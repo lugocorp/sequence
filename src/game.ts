@@ -1,8 +1,11 @@
+import Graphics from './graphics';
 
 export default class Game {
+    graphics: Graphics;
+
     start() {
-        const canvas = document.getElementById('canvas');
-        (canvas as any).height = 100;
-        (canvas as any).width = 100;
+        const canvas: HTMLCanvasElement = document.getElementById('canvas') as HTMLCanvasElement;
+        this.graphics = new Graphics(canvas);
+        this.graphics.setCanvasSize();
     }
 }
