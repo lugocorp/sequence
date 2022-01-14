@@ -1,8 +1,8 @@
 # Sequence Dungeons
 
 ### Todo
-- [ ] Set up basic canvas layout
-- [ ] Set up TypeScript
+- [x] Set up basic canvas layout
+- [x] Set up TypeScript
 - [ ] Get canvas to scale by multiples of some number
 - [ ] Create basic interface of future graphics loading system
 - [ ] Set up enemy and character classes
