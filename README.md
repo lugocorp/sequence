@@ -5,7 +5,7 @@
 - [x] Set up TypeScript
 - [x] Get canvas to scale by multiples of some number
 - [x] Create basic interface of future graphics loading system
-- [ ] Set up enemy and character classes
+- [x] Set up enemy and character classes
 - [ ] Create generic selector class
 - [ ] Add a linter
 - [ ] Add test platform (web)
