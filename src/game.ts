@@ -1,11 +1,17 @@
-import Graphics from './graphics';
+import GraphicsRenderer from './graphics/renderer';
+import GraphicsLoader from './graphics/loader';
 
 export default class Game {
-    graphics: Graphics;
+    renderer: GraphicsRenderer;
+    assets: GraphicsLoader;
 
-    start(): void {
+    // Initializes the game object so the player can start interacting with it
+    async start(): Promise<void> {
         const canvas: HTMLCanvasElement = document.getElementById('canvas') as HTMLCanvasElement;
-        this.graphics = new Graphics(canvas);
-        this.graphics.setCanvasSize();
+        this.renderer = new GraphicsRenderer(canvas);
+        this.assets = new GraphicsLoader();
+        this.renderer.setCanvasSize();
+        // Display some sort of loading screen here
+        await this.assets.loadAssets();
     }
 }

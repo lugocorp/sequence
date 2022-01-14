@@ -1,4 +1,4 @@
-import Element from './element';
+import Element from '../enums/element';
 
 export default abstract class Unit {
     resistances: Set<Element> = new Set();

@@ -1,5 +1,5 @@
+import Slots from '../enums/slots';
 import Ability from './ability';
-import Slots from './slots';
 import Item from './item';
 import Unit from './unit';
 

@@ -1,4 +1,4 @@
-import AbilityType from './ability-type';
+import AbilityType from '../enums/ability-type';
 
 export default class Ability {
     type: AbilityType;

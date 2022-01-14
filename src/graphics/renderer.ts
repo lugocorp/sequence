@@ -1,14 +1,16 @@
 
-export default class Graphics {
+export default class GraphicsRenderer {
     ctx: CanvasRenderingContext2D;
     canvas: HTMLCanvasElement;
-    placeholder: HTMLImageElement;
 
     constructor(canvas: HTMLCanvasElement) {
         this.ctx = canvas.getContext('2d');
         this.canvas = canvas;
     }
 
+    // Scales the canvas to be an integer multiple of the base resolution value,
+    // whatever will fit the device screen. For a list of commonly used mobile
+    // device resolutions, see here:
     // https://www.browserstack.com/guide/ideal-screen-sizes-for-responsive-design
     setCanvasSize(): void {
         const screenHeight = 750;
@@ -21,22 +23,5 @@ export default class Graphics {
         }
         this.canvas.height = unitHeight * ratio;
         this.canvas.width = unitWidth * ratio;
-    }
-
-    // Loads every spritesheet
-    async loadSheets(): Promise<void> {
-        this.placeholder = new Image();
-        await new Promise((resolve) => {
-            this.placeholder.src = './assets/placeholder.jpeg';
-            this.placeholder.onload = resolve;
-        });
-    }
-
-    // Grabs a sprite from the spritesheet
-    getSprite(id: number): HTMLImageElement {
-        const sheet: number = id >> 16;
-        const x = (id - sheet << 16) >> 8;
-        const y = (id - sheet << 16) - x << 8;
-        return this.placeholder;
     }
 }

@@ -1,6 +1,6 @@
-import ItemType from './item-type';
-import Trigger from './trigger';
-import Rarity from './rarity';
+import ItemType from '../enums/item-type';
+import Trigger from '../enums/trigger';
+import Rarity from '../enums/rarity';
 
 export default class Item {
     effect: () => void;
