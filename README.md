@@ -11,7 +11,7 @@
 - [x] Create basic interface of future graphics loading system
 - [x] Set up enemy and character classes
 - [x] Reorganize `src` folder and imports
-- [ ] Add some game pieces into a JSON object (use the spreadsheet)
+- [x] Add some game pieces into a JSON object (use the spreadsheet)
 - [ ] Create factory classes for heroes, enemies, abilities and items (will pull from JSON data)
 - [ ] Set up the party structure in the `Game` class
 - [ ] Add a linter and reformat the comments
