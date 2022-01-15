@@ -2,6 +2,7 @@
 
 ## Commands
 - `npm run compile` builds all the TypeScript code
+- `npm run lint` lints the project
 
 ## Todo
 #### Setup
@@ -13,11 +14,12 @@
 - [x] Reorganize `src` folder and imports
 - [x] Add some game pieces into a JSON object (use the spreadsheet)
 - [x] Create factory classes for heroes, enemies, abilities and items (will pull from JSON data)
+- [x] Add a linter and reformat the comments
 - [ ] Set up the party structure in the `Game` class
-- [ ] Add a linter and reformat the comments
+- [ ] Add test platform (web) and enable module-based imports
+- [ ] Figure out a good resolution value to work in
 
 #### Basic gameplay
-- [ ] Add test platform (web) and enable module-based imports
 - [ ] Create enemy card UI
 - [ ] Create hero card UI
 - [ ] Create hero selection UI
