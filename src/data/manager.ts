@@ -1,3 +1,8 @@
+/*
+ * This class has access to all the game data written by developers. As such it
+ * provides the Factory class with all the data it needs to instantiate game
+ * entities. Use this to get indexed abilities or random game objects.
+ */
 import AbilityType from '../enums/ability-type';
 import Rarity from '../enums/rarity';
 import Factory from './factory';

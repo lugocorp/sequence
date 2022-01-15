@@ -15,7 +15,7 @@
 - [x] Add some game pieces into a JSON object (use the spreadsheet)
 - [x] Create factory classes for heroes, enemies, abilities and items (will pull from JSON data)
 - [x] Add a linter and reformat the comments
-- [ ] Set up the party structure in the `Game` class
+- [x] Set up the party structure in the `Game` class
 - [ ] Add test platform (web) and enable module-based imports
 - [ ] Figure out a good resolution value to work in
 

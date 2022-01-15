@@ -1,3 +1,7 @@
+/*
+ * This class handles working with the HTML5 canvas to render game elements.
+ * Use it whenever you have to interact with the game canvas.
+ */
 
 export default class GraphicsRenderer {
     ctx: CanvasRenderingContext2D;

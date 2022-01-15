@@ -1,3 +1,7 @@
+/*
+ * This class takes game data and turns it into an entity that can be used in-game.
+ * Use this whenever you need to instantiate a game object.
+ */
 import Ability from '../entities/ability';
 import Enemy from '../entities/enemy';
 import Hero from '../entities/hero';
