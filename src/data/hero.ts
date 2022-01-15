@@ -1,7 +1,8 @@
 import Element from '../enums/element';
 import Slots from '../enums/slots';
+import {HeroData} from './types';
 
-const data = [
+const data: HeroData[] = [
     {
         name: 'Test Hero',
         health: 10,

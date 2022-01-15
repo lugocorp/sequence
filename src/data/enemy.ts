@@ -1,6 +1,7 @@
 import Element from '../enums/element';
+import {EnemyData} from './types';
 
-const data = [
+const data: EnemyData[] = [
     {
         name: 'Test Enemy',
         health: 10,

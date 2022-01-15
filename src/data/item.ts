@@ -1,7 +1,8 @@
 import ItemType from '../enums/item-type';
 import Rarity from '../enums/rarity';
+import {ItemData} from './types';
 
-const data = [
+const data: ItemData[] = [
     {
         name: 'Test Equip Item',
         type: ItemType.EQUIP,

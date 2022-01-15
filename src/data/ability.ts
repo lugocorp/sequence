@@ -1,6 +1,7 @@
 import AbilityType from '../enums/ability-type';
+import {AbilityData} from './types';
 
-const data = [
+const data: AbilityData[] = [
     {
         name: 'Test Blessing',
         type: AbilityType.BLESSING
