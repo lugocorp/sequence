@@ -1,6 +1,8 @@
 # Sequence Dungeons
 
 ## Commands
+- `npm run start` runs the game server and listens for code changes
+- `npm run serve` compiles the app and runs the game server
 - `npm run compile` builds all the TypeScript code
 - `npm run lint` lints the project
 

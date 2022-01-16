@@ -5,7 +5,9 @@
   "description": "A retro RPG rougelite game.",
   "scripts": {
     "compile": "npx tsc",
-    "lint": "npx eslint src"
+    "lint": "npx eslint src",
+    "serve": "npm run compile && npx cordova serve 3000",
+    "start": "npx nodemon -w www -w src -i www/src -e \"html css js ts\" --exec npm run serve"
   },
   "keywords": [
     "ecosystem:cordova"
@@ -17,6 +19,7 @@
     "@typescript-eslint/parser": "^5.9.1",
     "cordova": "^11.0.0",
     "eslint": "^8.6.0",
+    "nodemon": "^2.0.15",
     "typescript": "^4.5.4"
   }
 }

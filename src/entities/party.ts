@@ -1,5 +1,6 @@
+import Hero from './hero';
 
-export class Party {
+export default class Party {
     static MAX: number = 6;
     members: Hero[] = [];
 
