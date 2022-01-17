@@ -12,16 +12,16 @@ import * as types from './types';
 export default class Factory {
 
   // Instantiates a new Hero object based on some game data
-  createHero(data: types.HeroData): Hero {
+  createHero(manager: DataManager, data: types.HeroData): Hero {
     const hero: Hero = new Hero(data.sprite, data.name, data.health, data.damage, data.armor, data.speed, data.itemSlots, data.abilitySlots);
-    if (data.weaknesses) {
-      hero.weaknesses = new Set(data.weaknesses);
+    hero.weaknesses = data.weaknesses ? new Set(data.weaknesses) : new Set();
+    hero.resistances = data.resistances ? new Set(data.resistances) : new Set();
+    hero.damages = data.damages ? new Set(data.damages) : new Set();
+    if (data.ability1) {
+      hero.ability1 = manager.getAbilityByName(data.ability1);
     }
-    if (data.resistances) {
-      hero.resistances = new Set(data.resistances);
-    }
-    if (data.damages) {
-      hero.damages = new Set(data.damages);
+    if (data.ability2) {
+      hero.ability2 = manager.getAbilityByName(data.ability2);
     }
     return hero;
   }

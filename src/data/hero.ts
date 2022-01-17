@@ -3,7 +3,6 @@ import Element from '../enums/element';
 import Sprites from '../enums/sprites';
 import Slots from '../enums/slots';
 
-
 const data: HeroData[] = [
   {
     sprite: Sprites.ENEMY,
@@ -16,7 +15,8 @@ const data: HeroData[] = [
     weaknesses: [Element.WATER],
     resistances: [Element.DEATH],
     abilitySlots: Slots.TWO,
-    itemSlots: Slots.TWO
+    itemSlots: Slots.TWO,
+    ability1: 'test blessing'
   }
 ];
 

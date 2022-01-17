@@ -18,6 +18,8 @@ export interface HeroData {
   resistances: Element[];
   itemSlots: Slots;
   abilitySlots: Slots;
+  ability1?: string;
+  ability2?: string;
 }
 
 // Defines game data for an Enemy

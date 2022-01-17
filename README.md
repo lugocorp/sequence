@@ -23,7 +23,7 @@ We have a number of `npm` commands:
 
 #### Basic gameplay
 - [x] Create enemy card UI
-- [ ] Create hero card UI
+- [x] Create hero card UI
 - [ ] Create hero selection UI
 - [ ] Bring the encounter event UI together
 - [ ] Organize the game view into an event sequence

@@ -66,7 +66,7 @@ export default class DataManager {
    * to be returned by this function.
    */
   getRandomHero(): Hero {
-    return this.factory.createHero(heroes[this.random(heroes.length)]);
+    return this.factory.createHero(this, heroes[this.random(heroes.length)]);
   }
 
   /*
