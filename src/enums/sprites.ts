@@ -60,7 +60,7 @@ enum Sprites {
   GROUND   = 0x010101,
 
   // Spritesheet #2 (enemies)
-  ENEMY    = 0x020100
+  ENEMY    = 0x020101
 }
 
 export default Sprites;
