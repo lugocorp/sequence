@@ -6,8 +6,7 @@
   "scripts": {
     "compile": "npx tsc",
     "lint": "npx eslint src",
-    "serve": "npm run compile && npx webpack serve --port 2017",
-    "start": "npx nodemon -w src -e \"js ts\" --exec npm run serve"
+    "start": "npx webpack serve --port 2017"
   },
   "keywords": [
     "ecosystem:cordova"
@@ -19,7 +18,6 @@
     "@typescript-eslint/parser": "^5.9.1",
     "cordova": "^11.0.0",
     "eslint": "^8.6.0",
-    "nodemon": "^2.0.15",
     "ts-loader": "^9.2.6",
     "typescript": "^4.5.4",
     "webpack": "^5.66.0",

@@ -1,10 +1,10 @@
 # Sequence Dungeons
 
 ## Commands
-- `npm run start` runs the game server and listens for code changes
-- `npm run serve` compiles the app and runs the game server
-- `npm run compile` builds all the TypeScript code
-- `npm run lint` lints the project
+We have a number of `npm` commands:
+- `start` runs the game server and listens for code changes
+- `compile` builds all the TypeScript code
+- `lint` lints the project
 
 ## Todo
 #### Setup
@@ -19,7 +19,7 @@
 - [x] Add a linter and reformat the comments
 - [x] Set up the party structure in the `Game` class
 - [x] Add a test server for development (enable module-based imports)
-- [ ] Figure out a good resolution value to work in
+- [x] Figure out a good resolution value to work in
 
 #### Basic gameplay
 - [ ] Create enemy card UI

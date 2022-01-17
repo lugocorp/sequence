@@ -1,7 +1,7 @@
 import Hero from './hero';
 
 export default class Party {
-    static MAX: number = 6;
+    static MAX = 6;
     members: Hero[] = [];
 
     // Returns the number of heroes in your party
