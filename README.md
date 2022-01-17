@@ -22,7 +22,7 @@ We have a number of `npm` commands:
 - [x] Figure out a good resolution value to work in
 
 #### Basic gameplay
-- [ ] Create enemy card UI
+- [x] Create enemy card UI
 - [ ] Create hero card UI
 - [ ] Create hero selection UI
 - [ ] Bring the encounter event UI together
