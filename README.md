@@ -30,4 +30,15 @@ We have a number of `npm` commands:
 - [ ] Implement the loot event
 - [ ] Implement the treasure event
 - [ ] Copy the encounter event for a boss event
+
+#### Advanced gameplay
+- [ ] Add the trainer event
+- [ ] Add the witch events
+- [ ] Add the fairy event
+- [ ] Add the assassination event
+- [ ] Add the recruitment event
+- [ ] Add the merchant event
 - [ ] Code the basic event progression algorithm
+- [ ] Implement a lose state
+- [ ] Create a game data compiler that checks the data folder for illegal values
+- [ ] Add views for loading, instructions, credits, and game start

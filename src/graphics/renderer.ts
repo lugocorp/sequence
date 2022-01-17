@@ -119,10 +119,10 @@ export default class GraphicsRenderer {
    * This method invokes drawText to render long text in a
    * word-wrapped format.
    */
-  drawParagraph(msg: string, x: number, y: number, max: number = 19): void {
+  drawParagraph(msg: string, x: number, y: number, max = 19): void {
     const words: string[] = msg.split(' ');
     let line: string = words.splice(0, 1)[0];
-    let index: number = 0;
+    let index = 0;
     while (line.length) {
       while (words.length && line.length + words[0].length + 1 <= max) {
         line = `${line} ${words.splice(0, 1)[0]}`;
