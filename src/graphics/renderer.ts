@@ -19,8 +19,8 @@ export default class GraphicsRenderer {
      * https://www.browserstack.com/guide/ideal-screen-sizes-for-responsive-design
      */
     setCanvasSize(): void {
-        const screenHeight = 750;
-        const screenWidth = 500;
+        const screenHeight = window.innerHeight;
+        const screenWidth = window.innerWidth;
         const unitHeight = 300;
         const unitWidth = 200;
         let ratio = Math.floor(screenHeight / unitHeight);

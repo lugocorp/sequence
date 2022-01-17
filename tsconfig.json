@@ -4,13 +4,8 @@
         "removeComments": true,
         "module": "commonjs",
         "sourceMap": true,
-        "rootDir": "src",
-        "outDir": "www/src",
+        "outDir": "out",
         "lib": ["es2015", "dom"],
         "target": "es5"
-    },
-    "include": [
-        "src/**/*.ts",
-        "src/*.ts"
-    ]
+    }
 }

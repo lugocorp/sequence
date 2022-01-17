@@ -26,4 +26,7 @@ node_modules/
 /platforms/
 
 # Custom
+/www/index.js.map
+/www/index.js
 /www/src
+/out
