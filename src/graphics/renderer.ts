@@ -58,7 +58,7 @@ export default class GraphicsRenderer {
     this.drawSprite(Sprites.FIRE, 64, 51);
     this.drawSprite(Sprites.GROUND, 76, 51);
     this.drawSprite(Sprites.ELECTRIC, 88, 51);
-    this.drawText('12345678912345', 2, 65);
+    this.drawText('toxic sludge', 2, 65);
     this.drawSprite(Sprites.HEALTH, 76, 64);
     this.drawText('99', 88, 65);
     this.drawText('weak', 7, 77);
