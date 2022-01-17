@@ -26,25 +26,22 @@ export default class Factory {
   }
 
   // Instantiates a new Enemy object based on some game data
-  createEnemy(data: types.EnemyData): Enemy {
+  createEnemy(data: types.EnemyData, getAbilityByName: (string) => Ability): Enemy {
     if(data.name.length > 14) {
-      throw new Error(`Name for '${data.name}' cannot be over length 14`);
+      throw new Error(`Name for enemy '${data.name}' cannot be over length 14`);
     }
     if (data.damage > 99 || data.health > 99 || data.armor > 99) {
-      throw new Error(`Stats cannot be over 99 for enemy '${data.name}'`);
+      throw new Error(`Damage, health and armor cannot be over 99 for enemy '${data.name}'`);
     }
     if ([1, 2, 3].indexOf(data.speed) < 0) {
       throw new Error(`Invalid speed '${data.speed}' for enemy '${data.name}'`);
     }
     const enemy: Enemy = new Enemy(data.name, data.health, data.damage, data.armor, data.speed);
-    if (data.weaknesses) {
-      enemy.weaknesses = new Set(data.weaknesses);
-    }
-    if (data.resistances) {
-      enemy.resistances = new Set(data.resistances);
-    }
-    if (data.damages) {
-      enemy.damages = new Set(data.damages);
+    enemy.weaknesses = data.weaknesses ? new Set(data.weaknesses) : new Set();
+    enemy.resistances = data.resistances ? new Set(data.resistances) : new Set();
+    enemy.damages = data.damages ? new Set(data.damages) : new Set();
+    if (data.ability) {
+      enemy.ability = getAbilityByName(data.ability);
     }
     return enemy;
   }

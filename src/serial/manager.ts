@@ -58,7 +58,7 @@ export default class DataManager {
    * to be returned by this function.
    */
   getRandomEnemy(): Enemy {
-    return this.factory.createEnemy(enemies[this.random(enemies.length)]);
+    return this.factory.createEnemy(enemies[this.random(enemies.length)], this.getAbilityByName);
   }
 
   /*

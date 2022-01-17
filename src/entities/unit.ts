@@ -1,9 +1,9 @@
 import Element from '../enums/element';
 
 export default abstract class Unit {
-  resistances: Set<Element> = new Set();
-  weaknesses: Set<Element> = new Set();
-  damages: Set<Element> = new Set();
+  resistances: Set<Element>;
+  weaknesses: Set<Element>;
+  damages: Set<Element>;
   maxHealth: number;
   health: number;
   damage: number;

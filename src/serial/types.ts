@@ -28,6 +28,7 @@ export interface EnemyData {
   damages: Element[];
   weaknesses: Element[];
   resistances: Element[];
+  ability?: string;
 }
 
 // Defines game data for an Item

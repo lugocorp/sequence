@@ -75,6 +75,8 @@ export default class GraphicsRenderer {
     this.drawSprite(Sprites.FIRE, 66, 88);
     this.drawSprite(Sprites.GROUND, 77, 88);
     this.drawSprite(Sprites.ELECTRIC, 88, 88);
+    this.drawText('ability name', 2, 100);
+    this.drawParagraph('this is an ability that is really just used for testing. yep, nothing much to see here in this ability!', 2, 110);
     this.ctx.scale(this.inverse, this.inverse);
   }
 
@@ -120,6 +122,24 @@ export default class GraphicsRenderer {
         const c: DrawCoords = this.assets.getSprite(glyph);
         this.ctx.drawImage(c.src, c.left, c.top, c.width, c.height, x + (a * c.width), y, c.width, c.height);
       }
+    }
+  }
+
+  /*
+   * This method invokes drawText to render long text in a
+   * word-wrapped format.
+   */
+  drawParagraph(msg: string, x: number, y: number, max: number = 19): void {
+    const words: string[] = msg.split(' ');
+    let line: string = words.splice(0, 1)[0];
+    let index: number = 0;
+    while (line.length) {
+      while (words.length && line.length + words[0].length + 1 <= max) {
+        line = `${line} ${words.splice(0, 1)[0]}`;
+      }
+      this.drawText(line, x, y + (index * 8));
+      line = words.length ? words.splice(0, 1)[0]: '';
+      index++;
     }
   }
 }
