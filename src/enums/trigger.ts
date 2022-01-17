@@ -1,6 +1,6 @@
 enum Trigger {
-    UNIT_DIES,
-    ON_EQUIP
+  UNIT_DIES,
+  ON_EQUIP
 }
 
 export default Trigger;

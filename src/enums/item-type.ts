@@ -1,7 +1,7 @@
 
 enum ItemType {
-    CONSUME,
-    EQUIP
+  CONSUME,
+  EQUIP
 }
 
 export default ItemType;

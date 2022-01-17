@@ -1,7 +1,7 @@
 
 enum AbilityType {
-    BLESSING,
-    CURSE
+  BLESSING,
+  CURSE
 }
 
 export default AbilityType;

@@ -1,8 +1,8 @@
 
 enum Slots {
-    ZERO,
-    ONE,
-    TWO
+  ZERO,
+  ONE,
+  TWO
 }
 
 export default Slots;
