@@ -1,6 +1,6 @@
 import GraphicsRenderer from './graphics/renderer';
 import GraphicsLoader from './graphics/loader';
-import DataManager from './data/manager';
+import DataManager from './serial/manager';
 import Party from './entities/party';
 
 export default class Game {

@@ -11,10 +11,10 @@ import Enemy from '../entities/enemy';
 import Hero from '../entities/hero';
 import Item from '../entities/item';
 import * as types from './types';
-import abilities from './ability';
-import enemies from './enemy';
-import heroes from './hero';
-import items from './item';
+import abilities from '../data/ability';
+import enemies from '../data/enemy';
+import heroes from '../data/hero';
+import items from '../data/item';
 
 export default class DataManager {
   abilitiesByTypeIndex: Map<AbilityType, types.AbilityData[]> = new Map();

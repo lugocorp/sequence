@@ -1,5 +1,5 @@
 import AbilityType from '../enums/ability-type';
-import {AbilityData} from './types';
+import {AbilityData} from '../serial/types';
 
 const data: AbilityData[] = [
   {

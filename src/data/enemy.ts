@@ -1,5 +1,5 @@
 import Element from '../enums/element';
-import {EnemyData} from './types';
+import {EnemyData} from '../serial/types';
 
 const data: EnemyData[] = [
   {

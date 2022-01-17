@@ -1,6 +1,6 @@
 import Element from '../enums/element';
 import Slots from '../enums/slots';
-import {HeroData} from './types';
+import {HeroData} from '../serial/types';
 
 const data: HeroData[] = [
   {
