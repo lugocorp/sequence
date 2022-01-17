@@ -3,8 +3,10 @@
  * Use it whenever you have to interact with the game canvas.
  */
 import Sprites from '../enums/sprites';
+import Element from '../enums/element';
 import DrawCoords from './draw-coords';
 import GraphicsLoader from './loader';
+import View from '../views/view';
 
 export default class GraphicsRenderer {
   static WIDTH = 100;
@@ -42,41 +44,9 @@ export default class GraphicsRenderer {
   /*
    * This method draws a single frame of the app.
    */
-  frame(): void {
+  frame(view: View): void {
     this.ctx.scale(this.ratio, this.ratio);
-    // Do something here
-    this.drawSprite(0x020100, 2, 2); // Image
-    this.drawSprite(Sprites.SPEED, 64, 3);
-    this.drawText('2', 82, 4);
-    this.drawSprite(Sprites.SHIELD, 64, 15);
-    this.drawText('1', 82, 16);
-    this.drawSprite(Sprites.DAMAGE, 64, 27);
-    this.drawText('4', 82, 28);
-    this.drawSprite(Sprites.LIFE, 64, 39);
-    this.drawSprite(Sprites.DEATH, 76, 39);
-    this.drawSprite(Sprites.WATER, 88, 39);
-    this.drawSprite(Sprites.FIRE, 64, 51);
-    this.drawSprite(Sprites.GROUND, 76, 51);
-    this.drawSprite(Sprites.ELECTRIC, 88, 51);
-    this.drawText('toxic sludge', 2, 65);
-    this.drawSprite(Sprites.HEALTH, 76, 64);
-    this.drawText('99', 88, 65);
-    this.drawText('weak', 7, 77);
-    this.drawSprite(Sprites.LIFE, 33, 76);
-    this.drawSprite(Sprites.DEATH, 44, 76);
-    this.drawSprite(Sprites.WATER, 55, 76);
-    this.drawSprite(Sprites.FIRE, 66, 76);
-    this.drawSprite(Sprites.GROUND, 77, 76);
-    this.drawSprite(Sprites.ELECTRIC, 88, 76);
-    this.drawText('resist', 2, 89);
-    this.drawSprite(Sprites.LIFE, 33, 88);
-    this.drawSprite(Sprites.DEATH, 44, 88);
-    this.drawSprite(Sprites.WATER, 55, 88);
-    this.drawSprite(Sprites.FIRE, 66, 88);
-    this.drawSprite(Sprites.GROUND, 77, 88);
-    this.drawSprite(Sprites.ELECTRIC, 88, 88);
-    this.drawText('ability name', 2, 100);
-    this.drawParagraph('this is an ability that is really just used for testing. yep, nothing much to see here in this ability!', 2, 110);
+    view.frame(this);
     this.ctx.scale(this.inverse, this.inverse);
   }
 
@@ -86,6 +56,17 @@ export default class GraphicsRenderer {
   drawSprite(id: number, x: number, y: number): void {
     const c: DrawCoords = this.assets.getSprite(id);
     this.ctx.drawImage(c.src, c.left, c.top, c.width, c.height, x, y, c.width, c.height);
+  }
+
+  getElementSprite(e: Element): Sprites {
+    switch (e) {
+      case Element.LIFE: return Sprites.LIFE;
+      case Element.DEATH: return Sprites.DEATH;
+      case Element.WATER: return Sprites.WATER;
+      case Element.FIRE: return Sprites.FIRE;
+      case Element.GROUND: return Sprites.GROUND;
+      case Element.ELECTRIC: return Sprites.ELECTRIC;
+    }
   }
 
   /*
@@ -108,6 +89,8 @@ export default class GraphicsRenderer {
       case ',': return Sprites.COMMA;
       case '!': return Sprites.EXCLAIM;
       case '?': return Sprites.QUESTION;
+      case '+': return Sprites.PLUS;
+      case '-': return Sprites.MINUS;
     }
     throw new Error(`No font glyph for character '${char}'`);
   }
@@ -123,6 +106,13 @@ export default class GraphicsRenderer {
         this.ctx.drawImage(c.src, c.left, c.top, c.width, c.height, x + (a * c.width), y, c.width, c.height);
       }
     }
+  }
+
+  /*
+   * This method is like drawText but for numerical values
+   */
+  drawNumber(msg: number, x:number, y: number): void {
+    this.drawText(`${msg}`, x, y);
   }
 
   /*

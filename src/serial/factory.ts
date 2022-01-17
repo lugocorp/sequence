@@ -2,6 +2,7 @@
  * This class takes game data and turns it into an entity that can be used in-game.
  * Use this whenever you need to instantiate a game object.
  */
+import DataManager from './manager';
 import Ability from '../entities/ability';
 import Enemy from '../entities/enemy';
 import Hero from '../entities/hero';
@@ -26,7 +27,7 @@ export default class Factory {
   }
 
   // Instantiates a new Enemy object based on some game data
-  createEnemy(data: types.EnemyData, getAbilityByName: (string) => Ability): Enemy {
+  createEnemy(manager: DataManager, data: types.EnemyData): Enemy {
     if(data.name.length > 14) {
       throw new Error(`Name for enemy '${data.name}' cannot be over length 14`);
     }
@@ -41,7 +42,7 @@ export default class Factory {
     enemy.resistances = data.resistances ? new Set(data.resistances) : new Set();
     enemy.damages = data.damages ? new Set(data.damages) : new Set();
     if (data.ability) {
-      enemy.ability = getAbilityByName(data.ability);
+      enemy.ability = manager.getAbilityByName(data.ability);
     }
     return enemy;
   }
@@ -54,6 +55,9 @@ export default class Factory {
 
   // Instantiates a new Ability object based on some game data
   createAbility(data: types.AbilityData): Ability {
+    if (data.name.length > 19) {
+      throw new Error(`Name for ability '${data.name}' cannot be over length 19`);
+    }
     const ability: Ability = new Ability(data.name, data.type);
     return ability;
   }

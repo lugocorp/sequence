@@ -3,11 +3,11 @@ import {AbilityData} from '../serial/types';
 
 const data: AbilityData[] = [
   {
-    name: 'Test Blessing',
+    name: 'test blessing',
     type: AbilityType.BLESSING
   },
   {
-    name: 'Test Curse',
+    name: 'test curse',
     type: AbilityType.CURSE
   }
 ];

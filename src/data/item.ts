@@ -4,32 +4,32 @@ import {ItemData} from '../serial/types';
 
 const data: ItemData[] = [
   {
-    name: 'Test Equip Item',
+    name: 'test equip item',
     type: ItemType.EQUIP,
     rarity: Rarity.COMMON
   },
   {
-    name: 'Test Consume Item',
+    name: 'test consume item',
     type: ItemType.CONSUME,
     rarity: Rarity.COMMON
   },
   {
-    name: 'Test Uncommon Item',
+    name: 'test uncommon item',
     type: ItemType.EQUIP,
     rarity: Rarity.UNCOMMON
   },
   {
-    name: 'Test Rare Item',
+    name: 'test rare item',
     type: ItemType.EQUIP,
     rarity: Rarity.RARE
   },
   {
-    name: 'Test Legendary Item',
+    name: 'test legendary item',
     type: ItemType.EQUIP,
     rarity: Rarity.LEGENDARY
   },
   {
-    name: 'Test Mythic Item',
+    name: 'test mythic item',
     type: ItemType.EQUIP,
     rarity: Rarity.MYTHIC
   },

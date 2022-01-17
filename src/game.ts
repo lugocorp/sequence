@@ -2,8 +2,11 @@ import GraphicsRenderer from './graphics/renderer';
 import GraphicsLoader from './graphics/loader';
 import DataManager from './serial/manager';
 import Party from './entities/party';
+import GameView from './views/game';
+import View from './views/view';
 
 export default class Game {
+  static game: Game;
   renderer: GraphicsRenderer;
   assets: GraphicsLoader;
   data: DataManager;
@@ -22,6 +25,7 @@ export default class Game {
     await this.assets.loadAssets();
     this.data.index();
     // Loading has completed
-    this.renderer.frame();
+    const view: View = new GameView();
+    this.renderer.frame(view);
   }
 }

@@ -4,7 +4,7 @@ import {HeroData} from '../serial/types';
 
 const data: HeroData[] = [
   {
-    name: 'Test Hero',
+    name: 'test hero',
     health: 10,
     damage: 2,
     armor: 2,

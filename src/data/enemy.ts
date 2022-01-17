@@ -3,14 +3,15 @@ import {EnemyData} from '../serial/types';
 
 const data: EnemyData[] = [
   {
-    name: 'Test Enemy',
+    name: 'test enemy',
     health: 10,
     damage: 2,
     armor: 2,
     speed: 2,
     damages: [Element.FIRE],
     weaknesses: [Element.WATER],
-    resistances: [Element.DEATH]
+    resistances: [Element.DEATH],
+    ability: 'test blessing'
   }
 ];
 

@@ -44,6 +44,8 @@ enum Sprites {
   COMMA    = 0x000102,
   EXCLAIM  = 0x000202,
   QUESTION = 0x000302,
+  PLUS     = 0x000402,
+  MINUS    = 0x000502,
 
   // Spritesheet #1 (icons)
   HEALTH   = 0x010000,
