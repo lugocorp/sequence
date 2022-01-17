@@ -1,11 +1,13 @@
 import AbilityType from '../enums/ability-type';
 import ItemType from '../enums/item-type';
+import Sprites from '../enums/sprites';
 import Element from '../enums/element';
 import Rarity from '../enums/rarity';
 import Slots from '../enums/slots';
 
 // Defines game data for a Hero
 export interface HeroData {
+  sprite: Sprites;
   name: string;
   health: number;
   damage: number;
@@ -20,6 +22,7 @@ export interface HeroData {
 
 // Defines game data for an Enemy
 export interface EnemyData {
+  sprite: Sprites;
   name: string;
   health: number;
   damage: number;

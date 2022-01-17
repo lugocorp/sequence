@@ -57,7 +57,10 @@ enum Sprites {
   WATER    = 0x010201,
   FIRE     = 0x010401,
   ELECTRIC = 0x010301,
-  GROUND   = 0x010101
+  GROUND   = 0x010101,
+
+  // Spritesheet #2 (enemies)
+  ENEMY    = 0x020100
 }
 
 export default Sprites;

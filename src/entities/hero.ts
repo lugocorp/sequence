@@ -1,3 +1,4 @@
+import Sprites from '../enums/sprites';
 import Slots from '../enums/slots';
 import Ability from './ability';
 import Item from './item';
@@ -11,8 +12,8 @@ export default class Hero extends Unit {
   item1: Item;
   item2: Item;
 
-  constructor(name: string, health: number, damage: number, armor: number, speed: number, itemSlots: Slots, abilitySlots: Slots) {
-    super(name, health, damage, armor, speed);
+  constructor(sprite: Sprites, name: string, health: number, damage: number, armor: number, speed: number, itemSlots: Slots, abilitySlots: Slots) {
+    super(sprite, name, health, damage, armor, speed);
     this.abilitySlots = abilitySlots;
     this.itemSlots = itemSlots;
   }

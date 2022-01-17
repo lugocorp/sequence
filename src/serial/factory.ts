@@ -13,7 +13,7 @@ export default class Factory {
 
   // Instantiates a new Hero object based on some game data
   createHero(data: types.HeroData): Hero {
-    const hero: Hero = new Hero(data.name, data.health, data.damage, data.armor, data.speed, data.itemSlots, data.abilitySlots);
+    const hero: Hero = new Hero(data.sprite, data.name, data.health, data.damage, data.armor, data.speed, data.itemSlots, data.abilitySlots);
     if (data.weaknesses) {
       hero.weaknesses = new Set(data.weaknesses);
     }
@@ -37,7 +37,7 @@ export default class Factory {
     if ([1, 2, 3].indexOf(data.speed) < 0) {
       throw new Error(`Invalid speed '${data.speed}' for enemy '${data.name}'`);
     }
-    const enemy: Enemy = new Enemy(data.name, data.health, data.damage, data.armor, data.speed);
+    const enemy: Enemy = new Enemy(data.sprite, data.name, data.health, data.damage, data.armor, data.speed);
     enemy.weaknesses = data.weaknesses ? new Set(data.weaknesses) : new Set();
     enemy.resistances = data.resistances ? new Set(data.resistances) : new Set();
     enemy.damages = data.damages ? new Set(data.damages) : new Set();

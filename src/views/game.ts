@@ -25,7 +25,7 @@ export default class GameView implements View {
    * This method renders an enemy card
    */
   enemyCard(r: GraphicsRenderer, enemy: Enemy): void {
-    r.drawSprite(0x020100, 2, 2); // Image
+    r.drawSprite(enemy.sprite, 2, 2);
     r.drawSprite(Sprites.SPEED, 64, 3);
     r.drawSprite(Sprites.SHIELD, 64, 15);
     r.drawSprite(Sprites.DAMAGE, 64, 27);
