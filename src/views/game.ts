@@ -1,14 +1,11 @@
 import GraphicsRenderer from '../graphics/renderer';
-import EncounterEvent from '../events/encounter';
 import EventChain from '../events/chain';
-import Event from '../events/event';
 import Sprites from '../enums/sprites';
 import Damage from '../enums/damage';
 import Ability from '../entities/ability';
 import Enemy from '../entities/enemy';
 import Hero from '../entities/hero';
 import Item from '../entities/item';
-import Game from '../game';
 import View from './view';
 
 export default class GameView implements View {

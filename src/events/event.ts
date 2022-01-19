@@ -2,7 +2,7 @@ import GraphicsRenderer from '../graphics/renderer';
 import GameView from '../views/game';
 
 interface Event {
-  render: (GameView, GraphicsRenderer) => void;
+  render: (view: GameView, r: GraphicsRenderer) => void;
   click: (x: number, y: number) => void;
   state: number;
 }
