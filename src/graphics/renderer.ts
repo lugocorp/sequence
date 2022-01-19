@@ -3,7 +3,7 @@
  * Use it whenever you have to interact with the game canvas.
  */
 import Sprites from '../enums/sprites';
-import Element from '../enums/element';
+import Damage from '../enums/damage';
 import DrawCoords from './draw-coords';
 import GraphicsLoader from './loader';
 import View from '../views/view';
@@ -58,14 +58,14 @@ export default class GraphicsRenderer {
     this.ctx.drawImage(c.src, c.left, c.top, c.width, c.height, x, y, c.width, c.height);
   }
 
-  getElementSprite(e: Element): Sprites {
+  getElementSprite(e: Damage): Sprites {
     switch (e) {
-      case Element.LIFE: return Sprites.LIFE;
-      case Element.DEATH: return Sprites.DEATH;
-      case Element.WATER: return Sprites.WATER;
-      case Element.FIRE: return Sprites.FIRE;
-      case Element.GROUND: return Sprites.GROUND;
-      case Element.ELECTRIC: return Sprites.ELECTRIC;
+      case Damage.PIERCING: return Sprites.PIERCING;
+      case Damage.BLUNT: return Sprites.BLUNT;
+      case Damage.FROST: return Sprites.FROST;
+      case Damage.FIRE: return Sprites.FIRE;
+      case Damage.DEATH: return Sprites.DEATH;
+      case Damage.LIGHT: return Sprites.LIGHT;
     }
   }
 
@@ -91,6 +91,7 @@ export default class GraphicsRenderer {
       case '?': return Sprites.QUESTION;
       case '+': return Sprites.PLUS;
       case '-': return Sprites.MINUS;
+      case '\'': return Sprites.APOSTROPHE;
     }
     throw new Error(`No font glyph for character '${char}'`);
   }

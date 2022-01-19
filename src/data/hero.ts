@@ -1,5 +1,5 @@
 import {HeroData} from '../serial/types';
-import Element from '../enums/element';
+import Damage from '../enums/damage';
 import Sprites from '../enums/sprites';
 import Slots from '../enums/slots';
 
@@ -11,9 +11,9 @@ const data: HeroData[] = [
     damage: 2,
     armor: 2,
     speed: 2,
-    damages: [Element.FIRE],
-    weaknesses: [Element.WATER],
-    resistances: [Element.DEATH],
+    damages: [Damage.PIERCING],
+    weaknesses: [Damage.DEATH],
+    resistances: [Damage.BLUNT],
     abilitySlots: Slots.TWO,
     itemSlots: Slots.TWO,
     ability1: 'test blessing'

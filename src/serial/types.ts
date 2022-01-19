@@ -1,7 +1,7 @@
 import AbilityType from '../enums/ability-type';
 import ItemType from '../enums/item-type';
 import Sprites from '../enums/sprites';
-import Element from '../enums/element';
+import Damage from '../enums/damage';
 import Rarity from '../enums/rarity';
 import Slots from '../enums/slots';
 
@@ -13,9 +13,9 @@ export interface HeroData {
   damage: number;
   armor: number;
   speed: number;
-  damages: Element[];
-  weaknesses: Element[];
-  resistances: Element[];
+  damages: Damage[];
+  weaknesses: Damage[];
+  resistances: Damage[];
   itemSlots: Slots;
   abilitySlots: Slots;
   ability1?: string;
@@ -30,9 +30,9 @@ export interface EnemyData {
   damage: number;
   armor: number;
   speed: number;
-  damages: Element[];
-  weaknesses: Element[];
-  resistances: Element[];
+  damages: Damage[];
+  weaknesses: Damage[];
+  resistances: Damage[];
   ability?: string;
 }
 

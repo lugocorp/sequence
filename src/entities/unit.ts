@@ -1,10 +1,10 @@
 import Sprites from '../enums/sprites';
-import Element from '../enums/element';
+import Damage from '../enums/damage';
 
 export default abstract class Unit {
-  resistances: Set<Element>;
-  weaknesses: Set<Element>;
-  damages: Set<Element>;
+  resistances: Set<Damage>;
+  weaknesses: Set<Damage>;
+  damages: Set<Damage>;
   maxHealth: number;
   sprite: Sprites;
   health: number;
