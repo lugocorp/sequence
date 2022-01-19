@@ -1,27 +1,35 @@
 import GraphicsRenderer from '../graphics/renderer';
+import EncounterEvent from '../events/encounter';
+import EventChain from '../events/chain';
+import Event from '../events/event';
 import Sprites from '../enums/sprites';
 import Damage from '../enums/damage';
 import Ability from '../entities/ability';
 import Enemy from '../entities/enemy';
 import Hero from '../entities/hero';
 import Item from '../entities/item';
-import View from './view';
 import Game from '../game';
+import View from './view';
 
 export default class GameView implements View {
+  chain: EventChain;
+
+  constructor(chain: EventChain) {
+    this.chain = chain;
+  }
 
   /*
    * This method is responsible for handling click events
    */
   click(x: number, y: number): void {
-    // Implement me later
+    this.chain.latest().click(x, y);
   }
 
   /*
    * This method renders a single frame of the game view
    */
   frame(r: GraphicsRenderer): void {
-    this.heroCard(r, Game.game.data.getRandomHero());
+    this.chain.latest().render(this, r);
   }
 
   /*
@@ -39,7 +47,7 @@ export default class GameView implements View {
     enemy.damages.forEach((e: Damage) => {
       const x = ((index % 3) * 12) + 64;
       const y = index < 3 ? 39 : 51;
-      r.drawSprite(r.getElementSprite(e), x, y);
+      r.drawSprite(r.getDamageSprite(e), x, y);
       index++;
     });
     index = 0;
@@ -48,13 +56,13 @@ export default class GameView implements View {
     r.drawNumber(enemy.health, 88, 65);
     r.drawText('weak', 7, 77);
     enemy.weaknesses.forEach((e: Damage) => {
-      r.drawSprite(r.getElementSprite(e), (index * 11) + 33, 76);
+      r.drawSprite(r.getDamageSprite(e), (index * 11) + 33, 76);
       index++;
     });
     index = 0;
     r.drawText('resist', 2, 89);
     enemy.resistances.forEach((e: Damage) => {
-      r.drawSprite(r.getElementSprite(e), (index * 11) + 33, 88);
+      r.drawSprite(r.getDamageSprite(e), (index * 11) + 33, 88);
       index++;
     });
     if (enemy.ability) {
@@ -78,7 +86,7 @@ export default class GameView implements View {
     hero.damages.forEach((e: Damage) => {
       const x = ((index % 3) * 12) + 64;
       const y = index < 3 ? 39 : 51;
-      r.drawSprite(r.getElementSprite(e), x, y);
+      r.drawSprite(r.getDamageSprite(e), x, y);
       index++;
     });
     index = 0;
@@ -87,13 +95,13 @@ export default class GameView implements View {
     r.drawNumber(hero.health, 88, 65);
     r.drawText('weak', 7, 77);
     hero.weaknesses.forEach((e: Damage) => {
-      r.drawSprite(r.getElementSprite(e), (index * 11) + 33, 76);
+      r.drawSprite(r.getDamageSprite(e), (index * 11) + 33, 76);
       index++;
     });
     index = 0;
     r.drawText('resist', 2, 89);
     hero.resistances.forEach((e: Damage) => {
-      r.drawSprite(r.getElementSprite(e), (index * 11) + 33, 88);
+      r.drawSprite(r.getDamageSprite(e), (index * 11) + 33, 88);
       index++;
     });
     r.drawText('abilities', 2, 100);

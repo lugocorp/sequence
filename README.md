@@ -24,17 +24,17 @@ We have a number of `npm` commands:
 #### Basic gameplay
 - [x] Create enemy card UI
 - [x] Create hero card UI
-- [ ] Create hero selection UI
+- [x] Organize the game view into an event sequence
+- [ ] Rewrite click propogation to include on click down and click up (reuse coordinates from click down, this is for graphical feedback)
 - [ ] Bring the encounter event UI together
-- [ ] Organize the game view into an event sequence
 - [ ] Implement the loot event
 - [ ] Implement the treasure event
 - [ ] Copy the encounter event for a boss event
 
 #### Advanced gameplay
 - [ ] Add the trainer event
-- [ ] Add the witch events
-- [ ] Add the fairy event
+- [ ] Add the trickster and guardian events
+- [ ] Add the good omen event
 - [ ] Add the assassination event
 - [ ] Add the recruitment event
 - [ ] Add the merchant event

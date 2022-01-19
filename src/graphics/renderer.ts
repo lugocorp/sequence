@@ -14,8 +14,6 @@ export default class GraphicsRenderer {
   ctx: CanvasRenderingContext2D;
   canvas: HTMLCanvasElement;
   assets: GraphicsLoader;
-  inverse: number;
-  ratio: number;
   constructor(canvas: HTMLCanvasElement, assets: GraphicsLoader) {
     this.ctx = canvas.getContext('2d');
     this.ctx.imageSmoothingEnabled = false;
@@ -32,22 +30,21 @@ export default class GraphicsRenderer {
   setCanvasSize(): void {
     const screenWidth = window.innerWidth;
     const screenHeight = window.innerHeight;
-    this.ratio = Math.floor(screenHeight / GraphicsRenderer.HEIGHT);
-    if (GraphicsRenderer.WIDTH * this.ratio > screenWidth) {
-      this.ratio = Math.floor(screenWidth / GraphicsRenderer.WIDTH);
+    let ratio = Math.floor(screenHeight / GraphicsRenderer.HEIGHT);
+    if (GraphicsRenderer.WIDTH * ratio > screenWidth) {
+      ratio = Math.floor(screenWidth / GraphicsRenderer.WIDTH);
     }
-    this.canvas.height = GraphicsRenderer.HEIGHT * this.ratio;
-    this.canvas.width = GraphicsRenderer.WIDTH * this.ratio;
-    this.inverse = 1 / this.ratio;
+    this.canvas.height = GraphicsRenderer.HEIGHT * ratio;
+    this.canvas.width = GraphicsRenderer.WIDTH * ratio;
+    this.ctx.scale(ratio, ratio);
   }
 
   /*
    * This method draws a single frame of the app.
    */
   frame(view: View): void {
-    this.ctx.scale(this.ratio, this.ratio);
+    this.ctx.clearRect(0, 0, GraphicsRenderer.WIDTH, GraphicsRenderer.HEIGHT);
     view.frame(this);
-    this.ctx.scale(this.inverse, this.inverse);
   }
 
   /*
@@ -58,14 +55,17 @@ export default class GraphicsRenderer {
     this.ctx.drawImage(c.src, c.left, c.top, c.width, c.height, x, y, c.width, c.height);
   }
 
-  getElementSprite(e: Damage): Sprites {
+  /*
+   * This method grabs the icon sprite for a damage type.
+   */
+  getDamageSprite(e: Damage): Sprites {
     switch (e) {
       case Damage.PIERCING: return Sprites.PIERCING;
       case Damage.BLUNT: return Sprites.BLUNT;
-      case Damage.FROST: return Sprites.FROST;
       case Damage.FIRE: return Sprites.FIRE;
-      case Damage.DEATH: return Sprites.DEATH;
+      case Damage.FROST: return Sprites.FROST;
       case Damage.LIGHT: return Sprites.LIGHT;
+      case Damage.DEATH: return Sprites.DEATH;
     }
   }
 
