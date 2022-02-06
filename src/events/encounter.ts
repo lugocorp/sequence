@@ -22,6 +22,12 @@ export default class EncounterEvent implements Event {
   }
 
   render(view: GameView, r: GraphicsRenderer): void {
-    view.enemyCard(r, this.enemy);
+    switch (this.state) {
+      case EncounterEvent.VIEW_ENEMY: return view.enemyCard(r, this.enemy);
+      case EncounterEvent.VIEW_PARTY: return view.heroCard(r, null);
+      case EncounterEvent.VIEW_ABILITY: return view.abilityInspection(r, null);
+      case EncounterEvent.VIEW_ITEM: return view.itemInspection(r, null);
+      case EncounterEvent.BATTLE: return;
+    }
   }
 }

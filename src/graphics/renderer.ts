@@ -7,6 +7,7 @@ import Damage from '../enums/damage';
 import DrawCoords from './draw-coords';
 import GraphicsLoader from './loader';
 import View from '../views/view';
+import Game from '../game';
 
 export default class GraphicsRenderer {
   static WIDTH = 100;
@@ -100,7 +101,18 @@ export default class GraphicsRenderer {
   /*
    * This method draws some text using the custom in-game font.
    */
-  drawText(msg: string, x: number, y: number): void {
+  drawText(msg: string, x: number, y: number, clickable = false): void {
+    const highlight = clickable &&
+      Game.game.currentClick.down &&
+      Game.game.currentClick.x >= x &&
+      Game.game.currentClick.y >= y &&
+      Game.game.currentClick.x <= x + (msg.length * 5) &&
+      Game.game.currentClick.y <= y + 8;
+    if (highlight) {
+      this.ctx.fillStyle = 'white';
+      this.ctx.fillRect(x, y, 5 * msg.length, 8);
+      this.ctx.fillStyle = 'black';
+    }
     for (let a = 0; a < msg.length; a++) {
       if (msg[a] !== ' ') {
         const glyph: Sprites = this.getGlyph(msg[a]);

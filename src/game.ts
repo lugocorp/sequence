@@ -8,6 +8,7 @@ import View from './views/view';
 
 export default class Game {
   static game: Game;
+  currentClick: {x: number, y: number, down: boolean};
   renderer: GraphicsRenderer;
   assets: GraphicsLoader;
   chain: EventChain;
@@ -16,6 +17,7 @@ export default class Game {
   view: View;
 
   constructor() {
+    this.currentClick = {x: 0, y: 0, down: false};
     this.assets = new GraphicsLoader();
     this.chain = new EventChain();
     this.data = new DataManager();
@@ -43,7 +45,9 @@ export default class Game {
   // Alerts the current view of a click event
   click(x: number, y: number, down: boolean): void {
     if (this.view) {
+      this.currentClick = {x, y, down};
       this.view.click(x, y, down);
+      this.invalidate();
     }
   }
 }
