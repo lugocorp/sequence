@@ -17,7 +17,7 @@ export default class EncounterEvent implements Event {
     this.enemy = enemy;
   }
 
-  click(x: number, y: number): void {
+  click(x: number, y: number, down: boolean): void {
     // Implement me later
   }
 

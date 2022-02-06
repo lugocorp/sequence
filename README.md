@@ -25,7 +25,7 @@ We have a number of `npm` commands:
 - [x] Create enemy card UI
 - [x] Create hero card UI
 - [x] Organize the game view into an event sequence
-- [ ] Rewrite click propogation to include on click down and click up (reuse coordinates from click down, this is for graphical feedback)
+- [x] Rewrite click propogation to include on click down and click up (reuse coordinates from click down, this is for graphical feedback)
 - [ ] Bring the encounter event UI together
 - [ ] Implement the loot event
 - [ ] Implement the treasure event

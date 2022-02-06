@@ -2,10 +2,17 @@ import Game from './game';
 Game.game = new Game();
 
 // For click handling
+let downCoordX = 0;
+let downCoordY = 0;
 const canvas = document.getElementById('canvas');
-canvas.addEventListener('click', (e) => {
+canvas.addEventListener('mousedown', (e) => {
   const rect = canvas.getBoundingClientRect();
-  Game.game.click(e.clientX - rect.left, e.clientY - rect.top);
+  downCoordX = e.clientX - rect.left;
+  downCoordY = e.clientY - rect.top;
+  Game.game.click(downCoordX, downCoordY, true);
+});
+canvas.addEventListener('mouseup', () => {
+  Game.game.click(downCoordX, downCoordY, false);
 });
 
 // For game start

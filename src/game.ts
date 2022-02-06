@@ -41,9 +41,9 @@ export default class Game {
   }
 
   // Alerts the current view of a click event
-  click(x: number, y: number): void {
+  click(x: number, y: number, down: boolean): void {
     if (this.view) {
-      this.view.click(x, y);
+      this.view.click(x, y, down);
     }
   }
 }

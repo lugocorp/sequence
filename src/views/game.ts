@@ -18,8 +18,8 @@ export default class GameView implements View {
   /*
    * This method is responsible for handling click events
    */
-  click(x: number, y: number): void {
-    this.chain.latest().click(x, y);
+  click(x: number, y: number, down: boolean): void {
+    this.chain.latest().click(x, y, down);
   }
 
   /*
