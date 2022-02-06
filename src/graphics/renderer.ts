@@ -14,6 +14,7 @@ export default class GraphicsRenderer {
   ctx: CanvasRenderingContext2D;
   canvas: HTMLCanvasElement;
   assets: GraphicsLoader;
+  scale: number;
   constructor(canvas: HTMLCanvasElement, assets: GraphicsLoader) {
     this.ctx = canvas.getContext('2d');
     this.ctx.imageSmoothingEnabled = false;
@@ -30,13 +31,13 @@ export default class GraphicsRenderer {
   setCanvasSize(): void {
     const screenWidth = window.innerWidth;
     const screenHeight = window.innerHeight;
-    let ratio = Math.floor(screenHeight / GraphicsRenderer.HEIGHT);
-    if (GraphicsRenderer.WIDTH * ratio > screenWidth) {
-      ratio = Math.floor(screenWidth / GraphicsRenderer.WIDTH);
+    this.scale = Math.floor(screenHeight / GraphicsRenderer.HEIGHT);
+    if (GraphicsRenderer.WIDTH * this.scale > screenWidth) {
+      this.scale = Math.floor(screenWidth / GraphicsRenderer.WIDTH);
     }
-    this.canvas.height = GraphicsRenderer.HEIGHT * ratio;
-    this.canvas.width = GraphicsRenderer.WIDTH * ratio;
-    this.ctx.scale(ratio, ratio);
+    this.canvas.height = GraphicsRenderer.HEIGHT * this.scale;
+    this.canvas.width = GraphicsRenderer.WIDTH * this.scale;
+    this.ctx.scale(this.scale, this.scale);
   }
 
   /*
