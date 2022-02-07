@@ -27,7 +27,7 @@ We have a number of `npm` commands:
 - [x] Organize the game view into an event sequence
 - [x] Rewrite click propogation to include on click down and click up (reuse coordinates from click down, this is for graphical feedback)
 - [x] Bring the encounter event UI together
-- [ ] Implement the loot event
+- [x] Implement the loot event
 - [ ] Implement the treasure event
 - [ ] Copy the encounter event for a boss event
 

@@ -3,7 +3,7 @@
  * Its job is to generate and serve events for as long as
  * the player survives.
  */
-import EncounterEvent from './encounter';
+import LootEvent from './loot';
 import Event from './event';
 import Game from '../game';
 
@@ -15,7 +15,7 @@ export default class EventChain {
    */
   latest(): Event {
     if (!this.event) {
-      this.event = new EncounterEvent(Game.game.data.getRandomEnemy());
+      this.event = new LootEvent(Game.game.data.getRandomItem());
     }
     return this.event;
   }

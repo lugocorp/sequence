@@ -17,4 +17,19 @@ export default class Hero extends Unit {
     this.abilitySlots = abilitySlots;
     this.itemSlots = itemSlots;
   }
+
+  // Returns true if this hero has space for another item
+  hasFreeItemSlot(): boolean {
+    return (this.itemSlots === Slots.ONE && !this.item1) ||
+      (this.itemSlots === Slots.TWO && !this.item2);
+  }
+
+  // Equips an item to this hero
+  equip(item: Item): void {
+    if (this.item1) {
+      this.item2 = item;
+    } else {
+      this.item1 = item;
+    }
+  }
 }

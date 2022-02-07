@@ -95,9 +95,6 @@ export default class EncounterEvent implements Event {
    * Handle click logic for this event
    */
   click(x: number, y: number, down: boolean): void {
-    if (down) {
-      return;
-    }
     if (this.state === EncounterEvent.VIEW_ENEMY) {
       if (Game.game.within('view party', 25, 190)) {
         this.state = EncounterEvent.VIEW_PARTY;
@@ -120,14 +117,14 @@ export default class EncounterEvent implements Event {
         this.state = EncounterEvent.VIEW_ITEM;
         this.item = hero.item2;
       }
-      if (Game.game.within('last', 2, 180)) {
+      if (Game.game.within('last', 2, 180) && Game.game.party.length() > 1) {
         this.heroIndex = (this.heroIndex || Game.game.party.length()) - 1;
       }
       if (Game.game.within('choose', 35, 180)) {
         this.state = EncounterEvent.BATTLE;
         this.stepBattleLogic();
       }
-      if (Game.game.within('next', 78, 180)) {
+      if (Game.game.within('next', 78, 180) && Game.game.party.length() > 1) {
         this.heroIndex = (this.heroIndex === Game.game.party.length() - 1) ? 0 : this.heroIndex + 1;
       }
       if (Game.game.within('view enemy', 25, 190)) {
