@@ -103,23 +103,23 @@ export default class GameView implements View {
     });
     r.drawText('abilities', 2, 100);
     if (hero.ability1) {
-      r.drawText(hero.ability1.name, 2, 110);
+      r.drawText(hero.ability1.name, 2, 110, true);
     } else if (hero.abilitySlots > 0) {
       r.drawText('-', 2, 110);
     }
     if (hero.ability2) {
-      r.drawText(hero.ability2.name, 2, 120);
+      r.drawText(hero.ability2.name, 2, 120, true);
     } else if (hero.abilitySlots > 1) {
       r.drawText('-', 2, 120);
     }
     r.drawText('items', 2, 130);
     if (hero.item1) {
-      r.drawText(hero.item1.name, 2, 140);
+      r.drawText(hero.item1.name, 2, 140, true);
     } else if (hero.itemSlots > 0) {
       r.drawText('-', 2, 140);
     }
     if (hero.item2) {
-      r.drawText(hero.item2.name, 2, 150);
+      r.drawText(hero.item2.name, 2, 150, true);
     } else if (hero.itemSlots > 1) {
       r.drawText('-', 2, 150);
     }
@@ -131,7 +131,6 @@ export default class GameView implements View {
   abilityInspection(r: GraphicsRenderer, ability: Ability): void {
     r.drawText(ability.name, 2, 2);
     r.drawParagraph('here is an ability description to be rendered onto the screen. i will have to add a description field to abilities sometime soon...', 2, 20);
-    r.drawText('back', 40, 190);
   }
 
   /*
@@ -140,6 +139,21 @@ export default class GameView implements View {
   itemInspection(r: GraphicsRenderer, item: Item): void {
     r.drawText(item.name, 2, 2);
     r.drawParagraph('here is an item description to be rendered onto the screen. i will have to add a description field to items sometime soon...', 2, 20);
-    r.drawText('back', 40, 190);
+  }
+
+  /*
+   * This method renders a battle animation
+   */
+  battleAnimation(r: GraphicsRenderer, hero: Hero, enemy: Enemy): void {
+    // Draw the enemy
+    r.drawSprite(enemy.sprite, 2, 2);
+    r.drawSprite(Sprites.HEALTH, 71, 52);
+    r.drawNumber(enemy.health, 83, 53);
+    r.drawText(enemy.name, 2, 64);
+    // Draw the hero
+    r.drawSprite(hero.sprite, 38, 138);
+    r.drawSprite(Sprites.HEALTH, 7, 188);
+    r.drawNumber(hero.health, 19, 189);
+    r.drawText(hero.name, 98 - (hero.name.length * 5), 126);
   }
 }

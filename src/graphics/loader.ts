@@ -10,6 +10,18 @@ export default class GraphicsLoader {
   static NUM_SHEETS = 3;
 
   /*
+   * This method returns the dimensions of each sprite in a spritesheet
+   * identified by the sheet parameter.
+   */
+  getDimensions(sheet: number): {w: number, h: number} {
+    const sizes = [
+      {w: 5, h: 8},
+      {w: 10, h: 10}
+    ];
+    return (sheet < sizes.length) ? sizes[sheet] : {w: 60, h: 60};
+  }
+
+  /*
    * Loads every spritesheet so we can grab sprites from them later.
    * This is an async method that resolves only when every spritesheet
    * has been fully loaded.
@@ -26,19 +38,6 @@ export default class GraphicsLoader {
   }
 
   /*
-   * This method returns the dimensions of each sprite in a spritesheet
-   * identified by the sheet parameter.
-   */
-  getDimensions(sheet: number): [number, number] {
-    switch (sheet) {
-      case 0: return [5, 8];
-      case 1: return [10, 10];
-      case 2: return [60, 60];
-    }
-    throw new Error(`No dimensions set for spritesheet #${sheet}`);
-  }
-
-  /*
    * Returns draw instructions for a sprite based on a 3-byte hexadecimal.
    * The draw instructions include the sprite's source sheet, as well as
    * x, y, width and height coordinates on that sheet to pull from.
@@ -47,16 +46,16 @@ export default class GraphicsLoader {
     const index: number = id >> 16;
     const x = (id - (index << 16)) >> 8;
     const y = (id - (index << 16)) - (x << 8);
-    const dimensions: [number, number] = this.getDimensions(index);
+    const dimensions: {w: number, h: number} = this.getDimensions(index);
     if (index >= GraphicsLoader.NUM_SHEETS) {
       throw new Error(`Spritesheet #${index} not registered`);
     }
     return {
       src: this.sheets[index],
-      left: x * dimensions[0],
-      top: y * dimensions[1],
-      width: dimensions[0],
-      height: dimensions[1]
+      left: x * dimensions.w,
+      top: y * dimensions.h,
+      width: dimensions.w,
+      height: dimensions.h
     };
   }
 }

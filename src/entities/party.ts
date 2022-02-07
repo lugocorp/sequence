@@ -9,6 +9,11 @@ export default class Party {
     return this.members.length;
   }
 
+  // Returns the hero at the given index
+  get(index: number): Hero {
+    return this.members[index];
+  }
+
   // Adds a hero to your party
   add(hero: Hero): void {
     if (this.members.length > Party.MAX) {

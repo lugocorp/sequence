@@ -33,6 +33,7 @@ export default class Game {
     await this.assets.loadAssets();
     this.data.index();
     // Loading has completed
+    this.party.add(this.data.getRandomHero());
     this.view = new GameView(this.chain);
     this.invalidate();
   }
