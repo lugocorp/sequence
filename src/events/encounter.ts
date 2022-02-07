@@ -4,37 +4,40 @@ import Ability from '../entities/ability';
 import Enemy from '../entities/enemy';
 import Hero from '../entities/hero';
 import Item from '../entities/item';
+import TurnData from './turn-data';
 import Event from './event';
 import Game from '../game';
 
 export default class EncounterEvent implements Event {
+  static WIN = 'victory';
+  static LOSS = 'defeat';
+  static MUTUAL = 'destruction';
+  static DRAW = 'stalemate';
   static VIEW_ENEMY   = 0;
   static VIEW_PARTY   = 1;
   static VIEW_ABILITY = 2;
   static VIEW_ITEM    = 3;
   static BATTLE       = 4;
-  enemyArmorForTurn: number;
-  heroArmorForTurn: number;
-  enemyDamaged: boolean;
-  heroDamaged: boolean;
-  battleStep: number;
-  stalemate: boolean;
+  static FINISHED     = 5;
   heroIndex: number;
   ability: Ability;
+  result: string;
+  turn: TurnData;
   state: number;
-  done: boolean;
   enemy: Enemy;
   item: Item;
 
   constructor(enemy: Enemy) {
     this.state = EncounterEvent.VIEW_ENEMY;
-    this.enemyDamaged = false;
-    this.heroDamaged = false;
-    this.stalemate = false;
-    this.battleStep = 0;
     this.heroIndex = 0;
     this.enemy = enemy;
-    this.done = false;
+    this.turn = {
+      enemyDamaged: false,
+      heroDamaged: false,
+      enemyArmor: 0,
+      heroArmor: 0,
+      step: 0
+    };
   }
 
   /**
@@ -43,42 +46,49 @@ export default class EncounterEvent implements Event {
   stepBattleLogic(): void {
     const enemy: Enemy = this.enemy;
     const hero: Hero = Game.game.party.get(this.heroIndex);
+    // Check for stalemate condition
     if ((hero.damage * hero.speed <= enemy.armor) && (enemy.damage * enemy.speed <= hero.armor)) {
-      this.stalemate = true;
+      this.state = EncounterEvent.FINISHED;
+      this.result = EncounterEvent.DRAW;
       Game.game.invalidate();
+      return;
     }
-    this.battleStep = (this.battleStep === 6) ? 1 : this.battleStep + 1;
-    if (this.battleStep === 1) {
-      this.enemyArmorForTurn = enemy.armor;
-      this.heroArmorForTurn = hero.armor;
+    // Iterate turn step and reset armors for the turn
+    this.turn.step = (this.turn.step === 6) ? 1 : this.turn.step + 1;
+    if (this.turn.step === 1) {
+      this.turn.enemyArmor = enemy.armor;
+      this.turn.heroArmor = hero.armor;
     }
-    if (this.battleStep % (6 / hero.speed) === 0) {
-      const damage = (hero.damage > this.enemyArmorForTurn) ? hero.damage - this.enemyArmorForTurn : 0;
-      this.enemyArmorForTurn = this.enemyArmorForTurn > hero.damage ? this.enemyArmorForTurn - hero.damage : 0;
-      if (damage) {
-        enemy.health -= (enemy.health < damage) ? enemy.health : damage;
-        this.enemyDamaged = true;
-      }
+    // Perform hero attack
+    if (this.turn.step % (6 / hero.speed) === 0) {
+      const damage = (hero.damage > this.turn.enemyArmor) ? hero.damage - this.turn.enemyArmor : 0;
+      this.turn.enemyArmor = this.turn.enemyArmor > hero.damage ? this.turn.enemyArmor - hero.damage : 0;
+      enemy.health -= (enemy.health < damage) ? enemy.health : damage;
+      this.turn.enemyDamaged = true;
     }
-    if (this.battleStep % (6 / enemy.speed) === 0) {
-      const damage = (enemy.damage > this.heroArmorForTurn) ? enemy.damage - this.heroArmorForTurn : 0;
-      this.heroArmorForTurn = this.heroArmorForTurn > enemy.damage ? this.heroArmorForTurn - enemy.damage : 0;
-      if (damage) {
-        hero.health -= (hero.health < damage) ? hero.health : damage;
-        this.heroDamaged = true;
-      }
+    // Perform enemy attack
+    if (this.turn.step % (6 / enemy.speed) === 0) {
+      const damage = (enemy.damage > this.turn.heroArmor) ? enemy.damage - this.turn.heroArmor : 0;
+      this.turn.heroArmor = this.turn.heroArmor > enemy.damage ? this.turn.heroArmor - enemy.damage : 0;
+      hero.health -= (hero.health < damage) ? hero.health : damage;
+      this.turn.heroDamaged = true;
     }
-    if (this.heroDamaged || this.enemyDamaged) {
+    // Animate either character taking damage
+    if (this.turn.heroDamaged || this.turn.enemyDamaged) {
       Game.game.invalidate();
-      this.enemyDamaged = false;
-      this.heroDamaged = false;
+      this.turn.enemyDamaged = false;
+      this.turn.heroDamaged = false;
       setTimeout(() => Game.game.invalidate(), 66);
     }
-    if (hero.health && enemy.health && !this.stalemate) {
-      setTimeout(() => this.stepBattleLogic(), 166);
-    } else {
-      this.done = true;
+    if (!hero.health || !enemy.health) {
+      this.result = !enemy.health ? EncounterEvent.WIN : EncounterEvent.LOSS;
+      if (!hero.health && !enemy.health) {
+        this.state = EncounterEvent.FINISHED;
+        this.result = EncounterEvent.MUTUAL;
+      }
+      return;
     }
+    setTimeout(() => this.stepBattleLogic(), 166);
   }
 
   /**
@@ -89,46 +99,46 @@ export default class EncounterEvent implements Event {
       return;
     }
     if (this.state === EncounterEvent.VIEW_ENEMY) {
-      if (x >= 25 && x <= 75 && y >= 190 && y <= 198) {
+      if (Game.game.within('view party', 25, 190)) {
         this.state = EncounterEvent.VIEW_PARTY;
       }
     } else if (this.state === EncounterEvent.VIEW_PARTY) {
       const hero: Hero = Game.game.party.get(this.heroIndex);
-      if (hero.ability1 && x >= 2 && x <= 2 + (hero.ability1.name.length * 5) && y >= 110 && y <= 118) {
+      if (hero.ability1 && Game.game.within(hero.ability1.name, 2, 110)) {
         this.state = EncounterEvent.VIEW_ABILITY;
         this.ability = hero.ability1;
       }
-      if (hero.ability2 && x >= 2 && x <= 2 + (hero.ability2.name.length * 5) && y >= 120 && y <= 128) {
+      if (hero.ability2 && Game.game.within(hero.ability2.name, 2, 120)) {
         this.state = EncounterEvent.VIEW_ABILITY;
         this.ability = hero.ability2;
       }
-      if (hero.item1 && x >= 2 && x <= 2 + (hero.item1.name.length * 5) && y >= 140 && y <= 148) {
+      if (hero.item1 && Game.game.within(hero.item1.name, 2, 140)) {
         this.state = EncounterEvent.VIEW_ITEM;
         this.item = hero.item1;
       }
-      if (hero.item2 && x >= 2 && x <= 2 + (hero.item2.name.length * 5) && y >= 150 && y <= 158) {
+      if (hero.item2 && Game.game.within(hero.item2.name, 2, 150)) {
         this.state = EncounterEvent.VIEW_ITEM;
         this.item = hero.item2;
       }
-      if (x >= 2 && x <= 22 && y >= 180 && y <= 188) {
+      if (Game.game.within('last', 2, 180)) {
         this.heroIndex = (this.heroIndex || Game.game.party.length()) - 1;
       }
-      if (x >= 35 && x <= 65 && y >= 180 && y <= 188) {
+      if (Game.game.within('choose', 35, 180)) {
         this.state = EncounterEvent.BATTLE;
         this.stepBattleLogic();
       }
-      if (x >= 78 && x <= 98 && y >= 180 && y <= 188) {
+      if (Game.game.within('next', 78, 180)) {
         this.heroIndex = (this.heroIndex === Game.game.party.length() - 1) ? 0 : this.heroIndex + 1;
       }
-      if (x >= 25 && x <= 75 && y >= 190 && y <= 198) {
+      if (Game.game.within('view enemy', 25, 190)) {
         this.state = EncounterEvent.VIEW_ENEMY;
       }
     } else if (this.state === EncounterEvent.VIEW_ABILITY || this.state === EncounterEvent.VIEW_ITEM) {
-      if (x >= 40 && x <= 60 && y >= 190 && y <= 198) {
+      if (Game.game.within('back', 40, 190)) {
         this.state = EncounterEvent.VIEW_PARTY;
       }
-    } else if (this.state === EncounterEvent.BATTLE) {
-      if (this.done && x >= 30 && x <= 70 && y >= 101 && y <= 109) {
+    } else if (this.state === EncounterEvent.FINISHED) {
+      if (Game.game.within('continue', 30, 101)) {
         console.log('Move on from battle');
         // Implement something else here, call something
       }
@@ -160,8 +170,12 @@ export default class EncounterEvent implements Event {
       view.itemInspection(r, this.item);
       r.drawText('back', 40, 190, true);
     }
-    if (this.state === EncounterEvent.BATTLE) {
-      view.battleAnimation(r, Game.game.party.get(this.heroIndex), this.enemy, !this.heroDamaged, !this.enemyDamaged, this.stalemate);
+    if (this.state === EncounterEvent.BATTLE || this.state === EncounterEvent.FINISHED) {
+      view.battleAnimation(r, Game.game.party.get(this.heroIndex), this.enemy, this.turn);
+      if (this.state === EncounterEvent.FINISHED) {
+        r.drawText(this.result, 50 - (this.result.length * 2.5), 91);
+        r.drawText('continue', 30, 101, true);
+      }
     }
   }
 }

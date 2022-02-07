@@ -51,4 +51,13 @@ export default class Game {
       this.invalidate();
     }
   }
+
+  // Returns true if the current click happened inside this text
+  within(msg: string, x: number, y: number): boolean {
+    return !this.currentClick.down &&
+      this.currentClick.x >= x &&
+      this.currentClick.y >= y &&
+      this.currentClick.x <= x + (msg.length * 5) &&
+      this.currentClick.y <= y + 8;
+  }
 }
