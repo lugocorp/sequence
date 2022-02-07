@@ -47,7 +47,7 @@ export default class Game {
   click(x: number, y: number, down: boolean): void {
     if (this.view) {
       this.currentClick = {x, y, down};
-      this.view.click(x, y, down);
+      this.view.click();
       this.invalidate();
     }
   }

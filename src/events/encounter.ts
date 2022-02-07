@@ -94,7 +94,7 @@ export default class EncounterEvent implements Event {
   /**
    * Handle click logic for this event
    */
-  click(x: number, y: number, down: boolean): void {
+  click(): void {
     if (this.state === EncounterEvent.VIEW_ENEMY) {
       if (Game.game.within('view party', 25, 190)) {
         this.state = EncounterEvent.VIEW_PARTY;

@@ -1,4 +1,5 @@
 import GraphicsRenderer from '../graphics/renderer';
+import ItemType from '../enums/item-type';
 import GameView from '../views/game';
 import Ability from '../entities/ability';
 import Hero from '../entities/hero';
@@ -7,7 +8,7 @@ import Event from './event';
 import Game from '../game';
 
 export default class LootEvent implements Event {
-  static VIEW_LOOT   = 0;
+  static VIEW_LOOT    = 0;
   static VIEW_PARTY   = 1;
   static VIEW_ABILITY = 2;
   static VIEW_ITEM    = 3;
@@ -26,7 +27,7 @@ export default class LootEvent implements Event {
   /**
    * Handle click logic for this event
    */
-  click(x: number, y: number, down: boolean): void {
+  click(): void {
     if (this.state === LootEvent.VIEW_LOOT) {
       if (Game.game.within('view party', 25, 190)) {
         this.state = LootEvent.VIEW_PARTY;
@@ -52,9 +53,11 @@ export default class LootEvent implements Event {
       if (Game.game.within('last', 2, 180) && Game.game.party.length() > 1) {
         this.heroIndex = (this.heroIndex || Game.game.party.length()) - 1;
       }
-      if (Game.game.within('give item', 27.5, 170) && hero.hasFreeItemSlot()) {
-        hero.equip(this.loot);
-        // Move on to next event
+      if (Game.game.within('give item', 27.5, 170) && hero.canUseItem(this.loot)) {
+        if (this.loot.type === ItemType.EQUIP) {
+          hero.equip(this.loot);
+        }
+        // Activate loot effect on hero then move on to next event
       }
       if (Game.game.within('drop item', 27.5, 180)) {
         // Move on to next event
@@ -86,7 +89,7 @@ export default class LootEvent implements Event {
         r.drawText('last', 2, 180, true);
         r.drawText('next', 78, 180, true);
       }
-      if (Game.game.party.get(this.heroIndex).hasFreeItemSlot()) {
+      if (Game.game.party.get(this.heroIndex).canUseItem(this.loot)) {
         r.drawText('give item', 27.5, 170, true);
       }
       r.drawText('drop item', 27.5, 180, true);

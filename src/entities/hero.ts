@@ -1,3 +1,4 @@
+import ItemType from '../enums/item-type';
 import Sprites from '../enums/sprites';
 import Slots from '../enums/slots';
 import Ability from './ability';
@@ -19,7 +20,10 @@ export default class Hero extends Unit {
   }
 
   // Returns true if this hero has space for another item
-  hasFreeItemSlot(): boolean {
+  canUseItem(item: Item): boolean {
+    if (item.type === ItemType.CONSUME) {
+      return true;
+    }
     return (this.itemSlots === Slots.ONE && !this.item1) ||
       (this.itemSlots === Slots.TWO && !this.item2);
   }
