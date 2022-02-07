@@ -144,16 +144,32 @@ export default class GameView implements View {
   /*
    * This method renders a battle animation
    */
-  battleAnimation(r: GraphicsRenderer, hero: Hero, enemy: Enemy): void {
+  battleAnimation(r: GraphicsRenderer, hero: Hero, enemy: Enemy, drawHero: boolean, drawEnemy: boolean, stalemate: boolean): void {
     // Draw the enemy
-    r.drawSprite(enemy.sprite, 2, 2);
+    if (drawEnemy && enemy.health) {
+      r.drawSprite(enemy.sprite, 2, 2);
+    }
     r.drawSprite(Sprites.HEALTH, 71, 52);
     r.drawNumber(enemy.health, 83, 53);
     r.drawText(enemy.name, 2, 64);
     // Draw the hero
-    r.drawSprite(hero.sprite, 38, 138);
-    r.drawSprite(Sprites.HEALTH, 7, 188);
-    r.drawNumber(hero.health, 19, 189);
+    if (drawHero && hero.health) {
+      r.drawSprite(hero.sprite, 38, 138);
+    }
+    r.drawSprite(Sprites.HEALTH, 7, 138);
+    r.drawNumber(hero.health, 19, 139);
     r.drawText(hero.name, 98 - (hero.name.length * 5), 126);
+    // Draw battle outcome
+    if (!hero.health || !enemy.health || stalemate) {
+      let msg = !enemy.health ? 'victory' : 'defeat';
+      if (!hero.health && !enemy.health) {
+        msg = 'destruction';
+      }
+      if (stalemate) {
+        msg = 'stalemate';
+      }
+      r.drawText(msg, 50 - (msg.length * 2.5), 91);
+      r.drawText('continue', 30, 101, true);
+    }
   }
 }
