@@ -4,8 +4,10 @@
  * the player survives.
  */
 import EncounterEvent from './encounter';
+import TreasureEvent from './treasure';
 import DeathEvent from './death';
 import LootEvent from './loot';
+import BossEvent from './boss';
 import Event from './event';
 import Game from '../game';
 
@@ -36,8 +38,13 @@ export default class EventChain {
       this.events.push(new DeathEvent());
       return;
     }
-    if (Math.random() < 0.5) {
+    const roll = Math.random();
+    if (roll < 0.15) {
+      this.events.push(new TreasureEvent());
+    } else if (roll < 0.3) {
       this.events.push(new LootEvent(Game.game.data.getRandomItem()));
+    } else if (roll < 0.35) {
+      this.events.push(new BossEvent(Game.game.data.getRandomEnemy()));
     } else {
       this.events.push(new EncounterEvent(Game.game.data.getRandomEnemy()));
     }

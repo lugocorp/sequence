@@ -92,6 +92,18 @@ export default class EncounterEvent implements Event {
   }
 
   /**
+   * Determine what should happen when the player clicks continue
+   * after a battle has concluded.
+   */
+  postBattleHandler(): void {
+    const hero: Hero = Game.game.party.get(this.heroIndex);
+    if (!hero.health) {
+      Game.game.party.remove(hero);
+    }
+    Game.game.progress();
+  }
+
+  /**
    * Handle click logic for this event
    */
   click(): void {
@@ -136,11 +148,7 @@ export default class EncounterEvent implements Event {
       }
     } else if (this.state === EncounterEvent.FINISHED) {
       if (Game.game.within('continue', 30, 101)) {
-        const hero: Hero = Game.game.party.get(this.heroIndex);
-        if (!hero.health) {
-          Game.game.party.remove(hero);
-        }
-        Game.game.progress();
+        this.postBattleHandler();
       }
     }
   }
