@@ -43,6 +43,15 @@ export default class Game {
     this.renderer.frame(this.view);
   }
 
+  // Progresses to the next event in the game
+  progress(): void {
+    if (this.chain.events.length === 1) {
+      this.chain.plan(this.chain.events[0]);
+    }
+    this.chain.events.splice(0, 1);
+    this.invalidate();
+  }
+
   // Alerts the current view of a click event
   click(x: number, y: number, down: boolean): void {
     if (this.view) {

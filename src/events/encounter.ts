@@ -81,9 +81,9 @@ export default class EncounterEvent implements Event {
       setTimeout(() => Game.game.invalidate(), 66);
     }
     if (!hero.health || !enemy.health) {
+      this.state = EncounterEvent.FINISHED;
       this.result = !enemy.health ? EncounterEvent.WIN : EncounterEvent.LOSS;
       if (!hero.health && !enemy.health) {
-        this.state = EncounterEvent.FINISHED;
         this.result = EncounterEvent.MUTUAL;
       }
       return;
@@ -136,8 +136,11 @@ export default class EncounterEvent implements Event {
       }
     } else if (this.state === EncounterEvent.FINISHED) {
       if (Game.game.within('continue', 30, 101)) {
-        console.log('Move on from battle');
-        // Implement something else here, call something
+        const hero: Hero = Game.game.party.get(this.heroIndex);
+        if (!hero.health) {
+          Game.game.party.remove(hero);
+        }
+        Game.game.progress();
       }
     }
   }

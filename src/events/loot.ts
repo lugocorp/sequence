@@ -57,10 +57,11 @@ export default class LootEvent implements Event {
         if (this.loot.type === ItemType.EQUIP) {
           hero.equip(this.loot);
         }
-        // Activate loot effect on hero then move on to next event
+        // Activate loot effect on hero
+        Game.game.progress();
       }
       if (Game.game.within('drop item', 27.5, 180)) {
-        // Move on to next event
+        Game.game.progress();
       }
       if (Game.game.within('view item', 27.5, 190)) {
         this.state = LootEvent.VIEW_LOOT;
@@ -76,7 +77,7 @@ export default class LootEvent implements Event {
   }
 
   /**
-   * Render the encounter event-specific view
+   * Render the loot event-specific view
    */
   render(view: GameView, r: GraphicsRenderer): void {
     if (this.state === LootEvent.VIEW_LOOT) {
