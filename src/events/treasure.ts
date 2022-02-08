@@ -1,6 +1,7 @@
 import GraphicsRenderer from '../graphics/renderer';
 import Sprites from '../enums/sprites';
 import GameView from '../views/game';
+import Rarity from '../rarity';
 import Event from './event';
 import Game from '../game';
 
@@ -10,14 +11,7 @@ export default class TreasureEvent implements Event {
   msg: string;
 
   constructor() {
-    this.amount = 1;
-    const roll = Math.random();
-    if (roll < 0.5) {
-      this.amount = 5;
-    }
-    if (roll < 0.05) {
-      this.amount = 25;
-    }
+    this.amount = [1, 5, 25][Rarity.roll(Rarity.RARE)];
     this.msg = `your party found ${this.amount} gold`;
   }
 

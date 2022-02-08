@@ -1,15 +1,14 @@
 import ItemType from '../enums/item-type';
 import Trigger from '../enums/trigger';
-import Rarity from '../enums/rarity';
 
 export default class Item {
   effect: () => void;
   trigger: Trigger;
-  rarity: Rarity;
+  rarity: number;
   type: ItemType;
   name: string;
 
-  constructor(name: string, type: ItemType, rarity: Rarity) {
+  constructor(name: string, type: ItemType, rarity: number) {
     this.rarity = rarity;
     this.name = name;
     this.type = type;

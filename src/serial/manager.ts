@@ -4,12 +4,12 @@
  * entities. Use this to get indexed abilities or random game objects.
  */
 import AbilityType from '../enums/ability-type';
-import Rarity from '../enums/rarity';
 import Factory from './factory';
 import Ability from '../entities/ability';
 import Enemy from '../entities/enemy';
 import Hero from '../entities/hero';
 import Item from '../entities/item';
+import Rarity from '../rarity';
 import * as types from './types';
 import abilities from '../data/ability';
 import enemies from '../data/enemy';
@@ -19,7 +19,7 @@ import items from '../data/item';
 export default class DataManager {
   abilitiesByTypeIndex: Map<AbilityType, types.AbilityData[]> = new Map();
   abilitiesByNameIndex: Map<string, types.AbilityData> = new Map();
-  itemsByRarityIndex: Map<Rarity, types.ItemData[]> = new Map();
+  itemsByRarityIndex: Map<number, types.ItemData[]> = new Map();
   factory: Factory = new Factory();
 
   // Sets up indices in this object for easy access of game data by reference
@@ -27,8 +27,8 @@ export default class DataManager {
     for (const key of Object.keys(AbilityType)) {
       this.abilitiesByTypeIndex.set(AbilityType[key], []);
     }
-    for (const key of Object.keys(Rarity)) {
-      this.itemsByRarityIndex.set(Rarity[key], []);
+    for (const rarity of Rarity.values()) {
+      this.itemsByRarityIndex.set(rarity, []);
     }
     for (const ability of abilities) {
       this.abilitiesByNameIndex.set(ability.name, ability);
@@ -75,7 +75,7 @@ export default class DataManager {
    */
   getRandomItem(): Item {
     const roll: number = this.random(31);
-    let rarity: Rarity = Rarity.COMMON;
+    let rarity: number = Rarity.COMMON;
     if (roll === 0) {
       rarity = Rarity.MYTHIC;
     } else if (roll < 3) {
