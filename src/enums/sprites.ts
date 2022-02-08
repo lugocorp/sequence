@@ -61,7 +61,12 @@ enum Sprites {
   DEATH    = 0x010501,
 
   // Spritesheet #2 (enemies)
-  ENEMY    = 0x020101
+  TREASURE_CHEST    = 0x020000,
+  TOOTH_BEAST       = 0x020100,
+  MATRIARCH         = 0x020200,
+  TOXIC_SLUDGE      = 0x020001,
+  DIRE_CRAB         = 0x020101,
+  SWORD_HOLDER      = 0x020201,
 }
 
 export default Sprites;

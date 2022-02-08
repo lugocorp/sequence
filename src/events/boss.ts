@@ -13,7 +13,7 @@ export default class BossEvent extends EncounterEvent {
     if (!hero.health) {
       Game.game.party.remove(hero);
     }
-    if (this.enemy.health) {
+    if (Game.game.party.length() && this.enemy.health) {
       this.state = EncounterEvent.VIEW_PARTY;
       this.turn = {
         enemyDamaged: false,

@@ -45,7 +45,7 @@ export default class Game {
 
   // Progresses to the next event in the game
   progress(): void {
-    if (this.chain.events.length === 1) {
+    if (!this.party.length() || this.chain.events.length === 1) {
       this.chain.plan(this.chain.events[0]);
     }
     this.chain.events.splice(0, 1);

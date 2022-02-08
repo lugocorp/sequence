@@ -35,6 +35,7 @@ export default class EventChain {
       return;
     }
     if (!Game.game.party.length()) {
+      this.events.splice(1, this.events.length - 1);
       this.events.push(new DeathEvent());
       return;
     }

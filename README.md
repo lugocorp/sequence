@@ -33,15 +33,19 @@ We have a number of `npm` commands:
 - [x] Copy the encounter event for a boss event
 
 #### Advanced gameplay
-- [ ] Add a few more sprites and test data
+- [x] Add a few more sprites and test data
+- [ ] Implement typed damage (weaknesses and resistances)
+- [ ] Implement items and abilities (descriptions and effects)
 - [ ] Create a game data compiler that checks the data folder for illegal values
 - [ ] Remove some of the less necessary enums now that we have the compiler
 - [ ] Add aftermath or prelude states to game events so things flow more smoothly
+- [ ] Add views for loading, instructions, credits, and game start
 - [ ] Add the trainer event
 - [ ] Add the trickster and guardian events
 - [ ] Add the good omen event
 - [ ] Add the assassination event
 - [ ] Add the recruitment event
 - [ ] Add the merchant event
+- [ ] Add more graphics and final game data
 - [ ] Code the event progression algorithm
-- [ ] Add views for loading, instructions, credits, and game start
+- [ ] Balance the game

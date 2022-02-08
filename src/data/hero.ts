@@ -5,18 +5,31 @@ import Slots from '../enums/slots';
 
 const data: HeroData[] = [
   {
-    sprite: Sprites.ENEMY,
-    name: 'test hero',
-    health: 10,
-    damage: 2,
+    sprite: Sprites.MATRIARCH,
+    name: 'matriarch',
+    health: 20,
     armor: 2,
+    damage: 4,
     speed: 2,
     damages: [Damage.PIERCING],
     weaknesses: [Damage.DEATH],
     resistances: [Damage.BLUNT],
-    abilitySlots: Slots.TWO,
-    itemSlots: Slots.TWO,
+    itemSlots: Slots.ZERO,
+    abilitySlots: Slots.ONE,
     ability1: 'test blessing'
+  },
+  {
+    sprite: Sprites.SWORD_HOLDER,
+    name: 'sword holder',
+    health: 20,
+    armor: 1,
+    damage: 4,
+    speed: 2,
+    damages: [Damage.PIERCING],
+    weaknesses: [Damage.DEATH],
+    resistances: [Damage.BLUNT],
+    itemSlots: Slots.ONE,
+    abilitySlots: Slots.ONE
   }
 ];
 

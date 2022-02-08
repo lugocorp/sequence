@@ -32,7 +32,7 @@ export default class TreasureEvent implements Event {
    * Render the death event-specific view
    */
   render(view: GameView, r: GraphicsRenderer): void {
-    r.drawSprite(Sprites.ENEMY, 20, 20);
+    r.drawSprite(Sprites.TREASURE_CHEST, 20, 20);
     r.drawParagraph(this.msg, 2, 100);
     r.drawText('collect the gold', 10, 180, true);
     r.drawText('leave it', 30, 190, true);
