@@ -6,32 +6,38 @@ const data: ItemData[] = [
   {
     name: 'test equip item',
     type: ItemType.EQUIP,
-    rarity: Rarity.COMMON
+    rarity: Rarity.COMMON,
+    description: 'this is a test item'
   },
   {
     name: 'test consume item',
     type: ItemType.CONSUME,
-    rarity: Rarity.COMMON
+    rarity: Rarity.COMMON,
+    description: 'this is a test item'
   },
   {
     name: 'test uncommon item',
     type: ItemType.EQUIP,
-    rarity: Rarity.UNCOMMON
+    rarity: Rarity.UNCOMMON,
+    description: 'this is a test item'
   },
   {
     name: 'test rare item',
     type: ItemType.EQUIP,
-    rarity: Rarity.RARE
+    rarity: Rarity.RARE,
+    description: 'this is a test item'
   },
   {
     name: 'test legendary item',
     type: ItemType.EQUIP,
-    rarity: Rarity.LEGENDARY
+    rarity: Rarity.LEGENDARY,
+    description: 'this is a test item'
   },
   {
     name: 'test mythic item',
     type: ItemType.EQUIP,
-    rarity: Rarity.MYTHIC
+    rarity: Rarity.MYTHIC,
+    description: 'this is a test item'
   },
 ];
 

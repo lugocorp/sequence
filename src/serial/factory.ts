@@ -49,7 +49,7 @@ export default class Factory {
 
   // Instantiates a new Item object based on some game data
   createItem(data: types.ItemData): Item {
-    const item: Item = new Item(data.name, data.type, data.rarity);
+    const item: Item = new Item(data.name, data.type, data.rarity, data.description);
     return item;
   }
 
@@ -58,7 +58,7 @@ export default class Factory {
     if (data.name.length > 19) {
       throw new Error(`Name for ability '${data.name}' cannot be over length 19`);
     }
-    const ability: Ability = new Ability(data.name, data.type);
+    const ability: Ability = new Ability(data.name, data.type, data.description);
     return ability;
   }
 }

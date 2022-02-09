@@ -39,10 +39,12 @@ export interface ItemData {
   name: string;
   type: ItemType;
   rarity: number;
+  description: string;
 }
 
 // Defines game data for an Ability
 export interface AbilityData {
   name: string;
   type: AbilityType;
+  description: string;
 }

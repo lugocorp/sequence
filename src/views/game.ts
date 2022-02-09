@@ -64,7 +64,7 @@ export default class GameView implements View {
     });
     if (enemy.ability) {
       r.drawText(enemy.ability.name, 2, 100);
-      r.drawParagraph('this is an ability that is really just used for testing. yep, nothing much to see here in this ability!', 2, 110);
+      r.drawParagraph(enemy.ability.description, 2, 110);
     }
   }
 
@@ -130,7 +130,7 @@ export default class GameView implements View {
    */
   abilityInspection(r: GraphicsRenderer, ability: Ability): void {
     r.drawText(ability.name, 2, 2);
-    r.drawParagraph('here is an ability description to be rendered onto the screen. i will have to add a description field to abilities sometime soon...', 2, 20);
+    r.drawParagraph(ability.description, 2, 20);
   }
 
   /*
@@ -138,7 +138,7 @@ export default class GameView implements View {
    */
   itemInspection(r: GraphicsRenderer, item: Item): void {
     r.drawText(item.name, 2, 2);
-    r.drawParagraph('here is an item description to be rendered onto the screen. i will have to add a description field to items sometime soon...', 2, 20);
+    r.drawParagraph(item.description, 2, 20);
   }
 
   /*
