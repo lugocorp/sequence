@@ -1,5 +1,5 @@
 import {EnemyData} from '../serial/types';
-import Damage from '../enums/damage';
+import Damage from '../damage';
 import Sprites from '../enums/sprites';
 
 const data: EnemyData[] = [

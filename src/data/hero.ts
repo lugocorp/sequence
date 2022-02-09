@@ -1,5 +1,5 @@
 import {HeroData} from '../serial/types';
-import Damage from '../enums/damage';
+import Damage from '../damage';
 import Sprites from '../enums/sprites';
 import Slots from '../enums/slots';
 

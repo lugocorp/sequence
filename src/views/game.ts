@@ -2,7 +2,6 @@ import GraphicsRenderer from '../graphics/renderer';
 import TurnData from '../events/turn-data';
 import EventChain from '../events/chain';
 import Sprites from '../enums/sprites';
-import Damage from '../enums/damage';
 import Ability from '../entities/ability';
 import Enemy from '../entities/enemy';
 import Hero from '../entities/hero';
@@ -42,7 +41,7 @@ export default class GameView implements View {
     r.drawNumber(enemy.armor, 82, 16);
     r.drawNumber(enemy.damage, 82, 28);
     let index = 0;
-    enemy.damages.forEach((e: Damage) => {
+    enemy.damages.forEach((e: number) => {
       const x = ((index % 3) * 12) + 64;
       const y = index < 3 ? 39 : 51;
       r.drawSprite(r.getDamageSprite(e), x, y);
@@ -53,13 +52,13 @@ export default class GameView implements View {
     r.drawSprite(Sprites.HEALTH, 76, 64);
     r.drawNumber(enemy.health, 88, 65);
     r.drawText('weak', 7, 77);
-    enemy.weaknesses.forEach((e: Damage) => {
+    enemy.weaknesses.forEach((e: number) => {
       r.drawSprite(r.getDamageSprite(e), (index * 11) + 33, 76);
       index++;
     });
     index = 0;
     r.drawText('resist', 2, 89);
-    enemy.resistances.forEach((e: Damage) => {
+    enemy.resistances.forEach((e: number) => {
       r.drawSprite(r.getDamageSprite(e), (index * 11) + 33, 88);
       index++;
     });
@@ -81,7 +80,7 @@ export default class GameView implements View {
     r.drawNumber(hero.armor, 82, 16);
     r.drawNumber(hero.damage, 82, 28);
     let index = 0;
-    hero.damages.forEach((e: Damage) => {
+    hero.damages.forEach((e: number) => {
       const x = ((index % 3) * 12) + 64;
       const y = index < 3 ? 39 : 51;
       r.drawSprite(r.getDamageSprite(e), x, y);
@@ -92,13 +91,13 @@ export default class GameView implements View {
     r.drawSprite(Sprites.HEALTH, 76, 64);
     r.drawNumber(hero.health, 88, 65);
     r.drawText('weak', 7, 77);
-    hero.weaknesses.forEach((e: Damage) => {
+    hero.weaknesses.forEach((e: number) => {
       r.drawSprite(r.getDamageSprite(e), (index * 11) + 33, 76);
       index++;
     });
     index = 0;
     r.drawText('resist', 2, 89);
-    hero.resistances.forEach((e: Damage) => {
+    hero.resistances.forEach((e: number) => {
       r.drawSprite(r.getDamageSprite(e), (index * 11) + 33, 88);
       index++;
     });

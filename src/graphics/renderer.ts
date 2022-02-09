@@ -3,7 +3,7 @@
  * Use it whenever you have to interact with the game canvas.
  */
 import Sprites from '../enums/sprites';
-import Damage from '../enums/damage';
+import Damage from '../damage';
 import DrawCoords from './draw-coords';
 import GraphicsLoader from './loader';
 import View from '../views/view';
@@ -60,7 +60,7 @@ export default class GraphicsRenderer {
   /*
    * This method grabs the icon sprite for a damage type.
    */
-  getDamageSprite(e: Damage): Sprites {
+  getDamageSprite(e: number): Sprites {
     switch (e) {
       case Damage.PIERCING: return Sprites.PIERCING;
       case Damage.BLUNT: return Sprites.BLUNT;

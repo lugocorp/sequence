@@ -5,6 +5,7 @@ import Enemy from '../entities/enemy';
 import Hero from '../entities/hero';
 import Item from '../entities/item';
 import TurnData from './turn-data';
+import Damage from '../damage';
 import Event from './event';
 import Game from '../game';
 
@@ -61,14 +62,22 @@ export default class EncounterEvent implements Event {
     }
     // Perform hero attack
     if (this.turn.step % (6 / hero.speed) === 0) {
-      const damage = (hero.damage > this.turn.enemyArmor) ? hero.damage - this.turn.enemyArmor : 0;
+      let damage = (hero.damage > this.turn.enemyArmor) ? hero.damage - this.turn.enemyArmor : 0;
+      damage += Damage.getTypedDamageModifier(hero, enemy);
+      if (damage < 0) {
+        damage = 0;
+      }
       this.turn.enemyArmor = this.turn.enemyArmor > hero.damage ? this.turn.enemyArmor - hero.damage : 0;
       enemy.health -= (enemy.health < damage) ? enemy.health : damage;
       this.turn.enemyDamaged = true;
     }
     // Perform enemy attack
     if (this.turn.step % (6 / enemy.speed) === 0) {
-      const damage = (enemy.damage > this.turn.heroArmor) ? enemy.damage - this.turn.heroArmor : 0;
+      let damage = (enemy.damage > this.turn.heroArmor) ? enemy.damage - this.turn.heroArmor : 0;
+      damage += Damage.getTypedDamageModifier(enemy, hero);
+      if (damage < 0) {
+        damage = 0;
+      }
       this.turn.heroArmor = this.turn.heroArmor > enemy.damage ? this.turn.heroArmor - enemy.damage : 0;
       hero.health -= (hero.health < damage) ? hero.health : damage;
       this.turn.heroDamaged = true;

@@ -34,7 +34,7 @@ We have a number of `npm` commands:
 
 #### Advanced gameplay
 - [x] Add a few more sprites and test data
-- [ ] Implement typed damage (weaknesses and resistances)
+- [x] Implement typed damage (weaknesses and resistances)
 - [ ] Implement items and abilities (descriptions and effects)
 - [ ] Create a game data compiler that checks the data folder for illegal values
 - [ ] Remove some of the less necessary enums now that we have the compiler
