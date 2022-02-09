@@ -28,15 +28,6 @@ export default class Factory {
 
   // Instantiates a new Enemy object based on some game data
   createEnemy(manager: DataManager, data: types.EnemyData): Enemy {
-    if(data.name.length > 14) {
-      throw new Error(`Name for enemy '${data.name}' cannot be over length 14`);
-    }
-    if (data.damage > 99 || data.health > 99 || data.armor > 99) {
-      throw new Error(`Damage, health and armor cannot be over 99 for enemy '${data.name}'`);
-    }
-    if ([1, 2, 3].indexOf(data.speed) < 0) {
-      throw new Error(`Invalid speed '${data.speed}' for enemy '${data.name}'`);
-    }
     const enemy: Enemy = new Enemy(data.sprite, data.name, data.health, data.damage, data.armor, data.speed);
     enemy.weaknesses = data.weaknesses ? new Set(data.weaknesses) : new Set();
     enemy.resistances = data.resistances ? new Set(data.resistances) : new Set();
@@ -49,16 +40,11 @@ export default class Factory {
 
   // Instantiates a new Item object based on some game data
   createItem(data: types.ItemData): Item {
-    const item: Item = new Item(data.name, data.type, data.rarity, data.description, data.effect);
-    return item;
+    return new Item(data.name, data.type, data.rarity, data.description, data.effect);
   }
 
   // Instantiates a new Ability object based on some game data
   createAbility(data: types.AbilityData): Ability {
-    if (data.name.length > 19) {
-      throw new Error(`Name for ability '${data.name}' cannot be over length 19`);
-    }
-    const ability: Ability = new Ability(data.name, data.type, data.description, data.effect);
-    return ability;
+    return new Ability(data.name, data.type, data.description, data.effect);
   }
 }

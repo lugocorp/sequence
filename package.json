@@ -6,7 +6,8 @@
   "scripts": {
     "compile": "npx tsc",
     "lint": "npx eslint src",
-    "start": "npx webpack serve --port 2017"
+    "start": "npx webpack serve --port 2017",
+    "audit": "tsc && node out/audit.js"
   },
   "keywords": [
     "ecosystem:cordova"

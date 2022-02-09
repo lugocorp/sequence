@@ -5,6 +5,7 @@ We have a number of `npm` commands:
 - `start` runs the game server and listens for code changes
 - `compile` builds all the TypeScript code
 - `lint` lints the project
+- `audit` checks the game data for any illegal values
 
 ## Todo
 #### Setup
@@ -36,15 +37,16 @@ We have a number of `npm` commands:
 - [x] Add a few more sprites and test data
 - [x] Implement typed damage (weaknesses and resistances)
 - [x] Implement items and abilities (descriptions and effects)
-- [ ] Create a game data compiler that checks the data folder for illegal values
-- [ ] Remove some of the less necessary enums now that we have the compiler
-- [ ] Add aftermath or prelude states to game events so things flow more smoothly
+- [x] Create a game data compiler that checks the data folder for illegal values
+- [x] Remove some of the less necessary enums now that we have the compiler
 - [ ] Add views for loading, instructions, credits, and game start
+- [ ] Add aftermath or prelude states to game events so things flow more smoothly
+- [ ] Share with Indigenous Game Devs group
+- [ ] Add the recruitment event
 - [ ] Add the trainer event
 - [ ] Add the trickster and guardian events
 - [ ] Add the good omen event
 - [ ] Add the assassination event
-- [ ] Add the recruitment event
 - [ ] Add the merchant event
 - [ ] Add more graphics and final game data
 - [ ] Code the event progression algorithm

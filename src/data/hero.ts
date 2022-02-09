@@ -1,7 +1,6 @@
 import {HeroData} from '../serial/types';
 import Damage from '../damage';
 import Sprites from '../enums/sprites';
-import Slots from '../enums/slots';
 
 const data: HeroData[] = [
   {
@@ -14,8 +13,8 @@ const data: HeroData[] = [
     damages: [Damage.PIERCING],
     weaknesses: [Damage.DEATH],
     resistances: [Damage.BLUNT],
-    itemSlots: Slots.ZERO,
-    abilitySlots: Slots.ONE,
+    itemSlots: 0,
+    abilitySlots: 1,
     ability1: 'test blessing'
   },
   {
@@ -28,8 +27,8 @@ const data: HeroData[] = [
     damages: [Damage.PIERCING],
     weaknesses: [Damage.DEATH],
     resistances: [Damage.BLUNT],
-    itemSlots: Slots.ONE,
-    abilitySlots: Slots.ONE
+    itemSlots: 1,
+    abilitySlots: 1
   }
 ];
 
