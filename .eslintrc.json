@@ -7,7 +7,8 @@
   "plugins": ["@typescript-eslint"],
   "extends": ["eslint:recommended", "plugin:@typescript-eslint/recommended"],
   "rules": {
-      "multiline-comment-style": ["error", "starred-block"]
+      "multiline-comment-style": ["error", "starred-block"],
+      "@typescript-eslint/no-explicit-any": "off"
   },
   "env": {
     "browser": true,

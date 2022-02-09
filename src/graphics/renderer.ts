@@ -94,6 +94,8 @@ export default class GraphicsRenderer {
       case '+': return Sprites.PLUS;
       case '-': return Sprites.MINUS;
       case '\'': return Sprites.APOSTROPHE;
+      case '/': return Sprites.SLASH;
+      case '%': return Sprites.PERCENT;
     }
     throw new Error(`No font glyph for character '${char}'`);
   }

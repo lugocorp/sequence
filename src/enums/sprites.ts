@@ -47,6 +47,8 @@ enum Sprites {
   PLUS       = 0x000402,
   MINUS      = 0x000502,
   APOSTROPHE = 0x000602,
+  SLASH      = 0x000702,
+  PERCENT    = 0x000802,
 
   // Spritesheet #1 (icons)
   HEALTH   = 0x010000,

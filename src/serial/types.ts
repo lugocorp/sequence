@@ -1,3 +1,4 @@
+import {AbilityEffect, ItemEffect} from '../effects';
 import AbilityType from '../enums/ability-type';
 import ItemType from '../enums/item-type';
 import Sprites from '../enums/sprites';
@@ -40,6 +41,7 @@ export interface ItemData {
   type: ItemType;
   rarity: number;
   description: string;
+  effect: ItemEffect;
 }
 
 // Defines game data for an Ability
@@ -47,4 +49,5 @@ export interface AbilityData {
   name: string;
   type: AbilityType;
   description: string;
+  effect: AbilityEffect;
 }

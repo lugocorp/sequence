@@ -1,5 +1,6 @@
 import GraphicsRenderer from '../graphics/renderer';
 import ItemType from '../enums/item-type';
+import Trigger from '../enums/trigger';
 import GameView from '../views/game';
 import Ability from '../entities/ability';
 import Hero from '../entities/hero';
@@ -57,7 +58,7 @@ export default class LootEvent implements Event {
         if (this.loot.type === ItemType.EQUIP) {
           hero.equip(this.loot);
         }
-        // Activate loot effect on hero
+        this.loot.effect(Trigger.USED, hero, null);
         Game.game.progress();
       }
       if (Game.game.within('drop item', 27.5, 180)) {

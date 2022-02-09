@@ -1,4 +1,5 @@
 import ItemType from '../enums/item-type';
+import Trigger from '../enums/trigger';
 import Sprites from '../enums/sprites';
 import Slots from '../enums/slots';
 import Ability from './ability';
@@ -34,6 +35,21 @@ export default class Hero extends Unit {
       this.item2 = item;
     } else {
       this.item1 = item;
+    }
+  }
+
+  activate(trigger: Trigger, data: any): void {
+    if (this.ability1) {
+      this.ability1.effect(trigger, this, data);
+    }
+    if (this.ability2) {
+      this.ability2.effect(trigger, this, data);
+    }
+    if (this.item1) {
+      this.item1.effect(trigger, this, data);
+    }
+    if (this.item2) {
+      this.item2.effect(trigger, this, data);
     }
   }
 }

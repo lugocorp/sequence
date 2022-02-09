@@ -1,5 +1,10 @@
+import Trigger from '../enums/trigger';
 import Sprites from '../enums/sprites';
 
+/**
+ * This is the base class that both Hero and Enemy
+ * get their logic and interface from.
+ */
 export default abstract class Unit {
   resistances: Set<number>;
   weaknesses: Set<number>;
@@ -21,4 +26,10 @@ export default abstract class Unit {
     this.speed = speed;
     this.name = name;
   }
+
+  /**
+   * This function activates all ability and item effects given a
+   * particular trigger.
+   */
+  abstract activate(trigger: Trigger, data: any): void;
 }
