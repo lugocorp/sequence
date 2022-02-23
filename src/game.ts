@@ -3,6 +3,7 @@ import GraphicsLoader from './graphics/loader';
 import DataManager from './serial/manager';
 import EventChain from './events/chain';
 import Party from './entities/party';
+import LoadingView from './views/loading';
 import GameView from './views/game';
 import View from './views/view';
 
@@ -30,8 +31,14 @@ export default class Game {
     this.renderer = new GraphicsRenderer(canvas, this.assets);
     this.renderer.setCanvasSize();
     // Load and setup game assets (with a loading screen)
+    await this.assets.loadInitialAsset();
+    this.view = new LoadingView();
+    this.invalidate();
     await this.assets.loadAssets();
     this.data.index();
+    await new Promise((resolve) => {
+      setTimeout(resolve, 1000);
+    });
     // Loading has completed
     this.party.add(this.data.getRandomHero());
     this.view = new GameView(this.chain);

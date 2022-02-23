@@ -69,6 +69,9 @@ enum Sprites {
   TOXIC_SLUDGE      = 0x020001,
   DIRE_CRAB         = 0x020101,
   SWORD_HOLDER      = 0x020201,
+
+  // Loading sprite
+  LOADING = 0xFFFFFF
 }
 
 export default Sprites;

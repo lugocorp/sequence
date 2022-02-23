@@ -6,6 +6,7 @@
 import DrawCoords from './draw-coords';
 
 export default class GraphicsLoader {
+  loadAsset: HTMLImageElement;
   sheets: HTMLImageElement[];
   static NUM_SHEETS = 3;
 
@@ -19,6 +20,17 @@ export default class GraphicsLoader {
       {w: 10, h: 10}
     ];
     return (sheet < sizes.length) ? sizes[sheet] : {w: 60, h: 60};
+  }
+
+  /*
+   * Loads the one sprite needed for the loading screen.
+   */
+  async loadInitialAsset(): Promise<void> {
+    this.loadAsset = new Image();
+    await new Promise((resolve) => {
+      this.loadAsset.src = `./assets/loading.png`;
+      this.loadAsset.onload = resolve;
+    });
   }
 
   /*
@@ -43,6 +55,15 @@ export default class GraphicsLoader {
    * x, y, width and height coordinates on that sheet to pull from.
    */
   getSprite(id: number): DrawCoords {
+    if (id === 0xFFFFFF) {
+      return {
+        src: this.loadAsset,
+        left: 0,
+        top: 0,
+        width: 50,
+        height: 8,
+      }
+    }
     const index: number = id >> 16;
     const x = (id - (index << 16)) >> 8;
     const y = (id - (index << 16)) - (x << 8);
