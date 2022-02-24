@@ -39,7 +39,7 @@ We have a number of `npm` commands:
 - [x] Implement items and abilities (descriptions and effects)
 - [x] Create a game data compiler that checks the data folder for illegal values
 - [x] Remove some of the less necessary enums now that we have the compiler
-- [ ] Add views for loading, instructions, credits, and game start
+- [x] Add views for loading, instructions, credits, and game start
 - [ ] Add aftermath or prelude states to game events so things flow more smoothly
 - [ ] Share with Indigenous Game Devs group
 - [ ] Add the recruitment event

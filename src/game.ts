@@ -4,7 +4,7 @@ import DataManager from './serial/manager';
 import EventChain from './events/chain';
 import Party from './entities/party';
 import LoadingView from './views/loading';
-import GameView from './views/game';
+import StartView from './views/start';
 import View from './views/view';
 
 export default class Game {
@@ -41,7 +41,7 @@ export default class Game {
     });
     // Loading has completed
     this.party.add(this.data.getRandomHero());
-    this.view = new GameView(this.chain);
+    this.view = new StartView();
     this.invalidate();
   }
 

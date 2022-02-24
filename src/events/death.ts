@@ -1,4 +1,5 @@
 import GraphicsRenderer from '../graphics/renderer';
+import StartView from '../views/start';
 import GameView from '../views/game';
 import Event from './event';
 import Game from '../game';
@@ -11,7 +12,7 @@ export default class DeathEvent implements Event {
    */
   click(): void {
     if (Game.game.within('continue', 30, 190)) {
-      // Go back to the main menu view
+      Game.game.view = new StartView();
     }
   }
 
