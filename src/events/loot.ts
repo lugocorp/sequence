@@ -9,10 +9,14 @@ import Event from './event';
 import Game from '../game';
 
 export default class LootEvent implements Event {
+  static PRELUDE      = -1;
   static VIEW_LOOT    = 0;
   static VIEW_PARTY   = 1;
   static VIEW_ABILITY = 2;
   static VIEW_ITEM    = 3;
+  static GRABBED      = 4;
+  static CONSUMED     = 5;
+  static LEFT         = 6;
   heroIndex: number;
   ability: Ability;
   state: number;
@@ -20,7 +24,7 @@ export default class LootEvent implements Event {
   loot: Item;
 
   constructor(loot: Item) {
-    this.state = LootEvent.VIEW_LOOT;
+    this.state = LootEvent.PRELUDE;
     this.heroIndex = 0;
     this.loot = loot;
   }
@@ -29,7 +33,11 @@ export default class LootEvent implements Event {
    * Handle click logic for this event
    */
   click(): void {
-    if (this.state === LootEvent.VIEW_LOOT) {
+    if (this.state === LootEvent.PRELUDE) {
+      if (Game.game.within('continue', 30, 190)) {
+        this.state = LootEvent.VIEW_LOOT;
+      }
+    } else if (this.state === LootEvent.VIEW_LOOT) {
       if (Game.game.within('view party', 25, 190)) {
         this.state = LootEvent.VIEW_PARTY;
       }
@@ -57,12 +65,14 @@ export default class LootEvent implements Event {
       if (Game.game.within('give item', 27.5, 170) && hero.canUseItem(this.loot)) {
         if (this.loot.type === ItemType.EQUIP) {
           hero.equip(this.loot);
+          this.state = LootEvent.GRABBED;
+        } else {
+          this.state = LootEvent.CONSUMED;
         }
         this.loot.effect(Trigger.USED, hero, null);
-        Game.game.progress();
       }
       if (Game.game.within('drop item', 27.5, 180)) {
-        Game.game.progress();
+        this.state = LootEvent.LEFT;
       }
       if (Game.game.within('view item', 27.5, 190)) {
         this.state = LootEvent.VIEW_LOOT;
@@ -74,6 +84,10 @@ export default class LootEvent implements Event {
       if (Game.game.within('back', 40, 190)) {
         this.state = LootEvent.VIEW_PARTY;
       }
+    } else if (this.state === LootEvent.GRABBED || this.state === LootEvent.CONSUMED || this.state === LootEvent.LEFT) {
+      if (Game.game.within('continue', 30, 190)) {
+        Game.game.progress();
+      }
     }
   }
 
@@ -81,6 +95,10 @@ export default class LootEvent implements Event {
    * Render the loot event-specific view
    */
   render(view: GameView, r: GraphicsRenderer): void {
+    if (this.state === LootEvent.PRELUDE) {
+      r.drawParagraph('your party came upon a useful item', 2, 0);
+      r.drawText('continue', 30, 190, true);
+    }
     if (this.state === LootEvent.VIEW_LOOT) {
       view.itemInspection(r, this.loot);
       r.drawText('view party', 25, 190, true);
@@ -104,6 +122,18 @@ export default class LootEvent implements Event {
     if (this.state === LootEvent.VIEW_ITEM) {
       view.itemInspection(r, this.item);
       r.drawText('back', 40, 190, true);
+    }
+    if (this.state === LootEvent.GRABBED) {
+      r.drawParagraph('your party equipped the useful item', 2, 0);
+      r.drawText('continue', 30, 190, true);
+    }
+    if (this.state === LootEvent.CONSUMED) {
+      r.drawParagraph('your party took the item and used it', 2, 0);
+      r.drawText('continue', 30, 190, true);
+    }
+    if (this.state === LootEvent.LEFT) {
+      r.drawParagraph('your party left the item where it was', 2, 0);
+      r.drawText('continue', 30, 190, true);
     }
   }
 }
