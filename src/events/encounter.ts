@@ -14,12 +14,13 @@ export default class EncounterEvent implements Event {
   static LOSS = 'defeat';
   static MUTUAL = 'destruction';
   static DRAW = 'stalemate';
-  static VIEW_ENEMY   = 0;
-  static VIEW_PARTY   = 1;
-  static VIEW_ABILITY = 2;
-  static VIEW_ITEM    = 3;
-  static BATTLE       = 4;
-  static FINISHED     = 5;
+  static PRELUDE      = 0;
+  static VIEW_ENEMY   = 1;
+  static VIEW_PARTY   = 2;
+  static VIEW_ABILITY = 3;
+  static VIEW_ITEM    = 4;
+  static BATTLE       = 5;
+  static FINISHED     = 6;
   heroIndex: number;
   ability: Ability;
   result: string;
@@ -29,7 +30,7 @@ export default class EncounterEvent implements Event {
   item: Item;
 
   constructor(enemy: Enemy) {
-    this.state = EncounterEvent.VIEW_ENEMY;
+    this.state = EncounterEvent.PRELUDE;
     this.heroIndex = 0;
     this.enemy = enemy;
     this.turn = {
@@ -116,7 +117,11 @@ export default class EncounterEvent implements Event {
    * Handle click logic for this event
    */
   click(): void {
-    if (this.state === EncounterEvent.VIEW_ENEMY) {
+    if (this.state === EncounterEvent.PRELUDE) {
+      if (Game.game.within('continue', 30, 190)) {
+        this.state = EncounterEvent.VIEW_ENEMY;
+      }
+    } else if (this.state === EncounterEvent.VIEW_ENEMY) {
       if (Game.game.within('view party', 25, 190)) {
         this.state = EncounterEvent.VIEW_PARTY;
       }
@@ -166,6 +171,10 @@ export default class EncounterEvent implements Event {
    * Render the encounter event-specific view
    */
   render(view: GameView, r: GraphicsRenderer): void {
+    if (this.state === EncounterEvent.PRELUDE) {
+      r.drawParagraph('your party comes across a terrible monster', 2, 0);
+      r.drawText('continue', 30, 190);
+    }
     if (this.state === EncounterEvent.VIEW_ENEMY) {
       view.enemyCard(r, this.enemy);
       r.drawText('view party', 25, 190, true);

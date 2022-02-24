@@ -1,3 +1,5 @@
+import GraphicsRenderer from '../graphics/renderer';
+import GameView from '../views/game';
 import EncounterEvent from './encounter';
 import Hero from '../entities/hero';
 import Game from '../game';
@@ -25,6 +27,18 @@ export default class BossEvent extends EncounterEvent {
       Game.game.invalidate();
     } else {
       Game.game.progress();
+    }
+  }
+
+  /**
+   * Override the draw method so that we have extra prelude text.
+   */
+  render(view: GameView, r: GraphicsRenderer): void {
+    if (this.state === EncounterEvent.PRELUDE) {
+      r.drawParagraph('your party comes across a terrible monster that towers far above them...', 2, 0);
+      r.drawText('continue', 30, 190);
+    } else {
+      super.render(view, r);
     }
   }
 }

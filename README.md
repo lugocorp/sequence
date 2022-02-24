@@ -40,14 +40,15 @@ We have a number of `npm` commands:
 - [x] Create a game data compiler that checks the data folder for illegal values
 - [x] Remove some of the less necessary enums now that we have the compiler
 - [x] Add views for loading, instructions, credits, and game start
-- [ ] Add aftermath or prelude states to game events so things flow more smoothly
-- [ ] Share with Indigenous Game Devs group
+- [x] Add aftermath or prelude states to game events so things flow more smoothly
+- [x] Share with Indigenous Game Devs group
+- [ ] Add more graphics
 - [ ] Add the recruitment event
 - [ ] Add the trainer event
 - [ ] Add the trickster and guardian events
 - [ ] Add the good omen event
 - [ ] Add the assassination event
 - [ ] Add the merchant event
-- [ ] Add more graphics and final game data
+- [ ] Add more graphics and game data
 - [ ] Code the event progression algorithm
-- [ ] Balance the game
+- [ ] Balance the game as needed

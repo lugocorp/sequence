@@ -6,10 +6,10 @@ import Event from './event';
 import Game from '../game';
 
 export default class TreasureEvent implements Event {
-  static PRELUDE      = -1;
-  static CHOICE       = 0;
-  static GRABBED      = 1;
-  static LEFT         = 2;
+  static PRELUDE      = 0;
+  static CHOICE       = 1;
+  static GRABBED      = 2;
+  static LEFT         = 3;
   amount: number;
   state: number;
   msg: string;

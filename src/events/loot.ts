@@ -9,14 +9,14 @@ import Event from './event';
 import Game from '../game';
 
 export default class LootEvent implements Event {
-  static PRELUDE      = -1;
-  static VIEW_LOOT    = 0;
-  static VIEW_PARTY   = 1;
-  static VIEW_ABILITY = 2;
-  static VIEW_ITEM    = 3;
-  static GRABBED      = 4;
-  static CONSUMED     = 5;
-  static LEFT         = 6;
+  static PRELUDE      = 0;
+  static VIEW_LOOT    = 1;
+  static VIEW_PARTY   = 2;
+  static VIEW_ABILITY = 3;
+  static VIEW_ITEM    = 4;
+  static GRABBED      = 5;
+  static CONSUMED     = 6;
+  static LEFT         = 7;
   heroIndex: number;
   ability: Ability;
   state: number;
