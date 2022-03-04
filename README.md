@@ -42,6 +42,7 @@ We have a number of `npm` commands:
 - [x] Add views for loading, instructions, credits, and game start
 - [x] Add aftermath or prelude states to game events so things flow more smoothly
 - [x] Share with Indigenous Game Devs group
+- [x] Rework on-screen text to make animations easier
 - [ ] Add more graphics
 - [ ] Add the recruitment event
 - [ ] Add the trainer event

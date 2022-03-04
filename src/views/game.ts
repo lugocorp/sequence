@@ -8,10 +8,11 @@ import Hero from '../entities/hero';
 import Item from '../entities/item';
 import View from './view';
 
-export default class GameView implements View {
+export default class GameView extends View {
   chain: EventChain;
 
   constructor(chain: EventChain) {
+    super();
     this.chain = chain;
   }
 
