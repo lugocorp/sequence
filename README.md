@@ -33,7 +33,7 @@ We have a number of `npm` commands:
 - [x] Implement the treasure event
 - [x] Copy the encounter event for a boss event
 
-#### Advanced gameplay
+#### Gearing up for the final stretch
 - [x] Add a few more sprites and test data
 - [x] Implement typed damage (weaknesses and resistances)
 - [x] Implement items and abilities (descriptions and effects)
@@ -43,13 +43,17 @@ We have a number of `npm` commands:
 - [x] Add aftermath or prelude states to game events so things flow more smoothly
 - [x] Share with Indigenous Game Devs group
 - [x] Rework on-screen text to make animations easier
-- [ ] Add more graphics
-- [ ] Add the recruitment event
-- [ ] Add the trainer event
-- [ ] Add the trickster and guardian events
-- [ ] Add the good omen event
-- [ ] Add the assassination event
-- [ ] Add the merchant event
-- [ ] Add more graphics and game data
+
+#### Finishing it up
+- [ ] Clean up the code
+- [ ] Add other game events
+- [ ] Make sure all prelude/aftermath scenes flow well
+- [ ] Add sounds into the game (just to accentuate certain events)
+- [ ] Throw in some game data
 - [ ] Code the event progression algorithm
 - [ ] Balance the game as needed
+- [ ] Prettify the event UI (especially character selection)
+- [ ] Add more items, abilities, enemies, etc
+- [ ] Research and ask cultural consultants to help come up with character concepts, double check core gameplay
+- [ ] Design character and monster graphics
+- [ ] Contact more consultants just to double check themes and designs
