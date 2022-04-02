@@ -7,51 +7,40 @@ const data: ItemData[] = [
   {
     name: 'basic sword',
     rarity: Rarity.COMMON,
-    description: 'gives a party member +1 damage',
+    description: 'gives a party member +1 strength',
     effect: (trigger: Trigger, hero: Hero, data: any) => {
       if (trigger === Trigger.USED) {
-        hero.damage += 1;
+        hero.strength += 1;
       }
     }
   },
   {
     name: 'corn',
     rarity: Rarity.COMMON,
-    description: 'heals a party member by up to 25% of their max health',
+    description: 'gives a party member +1 wisdom',
     effect: (trigger: Trigger, hero: Hero, data: any) => {
       if (trigger === Trigger.USED) {
-        const heal: number = Math.floor(hero.maxHealth * 0.25);
-        hero.health += heal;
-        if (hero.health > hero.maxHealth) {
-          hero.health = hero.maxHealth;
-        }
+        hero.wisdom += 1;
       }
     }
   },
   {
     name: 'large sword',
     rarity: Rarity.UNCOMMON,
-    description: 'gives a party member +2 damage, -1 armor',
+    description: 'gives a party member +1 agility',
     effect: (trigger: Trigger, hero: Hero, data: any) => {
       if (trigger === Trigger.USED) {
-        hero.damage += 2;
-        hero.armor -= 1;
-        if (hero.armor < 0) {
-          hero.armor = 0;
-        }
+        hero.agility += 1;
       }
     }
   },
   {
     name: 'sacred medicine',
     rarity: Rarity.RARE,
-    description: 'gives a party member +10 max health',
+    description: 'gives a party member +5% luck',
     effect: (trigger: Trigger, hero: Hero, data: any) => {
       if (trigger === Trigger.USED) {
-        hero.maxHealth += 10;
-        if (hero.maxHealth > 99) {
-          hero.maxHealth = 99;
-        }
+        hero.luck += 5;
       }
     }
   },

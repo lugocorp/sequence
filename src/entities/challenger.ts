@@ -6,7 +6,7 @@ import Unit from './unit';
 export default class Challenger extends Unit {
   ability: Ability;
 
-  constructor(sprite: Sprites, name: string, health: number, strength: number, wisdom: number, agility: number) {
+  constructor(sprite: Sprites, name: string, strength: number, wisdom: number, agility: number) {
     super(sprite, name, strength, wisdom, agility);
   }
 

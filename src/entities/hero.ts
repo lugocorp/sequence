@@ -8,12 +8,14 @@ export default class Hero extends Unit {
   ability1: Ability;
   ability2: Ability;
   itemSlots: number;
+  luck: number;
   item1: Item;
   item2: Item;
 
   constructor(sprite: Sprites, name: string, strength: number, wisdom: number, agility: number, itemSlots: number) {
     super(sprite, name, strength, wisdom, agility);
     this.itemSlots = itemSlots;
+    this.luck = 50;
   }
 
   // Returns true if this hero has space for another item

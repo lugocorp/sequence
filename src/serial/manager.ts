@@ -3,36 +3,30 @@
  * provides the Factory class with all the data it needs to instantiate game
  * entities. Use this to get indexed abilities or random game objects.
  */
-import AbilityType from '../enums/ability-type';
 import Factory from './factory';
+import Challenger from '../entities/challenger';
 import Ability from '../entities/ability';
-import Enemy from '../entities/enemy';
 import Hero from '../entities/hero';
 import Item from '../entities/item';
 import Rarity from '../rarity';
 import * as types from './types';
+import challengers from '../data/challenger';
 import abilities from '../data/ability';
-import enemies from '../data/challenger';
 import heroes from '../data/hero';
 import items from '../data/item';
 
 export default class DataManager {
-  abilitiesByTypeIndex: Map<AbilityType, types.AbilityData[]> = new Map();
   abilitiesByNameIndex: Map<string, types.AbilityData> = new Map();
   itemsByRarityIndex: Map<number, types.ItemData[]> = new Map();
   factory: Factory = new Factory();
 
   // Sets up indices in this object for easy access of game data by reference
   index(): void {
-    for (const key of Object.keys(AbilityType)) {
-      this.abilitiesByTypeIndex.set(AbilityType[key], []);
-    }
     for (const rarity of Rarity.values()) {
       this.itemsByRarityIndex.set(rarity, []);
     }
     for (const ability of abilities) {
       this.abilitiesByNameIndex.set(ability.name, ability);
-      this.abilitiesByTypeIndex.get(ability.type).push(ability);
     }
     for (const item of items) {
       this.itemsByRarityIndex.get(item.rarity).push(item);
@@ -57,8 +51,8 @@ export default class DataManager {
    * Returns a random enemy available in the game. Every enemy has equal chance
    * to be returned by this function.
    */
-  getRandomEnemy(): Enemy {
-    return this.factory.createEnemy(this, enemies[this.random(enemies.length)]);
+  getRandomChallenger(): Challenger {
+    return this.factory.createChallenger(this, challengers[this.random(challengers.length)]);
   }
 
   /*

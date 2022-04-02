@@ -1,5 +1,5 @@
 enum Trigger {
-  USED // This trigger fires when the item is equipped or consumed
+  USED // This trigger fires when the item is equipped
 }
 
 export default Trigger;

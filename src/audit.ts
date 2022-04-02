@@ -1,9 +1,9 @@
+import challengers from './data/challenger';
 import abilities from './data/ability';
-import enemies from './data/challenger';
 import heroes from './data/hero';
 import items from './data/item';
+const MAX_CHALLENGER_NAME_LENGTH = 14;
 const MAX_ABILITY_NAME_LENGTH = 19;
-const MAX_ENEMY_NAME_LENGTH = 14;
 const MAX_ITEM_NAME_LENGTH = 19;
 const MAX_HERO_NAME_LENGTH = 14;
 const valid_abilities = [];
@@ -36,21 +36,18 @@ for (const item of items) {
 }
 
 // Check enemies
-for (const enemy of enemies) {
-  if (enemy.name != enemy.name.toLowerCase()) {
-    error('Uppercase letters detected', 'enemy', enemy.name);
+for (const challenger of challengers) {
+  if (challenger.name != challenger.name.toLowerCase()) {
+    error('Uppercase letters detected', 'challenger', challenger.name);
   }
-  if (enemy.name.length > MAX_ENEMY_NAME_LENGTH) {
-    error('Invalid name length', 'enemy', enemy.name, `Maximum name length is ${MAX_ENEMY_NAME_LENGTH}.`);
+  if (challenger.name.length > MAX_CHALLENGER_NAME_LENGTH) {
+    error('Invalid name length', 'challenger', challenger.name, `Maximum name length is ${MAX_CHALLENGER_NAME_LENGTH}.`);
   }
-  if (enemy.damage > 99 || enemy.health > 99 || enemy.armor > 99) {
-    error('Damage, health or armor is over 99', 'enemy', enemy.name);
+  if (challenger.strength + challenger.wisdom + challenger.agility != 6) {
+    error('Invalid stat spread detected', 'challenger', challenger.name, 'stats should add up to 6');
   }
-  if ([1, 2, 3].indexOf(enemy.speed) < 0) {
-    error('Invalid speed detected', 'enemy', enemy.name, 'Speed can only be either (1, 2, 3)');
-  }
-  if (enemy.ability && valid_abilities.indexOf(enemy.ability) < 0) {
-    error(`Unregistered ability '${enemy.ability}'`, 'enemy', enemy.name);
+  if (challenger.ability && valid_abilities.indexOf(challenger.ability) < 0) {
+    error(`Unregistered ability '${challenger.ability}'`, 'challenger', challenger.name);
   }
 }
 
@@ -61,23 +58,14 @@ for (const hero of heroes) {
   if (hero.name.length > MAX_HERO_NAME_LENGTH) {
     error('Invalid name length', 'hero', hero.name, `Maximum name length is ${MAX_HERO_NAME_LENGTH}.`);
   }
-  if (hero.damage > 99 || hero.health > 99 || hero.armor > 99) {
-    error('Damage, health or armor is over 99', 'hero', hero.name);
-  }
-  if ([1, 2, 3].indexOf(hero.speed) < 0) {
-    error('Invalid speed detected', 'hero', hero.name, 'Speed can only be either (1, 2, 3)');
+  if (hero.strength + hero.wisdom + hero.agility != 6) {
+    error('Invalid stat spread detected', 'hero', hero.name, 'stats should add up to 6');
   }
   if ([0, 1, 2].indexOf(hero.itemSlots) < 0) {
     error('Invalid number of item slots detected', 'hero', hero.name, 'Item slots can only be either (0, 1, 2)');
   }
-  if ([0, 1, 2].indexOf(hero.abilitySlots) < 0) {
-    error('Invalid number of ability slots detected', 'hero', hero.name, 'Ability slots can only be either (0, 1, 2)');
-  }
-  if (hero.ability1 && valid_abilities.indexOf(hero.ability1) < 0) {
-    error(`Unregistered ability '${hero.ability1}'`, 'hero', hero.name);
-  }
-  if (hero.ability2 && valid_abilities.indexOf(hero.ability2) < 0) {
-    error(`Unregistered ability '${hero.ability2}'`, 'hero', hero.name);
+  if (hero.ability && valid_abilities.indexOf(hero.ability) < 0) {
+    error(`Unregistered ability '${hero.ability}'`, 'hero', hero.name);
   }
 }
 

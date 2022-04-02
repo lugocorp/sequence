@@ -11,7 +11,6 @@ export default abstract class Unit {
   wisdom: number;
   agility: number;
   name: string;
-  luck: number;
 
   constructor(sprite: Sprites, name: string, strength: number, wisdom: number, agility: number) {
     this.sprite = sprite;
@@ -19,7 +18,6 @@ export default abstract class Unit {
     this.wisdom = wisdom;
     this.agility = agility;
     this.name = name;
-    this.luck = 50;
   }
 
   /**
