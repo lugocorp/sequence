@@ -5,24 +5,24 @@ const data: ChallengerData[] = [
   {
     sprite: Sprites.DIRE_CRAB,
     name: 'dire crab',
-    strength: 5,
-    wisdom: 2,
-    agility: 1
+    strength: 6,
+    wisdom: 0,
+    agility: 0
   },
   {
     sprite: Sprites.TOXIC_SLUDGE,
     name: 'toxic sludge',
-    strength: 0,
-    wisdom: 5,
-    agility: 1,
+    strength: 2,
+    wisdom: 2,
+    agility: 2,
     ability: 'test blessing'
   },
   {
     sprite: Sprites.TOOTH_BEAST,
     name: 'tooth beast',
-    strength: 0,
-    wisdom: 2,
-    agility: 3,
+    strength: 3,
+    wisdom: 3,
+    agility: 0,
     ability: 'test blessing'
   }
 ];
