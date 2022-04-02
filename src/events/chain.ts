@@ -3,6 +3,7 @@
  * Its job is to generate and serve events for as long as
  * the player survives.
  */
+import ChallengeEvent from './challenge';
 import DeathEvent from './death';
 import Event from './event';
 import Game from '../game';
@@ -27,7 +28,7 @@ export default class EventChain {
    */
   plan(previous: Event): void {
     if (!previous) {
-      this.events.push(new DeathEvent());
+      this.events.push(new ChallengeEvent());
       return;
     }
     if (!Game.game.party.length()) {
@@ -35,5 +36,6 @@ export default class EventChain {
       this.events.push(new DeathEvent());
       return;
     }
+    this.events.push(new ChallengeEvent());
   }
 }

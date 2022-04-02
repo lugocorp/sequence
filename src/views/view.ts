@@ -1,5 +1,7 @@
 import GraphicsRenderer from '../graphics/renderer';
 import Text from '../graphics/text';
+import Challenger from '../entities/challenger';
+import Hero from '../entities/hero';
 import Game from '../game';
 
 abstract class View {
@@ -21,6 +23,20 @@ abstract class View {
       }
       r.drawText(msg, t.x, t.y, t.click ? true : false);
     }
+  }
+
+  /*
+   * This method renders a challenger card
+   */
+  challengerCard(r: GraphicsRenderer, challenger: Challenger): void {
+    // Do something here eventually
+  }
+  
+  /*
+   * This method renders a hero card
+   */
+  heroCard(r: GraphicsRenderer, hero: Hero): void {
+    // Do something here eventually
   }
 
   click(): void {

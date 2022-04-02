@@ -49,14 +49,14 @@ We have a number of `npm` commands:
 - [ ] Rip out battle code and replace with generalized challenges
 - [ ] Add other new events
 - [ ] Clean up the code
+- [ ] Make sure all prelude/aftermath scenes flow well
+- [ ] Throw in some game data
 - [ ] Research and ask cultural consultants to help come up with character concepts, double check core gameplay
 
 #### Finishing it up
 - [ ] Lock down art style and UI
-- [ ] Make sure all prelude/aftermath scenes flow well
 - [ ] Add sounds into the game (just to accentuate certain events)
 - [ ] Code the event progression algorithm
-- [ ] Throw in some game data
 - [ ] Balance the game as needed
 - [ ] Add more items, abilities, enemies, etc
 - [ ] Design character and monster graphics

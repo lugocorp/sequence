@@ -4,7 +4,6 @@ import GameView from '../views/game';
 interface Event {
   render: (view: GameView, r: GraphicsRenderer) => void;
   click: () => void;
-  state: number;
 }
 
 export default Event;
