@@ -6,25 +6,20 @@ import Sprites from '../enums/sprites';
  * get their logic and interface from.
  */
 export default abstract class Unit {
-  resistances: Set<number>;
-  weaknesses: Set<number>;
-  damages: Set<number>;
-  maxHealth: number;
   sprite: Sprites;
-  health: number;
-  damage: number;
-  armor: number;
-  speed: number;
+  strength: number;
+  wisdom: number;
+  agility: number;
   name: string;
+  luck: number;
 
-  constructor(sprite: Sprites, name: string, health: number, damage: number, armor: number, speed: number) {
-    this.maxHealth = health;
-    this.health = health;
+  constructor(sprite: Sprites, name: string, strength: number, wisdom: number, agility: number) {
     this.sprite = sprite;
-    this.damage = damage;
-    this.armor = armor;
-    this.speed = speed;
+    this.strength = strength;
+    this.wisdom = wisdom;
+    this.agility = agility;
     this.name = name;
+    this.luck = 50;
   }
 
   /**

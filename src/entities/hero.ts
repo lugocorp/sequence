@@ -1,4 +1,3 @@
-import ItemType from '../enums/item-type';
 import Trigger from '../enums/trigger';
 import Sprites from '../enums/sprites';
 import Ability from './ability';
@@ -6,24 +5,19 @@ import Item from './item';
 import Unit from './unit';
 
 export default class Hero extends Unit {
-  abilitySlots: number;
   ability1: Ability;
   ability2: Ability;
   itemSlots: number;
   item1: Item;
   item2: Item;
 
-  constructor(sprite: Sprites, name: string, health: number, damage: number, armor: number, speed: number, itemSlots: number, abilitySlots: number) {
-    super(sprite, name, health, damage, armor, speed);
-    this.abilitySlots = abilitySlots;
+  constructor(sprite: Sprites, name: string, strength: number, wisdom: number, agility: number, itemSlots: number) {
+    super(sprite, name, strength, wisdom, agility);
     this.itemSlots = itemSlots;
   }
 
   // Returns true if this hero has space for another item
-  canUseItem(item: Item): boolean {
-    if (item.type === ItemType.CONSUME) {
-      return true;
-    }
+  canReceiveItem(): boolean {
     return (this.itemSlots === 1 && !this.item1) ||
       (this.itemSlots === 2 && !this.item2);
   }

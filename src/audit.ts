@@ -1,5 +1,5 @@
 import abilities from './data/ability';
-import enemies from './data/enemy';
+import enemies from './data/challenger';
 import heroes from './data/hero';
 import items from './data/item';
 const MAX_ABILITY_NAME_LENGTH = 19;

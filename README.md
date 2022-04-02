@@ -44,16 +44,20 @@ We have a number of `npm` commands:
 - [x] Share with Indigenous Game Devs group
 - [x] Rework on-screen text to make animations easier
 
-#### Finishing it up
+#### Redesign to be less convoluted
+- [x] Rework game data types into the new models
+- [ ] Rip out battle code and replace with generalized challenges
+- [ ] Add other new events
 - [ ] Clean up the code
-- [ ] Add other game events
+- [ ] Research and ask cultural consultants to help come up with character concepts, double check core gameplay
+
+#### Finishing it up
+- [ ] Lock down art style and UI
 - [ ] Make sure all prelude/aftermath scenes flow well
 - [ ] Add sounds into the game (just to accentuate certain events)
-- [ ] Throw in some game data
 - [ ] Code the event progression algorithm
+- [ ] Throw in some game data
 - [ ] Balance the game as needed
-- [ ] Prettify the event UI (especially character selection)
 - [ ] Add more items, abilities, enemies, etc
-- [ ] Research and ask cultural consultants to help come up with character concepts, double check core gameplay
 - [ ] Design character and monster graphics
 - [ ] Contact more consultants just to double check themes and designs

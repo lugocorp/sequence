@@ -12,7 +12,7 @@ import Item from '../entities/item';
 import Rarity from '../rarity';
 import * as types from './types';
 import abilities from '../data/ability';
-import enemies from '../data/enemy';
+import enemies from '../data/challenger';
 import heroes from '../data/hero';
 import items from '../data/item';
 

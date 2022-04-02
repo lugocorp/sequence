@@ -1,43 +1,30 @@
 import {AbilityEffect, ItemEffect} from '../effects';
-import AbilityType from '../enums/ability-type';
-import ItemType from '../enums/item-type';
 import Sprites from '../enums/sprites';
 
 // Defines game data for a Hero
 export interface HeroData {
   sprite: Sprites;
   name: string;
-  health: number;
-  damage: number;
-  armor: number;
-  speed: number;
-  damages: number[];
-  weaknesses: number[];
-  resistances: number[];
+  strength: number;
+  wisdom: number;
+  agility: number;
   itemSlots: number;
-  abilitySlots: number;
-  ability1?: string;
-  ability2?: string;
+  ability?: string;
 }
 
-// Defines game data for an Enemy
-export interface EnemyData {
+// Defines game data for an Challenger
+export interface ChallengerData {
   sprite: Sprites;
   name: string;
-  health: number;
-  damage: number;
-  armor: number;
-  speed: number;
-  damages: number[];
-  weaknesses: number[];
-  resistances: number[];
+  strength: number;
+  wisdom: number;
+  agility: number;
   ability?: string;
 }
 
 // Defines game data for an Item
 export interface ItemData {
   name: string;
-  type: ItemType;
   rarity: number;
   description: string;
   effect: ItemEffect;
@@ -46,7 +33,6 @@ export interface ItemData {
 // Defines game data for an Ability
 export interface AbilityData {
   name: string;
-  type: AbilityType;
   description: string;
   effect: AbilityEffect;
 }
