@@ -1,7 +1,7 @@
 import Trigger from '../enums/trigger';
+import Rarity from '../enums/rarity';
 import {ItemData} from '../serial/types';
 import Hero from '../entities/hero';
-import Rarity from '../rarity';
 
 const data: ItemData[] = [
   {

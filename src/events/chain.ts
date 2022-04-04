@@ -7,6 +7,7 @@ import ChallengeEvent from './challenge';
 import ChoiceEvent from './choice';
 import DeathEvent from './death';
 import GiftEvent from './gift';
+import Random from '../random';
 import Event from './event';
 import Game from '../game';
 
@@ -38,13 +39,10 @@ export default class EventChain {
       this.events.push(new DeathEvent());
       return;
     }
-    const roll = Math.random();
-    if (roll < 0.5) {
-      this.events.push(new ChallengeEvent(Game.game.data.getRandomChallenger()));
-    } else if (roll < 0.75) {
-      this.events.push(new ChoiceEvent());
-    } else {
-      this.events.push(new GiftEvent());
-    }
+    this.events.push(Random.weightedList([
+      [50, () => new ChallengeEvent(Game.game.data.getRandomChallenger())],
+      [25, () => new ChoiceEvent()],
+      [25, () => new GiftEvent()]
+    ])());
   }
 }

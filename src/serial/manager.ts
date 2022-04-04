@@ -3,12 +3,13 @@
  * provides the Factory class with all the data it needs to instantiate game
  * entities. Use this to get indexed abilities or random game objects.
  */
+import Random from '../random';
 import Factory from './factory';
 import Challenger from '../entities/challenger';
 import Ability from '../entities/ability';
 import Hero from '../entities/hero';
 import Item from '../entities/item';
-import Rarity from '../rarity';
+import Rarity from '../enums/rarity';
 import * as types from './types';
 import challengers from '../data/challenger';
 import abilities from '../data/ability';
@@ -42,17 +43,12 @@ export default class DataManager {
     return this.factory.createAbility(ability);
   }
 
-  // Returns a random number in the range [0, max)
-  random(max): number {
-    return Math.floor(Math.random() * max);
-  }
-
   /*
    * Returns a random enemy available in the game. Every enemy has equal chance
    * to be returned by this function.
    */
   getRandomChallenger(): Challenger {
-    return this.factory.createChallenger(this, challengers[this.random(challengers.length)]);
+    return this.factory.createChallenger(this, Random.randomElement(challengers));
   }
 
   /*
@@ -60,7 +56,7 @@ export default class DataManager {
    * to be returned by this function.
    */
   getRandomHero(): Hero {
-    return this.factory.createHero(this, heroes[this.random(heroes.length)]);
+    return this.factory.createHero(this, Random.randomElement(heroes));
   }
 
   /*
@@ -68,18 +64,14 @@ export default class DataManager {
    * returned by this function is determined by its rarity.
    */
   getRandomItem(): Item {
-    const roll: number = this.random(31);
-    let rarity: number = Rarity.COMMON;
-    if (roll === 0) {
-      rarity = Rarity.MYTHIC;
-    } else if (roll < 3) {
-      rarity = Rarity.LEGENDARY;
-    } else if (roll < 7) {
-      rarity = Rarity.RARE;
-    } else if (roll < 15) {
-      rarity = Rarity.UNCOMMON;
-    }
+    const rarity = Random.weightedList([
+      [1, Rarity.MYTHIC],
+      [2, Rarity.LEGENDARY],
+      [4, Rarity.RARE],
+      [8, Rarity.UNCOMMON],
+      [16, Rarity.COMMON]
+    ]);
     const pool: types.ItemData[] = this.itemsByRarityIndex.get(rarity);
-    return this.factory.createItem(pool[this.random(pool.length)]);
+    return this.factory.createItem(Random.randomElement(pool));
   }
 }

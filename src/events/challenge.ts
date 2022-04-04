@@ -5,7 +5,8 @@ import HeroWidget from '../widgets/hero';
 import Text from '../widgets/text';
 import Challenger from '../entities/challenger';
 import Hero from '../entities/hero';
-import Challenge from '../challenge';
+import Stats from '../enums/stats';
+import Random from '../random';
 import Event from './event';
 import Game from '../game';
 
@@ -14,8 +15,8 @@ export default class ChallengeEvent implements Event {
   static VIEW_CHALLENGER = 1;
   static VIEW_PARTY      = 2;
   static FINISHED        = 3;
+  private expectation: number[];
   private challenger: Challenger;
-  private challenge: Challenge;
   private heroViewer: HeroWidget;
   private selector: Selector;
   private result: boolean;
@@ -27,7 +28,6 @@ export default class ChallengeEvent implements Event {
   constructor(challenger: Challenger) {
     const that = this;
     this.state = ChallengeEvent.PRELUDE;
-    this.challenge = new Challenge();
     this.challenger = challenger;
     this.heroViewer = new HeroWidget();
     this.selector = new Selector(
@@ -37,7 +37,7 @@ export default class ChallengeEvent implements Event {
         that.heroViewer.setHero(value as Hero);
       },
       (result: any) => {
-        that.result = that.challenge.playerOvercomesChallenge(result as Hero, that.challenger);
+        that.result = that.playerOvercomesChallenge(result as Hero, that.challenger);
         that.state = ChallengeEvent.FINISHED;
       }
     );
@@ -55,6 +55,20 @@ export default class ChallengeEvent implements Event {
         Game.game.progress();
       }
     });
+    this.expectation = [Random.max(Stats.N)];
+    if (Random.passes(0.5)) {
+      this.expectation.push(((Random.passes(0.5) ? 1 : -1) + this.expectation[0] + Stats.N) % Stats.N);
+    }
+  }
+
+  playerOvercomesChallenge(hero: Hero, challenger: Challenger): boolean {
+    let sum1: number = Stats.getUnitStat(hero, this.expectation[0]);
+    let sum2: number = Stats.getUnitStat(challenger, this.expectation[0]);
+    if (this.expectation.length > 1) {
+      sum1 += Stats.getUnitStat(hero, this.expectation[1]);
+      sum2 += Stats.getUnitStat(challenger, this.expectation[1]);
+    }
+    return (sum1 > sum2) || (sum1 === sum2 && Random.passes(hero.luck / 100));
   }
 
   click(): void {
@@ -73,7 +87,10 @@ export default class ChallengeEvent implements Event {
   render(view: GameView, r: GraphicsRenderer): void {
     if (this.state === ChallengeEvent.PRELUDE) {
       r.drawParagraph('your party comes across a challenger', 2, 0);
-      r.drawParagraph(this.challenge.message(), 0, 30);
+      const message = (this.expectation.length === 1) ?
+        `this will be a challenge of ${Stats.getStatName(this.expectation[0])}.` :
+        `this will be a challenge of ${Stats.getStatName(this.expectation[0])} and ${Stats.getStatName(this.expectation[1])}.`;
+      r.drawParagraph(message, 0, 30);
       this.continue.render(view, r);
     }
     if (this.state === ChallengeEvent.VIEW_CHALLENGER) {

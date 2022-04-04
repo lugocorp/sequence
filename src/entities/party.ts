@@ -1,3 +1,4 @@
+import Random from '../random';
 import Hero from './hero';
 
 export default class Party {
@@ -29,5 +30,10 @@ export default class Party {
       throw new Error(`${hero.name} is not in your party and therefore cannot be removed`);
     }
     this.members.splice(index, 1);
+  }
+
+  // Returns a random hero in the party
+  randomHero(): Hero {
+    return Random.randomElement(this.members);
   }
 }
