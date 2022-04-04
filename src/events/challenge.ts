@@ -1,8 +1,9 @@
 import GraphicsRenderer from '../graphics/renderer';
 import GameView from '../views/game';
+import Selector from '../widgets/selector';
+import HeroWidget from '../widgets/hero';
+import Text from '../widgets/text';
 import Challenger from '../entities/challenger';
-import Ability from '../entities/ability';
-import Item from '../entities/item';
 import Hero from '../entities/hero';
 import Challenge from '../challenge';
 import Event from './event';
@@ -12,105 +13,83 @@ export default class ChallengeEvent implements Event {
   static PRELUDE         = 0;
   static VIEW_CHALLENGER = 1;
   static VIEW_PARTY      = 2;
-  static VIEW_ABILITY    = 3;
-  static VIEW_ITEM       = 4;
-  static FINISHED        = 5;
-  challenger: Challenger;
-  challenge: Challenge;
-  heroIndex: number;
-  ability: Ability;
-  result: boolean;
-  state: number;
-  item: Item;
+  static FINISHED        = 3;
+  private challenger: Challenger;
+  private challenge: Challenge;
+  private heroViewer: HeroWidget;
+  private selector: Selector;
+  private result: boolean;
+  private state: number;
+  private viewChallenger: Text;
+  private viewParty: Text;
+  private continue: Text;
 
   constructor(challenger: Challenger) {
+    const that = this;
     this.state = ChallengeEvent.PRELUDE;
     this.challenge = new Challenge();
     this.challenger = challenger;
-    this.heroIndex = 0;
+    this.heroViewer = new HeroWidget();
+    this.selector = new Selector(
+      Game.game.party.length(),
+      (i: number) => Game.game.party.get(i),
+      (value: any) => {
+        that.heroViewer.setHero(value as Hero);
+      },
+      (result: any) => {
+        that.result = that.challenge.playerOvercomesChallenge(result as Hero, that.challenger);
+        that.state = ChallengeEvent.FINISHED;
+      }
+    );
+    this.viewChallenger = new Text('view challenger', 25, 190, false, () => {
+      that.state = ChallengeEvent.VIEW_CHALLENGER;
+    });
+    this.viewParty = new Text('view party', 25, 190, false, () => {
+      that.state = ChallengeEvent.VIEW_PARTY;
+    });
+    this.continue = new Text('continue', 30, 190, false, () => {
+      if (that.state === ChallengeEvent.PRELUDE) {
+        that.state = ChallengeEvent.VIEW_CHALLENGER;
+      }
+      if (that.state === ChallengeEvent.FINISHED) {
+        Game.game.progress();
+      }
+    });
   }
 
   click(): void {
-    if (this.state === ChallengeEvent.PRELUDE) {
-      if (Game.game.within('continue', 30, 190)) {
-        this.state = ChallengeEvent.VIEW_CHALLENGER;
-      }
-    } else if (this.state === ChallengeEvent.VIEW_CHALLENGER) {
-      if (Game.game.within('view party', 25, 190)) {
-        this.state = ChallengeEvent.VIEW_PARTY;
-      }
+    if (this.state === ChallengeEvent.VIEW_CHALLENGER) {
+      this.viewParty.click();
     } else if (this.state === ChallengeEvent.VIEW_PARTY) {
-      const hero: Hero = Game.game.party.get(this.heroIndex);
-      if (hero.ability1 && Game.game.within(hero.ability1.name, 2, 110)) {
-        this.state = ChallengeEvent.VIEW_ABILITY;
-        this.ability = hero.ability1;
+      if (this.heroViewer.viewingHero()) {
+        this.viewChallenger.click();
+        this.selector.click();
       }
-      if (hero.ability2 && Game.game.within(hero.ability2.name, 2, 120)) {
-        this.state = ChallengeEvent.VIEW_ABILITY;
-        this.ability = hero.ability2;
-      }
-      if (hero.item1 && Game.game.within(hero.item1.name, 2, 140)) {
-        this.state = ChallengeEvent.VIEW_ITEM;
-        this.item = hero.item1;
-      }
-      if (hero.item2 && Game.game.within(hero.item2.name, 2, 150)) {
-        this.state = ChallengeEvent.VIEW_ITEM;
-        this.item = hero.item2;
-      }
-      if (Game.game.within('last', 2, 180) && Game.game.party.length() > 1) {
-        this.heroIndex = (this.heroIndex || Game.game.party.length()) - 1;
-      }
-      if (Game.game.within('choose', 35, 180)) {
-        this.state = ChallengeEvent.FINISHED;
-        this.result = this.challenge.playerOvercomesChallenge(Game.game.party.get(this.heroIndex), this.challenger);
-      }
-      if (Game.game.within('next', 78, 180) && Game.game.party.length() > 1) {
-        this.heroIndex = (this.heroIndex === Game.game.party.length() - 1) ? 0 : this.heroIndex + 1;
-      }
-      if (Game.game.within('view challenger', 25, 190)) {
-        this.state = ChallengeEvent.VIEW_CHALLENGER;
-      }
-    } else if (this.state === ChallengeEvent.VIEW_ABILITY || this.state === ChallengeEvent.VIEW_ITEM) {
-      if (Game.game.within('back', 40, 190)) {
-        this.state = ChallengeEvent.VIEW_PARTY;
-      }
-    } else if (this.state === ChallengeEvent.FINISHED) {
-      if (Game.game.within('continue', 30, 101)) {
-        Game.game.progress();
-      }
+      this.heroViewer.click();
     }
+    this.continue.click();
   }
 
   render(view: GameView, r: GraphicsRenderer): void {
     if (this.state === ChallengeEvent.PRELUDE) {
       r.drawParagraph('your party comes across a challenger', 2, 0);
       r.drawParagraph(this.challenge.message(), 0, 30);
-      r.drawText('continue', 30, 190);
+      this.continue.render(view, r);
     }
     if (this.state === ChallengeEvent.VIEW_CHALLENGER) {
       view.challengerCard(r, this.challenger);
-      r.drawText('view party', 25, 190, true);
+      this.viewParty.render(view, r);
     }
     if (this.state === ChallengeEvent.VIEW_PARTY) {
-      view.heroCard(r, Game.game.party.get(this.heroIndex));
-      if (Game.game.party.length() > 1) {
-        r.drawText('last', 2, 180, true);
-        r.drawText('next', 78, 180, true);
+      this.heroViewer.render(view, r);
+      if (this.heroViewer.viewingHero()) {
+        this.viewChallenger.render(view, r);
+        this.selector.render(view, r);
       }
-      r.drawText('choose', 35, 180, true);
-      r.drawText('view challenger', 25, 190, true);
-    }
-    if (this.state === ChallengeEvent.VIEW_ABILITY) {
-      view.abilityInspection(r, this.ability);
-      r.drawText('back', 40, 190, true);
-    }
-    if (this.state === ChallengeEvent.VIEW_ITEM) {
-      view.itemInspection(r, this.item);
-      r.drawText('back', 40, 190, true);
     }
     if (this.state === ChallengeEvent.FINISHED) {
       r.drawParagraph(this.result ? 'yay': 'oh no', 0, 0);
-      r.drawText('continue', 30, 101, true);
+      this.continue.render(view, r);
     }
   }
 }

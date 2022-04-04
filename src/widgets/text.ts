@@ -1,4 +1,5 @@
 import GraphicsRenderer from '../graphics/renderer';
+import GameView from '../views/game';
 import Widget from './widget';
 import Game from '../game';
 
@@ -30,7 +31,7 @@ export default class Text extends Widget {
     }
   }
 
-  render(r: GraphicsRenderer): void {
+  render(view: GameView, r: GraphicsRenderer): void {
     if (this.cutoff < this.msg.length) {
       this.cutoff++;
     }

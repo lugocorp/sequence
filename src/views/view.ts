@@ -12,7 +12,7 @@ abstract class View {
   frame(r: GraphicsRenderer): void {
     let animated = false;
     for (const w of this.widgets) {
-      w.render(r);
+      w.render(undefined, r);
       animated = animated || w.isAnimated();
     }
     if (animated) {

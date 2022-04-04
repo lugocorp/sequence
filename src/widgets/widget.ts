@@ -1,4 +1,5 @@
 import GraphicsRenderer from '../graphics/renderer';
+import GameView from '../views/game';
 
 abstract class Widget {
 
@@ -10,7 +11,7 @@ abstract class Widget {
     throw new Error();
   }
 
-  render(r: GraphicsRenderer): void {
+  render(view: GameView, r: GraphicsRenderer): void {
     throw new Error();
   }
 }
