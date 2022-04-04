@@ -4,7 +4,9 @@
  * the player survives.
  */
 import ChallengeEvent from './challenge';
+import ChoiceEvent from './choice';
 import DeathEvent from './death';
+import GiftEvent from './gift';
 import Event from './event';
 import Game from '../game';
 
@@ -36,6 +38,13 @@ export default class EventChain {
       this.events.push(new DeathEvent());
       return;
     }
-    this.events.push(new ChallengeEvent(Game.game.data.getRandomChallenger()));
+    const roll = Math.random();
+    if (roll < 0.5) {
+      this.events.push(new ChallengeEvent(Game.game.data.getRandomChallenger()));
+    } else if (roll < 0.75) {
+      this.events.push(new ChoiceEvent());
+    } else {
+      this.events.push(new GiftEvent());
+    }
   }
 }
