@@ -1,5 +1,5 @@
 import Game from '../game';
-import Text from '../graphics/text';
+import Text from '../widgets/text';
 import InstructionsView from './instructions';
 import CreditsView from './credits';
 import GameView from './game';
@@ -9,7 +9,7 @@ export default class StartView extends View {
 
   constructor() {
     super();
-    this.addText(
+    this.widgets = [
       new Text('new game', 30, 70, false, () => {
         Game.game.view = new GameView(Game.game.chain);
       }),
@@ -19,6 +19,6 @@ export default class StartView extends View {
       new Text('credits', 30, 110, false, () => {
         Game.game.view = new CreditsView();
       })
-    );
+    ];
   }
 }

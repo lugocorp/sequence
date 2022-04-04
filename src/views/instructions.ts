@@ -1,5 +1,5 @@
 import Game from '../game';
-import Text from '../graphics/text';
+import Text from '../widgets/text';
 import GraphicsRenderer from '../graphics/renderer';
 import StartView from './start';
 import View from './view';
@@ -8,9 +8,11 @@ export default class InstructionsView extends View {
 
   constructor() {
     super();
-    this.addText(new Text('back', 40, 190, false, () => {
-      Game.game.view = new StartView();
-    }));
+    this.widgets = [
+      new Text('back', 40, 190, false, () => {
+        Game.game.view = new StartView();
+      })
+    ];
   }
 
   frame(r: GraphicsRenderer): void {

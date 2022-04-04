@@ -1,5 +1,5 @@
 import Game from '../game';
-import Text from '../graphics/text';
+import Text from '../widgets/text';
 import StartView from './start';
 import View from './view';
 
@@ -7,7 +7,7 @@ export default class CreditsView extends View {
 
   constructor() {
     super();
-    this.addText(
+    this.widgets = [
       new Text('-programming-', 15, 10),
       new Text('alex lugo', 25, 20, true),
       new Text('-design-', 30, 40),
@@ -18,7 +18,6 @@ export default class CreditsView extends View {
       new Text('back', 40, 190, false, () => {
         Game.game.view = new StartView();
       })
-    );
-    this.startTextAnimation();
+    ];
   }
 }
