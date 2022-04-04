@@ -46,7 +46,7 @@ We have a number of `npm` commands:
 
 #### Redesign to be less convoluted
 - [x] Rework game data types into the new models
-- [ ] Rip out battle code and replace with generalized challenges
+- [x] Rip out battle code and replace with generalized challenges
 - [ ] Add other new events
 - [ ] Clean up the code
 - [ ] Make sure all prelude/aftermath scenes flow well

@@ -4,6 +4,7 @@ import Challenger from '../entities/challenger';
 import Ability from '../entities/ability';
 import Item from '../entities/item';
 import Hero from '../entities/hero';
+import Challenge from '../challenge';
 import Event from './event';
 import Game from '../game';
 
@@ -13,13 +14,21 @@ export default class ChallengeEvent implements Event {
   static VIEW_PARTY      = 2;
   static VIEW_ABILITY    = 3;
   static VIEW_ITEM       = 4;
-  static BATTLE          = 5;
-  static FINISHED        = 6;
+  static FINISHED        = 5;
   challenger: Challenger;
+  challenge: Challenge;
   heroIndex: number;
   ability: Ability;
+  result: boolean;
   state: number;
   item: Item;
+
+  constructor(challenger: Challenger) {
+    this.state = ChallengeEvent.PRELUDE;
+    this.challenge = new Challenge();
+    this.challenger = challenger;
+    this.heroIndex = 0;
+  }
 
   click(): void {
     if (this.state === ChallengeEvent.PRELUDE) {
@@ -52,8 +61,8 @@ export default class ChallengeEvent implements Event {
         this.heroIndex = (this.heroIndex || Game.game.party.length()) - 1;
       }
       if (Game.game.within('choose', 35, 180)) {
-        this.state = ChallengeEvent.BATTLE;
-        // this.stepBattleLogic();
+        this.state = ChallengeEvent.FINISHED;
+        this.result = this.challenge.playerOvercomesChallenge(Game.game.party.get(this.heroIndex), this.challenger);
       }
       if (Game.game.within('next', 78, 180) && Game.game.party.length() > 1) {
         this.heroIndex = (this.heroIndex === Game.game.party.length() - 1) ? 0 : this.heroIndex + 1;
@@ -67,7 +76,7 @@ export default class ChallengeEvent implements Event {
       }
     } else if (this.state === ChallengeEvent.FINISHED) {
       if (Game.game.within('continue', 30, 101)) {
-        // this.postBattleHandler();
+        Game.game.progress();
       }
     }
   }
@@ -75,6 +84,7 @@ export default class ChallengeEvent implements Event {
   render(view: GameView, r: GraphicsRenderer): void {
     if (this.state === ChallengeEvent.PRELUDE) {
       r.drawParagraph('your party comes across a challenger', 2, 0);
+      r.drawParagraph(this.challenge.message(), 0, 30);
       r.drawText('continue', 30, 190);
     }
     if (this.state === ChallengeEvent.VIEW_CHALLENGER) {
@@ -97,6 +107,10 @@ export default class ChallengeEvent implements Event {
     if (this.state === ChallengeEvent.VIEW_ITEM) {
       view.itemInspection(r, this.item);
       r.drawText('back', 40, 190, true);
+    }
+    if (this.state === ChallengeEvent.FINISHED) {
+      r.drawParagraph(this.result ? 'yay': 'oh no', 0, 0);
+      r.drawText('continue', 30, 101, true);
     }
   }
 }

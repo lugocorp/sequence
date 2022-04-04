@@ -28,7 +28,7 @@ export default class EventChain {
    */
   plan(previous: Event): void {
     if (!previous) {
-      this.events.push(new ChallengeEvent());
+      this.events.push(new ChallengeEvent(Game.game.data.getRandomChallenger()));
       return;
     }
     if (!Game.game.party.length()) {
@@ -36,6 +36,6 @@ export default class EventChain {
       this.events.push(new DeathEvent());
       return;
     }
-    this.events.push(new ChallengeEvent());
+    this.events.push(new ChallengeEvent(Game.game.data.getRandomChallenger()));
   }
 }
