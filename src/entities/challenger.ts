@@ -10,6 +10,7 @@ export default class Challenger extends Unit {
     super(sprite, name, strength, wisdom, agility);
   }
 
+  // This function handles the challenger's ability effect
   activate(trigger: Trigger, data: any): void {
     if (this.ability) {
       this.ability.effect(trigger, this, data);

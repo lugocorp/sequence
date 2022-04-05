@@ -49,9 +49,9 @@ We have a number of `npm` commands:
 - [x] Rip out battle code and replace with generalized challenges
 - [x] Add other new events
 - [x] Clean up the code
-- [ ] Comment all the new code
+- [x] Comment all the new code
 - [ ] Make sure all prelude/aftermath scenes flow well
-- [ ] Throw in some game data
+- [ ] Throw in some game data to test events with
 - [ ] Research and ask cultural consultants to help come up with character concepts, double check core gameplay
 
 #### Finishing it up

@@ -61,6 +61,7 @@ export default class ChallengeEvent implements Event {
     }
   }
 
+  // Returns true if the selected hero overcame the challenge
   playerOvercomesChallenge(hero: Hero, challenger: Challenger): boolean {
     let sum1: number = Stats.getUnitStat(hero, this.expectation[0]);
     let sum2: number = Stats.getUnitStat(challenger, this.expectation[0]);

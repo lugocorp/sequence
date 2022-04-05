@@ -1,6 +1,4 @@
-/**
- * This class handles item and treasure rarity.
- */
+// This class handles item and treasure rarity.
 export default class Rarity {
   static COMMON    = 0;
   static UNCOMMON  = 1;

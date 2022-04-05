@@ -21,6 +21,7 @@ export default class Text extends Widget {
     this.y = y;
   }
 
+  // Returns true if the etxt is still being animated
   isAnimated(): boolean {
     return this.animated && this.cutoff < this.msg.length;
   }

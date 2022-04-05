@@ -30,6 +30,7 @@ export default class Selector extends Widget {
     });
   }
 
+  // Returns the currently selected element
   getSelected(): any {
     return this.get(this.index);
   }

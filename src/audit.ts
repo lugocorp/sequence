@@ -51,6 +51,7 @@ for (const challenger of challengers) {
   }
 }
 
+// Check heroes
 for (const hero of heroes) {
   if (hero.name != hero.name.toLowerCase()) {
     error('Uppercase letters detected', 'hero', hero.name);

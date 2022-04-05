@@ -33,6 +33,7 @@ export default class Hero extends Unit {
     }
   }
 
+  // This function handles the hero's item and ability effects
   activate(trigger: Trigger, data: any): void {
     if (this.ability1) {
       this.ability1.effect(trigger, this, data);

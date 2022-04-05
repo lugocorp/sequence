@@ -23,12 +23,14 @@ export default class HeroWidget extends Widget {
     });
   }
 
+  // Sets the hero to be viewed
   setHero(hero: Hero): void {
     this.ability = undefined;
     this.item = undefined;
     this.hero = hero;
   }
 
+  // Returns true if the player is viewing the hero, not an ability or item
   viewingHero(): boolean {
     return this.item === undefined && this.ability === undefined;
   }
