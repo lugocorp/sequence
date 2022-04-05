@@ -50,8 +50,9 @@ We have a number of `npm` commands:
 - [x] Add other new events
 - [x] Clean up the code
 - [x] Comment all the new code
-- [ ] Make sure all prelude/aftermath scenes flow well
-- [ ] Throw in some game data to test events with
+- [x] Make sure all prelude/aftermath scenes flow well
+- [ ] Flesh out the new events
+- [ ] Throw in some game data
 - [ ] Research and ask cultural consultants to help come up with character concepts, double check core gameplay
 
 #### Finishing it up
@@ -62,3 +63,8 @@ We have a number of `npm` commands:
 - [ ] Add more items, abilities, enemies, etc
 - [ ] Design character and monster graphics
 - [ ] Contact more consultants just to double check themes and designs
+- [ ] Add consultants into the game credits
+
+#### Post-launch (if people want)
+- [ ] Add custom RNG with seed, allow players to set the seed for a given run
+- [ ] Add save file and previous run stats (how far you went, points scored, etc)

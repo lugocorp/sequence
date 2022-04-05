@@ -52,7 +52,7 @@ export default class ChoiceEvent implements Event {
     this.viewHero = new Text('view hero', 25, 190, false, () => {
       this.state = ChoiceEvent.VIEW_HERO;
     });
-    this.viewOptions = new Text('view options', 25, 190, false, () => {
+    this.viewOptions = new Text('view options', 20, 190, false, () => {
       this.state = ChoiceEvent.VIEW_OPTIONS;
     });
   }
@@ -70,7 +70,7 @@ export default class ChoiceEvent implements Event {
 
   render(view: GameView, r: GraphicsRenderer): void {
     if (this.state === ChoiceEvent.PRELUDE) {
-      r.drawParagraph(`a spirit offers a gift to ${this.hero.name}`, 2, 0);
+      r.drawParagraph(`a spirit reveals itself to ${this.hero.name}. it comes bearing a gift of your choosing.`, 2, 0);
       this.continue.render(view, r);
     }
     if (this.state === ChoiceEvent.VIEW_OPTIONS) {
@@ -83,7 +83,7 @@ export default class ChoiceEvent implements Event {
       this.viewOptions.render(view, r);
     }
     if (this.state === ChoiceEvent.FINISHED) {
-      r.drawParagraph(`${this.hero.name} received the gift`, 0, 0);
+      r.drawParagraph(`${this.hero.name} received the spirit's gift of ${(this.selector.getSelected() as Item).name}. the spirit conceals itself once more.`, 0, 0);
       this.continue.render(view, r);
     }
   }

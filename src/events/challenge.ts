@@ -41,7 +41,7 @@ export default class ChallengeEvent implements Event {
         that.state = ChallengeEvent.FINISHED;
       }
     );
-    this.viewChallenger = new Text('view challenger', 25, 190, false, () => {
+    this.viewChallenger = new Text('view challenger', 12, 190, false, () => {
       that.state = ChallengeEvent.VIEW_CHALLENGER;
     });
     this.viewParty = new Text('view party', 25, 190, false, () => {
@@ -87,11 +87,11 @@ export default class ChallengeEvent implements Event {
 
   render(view: GameView, r: GraphicsRenderer): void {
     if (this.state === ChallengeEvent.PRELUDE) {
-      r.drawParagraph('your party comes across a challenger', 2, 0);
-      const message = (this.expectation.length === 1) ?
-        `this will be a challenge of ${Stats.getStatName(this.expectation[0])}.` :
-        `this will be a challenge of ${Stats.getStatName(this.expectation[0])} and ${Stats.getStatName(this.expectation[1])}.`;
-      r.drawParagraph(message, 0, 30);
+      const message = 'your party comes across a spirit who offers a challenge.' +
+        ((this.expectation.length === 1) ?
+          `this will be a test of ${Stats.getStatName(this.expectation[0])}.` :
+          `this will be a test of ${Stats.getStatName(this.expectation[0])} and ${Stats.getStatName(this.expectation[1])}.`);
+      r.drawParagraph(message, 2, 2);
       this.continue.render(view, r);
     }
     if (this.state === ChallengeEvent.VIEW_CHALLENGER) {
@@ -106,7 +106,11 @@ export default class ChallengeEvent implements Event {
       }
     }
     if (this.state === ChallengeEvent.FINISHED) {
-      r.drawParagraph(this.result ? 'yay': 'oh no', 0, 0);
+      const name = (this.selector.getSelected() as Hero).name;
+      const message = this.result ?
+        `${name} overcame the spirit's challenge!` :
+        `${name} did not succeed in the spirit's challenge.`;
+      r.drawParagraph(message, 2, 2);
       this.continue.render(view, r);
     }
   }

@@ -68,7 +68,7 @@ export default class GiftEvent implements Event {
 
   render(view: GameView, r: GraphicsRenderer): void {
     if (this.state === GiftEvent.PRELUDE) {
-      r.drawParagraph('a spirit offers a gift to your party', 2, 0);
+      r.drawParagraph(`a spirit offers a gift of ${this.gift.name} to your party. only one member may accept it.`, 2, 0);
       this.continue.render(view, r);
     }
     if (this.state === GiftEvent.VIEW_GIFT) {
@@ -83,7 +83,7 @@ export default class GiftEvent implements Event {
       }
     }
     if (this.state === GiftEvent.FINISHED) {
-      r.drawParagraph(`${(this.selector.getSelected() as Hero).name} received the gift`, 0, 0);
+      r.drawParagraph(`${(this.selector.getSelected() as Hero).name} received the gift of ${this.gift.name}.`, 0, 0);
       this.continue.render(view, r);
     }
   }
