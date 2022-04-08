@@ -1,4 +1,8 @@
 # Sequence Dungeons
+This is a rogue-like game set in an Indigenous fantasy world where you build an ever-shifting party to overcome a string of events.
+The core of the game is around strategic choice making.
+You'll have clear ideas of the immediate outcome of your choices but only a speculation about later consequences.
+The game is written in TypeScript and runs on mobile platforms using Cordova.
 
 ## Commands
 We have a number of `npm` commands:
@@ -51,20 +55,22 @@ We have a number of `npm` commands:
 - [x] Clean up the code
 - [x] Comment all the new code
 - [x] Make sure all prelude/aftermath scenes flow well
-- [ ] Flesh out the new events
-- [ ] Throw in some game data
+- [x] Throw in some game data
+- [ ] Write up + flesh out the new events
 - [ ] Research and ask cultural consultants to help come up with character concepts, double check core gameplay
 
 #### Finishing it up
 - [ ] Lock down art style and UI
+- [ ] Rewrite UI as needed and make everything line up in a pretty way
 - [ ] Add sounds into the game (just to accentuate certain events)
 - [ ] Code the event progression algorithm
 - [ ] Balance the game as needed
 - [ ] Add more items, abilities, enemies, etc
-- [ ] Design character and monster graphics
+- [ ] Design character and spirit graphics
 - [ ] Contact more consultants just to double check themes and designs
 - [ ] Add consultants into the game credits
 
 #### Post-launch (if people want)
 - [ ] Add custom RNG with seed, allow players to set the seed for a given run
-- [ ] Add save file and previous run stats (how far you went, points scored, etc)
+- [ ] Store previous run stats (how far you went, points scored, etc) in a save file
+- [ ] Create an encyclopedia view for all items, spirits, heroes and events
