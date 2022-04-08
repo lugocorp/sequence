@@ -25,10 +25,10 @@ export default class ChallengeEvent implements Event {
   private viewParty: Text;
   private continue: Text;
 
-  constructor(challenger: Challenger) {
+  constructor() {
     const that = this;
     this.state = ChallengeEvent.PRELUDE;
-    this.challenger = challenger;
+    this.challenger = Game.game.data.getRandomChallenger();
     this.heroViewer = new HeroWidget();
     this.selector = new Selector(
       Game.game.party.length(),

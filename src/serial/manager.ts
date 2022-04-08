@@ -44,8 +44,16 @@ export default class DataManager {
   }
 
   /*
-   * Returns a random enemy available in the game. Every enemy has equal chance
-   * to be returned by this function.
+   * Returns a random ability available in the game. Every ability has equal
+   * chance to be returned by this function.
+   */
+  getRandomAbility(): Ability {
+    return this.factory.createAbility(Random.randomElement(abilities));
+  }
+
+  /*
+   * Returns a random challenger available in the game. Every challenger has
+   * equal chance to be returned by this function.
    */
   getRandomChallenger(): Challenger {
     return this.factory.createChallenger(this, Random.randomElement(challengers));

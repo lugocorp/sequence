@@ -56,7 +56,8 @@ We have a number of `npm` commands:
 - [x] Comment all the new code
 - [x] Make sure all prelude/aftermath scenes flow well
 - [x] Throw in some game data
-- [ ] Write up + flesh out the new events
+- [x] Flesh out the gift and offering events
+- [ ] Write a few events (trap, trickster, obstacle, recruit)
 - [ ] Research and ask cultural consultants to help come up with character concepts, double check core gameplay
 
 #### Finishing it up

@@ -1,10 +1,11 @@
+import {ItemEffect} from '../effects';
+import {ItemData} from '../serial/types';
+import Hero from '../entities/hero';
 import Trigger from '../enums/trigger';
 import Rarity from '../enums/rarity';
 import Stats from '../enums/stats';
-import {ItemData} from '../serial/types';
-import Hero from '../entities/hero';
 
-function statItemEffect(stat: number, boost: number): (trigger: Trigger, hero: Hero, data: any) => void {
+function statItemEffect(stat: number, boost: number): ItemEffect {
     return (trigger: Trigger, hero: Hero, data: any) => {
         if (trigger === Trigger.EQUIP) {
             Stats.changeUnitStat(hero, stat, boost);
@@ -15,7 +16,7 @@ function statItemEffect(stat: number, boost: number): (trigger: Trigger, hero: H
     }
 }
 
-function luckItemEffect(boost: number): (trigger: Trigger, hero: Hero, data: any) => void {
+function luckItemEffect(boost: number): ItemEffect {
     return (trigger: Trigger, hero: Hero, data: any) => {
         if (trigger === Trigger.EQUIP) {
             hero.luck += boost;
@@ -73,7 +74,7 @@ const data: ItemData[] = [
     name: 'sacred medicine',
     rarity: Rarity.RARE,
     description: 'gives a party member +5% luck',
-    effect: luckItemEffect(0.1)
+    effect: luckItemEffect(10)
   },
   {
     name: 'medicine bag',

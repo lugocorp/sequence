@@ -19,14 +19,14 @@ export default class Selector extends Widget {
     this.get = get;
     this.last = new Text('last', 2, 180, false, () => {
       that.index = (that.index || that.length) - 1;
-      onchange(that.getSelected());
+      onchange ? onchange(that.getSelected()) : undefined;
     });
     this.choose = new Text('choose', 35, 180, false, () => {
       callback(that.getSelected());
     });
     this.next = new Text('next', 78, 180, false, () => {
       that.index = (that.index === that.length - 1) ? 0 : that.index + 1;
-      onchange(that.getSelected());
+      onchange ? onchange(that.getSelected()) : undefined;
     });
   }
 

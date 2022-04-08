@@ -18,18 +18,27 @@ export default class Hero extends Unit {
     this.luck = 50;
   }
 
-  // Returns true if this hero has space for another item
-  canReceiveItem(): boolean {
-    return (this.itemSlots === 1 && !this.item1) ||
-      (this.itemSlots === 2 && !this.item2);
-  }
-
   // Equips an item to this hero
   equip(item: Item): void {
     if (this.item1) {
+      if (this.item2) {
+        this.item1.effect(Trigger.UNEQUIP, this, null);
+        this.item1 = this.item2;
+      }
       this.item2 = item;
+      this.item2.effect(Trigger.EQUIP, this, null);
     } else {
       this.item1 = item;
+      this.item1.effect(Trigger.EQUIP, this, null);
+    }
+  }
+
+  // Applies an ability or item to this hero
+  receive(gift: Item | Ability): void {
+    if (gift instanceof Item) {
+      this.equip(gift);
+    } else {
+      this.ability2 = gift;
     }
   }
 

@@ -41,6 +41,8 @@ export default class Game {
     });
     // Loading has completed
     this.party.add(this.data.getRandomHero());
+    this.party.add(this.data.getRandomHero());
+    this.party.add(this.data.getRandomHero());
     this.view = new StartView();
     this.invalidate();
   }

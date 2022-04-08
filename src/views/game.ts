@@ -34,17 +34,16 @@ export default class GameView extends View {
    */
   challengerCard(r: GraphicsRenderer, challenger: Challenger): void {
     r.drawSprite(challenger.sprite, 2, 2);
-    r.drawSprite(Sprites.SPEED, 64, 3);
+    r.drawSprite(Sprites.DAMAGE, 64, 3);
     r.drawSprite(Sprites.SHIELD, 64, 15);
-    r.drawSprite(Sprites.DAMAGE, 64, 27);
+    r.drawSprite(Sprites.SPEED, 64, 27);
     r.drawNumber(challenger.strength, 82, 4);
     r.drawNumber(challenger.wisdom, 82, 16);
     r.drawNumber(challenger.agility, 82, 28);
     r.drawText(challenger.name, 2, 65);
-    r.drawSprite(Sprites.HEALTH, 76, 64);
     if (challenger.ability) {
-      r.drawText(challenger.ability.name, 2, 100);
-      r.drawParagraph(challenger.ability.description, 2, 110);
+      r.drawText(challenger.ability.name, 2, 80);
+      r.drawParagraph(challenger.ability.description, 2, 90);
     }
   }
   
@@ -53,35 +52,34 @@ export default class GameView extends View {
    */
   heroCard(r: GraphicsRenderer, hero: Hero): void {
     r.drawSprite(hero.sprite, 2, 2);
-    r.drawSprite(Sprites.SPEED, 64, 3);
+    r.drawSprite(Sprites.DAMAGE, 64, 3);
     r.drawSprite(Sprites.SHIELD, 64, 15);
-    r.drawSprite(Sprites.DAMAGE, 64, 27);
+    r.drawSprite(Sprites.SPEED, 64, 27);
+    r.drawSprite(Sprites.HEALTH, 64, 39);
     r.drawNumber(hero.strength, 82, 4);
     r.drawNumber(hero.wisdom, 82, 16);
     r.drawNumber(hero.agility, 82, 28);
+    r.drawText(`${hero.luck}%`, 82, 40);
     r.drawText(hero.name, 2, 65);
-    r.drawSprite(Sprites.HEALTH, 76, 64);
-    r.drawText('weak', 7, 77);
-    r.drawText('resist', 2, 89);
-    r.drawText('abilities', 2, 100);
+    r.drawText('abilities', 2, 80);
     if (hero.ability1) {
-      r.drawText(hero.ability1.name, 2, 110, true);
+      r.drawText(hero.ability1.name, 2, 90, true);
     } else {
-      r.drawText('-', 2, 110);
+      r.drawText('-', 2, 90);
     }
     if (hero.ability2) {
-      r.drawText(hero.ability2.name, 2, 120, true);
+      r.drawText(hero.ability2.name, 2, 100, true);
     }
-    r.drawText('items', 2, 130);
+    r.drawText('items', 2, 110);
     if (hero.item1) {
-      r.drawText(hero.item1.name, 2, 140, true);
+      r.drawText(hero.item1.name, 2, 120, true);
     } else if (hero.itemSlots > 0) {
-      r.drawText('-', 2, 140);
+      r.drawText('-', 2, 120);
     }
     if (hero.item2) {
-      r.drawText(hero.item2.name, 2, 150, true);
+      r.drawText(hero.item2.name, 2, 130, true);
     } else if (hero.itemSlots > 1) {
-      r.drawText('-', 2, 150);
+      r.drawText('-', 2, 130);
     }
   }
 

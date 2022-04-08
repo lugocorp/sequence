@@ -4,9 +4,10 @@
  * the player survives.
  */
 import ChallengeEvent from './challenge';
-import ChoiceEvent from './choice';
+import OfferingEvent from './offering';
 import DeathEvent from './death';
 import GiftEvent from './gift';
+import TrapEvent from './trap';
 import Random from '../random';
 import Event from './event';
 import Game from '../game';
@@ -18,6 +19,9 @@ export default class EventChain {
    * This function returns the current event in the sequence.
    */
   latest(): Event {
+    if (!Game.game.party.length()) {
+      return new DeathEvent();
+    }
     if (!this.events.length) {
       this.plan(null);
     }
@@ -31,18 +35,14 @@ export default class EventChain {
    */
   plan(previous: Event): void {
     if (!previous) {
-      this.events.push(new ChallengeEvent(Game.game.data.getRandomChallenger()));
-      return;
-    }
-    if (!Game.game.party.length()) {
-      this.events.splice(1, this.events.length - 1);
-      this.events.push(new DeathEvent());
+      this.events.push(new ChallengeEvent());
       return;
     }
     this.events.push(Random.weightedList([
-      [50, () => new ChallengeEvent(Game.game.data.getRandomChallenger())],
-      [25, () => new ChoiceEvent()],
-      [25, () => new GiftEvent()]
+      [50, () => new ChallengeEvent()],
+      [25, () => new OfferingEvent()],
+      [20, () => new GiftEvent()],
+      [5,  () => new TrapEvent]
     ])());
   }
 }
