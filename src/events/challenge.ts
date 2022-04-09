@@ -11,10 +11,10 @@ import Event from './event';
 import Game from '../game';
 
 export default class ChallengeEvent implements Event {
-  static PRELUDE         = 0;
-  static VIEW_CHALLENGER = 1;
-  static VIEW_PARTY      = 2;
-  static FINISHED        = 3;
+  private static PRELUDE         = 0;
+  private static VIEW_CHALLENGER = 1;
+  private static VIEW_PARTY      = 2;
+  private static FINISHED        = 3;
   private expectation: number[];
   private challenger: Challenger;
   private heroViewer: HeroWidget;

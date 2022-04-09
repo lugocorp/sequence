@@ -15,10 +15,10 @@ import Game from '../game';
  * The options will be either an item, a beneficial ability, or a detrimental ability.
  */
 export default class GiftEvent implements Event {
-  static PRELUDE         = 0;
-  static VIEW_OPTIONS    = 1;
-  static VIEW_HERO       = 2;
-  static FINISHED        = 3;
+  private static PRELUDE         = 0;
+  private static VIEW_OPTIONS    = 1;
+  private static VIEW_HERO       = 2;
+  private static FINISHED        = 3;
   private options: Item[] | Ability[];
   private heroViewer: HeroWidget;
   private selector: Selector;

@@ -5,6 +5,8 @@
  */
 import ChallengeEvent from './challenge';
 import OfferingEvent from './offering';
+import ObstacleEvent from './obstacle';
+import RecruitEvent from './recruit';
 import DeathEvent from './death';
 import GiftEvent from './gift';
 import TrapEvent from './trap';
@@ -39,10 +41,12 @@ export default class EventChain {
       return;
     }
     this.events.push(Random.weightedList([
-      [50, () => new ChallengeEvent()],
+      [40, () => new ChallengeEvent()],
       [25, () => new OfferingEvent()],
+      [5,  () => new ObstacleEvent()],
+      [5,  () => new RecruitEvent()],
       [20, () => new GiftEvent()],
-      [5,  () => new TrapEvent]
+      [5,  () => new TrapEvent()]
     ])());
   }
 }

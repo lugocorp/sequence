@@ -1,3 +1,4 @@
+import Stats from '../enums/stats';
 import Random from '../random';
 import Hero from './hero';
 
@@ -35,5 +36,10 @@ export default class Party {
   // Returns a random hero in the party
   randomHero(): Hero {
     return Random.randomElement(this.members);
+  }
+
+  // Filters the party by a stat expectation
+  filter(stat: number, minimum: number): void {
+    this.members = this.members.filter((member: Hero) => Stats.getUnitStat(member, stat) >= minimum);
   }
 }

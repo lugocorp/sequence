@@ -1,4 +1,5 @@
 import Unit from '../entities/unit';
+import Random from '../random';
 
 // Handles logic for unit stats in the game
 export default class Stats {
@@ -6,6 +7,11 @@ export default class Stats {
   static WISDOM   = 1;
   static AGILITY  = 2;
   static N = 3;
+
+  // Returns a random stat
+  static getRandomStat(): number {
+    return Random.max(Stats.N);
+  }
 
   // Returns the stat's display name
   static getStatName(stat: number): string {

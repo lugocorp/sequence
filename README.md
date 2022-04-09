@@ -57,12 +57,14 @@ We have a number of `npm` commands:
 - [x] Make sure all prelude/aftermath scenes flow well
 - [x] Throw in some game data
 - [x] Flesh out the gift and offering events
-- [ ] Write a few events (trap, trickster, obstacle, recruit)
+- [x] Write a few events (trap, obstacle, recruit)
 - [ ] Research and ask cultural consultants to help come up with character concepts, double check core gameplay
 
 #### Finishing it up
 - [ ] Lock down art style and UI
 - [ ] Rewrite UI as needed and make everything line up in a pretty way
+- [ ] Add weather system
+- [ ] Code the rest of the events
 - [ ] Add sounds into the game (just to accentuate certain events)
 - [ ] Code the event progression algorithm
 - [ ] Balance the game as needed
@@ -70,6 +72,7 @@ We have a number of `npm` commands:
 - [ ] Design character and spirit graphics
 - [ ] Contact more consultants just to double check themes and designs
 - [ ] Add consultants into the game credits
+- [ ] Final round of game balance
 
 #### Post-launch (if people want)
 - [ ] Add custom RNG with seed, allow players to set the seed for a given run
