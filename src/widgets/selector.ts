@@ -10,10 +10,12 @@ export default class Selector extends Widget {
   private choose: Text;
   private next: Text;
   private last: Text;
+  showChoose: boolean;
 
   constructor(length: number, get: (i: number) => any, onchange: (value: any) => void, callback: (result: any) => void) {
     super();
     const that = this;
+    this.showChoose = true;
     this.length = length;
     this.index = 0;
     this.get = get;
@@ -40,7 +42,9 @@ export default class Selector extends Widget {
       this.last.click();
       this.next.click();
     }
-    this.choose.click();
+    if (this.showChoose) {
+      this.choose.click();
+    }
   }
 
   render(view: GameView, r: GraphicsRenderer): void {
@@ -48,6 +52,8 @@ export default class Selector extends Widget {
       this.last.render(view, r);
       this.next.render(view, r);
     }
-    this.choose.render(view, r);
+    if (this.showChoose) {
+      this.choose.render(view, r);
+    }
   }
 }

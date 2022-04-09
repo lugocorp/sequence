@@ -66,13 +66,13 @@ We have a number of `npm` commands:
 - [ ] Add weather system
 - [ ] Code the rest of the events
 - [ ] Add sounds into the game (just to accentuate certain events)
+- [ ] Clean up all events
 - [ ] Code the event progression algorithm
+- [ ] Add all items, abilities, challengers, heroes, etc
 - [ ] Balance the game as needed
-- [ ] Add more items, abilities, enemies, etc
 - [ ] Design character and spirit graphics
 - [ ] Contact more consultants just to double check themes and designs
 - [ ] Add consultants into the game credits
-- [ ] Final round of game balance
 
 #### Post-launch (if people want)
 - [ ] Add custom RNG with seed, allow players to set the seed for a given run

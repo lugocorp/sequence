@@ -53,6 +53,7 @@ export default class RecruitEvent implements Event {
         }
       }
     );
+    this.partySelector.showChoose = false;
     this.recruitSelector = new Selector(
       that.recruits.length,
       (i: number) => that.recruits[i],
@@ -85,6 +86,7 @@ export default class RecruitEvent implements Event {
         that.state = RecruitEvent.VIEW_RECRUITS;
       }
       if (that.state === RecruitEvent.PLEASE_REMOVE) {
+        that.partySelector.showChoose = true;
         that.state = RecruitEvent.REMOVE_MEMBER;
         that.heroViewer.setHero(that.partySelector.getSelected() as Hero);
       }

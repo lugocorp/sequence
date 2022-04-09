@@ -95,6 +95,38 @@ const data: HeroData[] = [
     agility: 0,
     itemSlots: 2,
     ability: 'test blessing'
+  },
+  {
+    sprite: Sprites.SWORD_HOLDER,
+    name: 'test hero 1',
+    strength: 2,
+    wisdom: 2,
+    agility: 2,
+    itemSlots: 2
+  },
+  {
+    sprite: Sprites.SWORD_HOLDER,
+    name: 'test hero 2',
+    strength: 2,
+    wisdom: 2,
+    agility: 2,
+    itemSlots: 2
+  },
+  {
+    sprite: Sprites.SWORD_HOLDER,
+    name: 'test hero 3',
+    strength: 2,
+    wisdom: 2,
+    agility: 2,
+    itemSlots: 2
+  },
+  {
+    sprite: Sprites.SWORD_HOLDER,
+    name: 'test hero 4',
+    strength: 2,
+    wisdom: 2,
+    agility: 2,
+    itemSlots: 2
   }
 ];
 
