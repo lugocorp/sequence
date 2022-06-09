@@ -58,23 +58,27 @@ We have a number of `npm` commands:
 - [x] Throw in some game data
 - [x] Flesh out the gift and offering events
 - [x] Write a few events (trap, obstacle, recruit)
-- [ ] Research and ask cultural consultants to help come up with character concepts, double check core gameplay
+- [x] Research and ask cultural consultants to help come up with character concepts, double check core gameplay
 
-#### Finishing it up
+#### Beta Build
 - [ ] Lock down art style and UI
 - [ ] Rewrite UI as needed and make everything line up in a pretty way
-- [ ] Add weather system
-- [ ] Code the rest of the events
+- [ ] Add new events and systems
+- [ ] Add consultants into the game credits
 - [ ] Add sounds into the game (just to accentuate certain events)
 - [ ] Clean up all events
 - [ ] Code the event progression algorithm
-- [ ] Add all items, abilities, challengers, heroes, etc
-- [ ] Balance the game as needed
-- [ ] Design character and spirit graphics
+- [ ] Draw some beta sprites
+- [ ] Add content for beta
+- [ ] Balance as needed
+- [ ] Launch the beta
 - [ ] Contact more consultants just to double check themes and designs
-- [ ] Add consultants into the game credits
 
-#### Post-launch (if people want)
+#### Full Launch
+- [ ] Update consultants list
 - [ ] Add custom RNG with seed, allow players to set the seed for a given run
 - [ ] Store previous run stats (how far you went, points scored, etc) in a save file
-- [ ] Create an encyclopedia view for all items, spirits, heroes and events
+- [ ] Redesign sprites for full launch/draw all sprites
+- [ ] Put all launch content into the game
+- [ ] Balance as needed again
+- [ ] Launch the full game
