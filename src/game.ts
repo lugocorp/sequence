@@ -1,11 +1,11 @@
+import {GLYPH_W, GLYPH_H} from './enums/values';
 import GraphicsRenderer from './graphics/renderer';
 import GraphicsLoader from './graphics/loader';
 import DataManager from './serial/manager';
 import EventChain from './logic/chain';
 import Party from './entities/party';
 import StartView from './views/start';
-import View from './graphics/view';
-import {GLYPH_W, GLYPH_H} from './enums/values';
+import View from './ui/view';
 
 export default class Game {
   static game: Game;

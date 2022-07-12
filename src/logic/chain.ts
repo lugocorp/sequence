@@ -12,7 +12,7 @@ import BeginEvent from '../views/events/begin';
 import GiftEvent from '../views/events/gift';
 import TrapEvent from '../views/events/trap';
 import Random from './random';
-import View from '../graphics/view';
+import View from '../ui/view';
 import Game from '../game';
 
 export default class EventChain {

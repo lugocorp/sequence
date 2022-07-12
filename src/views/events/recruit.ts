@@ -1,7 +1,7 @@
 import GraphicsRenderer from '../../graphics/renderer';
 import Party from '../../entities/party';
 import Hero from '../../entities/hero';
-import View from '../../graphics/view';
+import View from '../../ui/view';
 import Game from '../../game';
 
 /*

@@ -3,7 +3,7 @@ import Item from '../../entities/item';
 import Hero from '../../entities/hero';
 import Ability from '../../entities/ability';
 import Random from '../../logic/random';
-import View from '../../graphics/view';
+import View from '../../ui/view';
 import Game from '../../game';
 
 /*

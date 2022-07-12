@@ -1,8 +1,8 @@
 import Game from '../game';
 import GraphicsRenderer from '../graphics/renderer';
 import StartView from './start';
-import View from '../graphics/view';
-import Action from '../graphics/action';
+import View from '../ui/view';
+import Action from '../ui/action';
 
 export default class InstructionsView extends View {
 

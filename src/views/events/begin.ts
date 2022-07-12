@@ -1,7 +1,7 @@
 import Sprites from '../../enums/sprites';
 import GraphicsRenderer from '../../graphics/renderer';
-import Action from '../../graphics/action';
-import View from '../../graphics/view';
+import Action from '../../ui/action';
+import View from '../../ui/view';
 import Game from '../../game';
 
 export default class BeginEvent extends View {

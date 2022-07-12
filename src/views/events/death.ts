@@ -1,6 +1,6 @@
 import GraphicsRenderer from '../../graphics/renderer';
 import StartView from '../../views/start';
-import View from '../../graphics/view';
+import View from '../../ui/view';
 import Game from '../../game';
 
 export default class DeathEvent extends View {

@@ -2,11 +2,12 @@
  * This class handles working with the HTML5 canvas to render game elements.
  * Use it whenever you have to interact with the game canvas.
  */
-import Sprites from '../enums/sprites';
 import { WIDTH, HEIGHT, GLYPH_W, GLYPH_H } from '../enums/values';
+import Sprites from '../enums/sprites';
 import DrawCoords from './draw-coords';
 import GraphicsLoader from './loader';
-import View from './view';
+import Action from '../ui/action';
+import View from '../ui/view';
 import Game from '../game';
 
 export default class GraphicsRenderer {
@@ -78,7 +79,7 @@ export default class GraphicsRenderer {
         this.drawSprite(sprite2, (a * GLYPH_W) + 2, top);
       }
       for (let a = 0; a < view.actions.length; a++) {
-        const action = view.actions[a];
+        const action: Action = view.actions[a];
         const coords: number[] = view.getActionCoords(a);
         this.drawText(action.label, coords[0], coords[1], true);
         this.drawSprite(Sprites.LINE_VERT, 2, (coords[1] * GLYPH_H) + 102);
