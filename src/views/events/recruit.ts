@@ -1,6 +1,9 @@
+import Sprites from '../../enums/sprites';
 import GraphicsRenderer from '../../graphics/renderer';
 import Party from '../../entities/party';
 import Hero from '../../entities/hero';
+import Selector from '../../ui/selector';
+import Action from '../../ui/action';
 import View from '../../ui/view';
 import Game from '../../game';
 
@@ -8,6 +11,75 @@ import Game from '../../game';
  * In this event you choose a new party member.
  */
 export default class RecruitEvent extends View {
+  private recruitSelector: Selector<Hero>;
+  private memberSelector: Selector<Hero>;
+  private recruits: Hero[];
+
+  constructor() {
+    super(Sprites.DIRE_CRAB, 'you choose a new party member to recruit.');
+    const that = this;
+    this.setAction('continue', () => that.viewRecruits());
+    this.recruits = [
+      Game.game.data.getRandomHero(),
+      Game.game.data.getRandomHero(),
+      Game.game.data.getRandomHero()
+    ];
+    this.memberSelector = Selector.heroSelector(Game.game.party.members);
+    this.recruitSelector = Selector.heroSelector(this.recruits);
+  }
+
+  viewRecruits(): void {
+    const that = this;
+    this.selector = this.recruitSelector;
+    this.actions = [
+      new Action('choose', () => {
+        if (Game.game.party.isFull()) {
+          that.pleaseRemove();
+        } else {
+          that.finished();
+        }
+      }),
+      new Action('view party', () => that.viewParty())
+    ];
+    this.selector.invalidate();
+  }
+
+  viewParty(): void {
+    const that = this;
+    this.selector = this.memberSelector;
+    this.setAction('back', () => that.viewRecruits());
+    this.selector.invalidate();
+  }
+
+  pleaseRemove(): void {
+    const that = this;
+    this.selector = undefined;
+    this.setText('your party is full. please remove an existing member.');
+    this.setAction('continue', () => that.removeMember());
+  }
+
+  removeMember(): void {
+    const that = this;
+    this.selector = this.memberSelector;
+    this.setAction('choose', () => that.finished());
+    this.selector.invalidate();
+  }
+
+  finished(): void {
+    const that = this;
+    this.selector = undefined;
+    const recruit: Hero = this.recruitSelector.item();
+    let text = `welcome ${recruit.name} to your party!`;
+    if (Game.game.party.isFull()) {
+      const member: Hero = this.memberSelector.item();
+      text += ` ${member.name} left your party.`
+      Game.game.party.remove(member);
+    }
+    Game.game.party.add(recruit);
+    this.setText(text);
+    this.setAction('continue', () => Game.game.progress());
+  }
+
   /* private static PRELUDE       = 0;
   private static VIEW_RECRUITS = 1;
   private static VIEW_PARTY    = 2;

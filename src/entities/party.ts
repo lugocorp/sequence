@@ -11,6 +11,11 @@ export default class Party {
     return this.members.length;
   }
 
+  // Returns true if the party is full
+  isFull(): boolean {
+    return this.length() === Party.MAX;
+  }
+
   // Returns the hero at the given index
   get(index: number): Hero {
     return this.members[index];

@@ -3,13 +3,13 @@
  * Its job is to generate and serve events for as long as
  * the player survives.
  */
-// import ChallengeEvent from '../views/events/challenge';
-// import OfferingEvent from '../views/events/offering';
-// import ObstacleEvent from '../views/events/obstacle';
-// import RecruitEvent from '../views/events/recruit';
+import ChallengeEvent from '../views/events/challenge';
+import OfferingEvent from '../views/events/offering';
+import ObstacleEvent from '../views/events/obstacle';
+import RecruitEvent from '../views/events/recruit';
 import DeathEvent from '../views/events/death';
 import BeginEvent from '../views/events/begin';
-// import GiftEvent from '../views/events/gift';
+import GiftEvent from '../views/events/gift';
 import TrapEvent from '../views/events/trap';
 import Random from './random';
 import View from '../ui/view';
@@ -40,16 +40,15 @@ export default class EventChain {
    */
   plan(previous: View): void {
     if (!previous) {
-      // this.events.push(new ChallengeEvent());
-      this.events.push(new TrapEvent());
+      this.events.push(new ChallengeEvent());
       return;
     }
     this.events.push(Random.weightedList([
-      // [40, () => new ChallengeEvent()],
-      // [25, () => new OfferingEvent()],
-      // [5,  () => new ObstacleEvent()],
-      // [5,  () => new RecruitEvent()],
-      // [20, () => new GiftEvent()],
+      [40, () => new ChallengeEvent()],
+      [25, () => new OfferingEvent()],
+      [5,  () => new ObstacleEvent()],
+      [5,  () => new RecruitEvent()],
+      [20, () => new GiftEvent()],
       [5,  () => new TrapEvent()]
     ])());
   }

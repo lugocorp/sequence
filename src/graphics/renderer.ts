@@ -60,7 +60,7 @@ export default class GraphicsRenderer {
       if (view.selector.index > 0) {
         this.drawSprite(Sprites.ARROW_LEFT, 3, 46);
       }
-      if (view.selector.index < view.selector.size()) {
+      if (view.selector.index < view.selector.size() - 1) {
         this.drawSprite(Sprites.ARROW_RIGHT, 116, 46);
       }
     }

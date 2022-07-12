@@ -88,7 +88,7 @@ export default class Game {
           this.view.selector.index--;
           this.view.selector.invalidate();
         }
-        if (this.view.selector.index < this.view.selector.size() && this.within('a', 116, 46)) {
+        if (this.view.selector.index < this.view.selector.size() - 1 && this.within('a', 116, 46)) {
           this.view.selector.index++;
           this.view.selector.invalidate();
         }

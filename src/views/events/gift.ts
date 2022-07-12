@@ -1,8 +1,11 @@
+import Sprites from '../../enums/sprites';
 import GraphicsRenderer from '../../graphics/renderer';
 import Item from '../../entities/item';
 import Hero from '../../entities/hero';
 import Ability from '../../entities/ability';
 import Random from '../../logic/random';
+import Selector from '../../ui/selector';
+import Action from '../../ui/action';
 import View from '../../ui/view';
 import Game from '../../game';
 
@@ -11,6 +14,56 @@ import Game from '../../game';
  * The options will be either an item, a beneficial ability, or a detrimental ability.
  */
 export default class GiftEvent extends View {
+  private giftSelector: Selector<Item | Ability>;
+  private heroSelector: Selector<Hero>;
+  private options: Item[] | Ability[];
+  private hero: Hero;
+
+  constructor() {
+    super(Sprites.DIRE_CRAB);
+    this.hero = Game.game.party.randomHero();
+    this.options = Random.passes(0.5) ?
+      [
+        Game.game.data.getRandomAbility(),
+        Game.game.data.getRandomAbility(),
+        Game.game.data.getRandomAbility()
+      ] :
+      [
+        Game.game.data.getRandomItem(),
+        Game.game.data.getRandomItem(),
+        Game.game.data.getRandomItem()
+      ];
+    const that = this;
+    this.setText(`a spirit reveals itself to ${this.hero.name}. it comes bearing a gift of your choosing.`);
+    this.setAction('continue', () => that.chooseGift());
+    this.giftSelector = Selector.giftSelector(this.options);
+    this.heroSelector = Selector.heroSelector([this.hero]);
+  }
+
+  chooseGift(): void {
+    const that = this;
+    this.selector = this.giftSelector;
+    this.selector.invalidate();
+    this.actions = [
+      new Action('view member', () => that.viewHero()),
+      new Action('choose', () => that.finish())
+    ];
+  }
+
+  viewHero(): void {
+    const that = this;
+    this.selector = this.heroSelector;
+    this.selector.invalidate();
+    this.setAction('view gifts', () => that.chooseGift());
+  }
+
+  finish(): void {
+    const gift: Item | Ability = this.giftSelector.item();
+    this.hero.receive(gift);
+    this.setText(`${this.hero.name} received the spirit's gift of ${gift.name}. the spirit conceals itself once more.`);
+    this.setAction('continue', () => Game.game.progress());
+  }
+
   /* private static PRELUDE         = 0;
   private static VIEW_OPTIONS    = 1;
   private static VIEW_HERO       = 2;

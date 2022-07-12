@@ -1,8 +1,11 @@
+import Sprites from '../../enums/sprites';
 import GraphicsRenderer from '../../graphics/renderer';
 import Item from '../../entities/item';
 import Hero from '../../entities/hero';
 import Ability from '../../entities/ability';
 import Random from '../../logic/random';
+import Selector from '../../ui/selector';
+import Action from '../../ui/action';
 import View from '../../ui/view';
 import Game from '../../game';
 
@@ -11,6 +14,42 @@ import Game from '../../game';
  * This gift can be either an item, a beneficial ability, or a detrimental ability.
  */
 export default class OfferingEvent extends View {
+  private heroSelector: Selector<Hero>;
+  private gift: Item | Ability;
+
+  constructor() {
+    super(Sprites.DIRE_CRAB);
+    const that = this;
+    this.gift = Random.passes(0.5) ?
+      Game.game.data.getRandomItem() :
+      Game.game.data.getRandomAbility();
+    this.setText(`a spirit offers a gift of ${this.gift.name} to your party. only one member may accept it.`);
+    this.setAction('continue', () => that.viewGift());
+    this.heroSelector = Selector.heroSelector(Game.game.party.members);
+  }
+
+  viewGift(): void {
+    const that = this;
+    this.setText(this.gift.name);
+    this.setAction('view party', () => that.viewParty());
+  }
+
+  viewParty(): void {
+    const that = this;
+    this.selector = this.heroSelector;
+    this.actions = [
+      new Action('view gift', () => that.viewGift()),
+      new Action('choose', () => that.finish())
+    ];
+    this.selector.invalidate();
+  }
+
+  finish(): void {
+    const hero: Hero = this.heroSelector.item();
+    this.setText(`${hero.name} was given ${this.gift.name}`);
+    this.setAction('continue', () => Game.game.progress());
+    this.selector = undefined;
+  }
   /* private static PRELUDE    = 0;
   private static VIEW_GIFT  = 1;
   private static VIEW_PARTY = 2;

@@ -8,7 +8,7 @@ export default class View {
   actions: Action[];
   image: number;
 
-  constructor(image: number, text: string, actions?: Action[]) {
+  constructor(image: number, text = '', actions?: Action[]) {
     this.actions = actions || [];
     this.image = image;
     this.setText(text);
@@ -27,6 +27,13 @@ export default class View {
   // Returns the text coordinates of the indexed action
   getActionCoords(index: number): number[] {
     return [1, TEXT_H - (this.actions.length - index + 1)];
+  }
+
+  // Sets a single action for this View
+  setAction(label: string, effect: () => void): void {
+    this.actions = [
+      new Action(label, effect)
+    ];
   }
 
   // Returns this view's text content

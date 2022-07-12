@@ -1,17 +1,22 @@
+import Ability from '../entities/ability';
+import Item from '../entities/item';
+import Hero from '../entities/hero';
+import Game from '../game';
+import View from './view';
 
 export default class Selector<T> {
-  select: (e: T) => void;
+  select: (v: View, e: T) => void;
   private data: T[];
   index: number;
 
-  constructor(data: T[], select: (e: T) => void) {
+  constructor(data: T[], select: (v: View, e: T) => void) {
     this.select = select;
     this.data = data;
     this.index = 0;
   }
 
   invalidate(): void {
-    this.select(this.item());
+    this.select(Game.game.view, this.item());
   }
 
   item(): T {
@@ -20,5 +25,26 @@ export default class Selector<T> {
 
   size(): number {
     return this.data.length;
+  }
+
+  // A built-in Hero viewing selector
+  static heroSelector(data: Hero[], select?: (hero: Hero) => void): Selector<Hero> {
+    return new Selector<Hero>(data, (view: View, hero: Hero): void => {
+      view.image = hero.sprite;
+      view.setText(hero.name);
+      if (select) {
+        select(hero);
+      }
+    });
+  }
+
+  // A built-in Item or Ability viewing selector
+  static giftSelector(data: (Item | Ability)[], select?: (gift: Item | Ability) => void): Selector<Item | Ability> {
+    return new Selector<Item | Ability>(data, (view: View, gift: Item | Ability): void => {
+      view.setText(gift.name);
+      if (select) {
+        select(gift);
+      }
+    });
   }
 }
