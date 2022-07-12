@@ -10,6 +10,10 @@ export default class Selector<T> {
     this.index = 0;
   }
 
+  invalidate(): void {
+    this.select(this.item());
+  }
+
   item(): T {
     return this.data[this.index];
   }

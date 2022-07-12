@@ -3,10 +3,16 @@ import Selector from './selector';
 import Action from './action';
 
 export default class View {
+  private text: string;
   selector: Selector<any>;
   actions: Action[];
   image: number;
-  text: string;
+
+  constructor(image: number, text: string, actions?: Action[]) {
+    this.actions = actions || [];
+    this.image = image;
+    this.setText(text);
+  }
 
   // Returns true if this view has options
   hasOptions(): boolean {
@@ -21,6 +27,11 @@ export default class View {
   // Returns the text coordinates of the indexed action
   getActionCoords(index: number): number[] {
     return [1, TEXT_H - (this.actions.length - index + 1)];
+  }
+
+  // Returns this view's text content
+  getText(): string {
+    return this.text;
   }
 
   // Formats text wrap according to the screen constraints

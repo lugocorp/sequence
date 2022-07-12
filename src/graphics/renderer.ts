@@ -52,8 +52,9 @@ export default class GraphicsRenderer {
     if (view.image) {
       this.drawSprite(view.image, 12, 0);
     }
-    if (view.text) {
-      this.drawText(view.text, 0, 0);
+    const text = view.getText();
+    if (text) {
+      this.drawText(text, 0, 0);
     }
     if (view.hasOptions()) {
       if (view.selector.index > 0) {

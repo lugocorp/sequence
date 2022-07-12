@@ -6,11 +6,8 @@ import Game from '../../game';
 
 export default class BeginEvent extends View {
   constructor() {
-    super();
-    this.setText('your party sets off on a new adventure.');
-    this.image = Sprites.DIRE_CRAB;
-    this.actions = [
+    super(Sprites.DIRE_CRAB, 'your party sets off on a new adventure.', [
       new Action('next', () => Game.game.progress())
-    ];
+    ]);
   }
 }

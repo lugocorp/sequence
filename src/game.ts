@@ -53,6 +53,11 @@ export default class Game {
     this.renderer.frame(this.view);
   }
 
+  // Sets the current view of the game
+  static setView(view: View): void {
+    Game.game.view = view;
+  }
+
   // Progresses to the next event in the game
   progress(): void {
     if (!this.party.length() || this.chain.events.length === 1) {
@@ -81,9 +86,11 @@ export default class Game {
       if (this.view.hasOptions()) {
         if (this.view.selector.index > 0 && this.within('a', 3, 46)) {
           this.view.selector.index--;
+          this.view.selector.invalidate();
         }
         if (this.view.selector.index < this.view.selector.size() && this.within('a', 116, 46)) {
           this.view.selector.index++;
+          this.view.selector.invalidate();
         }
       }
       this.invalidate();

@@ -1,5 +1,8 @@
 import GraphicsRenderer from '../../graphics/renderer';
+import Sprites from '../../enums/sprites';
 import Hero from '../../entities/hero';
+import Selector from '../../ui/selector';
+import Action from '../../ui/action';
 import View from '../../ui/view';
 import Game from '../../game';
 
@@ -7,6 +10,40 @@ import Game from '../../game';
  * In this event you choose a party member to leave behind.
  */
 export default class TrapEvent extends View {
+  constructor() {
+    super(Sprites.DIRE_CRAB, 'you must choose a party member to let go.');
+    const that = this;
+    this.actions = [
+      new Action('continue', (): void => that.heroViewer())
+    ];
+  }
+
+  heroViewer(): void {
+    const that = this;
+    this.selector = new Selector<Hero>(Game.game.party.members, (hero: Hero): void => {
+      that.image = hero.sprite;
+      that.setText(hero.name);
+    });
+    this.actions = [
+      new Action('choose', () => that.endState())
+    ];
+    this.selector.invalidate();
+  }
+
+  endState(): void {
+    const that = this;
+    const hero: Hero = this.selector.item();
+    this.setText(`${hero.name} was let go from your party.`);
+    this.actions = [
+      new Action('continue', () => {
+        Game.game.party.remove(hero);
+        Game.game.progress();
+      })
+    ];
+    this.selector = undefined;
+  }
+
+
   /* static PRELUDE    = 0;
   static VIEW_PARTY = 1;
   static FINISHED   = 2;
