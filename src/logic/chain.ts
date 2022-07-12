@@ -8,6 +8,7 @@ import OfferingEvent from '../views/events/offering';
 import ObstacleEvent from '../views/events/obstacle';
 import RecruitEvent from '../views/events/recruit';
 import DeathEvent from '../views/events/death';
+import BeginEvent from '../views/events/begin';
 import GiftEvent from '../views/events/gift';
 import TrapEvent from '../views/events/trap';
 import Random from './random';
@@ -15,7 +16,9 @@ import View from '../graphics/view';
 import Game from '../game';
 
 export default class EventChain {
-  events: View[] = [];
+  events: View[] = [
+    new BeginEvent()
+  ];
 
   /*
    * This function returns the current event in the sequence.

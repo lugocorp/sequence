@@ -10,7 +10,7 @@ export default class StartView extends View {
     super();
     this.actions = [
       new Action('new game', () => {
-        // Game.game.view = new GameView(Game.game.chain);
+        Game.game.view = Game.game.chain.latest();
       }),
       new Action('instructions', () => {
         Game.game.view = new InstructionsView();

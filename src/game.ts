@@ -5,6 +5,7 @@ import EventChain from './logic/chain';
 import Party from './entities/party';
 import StartView from './views/start';
 import View from './graphics/view';
+import {GLYPH_W, GLYPH_H} from './enums/values';
 
 export default class Game {
   static game: Game;
@@ -78,18 +79,23 @@ export default class Game {
         }
       }
       if (this.view.hasOptions()) {
-        // Handle clicks for the arrows
+        if (this.view.selector.index > 0 && this.within('a', 3, 46)) {
+          this.view.selector.index--;
+        }
+        if (this.view.selector.index < this.view.selector.size() && this.within('a', 116, 46)) {
+          this.view.selector.index++;
+        }
       }
       this.invalidate();
     }
   }
 
   // Returns true if the current click happened inside this text
-  within(msg: string, x: number, y: number): boolean {
-    return !this.currentClick.down &&
+  within(msg: string, x: number, y: number, down = false): boolean {
+    return this.currentClick.down === down &&
       this.currentClick.x >= x &&
       this.currentClick.y >= y &&
-      this.currentClick.x <= x + (msg.length * 5) &&
-      this.currentClick.y <= y + 8;
+      this.currentClick.x <= x + (msg.length * GLYPH_W) &&
+      this.currentClick.y <= y + GLYPH_H;
   }
 }

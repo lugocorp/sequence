@@ -1,8 +1,8 @@
 
 export default class Selector<T> {
   select: (e: T) => void;
-  private index: number;
   private data: T[];
+  index: number;
 
   constructor(data: T[], select: (e: T) => void) {
     this.select = select;

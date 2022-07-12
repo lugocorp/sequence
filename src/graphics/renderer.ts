@@ -55,8 +55,12 @@ export default class GraphicsRenderer {
       this.drawText(view.text, 0, 0);
     }
     if (view.hasOptions()) {
-      this.drawSprite(Sprites.ARROW_LEFT, 3, 46);
-      this.drawSprite(Sprites.ARROW_RIGHT, 116, 46);
+      if (view.selector.index > 0) {
+        this.drawSprite(Sprites.ARROW_LEFT, 3, 46);
+      }
+      if (view.selector.index < view.selector.size()) {
+        this.drawSprite(Sprites.ARROW_RIGHT, 116, 46);
+      }
     }
     if (view.hasActions()) {
       const top = this.toDisplayCoords(0, view.getActionCoords(0)[1])[1] - GLYPH_H;
@@ -111,17 +115,7 @@ export default class GraphicsRenderer {
     const coords = this.toDisplayCoords(tx, ty);
     let x = coords[0];
     let y = coords[1];
-    const highlight = clickable &&
-      Game.game.currentClick.down &&
-      Game.game.currentClick.x >= x &&
-      Game.game.currentClick.y >= y &&
-      Game.game.currentClick.x <= x + (msg.length * GLYPH_W) &&
-      Game.game.currentClick.y <= y + GLYPH_H;
-    if (highlight) {
-      this.ctx.fillStyle = 'white';
-      this.ctx.fillRect(x, y, GLYPH_W * msg.length, GLYPH_H);
-      this.ctx.fillStyle = 'black';
-    }
+    const highlight = clickable && Game.game.within(msg, x, y, true);
     let dx = 0;
     for (let a = 0; a < msg.length; a++) {
       if (msg[a] === '\n') {
@@ -135,6 +129,13 @@ export default class GraphicsRenderer {
         }
         dx++;
       }
+    }
+    if (highlight) {
+      this.ctx.fillStyle = '#dcd36a';
+      this.ctx.globalCompositeOperation = 'source-atop';
+      this.ctx.fillRect(x, y, GLYPH_W * msg.length, GLYPH_H);
+      this.ctx.globalCompositeOperation = 'source-over';
+      this.ctx.fillStyle = 'black';
     }
   }
 
