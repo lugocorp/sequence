@@ -3,16 +3,13 @@
  * Use it whenever you have to interact with the game canvas.
  */
 import Sprites from '../enums/sprites';
+import { WIDTH, HEIGHT, GLYPH_W, GLYPH_H } from '../enums/values';
 import DrawCoords from './draw-coords';
 import GraphicsLoader from './loader';
 import View from './view';
 import Game from '../game';
 
 export default class GraphicsRenderer {
-  static WIDTH = 124;
-  static HEIGHT = 200;
-  static TEXT_WIDTH = 24;
-  static TEXT_HEIGHT = 12;
   ctx: CanvasRenderingContext2D;
   canvas: HTMLCanvasElement;
   assets: GraphicsLoader;
@@ -33,12 +30,12 @@ export default class GraphicsRenderer {
   setCanvasSize(): void {
     const screenWidth = window.innerWidth;
     const screenHeight = window.innerHeight;
-    this.scale = Math.floor(screenHeight / GraphicsRenderer.HEIGHT);
-    if (GraphicsRenderer.WIDTH * this.scale > screenWidth) {
-      this.scale = Math.floor(screenWidth / GraphicsRenderer.WIDTH);
+    this.scale = Math.floor(screenHeight / HEIGHT);
+    if (WIDTH * this.scale > screenWidth) {
+      this.scale = Math.floor(screenWidth / WIDTH);
     }
-    this.canvas.height = GraphicsRenderer.HEIGHT * this.scale;
-    this.canvas.width = GraphicsRenderer.WIDTH * this.scale;
+    this.canvas.height = HEIGHT * this.scale;
+    this.canvas.width = WIDTH * this.scale;
     this.ctx.scale(this.scale, this.scale);
   }
 
@@ -46,7 +43,7 @@ export default class GraphicsRenderer {
    * This method draws a single frame of the app.
    */
   frame(view: View): void {
-    this.ctx.clearRect(0, 0, GraphicsRenderer.WIDTH, GraphicsRenderer.HEIGHT);
+    this.ctx.clearRect(0, 0, WIDTH, HEIGHT);
     if (!view) {
       this.drawSprite(Sprites.LOADING, 25, 96);
       return;
@@ -58,20 +55,37 @@ export default class GraphicsRenderer {
       this.drawText(view.text, 0, 0);
     }
     if (view.hasOptions()) {
-      // Draw option arrows
+      this.drawSprite(Sprites.ARROW_LEFT, 3, 46);
+      this.drawSprite(Sprites.ARROW_RIGHT, 116, 46);
     }
     if (view.hasActions()) {
-      // Draw action borders
+      const top = this.toDisplayCoords(0, view.getActionCoords(0)[1])[1] - GLYPH_H;
+      for (let a = 0; a < 24; a++) {
+        let sprite1 = Sprites.LINE_HORT;
+        let sprite2 = Sprites.LINE_HORT;
+        if (a === 0) {
+          sprite1 = Sprites.BOT_LEFT;
+          sprite2 = Sprites.TOP_LEFT;
+        } else if (a === 23) {
+          sprite1 = Sprites.BOT_RIGHT;
+          sprite2 = Sprites.TOP_RIGHT;
+        }
+        this.drawSprite(sprite1, (a * GLYPH_W) + 2, 190);
+        this.drawSprite(sprite2, (a * GLYPH_W) + 2, top);
+      }
       for (let a = 0; a < view.actions.length; a++) {
         const action = view.actions[a];
         const coords: number[] = view.getActionCoords(a);
-        this.drawText(action.text, coords[0], coords[1]);
+        this.drawText(action.label, coords[0], coords[1], true);
+        this.drawSprite(Sprites.LINE_VERT, 2, (coords[1] * GLYPH_H) + 102);
+        this.drawSprite(Sprites.LINE_VERT, (23 * GLYPH_W) + 2, (coords[1] * GLYPH_H) + 102);
       }
     }
   }
 
-  toDisplayCoords(x: number, y: number): number[] {
-    return [(x * 5) + 2, (y * 8) + 102];
+  // Converts text coords to display coords
+  toDisplayCoords(tx: number, ty: number): number[] {
+    return [(tx * GLYPH_W) + 2, (ty * GLYPH_H) + 102];
   }
 
   /*
@@ -85,32 +99,33 @@ export default class GraphicsRenderer {
   /*
    * This method is like drawText but for numerical values
    */
-  drawNumber(msg: number, x:number, y: number): void {
-    this.drawText(`${msg}`, x, y);
+  drawNumber(msg: number, tx: number, ty: number): void {
+    this.drawText(`${msg}`, tx, ty);
   }
 
   /*
    * This method draws some text using the custom in-game font.
    * x and y are given in units of text glyph position
    */
-  drawText(msg: string, x: number, y: number, clickable = false): void {
-    x = this.toDisplayCoords(x, y)[0];
-    y = this.toDisplayCoords(x, y)[1];
+  drawText(msg: string, tx: number, ty: number, clickable = false): void {
+    const coords = this.toDisplayCoords(tx, ty);
+    let x = coords[0];
+    let y = coords[1];
     const highlight = clickable &&
       Game.game.currentClick.down &&
       Game.game.currentClick.x >= x &&
       Game.game.currentClick.y >= y &&
-      Game.game.currentClick.x <= x + (msg.length * 5) &&
-      Game.game.currentClick.y <= y + 8;
+      Game.game.currentClick.x <= x + (msg.length * GLYPH_W) &&
+      Game.game.currentClick.y <= y + GLYPH_H;
     if (highlight) {
       this.ctx.fillStyle = 'white';
-      this.ctx.fillRect(x, y, 5 * msg.length, 8);
+      this.ctx.fillRect(x, y, GLYPH_W * msg.length, GLYPH_H);
       this.ctx.fillStyle = 'black';
     }
     let dx = 0;
     for (let a = 0; a < msg.length; a++) {
       if (msg[a] === '\n') {
-        y += 8;
+        y += GLYPH_H;
         dx = 0;
       } else {
         if (msg[a] !== ' ') {

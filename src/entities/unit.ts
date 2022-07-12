@@ -1,4 +1,4 @@
-import Trigger from '../enums/trigger';
+import {Trigger} from '../enums/types';
 import Sprites from '../enums/sprites';
 
 /**

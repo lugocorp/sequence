@@ -49,6 +49,14 @@ enum Sprites {
   APOSTROPHE = 0x000602,
   SLASH      = 0x000702,
   PERCENT    = 0x000802,
+  LINE_VERT  = 0x000902,
+  LINE_HORT  = 0x000A02,
+  TOP_LEFT   = 0x000B02,
+  TOP_RIGHT  = 0x000C02,
+  BOT_LEFT   = 0x000D02,
+  BOT_RIGHT  = 0x000E02,
+  ARROW_LEFT = 0x000F02,
+  ARROW_RIGHT= 0x001002,
 
   // Spritesheet #1 (icons)
   HEALTH   = 0x010000,

@@ -1,8 +1,7 @@
 import {ItemEffect} from '../effects';
 import {ItemData} from '../serial/types';
 import Hero from '../entities/hero';
-import Trigger from '../enums/trigger';
-import Rarity from '../enums/rarity';
+import {Rarity, Trigger} from '../enums/types';
 import Stats from '../enums/stats';
 
 function statItemEffect(stat: number, boost: number): ItemEffect {

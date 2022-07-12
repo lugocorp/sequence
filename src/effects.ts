@@ -1,4 +1,4 @@
-import Trigger from './enums/trigger';
+import { Trigger } from './enums/types';
 import Hero from './entities/hero';
 import Unit from './entities/unit';
 

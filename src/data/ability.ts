@@ -1,4 +1,4 @@
-import Trigger from '../enums/trigger';
+import {Trigger} from '../enums/types';
 import {AbilityData} from '../serial/types';
 import Unit from '../entities/unit';
 

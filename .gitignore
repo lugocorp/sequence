@@ -30,3 +30,4 @@ node_modules/
 /www/index.js
 /www/src
 /out
+*.kra

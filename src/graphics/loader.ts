@@ -3,6 +3,8 @@
  * It loads assets by a 3-byte hexadecimal, where the first byte refers to
  * a spritesheet ID, and the second and third bytes are coordinates.
  */
+import { GLYPH_W, GLYPH_H } from '../enums/values';
+import GraphicsRenderer from './renderer';
 import DrawCoords from './draw-coords';
 
 export default class GraphicsLoader {
@@ -16,7 +18,7 @@ export default class GraphicsLoader {
    */
   getDimensions(sheet: number): {w: number, h: number} {
     const sizes = [
-      {w: 5, h: 8},
+      {w: GLYPH_W, h: GLYPH_H},
       {w: 10, h: 10}
     ];
     return (sheet < sizes.length) ? sizes[sheet] : {w: 60, h: 60};

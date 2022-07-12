@@ -9,7 +9,7 @@ import Challenger from '../entities/challenger';
 import Ability from '../entities/ability';
 import Hero from '../entities/hero';
 import Item from '../entities/item';
-import Rarity from '../enums/rarity';
+import {Rarity} from '../enums/types';
 import * as types from './types';
 import challengers from '../data/challenger';
 import abilities from '../data/ability';

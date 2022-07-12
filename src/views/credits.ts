@@ -1,6 +1,7 @@
 import Game from '../game';
 import StartView from './start';
 import View from '../graphics/view';
+import Action from '../graphics/action';
 
 export default class CreditsView extends View {
 
@@ -16,12 +17,9 @@ export default class CreditsView extends View {
       'alexlugo.net'
     ].join('\n');
     this.actions = [
-      {
-        text: 'back',
-        effect: () => {
-          Game.game.view = new StartView();
-        }
-      }
+      new Action('back', () => {
+        Game.game.view = new StartView();
+      })
     ];
   }
 }

@@ -71,7 +71,7 @@ export default class Game {
           const action = this.view.actions[a];
           const precoords: number[] = this.view.getActionCoords(a);
           const coords: number[] = this.renderer.toDisplayCoords(precoords[0], precoords[1]);
-          if (this.within(action.text, coords[0], coords[1])) {
+          if (this.within(action.label, coords[0], coords[1])) {
             action.effect();
             break;
           }

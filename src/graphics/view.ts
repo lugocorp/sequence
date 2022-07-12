@@ -1,21 +1,16 @@
-import GraphicsRenderer from './renderer';
+import {TEXT_H} from '../enums/values';
+import Selector from './selector';
+import Action from './action';
 
 export default class View {
-  options: any[];
-  select: (e: any) => void;
-  actions: {text: string, effect: () => void}[];
+  selector: Selector<any>;
+  actions: Action[];
   image: number;
   text: string;
 
-  // Sets this view's selectable options
-  setOptions(options: any[], select: (e: any) => void): void {
-    this.options = options;
-    this.select = select;
-  }
-
   // Returns true if this view has options
   hasOptions(): boolean {
-    return (this.options?.length || 0) > 1;
+    return (this.selector?.size() || 0) > 1;
   }
 
   // Returns true if this view has actions
@@ -23,9 +18,9 @@ export default class View {
     return (this.actions?.length || 0) > 0;
   }
 
-  // Returns the coordinates of each action
+  // Returns the text coordinates of the indexed action
   getActionCoords(index: number): number[] {
-    return [1, GraphicsRenderer.TEXT_HEIGHT - (this.actions.length - index)];
+    return [1, TEXT_H - (this.actions.length - index + 1)];
   }
 
   // Formats text wrap according to the screen constraints
