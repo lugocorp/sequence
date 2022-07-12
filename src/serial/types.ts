@@ -1,4 +1,4 @@
-import {AbilityEffect, ItemEffect} from '../effects';
+import {AbilityEffect, ItemEffect} from '../enums/effects';
 import Sprites from '../enums/sprites';
 
 // Defines game data for a Hero

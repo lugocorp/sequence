@@ -3,7 +3,7 @@
  * provides the Factory class with all the data it needs to instantiate game
  * entities. Use this to get indexed abilities or random game objects.
  */
-import Random from '../random';
+import Random from '../logic/random';
 import Factory from './factory';
 import Challenger from '../entities/challenger';
 import Ability from '../entities/ability';

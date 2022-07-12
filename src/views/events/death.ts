@@ -1,7 +1,7 @@
-import GraphicsRenderer from '../graphics/renderer';
-import StartView from '../views/start';
-import View from '../graphics/view';
-import Game from '../game';
+import GraphicsRenderer from '../../graphics/renderer';
+import StartView from '../../views/start';
+import View from '../../graphics/view';
+import Game from '../../game';
 
 export default class DeathEvent extends View {
   /* continue: Text;

@@ -1,10 +1,10 @@
-import GraphicsRenderer from '../graphics/renderer';
-import Item from '../entities/item';
-import Hero from '../entities/hero';
-import Ability from '../entities/ability';
-import Random from '../random';
-import View from '../graphics/view';
-import Game from '../game';
+import GraphicsRenderer from '../../graphics/renderer';
+import Item from '../../entities/item';
+import Hero from '../../entities/hero';
+import Ability from '../../entities/ability';
+import Random from '../../logic/random';
+import View from '../../graphics/view';
+import Game from '../../game';
 
 /*
  * In this event you choose a party member to receive some pre-selected gift.

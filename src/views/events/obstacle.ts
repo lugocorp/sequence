@@ -1,8 +1,8 @@
-import GraphicsRenderer from '../graphics/renderer';
-import Stats from '../enums/stats';
-import Random from '../random';
-import View from '../graphics/view';
-import Game from '../game';
+import GraphicsRenderer from '../../graphics/renderer';
+import Stats from '../../enums/stats';
+import Random from '../../logic/random';
+import View from '../../graphics/view';
+import Game from '../../game';
 
 /*
  * In this event your party is filtered by a certain stat limit.

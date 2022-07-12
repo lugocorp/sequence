@@ -1,10 +1,10 @@
-import GraphicsRenderer from '../graphics/renderer';
-import Item from '../entities/item';
-import Hero from '../entities/hero';
-import Ability from '../entities/ability';
-import Random from '../random';
-import View from '../graphics/view';
-import Game from '../game';
+import GraphicsRenderer from '../../graphics/renderer';
+import Item from '../../entities/item';
+import Hero from '../../entities/hero';
+import Ability from '../../entities/ability';
+import Random from '../../logic/random';
+import View from '../../graphics/view';
+import Game from '../../game';
 
 /*
  * In this event you choose 1 of 3 options to bestow upon a pre-selected party member.

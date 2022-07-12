@@ -1,4 +1,4 @@
-import {ItemEffect} from '../effects';
+import {ItemEffect} from '../enums/effects';
 
 export default class Item {
   description: string;

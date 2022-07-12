@@ -1,5 +1,5 @@
 import Stats from '../enums/stats';
-import Random from '../random';
+import Random from '../logic/random';
 import Hero from './hero';
 
 export default class Party {

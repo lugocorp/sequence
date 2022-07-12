@@ -1,4 +1,4 @@
-import {ItemEffect} from '../effects';
+import {ItemEffect} from '../enums/effects';
 import {ItemData} from '../serial/types';
 import Hero from '../entities/hero';
 import {Rarity, Trigger} from '../enums/types';

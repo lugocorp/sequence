@@ -3,14 +3,14 @@
  * Its job is to generate and serve events for as long as
  * the player survives.
  */
-import ChallengeEvent from './challenge';
-import OfferingEvent from './offering';
-import ObstacleEvent from './obstacle';
-import RecruitEvent from './recruit';
-import DeathEvent from './death';
-import GiftEvent from './gift';
-import TrapEvent from './trap';
-import Random from '../random';
+import ChallengeEvent from '../views/events/challenge';
+import OfferingEvent from '../views/events/offering';
+import ObstacleEvent from '../views/events/obstacle';
+import RecruitEvent from '../views/events/recruit';
+import DeathEvent from '../views/events/death';
+import GiftEvent from '../views/events/gift';
+import TrapEvent from '../views/events/trap';
+import Random from './random';
 import View from '../graphics/view';
 import Game from '../game';
 

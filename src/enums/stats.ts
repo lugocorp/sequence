@@ -1,5 +1,5 @@
 import Unit from '../entities/unit';
-import Random from '../random';
+import Random from '../logic/random';
 
 // Handles logic for unit stats in the game
 export default class Stats {

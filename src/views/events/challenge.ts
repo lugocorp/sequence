@@ -1,10 +1,10 @@
-import GraphicsRenderer from '../graphics/renderer';
-import Challenger from '../entities/challenger';
-import Hero from '../entities/hero';
-import Stats from '../enums/stats';
-import Random from '../random';
-import View from '../graphics/view';
-import Game from '../game';
+import GraphicsRenderer from '../../graphics/renderer';
+import Challenger from '../../entities/challenger';
+import Hero from '../../entities/hero';
+import Stats from '../../enums/stats';
+import Random from '../../logic/random';
+import View from '../../graphics/view';
+import Game from '../../game';
 
 export default class ChallengeEvent extends View {
   /* private static PRELUDE         = 0;

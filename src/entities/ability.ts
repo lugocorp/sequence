@@ -1,4 +1,4 @@
-import {AbilityEffect} from '../effects';
+import {AbilityEffect} from '../enums/effects';
 
 export default class Ability {
   effect: AbilityEffect;
