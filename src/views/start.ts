@@ -1,24 +1,31 @@
 import Game from '../game';
-import Text from '../widgets/text';
 import InstructionsView from './instructions';
 import CreditsView from './credits';
-import GameView from './game';
-import View from './view';
+import View from '../graphics/view';
 
 export default class StartView extends View {
 
   constructor() {
     super();
-    this.widgets = [
-      new Text('new game', 30, 70, false, () => {
-        Game.game.view = new GameView(Game.game.chain);
-      }),
-      new Text('instructions', 20, 90, false, () => {
-        Game.game.view = new InstructionsView();
-      }),
-      new Text('credits', 30, 110, false, () => {
-        Game.game.view = new CreditsView();
-      })
+    this.actions = [
+      {
+        text: 'new game',
+        effect: () => {
+          // Game.game.view = new GameView(Game.game.chain);
+        }
+      },
+      {
+        text: 'instructions',
+        effect: () => {
+          Game.game.view = new InstructionsView();
+        }
+      },
+      {
+        text: 'credits',
+        effect: () => {
+          Game.game.view = new CreditsView();
+        }
+      }
     ];
   }
 }

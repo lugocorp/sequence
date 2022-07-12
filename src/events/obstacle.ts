@@ -1,16 +1,14 @@
 import GraphicsRenderer from '../graphics/renderer';
-import GameView from '../views/game';
 import Stats from '../enums/stats';
-import Text from '../widgets/text';
 import Random from '../random';
-import Event from './event';
+import View from '../graphics/view';
 import Game from '../game';
 
 /*
  * In this event your party is filtered by a certain stat limit.
  */
-export default class ObstacleEvent implements Event {
-  private static PRELUDE  = 0;
+export default class ObstacleEvent extends View {
+  /* private static PRELUDE  = 0;
   private static FINISHED = 1;
   private continue: Text;
   private original: number;
@@ -19,6 +17,7 @@ export default class ObstacleEvent implements Event {
   private stat: number;
 
   constructor() {
+    super();
     const that = this;
     this.minimum = Random.max(3) + 1;
     this.stat = Stats.getRandomStat();
@@ -53,5 +52,5 @@ export default class ObstacleEvent implements Event {
         2, 2);
     }
     this.continue.render(view, r);
-  }
+  } */
 }

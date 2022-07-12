@@ -1,21 +1,17 @@
 import GraphicsRenderer from '../graphics/renderer';
-import GameView from '../views/game';
 import Item from '../entities/item';
 import Hero from '../entities/hero';
 import Ability from '../entities/ability';
-import Selector from '../widgets/selector';
-import HeroWidget from '../widgets/hero';
-import Text from '../widgets/text';
 import Random from '../random';
-import Event from './event';
+import View from '../graphics/view';
 import Game from '../game';
 
 /*
  * In this event you choose a party member to receive some pre-selected gift.
  * This gift can be either an item, a beneficial ability, or a detrimental ability.
  */
-export default class OfferingEvent implements Event {
-  private static PRELUDE    = 0;
+export default class OfferingEvent extends View {
+  /* private static PRELUDE    = 0;
   private static VIEW_GIFT  = 1;
   private static VIEW_PARTY = 2;
   private static FINISHED   = 3;
@@ -28,6 +24,7 @@ export default class OfferingEvent implements Event {
   private state: number;
 
   constructor() {
+    super();
     const that = this;
     this.gift = Random.passes(0.5) ?
       Game.game.data.getRandomItem() :
@@ -98,5 +95,5 @@ export default class OfferingEvent implements Event {
       r.drawParagraph(`${(this.selector.getSelected() as Hero).name} received the gift of ${this.gift.name}.`, 0, 0);
       this.continue.render(view, r);
     }
-  }
+  } */
 }

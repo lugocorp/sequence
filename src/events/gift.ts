@@ -1,21 +1,17 @@
 import GraphicsRenderer from '../graphics/renderer';
-import GameView from '../views/game';
 import Item from '../entities/item';
 import Hero from '../entities/hero';
 import Ability from '../entities/ability';
-import Selector from '../widgets/selector';
-import HeroWidget from '../widgets/hero';
-import Text from '../widgets/text';
 import Random from '../random';
-import Event from './event';
+import View from '../graphics/view';
 import Game from '../game';
 
 /*
  * In this event you choose 1 of 3 options to bestow upon a pre-selected party member.
  * The options will be either an item, a beneficial ability, or a detrimental ability.
  */
-export default class GiftEvent implements Event {
-  private static PRELUDE         = 0;
+export default class GiftEvent extends View {
+  /* private static PRELUDE         = 0;
   private static VIEW_OPTIONS    = 1;
   private static VIEW_HERO       = 2;
   private static FINISHED        = 3;
@@ -29,6 +25,7 @@ export default class GiftEvent implements Event {
   private hero: Hero;
 
   constructor() {
+    super();
     const that = this;
     this.hero = Game.game.party.randomHero();
     this.state = GiftEvent.PRELUDE;
@@ -103,5 +100,5 @@ export default class GiftEvent implements Event {
       r.drawParagraph(`${this.hero.name} received the spirit's gift of ${(this.selector.getSelected() as Item).name}. the spirit conceals itself once more.`, 0, 0);
       this.continue.render(view, r);
     }
-  }
+  } */
 }

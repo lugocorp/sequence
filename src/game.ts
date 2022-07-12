@@ -3,9 +3,8 @@ import GraphicsLoader from './graphics/loader';
 import DataManager from './serial/manager';
 import EventChain from './events/chain';
 import Party from './entities/party';
-import LoadingView from './views/loading';
 import StartView from './views/start';
-import View from './views/view';
+import View from './graphics/view';
 
 export default class Game {
   static game: Game;
@@ -30,15 +29,16 @@ export default class Game {
     const canvas: HTMLCanvasElement = document.getElementById('canvas') as HTMLCanvasElement;
     this.renderer = new GraphicsRenderer(canvas, this.assets);
     this.renderer.setCanvasSize();
+
     // Load and setup game assets (with a loading screen)
     await this.assets.loadInitialAsset();
-    this.view = new LoadingView();
     this.invalidate();
     await this.assets.loadAssets();
     this.data.index();
     await new Promise((resolve) => {
       setTimeout(resolve, 1000);
     });
+
     // Loading has completed
     this.party.add(this.data.getRandomHero());
     this.party.add(this.data.getRandomHero());
@@ -58,6 +58,7 @@ export default class Game {
       this.chain.plan(this.chain.events[0]);
     }
     this.chain.events.splice(0, 1);
+    this.view = this.chain.latest();
     this.invalidate();
   }
 
@@ -65,7 +66,20 @@ export default class Game {
   click(x: number, y: number, down: boolean): void {
     if (this.view) {
       this.currentClick = {x, y, down};
-      this.view.click();
+      if (this.view.hasActions()) {
+        for (let a = 0; a < this.view.actions.length; a++) {
+          const action = this.view.actions[a];
+          const precoords: number[] = this.view.getActionCoords(a);
+          const coords: number[] = this.renderer.toDisplayCoords(precoords[0], precoords[1]);
+          if (this.within(action.text, coords[0], coords[1])) {
+            action.effect();
+            break;
+          }
+        }
+      }
+      if (this.view.hasOptions()) {
+        // Handle clicks for the arrows
+      }
       this.invalidate();
     }
   }

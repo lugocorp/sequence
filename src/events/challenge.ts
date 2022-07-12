@@ -1,17 +1,13 @@
 import GraphicsRenderer from '../graphics/renderer';
-import GameView from '../views/game';
-import Selector from '../widgets/selector';
-import HeroWidget from '../widgets/hero';
-import Text from '../widgets/text';
 import Challenger from '../entities/challenger';
 import Hero from '../entities/hero';
 import Stats from '../enums/stats';
 import Random from '../random';
-import Event from './event';
+import View from '../graphics/view';
 import Game from '../game';
 
-export default class ChallengeEvent implements Event {
-  private static PRELUDE         = 0;
+export default class ChallengeEvent extends View {
+  /* private static PRELUDE         = 0;
   private static VIEW_CHALLENGER = 1;
   private static VIEW_PARTY      = 2;
   private static FINISHED        = 3;
@@ -26,6 +22,7 @@ export default class ChallengeEvent implements Event {
   private continue: Text;
 
   constructor() {
+    super();
     const that = this;
     this.state = ChallengeEvent.PRELUDE;
     this.challenger = Game.game.data.getRandomChallenger();
@@ -113,5 +110,5 @@ export default class ChallengeEvent implements Event {
       r.drawParagraph(message, 2, 2);
       this.continue.render(view, r);
     }
-  }
+  } */
 }

@@ -1,17 +1,13 @@
 import GraphicsRenderer from '../graphics/renderer';
-import GameView from '../views/game';
 import Hero from '../entities/hero';
-import Selector from '../widgets/selector';
-import HeroWidget from '../widgets/hero';
-import Text from '../widgets/text';
-import Event from './event';
+import View from '../graphics/view';
 import Game from '../game';
 
 /*
  * In this event you choose a party member to leave behind.
  */
-export default class TrapEvent implements Event {
-  static PRELUDE    = 0;
+export default class TrapEvent extends View {
+  /* static PRELUDE    = 0;
   static VIEW_PARTY = 1;
   static FINISHED   = 2;
   private heroViewer: HeroWidget;
@@ -21,6 +17,7 @@ export default class TrapEvent implements Event {
   private state: number;
 
   constructor() {
+    super();
     const that = this;
     this.state = TrapEvent.PRELUDE;
     this.heroViewer = new HeroWidget();
@@ -71,5 +68,5 @@ export default class TrapEvent implements Event {
       r.drawParagraph(`${this.selected.name} was let go from your party.`, 0, 0);
       this.continue.render(view, r);
     }
-  }
+  } */
 }

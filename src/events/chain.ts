@@ -11,16 +11,16 @@ import DeathEvent from './death';
 import GiftEvent from './gift';
 import TrapEvent from './trap';
 import Random from '../random';
-import Event from './event';
+import View from '../graphics/view';
 import Game from '../game';
 
 export default class EventChain {
-  events: Event[] = [];
+  events: View[] = [];
 
   /*
    * This function returns the current event in the sequence.
    */
-  latest(): Event {
+  latest(): View {
     if (!Game.game.party.length()) {
       return new DeathEvent();
     }
@@ -35,7 +35,7 @@ export default class EventChain {
    * It's the core algorithm that runs the game, and it basically
    * determines difficulty.
    */
-  plan(previous: Event): void {
+  plan(previous: View): void {
     if (!previous) {
       this.events.push(new ChallengeEvent());
       return;

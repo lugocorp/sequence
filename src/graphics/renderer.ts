@@ -5,12 +5,14 @@
 import Sprites from '../enums/sprites';
 import DrawCoords from './draw-coords';
 import GraphicsLoader from './loader';
-import View from '../views/view';
+import View from './view';
 import Game from '../game';
 
 export default class GraphicsRenderer {
-  static WIDTH = 100;
+  static WIDTH = 124;
   static HEIGHT = 200;
+  static TEXT_WIDTH = 24;
+  static TEXT_HEIGHT = 12;
   ctx: CanvasRenderingContext2D;
   canvas: HTMLCanvasElement;
   assets: GraphicsLoader;
@@ -45,7 +47,31 @@ export default class GraphicsRenderer {
    */
   frame(view: View): void {
     this.ctx.clearRect(0, 0, GraphicsRenderer.WIDTH, GraphicsRenderer.HEIGHT);
-    view.frame(this);
+    if (!view) {
+      this.drawSprite(Sprites.LOADING, 25, 96);
+      return;
+    }
+    if (view.image) {
+      this.drawSprite(view.image, 12, 0);
+    }
+    if (view.text) {
+      this.drawText(view.text, 0, 0);
+    }
+    if (view.hasOptions()) {
+      // Draw option arrows
+    }
+    if (view.hasActions()) {
+      // Draw action borders
+      for (let a = 0; a < view.actions.length; a++) {
+        const action = view.actions[a];
+        const coords: number[] = view.getActionCoords(a);
+        this.drawText(action.text, coords[0], coords[1]);
+      }
+    }
+  }
+
+  toDisplayCoords(x: number, y: number): number[] {
+    return [(x * 5) + 2, (y * 8) + 102];
   }
 
   /*
@@ -54,6 +80,47 @@ export default class GraphicsRenderer {
   drawSprite(id: number, x: number, y: number): void {
     const c: DrawCoords = this.assets.getSprite(id);
     this.ctx.drawImage(c.src, c.left, c.top, c.width, c.height, x, y, c.width, c.height);
+  }
+
+  /*
+   * This method is like drawText but for numerical values
+   */
+  drawNumber(msg: number, x:number, y: number): void {
+    this.drawText(`${msg}`, x, y);
+  }
+
+  /*
+   * This method draws some text using the custom in-game font.
+   * x and y are given in units of text glyph position
+   */
+  drawText(msg: string, x: number, y: number, clickable = false): void {
+    x = this.toDisplayCoords(x, y)[0];
+    y = this.toDisplayCoords(x, y)[1];
+    const highlight = clickable &&
+      Game.game.currentClick.down &&
+      Game.game.currentClick.x >= x &&
+      Game.game.currentClick.y >= y &&
+      Game.game.currentClick.x <= x + (msg.length * 5) &&
+      Game.game.currentClick.y <= y + 8;
+    if (highlight) {
+      this.ctx.fillStyle = 'white';
+      this.ctx.fillRect(x, y, 5 * msg.length, 8);
+      this.ctx.fillStyle = 'black';
+    }
+    let dx = 0;
+    for (let a = 0; a < msg.length; a++) {
+      if (msg[a] === '\n') {
+        y += 8;
+        dx = 0;
+      } else {
+        if (msg[a] !== ' ') {
+          const glyph: Sprites = this.getGlyph(msg[a]);
+          const c: DrawCoords = this.assets.getSprite(glyph);
+          this.ctx.drawImage(c.src, c.left, c.top, c.width, c.height, x + (dx * c.width), y, c.width, c.height);
+        }
+        dx++;
+      }
+    }
   }
 
   /*
@@ -83,54 +150,5 @@ export default class GraphicsRenderer {
       case '%': return Sprites.PERCENT;
     }
     throw new Error(`No font glyph for character '${char}'`);
-  }
-
-  /*
-   * This method draws some text using the custom in-game font.
-   */
-  drawText(msg: string, x: number, y: number, clickable = false): void {
-    const highlight = clickable &&
-      Game.game.currentClick.down &&
-      Game.game.currentClick.x >= x &&
-      Game.game.currentClick.y >= y &&
-      Game.game.currentClick.x <= x + (msg.length * 5) &&
-      Game.game.currentClick.y <= y + 8;
-    if (highlight) {
-      this.ctx.fillStyle = 'white';
-      this.ctx.fillRect(x, y, 5 * msg.length, 8);
-      this.ctx.fillStyle = 'black';
-    }
-    for (let a = 0; a < msg.length; a++) {
-      if (msg[a] !== ' ') {
-        const glyph: Sprites = this.getGlyph(msg[a]);
-        const c: DrawCoords = this.assets.getSprite(glyph);
-        this.ctx.drawImage(c.src, c.left, c.top, c.width, c.height, x + (a * c.width), y, c.width, c.height);
-      }
-    }
-  }
-
-  /*
-   * This method is like drawText but for numerical values
-   */
-  drawNumber(msg: number, x:number, y: number): void {
-    this.drawText(`${msg}`, x, y);
-  }
-
-  /*
-   * This method invokes drawText to render long text in a
-   * word-wrapped format.
-   */
-  drawParagraph(msg: string, x: number, y: number, max = 19): void {
-    const words: string[] = msg.split(' ');
-    let line: string = words.splice(0, 1)[0];
-    let index = 0;
-    while (line.length) {
-      while (words.length && line.length + words[0].length + 1 <= max) {
-        line = `${line} ${words.splice(0, 1)[0]}`;
-      }
-      this.drawText(line, x, y + (index * 8));
-      line = words.length ? words.splice(0, 1)[0]: '';
-      index++;
-    }
   }
 }

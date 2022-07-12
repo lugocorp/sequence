@@ -1,18 +1,14 @@
 import GraphicsRenderer from '../graphics/renderer';
-import GameView from '../views/game';
 import Party from '../entities/party';
 import Hero from '../entities/hero';
-import Selector from '../widgets/selector';
-import HeroWidget from '../widgets/hero';
-import Text from '../widgets/text';
-import Event from './event';
+import View from '../graphics/view';
 import Game from '../game';
 
 /*
  * In this event you choose a new party member.
  */
-export default class RecruitEvent implements Event {
-  private static PRELUDE       = 0;
+export default class RecruitEvent extends View {
+  /* private static PRELUDE       = 0;
   private static VIEW_RECRUITS = 1;
   private static VIEW_PARTY    = 2;
   private static PLEASE_REMOVE = 3;
@@ -30,6 +26,7 @@ export default class RecruitEvent implements Event {
   private state: number;
 
   constructor() {
+    super();
     const that = this;
     this.recruits = [
       Game.game.data.getRandomHero(),
@@ -145,5 +142,5 @@ export default class RecruitEvent implements Event {
         this.viewRecruits.render(view, r);
       }
     }
-  }
+  } */
 }

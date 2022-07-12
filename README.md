@@ -61,7 +61,7 @@ We have a number of `npm` commands:
 - [x] Research and ask cultural consultants to help come up with character concepts, double check core gameplay
 
 #### Beta Build
-- [ ] Lock down art style and UI
+- [x] Lock down art style and UI
 - [ ] Rewrite UI as needed and make everything line up in a pretty way
 - [ ] Add new events and systems
 - [ ] Add consultants into the game credits
