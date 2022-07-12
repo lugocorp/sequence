@@ -7,7 +7,8 @@ import Game from '../game';
 export default class CreditsView extends View {
 
   constructor() {
-    super(
+    super();
+    this.set(
       Sprites.DIRE_CRAB,
       [
         '-programming-',

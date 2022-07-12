@@ -8,7 +8,8 @@ import Game from '../game';
 export default class InstructionsView extends View {
 
   constructor() {
-    super(
+    super();
+    this.set(
       Sprites.DIRE_CRAB,
       [
         'this is a role playing game.',

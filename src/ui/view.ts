@@ -1,6 +1,7 @@
 import {TEXT_H} from '../enums/values';
 import Selector from './selector';
 import Action from './action';
+import Game from '../game';
 
 export default class View {
   private text: string;
@@ -8,10 +9,15 @@ export default class View {
   actions: Action[];
   image: number;
 
-  constructor(image: number, text = '', actions?: Action[]) {
-    this.actions = actions || [];
+  // Sets all the important values of this View
+  set(image: number, text: string, actions: Action[], selector: Selector<any> = undefined): void {
     this.image = image;
     this.setText(text);
+    this.actions = actions;
+    this.selector = selector;
+    if (this.selector) {
+      this.selector.invalidate();
+    }
   }
 
   // Returns true if this view has options

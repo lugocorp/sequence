@@ -8,7 +8,8 @@ import Game from '../../game';
 export default class DeathEvent extends View {
 
   constructor() {
-    super(Sprites.DIRE_CRAB, 'your party did not make it', [
+    super();
+    this.set(Sprites.DIRE_CRAB, 'your party did not make it', [
       new Action('continue', () => Game.setView(new StartView()))
     ]);
   }
