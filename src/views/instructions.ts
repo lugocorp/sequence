@@ -9,8 +9,8 @@ export default class InstructionsView extends View {
 
   constructor() {
     super();
-    this.set(
-      Sprites.DIRE_CRAB,
+    this.setDetails(
+      Sprites.INSTRUCTIONS,
       [
         'this is a role playing game.',
         'all you have to do is make choices for your party.',

@@ -1,4 +1,4 @@
-import {GLYPH_W, GLYPH_H} from './enums/values';
+import {WGLYPH, HGLYPH} from './enums/values';
 import GraphicsRenderer from './graphics/renderer';
 import GraphicsLoader from './graphics/loader';
 import DataManager from './serial/manager';
@@ -75,8 +75,8 @@ export default class Game {
       if (this.view.hasActions()) {
         for (let a = 0; a < this.view.actions.length; a++) {
           const action = this.view.actions[a];
-          const precoords: number[] = this.view.getActionCoords(a);
-          const coords: number[] = this.renderer.toDisplayCoords(precoords[0], precoords[1]);
+          const actionCoords: number[] = this.view.getActionCoords(a);
+          const coords: number[] = this.renderer.toDisplayCoords(actionCoords[0], actionCoords[1]);
           if (this.within(action.label, coords[0], coords[1])) {
             action.effect();
             break;
@@ -102,7 +102,7 @@ export default class Game {
     return this.currentClick.down === down &&
       this.currentClick.x >= x &&
       this.currentClick.y >= y &&
-      this.currentClick.x <= x + (msg.length * GLYPH_W) &&
-      this.currentClick.y <= y + GLYPH_H;
+      this.currentClick.x <= x + (msg.length * WGLYPH) &&
+      this.currentClick.y <= y + HGLYPH;
   }
 }

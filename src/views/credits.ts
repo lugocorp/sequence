@@ -8,8 +8,8 @@ export default class CreditsView extends View {
 
   constructor() {
     super();
-    this.set(
-      Sprites.DIRE_CRAB,
+    this.setDetails(
+      Sprites.CREDITS,
       [
         '-programming-',
         'alex lugo',

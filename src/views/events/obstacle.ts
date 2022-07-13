@@ -20,8 +20,8 @@ export default class ObstacleEvent extends View {
     this.stat = Stats.getRandomStat();
     this.minimum = Random.max(3) + 1;
     const that = this;
-    this.set(
-      Sprites.DIRE_CRAB,
+    this.setDetails(
+      Sprites.OBSTACLE,
       `your party comes across a natural obstacle. only travelers with ${this.minimum} ${Stats.getStatName(this.stat)} or more may pass.`,
       [ new Action('continue', () => that.finish()) ]
     );
@@ -30,8 +30,8 @@ export default class ObstacleEvent extends View {
   finish(): void {
     const size: number = Game.game.party.length();
     Game.game.party.filter(this.stat, this.minimum);
-    this.set(
-      Sprites.DIRE_CRAB,
+    this.setDetails(
+      Sprites.OBSTACLE,
       size ?
         size === this.original ?
           'all party members passed the obstacle.' :

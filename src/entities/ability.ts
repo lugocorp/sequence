@@ -10,4 +10,8 @@ export default class Ability {
     this.effect = effect;
     this.name = name;
   }
+
+  descriptionText(): string {
+    return `${this.name}\n${this.description}`;
+  }
 }

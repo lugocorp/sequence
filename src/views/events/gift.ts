@@ -36,8 +36,8 @@ export default class GiftEvent extends View {
     const that = this;
     this.giftSelector = Selector.giftSelector(this.options);
     this.heroSelector = Selector.heroSelector([this.hero]);
-    this.set(
-      Sprites.DIRE_CRAB,
+    this.setDetails(
+      Sprites.SPIRIT,
       `a spirit reveals itself to ${this.hero.name}. it comes bearing a gift of your choosing.`,
       [ new Action('continue', () => that.chooseGift()) ]
     );
@@ -45,31 +45,23 @@ export default class GiftEvent extends View {
 
   chooseGift(): void {
     const that = this;
-    this.set(
-      Sprites.DIRE_CRAB,
-      '',
-      [
-        new Action('view member', () => that.viewHero()),
-        new Action('choose', () => that.finish())
-      ],
-      this.giftSelector
-    );
+    this.setSelector(this.giftSelector, [
+      new Action('view member', () => that.viewHero()),
+      new Action('choose', () => that.finish())
+    ]);
   }
 
   viewHero(): void {
     const that = this;
-    this.set(
-      Sprites.DIRE_CRAB,
-      '',
-      [ new Action('view gifts', () => that.chooseGift()) ],
-      this.heroSelector
-    );
+    this.setSelector(this.heroSelector,[
+      new Action('view gifts', () => that.chooseGift())
+    ]);
   }
 
   finish(): void {
     const gift: Item | Ability = this.giftSelector.item();
     this.hero.receive(gift);
-    this.set(
+    this.setDetails(
       this.hero.sprite,
       `${this.hero.name} received the spirit's gift of ${gift.name}. the spirit conceals itself once more.`,
       [ new Action('continue', () => Game.game.progress()) ]

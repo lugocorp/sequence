@@ -3,10 +3,10 @@
 export const WIDTH = 124;
 export const HEIGHT = 200;
 
-// The size of either dimension in text coordinates
-export const TEXT_W = 24;
-export const TEXT_H = 12;
-
 // The display size of a single glyph
-export const GLYPH_W = 5;
-export const GLYPH_H = 8;
+export const WGLYPH = 5;
+export const HGLYPH = 8;
+
+// The size of either dimension in text coordinates
+export const WTEXT = 120 / WGLYPH; // 24
+export const HTEXT = 96 / HGLYPH;  // 12

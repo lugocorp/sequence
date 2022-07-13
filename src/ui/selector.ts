@@ -1,3 +1,4 @@
+import Sprites from '../enums/sprites';
 import Ability from '../entities/ability';
 import Item from '../entities/item';
 import Hero from '../entities/hero';
@@ -31,7 +32,7 @@ export default class Selector<T> {
   static heroSelector(data: Hero[], select?: (hero: Hero) => void): Selector<Hero> {
     return new Selector<Hero>(data, (view: View, hero: Hero): void => {
       view.image = hero.sprite;
-      view.setText(hero.name);
+      view.setText(`${data.indexOf(hero) + 1}/${data.length} ${hero.descriptionText()}`);
       if (select) {
         select(hero);
       }
@@ -41,7 +42,8 @@ export default class Selector<T> {
   // A built-in Item or Ability viewing selector
   static giftSelector(data: (Item | Ability)[], select?: (gift: Item | Ability) => void): Selector<Item | Ability> {
     return new Selector<Item | Ability>(data, (view: View, gift: Item | Ability): void => {
-      view.setText(gift.name);
+      view.image = Sprites.NONE;
+      view.setText(`${data.indexOf(gift) + 1}/${data.length} ${gift.descriptionText()}`);
       if (select) {
         select(gift);
       }

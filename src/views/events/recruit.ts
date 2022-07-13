@@ -25,54 +25,44 @@ export default class RecruitEvent extends View {
     ];
     this.memberSelector = Selector.heroSelector(Game.game.party.members);
     this.recruitSelector = Selector.heroSelector(this.recruits);
-    this.set(Sprites.DIRE_CRAB, 'you choose a new party member to recruit.', [
+    this.setDetails(this.recruits[0].sprite, 'you choose a new party member to recruit.', [
       new Action('continue', () => that.viewRecruits())
     ]);
   }
 
   viewRecruits(): void {
     const that = this;
-    this.set(
-      Sprites.DIRE_CRAB,
-      '',
-      [
-        new Action('choose', () => {
-          if (Game.game.party.isFull()) {
-            that.pleaseRemove();
-          } else {
-            that.finished();
-          }
-        }),
-        new Action('view party', () => that.viewParty())
-      ],
-      this.recruitSelector
-    );
+    this.setSelector(this.recruitSelector, [
+      new Action('choose', () => {
+        if (Game.game.party.isFull()) {
+          that.pleaseRemove();
+        } else {
+          that.finished();
+        }
+      }),
+      new Action('view party', () => that.viewParty())
+    ]);
   }
 
   viewParty(): void {
     const that = this;
-    this.set(
-      Sprites.DIRE_CRAB,
-      '',
-      [ new Action('back', () => that.viewRecruits()) ],
-      this.memberSelector
-    );
+    this.setSelector(this.memberSelector, [
+      new Action('back', () => that.viewRecruits())
+    ]);
   }
 
   pleaseRemove(): void {
     const that = this;
-    this.set(Sprites.DIRE_CRAB, 'your party is full. please remove an existing member.', [
+    this.setDetails(this.recruitSelector.item().sprite, 'your party is full. please remove an existing member.', [
       new Action('continue', () => that.removeMember())
     ]);
   }
 
   removeMember(): void {
     const that = this;
-    this.set(
-      Sprites.DIRE_CRAB, '',
-      [ new Action('choose', () => that.finished()) ],
-      this.memberSelector
-    );
+    this.setSelector(this.memberSelector, [
+      new Action('choose', () => that.finished())
+    ]);
   }
 
   finished(): void {
@@ -85,7 +75,7 @@ export default class RecruitEvent extends View {
       Game.game.party.remove(member);
     }
     Game.game.party.add(recruit);
-    this.set(Sprites.DIRE_CRAB, text, [
+    this.setDetails(recruit.sprite, text, [
       new Action('continue', () => Game.game.progress())
     ]);
   }

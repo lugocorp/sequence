@@ -24,8 +24,8 @@ export default class OfferingEvent extends View {
     this.gift = Random.passes(0.5) ?
       Game.game.data.getRandomItem() :
       Game.game.data.getRandomAbility();
-    this.set(
-      Sprites.DIRE_CRAB,
+    this.setDetails(
+      Sprites.SPIRIT,
       `a spirit offers a gift of ${this.gift.name} to your party. only one member may accept it.`,
       [ new Action('continue', () => that.viewGift()) ]
     );
@@ -33,27 +33,22 @@ export default class OfferingEvent extends View {
 
   viewGift(): void {
     const that = this;
-    this.set(Sprites.DIRE_CRAB, this.gift.name, [
+    this.setDetails(Sprites.GIFT, this.gift.name, [
       new Action('view party', () => that.viewParty())
     ]);
   }
 
   viewParty(): void {
     const that = this;
-    this.set(
-      Sprites.DIRE_CRAB,
-      '',
-      [
-        new Action('view gift', () => that.viewGift()),
-        new Action('choose', () => that.finish())
-      ],
-      this.heroSelector
-    );
+    this.setSelector(this.heroSelector, [
+      new Action('view gift', () => that.viewGift()),
+      new Action('choose', () => that.finish())
+    ]);
   }
 
   finish(): void {
     const hero: Hero = this.heroSelector.item();
-    this.set(Sprites.DIRE_CRAB, `${hero.name} was given ${this.gift.name}`, [
+    this.setDetails(hero.sprite, `${hero.name} was given ${this.gift.name}`, [
       new Action('continue', () => Game.game.progress())
     ]);
   }

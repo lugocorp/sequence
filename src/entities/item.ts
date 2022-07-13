@@ -12,4 +12,8 @@ export default class Item {
     this.rarity = rarity;
     this.name = name;
   }
+
+  descriptionText(): string {
+    return `${this.name}\n${this.description}`;
+  }
 }

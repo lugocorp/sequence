@@ -1,4 +1,5 @@
-import {TEXT_H} from '../enums/values';
+import {WTEXT, HTEXT} from '../enums/values';
+import Sprites from '../enums/sprites';
 import Selector from './selector';
 import Action from './action';
 import Game from '../game';
@@ -10,14 +11,18 @@ export default class View {
   image: number;
 
   // Sets all the important values of this View
-  set(image: number, text: string, actions: Action[], selector: Selector<any> = undefined): void {
+  setDetails(image: number, text: string, actions: Action[]): void {
     this.image = image;
     this.setText(text);
     this.actions = actions;
+    this.selector = undefined;
+  }
+
+  // Sets details consistent with a selector view
+  setSelector(selector: Selector<any>, actions: Action[]): void {
+    this.setDetails(Sprites.NONE, '', actions);
     this.selector = selector;
-    if (this.selector) {
-      this.selector.invalidate();
-    }
+    this.selector.invalidate();
   }
 
   // Returns true if this view has options
@@ -32,7 +37,7 @@ export default class View {
 
   // Returns the text coordinates of the indexed action
   getActionCoords(index: number): number[] {
-    return [1, TEXT_H - (this.actions.length - index + 1)];
+    return [1, HTEXT - (this.actions.length - index + 1)];
   }
 
   // Sets a single action for this View
@@ -49,11 +54,11 @@ export default class View {
 
   // Formats text wrap according to the screen constraints
   setText(msg: string): void {
-    const words: string[] = msg.split(' ');
+    const words: string[] = msg.replace(/\n/g, '\n ').split(' ');
     let line: string = words.shift();
     let text = '';
     while (line.length) {
-      while (words.length && line.length + words[0].length + 1 <= 24) {
+      while (words.length && line.length + words[0].length + 1 <= WTEXT) {
         if (line[line.length - 1] === '\n') {
           break;
         }
@@ -65,6 +70,6 @@ export default class View {
       text += line;
       line = words.length ? words.shift(): '';
     }
-    this.text = text;
+    this.text = text.replace(/\t/g, ' ');
   }
 }

@@ -23,8 +23,8 @@ export default class ChallengeEvent extends View {
     if (Random.passes(0.5)) {
       this.expectation.push(((Random.passes(0.5) ? 1 : -1) + this.expectation[0] + Stats.N) % Stats.N);
     }
-    this.set(
-      Sprites.DIRE_CRAB,
+    this.setDetails(
+      this.challenger.sprite,
       'your party comes across a spirit who offers a challenge.' +
       ((this.expectation.length === 1) ?
         `this will be a test of ${Stats.getStatName(this.expectation[0])}.` :
@@ -35,29 +35,24 @@ export default class ChallengeEvent extends View {
 
   viewChallenger(): void {
     const that = this;
-    this.set(this.challenger.sprite, this.challenger.name, [
+    this.setDetails(this.challenger.sprite, this.challenger.name, [
       new Action('view party', () => that.viewParty())
     ]);
   }
 
   viewParty(): void {
     const that = this;
-    this.set(
-      Sprites.DIRE_CRAB,
-      '',
-      [
-        new Action('view spirit', () => that.viewChallenger()),
-        new Action('choose', () => that.finish())
-      ],
-      this.heroSelector
-    );
+    this.setSelector(this.heroSelector, [
+      new Action('view spirit', () => that.viewChallenger()),
+      new Action('choose', () => that.finish())
+    ]);
   }
 
   finish(): void {
     const hero: Hero = this.heroSelector.item();
     const result: boolean = this.playerOvercomesChallenge(hero, this.challenger);
-    this.set(
-      Sprites.DIRE_CRAB,
+    this.setDetails(
+      hero.sprite,
       result ?
         `${hero.name} overcame the spirit's challenge!` :
         `${hero.name} did not succeed in the spirit's challenge.`,
