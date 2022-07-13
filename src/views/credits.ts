@@ -18,7 +18,7 @@ export default class CreditsView extends View {
         '-pixel art-',
         'alex lugo',
         'alexlugo.net'
-      ].join('\n '),
+      ].join('\n'),
       [
         new Action('back', () => Game.setView(new StartView()))
       ]

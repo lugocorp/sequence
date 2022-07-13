@@ -32,7 +32,7 @@ export default class OfferingEvent extends View {
 
   viewGift(): void {
     const that = this;
-    this.setDetails(Sprites.GIFT, this.gift.name, [
+    this.setDetails(Sprites.GIFT, this.gift.descriptionText(), [
       new Action('view party', () => that.viewParty())
     ]);
   }
@@ -47,6 +47,7 @@ export default class OfferingEvent extends View {
 
   finish(): void {
     const hero: Hero = this.heroSelector.item();
+    hero.receive(this.gift);
     this.setDetails(hero.sprite, `${hero.name} was given ${this.gift.name}`, [
       new Action('continue', () => Game.game.progress())
     ]);

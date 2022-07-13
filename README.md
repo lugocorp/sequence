@@ -63,10 +63,10 @@ We have a number of `npm` commands:
 #### Beta Build
 - [x] Lock down art style and UI
 - [x] Rewrite UI as needed and make everything line up in a pretty way
+- [x] Clean up all events
 - [ ] Add new events and systems
 - [ ] Add consultants into the game credits
 - [ ] Add sounds into the game (just to accentuate certain events)
-- [ ] Clean up all events
 - [ ] Code the event progression algorithm
 - [ ] Draw some beta sprites
 - [ ] Add content for beta

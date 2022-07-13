@@ -1,4 +1,3 @@
-import {WGLYPH, HGLYPH} from './enums/values';
 import GraphicsRenderer from './graphics/renderer';
 import GraphicsLoader from './graphics/loader';
 import DataManager from './serial/manager';
@@ -99,10 +98,11 @@ export default class Game {
 
   // Returns true if the current click happened inside this text
   within(msg: string, x: number, y: number, down = false): boolean {
+    const bounds = this.renderer.getTextBounds(msg);
     return this.currentClick.down === down &&
       this.currentClick.x >= x &&
       this.currentClick.y >= y &&
-      this.currentClick.x <= x + (msg.length * WGLYPH) &&
-      this.currentClick.y <= y + HGLYPH;
+      this.currentClick.x <= x + bounds[0] &&
+      this.currentClick.y <= y + bounds[1];
   }
 }

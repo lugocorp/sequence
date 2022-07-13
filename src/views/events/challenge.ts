@@ -23,17 +23,20 @@ export default class ChallengeEvent extends View {
     }
     this.setDetails(
       this.challenger.sprite,
-      'your party comes across a spirit who offers a challenge.' +
-      ((this.expectation.length === 1) ?
-        `this will be a test of ${Stats.getStatName(this.expectation[0])}.` :
-        `this will be a test of ${Stats.getStatName(this.expectation[0])} and ${Stats.getStatName(this.expectation[1])}.`),
+      `your party comes across a spirit who offers a challenge. this will be ${this.getTestText()}.`,
       [ new Action('continue', () => that.viewChallenger()) ]
     );
   }
 
+  getTestText(): string {
+    return `a test of ${Stats.getStatName(this.expectation[0])}` +
+      ((this.expectation.length > 1) ? ` and ${Stats.getStatName(this.expectation[1])}` : '');
+  }
+
   viewChallenger(): void {
     const that = this;
-    this.setDetails(this.challenger.sprite, this.challenger.name, [
+    const text = `${this.challenger.name}\nchallenges you to ${this.getTestText()}`;
+    this.setDetails(this.challenger.sprite, text, [
       new Action('view party', () => that.viewParty())
     ]);
   }

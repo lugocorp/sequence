@@ -106,6 +106,18 @@ export default class GraphicsRenderer {
     this.ctx.drawImage(c.src, c.left, c.top, c.width, c.height, x, y, c.width, c.height);
   }
 
+  // Returns the bounds of some text
+  getTextBounds(msg: string): number[] {
+    const lines: string[] = msg.split('\n');
+    if (!lines[lines.length - 1].length) {
+      lines.pop();
+    }
+    return [
+      lines.reduce((acc: number, x: string) => Math.max(acc, x.length), 0) * WGLYPH,
+      lines.length * HGLYPH
+    ];
+  }
+
   /*
    * This method draws some text using the custom in-game font.
    * x and y are given in units of text glyph position
@@ -113,26 +125,28 @@ export default class GraphicsRenderer {
   drawText(msg: string, tx: number, ty: number, clickable = false): void {
     const coords = this.toDisplayCoords(tx, ty);
     const x = coords[0];
-    let y = coords[1];
+    const y = coords[1];
     const highlight = clickable && Game.game.within(msg, x, y, true);
     let dx = 0;
+    let dy = 0;
     for (let a = 0; a < msg.length; a++) {
       if (msg[a] === '\n') {
-        y += HGLYPH;
         dx = 0;
+        dy++;
       } else {
         if (msg[a] !== ' ') {
           const glyph: Sprites = this.getGlyph(msg[a]);
           const c: DrawCoords = this.assets.getSprite(glyph);
-          this.ctx.drawImage(c.src, c.left, c.top, c.width, c.height, x + (dx * c.width), y, c.width, c.height);
+          this.ctx.drawImage(c.src, c.left, c.top, WGLYPH, HGLYPH, x + (dx * WGLYPH), y + (dy * HGLYPH), WGLYPH, HGLYPH);
         }
         dx++;
       }
     }
     if (highlight) {
+      const bounds: number[] = this.getTextBounds(msg);
       this.ctx.fillStyle = '#dcd36a';
       this.ctx.globalCompositeOperation = 'source-atop';
-      this.ctx.fillRect(x, y, WGLYPH * msg.length, HGLYPH);
+      this.ctx.fillRect(x, y, bounds[0], bounds[1]);
       this.ctx.globalCompositeOperation = 'source-over';
       this.ctx.fillStyle = 'black';
     }

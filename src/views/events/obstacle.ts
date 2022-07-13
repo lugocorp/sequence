@@ -27,14 +27,14 @@ export default class ObstacleEvent extends View {
   }
 
   finish(): void {
-    const size: number = Game.game.party.length();
     Game.game.party.filter(this.stat, this.minimum);
+    const size: number = Game.game.party.length();
     this.setDetails(
       Sprites.OBSTACLE,
       size ?
-        size === this.original ?
+        (size === this.original ?
           'all party members passed the obstacle.' :
-          `only ${size} party members made it past the obstacle.` :
+          `only ${size} party members made it past the obstacle.`) :
         'no one in your party could pass the obstacle.',
       [ new Action('continue', () => Game.game.progress()) ]
     );
