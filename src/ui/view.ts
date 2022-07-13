@@ -2,7 +2,6 @@ import {WTEXT, HTEXT} from '../enums/values';
 import Sprites from '../enums/sprites';
 import Selector from './selector';
 import Action from './action';
-import Game from '../game';
 
 export default class View {
   private text: string;

@@ -1,4 +1,3 @@
-import GraphicsRenderer from '../../graphics/renderer';
 import Sprites from '../../enums/sprites';
 import Stats from '../../enums/stats';
 import Random from '../../logic/random';

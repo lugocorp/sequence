@@ -112,7 +112,7 @@ export default class GraphicsRenderer {
    */
   drawText(msg: string, tx: number, ty: number, clickable = false): void {
     const coords = this.toDisplayCoords(tx, ty);
-    let x = coords[0];
+    const x = coords[0];
     let y = coords[1];
     const highlight = clickable && Game.game.within(msg, x, y, true);
     let dx = 0;

@@ -1,4 +1,3 @@
-import GraphicsRenderer from '../../graphics/renderer';
 import Sprites from '../../enums/sprites';
 import Hero from '../../entities/hero';
 import Selector from '../../ui/selector';

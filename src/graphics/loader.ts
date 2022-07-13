@@ -5,7 +5,6 @@
  */
 import Sprites from '../enums/sprites';
 import { WGLYPH, HGLYPH } from '../enums/values';
-import GraphicsRenderer from './renderer';
 import DrawCoords from './draw-coords';
 
 export default class GraphicsLoader {

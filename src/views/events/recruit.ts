@@ -1,6 +1,3 @@
-import Sprites from '../../enums/sprites';
-import GraphicsRenderer from '../../graphics/renderer';
-import Party from '../../entities/party';
 import Hero from '../../entities/hero';
 import Selector from '../../ui/selector';
 import Action from '../../ui/action';
@@ -66,7 +63,6 @@ export default class RecruitEvent extends View {
   }
 
   finished(): void {
-    const that = this;
     const recruit: Hero = this.recruitSelector.item();
     let text = `welcome ${recruit.name} to your party!`;
     if (Game.game.party.isFull()) {

@@ -1,5 +1,3 @@
-import Sprites from '../../enums/sprites';
-import GraphicsRenderer from '../../graphics/renderer';
 import Challenger from '../../entities/challenger';
 import Hero from '../../entities/hero';
 import Stats from '../../enums/stats';

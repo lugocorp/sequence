@@ -1,4 +1,3 @@
-import GraphicsRenderer from '../../graphics/renderer';
 import StartView from '../../views/start';
 import Sprites from '../../enums/sprites';
 import Action from '../../ui/action';

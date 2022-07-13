@@ -1,5 +1,4 @@
 import Sprites from '../../enums/sprites';
-import GraphicsRenderer from '../../graphics/renderer';
 import Item from '../../entities/item';
 import Hero from '../../entities/hero';
 import Ability from '../../entities/ability';
