@@ -8,11 +8,15 @@ import OfferingEvent from '../views/events/offering';
 import ObstacleEvent from '../views/events/obstacle';
 import RecruitEvent from '../views/events/recruit';
 import WeatherEvent from '../views/events/weather';
+import ProjectEvent from '../views/events/project';
 import DeathEvent from '../views/events/death';
 import BeginEvent from '../views/events/begin';
+import DreamEvent from '../views/events/dream';
+import TradeEvent from '../views/events/trade';
 import GiftEvent from '../views/events/gift';
 import TrapEvent from '../views/events/trap';
 import FutureEvent from './future';
+import {Time} from '../enums/world';
 import Random from './random';
 import View from '../ui/view';
 import Game from '../game';
@@ -42,11 +46,6 @@ export default class EventChain {
    * determines difficulty.
    */
   plan(previous: View): void {
-    if (!previous) {
-      this.events.push(new ChallengeEvent());
-      return;
-    }
-
     // Tick future events and push if they're ready
     let a = 0;
     while (a < this.futures.length) {
@@ -61,15 +60,29 @@ export default class EventChain {
       }
     }
 
+    // Time-specific rolls
+    if (Game.game.world.time === Time.NIGHT) {
+      const event: () => View = Random.weighted([
+        [95, undefined],
+        [5,  (): View => new DreamEvent()]
+      ]);
+      if (event) {
+        this.events.push(event());
+        return;
+      }
+    }
+
     // Basic event roll
-    this.events.push(Random.weightedList([
-      [40, () => new ChallengeEvent()],
-      [20, () => new OfferingEvent()],
-      [15, () => new GiftEvent()],
-      [10, () => new WeatherEvent()],
-      [5,  () => new ObstacleEvent()],
-      [5,  () => new RecruitEvent()],
-      [5,  () => new TrapEvent()]
+    this.events.push(Random.weighted([
+      [40, (): View => new ChallengeEvent()],
+      [18, (): View => new WeatherEvent()],
+      [10, (): View => new OfferingEvent()],
+      [10, (): View => new GiftEvent()],
+      [5,  (): View => new ObstacleEvent()],
+      [5,  (): View => new RecruitEvent()],
+      [5,  (): View => new TrapEvent()],
+      [4,  (): View => new ProjectEvent()],
+      [3,  (): View => new TradeEvent()]
     ])());
   }
 }

@@ -48,7 +48,7 @@ export default class DataManager {
    * chance to be returned by this function.
    */
   getRandomAbility(): Ability {
-    return this.factory.createAbility(Random.randomElement(abilities));
+    return this.factory.createAbility(Random.element(abilities));
   }
 
   /*
@@ -56,7 +56,7 @@ export default class DataManager {
    * equal chance to be returned by this function.
    */
   getRandomChallenger(): Challenger {
-    return this.factory.createChallenger(this, Random.randomElement(challengers));
+    return this.factory.createChallenger(this, Random.element(challengers));
   }
 
   /*
@@ -64,7 +64,7 @@ export default class DataManager {
    * to be returned by this function.
    */
   getRandomHero(): Hero {
-    return this.factory.createHero(this, Random.randomElement(heroes));
+    return this.factory.createHero(this, Random.element(heroes));
   }
 
   /*
@@ -72,7 +72,7 @@ export default class DataManager {
    * returned by this function is determined by its rarity.
    */
   getRandomItem(): Item {
-    const rarity = Random.weightedList([
+    const rarity = Random.weighted([
       [1, Rarity.MYTHIC],
       [2, Rarity.LEGENDARY],
       [4, Rarity.RARE],
@@ -80,6 +80,6 @@ export default class DataManager {
       [16, Rarity.COMMON]
     ]);
     const pool: types.ItemData[] = this.itemsByRarityIndex.get(rarity);
-    return this.factory.createItem(Random.randomElement(pool));
+    return this.factory.createItem(Random.element(pool));
   }
 }

@@ -17,7 +17,7 @@ export default class Random {
   }
 
   // Returns a random element from the given array
-  static randomElement(list: any[]): any {
+  static element(list: any[]): any {
     return list[Math.floor(Random.next() * list.length)];
   }
 
@@ -30,7 +30,7 @@ export default class Random {
   }
 
   // Returns a random element from the given weighted array
-  static weightedList(list: [number, any][]): any {
+  static weighted<T>(list: [number, T][]): T {
     const sum = list.reduce((acc: number, x: [number, any]) => acc + x[0], 0);
     let roll = Math.floor(Random.next() * sum);
     let i = 0;

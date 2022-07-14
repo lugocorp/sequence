@@ -40,7 +40,7 @@ export default class Party {
 
   // Returns a random hero in the party
   randomHero(): Hero {
-    return Random.randomElement(this.members);
+    return Random.element(this.members);
   }
 
   // Filters the party by a stat expectation

@@ -34,6 +34,17 @@ export default class Hero extends Unit {
     item.effect(Trigger.EQUIP, this, null);
   }
 
+  getItem(index: number): Item {
+    return this.items[index];
+  }
+
+  // Replaces the item at the given index
+  replaceItem(index: number, item: Item): void {
+    this.items[index].effect(Trigger.UNEQUIP, this, null);
+    this.items[index] = item;
+    item.effect(Trigger.EQUIP, this, null);
+  }
+
   // Returns the number of equipped items
   itemCount(): number {
     return this.items.reduce((acc: number, x: Item) => acc + (x ? 1 : 0), 0);

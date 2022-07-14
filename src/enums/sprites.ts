@@ -73,6 +73,8 @@ enum Sprites {
   SUN          = 0x010000, // Come up with these later
   RAIN         = 0x010000, // Come up with these later
   WIND         = 0x010000, // Come up with these later
+  TRADE        = 0x010000, // Come up with these later
+  PROJECT      = 0x010000, // Come up with these later
 
   // Spritesheet #2 (enemies)
   SPIRIT            = 0x020000, // Placeholder to be replaced later
