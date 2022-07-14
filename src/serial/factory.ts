@@ -15,7 +15,7 @@ export default class Factory {
   createHero(manager: DataManager, data: types.HeroData): Hero {
     const hero: Hero = new Hero(data.sprite, data.name, data.strength, data.wisdom, data.agility, data.itemSlots);
     if (data.ability) {
-      hero.ability1 = manager.getAbilityByName(data.ability);
+      hero.ability = manager.getAbilityByName(data.ability);
     }
     return hero;
   }

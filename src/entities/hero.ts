@@ -5,64 +5,55 @@ import Item from './item';
 import Unit from './unit';
 
 export default class Hero extends Unit {
-  ability1: Ability;
-  ability2: Ability;
-  itemSlots: number;
+  private itemSlots: number;
+  private items: Item[];
+  ability: Ability;
   luck: number;
-  item1: Item;
-  item2: Item;
 
   constructor(sprite: Sprites, name: string, strength: number, wisdom: number, agility: number, itemSlots: number) {
     super(sprite, name, strength, wisdom, agility);
     this.itemSlots = itemSlots;
+    this.items = [];
     this.luck = 50;
+    for (let a = 0; a < this.itemSlots; a++) {
+      this.items.push(undefined);
+    }
   }
 
   // Equips an item to this hero
   equip(item: Item): void {
-    if (this.item1) {
-      if (this.item2) {
-        this.item1.effect(Trigger.UNEQUIP, this, null);
-        this.item1 = this.item2;
+    // Shift items if the Hero is fully equipped
+    if (this.items[this.items.length - 1]) {
+      this.items[0].effect(Trigger.UNEQUIP, this, null);
+      for (let a = 1; a < this.items.length; a++) {
+        this.items[a - 1] = this.items[a];
+        this.items[a] = undefined;
       }
-      this.item2 = item;
-      this.item2.effect(Trigger.EQUIP, this, null);
-    } else {
-      this.item1 = item;
-      this.item1.effect(Trigger.EQUIP, this, null);
     }
+    this.items[this.itemCount()] = item;
+    item.effect(Trigger.EQUIP, this, null);
   }
 
-  // Applies an ability or item to this hero
-  receive(gift: Item | Ability): void {
-    if (gift instanceof Item) {
-      this.equip(gift);
-    } else {
-      this.ability2 = gift;
-    }
+  // Returns the number of equipped items
+  itemCount(): number {
+    return this.items.reduce((acc: number, x: Item) => acc + (x ? 1 : 0), 0);
   }
 
   // This function handles the hero's item and ability effects
   activate(trigger: Trigger, data: any): void {
-    if (this.ability1) {
-      this.ability1.effect(trigger, this, data);
+    if (this.ability) {
+      this.ability.effect(trigger, this, data);
     }
-    if (this.ability2) {
-      this.ability2.effect(trigger, this, data);
-    }
-    if (this.item1) {
-      this.item1.effect(trigger, this, data);
-    }
-    if (this.item2) {
-      this.item2.effect(trigger, this, data);
+    for (const item of this.items) {
+      item?.effect(trigger, this, data);
     }
   }
 
   descriptionText(): string {
     const stat = (n: number): string => n > 9 ? `\t${n}\t` : `\t${n}\t\t`;
     return `${this.name}\n` +
-      `str:${stat(this.strength)}wis:${stat(this.wisdom)}dex:${stat(this.agility)}\n` +
-      (this.item1?.name || '-') + '\n' +
-      (this.item2?.name || '-');
+      `str:${stat(this.strength)}wis:${stat(this.wisdom)}dex:${stat(this.agility)}` +
+      (this.itemSlots ? '\nitems:\n' : '') +
+      this.items.map((x: Item) => (x?.name || '---')).join('\n');
   }
 }
