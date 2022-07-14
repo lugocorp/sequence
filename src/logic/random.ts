@@ -21,6 +21,14 @@ export default class Random {
     return list[Math.floor(Random.next() * list.length)];
   }
 
+  // Returns a random value from an enum
+  static enum<T>(e: T): T[keyof T] {
+    const enumValues = Object.keys(e)
+      .map(n => Number.parseInt(n))
+      .filter(n => !Number.isNaN(n)) as unknown as T[keyof T][];
+    return enumValues[Random.max(enumValues.length)];
+  }
+
   // Returns a random element from the given weighted array
   static weightedList(list: [number, any][]): any {
     const sum = list.reduce((acc: number, x: [number, any]) => acc + x[0], 0);

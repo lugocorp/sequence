@@ -14,7 +14,6 @@ import Game from '../../game';
  */
 export default class GiftEvent extends View {
   private giftSelector: Selector<Item | Ability>;
-  private heroSelector: Selector<Hero>;
   private options: Item[] | Ability[];
   private hero: Hero;
 
@@ -34,7 +33,6 @@ export default class GiftEvent extends View {
       ];
     const that = this;
     this.giftSelector = Selector.giftSelector(this.options);
-    this.heroSelector = Selector.heroSelector([this.hero]);
     this.setDetails(
       Sprites.SPIRIT,
       `a spirit reveals itself to ${this.hero.name}. it comes bearing a gift of your choosing.`,
@@ -52,7 +50,7 @@ export default class GiftEvent extends View {
 
   viewHero(): void {
     const that = this;
-    this.setSelector(this.heroSelector,[
+    this.setDetails(this.hero.sprite, this.hero.descriptionText(),[
       new Action('view gifts', () => that.chooseGift())
     ]);
   }

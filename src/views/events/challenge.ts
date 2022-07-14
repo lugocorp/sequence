@@ -35,7 +35,7 @@ export default class ChallengeEvent extends View {
 
   viewChallenger(): void {
     const that = this;
-    const text = `${this.challenger.name}\nchallenges you to ${this.getTestText()}`;
+    const text = `${this.challenger.descriptionText()}\nchallenges you to ${this.getTestText()}`;
     this.setDetails(this.challenger.sprite, text, [
       new Action('view party', () => that.viewParty())
     ]);

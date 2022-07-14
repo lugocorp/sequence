@@ -3,7 +3,7 @@ import Random from '../logic/random';
 import Hero from './hero';
 
 export default class Party {
-  static MAX = 6;
+  static MAX = 4;
   members: Hero[] = [];
 
   // Returns the number of heroes in your party

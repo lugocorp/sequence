@@ -1,8 +1,11 @@
+import {DAY_NIGHT_CYCLE, World, Weather, Time} from './enums/world';
 import GraphicsRenderer from './graphics/renderer';
 import GraphicsLoader from './graphics/loader';
 import DataManager from './serial/manager';
+import FutureEvent from './logic/future';
 import EventChain from './logic/chain';
 import Party from './entities/party';
+import TimeEvent from './views/events/time';
 import StartView from './views/start';
 import View from './ui/view';
 
@@ -13,6 +16,7 @@ export default class Game {
   assets: GraphicsLoader;
   chain: EventChain;
   data: DataManager;
+  world: World;
   party: Party;
   view: View;
 
@@ -22,6 +26,10 @@ export default class Game {
     this.chain = new EventChain();
     this.data = new DataManager();
     this.party = new Party();
+    this.world = {
+      weather: Weather.SUN,
+      time: Time.DAY
+    };
   }
 
   // Initializes the game object so the player can start interacting with it
@@ -40,9 +48,10 @@ export default class Game {
     });
 
     // Loading has completed
-    this.party.add(this.data.getRandomHero());
-    this.party.add(this.data.getRandomHero());
-    this.party.add(this.data.getRandomHero());
+    for (let a = 0; a < Party.MAX; a++) {
+      this.party.add(this.data.getRandomHero());
+    }
+    Game.futureEvent(new TimeEvent(), DAY_NIGHT_CYCLE);
     this.view = new StartView();
     this.invalidate();
   }
@@ -55,6 +64,11 @@ export default class Game {
   // Sets the current view of the game
   static setView(view: View): void {
     Game.game.view = view;
+  }
+
+  // Queues a FutureEvent
+  static futureEvent(view: View, turns: number, valid?: () => boolean): void {
+    Game.game.chain.futures.push(new FutureEvent(view, turns, valid));
   }
 
   // Progresses to the next event in the game

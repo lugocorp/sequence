@@ -7,15 +7,18 @@ import ChallengeEvent from '../views/events/challenge';
 import OfferingEvent from '../views/events/offering';
 import ObstacleEvent from '../views/events/obstacle';
 import RecruitEvent from '../views/events/recruit';
+import WeatherEvent from '../views/events/weather';
 import DeathEvent from '../views/events/death';
 import BeginEvent from '../views/events/begin';
 import GiftEvent from '../views/events/gift';
 import TrapEvent from '../views/events/trap';
+import FutureEvent from './future';
 import Random from './random';
 import View from '../ui/view';
 import Game from '../game';
 
 export default class EventChain {
+  futures: FutureEvent[] = [];
   events: View[] = [
     new BeginEvent()
   ];
@@ -43,12 +46,29 @@ export default class EventChain {
       this.events.push(new ChallengeEvent());
       return;
     }
+
+    // Tick future events and push if they're ready
+    let a = 0;
+    while (a < this.futures.length) {
+      const v: View = this.futures[a].tick();
+      if (v) {
+        if (this.futures[a].valid()) {
+          this.events.push(v);
+        }
+        this.futures.splice(a, 1);
+      } else {
+        a++;
+      }
+    }
+
+    // Basic event roll
     this.events.push(Random.weightedList([
       [40, () => new ChallengeEvent()],
-      [25, () => new OfferingEvent()],
+      [20, () => new OfferingEvent()],
+      [15, () => new GiftEvent()],
+      [10, () => new WeatherEvent()],
       [5,  () => new ObstacleEvent()],
       [5,  () => new RecruitEvent()],
-      [20, () => new GiftEvent()],
       [5,  () => new TrapEvent()]
     ])());
   }

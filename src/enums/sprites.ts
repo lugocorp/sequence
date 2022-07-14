@@ -68,6 +68,11 @@ enum Sprites {
   OBSTACLE     = 0x010000, // Come up with these later
   GIFT         = 0x010000, // Come up with these later
   TRAP         = 0x010000, // Come up with these later
+  NIGHT        = 0x010000, // Come up with these later
+  DAY          = 0x010000, // Come up with these later
+  SUN          = 0x010000, // Come up with these later
+  RAIN         = 0x010000, // Come up with these later
+  WIND         = 0x010000, // Come up with these later
 
   // Spritesheet #2 (enemies)
   SPIRIT            = 0x020000, // Placeholder to be replaced later

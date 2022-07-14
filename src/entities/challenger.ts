@@ -16,4 +16,10 @@ export default class Challenger extends Unit {
       this.ability.effect(trigger, this, data);
     }
   }
+
+  descriptionText(): string {
+    const stat = (n: number): string => n > 9 ? `\t${n}\t` : `\t${n}\t\t`;
+    return `${this.name}\n` +
+      `str:${stat(this.strength)}wis:${stat(this.wisdom)}dex:${stat(this.agility)}`;
+  }
 }
