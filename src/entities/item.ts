@@ -1,7 +1,6 @@
 import {ItemEffect} from '../enums/effects';
 import { Trigger } from '../enums/types';
 import Hero from './hero';
-import Unit from './unit';
 
 export default class Item {
   description: string;
@@ -11,7 +10,7 @@ export default class Item {
 
   constructor(name: string,rarity: number, description: string, effect?: ItemEffect) {
     this.description = description;
-    this.effect = effect || ((trigger: Trigger, hero: Hero, data: any): void => {});
+    this.effect = effect || ((trigger: Trigger, hero: Hero, data: any): void => undefined);
     this.rarity = rarity;
     this.name = name;
   }
