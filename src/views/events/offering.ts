@@ -34,10 +34,16 @@ export default class OfferingEvent extends View {
 
   viewParty(): void {
     const that = this;
-    this.setSelector(this.heroSelector, [
-      new Action('view gift', () => that.viewGift()),
-      new Action('choose', () => that.finish())
-    ]);
+    if (Game.game.party.canPickupItems()) {
+      this.setSelector(this.heroSelector, [
+        new Action('view gift', () => that.viewGift()),
+        new Action('choose', () => that.finish())
+      ]);
+    } else {
+      this.setDetails(this.heroSelector.item().sprite, `no one in your party can pickup items`, [
+        new Action('continue', () => Game.game.progress())
+      ]);
+    }
   }
 
   finish(): void {

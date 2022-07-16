@@ -33,10 +33,16 @@ export default class GiftEvent extends View {
 
   chooseGift(): void {
     const that = this;
-    this.setSelector(this.itemSelector, [
-      new Action('view member', () => that.viewHero()),
-      new Action('choose', () => that.finish())
-    ]);
+    if (this.hero.itemSlots) {
+      this.setSelector(this.itemSelector, [
+        new Action('view member', () => that.viewHero()),
+        new Action('choose', () => that.finish())
+      ]);
+    } else {
+      this.setDetails(this.hero.sprite, `${this.hero.name} cannot pickup any items`, [
+        new Action('continue', () => Game.game.progress())
+      ]);
+    }
   }
 
   viewHero(): void {

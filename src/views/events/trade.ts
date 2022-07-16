@@ -22,8 +22,7 @@ export default class TradeEvent extends View {
       Game.game.data.getRandomItem(),
       Game.game.data.getRandomItem()
     ]);
-    const able: boolean = Game.game.party.members.reduce((acc: number, x: Hero) => (x.itemCount() > 0 ? 1 : 0) + acc, 0) > 0;
-    if (able) {
+    if (Game.game.party.canPickupItems()) {
       this.setDetails(Sprites.TRADE, 'your party comes across a trading post.', [
         new Action('continue', () => that.viewParty())
       ]);

@@ -9,6 +9,7 @@ import ObstacleEvent from '../views/events/obstacle';
 import RecruitEvent from '../views/events/recruit';
 import WeatherEvent from '../views/events/weather';
 import ProjectEvent from '../views/events/project';
+import AnimalEvent from '../views/events/animal';
 import DeathEvent from '../views/events/death';
 import BeginEvent from '../views/events/begin';
 import DreamEvent from '../views/events/dream';
@@ -77,7 +78,7 @@ export default class EventChain {
     // Basic event roll
     this.events.push(Random.weighted([
       [40, (): View => new ChallengeEvent()],
-      [18, (): View => new WeatherEvent()],
+      [15, (): View => new WeatherEvent()],
       [6,  (): View => new OfferingEvent()],
       [6,  (): View => new GiftEvent()],
       [5,  (): View => new ObstacleEvent()],
@@ -86,7 +87,8 @@ export default class EventChain {
       [4,  (): View => new PlantEvent()],
       [4,  (): View => new ProjectEvent()],
       [4,  (): View => new RapidEvent()],
+      [3,  (): View => new AnimalEvent()],
       [3,  (): View => new TradeEvent()]
-    ])());
+    ], 100)());
   }
 }

@@ -4,10 +4,11 @@ import Random from '../logic/random';
 import Ability from './ability';
 import Item from './item';
 import Unit from './unit';
+import Game from '../game';
 
 export default class Hero extends Unit {
-  private itemSlots: number;
   private items: Item[];
+  itemSlots: number;
   ability: Ability;
   luck: number;
 
@@ -19,6 +20,10 @@ export default class Hero extends Unit {
     for (let a = 0; a < this.itemSlots; a++) {
       this.items.push(undefined);
     }
+  }
+
+  isInParty(): boolean {
+    return Game.game.party.members.indexOf(this) > -1;
   }
 
   // Equips an item to this hero
@@ -35,8 +40,21 @@ export default class Hero extends Unit {
     item.effect(Trigger.EQUIP, this, null);
   }
 
+  unequip(item: Item): void {
+    const index: number = this.items.indexOf(item);
+    for (let a = index + 1; a < this.items.length; a++) {
+      this.items[a - 1] = this.items[a];
+    }
+    this.items[this.items.length - 1] = undefined;
+    item.effect(Trigger.UNEQUIP, this, null);
+  }
+
   getItem(index: number): Item {
     return this.items[index];
+  }
+
+  hasItem(item: Item): boolean {
+    return this.items.indexOf(item) > -1;
   }
 
   // Replaces the item at the given index

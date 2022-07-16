@@ -79,6 +79,9 @@ enum Sprites {
   PLANT1       = 0x010000, // Come up with these later
   PLANT2       = 0x010000, // Come up with these later
   PLANT3       = 0x010000, // Come up with these later
+  ANIMAL1      = 0x010000, // Come up with these later
+  ANIMAL2      = 0x010000, // Come up with these later
+  ANIMAL3      = 0x010000, // Come up with these later
 
   // Spritesheet #2 (enemies)
   SPIRIT            = 0x020000, // Placeholder to be replaced later

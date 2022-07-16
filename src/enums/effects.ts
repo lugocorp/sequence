@@ -1,6 +1,6 @@
-import { Trigger } from './types';
 import Hero from '../entities/hero';
 import Unit from '../entities/unit';
+import { Trigger } from './types';
 
 // The type used for item effect handlers
 export type ItemEffect = (trigger: Trigger, hero: Hero, data: any) => void;

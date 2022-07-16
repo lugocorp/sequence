@@ -16,6 +16,11 @@ export default class Party {
     return this.length() === Party.MAX;
   }
 
+  // Returns true if anyone in your party has at least 1 item slot
+  canPickupItems(): boolean {
+    return this.members.reduce((acc: number, x: Hero) => Math.max(acc, x.itemSlots), 0) > 0;
+  }
+
   // Returns the hero at the given index
   get(index: number): Hero {
     return this.members[index];
