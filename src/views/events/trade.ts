@@ -43,10 +43,16 @@ export default class TradeEvent extends View {
 
   viewParty(): void {
     const that = this;
-    this.setSelector(this.heroSelector, [
-      new Action('view goods', () => that.trade()),
-      new Action('make trade', () => that.checkTrade())
-    ]);
+    if (Game.game.party.hasItems()) {
+      this.setSelector(this.heroSelector, [
+        new Action('view goods', () => that.trade()),
+        new Action('make trade', () => that.checkTrade())
+      ]);
+    } else {
+      this.setDetails(this.hero.sprite, `no one in your party has items to trade`, [
+        new Action('continue', () => Game.game.progress())
+      ]);
+    }
   }
 
   trade(): void {
