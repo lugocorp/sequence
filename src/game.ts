@@ -1,6 +1,7 @@
 import {DAY_NIGHT_CYCLE, World, Weather, Time} from './enums/world';
-import GraphicsRenderer from './graphics/renderer';
-import GraphicsLoader from './graphics/loader';
+import GraphicsRenderer from './media/renderer';
+import GraphicsLoader from './media/loader';
+import GameAudio from './media/audio';
 import DataManager from './serial/manager';
 import FutureEvent from './logic/future';
 import EventChain from './logic/chain';
@@ -16,6 +17,7 @@ export default class Game {
   assets: GraphicsLoader;
   chain: EventChain;
   data: DataManager;
+  audio: GameAudio;
   world: World;
   party: Party;
   view: View;
@@ -25,6 +27,7 @@ export default class Game {
     this.assets = new GraphicsLoader();
     this.chain = new EventChain();
     this.data = new DataManager();
+    this.audio = new GameAudio();
     this.party = new Party();
     this.world = {
       weather: Weather.SUN,
@@ -42,10 +45,9 @@ export default class Game {
     await this.assets.loadInitialAsset();
     this.invalidate();
     await this.assets.loadAssets();
+    await this.audio.loadAudio();
     this.data.index();
-    await new Promise((resolve) => {
-      setTimeout(resolve, 1000);
-    });
+    await new Promise((resolve) => setTimeout(resolve, 1000));
 
     // Loading has completed
     for (let a = 0; a < Party.MAX; a++) {
@@ -91,6 +93,7 @@ export default class Game {
           const actionCoords: number[] = this.view.getActionCoords(a);
           const coords: number[] = this.renderer.toDisplayCoords(actionCoords[0], actionCoords[1]);
           if (this.within(action.label, coords[0], coords[1])) {
+            this.audio.play(GameAudio.CLICK);
             action.effect();
             break;
           }

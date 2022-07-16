@@ -66,8 +66,7 @@ We have a number of `npm` commands:
 - [x] Clean up all events
 - [x] Add new events and systems
 - [x] Add consultants into the game credits
-- [ ] Add sounds into the game (just to accentuate certain events)
-- [ ] Code the event progression algorithm
+- [x] Add sounds into the game (just to accentuate certain events)
 - [ ] Draw some beta sprites
 - [ ] Add content for beta
 - [ ] Balance as needed
