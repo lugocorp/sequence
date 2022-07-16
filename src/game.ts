@@ -74,7 +74,7 @@ export default class Game {
   // Progresses to the next event in the game
   progress(): void {
     if (!this.party.length() || this.chain.events.length === 1) {
-      this.chain.plan(this.chain.events[0]);
+      this.chain.plan();
     }
     this.chain.events.splice(0, 1);
     this.view = this.chain.latest();

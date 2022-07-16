@@ -13,6 +13,8 @@ import DeathEvent from '../views/events/death';
 import BeginEvent from '../views/events/begin';
 import DreamEvent from '../views/events/dream';
 import TradeEvent from '../views/events/trade';
+import RapidEvent from '../views/events/rapid';
+import PlantEvent from '../views/events/plant';
 import GiftEvent from '../views/events/gift';
 import TrapEvent from '../views/events/trap';
 import FutureEvent from './future';
@@ -35,7 +37,7 @@ export default class EventChain {
       return new DeathEvent();
     }
     if (!this.events.length) {
-      this.plan(null);
+      this.plan();
     }
     return this.events[0];
   }
@@ -45,7 +47,7 @@ export default class EventChain {
    * It's the core algorithm that runs the game, and it basically
    * determines difficulty.
    */
-  plan(previous: View): void {
+  plan(): void {
     // Tick future events and push if they're ready
     let a = 0;
     while (a < this.futures.length) {
@@ -76,12 +78,14 @@ export default class EventChain {
     this.events.push(Random.weighted([
       [40, (): View => new ChallengeEvent()],
       [18, (): View => new WeatherEvent()],
-      [10, (): View => new OfferingEvent()],
-      [10, (): View => new GiftEvent()],
+      [6,  (): View => new OfferingEvent()],
+      [6,  (): View => new GiftEvent()],
       [5,  (): View => new ObstacleEvent()],
       [5,  (): View => new RecruitEvent()],
       [5,  (): View => new TrapEvent()],
+      [4,  (): View => new PlantEvent()],
       [4,  (): View => new ProjectEvent()],
+      [4,  (): View => new RapidEvent()],
       [3,  (): View => new TradeEvent()]
     ])());
   }

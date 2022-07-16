@@ -8,7 +8,6 @@ export default class DreamEvent extends View {
 
   constructor() {
     super();
-    const that = this;
     const hero: Hero = Game.game.party.randomHero();
     const item: Item = Game.game.data.getRandomItem();
     this.setDetails(hero.sprite, `${hero.name} has a dream about a powerful item. could it be prophetic?`, [

@@ -1,5 +1,6 @@
 import {Trigger} from '../enums/types';
 import Sprites from '../enums/sprites';
+import Random from '../logic/random';
 import Ability from './ability';
 import Item from './item';
 import Unit from './unit';
@@ -66,5 +67,9 @@ export default class Hero extends Unit {
       `str:${stat(this.strength)}wis:${stat(this.wisdom)}dex:${stat(this.agility)}` +
       (this.itemSlots ? '\nitems:\n' : '') +
       this.items.map((x: Item) => (x?.name || '---')).join('\n');
+  }
+
+  lucky(): boolean {
+    return Random.passes(this.luck / 100);
   }
 }

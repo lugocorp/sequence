@@ -68,6 +68,6 @@ export default class ChallengeEvent extends View {
       sum1 += Stats.getUnitStat(hero, this.expectation[1]);
       sum2 += Stats.getUnitStat(challenger, this.expectation[1]);
     }
-    return (sum1 > sum2) || (sum1 === sum2 && Random.passes(hero.luck / 100));
+    return (sum1 > sum2) || (sum1 === sum2 && hero.lucky());
   }
 }
