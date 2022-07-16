@@ -7,7 +7,7 @@ export interface HeroData {
   name: string;
   strength: number;
   wisdom: number;
-  agility: number;
+  dexterity: number;
   itemSlots: number;
   ability?: string;
 }
@@ -18,7 +18,7 @@ export interface ChallengerData {
   name: string;
   strength: number;
   wisdom: number;
-  agility: number;
+  dexterity: number;
   ability?: string;
 }
 

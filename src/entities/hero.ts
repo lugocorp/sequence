@@ -12,8 +12,8 @@ export default class Hero extends Unit {
   ability: Ability;
   luck: number;
 
-  constructor(sprite: Sprites, name: string, strength: number, wisdom: number, agility: number, itemSlots: number) {
-    super(sprite, name, strength, wisdom, agility);
+  constructor(sprite: Sprites, name: string, strength: number, wisdom: number, dexterity: number, itemSlots: number) {
+    super(sprite, name, strength, wisdom, dexterity);
     this.itemSlots = itemSlots;
     this.items = [];
     this.luck = 50;
@@ -82,7 +82,7 @@ export default class Hero extends Unit {
   descriptionText(): string {
     const stat = (n: number): string => n > 9 ? `\t${n}\t` : `\t${n}\t\t`;
     return `${this.name}\n` +
-      `str:${stat(this.strength)}wis:${stat(this.wisdom)}dex:${stat(this.agility)}` +
+      `str:${stat(this.strength)}wis:${stat(this.wisdom)}dex:${stat(this.dexterity)}` +
       (this.itemSlots ? '\nitems:\n' : '') +
       this.items.map((x: Item) => (x?.name || '---')).join('\n');
   }

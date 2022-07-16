@@ -7,7 +7,7 @@ const data: HeroData[] = [
     name: 'matriarch',
     strength: 2,
     wisdom: 2,
-    agility: 2,
+    dexterity: 2,
     itemSlots: 0,
     ability: 'test blessing'
   },
@@ -16,7 +16,7 @@ const data: HeroData[] = [
     name: 'sword holder',
     strength: 3,
     wisdom: 3,
-    agility: 0,
+    dexterity: 0,
     itemSlots: 1
   },
   {
@@ -24,7 +24,7 @@ const data: HeroData[] = [
     name: 'molten warrior',
     strength: 2,
     wisdom: 2,
-    agility: 2,
+    dexterity: 2,
     itemSlots: 2
   },
   {
@@ -32,7 +32,7 @@ const data: HeroData[] = [
     name: 'potter',
     strength: 3,
     wisdom: 3,
-    agility: 0,
+    dexterity: 0,
     itemSlots: 2
   },
   {
@@ -40,7 +40,7 @@ const data: HeroData[] = [
     name: 'frost woman',
     strength: 0,
     wisdom: 6,
-    agility: 0,
+    dexterity: 0,
     itemSlots: 1,
     ability: 'test blessing'
   },
@@ -49,7 +49,7 @@ const data: HeroData[] = [
     name: 'web witch',
     strength: 0,
     wisdom: 3,
-    agility: 3,
+    dexterity: 3,
     itemSlots: 1,
     ability: 'test blessing'
   },
@@ -58,7 +58,7 @@ const data: HeroData[] = [
     name: 'storm sage',
     strength: 0,
     wisdom: 3,
-    agility: 3,
+    dexterity: 3,
     itemSlots: 1,
     ability: 'test blessing'
   },
@@ -67,7 +67,7 @@ const data: HeroData[] = [
     name: 'basketweaver',
     strength: 0,
     wisdom: 6,
-    agility: 0,
+    dexterity: 0,
     itemSlots: 2
   },
   {
@@ -75,7 +75,7 @@ const data: HeroData[] = [
     name: 'scribe',
     strength: 0,
     wisdom: 6,
-    agility: 0,
+    dexterity: 0,
     itemSlots: 2,
     ability: 'test blessing'
   },
@@ -84,7 +84,7 @@ const data: HeroData[] = [
     name: 'flame fighter',
     strength: 6,
     wisdom: 0,
-    agility: 0,
+    dexterity: 0,
     itemSlots: 1
   },
   {
@@ -92,7 +92,7 @@ const data: HeroData[] = [
     name: 'sentinel',
     strength: 3,
     wisdom: 3,
-    agility: 0,
+    dexterity: 0,
     itemSlots: 2,
     ability: 'test blessing'
   },
@@ -101,7 +101,7 @@ const data: HeroData[] = [
     name: 'test hero 1',
     strength: 2,
     wisdom: 2,
-    agility: 2,
+    dexterity: 2,
     itemSlots: 2
   },
   {
@@ -109,7 +109,7 @@ const data: HeroData[] = [
     name: 'test hero 2',
     strength: 2,
     wisdom: 2,
-    agility: 2,
+    dexterity: 2,
     itemSlots: 2
   },
   {
@@ -117,7 +117,7 @@ const data: HeroData[] = [
     name: 'test hero 3',
     strength: 2,
     wisdom: 2,
-    agility: 2,
+    dexterity: 2,
     itemSlots: 2
   },
   {
@@ -125,7 +125,7 @@ const data: HeroData[] = [
     name: 'test hero 4',
     strength: 2,
     wisdom: 2,
-    agility: 2,
+    dexterity: 2,
     itemSlots: 2
   }
 ];

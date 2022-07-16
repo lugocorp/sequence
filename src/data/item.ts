@@ -42,8 +42,8 @@ const data: ItemData[] = [
   {
     name: 'beans',
     rarity: Rarity.COMMON,
-    description: 'gives a party member +1 agility',
-    effect: statItemEffect(Stats.AGILITY, 1)
+    description: 'gives a party member +1 dexterity',
+    effect: statItemEffect(Stats.DEXTERITY, 1)
   },
   {
     name: 'guava',

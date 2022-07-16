@@ -13,7 +13,7 @@ export default class Factory {
 
   // Instantiates a new Hero object based on some game data
   createHero(manager: DataManager, data: types.HeroData): Hero {
-    const hero: Hero = new Hero(data.sprite, data.name, data.strength, data.wisdom, data.agility, data.itemSlots);
+    const hero: Hero = new Hero(data.sprite, data.name, data.strength, data.wisdom, data.dexterity, data.itemSlots);
     if (data.ability) {
       hero.ability = manager.getAbilityByName(data.ability);
     }
@@ -22,7 +22,7 @@ export default class Factory {
 
   // Instantiates a new Challenger object based on some game data
   createChallenger(manager: DataManager, data: types.ChallengerData): Challenger {
-    const challenger: Challenger = new Challenger(data.sprite, data.name, data.strength, data.wisdom, data.agility);
+    const challenger: Challenger = new Challenger(data.sprite, data.name, data.strength, data.wisdom, data.dexterity);
     if (data.ability) {
       challenger.ability = manager.getAbilityByName(data.ability);
     }

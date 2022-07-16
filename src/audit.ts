@@ -43,7 +43,7 @@ for (const challenger of challengers) {
   if (challenger.name.length > MAX_CHALLENGER_NAME_LENGTH) {
     error('Invalid name length', 'challenger', challenger.name, `Maximum name length is ${MAX_CHALLENGER_NAME_LENGTH}.`);
   }
-  if (challenger.strength + challenger.wisdom + challenger.agility != 6) {
+  if (challenger.strength + challenger.wisdom + challenger.dexterity != 6) {
     error('Invalid stat spread detected', 'challenger', challenger.name, 'Stats should add up to 6');
   }
   if (challenger.ability && valid_abilities.indexOf(challenger.ability) < 0) {
@@ -59,7 +59,7 @@ for (const hero of heroes) {
   if (hero.name.length > MAX_HERO_NAME_LENGTH) {
     error('Invalid name length', 'hero', hero.name, `Maximum name length is ${MAX_HERO_NAME_LENGTH}.`);
   }
-  if (hero.strength + hero.wisdom + hero.agility != 6) {
+  if (hero.strength + hero.wisdom + hero.dexterity != 6) {
     error('Invalid stat spread detected', 'hero', hero.name, 'Stats should add up to 6');
   }
   if ([0, 1, 2].indexOf(hero.itemSlots) < 0) {

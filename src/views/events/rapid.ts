@@ -24,7 +24,7 @@ export default class RapidEvent extends View {
     const hero: Hero = this.heroSelector.item();
     hero.strength++;
     hero.wisdom++;
-    hero.agility++;
+    hero.dexterity++;
     this.setDetails(hero.sprite, `${hero.name} became stronger, wiser, and faster by the river!`, [
       new Action('continue', () => {
         if (hero.lucky()) {

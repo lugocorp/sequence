@@ -6,8 +6,8 @@ import Unit from './unit';
 export default class Challenger extends Unit {
   ability: Ability;
 
-  constructor(sprite: Sprites, name: string, strength: number, wisdom: number, agility: number) {
-    super(sprite, name, strength, wisdom, agility);
+  constructor(sprite: Sprites, name: string, strength: number, wisdom: number, dexterity: number) {
+    super(sprite, name, strength, wisdom, dexterity);
   }
 
   // This function handles the challenger's ability effect
@@ -20,6 +20,6 @@ export default class Challenger extends Unit {
   descriptionText(): string {
     const stat = (n: number): string => n > 9 ? `\t${n}\t` : `\t${n}\t\t`;
     return `${this.name}\n` +
-      `str:${stat(this.strength)}wis:${stat(this.wisdom)}dex:${stat(this.agility)}`;
+      `str:${stat(this.strength)}wis:${stat(this.wisdom)}dex:${stat(this.dexterity)}`;
   }
 }
