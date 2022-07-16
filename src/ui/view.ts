@@ -9,6 +9,11 @@ export default class View {
   actions: Action[];
   image: number;
 
+  // Performs some task when this view is first transitioned to
+  init(): void {
+    // Do nothing by default
+  }
+
   // Sets all the important values of this View
   setDetails(image: number, text: string, actions: Action[]): void {
     this.image = image;

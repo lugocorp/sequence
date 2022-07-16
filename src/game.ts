@@ -66,6 +66,7 @@ export default class Game {
   // Sets the current view of the game
   static setView(view: View): void {
     Game.game.view = view;
+    view.init();
   }
 
   // Queues a FutureEvent
