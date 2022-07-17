@@ -17,7 +17,6 @@ export default class GraphicsRenderer {
   scale: number;
   constructor(canvas: HTMLCanvasElement, assets: GraphicsLoader) {
     this.ctx = canvas.getContext('2d');
-    this.ctx.imageSmoothingEnabled = false;
     this.canvas = canvas;
     this.assets = assets;
   }
@@ -103,6 +102,7 @@ export default class GraphicsRenderer {
       return;
     }
     const c: DrawCoords = this.assets.getSprite(id);
+    this.ctx.imageSmoothingEnabled = false;
     this.ctx.drawImage(c.src, c.left, c.top, c.width, c.height, x, y, c.width, c.height);
   }
 
@@ -137,6 +137,7 @@ export default class GraphicsRenderer {
         if (msg[a] !== ' ') {
           const glyph: Sprites = this.getGlyph(msg[a]);
           const c: DrawCoords = this.assets.getSprite(glyph);
+          this.ctx.imageSmoothingEnabled = false;
           this.ctx.drawImage(c.src, c.left, c.top, WGLYPH, HGLYPH, x + (dx * WGLYPH), y + (dy * HGLYPH), WGLYPH, HGLYPH);
         }
         dx++;

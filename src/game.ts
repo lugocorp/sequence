@@ -101,11 +101,13 @@ export default class Game {
         }
       }
       if (this.view.hasOptions()) {
-        if (this.view.selector.index > 0 && this.within('a', 3, 46)) {
+        if (this.view.selector.index > 0 && this.bounded(0, 0, 12, 100)) {
+          this.audio.play(GameAudio.CLICK);
           this.view.selector.index--;
           this.view.selector.invalidate();
         }
-        if (this.view.selector.index < this.view.selector.size() - 1 && this.within('a', 116, 46)) {
+        if (this.view.selector.index < this.view.selector.size() - 1 && this.bounded(112, 0, 12, 100)) {
+          this.audio.play(GameAudio.CLICK);
           this.view.selector.index++;
           this.view.selector.invalidate();
         }
@@ -114,13 +116,18 @@ export default class Game {
     }
   }
 
-  // Returns true if the current click happened inside this text
-  within(msg: string, x: number, y: number, down = false): boolean {
-    const bounds = this.renderer.getTextBounds(msg);
+  // Returns true if the current click happened inside the given rectangle
+  bounded(x: number, y: number, w: number, h: number, down = false): boolean {
     return this.currentClick.down === down &&
       this.currentClick.x >= x &&
       this.currentClick.y >= y &&
-      this.currentClick.x <= x + bounds[0] &&
-      this.currentClick.y <= y + bounds[1];
+      this.currentClick.x <= x + w &&
+      this.currentClick.y <= y + h;
+  }
+
+  // Returns true if the current click happened inside this text
+  within(msg: string, x: number, y: number, down = false): boolean {
+    const bounds = this.renderer.getTextBounds(msg);
+    return this.bounded(x, y, bounds[0], bounds[1], down);
   }
 }
