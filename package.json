@@ -4,9 +4,9 @@
   "version": "1.0.0",
   "description": "A retro RPG rougelite game.",
   "scripts": {
-    "compile": "npx tsc",
-    "lint": "npx eslint src",
-    "start": "npx webpack serve --port 2017",
+    "compile": "webpack",
+    "lint": "eslint src",
+    "start": "webpack serve --port 2017",
     "audit": "tsc && node out/audit.js"
   },
   "keywords": [
