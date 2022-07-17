@@ -52,6 +52,7 @@ export default class ChallengeEvent extends View {
   finish(): void {
     const hero: Hero = this.heroSelector.item();
     const result: boolean = this.playerOvercomesChallenge(hero, this.challenger);
+    hero.fatigue();
     this.setDetails(
       hero.sprite,
       result ?

@@ -22,8 +22,27 @@ export default class Hero extends Unit {
     }
   }
 
+  // Returns true if this Hero is in the player's Party
   isInParty(): boolean {
     return Game.game.party.members.indexOf(this) > -1;
+  }
+
+  // Returns true if this Hero no longer has stats due to fatigue
+  isFatigued(): boolean {
+    return !this.strength && !this.wisdom && !this.dexterity;
+  }
+
+  // Reduces this Hero's stats
+  fatigue(): void {
+    if (this.strength > 0) {
+      this.strength--;
+    }
+    if (this.wisdom > 0) {
+      this.wisdom--;
+    }
+    if (this.dexterity > 0) {
+      this.dexterity--;
+    }
   }
 
   // Equips an item to this hero

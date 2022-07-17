@@ -28,6 +28,10 @@ export default class ProjectEvent extends View {
       new Action('continue', () => Game.game.progress())
     ]);
 
+    for (const hero of Game.game.party.members) {
+      hero.fatigue();
+    }
+
     // Set up future event
     const future: View = new View();
     future.setDetails(Sprites.PROJECT, `your party sees a group approaching. they are a community you helped recently, and they have come to show their gratitude.`, [

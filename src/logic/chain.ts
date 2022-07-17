@@ -9,6 +9,7 @@ import ObstacleEvent from '../views/events/obstacle';
 import RecruitEvent from '../views/events/recruit';
 import WeatherEvent from '../views/events/weather';
 import ProjectEvent from '../views/events/project';
+import FatigueEvent from '../views/events/fatigue';
 import AnimalEvent from '../views/events/animal';
 import DeathEvent from '../views/events/death';
 import BeginEvent from '../views/events/begin';
@@ -34,6 +35,11 @@ export default class EventChain {
    * This function returns the current event in the sequence.
    */
   latest(): View {
+    for (const hero of Game.game.party.members) {
+      if (hero.isFatigued()) {
+        return new FatigueEvent(hero);
+      }
+    }
     if (!Game.game.party.length()) {
       return new DeathEvent();
     }
