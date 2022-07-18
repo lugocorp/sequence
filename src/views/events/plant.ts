@@ -14,17 +14,17 @@ export default class PlantEvent extends View {
     const plant = Random.element([
       {
         name: 'pokeweed',
-        sprite: Sprites.PLANT1,
+        sprite: Sprites.POKEWEED,
         type: AVOID
       },
       {
         name: 'chayote',
-        sprite: Sprites.PLANT2,
+        sprite: Sprites.CHAYOTE,
         type: RAW
       },
       {
         name: 'elderberry',
-        sprite: Sprites.PLANT3,
+        sprite: Sprites.ELDERBERRY,
         type: BOIL
       }
     ]);

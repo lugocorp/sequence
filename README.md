@@ -68,7 +68,7 @@ We have a number of `npm` commands:
 - [x] Add consultants into the game credits
 - [x] Add sounds into the game (just to accentuate certain events)
 - [x] Code the fatigue system and rework events accordingly
-- [ ] Draw some beta sprites
+- [x] Draw some beta sprites
 - [ ] Add beta content
 - [ ] Balance as needed
 - [ ] Launch the beta

@@ -3,14 +3,14 @@ import Sprites from '../enums/sprites';
 
 const data: ChallengerData[] = [
   {
-    sprite: Sprites.DIRE_CRAB,
+    sprite: Sprites.SPIRIT,
     name: 'fox',
     strength: 6,
     wisdom: 0,
     dexterity: 0
   },
   {
-    sprite: Sprites.TOXIC_SLUDGE,
+    sprite: Sprites.SPIRIT,
     name: 'raccoon',
     strength: 2,
     wisdom: 2,
@@ -18,7 +18,7 @@ const data: ChallengerData[] = [
     ability: 'test blessing'
   },
   {
-    sprite: Sprites.TOOTH_BEAST,
+    sprite: Sprites.SPIRIT,
     name: 'sea turtle',
     strength: 3,
     wisdom: 3,
@@ -26,14 +26,14 @@ const data: ChallengerData[] = [
     ability: 'test blessing'
   },
   {
-    sprite: Sprites.DIRE_CRAB,
+    sprite: Sprites.SPIRIT,
     name: 'crab',
     strength: 6,
     wisdom: 0,
     dexterity: 0
   },
   {
-    sprite: Sprites.TOXIC_SLUDGE,
+    sprite: Sprites.SPIRIT,
     name: 'guinea pig',
     strength: 2,
     wisdom: 2,
@@ -41,7 +41,7 @@ const data: ChallengerData[] = [
     ability: 'test blessing'
   },
   {
-    sprite: Sprites.TOOTH_BEAST,
+    sprite: Sprites.SPIRIT,
     name: 'axolotl',
     strength: 3,
     wisdom: 3,

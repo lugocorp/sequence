@@ -17,15 +17,15 @@ export default class AnimalEvent extends View {
     const baby = Random.element([
       {
         name: 'cardinal',
-        sprite: Sprites.ANIMAL1
+        sprite: Sprites.CARDINAL
       },
       {
         name: 'raccoon',
-        sprite: Sprites.ANIMAL2
+        sprite: Sprites.RACCOON
       },
       {
         name: 'coyotl',
-        sprite: Sprites.ANIMAL3
+        sprite: Sprites.COYOTL
       }
     ]);
     this.heroSelector = Selector.heroSelector(Game.game.party.members);

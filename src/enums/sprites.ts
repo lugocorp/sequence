@@ -68,29 +68,29 @@ enum Sprites {
   OBSTACLE     = 0x010000, // Come up with these later
   GIFT         = 0x010000, // Come up with these later
   TRAP         = 0x010000, // Come up with these later
-  NIGHT        = 0x010000, // Come up with these later
-  DAY          = 0x010000, // Come up with these later
-  SUN          = 0x010000, // Come up with these later
-  RAIN         = 0x010000, // Come up with these later
-  WIND         = 0x010000, // Come up with these later
-  TRADE        = 0x010000, // Come up with these later
-  PROJECT      = 0x010000, // Come up with these later
-  RAPID        = 0x010000, // Come up with these later
-  PLANT1       = 0x010000, // Come up with these later
-  PLANT2       = 0x010000, // Come up with these later
-  PLANT3       = 0x010000, // Come up with these later
-  ANIMAL1      = 0x010000, // Come up with these later
-  ANIMAL2      = 0x010000, // Come up with these later
-  ANIMAL3      = 0x010000, // Come up with these later
+  SUN          = 0x010100,
+  RAIN         = 0x010200,
+  WIND         = 0x010001,
+  TRADE        = 0x010101,
+  RAPID        = 0x010201,
+  PROJECT      = 0x010002,
+  DAY          = 0x010102,
+  NIGHT        = 0x010202,
 
-  // Spritesheet #2 (enemies)
-  SPIRIT            = 0x020000, // Placeholder to be replaced later
-  TREASURE_CHEST    = 0x020000,
-  TOOTH_BEAST       = 0x020100,
-  MATRIARCH         = 0x020200,
-  TOXIC_SLUDGE      = 0x020001,
-  DIRE_CRAB         = 0x020101,
-  SWORD_HOLDER      = 0x020201,
+  // Spritesheet #2 (plants/animals)
+  ELDERBERRY = 0x010000,
+  POKEWEED   = 0x010100,
+  CHAYOTE    = 0x010200,
+  CARDINAL   = 0x010001,
+  RACCOON    = 0x010101,
+  COYOTL     = 0x010201,
+
+  // Spritesheet #3 (challengers)
+  SPIRIT = 0x030000, // Placeholder to be replaced later
+
+  // Spritesheet #4 (heroes)
+  MATRIARCH         = 0x040200,
+  SWORD_HOLDER      = 0x040201,
 
   // Constants that are special
   NONE    = 0xFFFFFE,
