@@ -78,12 +78,12 @@ enum Sprites {
   NIGHT        = 0x010202,
 
   // Spritesheet #2 (plants/animals)
-  ELDERBERRY = 0x010000,
-  POKEWEED   = 0x010100,
-  CHAYOTE    = 0x010200,
-  CARDINAL   = 0x010001,
-  RACCOON    = 0x010101,
-  COYOTL     = 0x010201,
+  ELDERBERRY = 0x020000,
+  POKEWEED   = 0x020100,
+  CHAYOTE    = 0x020200,
+  CARDINAL   = 0x020001,
+  RACCOON    = 0x020101,
+  COYOTL     = 0x020201,
 
   // Spritesheet #3 (challengers)
   SPIRIT = 0x030000, // Placeholder to be replaced later
