@@ -28,7 +28,7 @@ const data: HeroData[] = [
     itemSlots: 2
   },
   {
-    sprite: Sprites.SWORD_HOLDER,
+    sprite: Sprites.POTTER,
     name: 'potter',
     strength: 3,
     wisdom: 3,
@@ -36,7 +36,7 @@ const data: HeroData[] = [
     itemSlots: 2
   },
   {
-    sprite: Sprites.MATRIARCH,
+    sprite: Sprites.GOURD_ELDER,
     name: 'frost woman',
     strength: 0,
     wisdom: 6,
@@ -45,7 +45,7 @@ const data: HeroData[] = [
     ability: 'test blessing'
   },
   {
-    sprite: Sprites.SWORD_HOLDER,
+    sprite: Sprites.GOURD_ELDER,
     name: 'web witch',
     strength: 0,
     wisdom: 3,
@@ -54,7 +54,7 @@ const data: HeroData[] = [
     ability: 'test blessing'
   },
   {
-    sprite: Sprites.MATRIARCH,
+    sprite: Sprites.GOURD_ELDER,
     name: 'storm sage',
     strength: 0,
     wisdom: 3,
@@ -63,7 +63,7 @@ const data: HeroData[] = [
     ability: 'test blessing'
   },
   {
-    sprite: Sprites.SWORD_HOLDER,
+    sprite: Sprites.POTTER,
     name: 'basketweaver',
     strength: 0,
     wisdom: 6,
@@ -71,7 +71,7 @@ const data: HeroData[] = [
     itemSlots: 2
   },
   {
-    sprite: Sprites.MATRIARCH,
+    sprite: Sprites.POTTER,
     name: 'scribe',
     strength: 0,
     wisdom: 6,
@@ -97,35 +97,43 @@ const data: HeroData[] = [
     ability: 'test blessing'
   },
   {
-    sprite: Sprites.SWORD_HOLDER,
-    name: 'test hero 1',
-    strength: 2,
-    wisdom: 2,
+    sprite: Sprites.GOURD_ELDER,
+    name: 'gourd elder',
+    strength: 0,
+    wisdom: 4,
     dexterity: 2,
+    itemSlots: 3
+  },
+  {
+    sprite: Sprites.BIRD_CATCHER,
+    name: 'bird catcher',
+    strength: 1,
+    wisdom: 2,
+    dexterity: 3,
+    itemSlots: 1
+  },
+  {
+    sprite: Sprites.GOURD_ELDER,
+    name: 'corn woman',
+    strength: 4,
+    wisdom: 1,
+    dexterity: 1,
     itemSlots: 2
   },
   {
-    sprite: Sprites.SWORD_HOLDER,
-    name: 'test hero 2',
-    strength: 2,
-    wisdom: 2,
-    dexterity: 2,
+    sprite: Sprites.GOURD_ELDER,
+    name: 'squash lady',
+    strength: 1,
+    wisdom: 4,
+    dexterity: 1,
     itemSlots: 2
   },
   {
-    sprite: Sprites.SWORD_HOLDER,
-    name: 'test hero 3',
-    strength: 2,
-    wisdom: 2,
-    dexterity: 2,
-    itemSlots: 2
-  },
-  {
-    sprite: Sprites.SWORD_HOLDER,
-    name: 'test hero 4',
-    strength: 2,
-    wisdom: 2,
-    dexterity: 2,
+    sprite: Sprites.GOURD_ELDER,
+    name: 'bean girl',
+    strength: 1,
+    wisdom: 1,
+    dexterity: 4,
     itemSlots: 2
   }
 ];

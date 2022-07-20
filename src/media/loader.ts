@@ -18,12 +18,9 @@ export default class GraphicsLoader {
    */
   getDimensions(sheet: number): {w: number, h: number} {
     const sizes = [
-      {w: WGLYPH, h: HGLYPH},
-      {w: 100, h: 100},
-      {w: 100, h: 100},
-      {w: 100, h: 100}
+      {w: WGLYPH, h: HGLYPH}
     ];
-    return (sheet < sizes.length) ? sizes[sheet] : {w: 60, h: 60};
+    return (sheet < sizes.length) ? sizes[sheet] : {w: 100, h: 100};
   }
 
   /*
