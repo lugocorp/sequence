@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="net.lugocorp.sequence" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>Turtle Island</name>
-    <description>A retro RPG rougelite game</description>
+    <name>Adventures in Abya Yala</name>
+    <description>A retro RPG rougelite game based in Indigenous American cultures</description>
     <author email="alugocp@aim.com" href="http://lugocorp.net">
         Alex Lugo
     </author>
