@@ -70,17 +70,17 @@ We have a number of `npm` commands:
 - [x] Code the fatigue system and rework events accordingly
 - [x] Draw some beta sprites
 - [ ] Add beta content
-- [ ] Balance as needed
+- [ ] Allow a new game to be started without without exiting the app
 - [ ] Launch the beta
-- [ ] Contact more consultants just to double check themes and designs
 
 #### Full Launch
+- [ ] Contact more consultants just to double check themes and designs
+- [ ] Balance game content as needed
 - [ ] Update consultants list
+- [ ] Add time/weather icon to HUD
 - [ ] Replace audio files with custom sound effects
-- [ ] Allow a new game to be started without without exiting the app
 - [ ] Add custom RNG with seed, allow players to set the seed for a given run
 - [ ] Store previous run stats (how far you went, points scored, etc) in a save file
 - [ ] Redesign sprites for full launch/draw all sprites
-- [ ] Put all launch content into the game
-- [ ] Balance as needed again
+- [ ] Add all final game content
 - [ ] Launch the full game

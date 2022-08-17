@@ -89,11 +89,11 @@ enum Sprites {
   SPIRIT = 0x030000, // Placeholder to be replaced later
 
   // Spritesheet #4 (heroes)
-  MATRIARCH     = 0x040000,
-  SWORD_HOLDER  = 0x040000,
   BIRD_CATCHER  = 0x040000,
   POTTER        = 0x040100,
   GOURD_ELDER   = 0x040200,
+  CORN_WOMAN    = 0x040300,
+  SQUASH_LADY   = 0x040400,
 
   // Constants that are special
   NONE    = 0xFFFFFE,

@@ -169,6 +169,7 @@ export default class GraphicsRenderer {
       return ((Sprites.ZERO as number) + ((code - zero) << 8)) as Sprites;
     }
     switch (char) {
+      case 'í': return Sprites.I;
       case '.': return Sprites.PERIOD;
       case ',': return Sprites.COMMA;
       case '!': return Sprites.EXCLAIM;

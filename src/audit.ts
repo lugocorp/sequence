@@ -5,7 +5,7 @@ import items from './data/item';
 const MAX_CHALLENGER_NAME_LENGTH = 14;
 const MAX_ABILITY_NAME_LENGTH = 19;
 const MAX_ITEM_NAME_LENGTH = 19;
-const MAX_HERO_NAME_LENGTH = 14;
+const MAX_HERO_NAME_LENGTH = 20;
 const valid_abilities = [];
 let errors = 0;
 
@@ -59,10 +59,10 @@ for (const hero of heroes) {
   if (hero.name.length > MAX_HERO_NAME_LENGTH) {
     error('Invalid name length', 'hero', hero.name, `Maximum name length is ${MAX_HERO_NAME_LENGTH}.`);
   }
-  if (hero.strength + hero.wisdom + hero.dexterity != 6) {
+  if ([0, 6].indexOf(hero.strength + hero.wisdom + hero.dexterity) < 0) {
     error('Invalid stat spread detected', 'hero', hero.name, 'Stats should add up to 6');
   }
-  if ([0, 1, 2].indexOf(hero.itemSlots) < 0) {
+  if ([1, 2, 3, 4].indexOf(hero.itemSlots) < 0) {
     error('Invalid number of item slots detected', 'hero', hero.name, 'Item slots can only be either (0, 1, 2)');
   }
   if (hero.ability && valid_abilities.indexOf(hero.ability) < 0) {
