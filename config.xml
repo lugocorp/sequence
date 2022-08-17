@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="net.lugocorp.sequence" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>Sequence Dungeons</name>
+    <name>Turtle Island</name>
     <description>A retro RPG rougelite game</description>
     <author email="alugocp@aim.com" href="http://lugocorp.net">
         Alex Lugo
@@ -10,4 +10,12 @@
     <allow-intent href="https://*/*" />
     <hook type="before_build" src="build.sh" />
     <hook type="before_run" src="build.sh" />
+    <platform name="android">
+      <icon density="ldpi" foreground="icons/icon.xml" background="icons/background.xml" src="icons/icon.xml" />
+      <icon density="mdpi" foreground="icons/icon.xml" background="icons/background.xml" src="icons/icon.xml" />
+      <icon density="hdpi" foreground="icons/icon.xml" background="icons/background.xml" src="icons/icon.xml" />
+      <icon density="xhdpi" foreground="icons/icon.xml" background="icons/background.xml" src="icons/icon.xml" />
+      <icon density="xxhdpi" foreground="icons/icon.xml" background="icons/background.xml" src="icons/icon.xml" />
+      <icon density="xxxhdpi" foreground="icons/icon.xml" background="icons/background.xml" src="icons/icon.xml" />
+    </platform>
 </widget>
