@@ -32,6 +32,16 @@ export default class EventChain {
   ];
 
   /*
+   * This function clears the chain's internal state
+   */
+  clear(): void {
+    this.futures = [];
+    this.events = [
+      new BeginEvent()
+    ];
+  }
+
+  /*
    * This function returns the current event in the sequence.
    */
   latest(): View {

@@ -16,7 +16,7 @@ export default class Selector<T> {
   }
 
   invalidate(): void {
-    this.select(Game.game.view, this.item());
+    this.select(Game.game.getView(), this.item());
   }
 
   item(): T {

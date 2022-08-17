@@ -12,6 +12,7 @@ import View from './ui/view';
 
 export default class Game {
   static game: Game;
+  private view: View;
   currentClick: {x: number, y: number, down: boolean};
   renderer: GraphicsRenderer;
   assets: GraphicsLoader;
@@ -20,7 +21,6 @@ export default class Game {
   audio: GameAudio;
   world: World;
   party: Party;
-  view: View;
 
   constructor() {
     this.currentClick = {x: 0, y: 0, down: false};
@@ -29,10 +29,6 @@ export default class Game {
     this.data = new DataManager();
     this.audio = new GameAudio();
     this.party = new Party();
-    this.world = {
-      weather: Weather.SUN,
-      time: Time.DAY
-    };
   }
 
   // Initializes the game object so the player can start interacting with it
@@ -50,17 +46,32 @@ export default class Game {
     await new Promise((resolve) => setTimeout(resolve, 1000));
 
     // Loading has completed
-    for (let a = 0; a < Party.MAX; a++) {
+    Game.setView(new StartView());
+    this.invalidate();
+  }
+
+  // Sets initial game state
+  setInitialState(): void {
+    this.chain.clear();
+    this.party.clear();
+    this.world = {
+      weather: Weather.SUN,
+      time: Time.DAY
+    };
+    for (let a = 0; a < 1/*Party.MAX*/; a++) {
       this.party.add(this.data.getRandomHero());
     }
     Game.futureEvent(new TimeEvent(), DAY_NIGHT_CYCLE);
-    this.view = new StartView();
-    this.invalidate();
   }
 
   // Tells the game to render a new frame
   invalidate(): void {
     this.renderer.frame(this.view);
+  }
+
+  // Protected access to the current View
+  getView(): View {
+    return this.view;
   }
 
   // Sets the current view of the game
@@ -76,11 +87,11 @@ export default class Game {
 
   // Progresses to the next event in the game
   progress(): void {
-    if (!this.party.length() || this.chain.events.length === 1) {
+    if (this.party.length() && this.chain.events.length === 1) {
       this.chain.plan();
     }
     this.chain.events.splice(0, 1);
-    this.view = this.chain.latest();
+    Game.setView(this.chain.latest());
     this.invalidate();
   }
 

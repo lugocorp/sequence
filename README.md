@@ -69,8 +69,8 @@ We have a number of `npm` commands:
 - [x] Add sounds into the game (just to accentuate certain events)
 - [x] Code the fatigue system and rework events accordingly
 - [x] Draw some beta sprites
+- [x] Allow a new game to be started without without exiting the app
 - [ ] Add beta content
-- [ ] Allow a new game to be started without without exiting the app
 - [ ] Launch the beta
 
 #### Full Launch

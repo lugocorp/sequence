@@ -18,7 +18,7 @@ export default class InstructionsView extends View {
       ].join(' '),
       [
         new Action('back', () => {
-          Game.game.view = new StartView();
+          Game.setView(new StartView());
           Game.game.invalidate();
         })
       ]

@@ -15,4 +15,8 @@ export default class StartView extends View {
       new Action('credits', () => Game.setView(new CreditsView()))
     ]);
   }
+
+  init(): void {
+    Game.game.setInitialState();
+  }
 }

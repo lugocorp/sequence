@@ -6,6 +6,11 @@ export default class Party {
   static MAX = 4;
   members: Hero[] = [];
 
+  // Removes all heroes from your party
+  clear(): void {
+    this.members = [];
+  }
+
   // Returns the number of heroes in your party
   length(): number {
     return this.members.length;
