@@ -1,10 +1,10 @@
-import {ItemEffect} from '../enums/effects';
+import Effect from '../enums/effects';
 import {ItemData} from '../serial/types';
 import Hero from '../entities/hero';
 import {Rarity, Trigger} from '../enums/types';
 import Stats from '../enums/stats';
 
-function statItemEffect(stat: number, boost: number): ItemEffect {
+function statItemEffect(stat: number, boost: number): Effect {
     return (trigger: Trigger, hero: Hero, data: any) => {
         if (trigger === Trigger.EQUIP) {
             Stats.changeUnitStat(hero, stat, boost);
@@ -15,7 +15,7 @@ function statItemEffect(stat: number, boost: number): ItemEffect {
     }
 }
 
-function luckItemEffect(boost: number): ItemEffect {
+function luckItemEffect(boost: number): Effect {
     return (trigger: Trigger, hero: Hero, data: any) => {
         if (trigger === Trigger.EQUIP) {
             hero.luck += boost;
