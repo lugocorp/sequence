@@ -3,8 +3,9 @@ import challengers from './data/challenger';
 import heroes from './data/hero';
 import items from './data/item';
 const MAX_CHALLENGER_NAME_LENGTH = 20;
-const MAX_ITEM_NAME_LENGTH = 20;
+const MAX_HERO_PEOPLE_LENGTH = 13;
 const MAX_HERO_NAME_LENGTH = 20;
+const MAX_ITEM_NAME_LENGTH = 20;
 const valid_abilities = [];
 let errors = 0;
 
@@ -52,6 +53,9 @@ for (const hero of heroes) {
   }
   if (hero.name.length > MAX_HERO_NAME_LENGTH) {
     error('Invalid name length', 'hero', hero.name, `Maximum name length is ${MAX_HERO_NAME_LENGTH}.`);
+  }
+  if (hero.people.length > MAX_HERO_PEOPLE_LENGTH) {
+    error('Invalid people length', 'hero', hero.name, `Maximum people length is ${MAX_HERO_PEOPLE_LENGTH}.`);
   }
   if ([0, 6].indexOf(hero.strength + hero.wisdom + hero.dexterity) < 0) {
     error('Invalid stat spread detected', 'hero', hero.name, 'Stats should add up to 6');

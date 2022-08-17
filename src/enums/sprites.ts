@@ -58,6 +58,8 @@ enum Sprites {
   ARROW_LEFT  = 0x000F02,
   ARROW_RIGHT = 0x001002,
   COLON       = 0x001102,
+  ACCENT_I    = 0x001202,
+  ACCENT_E    = 0x001302,
 
   // Spritesheet #1 (backgrounds)
   WELCOME      = 0x010000, // Come up with these later

@@ -34,8 +34,8 @@ export default class Glyphs {
       return ((Sprites.ZERO as number) + ((code - zero) << 8)) as Sprites;
     }
     switch (char) {
-      case 'í': return Sprites.I;
-      case 'é': return Sprites.E;
+      case 'í': return Sprites.ACCENT_I;
+      case 'é': return Sprites.ACCENT_E;
       case '.': return Sprites.PERIOD;
       case ',': return Sprites.COMMA;
       case '!': return Sprites.EXCLAIM;

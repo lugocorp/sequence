@@ -1,3 +1,4 @@
+import {WTEXT} from '../enums/values';
 import {Trigger} from '../enums/types';
 import Sprites from '../enums/sprites';
 import Random from '../logic/random';
@@ -102,10 +103,11 @@ export default class Hero extends Unit {
 
   descriptionText(): string {
     const stat = (n: number): string => n > 9 ? `\t${n}\t` : `\t${n}\t\t`;
+    const numSpaces = WTEXT - this.people.length - 9 - 1;
+    const spaces = new Array(numSpaces + 1).join(' ');
     return `${this.name}\n` +
-      `str:${stat(this.strength)}wis:${stat(this.wisdom)}dex:${stat(this.dexterity)}` +
-      (this.itemSlots ? '\nitems:\n' : '') +
-      this.items.map((x: Item) => (x?.name || '---')).join('\n');
+      `${this.itemCount()}/${this.itemSlots} items${spaces}${this.people}\n` +
+      `str:${stat(this.strength)}wis:${stat(this.wisdom)}dex:${stat(this.dexterity)}`;
   }
 
   lucky(): boolean {
