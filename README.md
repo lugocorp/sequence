@@ -72,10 +72,14 @@ We have a number of `npm` commands:
 - [x] Code the fatigue system and rework events accordingly
 - [x] Draw some beta sprites
 - [x] Allow a new game to be started without without exiting the app
-- [ ] Add beta content
+- [x] Add party member data
+- [ ] Add a bunch of items
+- [ ] Program party member abilities
+- [ ] Finish all beta graphics
 - [ ] Launch the beta
 
 #### Full Launch
+- [ ] Fix reported beta bugs
 - [ ] Contact more consultants just to double check themes and designs
 - [ ] Balance game content as needed
 - [ ] Update consultants list
