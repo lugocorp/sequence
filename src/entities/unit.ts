@@ -19,10 +19,4 @@ export default abstract class Unit {
     this.dexterity = dexterity;
     this.name = name;
   }
-
-  /**
-   * This function activates all ability and item effects given a
-   * particular trigger.
-   */
-  abstract activate(trigger: Trigger, data: any): void;
 }

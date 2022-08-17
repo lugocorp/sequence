@@ -10,11 +10,13 @@ export default class Hero extends Unit {
   private items: Item[];
   itemSlots: number;
   ability: Ability;
+  people: string;
   luck: number;
 
-  constructor(sprite: Sprites, name: string, strength: number, wisdom: number, dexterity: number, itemSlots: number) {
+  constructor(sprite: Sprites, name: string, people: string, strength: number, wisdom: number, dexterity: number, itemSlots: number) {
     super(sprite, name, strength, wisdom, dexterity);
     this.itemSlots = itemSlots;
+    this.people = people;
     this.items = [];
     this.luck = 50;
     for (let a = 0; a < this.itemSlots; a++) {

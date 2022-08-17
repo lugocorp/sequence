@@ -14,16 +14,14 @@ const data: ChallengerData[] = [
     name: 'raccoon',
     strength: 2,
     wisdom: 2,
-    dexterity: 2,
-    ability: 'test blessing'
+    dexterity: 2
   },
   {
     sprite: Sprites.SPIRIT,
     name: 'sea turtle',
     strength: 3,
     wisdom: 3,
-    dexterity: 0,
-    ability: 'test blessing'
+    dexterity: 0
   },
   {
     sprite: Sprites.SPIRIT,
@@ -37,16 +35,14 @@ const data: ChallengerData[] = [
     name: 'guinea pig',
     strength: 2,
     wisdom: 2,
-    dexterity: 2,
-    ability: 'test blessing'
+    dexterity: 2
   },
   {
     sprite: Sprites.SPIRIT,
     name: 'axolotl',
     strength: 3,
     wisdom: 3,
-    dexterity: 0,
-    ability: 'test blessing'
+    dexterity: 0
   }
 ];
 

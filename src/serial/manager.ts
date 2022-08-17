@@ -6,18 +6,15 @@
 import Random from '../logic/random';
 import Factory from './factory';
 import Challenger from '../entities/challenger';
-import Ability from '../entities/ability';
 import Hero from '../entities/hero';
 import Item from '../entities/item';
 import {Rarity} from '../enums/types';
 import * as types from './types';
 import challengers from '../data/challenger';
-import abilities from '../data/ability';
 import heroes from '../data/hero';
 import items from '../data/item';
 
 export default class DataManager {
-  abilitiesByNameIndex: Map<string, types.AbilityData> = new Map();
   itemsByRarityIndex: Map<number, types.ItemData[]> = new Map();
   factory: Factory = new Factory();
 
@@ -26,29 +23,9 @@ export default class DataManager {
     for (const rarity of Rarity.values()) {
       this.itemsByRarityIndex.set(rarity, []);
     }
-    for (const ability of abilities) {
-      this.abilitiesByNameIndex.set(ability.name, ability);
-    }
     for (const item of items) {
       this.itemsByRarityIndex.get(item.rarity).push(item);
     }
-  }
-
-  // Returns an ability by its name
-  getAbilityByName(name: string): Ability {
-    const ability: types.AbilityData = this.abilitiesByNameIndex.get(name);
-    if (!ability) {
-      throw new Error(`Could not find ability called '${name}'`);
-    }
-    return this.factory.createAbility(ability);
-  }
-
-  /*
-   * Returns a random ability available in the game. Every ability has equal
-   * chance to be returned by this function.
-   */
-  getRandomAbility(): Ability {
-    return this.factory.createAbility(Random.element(abilities));
   }
 
   /*

@@ -5,11 +5,11 @@ import Sprites from '../enums/sprites';
 export interface HeroData {
   sprite: Sprites;
   name: string;
+  people: string;
   strength: number;
   wisdom: number;
   dexterity: number;
   itemSlots: number;
-  ability?: string;
 }
 
 // Defines game data for an Challenger
@@ -28,11 +28,4 @@ export interface ItemData {
   rarity: number;
   description: string;
   effect: ItemEffect;
-}
-
-// Defines game data for an Ability
-export interface AbilityData {
-  name: string;
-  description: string;
-  effect: AbilityEffect;
 }

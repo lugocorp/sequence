@@ -4,6 +4,7 @@
  */
 import { WIDTH, HEIGHT, WGLYPH, HGLYPH, WTEXT } from '../enums/values';
 import Sprites from '../enums/sprites';
+import Glyphs from '../serial/glyphs';
 import DrawCoords from './draw-coords';
 import GraphicsLoader from './loader';
 import Action from '../ui/action';
@@ -135,7 +136,7 @@ export default class GraphicsRenderer {
         dy++;
       } else {
         if (msg[a] !== ' ') {
-          const glyph: Sprites = this.getGlyph(msg[a]);
+          const glyph: Sprites = Glyphs.getGlyph(msg[a]);
           const c: DrawCoords = this.assets.getSprite(glyph);
           this.ctx.imageSmoothingEnabled = false;
           this.ctx.drawImage(c.src, c.left, c.top, WGLYPH, HGLYPH, x + (dx * WGLYPH), y + (dy * HGLYPH), WGLYPH, HGLYPH);
@@ -151,36 +152,5 @@ export default class GraphicsRenderer {
       this.ctx.globalCompositeOperation = 'source-over';
       this.ctx.fillStyle = 'black';
     }
-  }
-
-  /*
-   * This method returns a sprite for a specific character.
-   */
-  getGlyph(char: string): Sprites {
-    const a = 'a'.charCodeAt(0);
-    const z = 'z'.charCodeAt(0);
-    const zero = '0'.charCodeAt(0);
-    const nine = '9'.charCodeAt(0);
-    const code = char.charCodeAt(0);
-    if (code >= a && code <= z) {
-      return ((Sprites.A as number) + ((code - a) << 8)) as Sprites;
-    }
-    if (code >= zero && code <= nine) {
-      return ((Sprites.ZERO as number) + ((code - zero) << 8)) as Sprites;
-    }
-    switch (char) {
-      case 'í': return Sprites.I;
-      case '.': return Sprites.PERIOD;
-      case ',': return Sprites.COMMA;
-      case '!': return Sprites.EXCLAIM;
-      case '?': return Sprites.QUESTION;
-      case '+': return Sprites.PLUS;
-      case '-': return Sprites.MINUS;
-      case '\'': return Sprites.APOSTROPHE;
-      case '/': return Sprites.SLASH;
-      case '%': return Sprites.PERCENT;
-      case ':': return Sprites.COLON;
-    }
-    throw new Error(`No font glyph for character '${char}'`);
   }
 }
