@@ -48,7 +48,7 @@ const data: HeroData[] = [
     itemSlots: 2
   },
   {
-    sprite: Sprites.GOURD_ELDER,
+    sprite: Sprites.SWORD_HOLDER,
     name: 'sword holder',
     people: 'lakota',
     strength: 5,
@@ -165,7 +165,7 @@ const data: HeroData[] = [
     itemSlots: 2
   },
   {
-    sprite: Sprites.GOURD_ELDER,
+    sprite: Sprites.RUNNER,
     name: 'runner',
     people: 'pueblo',
     strength: 0,
@@ -237,7 +237,7 @@ const data: HeroData[] = [
     itemSlots: 2
   },
   {
-    sprite: Sprites.GOURD_ELDER,
+    sprite: Sprites.BEAN_GIRL,
     name: 'bean girl',
     people: 'oneida',
     strength: 1,
@@ -264,7 +264,7 @@ const data: HeroData[] = [
     itemSlots: 2
   },
   {
-    sprite: Sprites.GOURD_ELDER,
+    sprite: Sprites.SCOUT,
     name: 'scout',
     people: 'lummi',
     strength: 1,
@@ -318,7 +318,7 @@ const data: HeroData[] = [
     itemSlots: 1
   },
   {
-    sprite: Sprites.GOURD_ELDER,
+    sprite: Sprites.DEER_HUNTER,
     name: 'deer hunter',
     people: 'coahuiltecan',
     strength: 2,

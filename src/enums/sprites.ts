@@ -96,6 +96,11 @@ enum Sprites {
   GOURD_ELDER   = 0x040200,
   CORN_WOMAN    = 0x040300,
   SQUASH_LADY   = 0x040400,
+  BEAN_GIRL     = 0x040001,
+  SWORD_HOLDER  = 0x040101,
+  DEER_HUNTER   = 0x040201,
+  SCOUT         = 0x040301,
+  RUNNER        = 0x040401,
 
   // Constants that are special
   NONE    = 0xFFFFFE,
