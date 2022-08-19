@@ -6,7 +6,6 @@ const MAX_CHALLENGER_NAME_LENGTH = 20;
 const MAX_HERO_PEOPLE_LENGTH = 13;
 const MAX_HERO_NAME_LENGTH = 20;
 const MAX_ITEM_NAME_LENGTH = 20;
-const valid_abilities = [];
 let errors = 0;
 
 function error(msg: string, entity: string, name: string, additional = ''): void {
