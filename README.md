@@ -3,7 +3,6 @@ This is a rogue-like game set in an Indigenous fantasy world where you build an 
 The core of the game is around strategic choice making.
 You'll have clear ideas of the immediate outcome of your choices but only a speculation about later consequences.
 The game is written in TypeScript and runs on mobile platforms using Cordova.
-Mobile app icons were created with [svg2vector.com](https://svg2vector.com).
 
 ## Commands
 We have a number of `npm` commands:
