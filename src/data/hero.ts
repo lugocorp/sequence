@@ -12,7 +12,7 @@ const data: HeroData[] = [
     itemSlots: 2
   },
   {
-    sprite: Sprites.GOURD_ELDER,
+    sprite: Sprites.NONE,
     name: 'matriarch',
     people: 'ojibwe',
     strength: 2,
@@ -21,7 +21,7 @@ const data: HeroData[] = [
     itemSlots: 1
   },
   {
-    sprite: Sprites.GOURD_ELDER,
+    sprite: Sprites.NONE,
     name: 'molten warrior',
     people: 'aztec',
     strength: 6,
@@ -39,7 +39,7 @@ const data: HeroData[] = [
     itemSlots: 4
   },
   {
-    sprite: Sprites.GOURD_ELDER,
+    sprite: Sprites.NONE,
     name: 'frost woman',
     people: 'inuit',
     strength: 0,
@@ -57,7 +57,7 @@ const data: HeroData[] = [
     itemSlots: 1
   },
   {
-    sprite: Sprites.GOURD_ELDER,
+    sprite: Sprites.NONE,
     name: 'web witch',
     people: 'tlaxcaltec',
     strength: 0,
@@ -66,7 +66,7 @@ const data: HeroData[] = [
     itemSlots: 3
   },
   {
-    sprite: Sprites.GOURD_ELDER,
+    sprite: Sprites.NONE,
     name: 'storm sage',
     people: 'taíno',
     strength: 0,
@@ -75,7 +75,7 @@ const data: HeroData[] = [
     itemSlots: 2
   },
   {
-    sprite: Sprites.GOURD_ELDER,
+    sprite: Sprites.NONE,
     name: 'basketweaver',
     people: 'seneca',
     strength: 0,
@@ -84,7 +84,7 @@ const data: HeroData[] = [
     itemSlots: 4
   },
   {
-    sprite: Sprites.GOURD_ELDER,
+    sprite: Sprites.NONE,
     name: 'scribe',
     people: 'muisca',
     strength: 0,
@@ -93,7 +93,7 @@ const data: HeroData[] = [
     itemSlots: 3
   },
   {
-    sprite: Sprites.GOURD_ELDER,
+    sprite: Sprites.NONE,
     name: 'fighter',
     people: 'cree',
     strength: 4,
@@ -102,7 +102,7 @@ const data: HeroData[] = [
     itemSlots: 2
   },
   {
-    sprite: Sprites.GOURD_ELDER,
+    sprite: Sprites.NONE,
     name: 'sentinel',
     people: 'seminole',
     strength: 3,
@@ -111,7 +111,7 @@ const data: HeroData[] = [
     itemSlots: 2
   },
   {
-    sprite: Sprites.GOURD_ELDER,
+    sprite: Sprites.NONE,
     name: 'sneaky hunter',
     people: 'powhatan',
     strength: 1,
@@ -120,7 +120,7 @@ const data: HeroData[] = [
     itemSlots: 3
   },
   {
-    sprite: Sprites.GOURD_ELDER,
+    sprite: Sprites.NONE,
     name: 'war rider',
     people: 'cherokee',
     strength: 0,
@@ -129,7 +129,7 @@ const data: HeroData[] = [
     itemSlots: 4
   },
   {
-    sprite: Sprites.GOURD_ELDER,
+    sprite: Sprites.NONE,
     name: 'night sky woman',
     people: 'tlingit',
     strength: 0,
@@ -138,7 +138,7 @@ const data: HeroData[] = [
     itemSlots: 3
   },
   {
-    sprite: Sprites.GOURD_ELDER,
+    sprite: Sprites.NONE,
     name: 'kokum',
     people: 'dakelh',
     strength: 2,
@@ -147,7 +147,7 @@ const data: HeroData[] = [
     itemSlots: 3
   },
   {
-    sprite: Sprites.GOURD_ELDER,
+    sprite: Sprites.NONE,
     name: 'chilly elder',
     people: 'yaghan',
     strength: 1,
@@ -156,7 +156,7 @@ const data: HeroData[] = [
     itemSlots: 1
   },
   {
-    sprite: Sprites.GOURD_ELDER,
+    sprite: Sprites.NONE,
     name: 'snake priest',
     people: 'shawnee',
     strength: 1,
@@ -174,7 +174,7 @@ const data: HeroData[] = [
     itemSlots: 1
   },
   {
-    sprite: Sprites.GOURD_ELDER,
+    sprite: Sprites.SUN_PRIEST,
     name: 'sun priest',
     people: 'quechua',
     strength: 2,
@@ -183,7 +183,7 @@ const data: HeroData[] = [
     itemSlots: 3
   },
   {
-    sprite: Sprites.GOURD_ELDER,
+    sprite: Sprites.NONE,
     name: 'sneaky dancer',
     people: 'wampanoag',
     strength: 0,
@@ -192,7 +192,7 @@ const data: HeroData[] = [
     itemSlots: 1
   },
   {
-    sprite: Sprites.GOURD_ELDER,
+    sprite: Sprites.BONE_CRUSHER,
     name: 'bone crusher',
     people: 'inuit',
     strength: 6,
@@ -201,7 +201,7 @@ const data: HeroData[] = [
     itemSlots: 2
   },
   {
-    sprite: Sprites.GOURD_ELDER,
+    sprite: Sprites.BEAD_QUEEN,
     name: 'bead queen',
     people: 'diné',
     strength: 2,
@@ -210,7 +210,7 @@ const data: HeroData[] = [
     itemSlots: 3
   },
   {
-    sprite: Sprites.GOURD_ELDER,
+    sprite: Sprites.NONE,
     name: 'merchant',
     people: 'anasazi',
     strength: 0,
@@ -246,7 +246,7 @@ const data: HeroData[] = [
     itemSlots: 2
   },
   {
-    sprite: Sprites.GOURD_ELDER,
+    sprite: Sprites.FOX_BOY,
     name: 'fox boy',
     people: 'blackfoot',
     strength: 1,
@@ -255,7 +255,7 @@ const data: HeroData[] = [
     itemSlots: 2
   },
   {
-    sprite: Sprites.GOURD_ELDER,
+    sprite: Sprites.NONE,
     name: 'chinampa man',
     people: 'xaltocan',
     strength: 3,
@@ -273,7 +273,7 @@ const data: HeroData[] = [
     itemSlots: 1
   },
   {
-    sprite: Sprites.GOURD_ELDER,
+    sprite: Sprites.NONE,
     name: 'farmer',
     people: 'hopi',
     strength: 3,
@@ -282,7 +282,7 @@ const data: HeroData[] = [
     itemSlots: 3
   },
   {
-    sprite: Sprites.GOURD_ELDER,
+    sprite: Sprites.NONE,
     name: 'bat priest',
     people: 'maya',
     strength: 0,
@@ -291,7 +291,7 @@ const data: HeroData[] = [
     itemSlots: 2
   },
   {
-    sprite: Sprites.GOURD_ELDER,
+    sprite: Sprites.NONE,
     name: 'yuca farmer',
     people: 'lokono',
     strength: 4,
@@ -300,7 +300,7 @@ const data: HeroData[] = [
     itemSlots: 4
   },
   {
-    sprite: Sprites.GOURD_ELDER,
+    sprite: Sprites.NONE,
     name: 'hoop dancer',
     people: 'cree',
     strength: 2,
@@ -309,7 +309,7 @@ const data: HeroData[] = [
     itemSlots: 2
   },
   {
-    sprite: Sprites.GOURD_ELDER,
+    sprite: Sprites.NONE,
     name: 'mummy',
     people: 'quechua',
     strength: 2,
@@ -327,7 +327,7 @@ const data: HeroData[] = [
     itemSlots: 2
   },
   {
-    sprite: Sprites.GOURD_ELDER,
+    sprite: Sprites.NONE,
     name: 'cacíque',
     people: 'guaraní',
     strength: 3,
@@ -345,7 +345,7 @@ const data: HeroData[] = [
     itemSlots: 3
   },
   {
-    sprite: Sprites.GOURD_ELDER,
+    sprite: Sprites.NONE,
     name: 'hungry coyotl',
     people: 'texcoco',
     strength: 2,
@@ -354,7 +354,7 @@ const data: HeroData[] = [
     itemSlots: 1
   },
   {
-    sprite: Sprites.GOURD_ELDER,
+    sprite: Sprites.NONE,
     name: 'forager',
     people: 'guachichil',
     strength: 0,
@@ -363,7 +363,7 @@ const data: HeroData[] = [
     itemSlots: 1
   },
   {
-    sprite: Sprites.GOURD_ELDER,
+    sprite: Sprites.NONE,
     name: 'ranger',
     people: 'dakota',
     strength: 2,
@@ -372,7 +372,7 @@ const data: HeroData[] = [
     itemSlots: 2
   },
   {
-    sprite: Sprites.GOURD_ELDER,
+    sprite: Sprites.NONE,
     name: 'tanner',
     people: 'piscataway',
     strength: 0,
@@ -381,7 +381,7 @@ const data: HeroData[] = [
     itemSlots: 2
   },
   {
-    sprite: Sprites.GOURD_ELDER,
+    sprite: Sprites.NONE,
     name: 'medicine man',
     people: 'muskogee',
     strength: 0,
@@ -390,7 +390,7 @@ const data: HeroData[] = [
     itemSlots: 4
   },
   {
-    sprite: Sprites.GOURD_ELDER,
+    sprite: Sprites.NONE,
     name: 'architect',
     people: 'natchez',
     strength: 2,
@@ -399,7 +399,7 @@ const data: HeroData[] = [
     itemSlots: 2
   },
   {
-    sprite: Sprites.GOURD_ELDER,
+    sprite: Sprites.NONE,
     name: 'brawler',
     people: 'aymara',
     strength: 5,
@@ -408,7 +408,7 @@ const data: HeroData[] = [
     itemSlots: 1
   },
   {
-    sprite: Sprites.GOURD_ELDER,
+    sprite: Sprites.NONE,
     name: 'stargazer',
     people: 'seminole',
     strength: 0,
@@ -417,7 +417,7 @@ const data: HeroData[] = [
     itemSlots: 2
   },
   {
-    sprite: Sprites.GOURD_ELDER,
+    sprite: Sprites.NONE,
     name: 'nomad',
     people: 'crow',
     strength: 3,
@@ -426,7 +426,7 @@ const data: HeroData[] = [
     itemSlots: 1
   },
   {
-    sprite: Sprites.GOURD_ELDER,
+    sprite: Sprites.NONE,
     name: 'doctor',
     people: 'kwakiutl',
     strength: 1,
@@ -435,7 +435,7 @@ const data: HeroData[] = [
     itemSlots: 3
   },
   {
-    sprite: Sprites.GOURD_ELDER,
+    sprite: Sprites.NONE,
     name: 'boat maker',
     people: 'nimiipuu',
     strength: 2,
@@ -444,7 +444,7 @@ const data: HeroData[] = [
     itemSlots: 3
   },
   {
-    sprite: Sprites.GOURD_ELDER,
+    sprite: Sprites.COUNSELOR,
     name: 'counselor',
     people: 'comanche',
     strength: 0,

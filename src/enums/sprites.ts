@@ -101,6 +101,11 @@ enum Sprites {
   DEER_HUNTER   = 0x040201,
   SCOUT         = 0x040301,
   RUNNER        = 0x040401,
+  COUNSELOR     = 0x040002,
+  SUN_PRIEST    = 0x040102,
+  BEAD_QUEEN    = 0x040202,
+  BONE_CRUSHER  = 0x040302,
+  FOX_BOY       = 0x040402,
 
   // Constants that are special
   NONE    = 0xFFFFFE,
