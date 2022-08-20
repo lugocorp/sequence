@@ -62,9 +62,9 @@ enum Sprites {
   ACCENT_E    = 0x001302,
 
   // Spritesheet #1 (backgrounds)
-  WELCOME      = 0x010000, // Come up with these later
-  INSTRUCTIONS = 0x010000, // Come up with these later
-  CREDITS      = 0x010000, // Come up with these later
+  WELCOME      = 0x010203,
+  INSTRUCTIONS = 0x010103,
+  CREDITS      = 0x010003,
   BEGIN        = 0x010000, // Come up with these later
   DEATH        = 0x010000, // Come up with these later
   OBSTACLE     = 0x010000, // Come up with these later
