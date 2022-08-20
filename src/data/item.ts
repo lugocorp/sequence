@@ -2,6 +2,7 @@ import Effect from '../enums/effects';
 import {ItemData} from '../serial/types';
 import Hero from '../entities/hero';
 import {Rarity, Trigger} from '../enums/types';
+import Sprites from '../enums/sprites';
 import Stats from '../enums/stats';
 
 function statItemEffect(stat: number, boost: number): Effect {
@@ -29,62 +30,35 @@ function luckItemEffect(boost: number): Effect {
 const data: ItemData[] = [
   {
     name: 'corn',
+    sprite: Sprites.CORN,
     rarity: Rarity.COMMON,
     description: 'gives a party member +1 strength',
     effect: statItemEffect(Stats.STRENGTH, 1)
   },
   {
     name: 'squash',
-    rarity: Rarity.COMMON,
+    sprite: Sprites.SQUASH,
+    rarity: Rarity.UNCOMMON,
     description: 'gives a party member +1 wisdom',
     effect: statItemEffect(Stats.WISDOM, 1)
   },
   {
     name: 'beans',
-    rarity: Rarity.COMMON,
+    sprite: Sprites.BEANS,
+    rarity: Rarity.RARE,
     description: 'gives a party member +1 dexterity',
     effect: statItemEffect(Stats.DEXTERITY, 1)
   },
   {
-    name: 'guava',
-    rarity: Rarity.UNCOMMON,
-    description: 'a delicious fruit',
-    effect: (trigger: Trigger, hero: Hero, data: any) => {
-      // Do something here
-    }
-  },
-  {
-    name: 'paw paw',
-    rarity: Rarity.UNCOMMON,
-    description: 'a delicious fruit',
-    effect: (trigger: Trigger, hero: Hero, data: any) => {
-      // Do something here
-    }
-  },
-  {
     name: 'turquoise bead',
-    rarity: Rarity.UNCOMMON,
-    description: 'a pretty gem prized throughout the continent',
-    effect: (trigger: Trigger, hero: Hero, data: any) => {
-      // Do something here
-    }
-  },
-  {
-    name: 'sacred medicine',
-    rarity: Rarity.RARE,
-    description: 'gives a party member +5% luck',
-    effect: luckItemEffect(10)
-  },
-  {
-    name: 'medicine bag',
+    sprite: Sprites.TURQUOISE,
     rarity: Rarity.LEGENDARY,
-    description: 'a bag of sacred healing medicine',
-    effect: (trigger: Trigger, hero: Hero, data: any) => {
-      // Do something here
-    }
+    description: 'gives a party member +5% luck',
+    effect: luckItemEffect(5)
   },
   {
     name: 'bluejay feather',
+    sprite: Sprites.FEATHER,
     rarity: Rarity.MYTHIC,
     description: 'the feather of a beautiful bluejay',
     effect: (trigger: Trigger, hero: Hero, data: any) => {

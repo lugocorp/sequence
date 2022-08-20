@@ -22,6 +22,6 @@ export default class Factory {
 
   // Instantiates a new Item object based on some game data
   createItem(data: types.ItemData): Item {
-    return new Item(data.name, data.rarity, data.description, data.effect);
+    return new Item(data.name, data.sprite, data.rarity, data.description, data.effect);
   }
 }

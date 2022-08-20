@@ -113,7 +113,11 @@ enum Sprites {
   CHILLY_ELDER    = 0x040203,
 
   // Spritesheet #5 (Items)
-  CORN = 0x050000,
+  CORN      = 0x050000,
+  SQUASH    = 0x050100,
+  BEANS     = 0x050200,
+  FEATHER   = 0x050300,
+  TURQUOISE = 0x050400,
 
   // Constants that are special
   NONE    = 0xFFFFFE,

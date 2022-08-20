@@ -10,10 +10,11 @@ export default class Item {
   rarity: number;
   name: string;
 
-  constructor(name: string,rarity: number, description: string, effect?: Effect) {
-    this.sprite = Sprites.CORN;
+  constructor(name: string, sprite: Sprites, rarity: number, description: string, effect?: Effect) {
     this.description = description;
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     this.effect = effect || ((trigger: Trigger, hero: Hero, data: any): void => undefined);
+    this.sprite = sprite;
     this.rarity = rarity;
     this.name = name;
   }

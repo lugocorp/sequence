@@ -35,7 +35,7 @@ export default class AnimalEvent extends View {
           that.setSelector(that.heroSelector, [
             new Action('choose', () => {
               const hero: Hero = that.heroSelector.item();
-              const item: Item = new Item(baby.name, Rarity.RARE, `a lonely baby looking for its family`);
+              const item: Item = new Item(baby.name, baby.sprite, Rarity.RARE, `a lonely baby looking for its family`);
               hero.equip(item);
               const view: View = new View();
               view.setDetails(baby.sprite, `${hero.name} returns the baby ${baby.name} to its family. they are blessed with better luck`, [
