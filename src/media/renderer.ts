@@ -16,10 +16,12 @@ export default class GraphicsRenderer {
   canvas: HTMLCanvasElement;
   assets: GraphicsLoader;
   scale: number;
+  dark: number;
   constructor(canvas: HTMLCanvasElement, assets: GraphicsLoader) {
     this.ctx = canvas.getContext('2d');
     this.canvas = canvas;
     this.assets = assets;
+    this.dark = 0;
   }
 
   /*
@@ -88,6 +90,11 @@ export default class GraphicsRenderer {
         this.drawSprite(Sprites.LINE_VERT, 2, (coords[1] * HGLYPH) + 102);
         this.drawSprite(Sprites.LINE_VERT, (23 * WGLYPH) + 2, (coords[1] * HGLYPH) + 102);
       }
+    }
+    if (this.dark) {
+      this.ctx.globalAlpha = this.dark / 100;
+      this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+      this.ctx.globalAlpha = 1.0;
     }
   }
 

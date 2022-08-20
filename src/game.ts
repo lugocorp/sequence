@@ -86,12 +86,22 @@ export default class Game {
   }
 
   // Progresses to the next event in the game
-  progress(): void {
+  async progress(): Promise<void> {
+    const wait = () => new Promise((resolve) => setTimeout(resolve, 10));
+    for (this.renderer.dark = 0; this.renderer.dark < 100; this.renderer.dark += 20) {
+      this.invalidate();
+      await wait();
+    }
+    this.invalidate();
     if (this.party.length() && this.chain.events.length === 1) {
       this.chain.plan();
     }
     this.chain.events.splice(0, 1);
     Game.setView(this.chain.latest());
+    for (this.renderer.dark = 100; this.renderer.dark > 0; this.renderer.dark -= 20) {
+      this.invalidate();
+      await wait();
+    }
     this.invalidate();
   }
 
