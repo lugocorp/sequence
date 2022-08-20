@@ -11,12 +11,15 @@ export default class RapidEvent extends View {
   constructor() {
     super();
     const that = this;
-    this.heroSelector = Selector.heroSelector(Game.game.party.members);
-    this.setDetails(Sprites.RAPID, 'your party approaches a fast moving river. a party member will go down to become stronger, wiser and faster.', [
+    this.setDetails(Sprites.RAPID, 'your party approaches a dangerous, fast moving river. a party member will go down to become stronger, wiser and faster.', [
       new Action('continue', () => that.setSelector(that.heroSelector, [
         new Action('choose', () => that.river())
       ]))
     ]);
+  }
+
+  init(): void {
+    this.heroSelector = Selector.heroSelector(Game.game.party.members);
   }
 
   river(): void {
@@ -47,7 +50,7 @@ export default class RapidEvent extends View {
       })
     ]);
     Game.futureEvent(retrieve, 5, () => !Game.game.party.isFull());
-    this.setDetails(hero.sprite, `${hero.name} was swept away by the river! you can meet them downstream if your party isn't full.`, [
+    this.setDetails(Sprites.RAPID, `${hero.name} was swept away by the river! you can meet them downstream if your party isn't full.`, [
       new Action('continue', () => Game.game.progress())
     ]);
   }

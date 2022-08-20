@@ -7,14 +7,10 @@ import Game from '../../game';
 
 export default class DeathEvent extends View {
 
-  constructor() {
-    super();
+  init(): void {
+    Game.game.audio.play(GameAudio.FAIL);
     this.setDetails(Sprites.DEATH, 'your party did not make it', [
       new Action('continue', () => Game.setView(new StartView()))
     ]);
-  }
-
-  init(): void {
-    Game.game.audio.play(GameAudio.FAIL);
   }
 }

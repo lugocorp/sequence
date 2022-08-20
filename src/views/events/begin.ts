@@ -7,12 +7,22 @@ import Game from '../../game';
 export default class BeginEvent extends View {
   constructor() {
     super();
-    const that = this;
+  }
+
+  init(): void {
     this.setDetails(
       Sprites.BEGIN,
       'your party sets off on a new adventure.',
-      [ new Action('view party', () => that.finish()) ]
+      [
+        new Action('view party', () => this.setSelector(
+          Selector.heroSelector(Game.game.party.members),
+          [
+            new Action('continue', () => Game.game.progress())
+          ]
+        ))
+      ]
     );
+
   }
 
   finish(): void {

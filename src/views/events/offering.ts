@@ -15,13 +15,16 @@ export default class OfferingEvent extends View {
   constructor() {
     super();
     const that = this;
-    this.heroSelector = Selector.heroSelector(Game.game.party.members);
     this.gift = Game.game.data.getRandomItem();
     this.setDetails(
       this.gift.sprite,
       `a spirit offers a gift of ${this.gift.name} to your party. only one member may accept it.`,
       [ new Action('continue', () => that.viewGift()) ]
     );
+  }
+
+  init(): void {
+    this.heroSelector = Selector.heroSelector(Game.game.party.members);
   }
 
   viewGift(): void {

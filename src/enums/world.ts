@@ -10,7 +10,8 @@ export enum Time {
 export enum Weather {
   SUN,
   RAIN,
-  WIND
+  WIND,
+  SNOW
 }
 
 export type World = {

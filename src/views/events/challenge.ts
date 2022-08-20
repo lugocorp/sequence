@@ -15,7 +15,6 @@ export default class ChallengeEvent extends View {
   constructor() {
     super();
     const that = this;
-    this.heroSelector = Selector.heroSelector(Game.game.party.members);
     this.challenger = Game.game.data.getRandomChallenger();
     this.expectation = [Random.max(Stats.N)];
     if (Random.passes(0.5)) {
@@ -26,6 +25,10 @@ export default class ChallengeEvent extends View {
       `your party comes across a spirit who offers a challenge. this will be ${this.getTestText()}.`,
       [ new Action('continue', () => that.viewChallenger()) ]
     );
+  }
+
+  init(): void {
+    this.heroSelector = Selector.heroSelector(Game.game.party.members);
   }
 
   getTestText(): string {
@@ -50,15 +53,29 @@ export default class ChallengeEvent extends View {
   }
 
   finish(): void {
+    const that = this;
     const hero: Hero = this.heroSelector.item();
     const result: boolean = this.playerOvercomesChallenge(hero, this.challenger);
     hero.fatigue();
+    if (!result) {
+      for (const hero of Game.game.party.members) {
+        hero.fatigue();
+      }
+    }
     this.setDetails(
       hero.sprite,
       result ?
         `${hero.name} overcame the spirit's challenge!` :
         `${hero.name} did not succeed in the spirit's challenge.`,
-      [ new Action('continue', () => Game.game.progress()) ]
+      [
+        new Action('continue', () => that.setDetails(
+          hero.sprite,
+          result ?
+            `${hero.name} is tired but triumphant` :
+            `${hero.name} and the rest of your party were fatigued by the challenge`,
+          [ new Action('continue', () => Game.game.progress()) ]
+        ))
+      ]
     );
   }
 

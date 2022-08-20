@@ -14,10 +14,17 @@ export default class TrapEvent extends View {
   constructor() {
     super();
     const that = this;
-    this.heroSelector = Selector.heroSelector(Game.game.party.members);
-    this.setDetails(Sprites.TRAP, 'you must choose a party member to let go.', [
-      new Action('continue', (): void => that.heroViewer())
+    this.setDetails(Sprites.TRAP, 'your party comes across a very inviting village.', [
+      new Action('continue', () => that.setDetails(
+        Sprites.TRAP,
+        'choose one of your party members to stay here.',
+        [new Action('continue', () => that.heroViewer())]
+      ))
     ]);
+  }
+
+  init(): void {
+    this.heroSelector = Selector.heroSelector(Game.game.party.members);
   }
 
   heroViewer(): void {

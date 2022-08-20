@@ -1,6 +1,7 @@
 import {WTEXT} from '../enums/values';
 import {Trigger} from '../enums/types';
 import Sprites from '../enums/sprites';
+import Stats from '../enums/stats';
 import Random from '../logic/random';
 import Ability from './ability';
 import Item from './item';
@@ -37,15 +38,9 @@ export default class Hero extends Unit {
 
   // Reduces this Hero's stats
   fatigue(): void {
-    if (this.strength > 0) {
-      this.strength--;
-    }
-    if (this.wisdom > 0) {
-      this.wisdom--;
-    }
-    if (this.dexterity > 0) {
-      this.dexterity--;
-    }
+    Stats.changeUnitStat(this, Stats.STRENGTH, -1);
+    Stats.changeUnitStat(this, Stats.WISDOM, -1);
+    Stats.changeUnitStat(this, Stats.DEXTERITY, -1);
   }
 
   // Equips an item to this hero

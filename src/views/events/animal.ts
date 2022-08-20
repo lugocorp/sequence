@@ -28,7 +28,6 @@ export default class AnimalEvent extends View {
         sprite: Sprites.COYOTL
       }
     ]);
-    this.heroSelector = Selector.heroSelector(Game.game.party.members);
     this.setDetails(baby.sprite, `your party finds a lonely baby ${baby.name}. someone will pick it up and deliver it to its family.`, [
       new Action('continue', () => {
         if (Game.game.party.canPickupItems()) {
@@ -58,5 +57,9 @@ export default class AnimalEvent extends View {
         }
       })
     ]);
+  }
+
+  init(): void {
+    this.heroSelector = Selector.heroSelector(Game.game.party.members);
   }
 }

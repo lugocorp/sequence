@@ -14,7 +14,6 @@ export default class TradeEvent extends View {
   constructor() {
     super();
     const that = this;
-    this.heroSelector = Selector.heroSelector(Game.game.party.members);
     this.itemSelector = Selector.itemSelector([
       Game.game.data.getRandomItem(),
       Game.game.data.getRandomItem(),
@@ -31,6 +30,10 @@ export default class TradeEvent extends View {
         new Action('continue', () => Game.game.progress())
       ]);
     }
+  }
+
+  init(): void {
+    this.heroSelector = Selector.heroSelector(Game.game.party.members.filter((h: Hero) => h.itemCount() > 0));
   }
 
   get hero(): Hero {

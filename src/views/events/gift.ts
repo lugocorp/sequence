@@ -16,14 +16,17 @@ export default class GiftEvent extends View {
 
   constructor() {
     super();
-    this.hero = Game.game.party.randomHero();
     this.options = [
       Game.game.data.getRandomItem(),
       Game.game.data.getRandomItem(),
       Game.game.data.getRandomItem()
     ];
-    const that = this;
     this.itemSelector = Selector.itemSelector(this.options);
+  }
+
+  init(): void {
+    const that = this;
+    this.hero = Game.game.party.randomHero();
     this.setDetails(
       Sprites.BEAR,
       `a spirit reveals itself to ${this.hero.name}. it comes bearing a gift of your choosing.`,

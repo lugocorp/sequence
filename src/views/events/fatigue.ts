@@ -7,7 +7,7 @@ export default class FatigueEvent extends View {
 
   constructor(hero: Hero) {
     super();
-    this.setDetails(hero.sprite, `${hero.name} is too fatigued to move on`, [
+    this.setDetails(hero.sprite, `${hero.name} is too fatigued to move on, and has left your party`, [
       new Action('continue', () => {
         Game.game.party.remove(hero);
         Game.game.progress();

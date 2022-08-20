@@ -20,11 +20,18 @@ export default class RecruitEvent extends View {
       Game.game.data.getRandomHero(),
       Game.game.data.getRandomHero()
     ];
-    this.memberSelector = Selector.heroSelector(Game.game.party.members);
     this.recruitSelector = Selector.heroSelector(this.recruits);
-    this.setDetails(this.recruits[0].sprite, 'you choose a new party member to recruit.', [
-      new Action('continue', () => that.viewRecruits())
+    this.setDetails(this.recruits[0].sprite, 'your party comes across another group of travelers.', [
+      new Action('continue', () => that.setDetails(
+        this.recruits[0].sprite,
+        'you can choose one traveler to recruit into your party.',
+        [new Action('continue', () => that.viewRecruits())]
+      ))
     ]);
+  }
+
+  init(): void {
+    this.memberSelector = Selector.heroSelector(Game.game.party.members);
   }
 
   viewRecruits(): void {
