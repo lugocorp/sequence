@@ -73,11 +73,11 @@ We have a number of `npm` commands:
 - [x] Allow a new game to be started without without exiting the app
 - [x] Add party member data
 - [ ] Add a bunch of items
-- [ ] Program party member abilities
 - [ ] Finish all beta graphics
 - [ ] Launch the beta
 
 #### Full Launch
+- [ ] Program party member abilities
 - [ ] Fix reported beta bugs
 - [ ] Contact more consultants just to double check themes and designs
 - [ ] Balance game content as needed

@@ -67,7 +67,7 @@ export default class View {
     for (let a = 1; a < this.actions.length; a++) {
       const current: string = this.actions[a].label;
       const previous: string = this.actions[a - 1].label;
-      if (coords[0] === 1 && current.length + previous.length + 1 <= WTEXT - 2) {
+      if (coords[0] === 1 && current.length + previous.length + 2 <= WTEXT - 2) {
         coords[0] = WTEXT - 1 - current.length;
       } else {
         coords[0] = 1;
