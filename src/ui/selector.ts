@@ -1,4 +1,3 @@
-import Sprites from '../enums/sprites';
 import Item from '../entities/item';
 import Hero from '../entities/hero';
 import Game from '../game';
@@ -41,7 +40,7 @@ export default class Selector<T> {
   // A built-in Item viewing selector
   static itemSelector(data: Item[], select?: (gift: Item) => void): Selector<Item> {
     return new Selector<Item>(data, (view: View, gift: Item): void => {
-      view.image = Sprites.NONE;
+      view.image = gift.sprite;
       view.setText(`${data.indexOf(gift) + 1}/${data.length} ${gift.descriptionText()}`);
       if (select) {
         select(gift);

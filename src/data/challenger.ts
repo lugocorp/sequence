@@ -3,42 +3,28 @@ import Sprites from '../enums/sprites';
 
 const data: ChallengerData[] = [
   {
-    sprite: Sprites.SPIRIT,
-    name: 'fox',
-    strength: 6,
-    wisdom: 0,
-    dexterity: 0
-  },
-  {
-    sprite: Sprites.SPIRIT,
-    name: 'raccoon',
+    sprite: Sprites.OWL,
+    name: 'owl',
     strength: 2,
     wisdom: 2,
     dexterity: 2
   },
   {
-    sprite: Sprites.SPIRIT,
-    name: 'sea turtle',
-    strength: 3,
+    sprite: Sprites.BUTTERFLY,
+    name: 'butterfly',
+    strength: 0,
     wisdom: 3,
-    dexterity: 0
+    dexterity: 3
   },
   {
-    sprite: Sprites.SPIRIT,
-    name: 'crab',
-    strength: 6,
-    wisdom: 0,
-    dexterity: 0
+    sprite: Sprites.BEAR,
+    name: 'bear',
+    strength: 4,
+    wisdom: 1,
+    dexterity: 1
   },
   {
-    sprite: Sprites.SPIRIT,
-    name: 'guinea pig',
-    strength: 2,
-    wisdom: 2,
-    dexterity: 2
-  },
-  {
-    sprite: Sprites.SPIRIT,
+    sprite: Sprites.AXOLOTL,
     name: 'axolotl',
     strength: 3,
     wisdom: 3,

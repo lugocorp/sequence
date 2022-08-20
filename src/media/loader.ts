@@ -10,7 +10,7 @@ import DrawCoords from './draw-coords';
 export default class GraphicsLoader {
   loadAsset: HTMLImageElement;
   sheets: HTMLImageElement[];
-  static NUM_SHEETS = 5;
+  static NUM_SHEETS = 6;
 
   /*
    * This method returns the dimensions of each sprite in a spritesheet
@@ -18,9 +18,14 @@ export default class GraphicsLoader {
    */
   getDimensions(sheet: number): {w: number, h: number} {
     const sizes = [
-      {w: WGLYPH, h: HGLYPH}
+      {w: WGLYPH, h: HGLYPH},
+      undefined,
+      undefined,
+      undefined,
+      undefined,
+      {w: 50, h: 50}
     ];
-    return (sheet < sizes.length) ? sizes[sheet] : {w: 100, h: 100};
+    return ((sheet < sizes.length) ? sizes[sheet] : undefined) || {w: 100, h: 100};
   }
 
   /*

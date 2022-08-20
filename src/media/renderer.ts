@@ -50,7 +50,8 @@ export default class GraphicsRenderer {
       return;
     }
     if (view.image) {
-      this.drawSprite(view.image, 12, 0);
+      const c: DrawCoords = this.assets.getSprite(view.image);
+      this.drawSprite(view.image, ((100 - c.width) / 2) + 12, (100 - c.height) / 2);
     }
     const text = view.getText();
     if (text) {

@@ -25,7 +25,7 @@ export default class GiftEvent extends View {
     const that = this;
     this.itemSelector = Selector.itemSelector(this.options);
     this.setDetails(
-      Sprites.SPIRIT,
+      Sprites.BEAR,
       `a spirit reveals itself to ${this.hero.name}. it comes bearing a gift of your choosing.`,
       [ new Action('continue', () => that.chooseGift()) ]
     );

@@ -1,4 +1,3 @@
-import Sprites from '../../enums/sprites';
 import Item from '../../entities/item';
 import Hero from '../../entities/hero';
 import Selector from '../../ui/selector';
@@ -19,7 +18,7 @@ export default class OfferingEvent extends View {
     this.heroSelector = Selector.heroSelector(Game.game.party.members);
     this.gift = Game.game.data.getRandomItem();
     this.setDetails(
-      Sprites.SPIRIT,
+      this.gift.sprite,
       `a spirit offers a gift of ${this.gift.name} to your party. only one member may accept it.`,
       [ new Action('continue', () => that.viewGift()) ]
     );
@@ -27,7 +26,7 @@ export default class OfferingEvent extends View {
 
   viewGift(): void {
     const that = this;
-    this.setDetails(Sprites.GIFT, this.gift.descriptionText(), [
+    this.setDetails(this.gift.sprite, this.gift.descriptionText(), [
       new Action('view party', () => that.viewParty())
     ]);
   }

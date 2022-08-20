@@ -65,11 +65,10 @@ enum Sprites {
   WELCOME      = 0x010203,
   INSTRUCTIONS = 0x010103,
   CREDITS      = 0x010003,
-  BEGIN        = 0x010000, // Come up with these later
-  DEATH        = 0x010000, // Come up with these later
-  OBSTACLE     = 0x010000, // Come up with these later
-  GIFT         = 0x010000, // Come up with these later
-  TRAP         = 0x010000, // Come up with these later
+  BEGIN        = 0x010301,
+  DEATH        = 0x010302,
+  OBSTACLE     = 0x010300,
+  TRAP         = 0x010303,
   SUN          = 0x010100,
   RAIN         = 0x010200,
   WIND         = 0x010001,
@@ -88,7 +87,10 @@ enum Sprites {
   COYOTL     = 0x020201,
 
   // Spritesheet #3 (challengers)
-  SPIRIT = 0x030000, // Placeholder to be replaced later
+  OWL       = 0x030000,
+  AXOLOTL   = 0x030100,
+  BUTTERFLY = 0x030200,
+  BEAR      = 0x030300,
 
   // Spritesheet #4 (heroes)
   BIRD_CATCHER    = 0x040000,
@@ -109,6 +111,9 @@ enum Sprites {
   NIGHT_SKY_WOMAN = 0x040003,
   CHINAMPA_MAN    = 0x040103,
   CHILLY_ELDER    = 0x040203,
+
+  // Spritesheet #5 (Items)
+  CORN = 0x050000,
 
   // Constants that are special
   NONE    = 0xFFFFFE,
