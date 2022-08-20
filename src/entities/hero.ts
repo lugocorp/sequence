@@ -21,9 +21,6 @@ export default class Hero extends Unit {
     this.people = people;
     this.items = [];
     this.luck = 50;
-    for (let a = 0; a < this.itemSlots; a++) {
-      this.items.push(undefined);
-    }
   }
 
   // Returns true if this Hero is in the player's Party
@@ -46,44 +43,45 @@ export default class Hero extends Unit {
   // Equips an item to this hero
   equip(item: Item): void {
     // Shift items if the Hero is fully equipped
-    if (this.items[this.items.length - 1]) {
+    if (this.items.length === this.itemSlots) {
       this.items[0].effect(Trigger.UNEQUIP, this, null);
-      for (let a = 1; a < this.items.length; a++) {
-        this.items[a - 1] = this.items[a];
-        this.items[a] = undefined;
-      }
+      this.items.splice(0, 1);
     }
-    this.items[this.itemCount()] = item;
+    this.items.push(item);
     item.effect(Trigger.EQUIP, this, null);
   }
 
+  // Unequips an item from this hero
   unequip(item: Item): void {
     const index: number = this.items.indexOf(item);
-    for (let a = index + 1; a < this.items.length; a++) {
-      this.items[a - 1] = this.items[a];
-    }
-    this.items[this.items.length - 1] = undefined;
+    this.items.splice(index, 1);
     item.effect(Trigger.UNEQUIP, this, null);
   }
 
+  // Grabs a list of this hero's items
+  getItems(): Item[] {
+    return this.items;
+  }
+
+  // Grabs a specific item from this hero
   getItem(index: number): Item {
     return this.items[index];
   }
 
+  // Returns true if this hero has the given item
   hasItem(item: Item): boolean {
     return this.items.indexOf(item) > -1;
   }
 
   // Replaces the item at the given index
   replaceItem(index: number, item: Item): void {
-    this.items[index].effect(Trigger.UNEQUIP, this, null);
-    this.items[index] = item;
-    item.effect(Trigger.EQUIP, this, null);
+    this.unequip(this.items[index]);
+    this.equip(item);
   }
 
   // Returns the number of equipped items
   itemCount(): number {
-    return this.items.reduce((acc: number, x: Item) => acc + (x ? 1 : 0), 0);
+    return this.items.length;
   }
 
   // This function handles the hero's item and ability effects
@@ -96,6 +94,7 @@ export default class Hero extends Unit {
     }
   }
 
+  // Returns the text used in this hero's description
   descriptionText(): string {
     const stat = (n: number): string => n > 9 ? `\t${n}\t` : `\t${n}\t\t`;
     const numSpaces = WTEXT - this.people.length - 9 - 1;
@@ -105,6 +104,7 @@ export default class Hero extends Unit {
       `str:${stat(this.strength)}wis:${stat(this.wisdom)}dex:${stat(this.dexterity)}`;
   }
 
+  // Returns true if the hero passes a luck check
   lucky(): boolean {
     return Random.passes(this.luck / 100);
   }

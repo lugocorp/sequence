@@ -21,6 +21,11 @@ export default class Party {
     return this.length() === Party.MAX;
   }
 
+  // Returns true if the given Hero is part of this party
+  contains(hero: Hero): boolean {
+    return this.members.indexOf(hero) > -1;
+  }
+
   // Returns true if anyone in your party has at least 1 item slot
   canPickupItems(): boolean {
     return this.members.reduce((acc: number, x: Hero) => Math.max(acc, x.itemSlots), 0) > 0;

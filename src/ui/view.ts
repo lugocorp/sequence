@@ -14,6 +14,26 @@ export default class View {
     // Do nothing by default
   }
 
+  // Returns true if there is an Action with the given label in the current View
+  hasAction(label: string): boolean {
+    for (const action of this.actions) {
+      if (action.label === label) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  // Removes an Action with the given label
+  removeAction(label: string): void {
+    for (const action of this.actions) {
+      if (action.label === label) {
+        this.actions.splice(this.actions.indexOf(action), 1);
+        return;
+      }
+    }
+  }
+
   // Sets all the important values of this View
   setDetails(image: number, text: string, actions: Action[]): void {
     this.image = image;

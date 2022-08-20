@@ -1,5 +1,6 @@
 import Item from '../entities/item';
 import Hero from '../entities/hero';
+import Action from './action';
 import Game from '../game';
 import View from './view';
 
@@ -33,6 +34,16 @@ export default class Selector<T> {
       view.setText(`${data.indexOf(hero) + 1}/${data.length} ${hero.descriptionText()}`);
       if (select) {
         select(hero);
+      }
+      view.removeAction('items');
+      if (Game.game.party.contains(hero) && hero.itemCount() > 0) {
+        view.actions.push(new Action('items', () => {
+          const oldActions = view.actions;
+          const oldSelector = view.selector;
+          view.setSelector(Selector.itemSelector(hero.getItems()), [
+            new Action('back', () => view.setSelector(oldSelector, oldActions))
+          ]);
+        }));
       }
     });
   }
