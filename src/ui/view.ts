@@ -60,8 +60,25 @@ export default class View {
   }
 
   // Returns the text coordinates of the indexed action
-  getActionCoords(index: number): number[] {
-    return [1, HTEXT - (this.actions.length - index + 1)];
+  getActionCoords(index: number): [number, number] {
+    let x = 1;
+    let y = 0;
+    const coords: [number, number] = [x, y];
+    for (let a = 1; a < this.actions.length; a++) {
+      const current: string = this.actions[a].label;
+      const previous: string = this.actions[a - 1].label;
+      if (coords[0] === 1 && current.length + previous.length + 1 <= WTEXT - 2) {
+        coords[0] = WTEXT - 1 - current.length;
+      } else {
+        coords[0] = 1;
+        coords[1]++;
+      }
+      if (a === index) {
+        x = coords[0];
+        y = coords[1];
+      }
+    }
+    return [x, y + HTEXT - coords[1] - 2];
   }
 
   // Sets a single action for this View

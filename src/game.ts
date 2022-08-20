@@ -112,8 +112,8 @@ export default class Game {
       if (this.view.hasActions()) {
         for (let a = 0; a < this.view.actions.length; a++) {
           const action = this.view.actions[a];
-          const actionCoords: number[] = this.view.getActionCoords(a);
-          const coords: number[] = this.renderer.toDisplayCoords(actionCoords[0], actionCoords[1]);
+          const actionCoords: [number, number] = this.view.getActionCoords(a);
+          const coords: [number, number] = this.renderer.toDisplayCoords(actionCoords[0], actionCoords[1]);
           if (this.within(action.label, coords[0], coords[1])) {
             this.audio.play(GameAudio.CLICK);
             action.effect();

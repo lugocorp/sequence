@@ -68,7 +68,7 @@ export default class GraphicsRenderer {
       }
     }
     if (view.hasActions()) {
-      const actionCoords = view.getActionCoords(0);
+      const actionCoords: [number, number] = view.getActionCoords(0);
       const top = this.toDisplayCoords(0, actionCoords[1])[1] - HGLYPH;
       for (let a = 0; a < WTEXT; a++) {
         let sprite1 = Sprites.LINE_HORT;
@@ -85,7 +85,7 @@ export default class GraphicsRenderer {
       }
       for (let a = 0; a < view.actions.length; a++) {
         const action: Action = view.actions[a];
-        const coords: number[] = view.getActionCoords(a);
+        const coords: [number, number] = view.getActionCoords(a);
         this.drawText(action.label, coords[0], coords[1], true);
         this.drawSprite(Sprites.LINE_VERT, 2, (coords[1] * HGLYPH) + 102);
         this.drawSprite(Sprites.LINE_VERT, (23 * WGLYPH) + 2, (coords[1] * HGLYPH) + 102);
@@ -99,7 +99,7 @@ export default class GraphicsRenderer {
   }
 
   // Converts text coords to display coords
-  toDisplayCoords(tx: number, ty: number): number[] {
+  toDisplayCoords(tx: number, ty: number): [number, number] {
     return [(tx * WGLYPH) + 2, (ty * HGLYPH) + 102];
   }
 
@@ -116,7 +116,7 @@ export default class GraphicsRenderer {
   }
 
   // Returns the bounds of some text
-  getTextBounds(msg: string): number[] {
+  getTextBounds(msg: string): [number, number] {
     const lines: string[] = msg.split('\n');
     if (!lines[lines.length - 1].length) {
       lines.pop();
@@ -153,7 +153,7 @@ export default class GraphicsRenderer {
       }
     }
     if (highlight) {
-      const bounds: number[] = this.getTextBounds(msg);
+      const bounds: [number, number] = this.getTextBounds(msg);
       this.ctx.fillStyle = '#dcd36a';
       this.ctx.globalCompositeOperation = 'source-atop';
       this.ctx.fillRect(x, y, bounds[0], bounds[1]);

@@ -33,6 +33,30 @@ export default class EventChain {
   ];
 
   /*
+   * This function returns the roll table for the next event
+   */
+  private getEventRollTable(): any[][] {
+    const table: any[][] = [
+      [40, ChallengeEvent],
+      [15, WeatherEvent],
+      [6,  OfferingEvent],
+      [6,  GiftEvent],
+      [5,  ObstacleEvent],
+      [5,  RecruitEvent],
+      [5,  TrapEvent],
+      [4,  PlantEvent],
+      [4,  ProjectEvent],
+      [4,  RapidEvent],
+      [3,  AnimalEvent],
+      [3,  TradeEvent]
+    ];
+    if (Game.game.world.time === Time.NIGHT) {
+      table.push([5, DreamEvent]);
+    }
+    return table;
+  }
+
+  /*
    * This function clears the chain's internal state
    */
   clear(): void {
@@ -88,29 +112,5 @@ export default class EventChain {
     ))();
     this.previouslyPlanned = event;
     this.events.push(event);
-  }
-
-  /*
-   * This function returns the roll table for the next event
-   */
-  private getEventRollTable(): any[][] {
-    const table: any[][] = [
-      [40, ChallengeEvent],
-      [15, WeatherEvent],
-      [6,  OfferingEvent],
-      [6,  GiftEvent],
-      [5,  ObstacleEvent],
-      [5,  RecruitEvent],
-      [5,  TrapEvent],
-      [4,  PlantEvent],
-      [4,  ProjectEvent],
-      [4,  RapidEvent],
-      [3,  AnimalEvent],
-      [3,  TradeEvent]
-    ];
-    if (Game.game.world.time === Time.NIGHT) {
-      table.push([5, DreamEvent]);
-    }
-    return table;
   }
 }
