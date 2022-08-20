@@ -31,9 +31,9 @@ export default class GraphicsRenderer {
   setCanvasSize(): void {
     const screenWidth = window.innerWidth;
     const screenHeight = window.innerHeight;
-    this.scale = Math.floor(screenHeight / HEIGHT);
+    this.scale = screenHeight / HEIGHT;
     if (WIDTH * this.scale > screenWidth) {
-      this.scale = Math.floor(screenWidth / WIDTH);
+      this.scale = screenWidth / WIDTH;
     }
     this.canvas.height = HEIGHT * this.scale;
     this.canvas.width = WIDTH * this.scale;
