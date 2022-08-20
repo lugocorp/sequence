@@ -80,39 +80,37 @@ export default class EventChain {
       }
     }
 
-    // Time-specific rolls
-    if (Game.game.world.time === Time.NIGHT) {
-      const event: () => View = Random.weighted([
-        [95, undefined],
-        [5,  (): View => new DreamEvent()]
-      ]);
-      if (event) {
-        this.events.push(event());
-        return;
-      }
-    }
-
-    // Basic event roll
+    // Roll for the next event
     const event: View = new (Random.weighted(
-      [
-        [40, ChallengeEvent],
-        [15, WeatherEvent],
-        [6,  OfferingEvent],
-        [6,  GiftEvent],
-        [5,  ObstacleEvent],
-        [5,  RecruitEvent],
-        [5,  TrapEvent],
-        [4,  PlantEvent],
-        [4,  ProjectEvent],
-        [4,  RapidEvent],
-        [3,  AnimalEvent],
-        [3,  TradeEvent]
-      ]
-      .map((x: any[]): [number, any] => x as [number, any])
-      .filter((x: [number, any]) => x[1] !== this.previouslyPlanned?.constructor),
-      this.previouslyPlanned ? undefined : 100
+      this.getEventRollTable()
+        .map((x: any[]): [number, any] => x as [number, any])
+        .filter((x: [number, any]) => x[1] === ChallengeEvent || x[1] !== this.previouslyPlanned?.constructor)
     ))();
     this.previouslyPlanned = event;
     this.events.push(event);
+  }
+
+  /*
+   * This function returns the roll table for the next event
+   */
+  private getEventRollTable(): any[][] {
+    const table: any[][] = [
+      [40, ChallengeEvent],
+      [15, WeatherEvent],
+      [6,  OfferingEvent],
+      [6,  GiftEvent],
+      [5,  ObstacleEvent],
+      [5,  RecruitEvent],
+      [5,  TrapEvent],
+      [4,  PlantEvent],
+      [4,  ProjectEvent],
+      [4,  RapidEvent],
+      [3,  AnimalEvent],
+      [3,  TradeEvent]
+    ];
+    if (Game.game.world.time === Time.NIGHT) {
+      table.push([5, DreamEvent]);
+    }
+    return table;
   }
 }
