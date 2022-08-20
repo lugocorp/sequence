@@ -31,7 +31,7 @@ export default class Random {
 
   // Returns a random element from the given weighted array
   static weighted<T>(list: [number, T][], total?: number): T {
-    const sum = list.reduce((acc: number, x: [number, any]) => acc + x[0], 0);
+    const sum = list.reduce((acc: number, x: [number, T]) => acc + x[0], 0);
     if (!isNaN(total) && total !== sum) {
       throw new Error(`weighted list probabilities do not add up to ${total}`);
     }

@@ -26,6 +26,7 @@ import View from '../ui/view';
 import Game from '../game';
 
 export default class EventChain {
+  private previouslyPlanned: View;
   futures: FutureEvent[] = [];
   events: View[] = [
     new BeginEvent()
@@ -92,19 +93,26 @@ export default class EventChain {
     }
 
     // Basic event roll
-    this.events.push(Random.weighted([
-      [40, (): View => new ChallengeEvent()],
-      [15, (): View => new WeatherEvent()],
-      [6,  (): View => new OfferingEvent()],
-      [6,  (): View => new GiftEvent()],
-      [5,  (): View => new ObstacleEvent()],
-      [5,  (): View => new RecruitEvent()],
-      [5,  (): View => new TrapEvent()],
-      [4,  (): View => new PlantEvent()],
-      [4,  (): View => new ProjectEvent()],
-      [4,  (): View => new RapidEvent()],
-      [3,  (): View => new AnimalEvent()],
-      [3,  (): View => new TradeEvent()]
-    ], 100)());
+    const event: View = new (Random.weighted(
+      [
+        [40, ChallengeEvent],
+        [15, WeatherEvent],
+        [6,  OfferingEvent],
+        [6,  GiftEvent],
+        [5,  ObstacleEvent],
+        [5,  RecruitEvent],
+        [5,  TrapEvent],
+        [4,  PlantEvent],
+        [4,  ProjectEvent],
+        [4,  RapidEvent],
+        [3,  AnimalEvent],
+        [3,  TradeEvent]
+      ]
+      .map((x: any[]): [number, any] => x as [number, any])
+      .filter((x: [number, any]) => x[1] !== this.previouslyPlanned?.constructor),
+      this.previouslyPlanned ? undefined : 100
+    ))();
+    this.previouslyPlanned = event;
+    this.events.push(event);
   }
 }
