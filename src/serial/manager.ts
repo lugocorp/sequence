@@ -8,6 +8,7 @@ import Factory from './factory';
 import Challenger from '../entities/challenger';
 import Hero from '../entities/hero';
 import Item from '../entities/item';
+import Sprites from '../enums/sprites';
 import {Rarity} from '../enums/types';
 import * as types from './types';
 import challengers from '../data/challenger';
@@ -17,6 +18,7 @@ import items from '../data/item';
 export default class DataManager {
   itemsByRarityIndex: Map<number, types.ItemData[]> = new Map();
   factory: Factory = new Factory();
+  heroes: types.HeroData[];
 
   // Sets up indices in this object for easy access of game data by reference
   index(): void {
@@ -26,6 +28,7 @@ export default class DataManager {
     for (const item of items) {
       this.itemsByRarityIndex.get(item.rarity).push(item);
     }
+    this.heroes = heroes.filter((h: types.HeroData): boolean => h.sprite !== Sprites.NONE);
   }
 
   /*
@@ -41,7 +44,7 @@ export default class DataManager {
    * to be returned by this function.
    */
   getRandomHero(): Hero {
-    return this.factory.createHero(this, Random.element(heroes));
+    return this.factory.createHero(this, Random.element(this.heroes));
   }
 
   /*
