@@ -32,7 +32,7 @@ export default class Hero extends Unit {
 
   // Returns true if this Hero no longer has stats due to fatigue
   isFatigued(): boolean {
-    return !this.strength && !this.wisdom && !this.dexterity;
+    return this.strength <= 0 && this.wisdom <= 0 && this.dexterity <= 0;
   }
 
   // Reduces this Hero's stats

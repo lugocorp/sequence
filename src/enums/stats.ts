@@ -24,10 +24,6 @@ export default class Stats {
   }
 
   static changeUnitStat(unit: Unit, stat: number, boost: number): void {
-     switch (stat) {
-         case Stats.STRENGTH: unit.strength += boost; return;
-         case Stats.WISDOM: unit.wisdom += boost; return;
-         case Stats.DEXTERITY: unit.dexterity += boost; return;
-     }
+    unit[Stats.getStatName(stat)] = Math.max(0, Stats.getUnitStat(unit, stat) + boost);
   }
 }
