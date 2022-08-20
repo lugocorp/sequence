@@ -129,7 +129,7 @@ const data: HeroData[] = [
     itemSlots: 4
   },
   {
-    sprite: Sprites.NONE,
+    sprite: Sprites.NIGHT_SKY_WOMAN,
     name: 'night sky woman',
     people: 'tlingit',
     strength: 0,
@@ -147,7 +147,7 @@ const data: HeroData[] = [
     itemSlots: 3
   },
   {
-    sprite: Sprites.NONE,
+    sprite: Sprites.CHILLY_ELDER,
     name: 'chilly elder',
     people: 'yaghan',
     strength: 1,
@@ -255,7 +255,7 @@ const data: HeroData[] = [
     itemSlots: 2
   },
   {
-    sprite: Sprites.NONE,
+    sprite: Sprites.CHINAMPA_MAN,
     name: 'chinampa man',
     people: 'xaltocan',
     strength: 3,
