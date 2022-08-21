@@ -52,7 +52,7 @@ export default class TradeEvent extends View {
         new Action('make trade', () => that.checkTrade())
       ]);
     } else {
-      this.setDetails(this.hero.sprite, `no one in your party has items to trade`, [
+      this.setDetails(Game.game.party.members[0].sprite, `no one in your party has items to trade`, [
         new Action('continue', () => Game.game.progress())
       ]);
     }
