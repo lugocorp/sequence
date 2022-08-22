@@ -1,3 +1,4 @@
+import Sprites from '../../enums/sprites';
 import Item from '../../entities/item';
 import Hero from '../../entities/hero';
 import Selector from '../../ui/selector';
@@ -10,14 +11,16 @@ import Game from '../../game';
  */
 export default class OfferingEvent extends View {
   private heroSelector: Selector<Hero>;
+  private spirit: Sprites;
   private gift: Item;
 
   constructor() {
     super();
     const that = this;
     this.gift = Game.game.data.getRandomItem();
+    this.spirit = Game.game.data.getRandomSpirit();
     this.setDetails(
-      this.gift.sprite,
+      this.spirit,
       `a spirit offers a gift of ${this.gift.name} to your party. only one member may accept it.`,
       [ new Action('continue', () => that.viewGift()) ]
     );
@@ -38,8 +41,8 @@ export default class OfferingEvent extends View {
     const that = this;
     if (Game.game.party.canPickupItems()) {
       this.setSelector(this.heroSelector, [
-        new Action('view gift', () => that.viewGift()),
-        new Action('choose', () => that.finish())
+        new Action('choose', () => that.finish()),
+        new Action('view gift', () => that.viewGift())
       ]);
     } else {
       this.setDetails(this.heroSelector.item().sprite, `no one in your party can pickup items`, [
@@ -51,7 +54,7 @@ export default class OfferingEvent extends View {
   finish(): void {
     const hero: Hero = this.heroSelector.item();
     hero.equip(this.gift);
-    this.setDetails(hero.sprite, `${hero.name} was given ${this.gift.name}`, [
+    this.setDetails(this.spirit, `${hero.name} was given ${this.gift.name}. the spirit conceals itself once more.`, [
       new Action('continue', () => Game.game.progress())
     ]);
   }

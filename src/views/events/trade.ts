@@ -21,15 +21,9 @@ export default class TradeEvent extends View {
       Game.game.data.getRandomItem(),
       Game.game.data.getRandomItem()
     ]);
-    if (Game.game.party.canPickupItems()) {
-      this.setDetails(Sprites.TRADE, 'your party comes across a trading post.', [
-        new Action('continue', () => that.viewParty())
-      ]);
-    } else {
-      this.setDetails(Sprites.TRADE, 'your party comes across a trading post. none of them have any items to trade.', [
-        new Action('continue', () => Game.game.progress())
-      ]);
-    }
+    this.setDetails(Sprites.TRADE, 'your party comes across a trading post.', [
+      new Action('continue', () => Game.game.party.canPickupItems() ? that.viewParty() : Game.game.progress())
+    ]);
   }
 
   init(): void {
@@ -52,7 +46,7 @@ export default class TradeEvent extends View {
         new Action('make trade', () => that.checkTrade())
       ]);
     } else {
-      this.setDetails(Game.game.party.members[0].sprite, `no one in your party has items to trade`, [
+      this.setDetails(Sprites.TRADE, `no one in your party has items to trade`, [
         new Action('continue', () => Game.game.progress())
       ]);
     }

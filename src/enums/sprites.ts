@@ -72,6 +72,7 @@ enum Sprites {
   SUN          = 0x010100,
   RAIN         = 0x010200,
   WIND         = 0x010001,
+  SNOW         = 0x010000,
   TRADE        = 0x010101,
   RAPID        = 0x010201,
   PROJECT      = 0x010002,

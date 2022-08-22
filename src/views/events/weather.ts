@@ -29,7 +29,7 @@ export default class WeatherEvent extends View {
         break;
       case Weather.SNOW:
         this.desc = 'the temperature drops and frozen rain falls from the sky';
-        this.sprite = Sprites.RAIN;
+        this.sprite = Sprites.SNOW;
         break;
     }
     this.setDetails(

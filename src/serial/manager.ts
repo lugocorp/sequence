@@ -32,6 +32,13 @@ export default class DataManager {
   }
 
   /*
+   * Returns a random challenger sprite to represent a spirit.
+   */
+  getRandomSpirit(): Sprites {
+    return this.getRandomChallenger().sprite;
+  }
+
+  /*
    * Returns a random challenger available in the game. Every challenger has
    * equal chance to be returned by this function.
    */

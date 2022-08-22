@@ -47,8 +47,8 @@ export default class ChallengeEvent extends View {
   viewParty(): void {
     const that = this;
     this.setSelector(this.heroSelector, [
-      new Action('view spirit', () => that.viewChallenger()),
-      new Action('choose', () => that.finish())
+      new Action('choose', () => that.finish()),
+      new Action('view spirit', () => that.viewChallenger())
     ]);
   }
 
@@ -72,7 +72,7 @@ export default class ChallengeEvent extends View {
           hero.sprite,
           result ?
             `${hero.name} is tired but triumphant` :
-            `${hero.name} and the rest of your party were fatigued by the challenge`,
+            `your entire party was fatigued by the challenge`,
           [ new Action('continue', () => Game.game.progress()) ]
         ))
       ]

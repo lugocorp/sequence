@@ -37,14 +37,14 @@ export default class RecruitEvent extends View {
   viewRecruits(): void {
     const that = this;
     this.setSelector(this.recruitSelector, [
-      new Action('view party', () => that.viewParty()),
       new Action('choose', () => {
         if (Game.game.party.isFull()) {
           that.pleaseRemove();
         } else {
           that.finished();
         }
-      })
+      }),
+      new Action('view party', () => that.viewParty())
     ]);
   }
 
