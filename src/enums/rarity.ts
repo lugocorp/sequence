@@ -15,4 +15,14 @@ export default class Rarity {
       Rarity.MYTHIC
     ];
   }
+
+  static display(rarity: number): string {
+    return [
+      'common',
+      'uncommon',
+      'rare',
+      'legendary',
+      'mythic'
+    ][rarity];
+  }
 }

@@ -67,7 +67,16 @@ export default class GraphicsLoader {
         left: 0,
         top: 0,
         width: 50,
-        height: HGLYPH,
+        height: HGLYPH
+      }
+    }
+    if (id === Sprites.NONE) {
+      return {
+        src: undefined,
+        left: 0,
+        top: 0,
+        width: 100,
+        height: 100
       }
     }
     const index: number = id >> 16;

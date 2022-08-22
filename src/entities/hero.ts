@@ -10,6 +10,9 @@ import Game from '../game';
 
 export default class Hero extends Unit {
   private items: Item[];
+  originalStrength: number;
+  originalWisdom: number;
+  originalDexterity: number;
   itemSlots: number;
   ability: Ability;
   people: string;
@@ -21,6 +24,9 @@ export default class Hero extends Unit {
     this.people = people;
     this.items = [];
     this.luck = 50;
+    this.originalStrength = strength;
+    this.originalWisdom = wisdom;
+    this.originalDexterity = dexterity;
   }
 
   // Returns true if this Hero is in the player's Party
@@ -85,7 +91,7 @@ export default class Hero extends Unit {
   }
 
   // This function handles the hero's item and ability effects
-  activate(trigger: Trigger, data: any): void {
+  activate(trigger: Trigger, data?: any): void {
     if (this.ability) {
       this.ability.effect(trigger, this, data);
     }

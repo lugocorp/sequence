@@ -1,3 +1,4 @@
+import {Trigger} from '../enums/types';
 import Stats from '../enums/stats';
 import Random from '../logic/random';
 import Hero from './hero';
@@ -56,6 +57,7 @@ export default class Party {
       throw new Error(`${hero.name} is not in your party and therefore cannot be removed`);
     }
     this.members.splice(index, 1);
+    hero.activate(Trigger.LEAVES_PARTY);
   }
 
   // Returns a random hero in the party
@@ -65,6 +67,9 @@ export default class Party {
 
   // Filters the party by a stat expectation
   filter(stat: number, minimum: number): void {
-    this.members = this.members.filter((member: Hero) => Stats.getUnitStat(member, stat) >= minimum);
+    const remove: Hero[] = this.members.filter((member: Hero) => Stats.getUnitStat(member, stat) < minimum);
+    for (const hero of remove) {
+      this.remove(hero);
+    }
   }
 }

@@ -72,7 +72,7 @@ We have a number of `npm` commands:
 - [x] Draw some beta sprites
 - [x] Allow a new game to be started without without exiting the app
 - [x] Add party member data
-- [ ] Add a bunch of items
+- [x] Add a bunch of items
 - [ ] Finish all beta graphics
 - [ ] Launch the beta
 

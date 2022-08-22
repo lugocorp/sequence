@@ -60,12 +60,12 @@ export default class DataManager {
    */
   getRandomItem(): Item {
     const rarity = Random.weighted([
-      [1, Rarity.MYTHIC],
-      [2, Rarity.LEGENDARY],
-      [4, Rarity.RARE],
-      [8, Rarity.UNCOMMON],
-      [16, Rarity.COMMON]
-    ]);
+      [2, Rarity.MYTHIC],
+      [7, Rarity.LEGENDARY],
+      [17, Rarity.RARE],
+      [27, Rarity.UNCOMMON],
+      [47, Rarity.COMMON]
+    ], 100);
     const pool: types.ItemData[] = this.itemsByRarityIndex.get(rarity);
     return this.factory.createItem(Random.element(pool));
   }

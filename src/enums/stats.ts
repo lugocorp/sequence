@@ -1,5 +1,6 @@
-import Unit from '../entities/unit';
 import Random from '../logic/random';
+import Unit from '../entities/unit';
+import Hero from '../entities/hero';
 
 // Handles logic for unit stats in the game
 export default class Stats {
@@ -21,6 +22,11 @@ export default class Stats {
   // Returns a unit's value for the given stat
   static getUnitStat(unit: Unit, stat: number): number {
     return [unit.strength, unit.wisdom, unit.dexterity][stat];
+  }
+
+  // Returns a unit's original value for a given stat
+  static getOriginalStat(unit: Hero, stat: number): number {
+    return [unit.originalStrength, unit.originalWisdom, unit.originalDexterity][stat];
   }
 
   static changeUnitStat(unit: Unit, stat: number, boost: number): void {

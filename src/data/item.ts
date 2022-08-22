@@ -2,21 +2,12 @@ import Effect from '../enums/effects';
 import {ItemData} from '../serial/types';
 import Hero from '../entities/hero';
 import {Rarity, Trigger} from '../enums/types';
+import {Weather} from '../enums/world';
 import Sprites from '../enums/sprites';
 import Stats from '../enums/stats';
+import Game from '../game';
 
-function statItemEffect(stat: number, boost: number): Effect {
-    return (trigger: Trigger, hero: Hero, data: any) => {
-        if (trigger === Trigger.EQUIP) {
-            Stats.changeUnitStat(hero, stat, boost);
-        }
-        if (trigger === Trigger.UNEQUIP) {
-            Stats.changeUnitStat(hero, stat, -boost);
-        }
-    }
-}
-
-function luckItemEffect(boost: number): Effect {
+function luckEffect(boost: number): Effect {
     return (trigger: Trigger, hero: Hero, data: any) => {
         if (trigger === Trigger.EQUIP) {
             hero.luck += boost;
@@ -27,43 +18,172 @@ function luckItemEffect(boost: number): Effect {
     }
 }
 
+function boostEffect(str: number, wis: number, dex: number): Effect {
+  return (trigger: Trigger, hero: Hero, data: any) => {
+    if (trigger === Trigger.EQUIP) {
+      Stats.changeUnitStat(hero, Stats.STRENGTH, str);
+      Stats.changeUnitStat(hero, Stats.WISDOM, wis);
+      Stats.changeUnitStat(hero, Stats.DEXTERITY, dex);
+    }
+    if (trigger === Trigger.UNEQUIP) {
+      Stats.changeUnitStat(hero, Stats.STRENGTH, -str);
+      Stats.changeUnitStat(hero, Stats.WISDOM, -wis);
+      Stats.changeUnitStat(hero, Stats.DEXTERITY, -dex);
+    }
+  }
+}
+
+function weatherChallengeEffect(weather: Weather): Effect {
+  return (trigger: Trigger, hero: Hero, data: any) => {
+    if (trigger === Trigger.START_CHALLENGE) {
+      Game.game.world.weather = weather;
+    }
+  }
+}
+
 const data: ItemData[] = [
   {
     name: 'corn',
     sprite: Sprites.CORN,
     rarity: Rarity.COMMON,
-    description: 'gives a party member +1 strength',
-    effect: statItemEffect(Stats.STRENGTH, 1)
+    description: '+1 strength',
+    effect: boostEffect(1, 0, 0)
   },
   {
     name: 'squash',
     sprite: Sprites.SQUASH,
-    rarity: Rarity.UNCOMMON,
-    description: 'gives a party member +1 wisdom',
-    effect: statItemEffect(Stats.WISDOM, 1)
+    rarity: Rarity.COMMON,
+    description: '+1 wisdom',
+    effect: boostEffect(0, 1, 0)
   },
   {
     name: 'beans',
     sprite: Sprites.BEANS,
-    rarity: Rarity.RARE,
-    description: 'gives a party member +1 dexterity',
-    effect: statItemEffect(Stats.DEXTERITY, 1)
+    rarity: Rarity.COMMON,
+    description: '+1 dexterity',
+    effect: boostEffect(0, 0, 1)
   },
   {
     name: 'turquoise bead',
     sprite: Sprites.TURQUOISE,
-    rarity: Rarity.LEGENDARY,
-    description: 'gives a party member +5% luck',
-    effect: luckItemEffect(5)
+    rarity: Rarity.COMMON,
+    description: '+5% luck',
+    effect: luckEffect(5)
   },
   {
-    name: 'bluejay feather',
-    sprite: Sprites.FEATHER,
-    rarity: Rarity.MYTHIC,
-    description: 'the feather of a beautiful bluejay',
+    name: 'macuahuitl',
+    sprite: Sprites.NONE,
+    rarity: Rarity.UNCOMMON,
+    description: '+2 strength, -1 wisdom',
+    effect: boostEffect(2, -1, 0)
+  },
+  {
+    name: 'quipu',
+    sprite: Sprites.NONE,
+    rarity: Rarity.UNCOMMON,
+    description: '+2 wisdom, -1 dexterity',
+    effect: boostEffect(0, 2, -1)
+  },
+  {
+    name: 'moccasin',
+    sprite: Sprites.NONE,
+    rarity: Rarity.UNCOMMON,
+    description: '+2 dexterity, -1 strength',
+    effect: boostEffect(-1, 0, 2)
+  },
+  {
+    name: 'medicine bag',
+    sprite: Sprites.NONE,
+    rarity: Rarity.UNCOMMON,
+    description: '+5% luck to all party members when this character leaves your party',
     effect: (trigger: Trigger, hero: Hero, data: any) => {
-      // Do something here
+      if (trigger === Trigger.LEAVES_PARTY) {
+        for (const member of Game.game.party.members) {
+          member.luck += 5;
+        }
+      }
     }
+  },
+  {
+    name: 'tobacco',
+    sprite: Sprites.NONE,
+    rarity: Rarity.UNCOMMON,
+    description: '+5% luck after a successful challenge',
+    effect: (trigger: Trigger, hero: Hero, data: any) => {
+      if (trigger === Trigger.CHALLENGE_SUCCESS) {
+        hero.luck += 5;
+      }
+    }
+  },
+  {
+    name: 'echinacea',
+    sprite: Sprites.NONE,
+    rarity: Rarity.RARE,
+    description: 'reverts a random stat to its original value after a successful challenge',
+    effect: (trigger: Trigger, hero: Hero, data: any) => {
+      if (trigger === Trigger.CHALLENGE_SUCCESS) {
+        const stat: number = Stats.getRandomStat();
+        const current: number = Stats.getUnitStat(hero, stat);
+        const original: number = Stats.getOriginalStat(hero, stat);
+        Stats.changeUnitStat(hero, stat, original - current);
+      }
+    }
+  },
+  {
+    name: 'paw paw',
+    sprite: Sprites.NONE,
+    rarity: Rarity.RARE,
+    description: 'it rains when this item\'s holder is in a challenge',
+    effect: weatherChallengeEffect(Weather.RAIN)
+  },
+  {
+    name: 'cassava',
+    sprite: Sprites.NONE,
+    rarity: Rarity.RARE,
+    description: 'the wind blows when this item\'s holder is in a challenge',
+    effect: weatherChallengeEffect(Weather.WIND)
+  },
+  {
+    name: 'sunflower',
+    sprite: Sprites.NONE,
+    rarity: Rarity.RARE,
+    description: 'the clouds dissipate when this item\'s holder is in a challenge',
+    effect: weatherChallengeEffect(Weather.SUN)
+  },
+  {
+    name: 'manoomin rice',
+    sprite: Sprites.NONE,
+    rarity: Rarity.RARE,
+    description: 'it snows when this item\'s holder is in a challenge',
+    effect: weatherChallengeEffect(Weather.SNOW)
+  },
+  {
+    name: 'succotash',
+    sprite: Sprites.NONE,
+    rarity: Rarity.RARE,
+    description: '+1 strength\n+1 wisdom\n+1 dexterity',
+    effect: boostEffect(1, 1, 1)
+  },
+  {
+    name: 'chicha',
+    sprite: Sprites.NONE,
+    rarity: Rarity.LEGENDARY,
+    description: '+2 strength\n+2 wisdom\n+2 dexterity',
+    effect: boostEffect(2, 2, 2)
+  },
+  {
+    name: 'eagle feather',
+    sprite: Sprites.NONE,
+    rarity: Rarity.LEGENDARY,
+    description: '+100% luck',
+    effect: luckEffect(100)
+  },
+  {
+    name: 'turquoise ring',
+    sprite: Sprites.NONE,
+    rarity: Rarity.MYTHIC,
+    description: '+3 strength\n+3 wisdom\n+3 dexterity',
+    effect: boostEffect(3, 3, 3)
   }
 ];
 

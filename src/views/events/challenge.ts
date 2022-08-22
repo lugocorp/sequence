@@ -1,5 +1,6 @@
 import Challenger from '../../entities/challenger';
 import Hero from '../../entities/hero';
+import {Trigger} from '../../enums/types';
 import Stats from '../../enums/stats';
 import Random from '../../logic/random';
 import Selector from '../../ui/selector';
@@ -55,9 +56,13 @@ export default class ChallengeEvent extends View {
   finish(): void {
     const that = this;
     const hero: Hero = this.heroSelector.item();
+    hero.activate(Trigger.START_CHALLENGE);
     const result: boolean = this.playerOvercomesChallenge(hero, this.challenger);
     hero.fatigue();
-    if (!result) {
+    if (result) {
+      hero.activate(Trigger.CHALLENGE_SUCCESS);
+    } else {
+      hero.activate(Trigger.CHALLENGE_FAILURE);
       for (const hero of Game.game.party.members) {
         hero.fatigue();
       }
