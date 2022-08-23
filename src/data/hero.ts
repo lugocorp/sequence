@@ -75,7 +75,7 @@ const data: HeroData[] = [
     itemSlots: 2
   },
   {
-    sprite: Sprites.NONE,
+    sprite: Sprites.BASKETWEAVER,
     name: 'basketweaver',
     people: 'seneca',
     strength: 0,
@@ -399,7 +399,7 @@ const data: HeroData[] = [
     itemSlots: 2
   },
   {
-    sprite: Sprites.NONE,
+    sprite: Sprites.BRAWLER,
     name: 'brawler',
     people: 'aymara',
     strength: 5,

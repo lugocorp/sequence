@@ -9,7 +9,7 @@ export default class DeathEvent extends View {
 
   init(): void {
     Game.game.audio.play(GameAudio.FAIL);
-    this.setDetails(Sprites.DEATH, 'your party did not make it', [
+    this.setDetails(Sprites.DEATH, 'your party is empty', [
       new Action('continue', () => Game.setView(new StartView()))
     ]);
   }

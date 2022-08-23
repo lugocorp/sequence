@@ -72,28 +72,28 @@ const data: ItemData[] = [
   },
   {
     name: 'macuahuitl',
-    sprite: Sprites.NONE,
+    sprite: Sprites.MACUAHUITL,
     rarity: Rarity.UNCOMMON,
     description: '+2 strength, -1 wisdom',
     effect: boostEffect(2, -1, 0)
   },
   {
     name: 'quipu',
-    sprite: Sprites.NONE,
+    sprite: Sprites.QUIPU,
     rarity: Rarity.UNCOMMON,
     description: '+2 wisdom, -1 dexterity',
     effect: boostEffect(0, 2, -1)
   },
   {
     name: 'moccasin',
-    sprite: Sprites.NONE,
+    sprite: Sprites.MOCCASIN,
     rarity: Rarity.UNCOMMON,
     description: '+2 dexterity, -1 strength',
     effect: boostEffect(-1, 0, 2)
   },
   {
     name: 'medicine bag',
-    sprite: Sprites.NONE,
+    sprite: Sprites.MEDICINE_BAG,
     rarity: Rarity.UNCOMMON,
     description: '+5% luck to all party members when this character leaves your party',
     effect: (trigger: Trigger, hero: Hero, data: any) => {
@@ -106,7 +106,7 @@ const data: ItemData[] = [
   },
   {
     name: 'tobacco',
-    sprite: Sprites.NONE,
+    sprite: Sprites.TOBACCO,
     rarity: Rarity.UNCOMMON,
     description: '+5% luck after a successful challenge',
     effect: (trigger: Trigger, hero: Hero, data: any) => {
@@ -117,7 +117,7 @@ const data: ItemData[] = [
   },
   {
     name: 'echinacea',
-    sprite: Sprites.NONE,
+    sprite: Sprites.ECHINACEA,
     rarity: Rarity.RARE,
     description: 'reverts a random stat to its original value after a successful challenge',
     effect: (trigger: Trigger, hero: Hero, data: any) => {
@@ -131,56 +131,56 @@ const data: ItemData[] = [
   },
   {
     name: 'paw paw',
-    sprite: Sprites.NONE,
+    sprite: Sprites.PAW_PAW,
     rarity: Rarity.RARE,
     description: 'it rains when this item\'s holder is in a challenge',
     effect: weatherChallengeEffect(Weather.RAIN)
   },
   {
     name: 'cassava',
-    sprite: Sprites.NONE,
+    sprite: Sprites.CASSAVA,
     rarity: Rarity.RARE,
     description: 'the wind blows when this item\'s holder is in a challenge',
     effect: weatherChallengeEffect(Weather.WIND)
   },
   {
     name: 'sunflower',
-    sprite: Sprites.NONE,
+    sprite: Sprites.SUNFLOWER,
     rarity: Rarity.RARE,
     description: 'the clouds dissipate when this item\'s holder is in a challenge',
     effect: weatherChallengeEffect(Weather.SUN)
   },
   {
     name: 'manoomin rice',
-    sprite: Sprites.NONE,
+    sprite: Sprites.MANOOMIN_RICE,
     rarity: Rarity.RARE,
     description: 'it snows when this item\'s holder is in a challenge',
     effect: weatherChallengeEffect(Weather.SNOW)
   },
   {
     name: 'succotash',
-    sprite: Sprites.NONE,
+    sprite: Sprites.SUCCOTASH,
     rarity: Rarity.RARE,
     description: '+1 strength\n+1 wisdom\n+1 dexterity',
     effect: boostEffect(1, 1, 1)
   },
   {
     name: 'chicha',
-    sprite: Sprites.NONE,
+    sprite: Sprites.CHICHA,
     rarity: Rarity.LEGENDARY,
     description: '+2 strength\n+2 wisdom\n+2 dexterity',
     effect: boostEffect(2, 2, 2)
   },
   {
     name: 'eagle feather',
-    sprite: Sprites.NONE,
+    sprite: Sprites.EAGLE_FEATHER,
     rarity: Rarity.LEGENDARY,
     description: '+100% luck',
     effect: luckEffect(100)
   },
   {
     name: 'turquoise ring',
-    sprite: Sprites.NONE,
+    sprite: Sprites.TURQUOISE_RING,
     rarity: Rarity.MYTHIC,
     description: '+3 strength\n+3 wisdom\n+3 dexterity',
     effect: boostEffect(3, 3, 3)
