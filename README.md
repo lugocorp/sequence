@@ -73,19 +73,20 @@ We have a number of `npm` commands:
 - [x] Allow a new game to be started without without exiting the app
 - [x] Add party member data
 - [x] Add a bunch of items
-- [ ] Finish all beta graphics
+- [x] Finish all beta graphics
 - [ ] Launch the beta
 
 #### Full Launch
+- [ ] Add other characters back into game
 - [ ] Program party member abilities
 - [ ] Fix reported beta bugs
 - [ ] Contact more consultants just to double check themes and designs
-- [ ] Balance game content as needed
 - [ ] Update consultants list
 - [ ] Add time/weather icon to HUD
 - [ ] Replace audio files with custom sound effects
 - [ ] Add custom RNG with seed, allow players to set the seed for a given run
 - [ ] Store previous run stats (how far you went, points scored, etc) in a save file
+- [ ] Add all items
+- [ ] Balance game content as needed
 - [ ] Redesign sprites for full launch/draw all sprites
-- [ ] Add all final game content
 - [ ] Launch the full game

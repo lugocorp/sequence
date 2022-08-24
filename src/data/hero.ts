@@ -111,7 +111,7 @@ const data: HeroData[] = [
     itemSlots: 2
   },
   {
-    sprite: Sprites.NONE,
+    sprite: Sprites.SNEAKY_HUNTER,
     name: 'sneaky hunter',
     people: 'powhatan',
     strength: 1,
@@ -120,7 +120,7 @@ const data: HeroData[] = [
     itemSlots: 3
   },
   {
-    sprite: Sprites.NONE,
+    sprite: Sprites.WAR_RIDER,
     name: 'war rider',
     people: 'cherokee',
     strength: 0,
@@ -183,7 +183,7 @@ const data: HeroData[] = [
     itemSlots: 3
   },
   {
-    sprite: Sprites.NONE,
+    sprite: Sprites.SNEAKY_DANCER,
     name: 'sneaky dancer',
     people: 'wampanoag',
     strength: 0,
@@ -210,9 +210,9 @@ const data: HeroData[] = [
     itemSlots: 3
   },
   {
-    sprite: Sprites.NONE,
+    sprite: Sprites.MERCHANT,
     name: 'merchant',
-    people: 'anasazi',
+    people: 'pueblo',
     strength: 0,
     wisdom: 3,
     dexterity: 3,
@@ -363,7 +363,7 @@ const data: HeroData[] = [
     itemSlots: 1
   },
   {
-    sprite: Sprites.NONE,
+    sprite: Sprites.RANGER,
     name: 'ranger',
     people: 'dakota',
     strength: 2,

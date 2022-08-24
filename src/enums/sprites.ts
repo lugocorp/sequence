@@ -114,6 +114,11 @@ enum Sprites {
   CHILLY_ELDER    = 0x040203,
   BASKETWEAVER    = 0x040303,
   BRAWLER         = 0x040403,
+  SNEAKY_HUNTER   = 0x040004,
+  WAR_RIDER       = 0x040104,
+  SNEAKY_DANCER   = 0x040204,
+  MERCHANT        = 0x040304,
+  RANGER          = 0x040404,
 
   // Spritesheet #5 (Items)
   CORN           = 0x050000,
