@@ -53,7 +53,7 @@ export default class Party {
   // Removes a hero from your party
   remove(hero: Hero): void {
     const index: number = this.members.indexOf(hero);
-    if (index <0) {
+    if (index < 0) {
       throw new Error(`${hero.name} is not in your party and therefore cannot be removed`);
     }
     this.members.splice(index, 1);

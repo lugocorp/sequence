@@ -27,7 +27,7 @@ export default class ChallengeEvent extends View {
       [
         new Action('continue', () => that.setDetails(
           that.challenger.sprite,
-          `the entity with the higher contested stats or enough luck will win. the party member you choose will get tired, but it will be worse if they lose.`,
+          `the entity with the higher contested stats or enough luck will win. the party member you choose will get tired, and they will leave your party if they lose.`,
           [ new Action('continue', () => that.viewChallenger()) ]
         ))
       ]
@@ -65,18 +65,13 @@ export default class ChallengeEvent extends View {
     hero.activate(Trigger.START_CHALLENGE);
     const result: boolean = this.playerOvercomesChallenge(hero, this.challenger);
     if (result) {
-      hero.activate(Trigger.CHALLENGE_SUCCESS);
-      Stats.changeUnitStat(hero, this.expectation[0], -1);
-      if (this.expectation.length > 1) {
-        Stats.changeUnitStat(hero, this.expectation[1], -1);
-      }
+      hero.fatigue();
     } else {
-      hero.activate(Trigger.CHALLENGE_FAILURE);
-      Stats.setUnitStat(hero, this.expectation[0], 0);
-      if (this.expectation.length > 1) {
-        Stats.setUnitStat(hero, this.expectation[1], 0);
-      }
+      Stats.setUnitStat(hero, Stats.STRENGTH, 0);
+      Stats.setUnitStat(hero, Stats.WISDOM, 0);
+      Stats.setUnitStat(hero, Stats.DEXTERITY, 0);
     }
+    hero.activate(result ? Trigger.CHALLENGE_SUCCESS : Trigger.CHALLENGE_FAILURE);
     this.setDetails(
       hero.sprite,
       result ?
@@ -86,8 +81,8 @@ export default class ChallengeEvent extends View {
         new Action('continue', () => that.setDetails(
           hero.sprite,
           result ?
-            `${hero.name} is tired but triumphant. they received -1 to the contested stats.` :
-            `${hero.name} lost their contested stats.`,
+            `${hero.name} is tired but triumphant. they received -1 to all their stats.` :
+            `${hero.name} lost all their stats during the challenge.`,
           [ new Action('continue', () => Game.game.progress()) ]
         ))
       ]

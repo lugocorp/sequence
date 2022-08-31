@@ -26,7 +26,7 @@ export default class Stats {
 
   // Sets a unit's value for the given stat
   static setUnitStat(unit: Unit, stat: number, value: number): void {
-    [unit.strength, unit.wisdom, unit.dexterity][stat] = value;
+    unit[Stats.getStatName(stat)] = value;
   }
 
   // Returns a unit's original value for a given stat
