@@ -12,7 +12,7 @@ export default class BeginEvent extends View {
   init(): void {
     this.setDetails(
       Sprites.BEGIN,
-      'your party sets off on a new adventure.',
+      'your party sets off on a new adventure. press continue below and then use the arrows that appear above to view your party members.',
       [
         new Action('view party', () => this.setSelector(
           Selector.heroSelector(Game.game.party.members),
@@ -22,7 +22,6 @@ export default class BeginEvent extends View {
         ))
       ]
     );
-
   }
 
   finish(): void {

@@ -23,8 +23,14 @@ export default class ChallengeEvent extends View {
     }
     this.setDetails(
       this.challenger.sprite,
-      `your party comes across a spirit who offers a challenge. this will be ${this.getTestText()}.`,
-      [ new Action('continue', () => that.viewChallenger()) ]
+      `your party comes across a spirit who offers a challenge. this will be ${this.getTestText()} for any party member you choose.`,
+      [
+        new Action('continue', () => that.setDetails(
+          that.challenger.sprite,
+          `the entity with the higher contested stats or enough luck will win. the party member you choose will get tired, but it will be worse if they lose.`,
+          [ new Action('continue', () => that.viewChallenger()) ]
+        ))
+      ]
     );
   }
 
@@ -58,13 +64,17 @@ export default class ChallengeEvent extends View {
     const hero: Hero = this.heroSelector.item();
     hero.activate(Trigger.START_CHALLENGE);
     const result: boolean = this.playerOvercomesChallenge(hero, this.challenger);
-    hero.fatigue();
     if (result) {
       hero.activate(Trigger.CHALLENGE_SUCCESS);
+      Stats.changeUnitStat(hero, this.expectation[0], -1);
+      if (this.expectation.length > 1) {
+        Stats.changeUnitStat(hero, this.expectation[1], -1);
+      }
     } else {
       hero.activate(Trigger.CHALLENGE_FAILURE);
-      for (const hero of Game.game.party.members) {
-        hero.fatigue();
+      Stats.setUnitStat(hero, this.expectation[0], 0);
+      if (this.expectation.length > 1) {
+        Stats.setUnitStat(hero, this.expectation[1], 0);
       }
     }
     this.setDetails(
@@ -76,8 +86,8 @@ export default class ChallengeEvent extends View {
         new Action('continue', () => that.setDetails(
           hero.sprite,
           result ?
-            `${hero.name} is tired but triumphant` :
-            `your entire party was fatigued by the challenge`,
+            `${hero.name} is tired but triumphant. they received -1 to the contested stats.` :
+            `${hero.name} lost their contested stats.`,
           [ new Action('continue', () => Game.game.progress()) ]
         ))
       ]
@@ -91,6 +101,6 @@ export default class ChallengeEvent extends View {
       sum1 += Stats.getUnitStat(hero, this.expectation[1]);
       sum2 += Stats.getUnitStat(challenger, this.expectation[1]);
     }
-    return (sum1 > sum2) || (sum1 === sum2 && hero.lucky());
+    return (sum1 >= sum2) || hero.lucky();
   }
 }

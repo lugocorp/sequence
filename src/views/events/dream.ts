@@ -16,7 +16,7 @@ export default class DreamEvent extends View {
     // Set up future event
     const future: View = new View();
     future.setDetails(hero.sprite, `${hero.name} receives a powerful item they had recently dreamt of`, [
-      new Action('view item', () => future.setDetails(hero.sprite, item.descriptionText(), [
+      new Action('view item', () => future.setDetails(item.sprite, item.descriptionText(), [
         new Action('continue', () => {
           hero.equip(item);
           Game.game.progress();

@@ -8,14 +8,14 @@ import Stats from '../enums/stats';
 import Game from '../game';
 
 function luckEffect(boost: number): Effect {
-    return (trigger: Trigger, hero: Hero, data: any) => {
-        if (trigger === Trigger.EQUIP) {
-            hero.luck += boost;
-        }
-        if (trigger === Trigger.UNEQUIP) {
-            hero.luck -= boost;
-        }
+  return (trigger: Trigger, hero: Hero, data: any) => {
+    if (trigger === Trigger.EQUIP) {
+      hero.boostLuck(boost);
     }
+    if (trigger === Trigger.UNEQUIP) {
+      hero.boostLuck(-boost);
+    }
+  }
 }
 
 function boostEffect(str: number, wis: number, dex: number): Effect {
@@ -99,7 +99,7 @@ const data: ItemData[] = [
     effect: (trigger: Trigger, hero: Hero, data: any) => {
       if (trigger === Trigger.LEAVES_PARTY) {
         for (const member of Game.game.party.members) {
-          member.luck += 5;
+          member.boostLuck(5);
         }
       }
     }
@@ -111,7 +111,7 @@ const data: ItemData[] = [
     description: '+5% luck after a successful challenge',
     effect: (trigger: Trigger, hero: Hero, data: any) => {
       if (trigger === Trigger.CHALLENGE_SUCCESS) {
-        hero.luck += 5;
+        hero.boostLuck(5);
       }
     }
   },

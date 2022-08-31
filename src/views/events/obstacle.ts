@@ -10,7 +10,7 @@ import Game from '../../game';
  */
 export default class ObstacleEvent extends View {
   private original: number;
-  private minimum: number;
+  private cutoff: number;
   private stat: number;
   private obstacle: {sprite: Sprites, name: string};
 
@@ -19,21 +19,26 @@ export default class ObstacleEvent extends View {
     this.obstacle = Random.element([
       {sprite: Sprites.OBSTACLE, name: 'bog'},
       {sprite: Sprites.OBSTACLE, name: 'cliff'},
-      {sprite: Sprites.OBSTACLE, name: 'bog'},
+      {sprite: Sprites.OBSTACLE, name: 'cave'}
     ]);
     this.original = Game.game.party.length();
     this.stat = Stats.getRandomStat();
-    this.minimum = Random.max(3) + 1;
+    this.cutoff = Random.max(4) + 1;
     const that = this;
     this.setDetails(
       this.obstacle.sprite,
-      `your party comes across a ${this.obstacle.name}. only travelers with ${this.minimum} ${Stats.getStatName(this.stat)} or more may pass.`,
+      `your party comes across a ${this.obstacle.name}. only travelers with ${this.cutoff} ${Stats.getStatName(this.stat)} or ${this.higher ? 'higher' : 'lower'} may pass.`,
       [ new Action('continue', () => that.finish()) ]
     );
   }
 
+  // True if this event only allows members above a certain threshold
+  get higher(): boolean {
+    return this.cutoff <= 2;
+  }
+
   finish(): void {
-    Game.game.party.filter(this.stat, this.minimum);
+    Game.game.party.filter(this.stat, this.cutoff, this.higher);
     const size: number = Game.game.party.length();
     this.setDetails(
       this.obstacle.sprite,

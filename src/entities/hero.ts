@@ -10,20 +10,20 @@ import Game from '../game';
 
 export default class Hero extends Unit {
   private items: Item[];
+  private luck: number;
   originalStrength: number;
   originalWisdom: number;
   originalDexterity: number;
   itemSlots: number;
   ability: Ability;
   people: string;
-  luck: number;
 
   constructor(sprite: Sprites, name: string, people: string, strength: number, wisdom: number, dexterity: number, itemSlots: number) {
     super(sprite, name, strength, wisdom, dexterity);
     this.itemSlots = itemSlots;
     this.people = people;
     this.items = [];
-    this.luck = 50;
+    this.luck = 10;
     this.originalStrength = strength;
     this.originalWisdom = wisdom;
     this.originalDexterity = dexterity;
@@ -44,6 +44,10 @@ export default class Hero extends Unit {
     Stats.changeUnitStat(this, Stats.STRENGTH, -1);
     Stats.changeUnitStat(this, Stats.WISDOM, -1);
     Stats.changeUnitStat(this, Stats.DEXTERITY, -1);
+  }
+
+  boostLuck(boost: number): void {
+    this.luck = Math.max(Math.min(this.luck + boost, 100), 0);
   }
 
   // Equips an item to this hero
@@ -103,11 +107,13 @@ export default class Hero extends Unit {
   // Returns the text used in this hero's description
   descriptionText(): string {
     const stat = (n: number): string => n > 9 ? `\t${n}\t` : `\t${n}\t\t`;
-    const numSpaces = WTEXT - this.people.length - 9 - 1;
+    const digits = (n: number): number => n === 100 ? 3 : (n >= 10 ? 2 : 1);
+    const numSpaces = WTEXT - digits(this.luck) - 9 - 6 - 1;
     const spaces = new Array(numSpaces + 1).join(' ');
     return `${this.name}\n` +
-      `${this.itemCount()}/${this.itemSlots} items${spaces}${this.people}\n` +
-      `str:${stat(this.strength)}wis:${stat(this.wisdom)}dex:${stat(this.dexterity)}`;
+      `${this.itemCount()}/${this.itemSlots} items${spaces}${this.luck}% luck\n` +
+      `str:${stat(this.strength)}wis:${stat(this.wisdom)}dex:${stat(this.dexterity)}\n` +
+      this.people;
   }
 
   // Returns true if the hero passes a luck check

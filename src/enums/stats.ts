@@ -24,11 +24,17 @@ export default class Stats {
     return [unit.strength, unit.wisdom, unit.dexterity][stat];
   }
 
+  // Sets a unit's value for the given stat
+  static setUnitStat(unit: Unit, stat: number, value: number): void {
+    [unit.strength, unit.wisdom, unit.dexterity][stat] = value;
+  }
+
   // Returns a unit's original value for a given stat
   static getOriginalStat(unit: Hero, stat: number): number {
     return [unit.originalStrength, unit.originalWisdom, unit.originalDexterity][stat];
   }
 
+  // Changes a unit's stat by a given value
   static changeUnitStat(unit: Unit, stat: number, boost: number): void {
     unit[Stats.getStatName(stat)] = Math.max(0, Stats.getUnitStat(unit, stat) + boost);
   }
