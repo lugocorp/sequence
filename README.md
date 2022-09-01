@@ -61,7 +61,7 @@ We have a number of `npm` commands:
 - [x] Write a few events (trap, obstacle, recruit)
 - [x] Research and ask cultural consultants to help come up with character concepts, double check core gameplay
 
-#### Beta Build
+#### Alpha Build
 - [x] Lock down art style and UI
 - [x] Rewrite UI as needed and make everything line up in a pretty way
 - [x] Clean up all events
@@ -74,22 +74,25 @@ We have a number of `npm` commands:
 - [x] Add party member data
 - [x] Add a bunch of items
 - [x] Finish all beta graphics
+- [x] Give out alpha access
+
+#### Beta Launch
+- [ ] Fix reported alpha bugs
+- [ ] Add time/weather icon to HUD
+- [ ] Add custom RNG with seed, allow players to set the seed for a given run
+- [ ] Store previous run stats (how far you went, points scored, etc) in a save file
+- [ ] Add more data for the `plant` event, and graphics for `obstacle` and `project` events
+- [ ] Add other characters back into game
+- [ ] Add all events
+- [ ] Add all items
+- [ ] Program party member abilities
 - [ ] Launch the beta
 
 #### Full Launch
-- [ ] Add `lake`, `help`, `teacher`, `tree`, `trickster`, `3 sisters mound`, `potlatch`, and `village` events
-- [ ] Add more data for the `plant` event
-- [ ] Add `copper axe`, `amoxtli`, and `boots` items
-- [ ] Add other characters back into game
-- [ ] Program party member abilities
-- [ ] Fix reported beta bugs
 - [ ] Contact more consultants just to double check themes and designs
 - [ ] Update consultants list
-- [ ] Add time/weather icon to HUD
+- [ ] Redesign character sprites for full launch
 - [ ] Replace audio files with custom sound effects
-- [ ] Add custom RNG with seed, allow players to set the seed for a given run
-- [ ] Store previous run stats (how far you went, points scored, etc) in a save file
-- [ ] Add all items
 - [ ] Balance game content as needed
-- [ ] Redesign sprites for full launch/draw all sprites
+- [ ] Make sure all sprites are drawn
 - [ ] Launch the full game
