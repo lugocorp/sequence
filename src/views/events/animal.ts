@@ -64,7 +64,7 @@ export default class AnimalEvent extends View {
             })
           ]);
         } else {
-          that.setDetails(baby.sprite, `your party cannot pickup any items`, [
+          that.setDetails(baby.sprite, `your party's inventory is completely full. your party leaves the small animal.`, [
             new Action('continue', () => Game.game.progress())
           ]);
         }
@@ -73,6 +73,6 @@ export default class AnimalEvent extends View {
   }
 
   init(): void {
-    this.heroSelector = Selector.heroSelector(Game.game.party.members);
+    this.heroSelector = Selector.heroSelector(Game.game.party.emptyItemSlots());
   }
 }

@@ -1,6 +1,7 @@
 import Sprites from '../../enums/sprites';
 import Item from '../../entities/item';
 import Hero from '../../entities/hero';
+import Random from '../../logic/random';
 import Selector from '../../ui/selector';
 import Action from '../../ui/action';
 import View from '../../ui/view';
@@ -28,26 +29,28 @@ export default class GiftEvent extends View {
 
   init(): void {
     const that = this;
-    this.hero = Game.game.party.randomHero();
-    this.setDetails(
-      this.spirit,
-      `a spirit reveals itself to ${this.hero.name}. it comes bearing a gift of your choosing.`,
-      [ new Action('continue', () => that.chooseGift()) ]
-    );
+    if (Game.game.party.canPickupItems()) {
+      this.hero = Random.element(Game.game.party.emptyItemSlots());
+      this.setDetails(
+        this.spirit,
+        `a spirit reveals itself to ${this.hero.name}. it comes bearing a gift of your choosing.`,
+        [ new Action('continue', () => that.chooseGift()) ]
+      );
+    } else {
+      this.setDetails(
+        this.spirit,
+        `a spirit reveals itself to your party. it comes bearing a gift, but everyone's inventory is full.`,
+        [ new Action('continue', () => Game.game.progress()) ]
+      );
+    }
   }
 
   chooseGift(): void {
     const that = this;
-    if (this.hero.itemSlots) {
-      this.setSelector(this.itemSelector, [
-        new Action('choose', () => that.finish()),
-        new Action('view member', () => that.viewHero())
-      ]);
-    } else {
-      this.setDetails(this.hero.sprite, `${this.hero.name} cannot pickup any items`, [
-        new Action('continue', () => Game.game.progress())
-      ]);
-    }
+    this.setSelector(this.itemSelector, [
+      new Action('choose', () => that.finish()),
+      new Action('view member', () => that.viewHero())
+    ]);
   }
 
   viewHero(): void {

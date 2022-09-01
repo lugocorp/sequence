@@ -29,7 +29,7 @@ export default class Party {
 
   // Returns true if anyone in your party has at least 1 item slot
   canPickupItems(): boolean {
-    return this.members.reduce((acc: number, x: Hero) => Math.max(acc, x.itemSlots), 0) > 0;
+    return this.emptyItemSlots().length > 0;
   }
 
   // Returns true if anyone in your party has at least 1 item
@@ -48,6 +48,10 @@ export default class Party {
       throw new Error(`Cannot have more than ${Party.MAX} members in your party`);
     }
     this.members.push(hero);
+  }
+
+  emptyItemSlots(): Hero[] {
+    return this.members.filter((x: Hero) => x.canEquipItems());
   }
 
   // Removes a hero from your party

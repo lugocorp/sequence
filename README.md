@@ -77,6 +77,9 @@ We have a number of `npm` commands:
 - [ ] Launch the beta
 
 #### Full Launch
+- [ ] Add `lake`, `help`, `teacher`, `tree`, `trickster`, `3 sisters mound`, `potlatch`, and `village` events
+- [ ] Add more data for the `plant` event
+- [ ] Add `copper axe`, `amoxtli`, and `boots` items
 - [ ] Add other characters back into game
 - [ ] Program party member abilities
 - [ ] Fix reported beta bugs

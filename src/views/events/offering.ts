@@ -27,7 +27,14 @@ export default class OfferingEvent extends View {
   }
 
   init(): void {
-    this.heroSelector = Selector.heroSelector(Game.game.party.members);
+    this.heroSelector = Selector.heroSelector(Game.game.party.emptyItemSlots());
+    if (!this.heroSelector.size()) {
+      this.setDetails(
+        this.spirit,
+        `a spirit offers a gift of ${this.gift.name} to your party, but everyone's inventory is full.`,
+        [ new Action('continue', () => Game.game.progress()) ]
+      );
+    }
   }
 
   viewGift(): void {

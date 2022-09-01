@@ -11,12 +11,12 @@ import Game from '../game';
 export default class Hero extends Unit {
   private items: Item[];
   private luck: number;
+  private people: string;
+  private itemSlots: number;
   originalStrength: number;
   originalWisdom: number;
   originalDexterity: number;
-  itemSlots: number;
   ability: Ability;
-  people: string;
 
   constructor(sprite: Sprites, name: string, people: string, strength: number, wisdom: number, dexterity: number, itemSlots: number) {
     super(sprite, name, strength, wisdom, dexterity);
@@ -46,16 +46,15 @@ export default class Hero extends Unit {
     Stats.changeUnitStat(this, Stats.DEXTERITY, -1);
   }
 
+  // Changes the hero's luck by a given amount
   boostLuck(boost: number): void {
     this.luck = Math.max(Math.min(this.luck + boost, 100), 0);
   }
 
   // Equips an item to this hero
   equip(item: Item): void {
-    // Shift items if the Hero is fully equipped
-    if (this.items.length === this.itemSlots) {
-      this.items[0].effect(Trigger.UNEQUIP, this, null);
-      this.items.splice(0, 1);
+    if (this.items.length >= this.itemSlots) {
+      throw new Error(`${this.name} can no longer equip items`);
     }
     this.items.push(item);
     item.effect(Trigger.EQUIP, this, null);
@@ -92,6 +91,11 @@ export default class Hero extends Unit {
   // Returns the number of equipped items
   itemCount(): number {
     return this.items.length;
+  }
+
+  // Returns true if this hero can still equip items
+  canEquipItems(): boolean {
+    return this.items.length < this.itemSlots;
   }
 
   // This function handles the hero's item and ability effects
