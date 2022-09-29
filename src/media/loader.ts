@@ -10,7 +10,7 @@ import DrawCoords from './draw-coords';
 export default class GraphicsLoader {
   loadAsset: HTMLImageElement;
   sheets: HTMLImageElement[];
-  static NUM_SHEETS = 6;
+  static NUM_SHEETS = 7;
 
   /*
    * This method returns the dimensions of each sprite in a spritesheet

@@ -141,6 +141,10 @@ enum Sprites {
   EAGLE_FEATHER  = 0x050203,
   TURQUOISE_RING = 0x050303,
 
+  // Spritesheet #6 (backgrounds)
+  SPIRIT_REALM = 0x060000,
+  PRAIRIE      = 0x060100,
+
   // Constants that are special
   NONE    = 0xFFFFFE,
   LOADING = 0xFFFFFF
