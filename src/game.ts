@@ -58,9 +58,7 @@ export default class Game {
       weather: Weather.SUN,
       time: Time.DAY
     };
-    for (let a = 0; a < Party.MAX; a++) {
-      this.party.add(this.data.getRandomHero());
-    }
+    this.party.populate();
     Game.futureEvent(new TimeEvent(), DAY_NIGHT_CYCLE);
   }
 

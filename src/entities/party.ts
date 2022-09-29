@@ -1,6 +1,7 @@
 import {Trigger} from '../enums/types';
 import Stats from '../enums/stats';
 import Random from '../logic/random';
+import Game from '../game';
 import Hero from './hero';
 
 export default class Party {
@@ -35,6 +36,16 @@ export default class Party {
   // Returns true if anyone in your party has at least 1 item
   hasItems(): boolean {
     return this.members.reduce((acc: number, x: Hero) => acc + x.itemCount(), 0) > 0;
+  }
+
+  // Fully populates the party with an optional guaranteed character
+  populate(guaranteed?: string): void {
+    if (guaranteed) {
+      this.add(Game.game.data.getNamedHero(guaranteed));
+    }
+    while (this.length() < Party.MAX) {
+      this.add(Game.game.data.getRandomHero());
+    }
   }
 
   // Returns the hero at the given index

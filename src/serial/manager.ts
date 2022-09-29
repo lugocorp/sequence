@@ -55,6 +55,13 @@ export default class DataManager {
   }
 
   /*
+   * Returns the hero with the given name.
+   */
+  getNamedHero(name: string): Hero {
+    return this.factory.createHero(this, this.heroes.filter((x: types.HeroData) => x.name === name)[0]);
+  }
+
+  /*
    * Returns a random item available in the game. An item's probability to be
    * returned by this function is determined by its rarity.
    */

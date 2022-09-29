@@ -17,6 +17,7 @@ export default class GraphicsRenderer {
   assets: GraphicsLoader;
   scale: number;
   dark: number;
+
   constructor(canvas: HTMLCanvasElement, assets: GraphicsLoader) {
     this.ctx = canvas.getContext('2d');
     this.canvas = canvas;
@@ -53,8 +54,14 @@ export default class GraphicsRenderer {
     }
     if (view.image) {
       const c: DrawCoords = this.assets.getSprite(view.image);
-      this.drawSprite(view.image, ((100 - c.width) / 2) + 12, (100 - c.height) / 2);
+      this.drawSprite(view.image, ((100 - c.width) / 2) + 12, ((100 - c.height) / 2) + 3);
     }
+    this.ctx.lineWidth = 1;
+    this.ctx.rect(11, 2, 102, 1);
+    this.ctx.rect(11, 103, 102, 1);
+    this.ctx.rect(11, 2, 1, 102);
+    this.ctx.rect(112, 2, 1, 102);
+    this.ctx.fill();
     const text = view.getText();
     if (text) {
       this.drawText(text, 0, 0);
@@ -100,7 +107,7 @@ export default class GraphicsRenderer {
 
   // Converts text coords to display coords
   toDisplayCoords(tx: number, ty: number): [number, number] {
-    return [(tx * WGLYPH) + 2, (ty * HGLYPH) + 102];
+    return [(tx * WGLYPH) + 2, (ty * HGLYPH) + 104];
   }
 
   /*

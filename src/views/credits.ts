@@ -15,7 +15,7 @@ export default class CreditsView extends View {
         [
           '-development-\n\nalex lugo\ntaíno/chichimeca',
           '-consultants-\n\nkoro valdivia\ntawantinsuyu\n\nnati/palta\nquechua\nshe/they',
-          'c. travioli\ncheyenne river lakota'
+          'c. travioli\ncheyenne river lakota\n\nlydia prince\ndakelh/nehiyaw\nshe/her'
         ],
         (v: View, e: string) => {
           that.image = Sprites.CREDITS;
