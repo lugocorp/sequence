@@ -9,6 +9,7 @@ import Party from './entities/party';
 import TimeEvent from './views/events/time';
 import StartView from './views/start';
 import View from './ui/view';
+import History from './media/history';
 
 export default class Game {
   static game: Game;
@@ -18,7 +19,9 @@ export default class Game {
   assets: GraphicsLoader;
   chain: EventChain;
   data: DataManager;
+  history: History;
   audio: GameAudio;
+  score: number;
   world: World;
   party: Party;
 
@@ -27,6 +30,7 @@ export default class Game {
     this.assets = new GraphicsLoader();
     this.chain = new EventChain();
     this.data = new DataManager();
+    this.history = new History();
     this.audio = new GameAudio();
     this.party = new Party();
   }
@@ -40,6 +44,7 @@ export default class Game {
     // Load and setup game assets (with a loading screen)
     await this.assets.loadInitialAsset();
     this.invalidate();
+    await this.history.initialize();
     await this.assets.loadAssets();
     await this.audio.loadAudio();
     this.data.index();
@@ -53,6 +58,7 @@ export default class Game {
 
   // Sets initial game state
   setInitialState(): void {
+    this.score = 0;
     this.chain.clear();
     this.party.clear();
     this.world = {
