@@ -76,7 +76,7 @@ We have a number of `npm` commands:
 - [x] Finish all beta graphics
 
 #### Path to Launch
-- [ ] Replace audio files with less annoying sound effects
+- [x] Replace audio files with less annoying sound effects
 - [ ] Implement high score screen (store past runs, create a points system, etc)
 - [ ] Change existing events and implement new ones
 - [ ] Implement all item effects and add new character data

@@ -44,6 +44,7 @@ export default class Game {
     await this.audio.loadAudio();
     this.data.index();
     await new Promise((resolve) => setTimeout(resolve, 1000));
+    this.audio.play(GameAudio.STARTUP);
 
     // Loading has completed
     Game.setView(new StartView());
@@ -113,7 +114,7 @@ export default class Game {
           const actionCoords: [number, number] = this.view.getActionCoords(a);
           const coords: [number, number] = this.renderer.toDisplayCoords(actionCoords[0], actionCoords[1]);
           if (this.within(action.label, coords[0], coords[1])) {
-            this.audio.play(GameAudio.CLICK);
+            this.audio.play(GameAudio.OPTION);
             action.effect();
             break;
           }
@@ -121,12 +122,12 @@ export default class Game {
       }
       if (this.view.hasOptions()) {
         if (this.view.selector.index > 0 && this.bounded(0, 0, 12, 100)) {
-          this.audio.play(GameAudio.CLICK);
+          this.audio.play(GameAudio.ARROW);
           this.view.selector.index--;
           this.view.selector.invalidate();
         }
         if (this.view.selector.index < this.view.selector.size() - 1 && this.bounded(112, 0, 12, 100)) {
-          this.audio.play(GameAudio.CLICK);
+          this.audio.play(GameAudio.ARROW);
           this.view.selector.index++;
           this.view.selector.invalidate();
         }

@@ -1,12 +1,16 @@
 
 export default class GameAudio {
-  static CLICK = 0;
-  static FAIL  = 1;
-  static MUSIC = 2;
+  static STARTUP = 0;
+  static OPTION  = 1;
+  static ARROW   = 2;
+  static FAIL    = 3;
+  static MUSIC   = 4;
   private assets: HTMLAudioElement[];
   private paths: string[] = [
-    'mixkit-quick-positive-video-game-notification-interface-265.wav',
-    'mixkit-player-losing-or-failing-2042.wav',
+    'startup.wav',
+    'option.wav',
+    'arrow.wav',
+    'gameover.wav',
     'mixkit-game-level-music-689.wav'
   ];
 
