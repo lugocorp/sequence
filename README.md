@@ -74,25 +74,15 @@ We have a number of `npm` commands:
 - [x] Add party member data
 - [x] Add a bunch of items
 - [x] Finish all beta graphics
-- [x] Give out alpha access
 
 #### Beta Launch
-- [ ] Fix reported alpha bugs
-- [ ] Add time/weather icon to HUD
-- [ ] Add custom RNG with seed, allow players to set the seed for a given run
-- [ ] Store previous run stats (how far you went, points scored, etc) in a save file
-- [ ] Add more data for the `plant` event, and graphics for `obstacle` and `project` events
-- [ ] Add other characters back into game
-- [ ] Add all events
-- [ ] Add all items
-- [ ] Program party member abilities
-- [ ] Launch the beta
-
-#### Full Launch
-- [ ] Contact more consultants just to double check themes and designs
-- [ ] Update consultants list
-- [ ] Redesign character sprites for full launch
+- [ ] Add background sprites (designed with composition in mind)
 - [ ] Replace audio files with custom sound effects
+- [ ] Store previous run stats (how far you went, points scored, etc) in a save file
+- [ ] Change existing events and implement new ones
+- [ ] Add all graphics for the events
+- [ ] Add all items and their graphics
+- [ ] Redesign character sprites for full launch
 - [ ] Balance game content as needed
-- [ ] Make sure all sprites are drawn
+- [ ] Update any ugly UI throughout the game
 - [ ] Launch the full game
