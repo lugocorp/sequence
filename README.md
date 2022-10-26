@@ -75,14 +75,16 @@ We have a number of `npm` commands:
 - [x] Add a bunch of items
 - [x] Finish all beta graphics
 
-#### Beta Launch
-- [ ] Add background sprites (designed with composition in mind)
-- [ ] Replace audio files with custom sound effects
-- [ ] Store previous run stats (how far you went, points scored, etc) in a save file
+#### Path to Launch
+- [ ] Replace audio files with less annoying sound effects
+- [ ] Implement high score screen (store past runs, create a points system, etc)
 - [ ] Change existing events and implement new ones
+- [ ] Implement all item effects and add new character data
+- [ ] Package with new placeholder graphics, launch a browser-based open beta
+- [ ] Add background sprites (designed with composition in mind)
 - [ ] Add all graphics for the events
-- [ ] Add all items and their graphics
+- [ ] Draw item sprites
+- [ ] Update beta with feedback
 - [ ] Redesign character sprites for full launch
-- [ ] Balance game content as needed
 - [ ] Update any ugly UI throughout the game
 - [ ] Launch the full game
