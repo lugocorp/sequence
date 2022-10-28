@@ -57,6 +57,10 @@ export default class Glyphs {
         return Sprites.PERCENT;
       case ':':
         return Sprites.COLON;
+      case '(':
+        return Sprites.PAREN_OPEN;
+      case ')':
+        return Sprites.PAREN_CLOSE;
     }
     throw new Error(`No font glyph for character '${char}'`);
   }

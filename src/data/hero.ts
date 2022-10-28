@@ -9,25 +9,9 @@ const data: HeroData[] = [
     strength: 2,
     wisdom: 0,
     dexterity: 4,
-    itemSlots: 2
-  },
-  {
-    sprite: Sprites.NONE,
-    name: 'matriarch',
-    people: 'ojibwe',
-    strength: 2,
-    wisdom: 2,
-    dexterity: 2,
-    itemSlots: 1
-  },
-  {
-    sprite: Sprites.NONE,
-    name: 'molten warrior',
-    people: 'aztec',
-    strength: 6,
-    wisdom: 0,
-    dexterity: 0,
-    itemSlots: 2
+    itemSlots: 2,
+    luck: 10,
+    description: 'uses gourds to hunt birds for his yukayeke'
   },
   {
     sprite: Sprites.POTTER,
@@ -36,16 +20,9 @@ const data: HeroData[] = [
     strength: 3,
     wisdom: 3,
     dexterity: 0,
-    itemSlots: 4
-  },
-  {
-    sprite: Sprites.NONE,
-    name: 'frost woman',
-    people: 'inuit',
-    strength: 0,
-    wisdom: 6,
-    dexterity: 0,
-    itemSlots: 2
+    itemSlots: 4,
+    luck: 10,
+    description: 'some description here'
   },
   {
     sprite: Sprites.SWORD_HOLDER,
@@ -54,25 +31,9 @@ const data: HeroData[] = [
     strength: 5,
     wisdom: 1,
     dexterity: 0,
-    itemSlots: 1
-  },
-  {
-    sprite: Sprites.NONE,
-    name: 'web witch',
-    people: 'tlaxcaltec',
-    strength: 0,
-    wisdom: 5,
-    dexterity: 1,
-    itemSlots: 3
-  },
-  {
-    sprite: Sprites.NONE,
-    name: 'storm sage',
-    people: 'taíno',
-    strength: 0,
-    wisdom: 4,
-    dexterity: 2,
-    itemSlots: 2
+    itemSlots: 1,
+    luck: 10,
+    description: 'some description here'
   },
   {
     sprite: Sprites.BASKETWEAVER,
@@ -81,34 +42,9 @@ const data: HeroData[] = [
     strength: 0,
     wisdom: 6,
     dexterity: 0,
-    itemSlots: 4
-  },
-  {
-    sprite: Sprites.NONE,
-    name: 'scribe',
-    people: 'muisca',
-    strength: 0,
-    wisdom: 5,
-    dexterity: 1,
-    itemSlots: 3
-  },
-  {
-    sprite: Sprites.NONE,
-    name: 'fighter',
-    people: 'cree',
-    strength: 4,
-    wisdom: 0,
-    dexterity: 2,
-    itemSlots: 2
-  },
-  {
-    sprite: Sprites.NONE,
-    name: 'sentinel',
-    people: 'seminole',
-    strength: 3,
-    wisdom: 0,
-    dexterity: 3,
-    itemSlots: 2
+    itemSlots: 4,
+    luck: 10,
+    description: 'some description here'
   },
   {
     sprite: Sprites.SNEAKY_HUNTER,
@@ -117,7 +53,9 @@ const data: HeroData[] = [
     strength: 1,
     wisdom: 0,
     dexterity: 5,
-    itemSlots: 3
+    itemSlots: 3,
+    luck: 10,
+    description: 'some description here'
   },
   {
     sprite: Sprites.WAR_RIDER,
@@ -126,7 +64,9 @@ const data: HeroData[] = [
     strength: 0,
     wisdom: 0,
     dexterity: 6,
-    itemSlots: 4
+    itemSlots: 4,
+    luck: 10,
+    description: 'some description here'
   },
   {
     sprite: Sprites.NIGHT_SKY_WOMAN,
@@ -135,16 +75,9 @@ const data: HeroData[] = [
     strength: 0,
     wisdom: 3,
     dexterity: 3,
-    itemSlots: 3
-  },
-  {
-    sprite: Sprites.NONE,
-    name: 'kokum',
-    people: 'dakelh',
-    strength: 2,
-    wisdom: 4,
-    dexterity: 0,
-    itemSlots: 3
+    itemSlots: 3,
+    luck: 10,
+    description: 'some description here'
   },
   {
     sprite: Sprites.CHILLY_ELDER,
@@ -153,16 +86,9 @@ const data: HeroData[] = [
     strength: 1,
     wisdom: 5,
     dexterity: 0,
-    itemSlots: 1
-  },
-  {
-    sprite: Sprites.NONE,
-    name: 'snake priest',
-    people: 'shawnee',
-    strength: 1,
-    wisdom: 4,
-    dexterity: 1,
-    itemSlots: 2
+    itemSlots: 1,
+    luck: 10,
+    description: 'some description here'
   },
   {
     sprite: Sprites.RUNNER,
@@ -171,7 +97,9 @@ const data: HeroData[] = [
     strength: 0,
     wisdom: 1,
     dexterity: 5,
-    itemSlots: 1
+    itemSlots: 1,
+    luck: 10,
+    description: 'some description here'
   },
   {
     sprite: Sprites.SUN_PRIEST,
@@ -180,7 +108,9 @@ const data: HeroData[] = [
     strength: 2,
     wisdom: 4,
     dexterity: 0,
-    itemSlots: 3
+    itemSlots: 3,
+    luck: 10,
+    description: 'some description here'
   },
   {
     sprite: Sprites.SNEAKY_DANCER,
@@ -189,7 +119,9 @@ const data: HeroData[] = [
     strength: 0,
     wisdom: 2,
     dexterity: 4,
-    itemSlots: 1
+    itemSlots: 1,
+    luck: 10,
+    description: 'some description here'
   },
   {
     sprite: Sprites.BONE_CRUSHER,
@@ -198,7 +130,9 @@ const data: HeroData[] = [
     strength: 6,
     wisdom: 0,
     dexterity: 0,
-    itemSlots: 2
+    itemSlots: 2,
+    luck: 10,
+    description: 'some description here'
   },
   {
     sprite: Sprites.BEAD_QUEEN,
@@ -207,7 +141,9 @@ const data: HeroData[] = [
     strength: 2,
     wisdom: 2,
     dexterity: 2,
-    itemSlots: 3
+    itemSlots: 3,
+    luck: 10,
+    description: 'some description here'
   },
   {
     sprite: Sprites.MERCHANT,
@@ -216,7 +152,9 @@ const data: HeroData[] = [
     strength: 0,
     wisdom: 3,
     dexterity: 3,
-    itemSlots: 4
+    itemSlots: 4,
+    luck: 10,
+    description: 'some description here'
   },
   {
     sprite: Sprites.CORN_WOMAN,
@@ -225,7 +163,9 @@ const data: HeroData[] = [
     strength: 4,
     wisdom: 1,
     dexterity: 1,
-    itemSlots: 2
+    itemSlots: 2,
+    luck: 10,
+    description: 'some description here'
   },
   {
     sprite: Sprites.SQUASH_LADY,
@@ -234,7 +174,9 @@ const data: HeroData[] = [
     strength: 1,
     wisdom: 4,
     dexterity: 1,
-    itemSlots: 2
+    itemSlots: 2,
+    luck: 10,
+    description: 'some description here'
   },
   {
     sprite: Sprites.BEAN_GIRL,
@@ -243,7 +185,9 @@ const data: HeroData[] = [
     strength: 1,
     wisdom: 1,
     dexterity: 4,
-    itemSlots: 2
+    itemSlots: 2,
+    luck: 10,
+    description: 'some description here'
   },
   {
     sprite: Sprites.FOX_BOY,
@@ -252,7 +196,9 @@ const data: HeroData[] = [
     strength: 1,
     wisdom: 3,
     dexterity: 2,
-    itemSlots: 2
+    itemSlots: 2,
+    luck: 10,
+    description: 'some description here'
   },
   {
     sprite: Sprites.CHINAMPA_MAN,
@@ -261,7 +207,9 @@ const data: HeroData[] = [
     strength: 3,
     wisdom: 3,
     dexterity: 0,
-    itemSlots: 2
+    itemSlots: 2,
+    luck: 10,
+    description: 'some description here'
   },
   {
     sprite: Sprites.SCOUT,
@@ -270,52 +218,9 @@ const data: HeroData[] = [
     strength: 1,
     wisdom: 2,
     dexterity: 3,
-    itemSlots: 1
-  },
-  {
-    sprite: Sprites.NONE,
-    name: 'farmer',
-    people: 'hopi',
-    strength: 3,
-    wisdom: 3,
-    dexterity: 0,
-    itemSlots: 3
-  },
-  {
-    sprite: Sprites.NONE,
-    name: 'bat priest',
-    people: 'maya',
-    strength: 0,
-    wisdom: 4,
-    dexterity: 2,
-    itemSlots: 2
-  },
-  {
-    sprite: Sprites.NONE,
-    name: 'yuca farmer',
-    people: 'lokono',
-    strength: 4,
-    wisdom: 2,
-    dexterity: 0,
-    itemSlots: 4
-  },
-  {
-    sprite: Sprites.NONE,
-    name: 'hoop dancer',
-    people: 'cree',
-    strength: 2,
-    wisdom: 2,
-    dexterity: 2,
-    itemSlots: 2
-  },
-  {
-    sprite: Sprites.NONE,
-    name: 'mummy',
-    people: 'quechua',
-    strength: 2,
-    wisdom: 4,
-    dexterity: 0,
-    itemSlots: 1
+    itemSlots: 1,
+    luck: 10,
+    description: 'some description here'
   },
   {
     sprite: Sprites.DEER_HUNTER,
@@ -324,16 +229,9 @@ const data: HeroData[] = [
     strength: 2,
     wisdom: 1,
     dexterity: 3,
-    itemSlots: 2
-  },
-  {
-    sprite: Sprites.NONE,
-    name: 'cacíque',
-    people: 'guaraní',
-    strength: 3,
-    wisdom: 2,
-    dexterity: 1,
-    itemSlots: 2
+    itemSlots: 2,
+    luck: 10,
+    description: 'some description here'
   },
   {
     sprite: Sprites.GOURD_ELDER,
@@ -342,25 +240,9 @@ const data: HeroData[] = [
     strength: 0,
     wisdom: 3,
     dexterity: 3,
-    itemSlots: 3
-  },
-  {
-    sprite: Sprites.NONE,
-    name: 'hungry coyotl',
-    people: 'texcoco',
-    strength: 2,
-    wisdom: 3,
-    dexterity: 1,
-    itemSlots: 1
-  },
-  {
-    sprite: Sprites.NONE,
-    name: 'forager',
-    people: 'guachichil',
-    strength: 0,
-    wisdom: 0,
-    dexterity: 0,
-    itemSlots: 1
+    itemSlots: 3,
+    luck: 10,
+    description: 'some description here'
   },
   {
     sprite: Sprites.RANGER,
@@ -369,34 +251,9 @@ const data: HeroData[] = [
     strength: 2,
     wisdom: 1,
     dexterity: 3,
-    itemSlots: 2
-  },
-  {
-    sprite: Sprites.NONE,
-    name: 'tanner',
-    people: 'piscataway',
-    strength: 0,
-    wisdom: 3,
-    dexterity: 3,
-    itemSlots: 2
-  },
-  {
-    sprite: Sprites.NONE,
-    name: 'medicine man',
-    people: 'muskogee',
-    strength: 0,
-    wisdom: 4,
-    dexterity: 2,
-    itemSlots: 4
-  },
-  {
-    sprite: Sprites.NONE,
-    name: 'architect',
-    people: 'natchez',
-    strength: 2,
-    wisdom: 4,
-    dexterity: 0,
-    itemSlots: 2
+    itemSlots: 2,
+    luck: 10,
+    description: 'some description here'
   },
   {
     sprite: Sprites.BRAWLER,
@@ -405,43 +262,9 @@ const data: HeroData[] = [
     strength: 5,
     wisdom: 0,
     dexterity: 1,
-    itemSlots: 1
-  },
-  {
-    sprite: Sprites.NONE,
-    name: 'stargazer',
-    people: 'seminole',
-    strength: 0,
-    wisdom: 3,
-    dexterity: 3,
-    itemSlots: 2
-  },
-  {
-    sprite: Sprites.NONE,
-    name: 'nomad',
-    people: 'crow',
-    strength: 3,
-    wisdom: 1,
-    dexterity: 2,
-    itemSlots: 1
-  },
-  {
-    sprite: Sprites.NONE,
-    name: 'doctor',
-    people: 'kwakiutl',
-    strength: 1,
-    wisdom: 5,
-    dexterity: 0,
-    itemSlots: 3
-  },
-  {
-    sprite: Sprites.NONE,
-    name: 'boat maker',
-    people: 'nimiipuu',
-    strength: 2,
-    wisdom: 4,
-    dexterity: 0,
-    itemSlots: 3
+    itemSlots: 1,
+    luck: 10,
+    description: 'some description here'
   },
   {
     sprite: Sprites.COUNSELOR,
@@ -450,7 +273,9 @@ const data: HeroData[] = [
     strength: 0,
     wisdom: 5,
     dexterity: 1,
-    itemSlots: 4
+    itemSlots: 4,
+    luck: 10,
+    description: 'some description here'
   }
 ];
 

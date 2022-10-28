@@ -18,7 +18,9 @@ export default class Factory {
       data.strength,
       data.wisdom,
       data.dexterity,
-      data.itemSlots
+      data.itemSlots,
+      data.luck,
+      data.description
     );
   }
 

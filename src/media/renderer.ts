@@ -3,11 +3,11 @@
  * Use it whenever you have to interact with the game canvas.
  */
 import { WIDTH, HEIGHT, WGLYPH, HGLYPH, WTEXT } from '../enums/values';
+import { colors } from '../enums/colors';
 import Sprites from '../enums/sprites';
 import Glyphs from '../serial/glyphs';
 import DrawCoords from './draw-coords';
 import GraphicsLoader from './loader';
-import { colors } from './colors';
 import Action from '../ui/action';
 import View from '../ui/view';
 import Game from '../game';

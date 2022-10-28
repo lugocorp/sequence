@@ -1,4 +1,5 @@
 import { WTEXT } from '../enums/values';
+import { green } from '../enums/colors';
 import { Trigger } from '../enums/types';
 import Sprites from '../enums/sprites';
 import Stats from '../enums/stats';
@@ -16,6 +17,7 @@ export default class Hero extends Unit {
   originalStrength: number;
   originalWisdom: number;
   originalDexterity: number;
+  description: string;
   ability: Ability;
 
   constructor(
@@ -25,13 +27,16 @@ export default class Hero extends Unit {
     strength: number,
     wisdom: number,
     dexterity: number,
-    itemSlots: number
+    itemSlots: number,
+    luck: number,
+    description: string
   ) {
     super(sprite, name, strength, wisdom, dexterity);
+    this.description = description;
     this.itemSlots = itemSlots;
     this.people = people;
     this.items = [];
-    this.luck = 10;
+    this.luck = luck;
     this.originalStrength = strength;
     this.originalWisdom = wisdom;
     this.originalDexterity = dexterity;
@@ -118,15 +123,12 @@ export default class Hero extends Unit {
 
   // Returns the text used in this hero's description
   descriptionText(): string {
-    const stat = (n: number): string => (n > 9 ? `\t${n}\t` : `\t${n}\t\t`);
-    const digits = (n: number): number => (n === 100 ? 3 : n >= 10 ? 2 : 1);
-    const numSpaces = WTEXT - digits(this.luck) - 9 - 6 - 1;
-    const spaces = new Array(numSpaces + 1).join(' ');
+    const stat = (n: number): string => (n > 9 ? `${n}\t` : `\t${n}\t`);
     return (
       `${this.name}\n` +
-      `${this.itemCount()}/${this.itemSlots} items${spaces}${this.luck}% luck\n` +
-      `str:${stat(this.strength)}wis:${stat(this.wisdom)}dex:${stat(this.dexterity)}\n` +
-      this.people
+      `${stat(this.strength)}str\t\t${stat(this.wisdom)}wis\t\t${stat(this.dexterity)}dex\n` +
+      `\thas ${this.itemCount()} items (max ${this.itemSlots})\n\n` +
+      `${this.description}\n`
     );
   }
 

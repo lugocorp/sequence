@@ -59,6 +59,8 @@ enum Sprites {
   COLON = 0x001102,
   ACCENT_I = 0x001202,
   ACCENT_E = 0x001302,
+  PAREN_OPEN = 0x001402,
+  PAREN_CLOSE = 0x001502,
 
   // Spritesheet #1 (backgrounds)
   WELCOME = 0x010203,
