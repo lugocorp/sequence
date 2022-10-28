@@ -17,9 +17,9 @@ export default class ObstacleEvent extends View {
   constructor() {
     super();
     this.obstacle = Random.element([
-      {sprite: Sprites.OBSTACLE, name: 'bog'},
-      {sprite: Sprites.OBSTACLE, name: 'cliff'},
-      {sprite: Sprites.OBSTACLE, name: 'cave'}
+      { sprite: Sprites.OBSTACLE, name: 'bog' },
+      { sprite: Sprites.OBSTACLE, name: 'cliff' },
+      { sprite: Sprites.OBSTACLE, name: 'cave' }
     ]);
     this.original = Game.game.party.length();
     this.stat = Stats.getRandomStat();

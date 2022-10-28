@@ -121,7 +121,7 @@ export default class GraphicsRenderer {
 
   // Converts text coords to display coords
   toDisplayCoords(tx: number, ty: number): [number, number] {
-    return [(tx * WGLYPH) + 2, (ty * HGLYPH) + 104];
+    return [ (tx * WGLYPH) + 2, (ty * HGLYPH) + 104 ];
   }
 
   /*
@@ -155,7 +155,7 @@ export default class GraphicsRenderer {
   drawText(text: string, tx: number, ty: number, clickable = false): void {
     // Calculate colored character indices
     const colorIndices: Record<number, string> = {};
-    let lastIndex: number = 0;
+    let lastIndex = 0;
     while (lastIndex < text.length && text.substring(lastIndex).indexOf('#') !== -1) {
       lastIndex += text.substring(lastIndex).indexOf('#');
       colorIndices[lastIndex - (2 * Object.values(colorIndices).length)] = colors[parseInt(text[++lastIndex])];

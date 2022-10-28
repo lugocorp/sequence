@@ -2,7 +2,6 @@ import Sprites from '../enums/sprites';
 import { WTEXT } from '../enums/values';
 import { green } from '../media/colors';
 import History from '../media/history';
-import Selector from '../ui/selector';
 import Action from '../ui/action';
 import View from '../ui/view';
 import StartView from './start';
@@ -49,7 +48,7 @@ export default class ScoreView extends View {
   }
 
   private viewScoreboard(): void {
-    const scores: string = `${Game.game.history.runs.map((x: [string, number], i: number) => this.format(x, i)).join('\n')}`;
+    const scores = `${Game.game.history.runs.map((x: [string, number], i: number) => this.format(x, i)).join('\n')}`;
     this.setDetails(Sprites.CREDITS, scores, [
       new Action('continue', () => Game.setView(new StartView()))
     ]);

@@ -6,6 +6,7 @@
   "scripts": {
     "compile": "webpack",
     "lint": "eslint src",
+    "lint:fix": "eslint --fix src",
     "start": "webpack serve --port 2017",
     "audit": "tsc && node out/audit.js",
     "android": "cordova run android"

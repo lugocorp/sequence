@@ -20,7 +20,7 @@ import PlantEvent from '../views/events/plant';
 import GiftEvent from '../views/events/gift';
 import TrapEvent from '../views/events/trap';
 import FutureEvent from './future';
-import {Time} from '../enums/world';
+import { Time } from '../enums/world';
 import Random from './random';
 import View from '../ui/view';
 import Game from '../game';
@@ -37,21 +37,21 @@ export default class EventChain {
    */
   private getEventRollTable(): any[][] {
     const table: any[][] = [
-      [40, ChallengeEvent],
-      [15, WeatherEvent],
-      [6,  OfferingEvent],
-      [6,  GiftEvent],
-      [5,  ObstacleEvent],
-      [5,  RecruitEvent],
-      [5,  TrapEvent],
-      [4,  PlantEvent],
-      [4,  ProjectEvent],
-      [4,  RapidEvent],
-      [3,  AnimalEvent],
-      [3,  TradeEvent]
+      [ 40, ChallengeEvent ],
+      [ 15, WeatherEvent ],
+      [ 6, OfferingEvent ],
+      [ 6, GiftEvent ],
+      [ 5, ObstacleEvent ],
+      [ 5, RecruitEvent ],
+      [ 5, TrapEvent ],
+      [ 4, PlantEvent ],
+      [ 4, ProjectEvent ],
+      [ 4, RapidEvent ],
+      [ 3, AnimalEvent ],
+      [ 3, TradeEvent ]
     ];
     if (Game.game.world.time === Time.NIGHT) {
-      table.push([5, DreamEvent]);
+      table.push([ 5, DreamEvent ]);
     }
     return table;
   }

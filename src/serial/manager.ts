@@ -9,7 +9,7 @@ import Challenger from '../entities/challenger';
 import Hero from '../entities/hero';
 import Item from '../entities/item';
 import Sprites from '../enums/sprites';
-import {Rarity} from '../enums/types';
+import { Rarity } from '../enums/types';
 import * as types from './types';
 import challengers from '../data/challenger';
 import heroes from '../data/hero';
@@ -67,11 +67,11 @@ export default class DataManager {
    */
   getRandomItem(): Item {
     const rarity = Random.weighted([
-      [2, Rarity.MYTHIC],
-      [7, Rarity.LEGENDARY],
-      [17, Rarity.RARE],
-      [27, Rarity.UNCOMMON],
-      [47, Rarity.COMMON]
+      [ 2, Rarity.MYTHIC ],
+      [ 7, Rarity.LEGENDARY ],
+      [ 17, Rarity.RARE ],
+      [ 27, Rarity.UNCOMMON ],
+      [ 47, Rarity.COMMON ]
     ], 100);
     const pool: types.ItemData[] = this.itemsByRarityIndex.get(rarity);
     return this.factory.createItem(Random.element(pool));

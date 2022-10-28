@@ -1,6 +1,6 @@
 import Challenger from '../../entities/challenger';
 import Hero from '../../entities/hero';
-import {Trigger} from '../../enums/types';
+import { Trigger } from '../../enums/types';
 import Stats from '../../enums/stats';
 import Random from '../../logic/random';
 import Selector from '../../ui/selector';
@@ -17,7 +17,7 @@ export default class ChallengeEvent extends View {
     super();
     const that = this;
     this.challenger = Game.game.data.getRandomChallenger();
-    this.expectation = [Random.max(Stats.N)];
+    this.expectation = [ Random.max(Stats.N) ];
     if (Random.passes(0.5)) {
       this.expectation.push(((Random.passes(0.5) ? 1 : -1) + this.expectation[0] + Stats.N) % Stats.N);
     }

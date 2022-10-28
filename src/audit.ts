@@ -56,10 +56,10 @@ for (const hero of heroes) {
   if (hero.people.length > MAX_HERO_PEOPLE_LENGTH) {
     error('Invalid people length', 'hero', hero.name, `Maximum people length is ${MAX_HERO_PEOPLE_LENGTH}.`);
   }
-  if ([0, 6].indexOf(hero.strength + hero.wisdom + hero.dexterity) < 0) {
+  if ([ 0, 6 ].indexOf(hero.strength + hero.wisdom + hero.dexterity) < 0) {
     error('Invalid stat spread detected', 'hero', hero.name, 'Stats should add up to 6');
   }
-  if ([1, 2, 3, 4].indexOf(hero.itemSlots) < 0) {
+  if ([ 1, 2, 3, 4 ].indexOf(hero.itemSlots) < 0) {
     error('Invalid number of item slots detected', 'hero', hero.name, 'Item slots can only be either (0, 1, 2)');
   }
   if (!Glyphs.isValid(hero.name)) {

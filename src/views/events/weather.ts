@@ -1,4 +1,4 @@
-import {Weather} from '../../enums/world';
+import { Weather } from '../../enums/world';
 import Sprites from '../../enums/sprites';
 import Random from '../../logic/random';
 import Action from '../../ui/action';

@@ -7,6 +7,12 @@
   "plugins": ["@typescript-eslint"],
   "extends": ["eslint:recommended", "plugin:@typescript-eslint/recommended"],
   "rules": {
+      "no-multi-spaces": ["error"],
+      "space-before-blocks": ["error"],
+      "object-curly-spacing": ["error", "always"],
+      "array-bracket-spacing": ["error", "always"],
+      "key-spacing": ["error", {"beforeColon": false, "afterColon": true}],
+      "keyword-spacing": ["error", {"before": true, "after": true}],
       "multiline-comment-style": ["error", "starred-block"],
       "@typescript-eslint/no-explicit-any": "off",
       "@typescript-eslint/no-this-alias": "off"

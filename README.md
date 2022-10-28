@@ -9,6 +9,7 @@ We have a number of `npm` commands:
 - `start` runs the game server and listens for code changes
 - `compile` builds all the TypeScript code
 - `lint` lints the project
+- `lint:fix` fixes lint errors with the project
 - `audit` checks the game data for any illegal values
 - `android` compiles and deploys the game to an android device
 

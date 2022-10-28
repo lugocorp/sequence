@@ -1,4 +1,4 @@
-import {Time, DAY_NIGHT_CYCLE} from '../../enums/world';
+import { Time, DAY_NIGHT_CYCLE } from '../../enums/world';
 import Sprites from '../../enums/sprites';
 import Action from '../../ui/action';
 import View from '../../ui/view';

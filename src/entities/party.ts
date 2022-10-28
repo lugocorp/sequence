@@ -1,4 +1,4 @@
-import {Trigger} from '../enums/types';
+import { Trigger } from '../enums/types';
 import Stats from '../enums/stats';
 import Random from '../logic/random';
 import Game from '../game';

@@ -9,4 +9,4 @@ export const HGLYPH = 8;
 
 // The size of either dimension in text coordinates
 export const WTEXT = 120 / WGLYPH; // 24
-export const HTEXT = 96 / HGLYPH;  // 12
+export const HTEXT = 96 / HGLYPH; // 12

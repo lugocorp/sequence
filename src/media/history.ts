@@ -55,13 +55,13 @@ export default class History {
    */
   log(): number {
     const MAX: number = HTEXT - 3;
-    let index: number = 0;
+    let index = 0;
     const score: number = this.calculateScore();
     while (index < this.runs.length && score < this.runs[index][1]) {
       index++;
     }
     const date = new Date();
-    this.runs.splice(index, 0, [`${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`, score]);
+    this.runs.splice(index, 0, [ `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`, score ]);
     while (this.runs.length > MAX) {
       this.runs.pop();
     }

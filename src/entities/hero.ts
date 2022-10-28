@@ -1,5 +1,5 @@
-import {WTEXT} from '../enums/values';
-import {Trigger} from '../enums/types';
+import { WTEXT } from '../enums/values';
+import { Trigger } from '../enums/types';
 import Sprites from '../enums/sprites';
 import Stats from '../enums/stats';
 import Random from '../logic/random';

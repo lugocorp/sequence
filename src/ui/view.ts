@@ -1,4 +1,4 @@
-import {WTEXT, HTEXT} from '../enums/values';
+import { WTEXT, HTEXT } from '../enums/values';
 import Sprites from '../enums/sprites';
 import Selector from './selector';
 import Action from './action';
@@ -63,7 +63,7 @@ export default class View {
   getActionCoords(index: number): [number, number] {
     let x = 1;
     let y = 0;
-    const coords: [number, number] = [x, y];
+    const coords: [number, number] = [ x, y ];
     for (let a = 1; a < this.actions.length; a++) {
       const current: string = this.actions[a].label;
       const previous: string = this.actions[a - 1].label;
@@ -78,7 +78,7 @@ export default class View {
         y = coords[1];
       }
     }
-    return [x, y + HTEXT - coords[1] - 2];
+    return [ x, y + HTEXT - coords[1] - 2 ];
   }
 
   // Sets a single action for this View

@@ -25,7 +25,7 @@ export default class RecruitEvent extends View {
       new Action('continue', () => that.setDetails(
         this.recruits[0].sprite,
         'you can choose one traveler to recruit into your party.',
-        [new Action('continue', () => that.viewRecruits())]
+        [ new Action('continue', () => that.viewRecruits()) ]
       ))
     ]);
   }

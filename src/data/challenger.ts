@@ -1,4 +1,4 @@
-import {ChallengerData} from '../serial/types';
+import { ChallengerData } from '../serial/types';
 import Sprites from '../enums/sprites';
 
 const data: ChallengerData[] = [

@@ -1,8 +1,8 @@
 import Effect from '../enums/effects';
-import {ItemData} from '../serial/types';
+import { ItemData } from '../serial/types';
 import Hero from '../entities/hero';
-import {Rarity, Trigger} from '../enums/types';
-import {Weather} from '../enums/world';
+import { Rarity, Trigger } from '../enums/types';
+import { Weather } from '../enums/world';
 import Sprites from '../enums/sprites';
 import Stats from '../enums/stats';
 import Game from '../game';

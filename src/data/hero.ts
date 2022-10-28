@@ -1,4 +1,4 @@
-import {HeroData} from '../serial/types';
+import { HeroData } from '../serial/types';
 import Sprites from '../enums/sprites';
 
 const data: HeroData[] = [
