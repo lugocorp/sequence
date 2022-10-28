@@ -1,7 +1,13 @@
+import { HTEXT } from '../enums/values';
 
 export default class History {
   private entry: any;
   runs: [string, number][];
+  peopleHelped: number;
+  itemsCollected: number;
+  nightsSurvived: number;
+  challengesWon: number;
+  partyMembers: number;
 
   /**
    * Sets up initial state
@@ -29,20 +35,26 @@ export default class History {
    * Resets state for a new game
    */
   clear(): void {
-    // Set variables to zero here
+    this.peopleHelped = 0;
+    this.itemsCollected = 0;
+    this.nightsSurvived = 0;
+    this.challengesWon = 0;
+    this.partyMembers = 0;
   }
 
   /**
    * Calculates a score from internal state
    */
-  private calculateScore(): number {
-    return 100;
+  calculateScore(): number {
+    return (this.peopleHelped * 100) + (this.itemsCollected * 25) + (this.nightsSurvived * 300) + (this.challengesWon * 100) + (this.partyMembers * 50);
   }
 
   /**
-   * Adds a new game score to the ledger
+   * Adds a new game score to the ledger.
+   * Returns the score's position on the board, or -1 if you didn't make it.
    */
-  log(): void {
+  log(): number {
+    const MAX: number = HTEXT - 3;
     let index: number = 0;
     const score: number = this.calculateScore();
     while (index < this.runs.length && score < this.runs[index][1]) {
@@ -50,9 +62,10 @@ export default class History {
     }
     const date = new Date();
     this.runs.splice(index, 0, [`${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`, score]);
-    while (this.runs.length > 9) {
+    while (this.runs.length > MAX) {
       this.runs.pop();
     }
+    return index < MAX ? index : -1;
   }
 
   /**

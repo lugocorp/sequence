@@ -7,17 +7,17 @@ export const colors = [
 ];
 
 export function green(text: string): string {
-  return text.split('').join('#0');
+  return '#0' + text.split('').join('#0');
 }
 
 export function red(text: string): string {
-  return text.split('').join('#1');
+  return '#1' + text.split('').join('#1');
 }
 
 export function orange(text: string): string {
-  return text.split('').join('#2');
+  return '#2' + text.split('').join('#2');
 }
 
 export function yellow(text: string): string {
-  return text.split('').join('#3');
+  return '#3' + text.split('').join('#3');
 }
