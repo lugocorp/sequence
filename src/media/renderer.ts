@@ -7,6 +7,7 @@ import Sprites from '../enums/sprites';
 import Glyphs from '../serial/glyphs';
 import DrawCoords from './draw-coords';
 import GraphicsLoader from './loader';
+import { colors } from './colors';
 import Action from '../ui/action';
 import View from '../ui/view';
 import Game from '../game';
@@ -151,7 +152,17 @@ export default class GraphicsRenderer {
    * This method draws some text using the custom in-game font.
    * x and y are given in units of text glyph position
    */
-  drawText(msg: string, tx: number, ty: number, clickable = false): void {
+  drawText(text: string, tx: number, ty: number, clickable = false): void {
+    // Calculate colored character indices
+    const colorIndices: Record<number, string> = {};
+    let lastIndex: number = 0;
+    while (lastIndex < text.length && text.substring(lastIndex).indexOf('#') !== -1) {
+      lastIndex += text.substring(lastIndex).indexOf('#');
+      colorIndices[lastIndex - (2 * Object.values(colorIndices).length)] = colors[parseInt(text[++lastIndex])];
+    }
+
+    // Position and render actual text
+    const msg = text.replace(/#./g, ''); // Replace color coded string with just visible characters
     const coords = this.toDisplayCoords(tx, ty);
     const x = coords[0];
     const y = coords[1];
@@ -168,6 +179,14 @@ export default class GraphicsRenderer {
           const c: DrawCoords = this.assets.getSprite(glyph);
           this.ctx.imageSmoothingEnabled = false;
           this.ctx.drawImage(c.src, c.left, c.top, WGLYPH, HGLYPH, x + (dx * WGLYPH), y + (dy * HGLYPH), WGLYPH, HGLYPH);
+          // Highlight specified characters
+          if (colorIndices[a]) {
+            this.ctx.fillStyle = colorIndices[a];
+            this.ctx.globalCompositeOperation = 'source-atop';
+            this.ctx.fillRect(x + (dx * WGLYPH), y + (dy * HGLYPH), WGLYPH, HGLYPH);
+            this.ctx.globalCompositeOperation = 'source-over';
+            this.ctx.fillStyle = 'black';
+          }
         }
         dx++;
       }

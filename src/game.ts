@@ -58,7 +58,7 @@ export default class Game {
 
   // Sets initial game state
   setInitialState(): void {
-    this.score = 0;
+    this.history.clear();
     this.chain.clear();
     this.party.clear();
     this.world = {
