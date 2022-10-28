@@ -15,11 +15,11 @@ export default class TrapEvent extends View {
     super();
     const that = this;
     this.setDetails(Sprites.TRAP, 'your party comes across a very inviting village.', [
-      new Action('continue', () => that.setDetails(
-        Sprites.TRAP,
-        'choose one of your party members to stay here.',
-        [ new Action('continue', () => that.heroViewer()) ]
-      ))
+      new Action('continue', () =>
+        that.setDetails(Sprites.TRAP, 'choose one of your party members to stay here.', [
+          new Action('continue', () => that.heroViewer())
+        ])
+      )
     ]);
   }
 
@@ -29,9 +29,7 @@ export default class TrapEvent extends View {
 
   heroViewer(): void {
     const that = this;
-    this.setSelector(this.heroSelector, [
-      new Action('choose', () => that.finished())
-    ]);
+    this.setSelector(this.heroSelector, [new Action('choose', () => that.finished())]);
   }
 
   finished(): void {

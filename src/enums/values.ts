@@ -1,4 +1,3 @@
-
 // The display size of the entire game view
 export const WIDTH = 124;
 export const HEIGHT = 200;

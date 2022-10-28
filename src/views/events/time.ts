@@ -14,9 +14,9 @@ export default class TimeEvent extends View {
     this.time = isDay(Game.game.world.time) ? Time.NIGHT : Time.DAY;
     this.setDetails(
       isDay(this.time) ? Sprites.DAY : Sprites.NIGHT,
-      isDay(this.time) ?
-        'the sun rises over the horizon as night retreats to the west' :
-        'the sun comes to rest behind the hills as the moon rises into the night sky',
+      isDay(this.time)
+        ? 'the sun rises over the horizon as night retreats to the west'
+        : 'the sun comes to rest behind the hills as the moon rises into the night sky',
       [
         new Action('continue', () => {
           Game.game.world.time = that.time;

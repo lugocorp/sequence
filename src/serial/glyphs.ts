@@ -1,14 +1,13 @@
 import Sprites from '../enums/sprites';
 
 export default class Glyphs {
-
   /*
    * This method returns true if the text contains no invalid characters
    */
   static isValid(text: string): boolean {
     try {
       for (const c of text) {
-        if ([ '\n', ' ' ].indexOf(c) < 0) {
+        if (['\n', ' '].indexOf(c) < 0) {
           Glyphs.getGlyph(c);
         }
       }
@@ -34,18 +33,30 @@ export default class Glyphs {
       return ((Sprites.ZERO as number) + ((code - zero) << 8)) as Sprites;
     }
     switch (char) {
-      case 'í': return Sprites.ACCENT_I;
-      case 'é': return Sprites.ACCENT_E;
-      case '.': return Sprites.PERIOD;
-      case ',': return Sprites.COMMA;
-      case '!': return Sprites.EXCLAIM;
-      case '?': return Sprites.QUESTION;
-      case '+': return Sprites.PLUS;
-      case '-': return Sprites.MINUS;
-      case '\'': return Sprites.APOSTROPHE;
-      case '/': return Sprites.SLASH;
-      case '%': return Sprites.PERCENT;
-      case ':': return Sprites.COLON;
+      case 'í':
+        return Sprites.ACCENT_I;
+      case 'é':
+        return Sprites.ACCENT_E;
+      case '.':
+        return Sprites.PERIOD;
+      case ',':
+        return Sprites.COMMA;
+      case '!':
+        return Sprites.EXCLAIM;
+      case '?':
+        return Sprites.QUESTION;
+      case '+':
+        return Sprites.PLUS;
+      case '-':
+        return Sprites.MINUS;
+      case "'":
+        return Sprites.APOSTROPHE;
+      case '/':
+        return Sprites.SLASH;
+      case '%':
+        return Sprites.PERCENT;
+      case ':':
+        return Sprites.COLON;
     }
     throw new Error(`No font glyph for character '${char}'`);
   }

@@ -37,13 +37,15 @@ export default class Selector<T> {
       }
       view.removeAction('items');
       if (Game.game.party.contains(hero) && hero.itemCount() > 0) {
-        view.actions.push(new Action('items', () => {
-          const oldActions = view.actions;
-          const oldSelector = view.selector;
-          view.setSelector(Selector.itemSelector(hero.getItems()), [
-            new Action('back', () => view.setSelector(oldSelector, oldActions))
-          ]);
-        }));
+        view.actions.push(
+          new Action('items', () => {
+            const oldActions = view.actions;
+            const oldSelector = view.selector;
+            view.setSelector(Selector.itemSelector(hero.getItems()), [
+              new Action('back', () => view.setSelector(oldSelector, oldActions))
+            ]);
+          })
+        );
       }
     });
   }

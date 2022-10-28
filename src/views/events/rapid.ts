@@ -11,11 +11,15 @@ export default class RapidEvent extends View {
   constructor() {
     super();
     const that = this;
-    this.setDetails(Sprites.RAPID, 'your party approaches a dangerous, fast moving river. a party member will go down to become stronger, wiser and faster.', [
-      new Action('continue', () => that.setSelector(that.heroSelector, [
-        new Action('choose', () => that.river())
-      ]))
-    ]);
+    this.setDetails(
+      Sprites.RAPID,
+      'your party approaches a dangerous, fast moving river. a party member will go down to become stronger, wiser and faster.',
+      [
+        new Action('continue', () =>
+          that.setSelector(that.heroSelector, [new Action('choose', () => that.river())])
+        )
+      ]
+    );
   }
 
   init(): void {
@@ -43,15 +47,21 @@ export default class RapidEvent extends View {
     const hero: Hero = this.heroSelector.item();
     Game.game.party.remove(hero);
     const retrieve: View = new View();
-    retrieve.setDetails(hero.sprite, `your party reunites with ${hero.name} after they were swept away by a river`, [
-      new Action('continue', () => {
-        Game.game.party.add(hero);
-        Game.game.progress();
-      })
-    ]);
+    retrieve.setDetails(
+      hero.sprite,
+      `your party reunites with ${hero.name} after they were swept away by a river`,
+      [
+        new Action('continue', () => {
+          Game.game.party.add(hero);
+          Game.game.progress();
+        })
+      ]
+    );
     Game.futureEvent(retrieve, 5, () => !Game.game.party.isFull());
-    this.setDetails(Sprites.RAPID, `${hero.name} was swept away by the river! you can meet them downstream if your party isn't full.`, [
-      new Action('continue', () => Game.game.progress())
-    ]);
+    this.setDetails(
+      Sprites.RAPID,
+      `${hero.name} was swept away by the river! you can meet them downstream if your party isn't full.`,
+      [new Action('continue', () => Game.game.progress())]
+    );
   }
 }

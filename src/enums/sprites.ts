@@ -2,7 +2,6 @@
  * This enum contains all the sprites used in the game.
  */
 enum Sprites {
-
   // Spritesheet #0 (font)
   A = 0x000000,
   B = 0x000100,
@@ -14,12 +13,12 @@ enum Sprites {
   H = 0x000700,
   I = 0x000800,
   J = 0x000900,
-  K = 0x000A00,
-  L = 0x000B00,
-  M = 0x000C00,
-  N = 0x000D00,
-  O = 0x000E00,
-  P = 0x000F00,
+  K = 0x000a00,
+  L = 0x000b00,
+  M = 0x000c00,
+  N = 0x000d00,
+  O = 0x000e00,
+  P = 0x000f00,
   Q = 0x001000,
   R = 0x001100,
   S = 0x001200,
@@ -50,12 +49,12 @@ enum Sprites {
   SLASH = 0x000702,
   PERCENT = 0x000802,
   LINE_VERT = 0x000902,
-  LINE_HORT = 0x000A02,
-  TOP_LEFT = 0x000B02,
-  TOP_RIGHT = 0x000C02,
-  BOT_LEFT = 0x000D02,
-  BOT_RIGHT = 0x000E02,
-  ARROW_LEFT = 0x000F02,
+  LINE_HORT = 0x000a02,
+  TOP_LEFT = 0x000b02,
+  TOP_RIGHT = 0x000c02,
+  BOT_LEFT = 0x000d02,
+  BOT_RIGHT = 0x000e02,
+  ARROW_LEFT = 0x000f02,
   ARROW_RIGHT = 0x001002,
   COLON = 0x001102,
   ACCENT_I = 0x001202,
@@ -146,8 +145,8 @@ enum Sprites {
   PRAIRIE = 0x060100,
 
   // Constants that are special
-  NONE = 0xFFFFFE,
-  LOADING = 0xFFFFFF
+  NONE = 0xfffffe,
+  LOADING = 0xffffff
 }
 
 export default Sprites;

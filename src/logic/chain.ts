@@ -28,30 +28,28 @@ import Game from '../game';
 export default class EventChain {
   private previouslyPlanned: View;
   futures: FutureEvent[] = [];
-  events: View[] = [
-    new BeginEvent()
-  ];
+  events: View[] = [new BeginEvent()];
 
   /*
    * This function returns the roll table for the next event
    */
   private getEventRollTable(): any[][] {
     const table: any[][] = [
-      [ 40, ChallengeEvent ],
-      [ 15, WeatherEvent ],
-      [ 6, OfferingEvent ],
-      [ 6, GiftEvent ],
-      [ 5, ObstacleEvent ],
-      [ 5, RecruitEvent ],
-      [ 5, TrapEvent ],
-      [ 4, PlantEvent ],
-      [ 4, ProjectEvent ],
-      [ 4, RapidEvent ],
-      [ 3, AnimalEvent ],
-      [ 3, TradeEvent ]
+      [40, ChallengeEvent],
+      [15, WeatherEvent],
+      [6, OfferingEvent],
+      [6, GiftEvent],
+      [5, ObstacleEvent],
+      [5, RecruitEvent],
+      [5, TrapEvent],
+      [4, PlantEvent],
+      [4, ProjectEvent],
+      [4, RapidEvent],
+      [3, AnimalEvent],
+      [3, TradeEvent]
     ];
     if (Game.game.world.time === Time.NIGHT) {
-      table.push([ 5, DreamEvent ]);
+      table.push([5, DreamEvent]);
     }
     return table;
   }
@@ -61,9 +59,7 @@ export default class EventChain {
    */
   clear(): void {
     this.futures = [];
-    this.events = [
-      new BeginEvent()
-    ];
+    this.events = [new BeginEvent()];
   }
 
   /*
@@ -108,7 +104,10 @@ export default class EventChain {
     const event: View = new (Random.weighted(
       this.getEventRollTable()
         .map((x: any[]): [number, any] => x as [number, any])
-        .filter((x: [number, any]) => x[1] === ChallengeEvent || x[1] !== this.previouslyPlanned?.constructor)
+        .filter(
+          (x: [number, any]) =>
+            x[1] === ChallengeEvent || x[1] !== this.previouslyPlanned?.constructor
+        )
     ))();
     this.previouslyPlanned = event;
     this.events.push(event);

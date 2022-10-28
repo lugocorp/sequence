@@ -1,4 +1,3 @@
-
 export default class GameAudio {
   static STARTUP = 0;
   static OPTION = 1;
@@ -18,13 +17,16 @@ export default class GameAudio {
   async loadAudio(): Promise<void> {
     const that = this;
     this.assets = new Array(this.paths.length);
-    await Promise.all(this.paths.map(
-      (path: string, index: number) => new Promise((resolve) => {
-        that.assets[index] = new Audio();
-        that.assets[index].src = `./assets/${path}`;
-        that.assets[index].addEventListener('canplaythrough', resolve);
-      })
-    ));
+    await Promise.all(
+      this.paths.map(
+        (path: string, index: number) =>
+          new Promise((resolve) => {
+            that.assets[index] = new Audio();
+            that.assets[index].src = `./assets/${path}`;
+            that.assets[index].addEventListener('canplaythrough', resolve);
+          })
+      )
+    );
   }
 
   // Plays a specific sound managed by this class

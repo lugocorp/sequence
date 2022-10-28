@@ -1,4 +1,3 @@
-
 // Triggers are used to activate effects at certain times during gameplay
 export enum Trigger {
   EQUIP, // Fires when the item is equipped
@@ -18,12 +17,6 @@ export class Rarity {
   static MYTHIC = 4;
 
   static values(): number[] {
-    return [
-      Rarity.COMMON,
-      Rarity.UNCOMMON,
-      Rarity.RARE,
-      Rarity.LEGENDARY,
-      Rarity.MYTHIC
-    ];
+    return [Rarity.COMMON, Rarity.UNCOMMON, Rarity.RARE, Rarity.LEGENDARY, Rarity.MYTHIC];
   }
 }

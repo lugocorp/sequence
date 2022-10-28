@@ -12,6 +12,6 @@ export default class FutureEvent {
   }
 
   tick(): View {
-    return (--this.turns <= 0) ? this.view : undefined;
+    return --this.turns <= 0 ? this.view : undefined;
   }
 }

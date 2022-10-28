@@ -22,12 +22,16 @@ export default class TradeEvent extends View {
       Game.game.data.getRandomItem()
     ]);
     this.setDetails(Sprites.TRADE, 'your party comes across a trading post.', [
-      new Action('continue', () => Game.game.party.canPickupItems() ? that.viewParty() : Game.game.progress())
+      new Action('continue', () =>
+        Game.game.party.canPickupItems() ? that.viewParty() : Game.game.progress()
+      )
     ]);
   }
 
   init(): void {
-    this.heroSelector = Selector.heroSelector(Game.game.party.members.filter((h: Hero) => h.itemCount() > 0));
+    this.heroSelector = Selector.heroSelector(
+      Game.game.party.members.filter((h: Hero) => h.itemCount() > 0)
+    );
   }
 
   get hero(): Hero {
@@ -79,8 +83,10 @@ export default class TradeEvent extends View {
     const index: number = Random.max(this.hero.itemCount());
     const replaced: Item = this.hero.getItem(index);
     this.hero.replaceItem(index, this.item);
-    this.setDetails(this.hero.sprite, `${this.hero.name} traded ${replaced.name} for ${this.item.name}`, [
-      new Action('continue', () => Game.game.progress())
-    ]);
+    this.setDetails(
+      this.hero.sprite,
+      `${this.hero.name} traded ${replaced.name} for ${this.item.name}`,
+      [new Action('continue', () => Game.game.progress())]
+    );
   }
 }

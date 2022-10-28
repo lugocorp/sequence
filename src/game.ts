@@ -14,7 +14,7 @@ import History from './media/history';
 export default class Game {
   static game: Game;
   private view: View;
-  currentClick: {x: number, y: number, down: boolean};
+  currentClick: { x: number; y: number; down: boolean };
   renderer: GraphicsRenderer;
   assets: GraphicsLoader;
   chain: EventChain;
@@ -118,7 +118,10 @@ export default class Game {
         for (let a = 0; a < this.view.actions.length; a++) {
           const action = this.view.actions[a];
           const actionCoords: [number, number] = this.view.getActionCoords(a);
-          const coords: [number, number] = this.renderer.toDisplayCoords(actionCoords[0], actionCoords[1]);
+          const coords: [number, number] = this.renderer.toDisplayCoords(
+            actionCoords[0],
+            actionCoords[1]
+          );
           if (this.within(action.label, coords[0], coords[1])) {
             this.audio.play(GameAudio.OPTION);
             action.effect();
@@ -132,7 +135,10 @@ export default class Game {
           this.view.selector.index--;
           this.view.selector.invalidate();
         }
-        if (this.view.selector.index < this.view.selector.size() - 1 && this.bounded(112, 0, 12, 100)) {
+        if (
+          this.view.selector.index < this.view.selector.size() - 1 &&
+          this.bounded(112, 0, 12, 100)
+        ) {
           this.audio.play(GameAudio.ARROW);
           this.view.selector.index++;
           this.view.selector.invalidate();
@@ -144,11 +150,13 @@ export default class Game {
 
   // Returns true if the current click happened inside the given rectangle
   bounded(x: number, y: number, w: number, h: number, down = false): boolean {
-    return this.currentClick.down === down &&
+    return (
+      this.currentClick.down === down &&
       this.currentClick.x >= x &&
       this.currentClick.y >= y &&
       this.currentClick.x <= x + w &&
-      this.currentClick.y <= y + h;
+      this.currentClick.y <= y + h
+    );
   }
 
   // Returns true if the current click happened inside this text

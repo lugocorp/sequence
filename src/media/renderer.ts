@@ -47,8 +47,10 @@ export default class GraphicsRenderer {
 
   getBackground(sprite: number): number {
     switch ((sprite & 0xff0000) >> 16) {
-      case 0x03: return Sprites.SPIRIT_REALM;
-      case 0x04: return Sprites.PRAIRIE;
+      case 0x03:
+        return Sprites.SPIRIT_REALM;
+      case 0x04:
+        return Sprites.PRAIRIE;
     }
     return Sprites.NONE;
   }
@@ -68,7 +70,7 @@ export default class GraphicsRenderer {
         this.drawSprite(background, 12, 3);
       }
       const c: DrawCoords = this.assets.getSprite(view.image);
-      this.drawSprite(view.image, ((100 - c.width) / 2) + 12, ((100 - c.height) / 2) + 3);
+      this.drawSprite(view.image, (100 - c.width) / 2 + 12, (100 - c.height) / 2 + 3);
     }
     this.ctx.lineWidth = 1;
     this.ctx.rect(11, 2, 102, 1);
@@ -101,15 +103,15 @@ export default class GraphicsRenderer {
           sprite1 = Sprites.BOT_RIGHT;
           sprite2 = Sprites.TOP_RIGHT;
         }
-        this.drawSprite(sprite1, (a * WGLYPH) + 2, 190);
-        this.drawSprite(sprite2, (a * WGLYPH) + 2, top);
+        this.drawSprite(sprite1, a * WGLYPH + 2, 190);
+        this.drawSprite(sprite2, a * WGLYPH + 2, top);
       }
       for (let a = 0; a < view.actions.length; a++) {
         const action: Action = view.actions[a];
         const coords: [number, number] = view.getActionCoords(a);
         this.drawText(action.label, coords[0], coords[1], true);
-        this.drawSprite(Sprites.LINE_VERT, 2, (coords[1] * HGLYPH) + 102);
-        this.drawSprite(Sprites.LINE_VERT, (23 * WGLYPH) + 2, (coords[1] * HGLYPH) + 102);
+        this.drawSprite(Sprites.LINE_VERT, 2, coords[1] * HGLYPH + 102);
+        this.drawSprite(Sprites.LINE_VERT, 23 * WGLYPH + 2, coords[1] * HGLYPH + 102);
       }
     }
     if (this.dark) {
@@ -121,7 +123,7 @@ export default class GraphicsRenderer {
 
   // Converts text coords to display coords
   toDisplayCoords(tx: number, ty: number): [number, number] {
-    return [ (tx * WGLYPH) + 2, (ty * HGLYPH) + 104 ];
+    return [tx * WGLYPH + 2, ty * HGLYPH + 104];
   }
 
   /*
@@ -158,7 +160,8 @@ export default class GraphicsRenderer {
     let lastIndex = 0;
     while (lastIndex < text.length && text.substring(lastIndex).indexOf('#') !== -1) {
       lastIndex += text.substring(lastIndex).indexOf('#');
-      colorIndices[lastIndex - (2 * Object.values(colorIndices).length)] = colors[parseInt(text[++lastIndex])];
+      colorIndices[lastIndex - 2 * Object.values(colorIndices).length] =
+        colors[parseInt(text[++lastIndex])];
     }
 
     // Position and render actual text
@@ -178,12 +181,22 @@ export default class GraphicsRenderer {
           const glyph: Sprites = Glyphs.getGlyph(msg[a]);
           const c: DrawCoords = this.assets.getSprite(glyph);
           this.ctx.imageSmoothingEnabled = false;
-          this.ctx.drawImage(c.src, c.left, c.top, WGLYPH, HGLYPH, x + (dx * WGLYPH), y + (dy * HGLYPH), WGLYPH, HGLYPH);
+          this.ctx.drawImage(
+            c.src,
+            c.left,
+            c.top,
+            WGLYPH,
+            HGLYPH,
+            x + dx * WGLYPH,
+            y + dy * HGLYPH,
+            WGLYPH,
+            HGLYPH
+          );
           // Highlight specified characters
           if (colorIndices[a]) {
             this.ctx.fillStyle = colorIndices[a];
             this.ctx.globalCompositeOperation = 'source-atop';
-            this.ctx.fillRect(x + (dx * WGLYPH), y + (dy * HGLYPH), WGLYPH, HGLYPH);
+            this.ctx.fillRect(x + dx * WGLYPH, y + dy * HGLYPH, WGLYPH, HGLYPH);
             this.ctx.globalCompositeOperation = 'source-over';
             this.ctx.fillStyle = 'black';
           }

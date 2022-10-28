@@ -18,7 +18,15 @@ export default class Hero extends Unit {
   originalDexterity: number;
   ability: Ability;
 
-  constructor(sprite: Sprites, name: string, people: string, strength: number, wisdom: number, dexterity: number, itemSlots: number) {
+  constructor(
+    sprite: Sprites,
+    name: string,
+    people: string,
+    strength: number,
+    wisdom: number,
+    dexterity: number,
+    itemSlots: number
+  ) {
     super(sprite, name, strength, wisdom, dexterity);
     this.itemSlots = itemSlots;
     this.people = people;
@@ -110,14 +118,16 @@ export default class Hero extends Unit {
 
   // Returns the text used in this hero's description
   descriptionText(): string {
-    const stat = (n: number): string => n > 9 ? `\t${n}\t` : `\t${n}\t\t`;
-    const digits = (n: number): number => n === 100 ? 3 : (n >= 10 ? 2 : 1);
+    const stat = (n: number): string => (n > 9 ? `\t${n}\t` : `\t${n}\t\t`);
+    const digits = (n: number): number => (n === 100 ? 3 : n >= 10 ? 2 : 1);
     const numSpaces = WTEXT - digits(this.luck) - 9 - 6 - 1;
     const spaces = new Array(numSpaces + 1).join(' ');
-    return `${this.name}\n` +
+    return (
+      `${this.name}\n` +
       `${this.itemCount()}/${this.itemSlots} items${spaces}${this.luck}% luck\n` +
       `str:${stat(this.strength)}wis:${stat(this.wisdom)}dex:${stat(this.dexterity)}\n` +
-      this.people;
+      this.people
+    );
   }
 
   // Returns true if the hero passes a luck check

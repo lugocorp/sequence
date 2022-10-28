@@ -15,7 +15,7 @@ function luckEffect(boost: number): Effect {
     if (trigger === Trigger.UNEQUIP) {
       hero.boostLuck(-boost);
     }
-  }
+  };
 }
 
 function boostEffect(str: number, wis: number, dex: number): Effect {
@@ -30,7 +30,7 @@ function boostEffect(str: number, wis: number, dex: number): Effect {
       Stats.changeUnitStat(hero, Stats.WISDOM, -wis);
       Stats.changeUnitStat(hero, Stats.DEXTERITY, -dex);
     }
-  }
+  };
 }
 
 function weatherChallengeEffect(weather: Weather): Effect {
@@ -38,7 +38,7 @@ function weatherChallengeEffect(weather: Weather): Effect {
     if (trigger === Trigger.START_CHALLENGE) {
       Game.game.world.weather = weather;
     }
-  }
+  };
 }
 
 const data: ItemData[] = [
@@ -133,28 +133,28 @@ const data: ItemData[] = [
     name: 'paw paw',
     sprite: Sprites.PAW_PAW,
     rarity: Rarity.RARE,
-    description: 'it rains when this item\'s holder is in a challenge',
+    description: "it rains when this item's holder is in a challenge",
     effect: weatherChallengeEffect(Weather.RAIN)
   },
   {
     name: 'cassava',
     sprite: Sprites.CASSAVA,
     rarity: Rarity.RARE,
-    description: 'the wind blows when this item\'s holder is in a challenge',
+    description: "the wind blows when this item's holder is in a challenge",
     effect: weatherChallengeEffect(Weather.WIND)
   },
   {
     name: 'sunflower',
     sprite: Sprites.SUNFLOWER,
     rarity: Rarity.RARE,
-    description: 'the clouds dissipate when this item\'s holder is in a challenge',
+    description: "the clouds dissipate when this item's holder is in a challenge",
     effect: weatherChallengeEffect(Weather.SUN)
   },
   {
     name: 'manoomin rice',
     sprite: Sprites.MANOOMIN_RICE,
     rarity: Rarity.RARE,
-    description: 'it snows when this item\'s holder is in a challenge',
+    description: "it snows when this item's holder is in a challenge",
     effect: weatherChallengeEffect(Weather.SNOW)
   },
   {

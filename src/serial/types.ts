@@ -24,7 +24,7 @@ export interface ChallengerData {
 
 // Defines game data for an Item
 export interface ItemData {
-  sprite: Sprites,
+  sprite: Sprites;
   name: string;
   rarity: number;
   description: string;

@@ -18,10 +18,14 @@ export default class History {
     await new Promise<void>((resolve) => {
       try {
         window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function (fs) {
-          fs.root.getFile("abyayala.json", { create: true, exclusive: false }, function (fileEntry) {
-            that.entry = fileEntry;
-            resolve();
-          });
+          fs.root.getFile(
+            'abyayala.json',
+            { create: true, exclusive: false },
+            function (fileEntry) {
+              that.entry = fileEntry;
+              resolve();
+            }
+          );
         });
       } catch (e) {
         console.error(e, e.stack);
@@ -46,7 +50,13 @@ export default class History {
    * Calculates a score from internal state
    */
   calculateScore(): number {
-    return (this.peopleHelped * 100) + (this.itemsCollected * 25) + (this.nightsSurvived * 300) + (this.challengesWon * 100) + (this.partyMembers * 50);
+    return (
+      this.peopleHelped * 100 +
+      this.itemsCollected * 25 +
+      this.nightsSurvived * 300 +
+      this.challengesWon * 100 +
+      this.partyMembers * 50
+    );
   }
 
   /**
@@ -61,7 +71,10 @@ export default class History {
       index++;
     }
     const date = new Date();
-    this.runs.splice(index, 0, [ `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`, score ]);
+    this.runs.splice(index, 0, [
+      `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`,
+      score
+    ]);
     while (this.runs.length > MAX) {
       this.runs.pop();
     }
@@ -103,7 +116,7 @@ export default class History {
             console.error(e, e.stack);
           }
           resolve();
-        }
+        };
         reader.readAsText(file);
       });
     });

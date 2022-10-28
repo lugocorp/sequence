@@ -32,15 +32,11 @@ export default class WeatherEvent extends View {
         this.sprite = Sprites.SNOW;
         break;
     }
-    this.setDetails(
-      this.sprite,
-      this.desc,
-      [
-        new Action('continue', () => {
-          Game.game.world.weather = that.weather;
-          Game.game.progress();
-        })
-      ]
-    );
+    this.setDetails(this.sprite, this.desc, [
+      new Action('continue', () => {
+        Game.game.world.weather = that.weather;
+        Game.game.progress();
+      })
+    ]);
   }
 }

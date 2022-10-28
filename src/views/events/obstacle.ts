@@ -12,7 +12,7 @@ export default class ObstacleEvent extends View {
   private original: number;
   private cutoff: number;
   private stat: number;
-  private obstacle: {sprite: Sprites, name: string};
+  private obstacle: { sprite: Sprites; name: string };
 
   constructor() {
     super();
@@ -27,8 +27,10 @@ export default class ObstacleEvent extends View {
     const that = this;
     this.setDetails(
       this.obstacle.sprite,
-      `your party comes across a ${this.obstacle.name}. only travelers with ${this.cutoff} ${Stats.getStatName(this.stat)} or ${this.higher ? 'higher' : 'lower'} may pass.`,
-      [ new Action('continue', () => that.finish()) ]
+      `your party comes across a ${this.obstacle.name}. only travelers with ${
+        this.cutoff
+      } ${Stats.getStatName(this.stat)} or ${this.higher ? 'higher' : 'lower'} may pass.`,
+      [new Action('continue', () => that.finish())]
     );
   }
 
@@ -42,12 +44,14 @@ export default class ObstacleEvent extends View {
     const size: number = Game.game.party.length();
     this.setDetails(
       this.obstacle.sprite,
-      size ?
-        (size === this.original ?
-          `all party members passed the ${this.obstacle.name}.` :
-          `only ${size} party member${size > 1 ? 's' : ''} made it past the ${this.obstacle.name}.`) :
-        `no one in your party could pass the ${this.obstacle.name}.`,
-      [ new Action('continue', () => Game.game.progress()) ]
+      size
+        ? size === this.original
+          ? `all party members passed the ${this.obstacle.name}.`
+          : `only ${size} party member${size > 1 ? 's' : ''} made it past the ${
+              this.obstacle.name
+            }.`
+        : `no one in your party could pass the ${this.obstacle.name}.`,
+      [new Action('continue', () => Game.game.progress())]
     );
   }
 }

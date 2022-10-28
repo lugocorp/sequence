@@ -1,4 +1,3 @@
-
 // Dictates the number of ticks between the day/night cycle
 export const DAY_NIGHT_CYCLE = 5;
 
@@ -15,6 +14,6 @@ export enum Weather {
 }
 
 export type World = {
-  weather: Weather,
-  time: Time
+  weather: Weather;
+  time: Time;
 };

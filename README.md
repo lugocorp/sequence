@@ -10,6 +10,7 @@ We have a number of `npm` commands:
 - `compile` builds all the TypeScript code
 - `lint` lints the project
 - `lint:fix` fixes lint errors with the project
+- `prettify` makes the code pretty
 - `audit` checks the game data for any illegal values
 - `android` compiles and deploys the game to an android device
 

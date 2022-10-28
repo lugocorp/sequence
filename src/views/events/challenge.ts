@@ -17,19 +17,23 @@ export default class ChallengeEvent extends View {
     super();
     const that = this;
     this.challenger = Game.game.data.getRandomChallenger();
-    this.expectation = [ Random.max(Stats.N) ];
+    this.expectation = [Random.max(Stats.N)];
     if (Random.passes(0.5)) {
-      this.expectation.push(((Random.passes(0.5) ? 1 : -1) + this.expectation[0] + Stats.N) % Stats.N);
+      this.expectation.push(
+        ((Random.passes(0.5) ? 1 : -1) + this.expectation[0] + Stats.N) % Stats.N
+      );
     }
     this.setDetails(
       this.challenger.sprite,
       `your party comes across a spirit who offers a challenge. this will be ${this.getTestText()} for any party member you choose.`,
       [
-        new Action('continue', () => that.setDetails(
-          that.challenger.sprite,
-          `the entity with the higher contested stats or enough luck will win. the party member you choose will get tired, and they will leave your party if they lose.`,
-          [ new Action('continue', () => that.viewChallenger()) ]
-        ))
+        new Action('continue', () =>
+          that.setDetails(
+            that.challenger.sprite,
+            `the entity with the higher contested stats or enough luck will win. the party member you choose will get tired, and they will leave your party if they lose.`,
+            [new Action('continue', () => that.viewChallenger())]
+          )
+        )
       ]
     );
   }
@@ -39,8 +43,10 @@ export default class ChallengeEvent extends View {
   }
 
   getTestText(): string {
-    return `a test of ${Stats.getStatName(this.expectation[0])}` +
-      ((this.expectation.length > 1) ? ` and ${Stats.getStatName(this.expectation[1])}` : '');
+    return (
+      `a test of ${Stats.getStatName(this.expectation[0])}` +
+      (this.expectation.length > 1 ? ` and ${Stats.getStatName(this.expectation[1])}` : '')
+    );
   }
 
   viewChallenger(): void {
@@ -74,17 +80,19 @@ export default class ChallengeEvent extends View {
     hero.activate(result ? Trigger.CHALLENGE_SUCCESS : Trigger.CHALLENGE_FAILURE);
     this.setDetails(
       hero.sprite,
-      result ?
-        `${hero.name} overcame the spirit's challenge!` :
-        `${hero.name} did not succeed in the spirit's challenge.`,
+      result
+        ? `${hero.name} overcame the spirit's challenge!`
+        : `${hero.name} did not succeed in the spirit's challenge.`,
       [
-        new Action('continue', () => that.setDetails(
-          hero.sprite,
-          result ?
-            `${hero.name} is tired but triumphant. they received -1 to all their stats.` :
-            `${hero.name} lost all their stats during the challenge.`,
-          [ new Action('continue', () => Game.game.progress()) ]
-        ))
+        new Action('continue', () =>
+          that.setDetails(
+            hero.sprite,
+            result
+              ? `${hero.name} is tired but triumphant. they received -1 to all their stats.`
+              : `${hero.name} lost all their stats during the challenge.`,
+            [new Action('continue', () => Game.game.progress())]
+          )
+        )
       ]
     );
   }
@@ -96,6 +104,6 @@ export default class ChallengeEvent extends View {
       sum1 += Stats.getUnitStat(hero, this.expectation[1]);
       sum2 += Stats.getUnitStat(challenger, this.expectation[1]);
     }
-    return (sum1 >= sum2) || hero.lucky();
+    return sum1 >= sum2 || hero.lucky();
   }
 }

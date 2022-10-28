@@ -6,7 +6,6 @@ import StartView from './start';
 import Game from '../game';
 
 export default class InstructionsView extends View {
-
   constructor() {
     super();
     const that = this;
@@ -27,7 +26,7 @@ export default class InstructionsView extends View {
           [
             'the goal of the game is to survive as long as you can.',
             'the game ends when you run out of party members, but you can always try again!',
-            'take each event in stride and you\'ll get the hang of it.'
+            "take each event in stride and you'll get the hang of it."
           ]
         ].map((x: string[]): string => x.join('')),
         (v: View, e: string) => {
@@ -35,7 +34,7 @@ export default class InstructionsView extends View {
           that.setText(e);
         }
       ),
-      [ new Action('back', () => Game.setView(new StartView())) ]
+      [new Action('back', () => Game.setView(new StartView()))]
     );
   }
 }

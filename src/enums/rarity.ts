@@ -7,22 +7,10 @@ export default class Rarity {
   static MYTHIC = 4;
 
   static values(): number[] {
-    return [
-      Rarity.COMMON,
-      Rarity.UNCOMMON,
-      Rarity.RARE,
-      Rarity.LEGENDARY,
-      Rarity.MYTHIC
-    ];
+    return [Rarity.COMMON, Rarity.UNCOMMON, Rarity.RARE, Rarity.LEGENDARY, Rarity.MYTHIC];
   }
 
   static display(rarity: number): string {
-    return [
-      'common',
-      'uncommon',
-      'rare',
-      'legendary',
-      'mythic'
-    ][rarity];
+    return ['common', 'uncommon', 'rare', 'legendary', 'mythic'][rarity];
   }
 }

@@ -6,7 +6,6 @@ import View from '../../ui/view';
 import Game from '../../game';
 
 export default class DeathEvent extends View {
-
   init(): void {
     Game.game.audio.play(GameAudio.FAIL);
     const place: number = Game.game.history.log();

@@ -82,7 +82,9 @@ export default class Party {
 
   // Filters the party by a stat expectation
   filter(stat: number, cutoff: number, higher: boolean): void {
-    const remove: Hero[] = this.members.filter((member: Hero) => higher ? (Stats.getUnitStat(member, stat) < cutoff) : (Stats.getUnitStat(member, stat) > cutoff));
+    const remove: Hero[] = this.members.filter((member: Hero) =>
+      higher ? Stats.getUnitStat(member, stat) < cutoff : Stats.getUnitStat(member, stat) > cutoff
+    );
     for (const hero of remove) {
       this.remove(hero);
     }

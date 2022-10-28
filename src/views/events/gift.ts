@@ -34,13 +34,13 @@ export default class GiftEvent extends View {
       this.setDetails(
         this.spirit,
         `a spirit reveals itself to ${this.hero.name}. it comes bearing a gift of your choosing.`,
-        [ new Action('continue', () => that.chooseGift()) ]
+        [new Action('continue', () => that.chooseGift())]
       );
     } else {
       this.setDetails(
         this.spirit,
         `a spirit reveals itself to your party. it comes bearing a gift, but everyone's inventory is full.`,
-        [ new Action('continue', () => Game.game.progress()) ]
+        [new Action('continue', () => Game.game.progress())]
       );
     }
   }
@@ -66,7 +66,7 @@ export default class GiftEvent extends View {
     this.setDetails(
       this.spirit,
       `${this.hero.name} received the spirit's gift of ${gift.name}. the spirit conceals itself once more.`,
-      [ new Action('continue', () => Game.game.progress()) ]
+      [new Action('continue', () => Game.game.progress())]
     );
   }
 }

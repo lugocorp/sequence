@@ -16,7 +16,7 @@ export default class GraphicsLoader {
    * This method returns the dimensions of each sprite in a spritesheet
    * identified by the sheet parameter.
    */
-  getDimensions(sheet: number): {w: number, h: number} {
+  getDimensions(sheet: number): { w: number; h: number } {
     const sizes = [
       { w: WGLYPH, h: HGLYPH },
       undefined,
@@ -25,7 +25,7 @@ export default class GraphicsLoader {
       undefined,
       { w: 50, h: 50 }
     ];
-    return ((sheet < sizes.length) ? sizes[sheet] : undefined) || { w: 100, h: 100 };
+    return (sheet < sizes.length ? sizes[sheet] : undefined) || { w: 100, h: 100 };
   }
 
   /*
@@ -68,7 +68,7 @@ export default class GraphicsLoader {
         top: 0,
         width: 50,
         height: HGLYPH
-      }
+      };
     }
     if (id === Sprites.NONE) {
       return {
@@ -77,12 +77,12 @@ export default class GraphicsLoader {
         top: 0,
         width: 100,
         height: 100
-      }
+      };
     }
     const index: number = id >> 16;
     const x = (id - (index << 16)) >> 8;
-    const y = (id - (index << 16)) - (x << 8);
-    const dimensions: {w: number, h: number} = this.getDimensions(index);
+    const y = id - (index << 16) - (x << 8);
+    const dimensions: { w: number; h: number } = this.getDimensions(index);
     if (index >= GraphicsLoader.NUM_SHEETS) {
       throw new Error(`Spritesheet #${index} not registered`);
     }

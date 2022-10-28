@@ -1,4 +1,3 @@
-
 export default class Action {
   effect: () => void;
   label: string;

@@ -58,7 +58,10 @@ export default class DataManager {
    * Returns the hero with the given name.
    */
   getNamedHero(name: string): Hero {
-    return this.factory.createHero(this, this.heroes.filter((x: types.HeroData) => x.name === name)[0]);
+    return this.factory.createHero(
+      this,
+      this.heroes.filter((x: types.HeroData) => x.name === name)[0]
+    );
   }
 
   /*
@@ -66,13 +69,16 @@ export default class DataManager {
    * returned by this function is determined by its rarity.
    */
   getRandomItem(): Item {
-    const rarity = Random.weighted([
-      [ 2, Rarity.MYTHIC ],
-      [ 7, Rarity.LEGENDARY ],
-      [ 17, Rarity.RARE ],
-      [ 27, Rarity.UNCOMMON ],
-      [ 47, Rarity.COMMON ]
-    ], 100);
+    const rarity = Random.weighted(
+      [
+        [2, Rarity.MYTHIC],
+        [7, Rarity.LEGENDARY],
+        [17, Rarity.RARE],
+        [27, Rarity.UNCOMMON],
+        [47, Rarity.COMMON]
+      ],
+      100
+    );
     const pool: types.ItemData[] = this.itemsByRarityIndex.get(rarity);
     return this.factory.createItem(Random.element(pool));
   }

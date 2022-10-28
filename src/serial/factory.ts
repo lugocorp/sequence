@@ -9,10 +9,17 @@ import Item from '../entities/item';
 import * as types from './types';
 
 export default class Factory {
-
   // Instantiates a new Hero object based on some game data
   createHero(manager: DataManager, data: types.HeroData): Hero {
-    return new Hero(data.sprite, data.name, data.people, data.strength, data.wisdom, data.dexterity, data.itemSlots);
+    return new Hero(
+      data.sprite,
+      data.name,
+      data.people,
+      data.strength,
+      data.wisdom,
+      data.dexterity,
+      data.itemSlots
+    );
   }
 
   // Instantiates a new Challenger object based on some game data

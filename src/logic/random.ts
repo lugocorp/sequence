@@ -1,7 +1,5 @@
-
 export default class Random {
-
-    // The core random number generator function
+  // The core random number generator function
   private static next(): number {
     return Math.random();
   }
@@ -24,8 +22,8 @@ export default class Random {
   // Returns a random value from an enum
   static enum<T>(e: T): T[keyof T] {
     const enumValues = Object.keys(e)
-      .map(n => Number.parseInt(n))
-      .filter(n => !Number.isNaN(n)) as unknown as T[keyof T][];
+      .map((n) => Number.parseInt(n))
+      .filter((n) => !Number.isNaN(n)) as unknown as T[keyof T][];
     return enumValues[Random.max(enumValues.length)];
   }
 
