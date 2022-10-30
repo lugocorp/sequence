@@ -28,10 +28,14 @@ export default class Selector<T> {
   }
 
   // A built-in Hero viewing selector
-  static heroSelector(data: Hero[], select?: (hero: Hero) => void): Selector<Hero> {
+  static heroSelector(data: Hero[], select?: (hero: Hero) => void, extra?: (hero: Hero) => string): Selector<Hero> {
     return new Selector<Hero>(data, (view: View, hero: Hero): void => {
       view.image = hero.sprite;
-      view.setText(`${data.indexOf(hero) + 1}/${data.length} ${hero.descriptionText()}`);
+      let description = `${data.indexOf(hero) + 1}/${data.length} ${hero.descriptionText()}`;
+      if (extra) {
+        description += `\n${extra(hero)}`;
+      }
+      view.setText(description);
       if (select) {
         select(hero);
       }

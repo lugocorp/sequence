@@ -39,7 +39,7 @@ export default class ChallengeEvent extends View {
   }
 
   init(): void {
-    this.heroSelector = Selector.heroSelector(Game.game.party.members);
+    this.heroSelector = Selector.heroSelector(Game.game.party.members, undefined, (hero: Hero) => `${hero.challengeSuccess(this.playerStatsHigher(hero, this.challenger))} chance to win the challenge`);
   }
 
   getTestText(): string {
@@ -97,13 +97,17 @@ export default class ChallengeEvent extends View {
     );
   }
 
-  playerOvercomesChallenge(hero: Hero, challenger: Challenger): boolean {
+  private playerStatsHigher(hero: Hero, challenger: Challenger): boolean {
     let sum1: number = Stats.getUnitStat(hero, this.expectation[0]);
     let sum2: number = Stats.getUnitStat(challenger, this.expectation[0]);
     if (this.expectation.length > 1) {
       sum1 += Stats.getUnitStat(hero, this.expectation[1]);
       sum2 += Stats.getUnitStat(challenger, this.expectation[1]);
     }
-    return sum1 >= sum2 || hero.lucky();
+    return sum1 >= sum2;
+  }
+
+  playerOvercomesChallenge(hero: Hero, challenger: Challenger): boolean {
+    return this.playerStatsHigher(hero, challenger) || hero.lucky();
   }
 }

@@ -11,7 +11,7 @@ const data: HeroData[] = [
     dexterity: 4,
     itemSlots: 2,
     luck: 10,
-    description: 'uses gourds to hunt birds for his yukayeke'
+    description: 'uses gourds to hunt birds for his yukayeke.'
   },
   {
     sprite: Sprites.POTTER,

@@ -1,5 +1,5 @@
+import { green, yellow, orange, red } from '../enums/colors';
 import { WTEXT } from '../enums/values';
-import { green } from '../enums/colors';
 import { Trigger } from '../enums/types';
 import Sprites from '../enums/sprites';
 import Stats from '../enums/stats';
@@ -127,9 +127,33 @@ export default class Hero extends Unit {
     return (
       `${this.name}\n` +
       `${stat(this.strength)}str\t\t${stat(this.wisdom)}wis\t\t${stat(this.dexterity)}dex\n` +
-      `\thas ${this.itemCount()} items (max ${this.itemSlots})\n\n` +
-      `${this.description}\n`
+      `\thas ${this.itemCount()} item${this.itemCount() === 1 ? '' : 's'} (max ${this.itemSlots})\n\n` +
+      `${this.description}`
     );
+  }
+
+  // Colors a player's success rate for some challenge
+  private coloredRate(rate: number): string {
+    if (rate >= 90) {
+      return green(`${rate}%`);
+    }
+    if (rate >= 60) {
+      return yellow(`${rate}%`);
+    }
+    if (rate >= 30) {
+      return orange(`${rate}%`);
+    }
+    return red(`${rate}%`);
+  }
+
+  // Returns the colored success rate of surviving a rapid
+  riverSuccess(): string {
+    return this.coloredRate(this.luck);
+  }
+
+  // Returns the colored success rate of winning a challenge
+  challengeSuccess(playerStatsHigher: boolean): string {
+    return this.coloredRate(playerStatsHigher ? 100 : this.luck);
   }
 
   // Returns true if the hero passes a luck check
