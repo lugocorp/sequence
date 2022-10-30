@@ -21,9 +21,11 @@ export default class TradeEvent extends View {
       Game.game.data.getRandomItem(),
       Game.game.data.getRandomItem()
     ]);
-    this.setDetails(Sprites.TRADE, 'your party comes across a trading post. choose a party member and one of their items to trade for a new one.', [
-      new Action('continue', () => that.viewParty())
-    ]);
+    this.setDetails(
+      Sprites.TRADE,
+      'your party comes across a trading post. choose a party member and one of their items to trade for a new one.',
+      [new Action('continue', () => that.viewParty())]
+    );
   }
 
   init(): void {

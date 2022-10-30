@@ -8,11 +8,7 @@ export default class ProjectEvent extends View {
   constructor() {
     super();
     const that = this;
-    const project: string = Random.element([
-      'build a bridge',
-      'cook a feast',
-      'maintain a garden'
-    ]);
+    const project: string = Random.element(['build a bridge', 'cook a feast', 'maintain a garden']);
     this.setDetails(
       Sprites.PROJECT,
       `your party has the chance to ${project} for a local community, but it will wear everyone out. will they do it?`,

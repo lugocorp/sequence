@@ -40,7 +40,12 @@ export default class ChallengeEvent extends View {
   }
 
   init(): void {
-    this.heroSelector = Selector.heroSelector(Game.game.party.members, undefined, (hero: Hero) => `${hero.challengeSuccess(this.playerStatsHigher(hero, this.challenger))} chance to win`);
+    this.heroSelector = Selector.heroSelector(
+      Game.game.party.members,
+      undefined,
+      (hero: Hero) =>
+        `${hero.challengeSuccess(this.playerStatsHigher(hero, this.challenger))} chance to win`
+    );
   }
 
   getTestText(): string {

@@ -23,7 +23,11 @@ export default class RapidEvent extends View {
   }
 
   init(): void {
-    this.heroSelector = Selector.heroSelector(Game.game.party.members, undefined, (hero: Hero) => `${hero.riverSuccess()} chance to not get swept away.`);
+    this.heroSelector = Selector.heroSelector(
+      Game.game.party.members,
+      undefined,
+      (hero: Hero) => `${hero.riverSuccess()} chance to not get swept away.`
+    );
   }
 
   river(): void {

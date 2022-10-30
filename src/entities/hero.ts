@@ -1,5 +1,4 @@
 import { green, yellow, orange, red } from '../enums/colors';
-import { WTEXT } from '../enums/values';
 import { Trigger } from '../enums/types';
 import Sprites from '../enums/sprites';
 import Stats from '../enums/stats';
@@ -128,7 +127,9 @@ export default class Hero extends Unit {
     return (
       `${this.name}\n` +
       `${stat(this.strength)}str\t\t${stat(this.wisdom)}wis\t\t${stat(this.dexterity)}dex\n` +
-      `\thas ${this.itemCount()} item${this.itemCount() === 1 ? '' : 's'} (max ${this.itemSlots})\n\n` +
+      `\thas ${this.itemCount()} item${this.itemCount() === 1 ? '' : 's'} (max ${
+        this.itemSlots
+      })\n\n` +
       `${this.description}`
     );
   }

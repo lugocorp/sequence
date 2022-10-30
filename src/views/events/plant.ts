@@ -59,9 +59,11 @@ export default class PlantEvent extends View {
     ]);
     const that = this;
     const result = (aftermath: () => void, ate = true): void =>
-      that.setDetails(plant.sprite, `your party ${ate ? 'eats' : 'avoids'} the plant known as ${plant.name}`, [
-        new Action('continue', () => aftermath())
-      ]);
+      that.setDetails(
+        plant.sprite,
+        `your party ${ate ? 'eats' : 'avoids'} the plant known as ${plant.name}`,
+        [new Action('continue', () => aftermath())]
+      );
     this.setDetails(
       plant.sprite,
       `your party is hungry and they come across a plant known as ${plant.name}. what do they do?`,
@@ -89,38 +91,40 @@ export default class PlantEvent extends View {
 
   poison(): void {
     const view: View = new View();
-    view.init = (): void => view.setDetails(
-      Game.game.party.members[0].sprite,
-      `your party suddenly feels fatigued. perhaps it was something they ate...`,
-      [
-        new Action('continue', () => {
-          for (const hero of Game.game.party.members) {
-            hero.fatigue();
-          }
-          Game.game.progress();
-        })
-      ]
-    );
+    view.init = (): void =>
+      view.setDetails(
+        Game.game.party.members[0].sprite,
+        `your party suddenly feels fatigued. perhaps it was something they ate...`,
+        [
+          new Action('continue', () => {
+            for (const hero of Game.game.party.members) {
+              hero.fatigue();
+            }
+            Game.game.progress();
+          })
+        ]
+      );
     Game.futureEvent(view, 3, () => true);
     Game.game.progress();
   }
 
   empower(): void {
     const view: View = new View();
-    view.init = (): void => view.setDetails(
-      Game.game.party.members[0].sprite,
-      `your party suddenly feels stronger, smarter and faster. perhaps it was something they ate!`,
-      [
-        new Action('continue', () => {
-          for (const hero of Game.game.party.members) {
-            hero.strength++;
-            hero.wisdom++;
-            hero.dexterity++;
-          }
-          Game.game.progress();
-        })
-      ]
-    );
+    view.init = (): void =>
+      view.setDetails(
+        Game.game.party.members[0].sprite,
+        `your party suddenly feels stronger, smarter and faster. perhaps it was something they ate!`,
+        [
+          new Action('continue', () => {
+            for (const hero of Game.game.party.members) {
+              hero.strength++;
+              hero.wisdom++;
+              hero.dexterity++;
+            }
+            Game.game.progress();
+          })
+        ]
+      );
     Game.futureEvent(view, 3, () => true);
     Game.game.progress();
   }
