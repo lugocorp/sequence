@@ -29,7 +29,7 @@ body {
 }
 
 canvas {
-  background-color: #EEEEEE;
+  background-color: #FFFFFF;
   transform: translate(-50%, -50%);
   position: relative;
   left: 50%;

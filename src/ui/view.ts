@@ -91,13 +91,18 @@ export default class View {
     return this.text;
   }
 
+  // Calculates string length without color annotations
+  visibleLength(word: string): number {
+    return word.replace(/#./g, '').length;
+  }
+
   // Formats text wrap according to the screen constraints
   setText(msg: string): void {
     const words: string[] = msg.replace(/\n/g, '\n ').split(' ');
     let line: string = words.shift();
     let text = '';
     while (line.length) {
-      while (words.length && line.length + words[0].length + 1 <= WTEXT) {
+      while (words.length && this.visibleLength(line) + this.visibleLength(words[0]) + 1 <= WTEXT) {
         if (line[line.length - 1] === '\n') {
           break;
         }

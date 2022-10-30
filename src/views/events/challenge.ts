@@ -1,5 +1,6 @@
 import Challenger from '../../entities/challenger';
 import Hero from '../../entities/hero';
+import { orange } from '../../enums/colors';
 import { Trigger } from '../../enums/types';
 import Stats from '../../enums/stats';
 import Random from '../../logic/random';
@@ -25,12 +26,12 @@ export default class ChallengeEvent extends View {
     }
     this.setDetails(
       this.challenger.sprite,
-      `your party comes across a spirit who offers a challenge. this will be ${this.getTestText()} for any party member you choose.`,
+      `your party comes across a spirit who offers a challenge. you may choose one party member to participate.`,
       [
         new Action('continue', () =>
           that.setDetails(
             that.challenger.sprite,
-            `the entity with the higher contested stats or enough luck will win. the party member you choose will get tired, and they will leave your party if they lose.`,
+            `your party member will win if they meet the contested stats or have enough luck. they will tire afterwards, but less so if they win.`,
             [new Action('continue', () => that.viewChallenger())]
           )
         )
@@ -39,13 +40,13 @@ export default class ChallengeEvent extends View {
   }
 
   init(): void {
-    this.heroSelector = Selector.heroSelector(Game.game.party.members, undefined, (hero: Hero) => `${hero.challengeSuccess(this.playerStatsHigher(hero, this.challenger))} chance to win the challenge`);
+    this.heroSelector = Selector.heroSelector(Game.game.party.members, undefined, (hero: Hero) => `${hero.challengeSuccess(this.playerStatsHigher(hero, this.challenger))} chance to win`);
   }
 
   getTestText(): string {
     return (
-      `a test of ${Stats.getStatName(this.expectation[0])}` +
-      (this.expectation.length > 1 ? ` and ${Stats.getStatName(this.expectation[1])}` : '')
+      `a test of ${orange(Stats.getStatName(this.expectation[0]))}` +
+      (this.expectation.length > 1 ? ` and ${orange(Stats.getStatName(this.expectation[1]))}` : '')
     );
   }
 

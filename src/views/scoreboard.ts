@@ -23,7 +23,7 @@ export default class ScoreView extends View {
     const total: number = history.calculateScore();
     this.setDetails(
       Sprites.CREDITS,
-      `${this.place < 0 ? "you didn't make the scoreboard" : 'high score!'}\n` +
+      `${this.place < 0 ? "not a high score" : 'high score!'}\n` +
         `${history.peopleHelped} people helped x100\n` +
         `${history.itemsCollected} items held x25\n` +
         `${history.nightsSurvived} nights x300\n` +
