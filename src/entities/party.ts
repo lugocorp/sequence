@@ -58,6 +58,7 @@ export default class Party {
     if (this.members.length > Party.MAX) {
       throw new Error(`Cannot have more than ${Party.MAX} members in your party`);
     }
+    Game.game.history.partyMembers++;
     this.members.push(hero);
   }
 

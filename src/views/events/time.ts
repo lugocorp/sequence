@@ -12,6 +12,9 @@ export default class TimeEvent extends View {
     const that = this;
     const isDay = (time: Time): boolean => time === Time.DAY;
     this.time = isDay(Game.game.world.time) ? Time.NIGHT : Time.DAY;
+    if (isDay(this.time)) {
+      Game.game.history.nightsSurvived++;
+    }
     this.setDetails(
       isDay(this.time) ? Sprites.DAY : Sprites.NIGHT,
       isDay(this.time)

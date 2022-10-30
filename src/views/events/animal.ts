@@ -26,13 +26,13 @@ export default class AnimalEvent extends View {
         sprite: Sprites.RACCOON
       },
       {
-        name: 'coyotl',
+        name: 'tadpole',
         sprite: Sprites.COYOTL
       }
     ]);
     this.setDetails(
       baby.sprite,
-      `your party finds a lonely baby ${baby.name}. someone will pick it up and deliver it to its family.`,
+      `your party finds a lonely baby ${baby.name}. someone may carry it until its family comes around.`,
       [
         new Action('continue', () => {
           if (Game.game.party.canPickupItems()) {
@@ -43,17 +43,13 @@ export default class AnimalEvent extends View {
                   baby.name,
                   baby.sprite,
                   Rarity.RARE,
-                  `+1 strength, +1 wisdom, +1 dexterity\na baby ${baby.name} looking for its family`,
+                  `+25% luck\na baby ${baby.name} looking for its family`,
                   (trigger: Trigger, hero: Hero, data: any) => {
                     if (trigger === Trigger.EQUIP) {
-                      Stats.changeUnitStat(hero, Stats.STRENGTH, 1);
-                      Stats.changeUnitStat(hero, Stats.WISDOM, 1);
-                      Stats.changeUnitStat(hero, Stats.DEXTERITY, 1);
+                      hero.boostLuck(25);
                     }
                     if (trigger === Trigger.UNEQUIP) {
-                      Stats.changeUnitStat(hero, Stats.STRENGTH, -1);
-                      Stats.changeUnitStat(hero, Stats.WISDOM, -1);
-                      Stats.changeUnitStat(hero, Stats.DEXTERITY, -1);
+                      hero.boostLuck(-25);
                     }
                   }
                 );
@@ -61,10 +57,13 @@ export default class AnimalEvent extends View {
                 const view: View = new View();
                 view.setDetails(
                   baby.sprite,
-                  `${hero.name} returns the baby ${baby.name} to its family. they are blessed with better luck`,
+                  `${hero.name} returns the baby ${baby.name} to its family. they receive a blessing of empowerment.`,
                   [
                     new Action('continue', () => {
-                      hero.boostLuck(10);
+                      Stats.changeUnitStat(hero, Stats.STRENGTH, 1);
+                      Stats.changeUnitStat(hero, Stats.WISDOM, 1);
+                      Stats.changeUnitStat(hero, Stats.DEXTERITY, 1);
+                      Game.game.history.peopleHelped++;
                       hero.unequip(item);
                       Game.game.progress();
                     })

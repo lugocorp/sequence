@@ -69,6 +69,7 @@ export default class Hero extends Unit {
     if (this.items.length >= this.itemSlots) {
       throw new Error(`${this.name} can no longer equip items`);
     }
+    Game.game.history.itemsCollected++;
     this.items.push(item);
     item.effect(Trigger.EQUIP, this, null);
   }

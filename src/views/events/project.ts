@@ -10,9 +10,8 @@ export default class ProjectEvent extends View {
     const that = this;
     const project: string = Random.element([
       'build a bridge',
-      'maintain a garden',
-      'rebuild a house',
-      'cook a feast'
+      'cook a feast',
+      'maintain a garden'
     ]);
     this.setDetails(
       Sprites.PROJECT,
@@ -35,6 +34,7 @@ export default class ProjectEvent extends View {
       [new Action('continue', () => Game.game.progress())]
     );
 
+    Game.game.history.peopleHelped++;
     for (const hero of Game.game.party.members) {
       hero.fatigue();
     }
@@ -48,10 +48,11 @@ export default class ProjectEvent extends View {
         new Action('continue', () =>
           future.setDetails(
             Sprites.PROJECT,
-            'your party is empowered by the thankful community members',
+            'your party is empowered and made luckier by the thankful community members',
             [
               new Action('continue', () => {
                 for (const hero of Game.game.party.members) {
+                  hero.boostLuck(10);
                   hero.strength++;
                   hero.wisdom++;
                   hero.dexterity++;

@@ -72,6 +72,7 @@ export default class ChallengeEvent extends View {
     hero.activate(Trigger.START_CHALLENGE);
     const result: boolean = this.playerOvercomesChallenge(hero, this.challenger);
     if (result) {
+      Game.game.history.challengesWon++;
       hero.fatigue();
     } else {
       Stats.setUnitStat(hero, Stats.STRENGTH, 0);
