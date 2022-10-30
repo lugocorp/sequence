@@ -7,23 +7,15 @@ import Hero from '../../entities/hero';
 import Item from '../../entities/item';
 import Game from '../../game';
 
-export default class TradeEvent extends View {
+export default class MedicineManEvent extends View {
   private heroSelector: Selector<Hero>;
-  private itemSelector: Selector<Item>;
 
   constructor() {
     super();
     const that = this;
-    this.itemSelector = Selector.itemSelector([
-      Game.game.data.getRandomItem(),
-      Game.game.data.getRandomItem(),
-      Game.game.data.getRandomItem(),
-      Game.game.data.getRandomItem(),
-      Game.game.data.getRandomItem()
-    ]);
     this.setDetails(
-      Sprites.TRADE,
-      'your party comes across a trading post. choose a party member and they will trade a random item for a new one.',
+      Sprites.MEDICINE_MAN,
+      'your party comes across a medicine man. he will empower one of your party members in exchange for a random item from them.',
       [new Action('continue', () => that.viewParty())]
     );
   }
@@ -38,30 +30,17 @@ export default class TradeEvent extends View {
     return this.heroSelector.item();
   }
 
-  get item(): Item {
-    return this.itemSelector.item();
-  }
-
   viewParty(): void {
     const that = this;
     if (Game.game.party.hasItems()) {
       this.setSelector(this.heroSelector, [
-        new Action('view goods', () => that.trade()),
         new Action('make trade', () => that.checkTrade())
       ]);
     } else {
-      this.setDetails(Sprites.TRADE, `no one in your party has items to trade`, [
+      this.setDetails(Sprites.MEDICINE_MAN, `no one in your party has an item to give.`, [
         new Action('continue', () => Game.game.progress())
       ]);
     }
-  }
-
-  trade(): void {
-    const that = this;
-    this.setSelector(this.itemSelector, [
-      new Action('view party', () => that.viewParty()),
-      new Action('make trade', () => that.checkTrade())
-    ]);
   }
 
   checkTrade(): void {
@@ -74,7 +53,7 @@ export default class TradeEvent extends View {
 
   invalidTrade(): void {
     const that = this;
-    this.setDetails(this.hero.sprite, `${this.hero.name} has no items to trade`, [
+    this.setDetails(this.hero.sprite, `${this.hero.name} has no items to give.`, [
       new Action('continue', () => that.viewParty())
     ]);
   }
@@ -82,10 +61,13 @@ export default class TradeEvent extends View {
   finish(): void {
     const index: number = Random.max(this.hero.itemCount());
     const replaced: Item = this.hero.getItem(index);
-    this.hero.replaceItem(index, this.item);
+    this.hero.unequip(replaced);
+    this.hero.strength++;
+    this.hero.wisdom++;
+    this.hero.dexterity++;
     this.setDetails(
       this.hero.sprite,
-      `${this.hero.name} traded ${replaced.name} for ${this.item.name}`,
+      `${this.hero.name} gave ${replaced.name} to the medicine man and was empowered.`,
       [new Action('continue', () => Game.game.progress())]
     );
   }

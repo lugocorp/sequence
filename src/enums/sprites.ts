@@ -79,6 +79,9 @@ enum Sprites {
   PROJECT = 0x010002,
   DAY = 0x010102,
   NIGHT = 0x010202,
+  SKINWALKER = 0x010202,
+  MEDICINE_MAN = 0x010101,
+  THREE_SISTERS = 0x010002,
 
   // Spritesheet #2 (plants/animals)
   ELDERBERRY = 0x020000,
@@ -87,6 +90,9 @@ enum Sprites {
   CARDINAL = 0x020001,
   RACCOON = 0x020101,
   COYOTL = 0x020201,
+  CHESTNUT = 0x020201,
+  CATALPA = 0x020201,
+  REDBUD = 0x020201,
 
   // Spritesheet #3 (challengers)
   OWL = 0x030000,

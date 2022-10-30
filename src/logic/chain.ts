@@ -3,6 +3,9 @@
  * Its job is to generate and serve events for as long as
  * the player survives.
  */
+import SkinwalkerEvent from '../views/events/skinwalker';
+import ThreeSistersEvent from '../views/events/sisters';
+import MedicineManEvent from '../views/events/medicine';
 import ChallengeEvent from '../views/events/challenge';
 import OfferingEvent from '../views/events/offering';
 import ObstacleEvent from '../views/events/obstacle';
@@ -17,6 +20,7 @@ import DreamEvent from '../views/events/dream';
 import TradeEvent from '../views/events/trade';
 import RapidEvent from '../views/events/rapid';
 import PlantEvent from '../views/events/plant';
+import TreeEvent from '../views/events/tree';
 import GiftEvent from '../views/events/gift';
 import TrapEvent from '../views/events/trap';
 import FutureEvent from './future';
@@ -35,18 +39,22 @@ export default class EventChain {
    */
   private getEventRollTable(): any[][] {
     const table: any[][] = [
-      [40, ChallengeEvent],
-      [15, WeatherEvent],
-      [6, OfferingEvent],
-      [6, GiftEvent],
-      [5, ObstacleEvent],
-      [5, RecruitEvent],
-      [5, TrapEvent],
-      [4, PlantEvent],
-      [4, ProjectEvent],
-      [4, RapidEvent],
-      [3, AnimalEvent],
-      [3, TradeEvent]
+      [40, ChallengeEvent], // 40
+      [8, WeatherEvent], // 48
+      [6, OfferingEvent], // 54
+      [6, GiftEvent], // 60
+      [5, ObstacleEvent], // 65
+      [5, RecruitEvent], // 70
+      [5, TrapEvent], // 75
+      [4, PlantEvent], // 79
+      [4, ProjectEvent], // 83
+      [4, RapidEvent], // 87
+      [3, AnimalEvent], // 90
+      [3, TradeEvent], // 93
+      [3, MedicineManEvent], // 96
+      [2, TreeEvent], // 98
+      [1, ThreeSistersEvent], // 99
+      [1, SkinwalkerEvent] // 100
     ];
     if (Game.game.world.time === Time.NIGHT) {
       table.push([5, DreamEvent]);
