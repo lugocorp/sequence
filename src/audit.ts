@@ -3,7 +3,6 @@ import challengers from './data/challenger';
 import heroes from './data/hero';
 import items from './data/item';
 const MAX_CHALLENGER_NAME_LENGTH = 20;
-const MAX_HERO_PEOPLE_LENGTH = 13;
 const MAX_HERO_NAME_LENGTH = 20;
 const MAX_ITEM_NAME_LENGTH = 20;
 let errors = 0;
@@ -47,7 +46,7 @@ for (const challenger of challengers) {
       `Maximum name length is ${MAX_CHALLENGER_NAME_LENGTH}.`
     );
   }
-  if (challenger.strength + challenger.wisdom + challenger.dexterity != 6) {
+  if (challenger.strength + challenger.wisdom + challenger.dexterity !== 6) {
     error(
       'Invalid stat spread detected',
       'challenger',
@@ -73,15 +72,7 @@ for (const hero of heroes) {
       `Maximum name length is ${MAX_HERO_NAME_LENGTH}.`
     );
   }
-  if (hero.people.length > MAX_HERO_PEOPLE_LENGTH) {
-    error(
-      'Invalid people length',
-      'hero',
-      hero.name,
-      `Maximum people length is ${MAX_HERO_PEOPLE_LENGTH}.`
-    );
-  }
-  if ([0, 6].indexOf(hero.strength + hero.wisdom + hero.dexterity) < 0) {
+  if (hero.strength + hero.wisdom + hero.dexterity !== 6) {
     error('Invalid stat spread detected', 'hero', hero.name, 'Stats should add up to 6');
   }
   if ([1, 2, 3, 4].indexOf(hero.itemSlots) < 0) {
@@ -89,7 +80,7 @@ for (const hero of heroes) {
       'Invalid number of item slots detected',
       'hero',
       hero.name,
-      'Item slots can only be either (0, 1, 2)'
+      'Item slots can only be either (1, 2, 3, 4)'
     );
   }
   if (!Glyphs.isValid(hero.name)) {

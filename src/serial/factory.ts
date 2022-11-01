@@ -3,6 +3,7 @@
  * Use this whenever you need to instantiate a game object.
  */
 import DataManager from './manager';
+import Effect from '../enums/effects';
 import Challenger from '../entities/challenger';
 import Hero from '../entities/hero';
 import Item from '../entities/item';
@@ -30,7 +31,7 @@ export default class Factory {
   }
 
   // Instantiates a new Item object based on some game data
-  createItem(data: types.ItemData): Item {
-    return new Item(data.name, data.sprite, data.rarity, data.description, data.effect);
+  createItem(data: types.ItemData, effect: Effect): Item {
+    return new Item(data.name, data.sprite, data.rarity, data.description, effect);
   }
 }

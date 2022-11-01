@@ -9,7 +9,7 @@
     "lint:fix": "eslint --fix src",
     "prettify": "prettier -w src",
     "start": "webpack serve --port 2017",
-    "audit": "tsc && node out/audit.js",
+    "audit": "tsc -t es5 --outDir out src/audit.ts && node out/audit.js",
     "android": "cordova run android"
   },
   "keywords": [

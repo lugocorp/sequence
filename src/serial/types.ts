@@ -1,4 +1,3 @@
-import Effect from '../enums/effects';
 import Sprites from '../enums/sprites';
 
 // Defines game data for a Hero
@@ -30,5 +29,4 @@ export interface ItemData {
   name: string;
   rarity: number;
   description: string;
-  effect: Effect;
 }

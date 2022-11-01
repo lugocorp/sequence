@@ -2,6 +2,7 @@ import { DAY_NIGHT_CYCLE, World, Weather, Time } from './enums/world';
 import GraphicsRenderer from './media/renderer';
 import GraphicsLoader from './media/loader';
 import GameAudio from './media/audio';
+import History from './media/history';
 import DataManager from './serial/manager';
 import FutureEvent from './logic/future';
 import EventChain from './logic/chain';
@@ -9,7 +10,6 @@ import Party from './entities/party';
 import TimeEvent from './views/events/time';
 import StartView from './views/start';
 import View from './ui/view';
-import History from './media/history';
 
 export default class Game {
   static game: Game;

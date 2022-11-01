@@ -8,10 +8,12 @@ import Factory from './factory';
 import Challenger from '../entities/challenger';
 import Hero from '../entities/hero';
 import Item from '../entities/item';
+import Effect from '../enums/effects';
 import Sprites from '../enums/sprites';
 import { Rarity } from '../enums/types';
 import * as types from './types';
 import challengers from '../data/challenger';
+import effects from '../data/effects';
 import heroes from '../data/hero';
 import items from '../data/item';
 
@@ -28,7 +30,7 @@ export default class DataManager {
     for (const item of items) {
       this.itemsByRarityIndex.get(item.rarity).push(item);
     }
-    this.heroes = heroes.filter((h: types.HeroData): boolean => h.sprite !== Sprites.NONE);
+    this.heroes = heroes.filter((h: types.HeroData): boolean => h.name.length > 0);
   }
 
   /*
@@ -79,7 +81,7 @@ export default class DataManager {
       ],
       100
     );
-    const pool: types.ItemData[] = this.itemsByRarityIndex.get(rarity);
-    return this.factory.createItem(Random.element(pool));
+    const item: Item = Random.element(this.itemsByRarityIndex.get(rarity));
+    return this.factory.createItem(item, effects[item.name]);
   }
 }

@@ -81,12 +81,22 @@ We have a number of `npm` commands:
 - [x] Replace audio files with less annoying sound effects
 - [x] Implement high score screen (store past runs, create a points system, etc)
 - [x] Change existing events and implement new ones
-- [ ] Implement all item effects and add new character data
+- [x] Add new character/challenger data, rework the auditor
+- [ ] Implement all item effects
 - [ ] Package with new placeholder graphics, launch a browser-based open beta
 - [ ] Add background sprites (designed with composition in mind)
 - [ ] Add all graphics for the events
 - [ ] Draw item sprites
-- [ ] Update beta with feedback
-- [ ] Redesign character sprites for full launch
+- [ ] Finally draw all final character sprites
 - [ ] Update any ugly UI throughout the game
+- [ ] Rebase project on top of the Wildflower codebase
+- [ ] Clean up all code
+- [ ] Update beta with feedback
+
+#### Marketing/launch
+- [ ] Release a YouTube devlog video for the creation process
+- [ ] Create some graphics for the play store
+- [ ] Test an iOS build of the game
+- [ ] Look into an Apple developer ID and app store requirements
+- [ ] Incorporate all beta feedback and remove anything that says beta
 - [ ] Launch the full game
