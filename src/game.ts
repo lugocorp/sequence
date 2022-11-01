@@ -63,7 +63,8 @@ export default class Game {
     this.party.clear();
     this.world = {
       weather: Weather.SUN,
-      time: Time.DAY
+      time: Time.DAY,
+      cave: false
     };
     this.party.populate('bird catcher');
     Game.futureEvent(new TimeEvent(), DAY_NIGHT_CYCLE);

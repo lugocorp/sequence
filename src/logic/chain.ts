@@ -26,6 +26,7 @@ import TreeEvent from '../views/events/tree';
 import GiftEvent from '../views/events/gift';
 import TrapEvent from '../views/events/trap';
 import DeerEvent from '../views/events/deer';
+import CaveEvent from '../views/events/cave';
 import FutureEvent from './future';
 import { Time } from '../enums/world';
 import Random from './random';
@@ -41,7 +42,7 @@ export default class EventChain {
    * This function returns the roll table for the next event
    */
   private getEventRollTable(): any[][] {
-    const table: any[][] = [
+    let table: [number, any][] = [
       [35, ChallengeEvent], // 35
       [8, WeatherEvent], // 43
       [6, OfferingEvent], // 49
@@ -59,11 +60,25 @@ export default class EventChain {
       [2, DeerEvent], // 96
       [1, TricksterEvent], // 97
       [1, ThreeSistersEvent], // 98
-      [1, ThiefEvent] // 99
-      // [1, CaveEvent], // 100
+      [1, ThiefEvent], // 99
+      [1, CaveEvent] // 100
     ];
+    if (Game.game.world.cave) {
+      table = [
+        [30, ChallengeEvent], // 30
+        [20, OfferingEvent], // 50
+        [20, GiftEvent], // 70
+        [10, TricksterEvent], // 80
+        [5, AnimalEvent], // 85
+        [5, ThiefEvent], // 90
+        [5, WeatherEvent], // 95
+        [5, SkinwalkerEvent] // 100
+      ];
+    }
     if (Game.game.world.time === Time.NIGHT) {
-      table.push([2, SkinwalkerEvent]);
+      if (!Game.game.world.cave) {
+        table.push([2, SkinwalkerEvent]);
+      }
       table.push([5, DreamEvent]);
     }
     return table;

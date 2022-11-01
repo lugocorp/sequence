@@ -7,22 +7,21 @@ import Game from '../../game';
 export default class TimeEvent extends View {
   private time: Time;
 
-  constructor() {
-    super();
-    const that = this;
+  init(): void {
     const isDay = (time: Time): boolean => time === Time.DAY;
-    this.time = isDay(Game.game.world.time) ? Time.NIGHT : Time.DAY;
-    if (isDay(this.time)) {
+    const time = isDay(Game.game.world.time) ? Time.NIGHT : Time.DAY;
+    if (isDay(time)) {
       Game.game.history.nightsSurvived++;
     }
+    const cave = Game.game.world.cave ? ' in the world outside the cave' : '';
     this.setDetails(
-      isDay(this.time) ? Sprites.DAY : Sprites.NIGHT,
-      isDay(this.time)
-        ? 'the sun rises over the horizon as night retreats to the west'
-        : 'the sun comes to rest behind the hills as the moon rises into the night sky',
+      isDay(time) ? Sprites.DAY : Sprites.NIGHT,
+      isDay(time)
+        ? `the sun rises over the horizon${cave} as night retreats to the west`
+        : `the sun comes to rest behind the hills${cave} as the moon rises into the night sky`,
       [
         new Action('continue', () => {
-          Game.game.world.time = that.time;
+          Game.game.world.time = time;
           Game.futureEvent(new TimeEvent(), DAY_NIGHT_CYCLE);
           Game.game.progress();
         })

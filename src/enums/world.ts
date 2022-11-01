@@ -15,5 +15,6 @@ export enum Weather {
 
 export type World = {
   weather: Weather;
+  cave: boolean;
   time: Time;
 };
