@@ -26,7 +26,7 @@ export default class ThiefEvent extends View {
     this.setDetails(
       this.animal.sprite,
       `your party comes across a trickster! a ${this.animal.name} has come to steal precious items.`,
-      [new Action('continue', () => this.checkForItems())]
+      [ new Action('continue', () => this.checkForItems()) ]
     );
   }
 
@@ -36,14 +36,14 @@ export default class ThiefEvent extends View {
 
   checkForItems(): void {
     const unflattened: Stolen[][] = Game.game.party.members.map((x: Hero) =>
-      x.getItems().map((y: Item) => [x, y])
+      x.getItems().map((y: Item) => [ x, y ])
     );
     const items: Stolen[] = unflattened.reduce((acc: Stolen[], x: Stolen[]) => acc.concat(x), []);
     if (!items.length) {
       this.setDetails(
         this.animal.sprite,
         `your party has no items for the ${this.animal.name} to steal. the trickster scurries away in frustration.`,
-        [new Action('continue', () => Game.game.progress())]
+        [ new Action('continue', () => Game.game.progress()) ]
       );
       return;
     }
@@ -56,7 +56,7 @@ export default class ThiefEvent extends View {
     this.setDetails(
       this.animal.sprite,
       `the ${this.animal.name} has stolen ${this.stolen.length} ${this.items}. will you chase it down?`,
-      [new Action('yes', () => this.chase()), new Action('no', () => this.getsAway())]
+      [ new Action('yes', () => this.chase()), new Action('no', () => this.getsAway()) ]
     );
   }
 
@@ -64,7 +64,7 @@ export default class ThiefEvent extends View {
     this.setDetails(
       this.animal.sprite,
       `your party has caught up with the ${this.animal.name}. will you continue to chase it down?`,
-      [new Action('yes', () => this.chase()), new Action('no', () => this.getsAway())]
+      [ new Action('yes', () => this.chase()), new Action('no', () => this.getsAway()) ]
     );
   }
 
@@ -101,7 +101,7 @@ export default class ThiefEvent extends View {
     this.setDetails(
       this.animal.sprite,
       `the ${this.animal.name} got away with ${this.stolen.length} of your party's items`,
-      [new Action('continue', () => Game.game.progress())]
+      [ new Action('continue', () => Game.game.progress()) ]
     );
   }
 }

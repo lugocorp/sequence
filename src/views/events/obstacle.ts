@@ -30,7 +30,7 @@ export default class ObstacleEvent extends View {
       `your party comes across a ${this.obstacle.name}. only travelers with ${
         this.cutoff
       } ${Stats.getStatName(this.stat)} or ${this.higher ? 'higher' : 'lower'} may pass.`,
-      [new Action('continue', () => that.finish())]
+      [ new Action('continue', () => that.finish()) ]
     );
   }
 
@@ -51,7 +51,7 @@ export default class ObstacleEvent extends View {
               this.obstacle.name
             }.`
         : `no one in your party could pass the ${this.obstacle.name}.`,
-      [new Action('continue', () => Game.game.progress())]
+      [ new Action('continue', () => Game.game.progress()) ]
     );
   }
 }

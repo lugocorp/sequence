@@ -18,7 +18,7 @@ export default class ChallengeEvent extends View {
     super();
     const that = this;
     this.challenger = Game.game.data.getRandomChallenger();
-    this.expectation = [Random.max(Stats.N)];
+    this.expectation = [ Random.max(Stats.N) ];
     if (Random.passes(0.5)) {
       this.expectation.push(
         ((Random.passes(0.5) ? 1 : -1) + this.expectation[0] + Stats.N) % Stats.N
@@ -32,7 +32,7 @@ export default class ChallengeEvent extends View {
           that.setDetails(
             that.challenger.sprite,
             `your party member will win if they meet the contested stats or have enough luck. they will tire afterwards, but less so if they win.`,
-            [new Action('continue', () => that.viewChallenger())]
+            [ new Action('continue', () => that.viewChallenger()) ]
           )
         )
       ]
@@ -97,7 +97,7 @@ export default class ChallengeEvent extends View {
             result
               ? `${hero.name} is tired but triumphant. they received -1 to all their stats.`
               : `${hero.name} lost all their stats during the challenge.`,
-            [new Action('continue', () => Game.game.progress())]
+            [ new Action('continue', () => Game.game.progress()) ]
           )
         )
       ]

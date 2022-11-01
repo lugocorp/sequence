@@ -36,50 +36,50 @@ import Game from '../game';
 export default class EventChain {
   private previouslyPlanned: View;
   futures: FutureEvent[] = [];
-  events: View[] = [new BeginEvent()];
+  events: View[] = [ new BeginEvent() ];
 
   /*
    * This function returns the roll table for the next event
    */
   private getEventRollTable(): any[][] {
     let table: [number, any][] = [
-      [35, ChallengeEvent], // 35
-      [8, WeatherEvent], // 43
-      [6, OfferingEvent], // 49
-      [6, GiftEvent], // 55
-      [5, ObstacleEvent], // 60
-      [5, RecruitEvent], // 65
-      [5, TrapEvent], // 70
-      [4, PlantEvent], // 74
-      [4, ProjectEvent], // 78
-      [4, RapidEvent], // 82
-      [3, AnimalEvent], // 85
-      [3, TradeEvent], // 88
-      [3, MedicineManEvent], // 91
-      [3, TreeEvent], // 94
-      [2, DeerEvent], // 96
-      [1, TricksterEvent], // 97
-      [1, ThreeSistersEvent], // 98
-      [1, ThiefEvent], // 99
-      [1, CaveEvent] // 100
+      [ 35, ChallengeEvent ], // 35
+      [ 8, WeatherEvent ], // 43
+      [ 6, OfferingEvent ], // 49
+      [ 6, GiftEvent ], // 55
+      [ 5, ObstacleEvent ], // 60
+      [ 5, RecruitEvent ], // 65
+      [ 5, TrapEvent ], // 70
+      [ 4, PlantEvent ], // 74
+      [ 4, ProjectEvent ], // 78
+      [ 4, RapidEvent ], // 82
+      [ 3, AnimalEvent ], // 85
+      [ 3, TradeEvent ], // 88
+      [ 3, MedicineManEvent ], // 91
+      [ 3, TreeEvent ], // 94
+      [ 2, DeerEvent ], // 96
+      [ 1, TricksterEvent ], // 97
+      [ 1, ThreeSistersEvent ], // 98
+      [ 1, ThiefEvent ], // 99
+      [ 1, CaveEvent ] // 100
     ];
     if (Game.game.world.cave) {
       table = [
-        [30, ChallengeEvent], // 30
-        [20, OfferingEvent], // 50
-        [20, GiftEvent], // 70
-        [10, TricksterEvent], // 80
-        [5, AnimalEvent], // 85
-        [5, ThiefEvent], // 90
-        [5, WeatherEvent], // 95
-        [5, SkinwalkerEvent] // 100
+        [ 30, ChallengeEvent ], // 30
+        [ 20, OfferingEvent ], // 50
+        [ 20, GiftEvent ], // 70
+        [ 10, TricksterEvent ], // 80
+        [ 5, AnimalEvent ], // 85
+        [ 5, ThiefEvent ], // 90
+        [ 5, WeatherEvent ], // 95
+        [ 5, SkinwalkerEvent ] // 100
       ];
     }
     if (Game.game.world.time === Time.NIGHT) {
       if (!Game.game.world.cave) {
-        table.push([2, SkinwalkerEvent]);
+        table.push([ 2, SkinwalkerEvent ]);
       }
-      table.push([5, DreamEvent]);
+      table.push([ 5, DreamEvent ]);
     }
     return table;
   }
@@ -89,7 +89,7 @@ export default class EventChain {
    */
   clear(): void {
     this.futures = [];
-    this.events = [new BeginEvent()];
+    this.events = [ new BeginEvent() ];
   }
 
   /*

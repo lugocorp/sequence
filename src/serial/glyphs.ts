@@ -7,7 +7,7 @@ export default class Glyphs {
   static isValid(text: string): boolean {
     try {
       for (const c of text) {
-        if (['\n', ' '].indexOf(c) < 0) {
+        if ([ '\n', ' ' ].indexOf(c) < 0) {
           Glyphs.getGlyph(c);
         }
       }

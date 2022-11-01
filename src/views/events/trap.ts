@@ -29,7 +29,7 @@ export default class TrapEvent extends View {
 
   heroViewer(): void {
     const that = this;
-    this.setSelector(this.heroSelector, [new Action('choose', () => that.finished())]);
+    this.setSelector(this.heroSelector, [ new Action('choose', () => that.finished()) ]);
   }
 
   finished(): void {

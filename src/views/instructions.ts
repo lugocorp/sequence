@@ -34,7 +34,7 @@ export default class InstructionsView extends View {
           that.setText(e);
         }
       ),
-      [new Action('back', () => Game.setView(new StartView()))]
+      [ new Action('back', () => Game.setView(new StartView())) ]
     );
   }
 }

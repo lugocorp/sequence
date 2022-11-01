@@ -1,4 +1,4 @@
-export const colors = ['#23df4d', '#df3c24', '#d7690b', '#edf05a'];
+export const colors = [ '#23df4d', '#df3c24', '#d7690b', '#edf05a' ];
 
 export function green(text: string): string {
   return '#0' + text.split('').join('#0');

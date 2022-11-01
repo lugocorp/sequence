@@ -17,6 +17,6 @@ export class Rarity {
   static MYTHIC = 4;
 
   static values(): number[] {
-    return [Rarity.COMMON, Rarity.UNCOMMON, Rarity.RARE, Rarity.LEGENDARY, Rarity.MYTHIC];
+    return [ Rarity.COMMON, Rarity.UNCOMMON, Rarity.RARE, Rarity.LEGENDARY, Rarity.MYTHIC ];
   }
 }

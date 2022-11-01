@@ -30,7 +30,7 @@ export default class ScoreView extends View {
         `${history.challengesWon} challenges won x100\n` +
         `${history.partyMembers} party members x50\n` +
         `total: ${total}`,
-      [new Action('continue', () => that.viewScoreboard())]
+      [ new Action('continue', () => that.viewScoreboard()) ]
     );
   }
 

@@ -16,12 +16,12 @@ export default class Stats {
 
   // Returns the stat's display name
   static getStatName(stat: number): string {
-    return ['strength', 'wisdom', 'dexterity'][stat];
+    return [ 'strength', 'wisdom', 'dexterity' ][stat];
   }
 
   // Returns a unit's value for the given stat
   static getUnitStat(unit: Unit, stat: number): number {
-    return [unit.strength, unit.wisdom, unit.dexterity][stat];
+    return [ unit.strength, unit.wisdom, unit.dexterity ][stat];
   }
 
   // Sets a unit's value for the given stat
@@ -31,7 +31,7 @@ export default class Stats {
 
   // Returns a unit's original value for a given stat
   static getOriginalStat(unit: Hero, stat: number): number {
-    return [unit.originalStrength, unit.originalWisdom, unit.originalDexterity][stat];
+    return [ unit.originalStrength, unit.originalWisdom, unit.originalDexterity ][stat];
   }
 
   // Changes a unit's stat by a given value

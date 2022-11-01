@@ -8,7 +8,7 @@ export default class ProjectEvent extends View {
   constructor() {
     super();
     const that = this;
-    const project: string = Random.element(['build a bridge', 'cook a feast', 'maintain a garden']);
+    const project: string = Random.element([ 'build a bridge', 'cook a feast', 'maintain a garden' ]);
     this.setDetails(
       Sprites.PROJECT,
       `your party has the chance to ${project} for a local community, but it will wear everyone out. will they do it?`,
@@ -27,7 +27,7 @@ export default class ProjectEvent extends View {
     this.setDetails(
       Sprites.PROJECT,
       `your party stays a while to ${project}. it is tiring but eventually the work is done and the community is thankful.`,
-      [new Action('continue', () => Game.game.progress())]
+      [ new Action('continue', () => Game.game.progress()) ]
     );
 
     Game.game.history.peopleHelped++;

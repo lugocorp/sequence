@@ -24,7 +24,7 @@ export default class TradeEvent extends View {
     this.setDetails(
       Sprites.TRADE,
       'your party comes across a trading post. choose a party member and they will trade a random item for a new one.',
-      [new Action('continue', () => that.viewParty())]
+      [ new Action('continue', () => that.viewParty()) ]
     );
   }
 
@@ -86,7 +86,7 @@ export default class TradeEvent extends View {
     this.setDetails(
       this.hero.sprite,
       `${this.hero.name} traded ${replaced.name} for ${this.item.name}`,
-      [new Action('continue', () => Game.game.progress())]
+      [ new Action('continue', () => Game.game.progress()) ]
     );
   }
 }

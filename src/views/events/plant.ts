@@ -62,7 +62,7 @@ export default class PlantEvent extends View {
       that.setDetails(
         plant.sprite,
         `your party ${ate ? 'eats' : 'avoids'} the plant known as ${plant.name}`,
-        [new Action('continue', () => aftermath())]
+        [ new Action('continue', () => aftermath()) ]
       );
     this.setDetails(
       plant.sprite,

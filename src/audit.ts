@@ -75,7 +75,7 @@ for (const hero of heroes) {
   if (hero.strength + hero.wisdom + hero.dexterity !== 6) {
     error('Invalid stat spread detected', 'hero', hero.name, 'Stats should add up to 6');
   }
-  if ([1, 2, 3, 4].indexOf(hero.itemSlots) < 0) {
+  if ([ 1, 2, 3, 4 ].indexOf(hero.itemSlots) < 0) {
     error(
       'Invalid number of item slots detected',
       'hero',

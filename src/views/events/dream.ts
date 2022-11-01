@@ -11,7 +11,7 @@ export default class DreamEvent extends View {
     this.setDetails(
       hero.sprite,
       `${hero.name} has a dream about a powerful item. could it be prophetic?`,
-      [new Action('continue', () => Game.game.progress())]
+      [ new Action('continue', () => Game.game.progress()) ]
     );
 
     // Set up future event

@@ -58,7 +58,7 @@ function medicineBagEffect(): Effect {
   };
 }
 
-function tobaccoEffect() : Effect {
+function tobaccoEffect(): Effect {
   return (trigger: Trigger, hero: Hero, data: any) => {
     if (trigger === Trigger.CHALLENGE_SUCCESS) {
       hero.boostLuck(5);
@@ -78,24 +78,24 @@ function echinaceaEffect(): Effect {
 }
 
 const data: Record<string, Effect> = {
-  'corn': boostEffect(1, 0, 0),
-  'squash': boostEffect(0, 1, 0),
-  'beans': boostEffect(0, 0, 1),
+  corn: boostEffect(1, 0, 0),
+  squash: boostEffect(0, 1, 0),
+  beans: boostEffect(0, 0, 1),
   'turquoise bead': luckEffect(5),
   'copper axe': boostEffect(2, -1, 0),
-  'quipu': boostEffect(0, 2, -1),
-  'moccasins': boostEffect(-1, 0, 2),
+  quipu: boostEffect(0, 2, -1),
+  moccasins: boostEffect(-1, 0, 2),
   'medicine bag': medicineBagEffect(),
-  'tobacco': tobaccoEffect(),
-  'echinacea': echinaceaEffect(),
+  tobacco: tobaccoEffect(),
+  echinacea: echinaceaEffect(),
   'frog glyph': weatherChallengeEffect(Weather.RAIN),
   'storm glyph': weatherChallengeEffect(Weather.WIND),
   'sun glyph': weatherChallengeEffect(Weather.SUN),
   'bird glyph': weatherChallengeEffect(Weather.SNOW),
-  'succotash': boostEffect(1, 1, 1),
-  'macuahuitl': luckAndBoostEffect(2, 0, 0, -5),
-  'amoxtli': luckAndBoostEffect(0, 2, 0, -5),
-  'huarache': luckAndBoostEffect(0, 0, 2, -5),
+  succotash: boostEffect(1, 1, 1),
+  macuahuitl: luckAndBoostEffect(2, 0, 0, -5),
+  amoxtli: luckAndBoostEffect(0, 2, 0, -5),
+  huarache: luckAndBoostEffect(0, 0, 2, -5),
   'corn and bean soup': boostEffect(2, 2, 2),
   'eagle feather': luckEffect(100),
   'turquoise ring': boostEffect(3, 3, 3)

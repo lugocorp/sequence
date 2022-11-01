@@ -42,7 +42,7 @@ export default class TricksterEvent extends View {
                 this.setDetails(
                   animal.sprite,
                   `${hero.name} was empowered by the ${animal.name}!`,
-                  [new Action('continue', () => Game.game.progress())]
+                  [ new Action('continue', () => Game.game.progress()) ]
                 );
               } else if (effect === 2) {
                 hero.boostLuck(-15);

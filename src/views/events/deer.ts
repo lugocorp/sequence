@@ -1,7 +1,4 @@
-import ChallengeEvent from './challenge';
 import Sprites from '../../enums/sprites';
-import Random from '../../logic/random';
-import Item from '../../entities/item';
 import Hero from '../../entities/hero';
 import Selector from '../../ui/selector';
 import Action from '../../ui/action';
@@ -58,14 +55,14 @@ export default class DeerEvent extends View {
           this.setDetails(
             hero.sprite,
             `${hero.name} successfully hunted the deer! they are tired but left a small offering for the beast's spirit. your party was blessed for their efforts.`,
-            [new Action('continue', () => Game.game.progress())]
+            [ new Action('continue', () => Game.game.progress()) ]
           );
         } else {
           Game.futureEvent(this, 3);
           this.setDetails(
             hero.sprite,
             `${hero.name} exhausted themself and did not catch the deer, and it escaped into the thicket. your party gives chase.`,
-            [new Action('continue', () => Game.game.progress())]
+            [ new Action('continue', () => Game.game.progress()) ]
           );
         }
       })

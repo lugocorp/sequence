@@ -29,7 +29,7 @@ export default class RecruitEvent extends View {
           that.setDetails(
             this.recruits[0].sprite,
             'you can choose one traveler to recruit into your party.',
-            [new Action('continue', () => that.viewRecruits())]
+            [ new Action('continue', () => that.viewRecruits()) ]
           )
         )
       ]
@@ -56,7 +56,7 @@ export default class RecruitEvent extends View {
 
   viewParty(): void {
     const that = this;
-    this.setSelector(this.memberSelector, [new Action('back', () => that.viewRecruits())]);
+    this.setSelector(this.memberSelector, [ new Action('back', () => that.viewRecruits()) ]);
   }
 
   pleaseRemove(): void {
@@ -64,13 +64,13 @@ export default class RecruitEvent extends View {
     this.setDetails(
       this.recruitSelector.item().sprite,
       'your party is full. please remove an existing member.',
-      [new Action('continue', () => that.removeMember())]
+      [ new Action('continue', () => that.removeMember()) ]
     );
   }
 
   removeMember(): void {
     const that = this;
-    this.setSelector(this.memberSelector, [new Action('choose', () => that.finished())]);
+    this.setSelector(this.memberSelector, [ new Action('choose', () => that.finished()) ]);
   }
 
   finished(): void {
@@ -82,6 +82,6 @@ export default class RecruitEvent extends View {
       Game.game.party.remove(member);
     }
     Game.game.party.add(recruit);
-    this.setDetails(recruit.sprite, text, [new Action('continue', () => Game.game.progress())]);
+    this.setDetails(recruit.sprite, text, [ new Action('continue', () => Game.game.progress()) ]);
   }
 }

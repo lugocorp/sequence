@@ -79,7 +79,7 @@ export default class AnimalEvent extends View {
             that.setDetails(
               baby.sprite,
               `your party's inventory is completely full. your party leaves the small animal.`,
-              [new Action('continue', () => Game.game.progress())]
+              [ new Action('continue', () => Game.game.progress()) ]
             );
           }
         })

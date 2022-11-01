@@ -22,7 +22,7 @@ export default class OfferingEvent extends View {
     this.setDetails(
       this.spirit,
       `a spirit offers a gift of ${this.gift.name} to your party. only one member may accept it.`,
-      [new Action('continue', () => that.viewGift())]
+      [ new Action('continue', () => that.viewGift()) ]
     );
   }
 
@@ -32,7 +32,7 @@ export default class OfferingEvent extends View {
       this.setDetails(
         this.spirit,
         `a spirit offers a gift of ${this.gift.name} to your party, but everyone's inventory is full.`,
-        [new Action('continue', () => Game.game.progress())]
+        [ new Action('continue', () => Game.game.progress()) ]
       );
     }
   }
@@ -64,7 +64,7 @@ export default class OfferingEvent extends View {
     this.setDetails(
       this.spirit,
       `${hero.name} was given ${this.gift.name}. the spirit conceals itself once more.`,
-      [new Action('continue', () => Game.game.progress())]
+      [ new Action('continue', () => Game.game.progress()) ]
     );
   }
 }

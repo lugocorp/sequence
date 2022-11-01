@@ -43,7 +43,7 @@ const data: ItemData[] = [
     name: 'acorn',
     sprite: Sprites.CORN,
     rarity: Rarity.COMMON,
-    description: 'adds a point to this character\'s next challenge'
+    description: "adds a point to this character's next challenge"
   },
   {
     name: 'indian grass',
@@ -169,7 +169,7 @@ const data: ItemData[] = [
     name: 'dream catcher',
     sprite: Sprites.CORN,
     rarity: Rarity.UNCOMMON,
-    description: 'absorbs other party members\' fatigue'
+    description: "absorbs other party members' fatigue"
   },
   {
     name: 'serpentine armbands',
@@ -376,19 +376,19 @@ const data: ItemData[] = [
     description: '100% luck in dexterity challenges'
   },
   {
-    name: 'condor\'s cleaver',
+    name: "condor's cleaver",
     sprite: Sprites.CORN,
     rarity: Rarity.LEGENDARY,
     description: 'challenging party members get +1 strength'
   },
   {
-    name: 'quetzal\'s quiver',
+    name: "quetzal's quiver",
     sprite: Sprites.CORN,
     rarity: Rarity.LEGENDARY,
     description: 'challenging party members get +1 wisdom'
   },
   {
-    name: 'eagle\'s aegis',
+    name: "eagle's aegis",
     sprite: Sprites.CORN,
     rarity: Rarity.LEGENDARY,
     description: 'challenging party members get +1 dexterity'

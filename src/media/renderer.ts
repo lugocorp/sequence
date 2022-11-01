@@ -123,7 +123,7 @@ export default class GraphicsRenderer {
 
   // Converts text coords to display coords
   toDisplayCoords(tx: number, ty: number): [number, number] {
-    return [tx * WGLYPH + 2, ty * HGLYPH + 104];
+    return [ tx * WGLYPH + 2, ty * HGLYPH + 104 ];
   }
 
   /*

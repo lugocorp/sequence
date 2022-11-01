@@ -37,7 +37,7 @@ export default class TreeEvent extends View {
               that.setDetails(
                 hero.sprite,
                 `${hero.name} sat beneath the ${tree.name} tree and became refreshed.`,
-                [new Action('continue', () => Game.game.progress())]
+                [ new Action('continue', () => Game.game.progress()) ]
               );
               hero.strength = hero.originalStrength;
               hero.wisdom = hero.originalWisdom;

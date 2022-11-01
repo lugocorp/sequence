@@ -16,7 +16,7 @@ export default class RapidEvent extends View {
       'your party approaches a dangerous, fast moving river. a party member will go down to become stronger, wiser and faster. they may get swept down the river.',
       [
         new Action('continue', () =>
-          that.setSelector(that.heroSelector, [new Action('choose', () => that.river())])
+          that.setSelector(that.heroSelector, [ new Action('choose', () => that.river()) ])
         )
       ]
     );
@@ -65,7 +65,7 @@ export default class RapidEvent extends View {
     this.setDetails(
       Sprites.RAPID,
       `${hero.name} was swept away by the river! you can meet them downstream if your party isn't full.`,
-      [new Action('continue', () => Game.game.progress())]
+      [ new Action('continue', () => Game.game.progress()) ]
     );
   }
 }

@@ -109,7 +109,7 @@ export default class History {
     return new Promise((resolve) => {
       that.entry.file(function (file) {
         const reader = new FileReader();
-        reader.onloadend = function (evt) {
+        reader.onloadend = function () {
           try {
             that.runs = JSON.parse(reader.result.toString());
           } catch (e) {

@@ -19,7 +19,7 @@ export default class MedicineManEvent extends View {
     this.setDetails(
       this.sprite,
       'your party comes across a medicine man. he will empower one of your party members in exchange for a random item from them.',
-      [new Action('continue', () => this.viewParty())]
+      [ new Action('continue', () => this.viewParty()) ]
     );
   }
 
@@ -36,7 +36,7 @@ export default class MedicineManEvent extends View {
   viewParty(): void {
     const that = this;
     if (Game.game.party.hasItems()) {
-      this.setSelector(this.heroSelector, [new Action('make trade', () => that.checkTrade())]);
+      this.setSelector(this.heroSelector, [ new Action('make trade', () => that.checkTrade()) ]);
     } else {
       this.setDetails(this.sprite, `no one in your party has an item to give.`, [
         new Action('continue', () => Game.game.progress())
@@ -69,7 +69,7 @@ export default class MedicineManEvent extends View {
     this.setDetails(
       this.hero.sprite,
       `${this.hero.name} gave ${replaced.name} to the medicine man and was empowered.`,
-      [new Action('continue', () => Game.game.progress())]
+      [ new Action('continue', () => Game.game.progress()) ]
     );
   }
 }
