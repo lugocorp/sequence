@@ -59,7 +59,7 @@ export default class EventChain {
       [2, DeerEvent], // 96
       [1, TricksterEvent], // 97
       [1, ThreeSistersEvent], // 98
-      [1, ThiefEvent], // 99
+      [1, ThiefEvent] // 99
       // [1, CaveEvent], // 100
     ];
     if (Game.game.world.time === Time.NIGHT) {

@@ -26,19 +26,27 @@ export default class TreeEvent extends View {
       }
     ]);
     const that = this;
-    this.setDetails(tree.sprite, `your party comes across an elder ${tree.name} tree. a party member may sit beneath it refresh their original abilities.`, [
-      new Action('continue', () => that.setSelector(that.heroSelector, [
-        new Action('select', () => {
-          const hero: Hero = that.heroSelector.item();
-          that.setDetails(hero.sprite, `${hero.name} sat beneath the ${tree.name} tree and became refreshed.`, [
-            new Action('continue', () => Game.game.progress())
-          ]);
-          hero.strength = hero.originalStrength;
-          hero.wisdom = hero.originalWisdom;
-          hero.dexterity = hero.originalDexterity;
-        })
-      ]))
-    ]);
+    this.setDetails(
+      tree.sprite,
+      `your party comes across an elder ${tree.name} tree. a party member may sit beneath it refresh their original abilities.`,
+      [
+        new Action('continue', () =>
+          that.setSelector(that.heroSelector, [
+            new Action('select', () => {
+              const hero: Hero = that.heroSelector.item();
+              that.setDetails(
+                hero.sprite,
+                `${hero.name} sat beneath the ${tree.name} tree and became refreshed.`,
+                [new Action('continue', () => Game.game.progress())]
+              );
+              hero.strength = hero.originalStrength;
+              hero.wisdom = hero.originalWisdom;
+              hero.dexterity = hero.originalDexterity;
+            })
+          ])
+        )
+      ]
+    );
   }
 
   init(): void {

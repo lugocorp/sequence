@@ -6,7 +6,6 @@ import View from '../../ui/view';
 import Game from '../../game';
 
 export default class SkinwalkerEvent extends View {
-
   init(): void {
     this.setDetails(Sprites.SKINWALKER, 'something stares from the darkness.', [
       new Action('continue', () => Game.game.progress())

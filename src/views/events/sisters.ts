@@ -11,20 +11,26 @@ export default class ThreeSistersEvent extends View {
   constructor() {
     super();
     const that = this;
-    this.setDetails(Sprites.THREE_SISTERS, 'your party comes across three sister plants growing together. you may choose someone to consume these and become empowered.', [
-      new Action('continue', () => that.setSelector(that.heroSelector, [
-        new Action('select', () => {
-          const hero: Hero = that.heroSelector.item();
-          that.setDetails(hero.sprite, `${hero.name} was empowered by the three plants.`, [
-            new Action('continue', () => Game.game.progress())
-          ]);
-          hero.boostLuck(10);
-          hero.strength++;
-          hero.wisdom++;
-          hero.dexterity++;
-        })
-      ]))
-    ]);
+    this.setDetails(
+      Sprites.THREE_SISTERS,
+      'your party comes across three sister plants growing together. you may choose someone to consume these and become empowered.',
+      [
+        new Action('continue', () =>
+          that.setSelector(that.heroSelector, [
+            new Action('select', () => {
+              const hero: Hero = that.heroSelector.item();
+              that.setDetails(hero.sprite, `${hero.name} was empowered by the three plants.`, [
+                new Action('continue', () => Game.game.progress())
+              ]);
+              hero.boostLuck(10);
+              hero.strength++;
+              hero.wisdom++;
+              hero.dexterity++;
+            })
+          ])
+        )
+      ]
+    );
   }
 
   init(): void {

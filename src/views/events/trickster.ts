@@ -21,41 +21,48 @@ export default class TricksterEvent extends View {
         name: 'raven'
       }
     ]);
-    this.setDetails(animal.sprite, `your party comes across a tricky ${animal.name}! which party member will go up and talk to it?`, [
-      new Action('continue', () => this.setSelector(this.heroSelector, [
-        new Action('select', () => {
-          const hero: Hero = this.heroSelector.item();
-          const effect: number = Random.max(4);
-          if (effect === 0) {
-            hero.fatigue();
-            this.setDetails(animal.sprite, `${hero.name} was fatigued by the ${animal.name}.`, [
-              new Action('continue', () => Game.game.progress())
-            ]);
-          } else if (effect === 1) {
-            hero.strength++;
-            hero.wisdom++;
-            hero.dexterity++;
-            this.setDetails(animal.sprite, `${hero.name} was empowered by the ${animal.name}!`, [
-              new Action('continue', () => Game.game.progress())
-            ]);
-          } else if (effect === 2) {
-            hero.boostLuck(-15);
-            this.setDetails(animal.sprite, `${hero.name} was cursed by the ${animal.name}.`, [
-              new Action('continue', () => Game.game.progress())
-            ]);
-          } else {
-            hero.boostLuck(15);
-            this.setDetails(animal.sprite, `${hero.name} was blessed by the ${animal.name}!`, [
-              new Action('continue', () => Game.game.progress())
-            ]);
-          }
-        })
-      ]))
-    ]);
+    this.setDetails(
+      animal.sprite,
+      `your party comes across a tricky ${animal.name}! which party member will go up and talk to it?`,
+      [
+        new Action('continue', () =>
+          this.setSelector(this.heroSelector, [
+            new Action('select', () => {
+              const hero: Hero = this.heroSelector.item();
+              const effect: number = Random.max(4);
+              if (effect === 0) {
+                hero.fatigue();
+                this.setDetails(animal.sprite, `${hero.name} was fatigued by the ${animal.name}.`, [
+                  new Action('continue', () => Game.game.progress())
+                ]);
+              } else if (effect === 1) {
+                hero.strength++;
+                hero.wisdom++;
+                hero.dexterity++;
+                this.setDetails(
+                  animal.sprite,
+                  `${hero.name} was empowered by the ${animal.name}!`,
+                  [new Action('continue', () => Game.game.progress())]
+                );
+              } else if (effect === 2) {
+                hero.boostLuck(-15);
+                this.setDetails(animal.sprite, `${hero.name} was cursed by the ${animal.name}.`, [
+                  new Action('continue', () => Game.game.progress())
+                ]);
+              } else {
+                hero.boostLuck(15);
+                this.setDetails(animal.sprite, `${hero.name} was blessed by the ${animal.name}!`, [
+                  new Action('continue', () => Game.game.progress())
+                ]);
+              }
+            })
+          ])
+        )
+      ]
+    );
   }
 
   init(): void {
     this.heroSelector = Selector.heroSelector(Game.game.party.members);
   }
-
 }

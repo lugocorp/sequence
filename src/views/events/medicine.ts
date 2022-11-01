@@ -9,14 +9,17 @@ import Game from '../../game';
 
 export default class MedicineManEvent extends View {
   private heroSelector: Selector<Hero>;
+  private readonly sprite = Random.element([
+    Sprites.MEDICINE_MAN_MUSKOGEE,
+    Sprites.MEDICINE_MAN_GUARANI
+  ]);
 
   constructor() {
     super();
-    const that = this;
     this.setDetails(
-      Sprites.MEDICINE_MAN,
+      this.sprite,
       'your party comes across a medicine man. he will empower one of your party members in exchange for a random item from them.',
-      [new Action('continue', () => that.viewParty())]
+      [new Action('continue', () => this.viewParty())]
     );
   }
 
@@ -33,11 +36,9 @@ export default class MedicineManEvent extends View {
   viewParty(): void {
     const that = this;
     if (Game.game.party.hasItems()) {
-      this.setSelector(this.heroSelector, [
-        new Action('make trade', () => that.checkTrade())
-      ]);
+      this.setSelector(this.heroSelector, [new Action('make trade', () => that.checkTrade())]);
     } else {
-      this.setDetails(Sprites.MEDICINE_MAN, `no one in your party has an item to give.`, [
+      this.setDetails(this.sprite, `no one in your party has an item to give.`, [
         new Action('continue', () => Game.game.progress())
       ]);
     }

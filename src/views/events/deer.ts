@@ -24,16 +24,26 @@ export default class DeerEvent extends View {
       this.playerChoice();
     }
     this.initiated = true;
-    this.heroSelector = Selector.heroSelector(Game.game.party.members, undefined, (hero) => `${hero.deerSuccess()} chance of success`);
+    this.heroSelector = Selector.heroSelector(
+      Game.game.party.members,
+      undefined,
+      (hero) => `${hero.deerSuccess()} chance of success`
+    );
   }
 
   playerChoice(): void {
-    this.setDetails(Sprites.DEER, 'your party comes close to the deer. will a party member try to catch it?', [
-      new Action('yes', () => this.hunt()),
-      new Action('no', () => this.setDetails(Sprites.DEER, 'your party turns away and leaves the deer alone.', [
-        new Action('continue', () => Game.game.progress())
-      ]))
-    ])
+    this.setDetails(
+      Sprites.DEER,
+      'your party comes close to the deer. will a party member try to catch it?',
+      [
+        new Action('yes', () => this.hunt()),
+        new Action('no', () =>
+          this.setDetails(Sprites.DEER, 'your party turns away and leaves the deer alone.', [
+            new Action('continue', () => Game.game.progress())
+          ])
+        )
+      ]
+    );
   }
 
   hunt(): void {
@@ -45,14 +55,18 @@ export default class DeerEvent extends View {
           for (const hero of Game.game.party.members) {
             hero.boostLuck(20);
           }
-          this.setDetails(hero.sprite, `${hero.name} successfully hunted the deer! they are tired but left a small offering for the beast's spirit. your party was blessed for their efforts.`, [
-            new Action('continue', () => Game.game.progress())
-          ]);
+          this.setDetails(
+            hero.sprite,
+            `${hero.name} successfully hunted the deer! they are tired but left a small offering for the beast's spirit. your party was blessed for their efforts.`,
+            [new Action('continue', () => Game.game.progress())]
+          );
         } else {
           Game.futureEvent(this, 3);
-          this.setDetails(hero.sprite, `${hero.name} exhausted themself and did not catch the deer, and it escaped into the thicket. your party gives chase.`, [
-            new Action('continue', () => Game.game.progress())
-          ]);
+          this.setDetails(
+            hero.sprite,
+            `${hero.name} exhausted themself and did not catch the deer, and it escaped into the thicket. your party gives chase.`,
+            [new Action('continue', () => Game.game.progress())]
+          );
         }
       })
     ]);
