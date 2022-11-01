@@ -31,6 +31,19 @@ export default class DataManager {
       this.itemsByRarityIndex.get(item.rarity).push(item);
     }
     this.heroes = heroes.filter((h: types.HeroData): boolean => h.name.length > 0);
+
+    // Check for item effect mismatches
+    const itemNames: string[] = items.map((x: Item) => x.name);
+    for (const key in effects) {
+      if (itemNames.indexOf(key) < 0) {
+        throw new Error(`Item ${key} does not exist.`);
+      }
+    }
+    for (const item of itemNames) {
+      if (!effects[item]) {
+        console.warn(`Unimplemented item '${item}'`);
+      }
+    }
   }
 
   /*
