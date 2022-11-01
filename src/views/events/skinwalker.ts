@@ -8,7 +8,7 @@ import Game from '../../game';
 export default class SkinwalkerEvent extends View {
 
   init(): void {
-    this.setDetails(Sprites.SKINWALKER, 'your party comes across a skinwalker.', [
+    this.setDetails(Sprites.SKINWALKER, 'something stares from the darkness.', [
       new Action('continue', () => Game.game.progress())
     ]);
     const heroes: Hero[] = [...Game.game.party.members];

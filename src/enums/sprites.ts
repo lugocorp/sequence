@@ -93,6 +93,10 @@ enum Sprites {
   CHESTNUT = 0x020201,
   CATALPA = 0x020201,
   REDBUD = 0x020201,
+  OTTER = 0x020201,
+  RABBIT = 0x020201,
+  DEER = 0x020101,
+  RAVEN = 0x030000,
 
   // Spritesheet #3 (challengers)
   OWL = 0x030000,

@@ -158,6 +158,11 @@ export default class Hero extends Unit {
     return this.coloredRate(playerStatsHigher ? 100 : this.luck);
   }
 
+  // Returns the colored success rate of successfully hunting a deer
+  deerSuccess(): string {
+    return this.coloredRate(this.luck);
+  }
+
   // Returns true if the hero passes a luck check
   lucky(): boolean {
     return Random.passes(this.luck / 100);

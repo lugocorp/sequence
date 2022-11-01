@@ -6,6 +6,7 @@
 import SkinwalkerEvent from '../views/events/skinwalker';
 import ThreeSistersEvent from '../views/events/sisters';
 import MedicineManEvent from '../views/events/medicine';
+import TricksterEvent from '../views/events/trickster';
 import ChallengeEvent from '../views/events/challenge';
 import OfferingEvent from '../views/events/offering';
 import ObstacleEvent from '../views/events/obstacle';
@@ -14,6 +15,7 @@ import WeatherEvent from '../views/events/weather';
 import ProjectEvent from '../views/events/project';
 import FatigueEvent from '../views/events/fatigue';
 import AnimalEvent from '../views/events/animal';
+import ThiefEvent from '../views/events/thief';
 import DeathEvent from '../views/events/death';
 import BeginEvent from '../views/events/begin';
 import DreamEvent from '../views/events/dream';
@@ -23,6 +25,7 @@ import PlantEvent from '../views/events/plant';
 import TreeEvent from '../views/events/tree';
 import GiftEvent from '../views/events/gift';
 import TrapEvent from '../views/events/trap';
+import DeerEvent from '../views/events/deer';
 import FutureEvent from './future';
 import { Time } from '../enums/world';
 import Random from './random';
@@ -39,24 +42,28 @@ export default class EventChain {
    */
   private getEventRollTable(): any[][] {
     const table: any[][] = [
-      [40, ChallengeEvent], // 40
-      [8, WeatherEvent], // 48
-      [6, OfferingEvent], // 54
-      [6, GiftEvent], // 60
-      [5, ObstacleEvent], // 65
-      [5, RecruitEvent], // 70
-      [5, TrapEvent], // 75
-      [4, PlantEvent], // 79
-      [4, ProjectEvent], // 83
-      [4, RapidEvent], // 87
-      [3, AnimalEvent], // 90
-      [3, TradeEvent], // 93
-      [3, MedicineManEvent], // 96
-      [2, TreeEvent], // 98
-      [1, ThreeSistersEvent], // 99
-      [1, SkinwalkerEvent] // 100
+      [35, ChallengeEvent], // 35
+      [8, WeatherEvent], // 43
+      [6, OfferingEvent], // 49
+      [6, GiftEvent], // 55
+      [5, ObstacleEvent], // 60
+      [5, RecruitEvent], // 65
+      [5, TrapEvent], // 70
+      [4, PlantEvent], // 74
+      [4, ProjectEvent], // 78
+      [4, RapidEvent], // 82
+      [3, AnimalEvent], // 85
+      [3, TradeEvent], // 88
+      [3, MedicineManEvent], // 91
+      [3, TreeEvent], // 94
+      [2, DeerEvent], // 96
+      [1, TricksterEvent], // 97
+      [1, ThreeSistersEvent], // 98
+      [1, ThiefEvent], // 99
+      // [1, CaveEvent], // 100
     ];
     if (Game.game.world.time === Time.NIGHT) {
+      table.push([2, SkinwalkerEvent]);
       table.push([5, DreamEvent]);
     }
     return table;
@@ -96,16 +103,21 @@ export default class EventChain {
   plan(): void {
     // Tick future events and push if they're ready
     let a = 0;
+    let future = false;
     while (a < this.futures.length) {
       const v: View = this.futures[a].tick();
       if (v) {
         if (this.futures[a].valid()) {
           this.events.push(v);
+          future = true;
         }
         this.futures.splice(a, 1);
       } else {
         a++;
       }
+    }
+    if (future) {
+      return;
     }
 
     // Roll for the next event
