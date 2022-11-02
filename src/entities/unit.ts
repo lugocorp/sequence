@@ -5,10 +5,10 @@ import Sprites from '../enums/sprites';
  * get their logic and interface from.
  */
 export default abstract class Unit {
+  protected strength: number;
+  protected wisdom: number;
+  protected dexterity: number;
   sprite: Sprites;
-  strength: number;
-  wisdom: number;
-  dexterity: number;
   name: string;
 
   constructor(sprite: Sprites, name: string, strength: number, wisdom: number, dexterity: number) {

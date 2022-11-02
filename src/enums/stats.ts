@@ -21,7 +21,7 @@ export default class Stats {
 
   // Returns a unit's value for the given stat
   static getUnitStat(unit: Unit, stat: number): number {
-    return [ unit.strength, unit.wisdom, unit.dexterity ][stat];
+    return unit[[ 'strength', 'wisdom', 'dexterity' ][stat]];
   }
 
   // Sets a unit's value for the given stat
@@ -31,7 +31,7 @@ export default class Stats {
 
   // Returns a unit's original value for a given stat
   static getOriginalStat(unit: Hero, stat: number): number {
-    return [ unit.originalStrength, unit.originalWisdom, unit.originalDexterity ][stat];
+    return unit[[ 'originalStrength', 'originalWisdom', 'originalDexterity' ][stat]];
   }
 
   // Changes a unit's stat by a given value

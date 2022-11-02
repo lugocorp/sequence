@@ -1,4 +1,5 @@
 import Sprites from '../../enums/sprites';
+import Stats from '../../enums/stats';
 import Random from '../../logic/random';
 import Hero from '../../entities/hero';
 import Selector from '../../ui/selector';
@@ -39,9 +40,9 @@ export default class TreeEvent extends View {
                 `${hero.name} sat beneath the ${tree.name} tree and became refreshed.`,
                 [ new Action('continue', () => Game.game.progress()) ]
               );
-              hero.strength = hero.originalStrength;
-              hero.wisdom = hero.originalWisdom;
-              hero.dexterity = hero.originalDexterity;
+              hero.refresh(Stats.STRENGTH);
+              hero.refresh(Stats.WISDOM);
+              hero.refresh(Stats.DEXTERITY);
             })
           ])
         )

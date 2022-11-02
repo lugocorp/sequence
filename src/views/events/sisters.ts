@@ -1,4 +1,5 @@
 import Sprites from '../../enums/sprites';
+import Stats from '../../enums/stats';
 import Hero from '../../entities/hero';
 import Selector from '../../ui/selector';
 import Action from '../../ui/action';
@@ -23,9 +24,9 @@ export default class ThreeSistersEvent extends View {
                 new Action('continue', () => Game.game.progress())
               ]);
               hero.boostLuck(10);
-              hero.strength++;
-              hero.wisdom++;
-              hero.dexterity++;
+              Stats.changeUnitStat(hero, Stats.STRENGTH, 1);
+              Stats.changeUnitStat(hero, Stats.WISDOM, 1);
+              Stats.changeUnitStat(hero, Stats.DEXTERITY, 1);
             })
           ])
         )

@@ -20,7 +20,6 @@ export interface ChallengerData {
   strength: number;
   wisdom: number;
   dexterity: number;
-  ability?: string;
 }
 
 // Defines game data for an Item

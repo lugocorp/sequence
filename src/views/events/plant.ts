@@ -1,5 +1,6 @@
 import Action from '../../ui/action';
 import View from '../../ui/view';
+import Stats from '../../enums/stats';
 import Sprites from '../../enums/sprites';
 import Random from '../../logic/random';
 import Game from '../../game';
@@ -117,9 +118,9 @@ export default class PlantEvent extends View {
         [
           new Action('continue', () => {
             for (const hero of Game.game.party.members) {
-              hero.strength++;
-              hero.wisdom++;
-              hero.dexterity++;
+              Stats.changeUnitStat(hero, Stats.STRENGTH, 1);
+              Stats.changeUnitStat(hero, Stats.WISDOM, 1);
+              Stats.changeUnitStat(hero, Stats.DEXTERITY, 1);
             }
             Game.game.progress();
           })

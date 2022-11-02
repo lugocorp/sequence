@@ -40,6 +40,12 @@ export default class ChallengeEvent extends View {
   }
 
   init(): void {
+    for (const hero of Game.game.party.members) {
+      hero.activate(Trigger.ENTER_CHALLENGE, {
+        expectation: this.expectation,
+        challenger: this.challenger
+      });
+    }
     this.heroSelector = Selector.heroSelector(
       Game.game.party.members,
       undefined,
@@ -97,7 +103,15 @@ export default class ChallengeEvent extends View {
             result
               ? `${hero.name} is tired but triumphant. they received -1 to all their stats.`
               : `${hero.name} lost all their stats during the challenge.`,
-            [ new Action('continue', () => Game.game.progress()) ]
+            [
+              new Action('continue', () => {
+                hero.activate(Trigger.EXIT_CHALLENGE, {
+                  expectation: this.expectation,
+                  challenger: this.challenger
+                });
+                Game.game.progress();
+              })
+            ]
           )
         )
       ]

@@ -5,9 +5,9 @@ import Rarity from '../enums/rarity';
 import Hero from './hero';
 
 export default class Item {
+  private effect: Effect;
   description: string;
   sprite: Sprites;
-  effect: Effect;
   rarity: number;
   name: string;
 
@@ -18,6 +18,10 @@ export default class Item {
     this.sprite = sprite;
     this.rarity = rarity;
     this.name = name;
+  }
+
+  activate(trigger: Trigger, hero: Hero, data: any): void {
+    this.effect.call(this, trigger, hero, data);
   }
 
   descriptionText(): string {

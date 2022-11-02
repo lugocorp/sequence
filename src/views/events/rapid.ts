@@ -1,8 +1,10 @@
+import { Trigger } from '../../enums/types';
+import Sprites from '../../enums/sprites';
+import Stats from '../../enums/stats';
 import Selector from '../../ui/selector';
+import Hero from '../../entities/hero';
 import Action from '../../ui/action';
 import View from '../../ui/view';
-import Sprites from '../../enums/sprites';
-import Hero from '../../entities/hero';
 import Game from '../../game';
 
 export default class RapidEvent extends View {
@@ -33,16 +35,17 @@ export default class RapidEvent extends View {
   river(): void {
     const that = this;
     const hero: Hero = this.heroSelector.item();
-    hero.strength++;
-    hero.wisdom++;
-    hero.dexterity++;
+    Stats.changeUnitStat(hero, Stats.STRENGTH, 1);
+    Stats.changeUnitStat(hero, Stats.WISDOM, 1);
+    Stats.changeUnitStat(hero, Stats.DEXTERITY, 1);
     this.setDetails(hero.sprite, `${hero.name} became stronger, wiser, and faster by the river!`, [
       new Action('continue', () => {
-        if (hero.lucky()) {
+        if (hero.getRiverSafety() > 0 || hero.lucky()) {
           Game.game.progress();
         } else {
           that.consequence();
         }
+        hero.activate(Trigger.RIVER, null);
       })
     ]);
   }

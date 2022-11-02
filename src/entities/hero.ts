@@ -3,7 +3,6 @@ import { Trigger } from '../enums/types';
 import Sprites from '../enums/sprites';
 import Stats from '../enums/stats';
 import Random from '../logic/random';
-import Ability from './ability';
 import Item from './item';
 import Unit from './unit';
 import Game from '../game';
@@ -13,11 +12,11 @@ export default class Hero extends Unit {
   private luck: number;
   private people: string;
   private itemSlots: number;
-  originalStrength: number;
-  originalWisdom: number;
-  originalDexterity: number;
+  private originalStrength: number;
+  private originalWisdom: number;
+  private originalDexterity: number;
+  private riverSafety: number;
   description: string;
-  ability: Ability;
 
   constructor(
     sprite: Sprites,
@@ -39,6 +38,7 @@ export default class Hero extends Unit {
     this.originalStrength = strength;
     this.originalWisdom = wisdom;
     this.originalDexterity = dexterity;
+    this.riverSafety = 0;
   }
 
   // Returns true if this Hero is in the player's Party
@@ -53,14 +53,34 @@ export default class Hero extends Unit {
 
   // Reduces this Hero's stats
   fatigue(): void {
+    this.activate(Trigger.FATIGUE, null);
     Stats.changeUnitStat(this, Stats.STRENGTH, -1);
     Stats.changeUnitStat(this, Stats.WISDOM, -1);
     Stats.changeUnitStat(this, Stats.DEXTERITY, -1);
   }
 
+  // Restores a given stat to its original value
+  refresh(stat: number): void {
+    const original =
+      stat === Stats.STRENGTH
+        ? this.originalStrength
+        : stat === Stats.WISDOM
+        ? this.originalWisdom
+        : this.originalDexterity;
+    Stats.setUnitStat(this, stat, original);
+  }
+
   // Changes the hero's luck by a given amount
   boostLuck(boost: number): void {
     this.luck = Math.max(Math.min(this.luck + boost, 100), 0);
+  }
+
+  tickRiverSafety(positive = true): void {
+    this.riverSafety += positive ? 1 : -1;
+  }
+
+  getRiverSafety(): number {
+    return this.riverSafety;
   }
 
   // Equips an item to this hero
@@ -70,14 +90,14 @@ export default class Hero extends Unit {
     }
     Game.game.history.itemsCollected++;
     this.items.push(item);
-    item.effect(Trigger.EQUIP, this, null);
+    item.activate(Trigger.EQUIP, this, null);
   }
 
   // Unequips an item from this hero
   unequip(item: Item): void {
     const index: number = this.items.indexOf(item);
     this.items.splice(index, 1);
-    item.effect(Trigger.UNEQUIP, this, null);
+    item.activate(Trigger.UNEQUIP, this, null);
   }
 
   // Grabs a list of this hero's items
@@ -111,13 +131,10 @@ export default class Hero extends Unit {
     return this.items.length < this.itemSlots;
   }
 
-  // This function handles the hero's item and ability effects
+  // This function handles the hero's item effects
   activate(trigger: Trigger, data?: any): void {
-    if (this.ability) {
-      this.ability.effect(trigger, this, data);
-    }
     for (const item of this.items) {
-      item?.effect(trigger, this, data);
+      item?.activate(trigger, this, data);
     }
   }
 
@@ -150,7 +167,7 @@ export default class Hero extends Unit {
 
   // Returns the colored success rate of surviving a rapid
   riverSuccess(): string {
-    return this.coloredRate(this.luck);
+    return this.coloredRate(this.riverSafety ? 100 : this.luck);
   }
 
   // Returns the colored success rate of winning a challenge
@@ -165,6 +182,8 @@ export default class Hero extends Unit {
 
   // Returns true if the hero passes a luck check
   lucky(): boolean {
-    return Random.passes(this.luck / 100);
+    const passed: boolean = Random.passes(this.luck / 100);
+    this.activate(Trigger.LUCK_CHECK, null);
+    return passed;
   }
 }

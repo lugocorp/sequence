@@ -5,6 +5,7 @@ import Action from '../../ui/action';
 import View from '../../ui/view';
 import Hero from '../../entities/hero';
 import Item from '../../entities/item';
+import Stats from '../../enums/stats';
 import Game from '../../game';
 
 export default class MedicineManEvent extends View {
@@ -63,9 +64,9 @@ export default class MedicineManEvent extends View {
     const index: number = Random.max(this.hero.itemCount());
     const replaced: Item = this.hero.getItem(index);
     this.hero.unequip(replaced);
-    this.hero.strength++;
-    this.hero.wisdom++;
-    this.hero.dexterity++;
+    Stats.changeUnitStat(this.hero, Stats.STRENGTH, 1);
+    Stats.changeUnitStat(this.hero, Stats.WISDOM, 1);
+    Stats.changeUnitStat(this.hero, Stats.DEXTERITY, 1);
     this.setDetails(
       this.hero.sprite,
       `${this.hero.name} gave ${replaced.name} to the medicine man and was empowered.`,

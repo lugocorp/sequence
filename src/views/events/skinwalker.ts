@@ -1,4 +1,5 @@
 import Sprites from '../../enums/sprites';
+import Stats from '../../enums/stats';
 import Random from '../../logic/random';
 import Hero from '../../entities/hero';
 import Action from '../../ui/action';
@@ -15,9 +16,9 @@ export default class SkinwalkerEvent extends View {
     for (let a = 0; a < removed; a++) {
       const hero: Hero = Random.element(heroes);
       heroes.splice(heroes.indexOf(hero), 1);
-      hero.strength = 0;
-      hero.wisdom = 0;
-      hero.dexterity = 0;
+      Stats.setUnitStat(hero, Stats.STRENGTH, 0);
+      Stats.setUnitStat(hero, Stats.WISDOM, 0);
+      Stats.setUnitStat(hero, Stats.DEXTERITY, 0);
     }
   }
 }

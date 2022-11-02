@@ -1,4 +1,5 @@
 import Sprites from '../../enums/sprites';
+import Stats from '../../enums/stats';
 import Random from '../../logic/random';
 import Action from '../../ui/action';
 import View from '../../ui/view';
@@ -49,9 +50,9 @@ export default class ProjectEvent extends View {
               new Action('continue', () => {
                 for (const hero of Game.game.party.members) {
                   hero.boostLuck(10);
-                  hero.strength++;
-                  hero.wisdom++;
-                  hero.dexterity++;
+                  Stats.changeUnitStat(hero, Stats.STRENGTH, 1);
+                  Stats.changeUnitStat(hero, Stats.WISDOM, 1);
+                  Stats.changeUnitStat(hero, Stats.DEXTERITY, 1);
                 }
                 Game.game.progress();
               })
