@@ -8,12 +8,12 @@ import Unit from './unit';
 import Game from '../game';
 
 export default class Hero extends Unit {
-  private items: Item[];
-  private luck: number;
-  private people: string;
   private originalStrength: number;
   private originalWisdom: number;
   private originalDexterity: number;
+  private items: Item[];
+  private luck: number;
+  private people: string;
   private riverSafety: number;
   private _basket: Basket;
   description: string;

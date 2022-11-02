@@ -68,7 +68,7 @@ export default class Basket {
   // Triggers item effects
   activate(trigger: Trigger): void {
     for (const item of this.items) {
-      item.activate(trigger, undefined, undefined);
+      item.activate(trigger);
     }
   }
 }

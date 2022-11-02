@@ -1,18 +1,3 @@
-// Triggers are used to activate effects at certain times during gameplay
-export enum Trigger {
-  EQUIP, // Fires when the item is equipped
-  UNEQUIP, // Fires when the item is unequipped
-  CHALLENGE_SUCCESS, // Fires when the hero succeeds a challenge
-  CHALLENGE_FAILURE, // Fires when the hero fails a challenge
-  START_CHALLENGE, // Fires when the hero is chosen for a challenge
-  LEAVES_PARTY, // Fires when the hero leaves the party
-  LUCK_CHECK, // Fires when the hero checks their luck stat
-  FATIGUE, // Fires when the hero is fatigued
-  ENTER_CHALLENGE, // Fires when you init a challenge event
-  EXIT_CHALLENGE, // Fires when you unload a challenge event
-  RIVER // Fires when the hero interacted with a river
-}
-
 // This class handles item and treasure rarity.
 export class Rarity {
   static COMMON = 0;
@@ -25,3 +10,60 @@ export class Rarity {
     return [ Rarity.COMMON, Rarity.UNCOMMON, Rarity.RARE, Rarity.LEGENDARY, Rarity.MYTHIC ];
   }
 }
+
+export enum TriggerType {
+  GET_STATS = "when you calculate a hero's stats",
+  GET_LUCK = "when you calculate a hero's luck",
+  GET_FATIGUE = "when you calculate a hero's fatigue",
+  GET_OBSTACLE = 'when you calculate obstacle survival',
+  GET_CHAIN = 'when you calculate event chain flags',
+  GET_RARITY = 'when you calculate item drop rarity floor',
+  AFTER_SELECTED = 'when a hero is selected for a challenge',
+  AFTER_LUCK = 'after a luck check',
+  AFTER_EVENT = 'after an event terminates',
+  AFTER_LEAVE = 'after a hero leaves the party',
+  AFTER_FATIGUE = 'after a hero gets fatigued'
+}
+
+// Triggers are used to activate effects at certain times during gameplay
+export type Trigger =
+  | {
+      type: TriggerType.GET_STATS;
+      strength: number;
+      wisdom: number;
+      dexterity: number;
+    }
+  | {
+      type: TriggerType.GET_LUCK;
+      luck: number;
+    }
+  | {
+      type: TriggerType.GET_FATIGUE;
+    }
+  | {
+      type: TriggerType.GET_OBSTACLE;
+    }
+  | {
+      type: TriggerType.GET_CHAIN;
+    }
+  | {
+      type: TriggerType.GET_RARITY;
+    }
+  | {
+      type: TriggerType.AFTER_SELECTED;
+    }
+  | {
+      type: TriggerType.AFTER_LUCK;
+    }
+  | {
+      type: TriggerType.AFTER_EVENT;
+    }
+  | {
+      type: TriggerType.AFTER_LEAVE;
+    }
+  | {
+      type: TriggerType.AFTER_FATIGUE;
+    };
+
+// Item effect type
+export type Effect = (trigger: Trigger) => void;

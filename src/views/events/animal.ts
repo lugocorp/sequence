@@ -45,13 +45,8 @@ export default class AnimalEvent extends EventView {
                   baby.sprite,
                   Rarity.RARE,
                   `+25% luck\na baby ${baby.name} looking for its family`,
-                  (trigger: Trigger, hero: Hero, data: any) => {
-                    if (trigger === Trigger.EQUIP) {
-                      hero.boostLuck(25);
-                    }
-                    if (trigger === Trigger.UNEQUIP) {
-                      hero.boostLuck(-25);
-                    }
+                  (trigger: Trigger) => {
+                    // TODO: Implement +25% luck effect here
                   }
                 );
                 hero.basket.equip(item);
