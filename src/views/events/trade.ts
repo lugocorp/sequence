@@ -1,5 +1,4 @@
 import Sprites from '../../enums/sprites';
-import Random from '../../logic/random';
 import Selector from '../../ui/selector';
 import Action from '../../ui/action';
 import { EventView } from '../event';

@@ -1,5 +1,4 @@
 import { green, yellow, orange, red } from '../enums/colors';
-import { Trigger } from '../enums/types';
 import Sprites from '../enums/sprites';
 import Stats from '../enums/stats';
 import Random from '../logic/random';

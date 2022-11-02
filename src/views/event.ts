@@ -2,7 +2,7 @@ import View from '../ui/view';
 
 export interface EventClass {
   label: string;
-};
+}
 
 /**
  * This class wraps game event logic such as event type labelling and comparison

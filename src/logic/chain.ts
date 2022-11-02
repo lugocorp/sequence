@@ -41,8 +41,8 @@ export default class EventChain {
   /*
    * This function returns the roll table for the next event
    */
-  private getEventRollTable(): any[][] {
-    let table: [number, any][] = [
+  private getEventRollTable(): [number, any][] {
+    let table: [number, EventClass][] = [
       [ 35, ChallengeEvent ], // 35
       [ 8, WeatherEvent ], // 43
       [ 6, OfferingEvent ], // 49
@@ -137,12 +137,10 @@ export default class EventChain {
 
     // Roll for the next event
     const event: EventView = new (Random.weighted(
-      this.getEventRollTable()
-        .map((x: any[]): [number, any] => x as [number, any])
-        .filter(
-          (x: [number, any]) =>
-            x[1].label === ChallengeEvent.label || x[1] !== this.previouslyPlanned?.label
-        )
+      this.getEventRollTable().filter(
+        (x: [number, EventClass]) =>
+          x[1].label === ChallengeEvent.label || x[1].label !== this.previouslyPlanned?.label
+      )
     ))();
     this.previouslyPlanned = event;
     this.events.push(event);

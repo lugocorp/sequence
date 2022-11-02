@@ -1,7 +1,6 @@
 import Challenger from '../../entities/challenger';
 import Hero from '../../entities/hero';
 import { orange } from '../../enums/colors';
-import { Trigger } from '../../enums/types';
 import Stats from '../../enums/stats';
 import Random from '../../logic/random';
 import Selector from '../../ui/selector';
@@ -96,9 +95,7 @@ export default class ChallengeEvent extends EventView {
             result
               ? `${hero.name} is tired but triumphant. they received -1 to all their stats.`
               : `${hero.name} lost all their stats during the challenge.`,
-            [
-              new Action('continue', () => Game.game.progress())
-            ]
+            [ new Action('continue', () => Game.game.progress()) ]
           )
         )
       ]

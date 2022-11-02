@@ -1,4 +1,3 @@
-import { Trigger } from '../../enums/types';
 import Sprites from '../../enums/sprites';
 import Stats from '../../enums/stats';
 import Selector from '../../ui/selector';

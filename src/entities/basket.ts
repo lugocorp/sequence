@@ -13,7 +13,7 @@ export default class Basket {
 
   // Returns a shallow copy of the items list
   toList(): Item[] {
-    return [...this.items];
+    return [ ...this.items ];
   }
 
   // Returns true if there are empty item slots
