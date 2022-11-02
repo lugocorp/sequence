@@ -35,7 +35,7 @@ export default class Party {
 
   // Returns true if anyone in your party has at least 1 item
   hasItems(): boolean {
-    return this.members.reduce((acc: number, x: Hero) => acc + x.itemCount(), 0) > 0;
+    return this.members.reduce((acc: number, x: Hero) => acc + x.basket.itemCount, 0) > 0;
   }
 
   // Fully populates the party with an optional guaranteed character
@@ -63,7 +63,7 @@ export default class Party {
   }
 
   emptyItemSlots(): Hero[] {
-    return this.members.filter((x: Hero) => x.canEquipItems());
+    return this.members.filter((x: Hero) => x.basket.hasSpace);
   }
 
   // Removes a hero from your party
@@ -73,7 +73,6 @@ export default class Party {
       throw new Error(`${hero.name} is not in your party and therefore cannot be removed`);
     }
     this.members.splice(index, 1);
-    hero.activate(Trigger.LEAVES_PARTY);
   }
 
   // Returns a random hero in the party

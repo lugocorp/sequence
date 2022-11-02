@@ -41,12 +41,6 @@ export default class ChallengeEvent extends EventView {
   }
 
   init(): void {
-    for (const hero of Game.game.party.members) {
-      hero.activate(Trigger.ENTER_CHALLENGE, {
-        expectation: this.expectation,
-        challenger: this.challenger
-      });
-    }
     this.heroSelector = Selector.heroSelector(
       Game.game.party.members,
       undefined,
@@ -81,7 +75,6 @@ export default class ChallengeEvent extends EventView {
   finish(): void {
     const that = this;
     const hero: Hero = this.heroSelector.item();
-    hero.activate(Trigger.START_CHALLENGE);
     const result: boolean = this.playerOvercomesChallenge(hero, this.challenger);
     if (result) {
       Game.game.history.challengesWon++;
@@ -91,7 +84,6 @@ export default class ChallengeEvent extends EventView {
       Stats.setUnitStat(hero, Stats.WISDOM, 0);
       Stats.setUnitStat(hero, Stats.DEXTERITY, 0);
     }
-    hero.activate(result ? Trigger.CHALLENGE_SUCCESS : Trigger.CHALLENGE_FAILURE);
     this.setDetails(
       hero.sprite,
       result
@@ -105,13 +97,7 @@ export default class ChallengeEvent extends EventView {
               ? `${hero.name} is tired but triumphant. they received -1 to all their stats.`
               : `${hero.name} lost all their stats during the challenge.`,
             [
-              new Action('continue', () => {
-                hero.activate(Trigger.EXIT_CHALLENGE, {
-                  expectation: this.expectation,
-                  challenger: this.challenger
-                });
-                Game.game.progress();
-              })
+              new Action('continue', () => Game.game.progress())
             ]
           )
         )

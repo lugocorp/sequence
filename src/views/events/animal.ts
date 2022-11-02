@@ -54,7 +54,7 @@ export default class AnimalEvent extends EventView {
                     }
                   }
                 );
-                hero.equip(item);
+                hero.basket.equip(item);
                 const view: EventView = new EventView({ label: 'animalreturn' });
                 view.setDetails(
                   baby.sprite,
@@ -65,12 +65,12 @@ export default class AnimalEvent extends EventView {
                       Stats.changeUnitStat(hero, Stats.WISDOM, 1);
                       Stats.changeUnitStat(hero, Stats.DEXTERITY, 1);
                       Game.game.history.peopleHelped++;
-                      hero.unequip(item);
+                      hero.basket.unequip(item);
                       Game.game.progress();
                     })
                   ]
                 );
-                Game.futureEvent(view, 8, () => hero.isInParty() && hero.hasItem(item));
+                Game.futureEvent(view, 8, () => hero.isInParty() && hero.basket.contains(item));
                 that.setDetails(baby.sprite, `${hero.name} picks up the baby ${baby.name}`, [
                   new Action('continue', () => Game.game.progress())
                 ]);

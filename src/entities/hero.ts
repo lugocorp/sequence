@@ -3,6 +3,7 @@ import { Trigger } from '../enums/types';
 import Sprites from '../enums/sprites';
 import Stats from '../enums/stats';
 import Random from '../logic/random';
+import Basket from './basket';
 import Item from './item';
 import Unit from './unit';
 import Game from '../game';
@@ -11,11 +12,11 @@ export default class Hero extends Unit {
   private items: Item[];
   private luck: number;
   private people: string;
-  private itemSlots: number;
   private originalStrength: number;
   private originalWisdom: number;
   private originalDexterity: number;
   private riverSafety: number;
+  private _basket: Basket;
   description: string;
 
   constructor(
@@ -31,7 +32,6 @@ export default class Hero extends Unit {
   ) {
     super(sprite, name, strength, wisdom, dexterity);
     this.description = description;
-    this.itemSlots = itemSlots;
     this.people = people;
     this.items = [];
     this.luck = luck;
@@ -39,6 +39,12 @@ export default class Hero extends Unit {
     this.originalWisdom = wisdom;
     this.originalDexterity = dexterity;
     this.riverSafety = 0;
+    this._basket = new Basket(itemSlots);
+  }
+
+  // Returns accessor to this hero's held items
+  get basket(): Basket {
+    return this._basket;
   }
 
   // Returns true if this Hero is in the player's Party
@@ -53,7 +59,6 @@ export default class Hero extends Unit {
 
   // Reduces this Hero's stats
   fatigue(): void {
-    this.activate(Trigger.FATIGUE, null);
     Stats.changeUnitStat(this, Stats.STRENGTH, -1);
     Stats.changeUnitStat(this, Stats.WISDOM, -1);
     Stats.changeUnitStat(this, Stats.DEXTERITY, -1);
@@ -83,69 +88,14 @@ export default class Hero extends Unit {
     return this.riverSafety;
   }
 
-  // Equips an item to this hero
-  equip(item: Item): void {
-    if (this.items.length >= this.itemSlots) {
-      throw new Error(`${this.name} can no longer equip items`);
-    }
-    Game.game.history.itemsCollected++;
-    this.items.push(item);
-    item.activate(Trigger.EQUIP, this, null);
-  }
-
-  // Unequips an item from this hero
-  unequip(item: Item): void {
-    const index: number = this.items.indexOf(item);
-    this.items.splice(index, 1);
-    item.activate(Trigger.UNEQUIP, this, null);
-  }
-
-  // Grabs a list of this hero's items
-  getItems(): Item[] {
-    return this.items;
-  }
-
-  // Grabs a specific item from this hero
-  getItem(index: number): Item {
-    return this.items[index];
-  }
-
-  // Returns true if this hero has the given item
-  hasItem(item: Item): boolean {
-    return this.items.indexOf(item) > -1;
-  }
-
-  // Replaces the item at the given index
-  replaceItem(index: number, item: Item): void {
-    this.unequip(this.items[index]);
-    this.equip(item);
-  }
-
-  // Returns the number of equipped items
-  itemCount(): number {
-    return this.items.length;
-  }
-
-  // Returns true if this hero can still equip items
-  canEquipItems(): boolean {
-    return this.items.length < this.itemSlots;
-  }
-
-  // This function handles the hero's item effects
-  activate(trigger: Trigger, data?: any): void {
-    for (const item of this.items) {
-      item?.activate(trigger, this, data);
-    }
-  }
-
   // Returns the text used in this hero's description
   descriptionText(): string {
     const stat = (n: number): string => (n > 9 ? `${n}\t` : `\t${n}\t`);
     return (
       `${this.name}\n` +
       `${stat(this.strength)}str\t\t${stat(this.wisdom)}wis\t\t${stat(this.dexterity)}dex\n` +
-      `\thas ${this.itemCount()} item${this.itemCount() === 1 ? '' : 's'} (max ${
-        this.itemSlots
+      `\thas ${this.basket.itemCount} item${this.basket.itemCount === 1 ? '' : 's'} (max ${
+        this.basket.total
       })\n\n` +
       `${this.description}`
     );
@@ -182,8 +132,6 @@ export default class Hero extends Unit {
 
   // Returns true if the hero passes a luck check
   lucky(): boolean {
-    const passed: boolean = Random.passes(this.luck / 100);
-    this.activate(Trigger.LUCK_CHECK, null);
-    return passed;
+    return Random.passes(this.luck / 100);
   }
 }

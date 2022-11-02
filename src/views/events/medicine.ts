@@ -27,7 +27,7 @@ export default class MedicineManEvent extends EventView {
 
   init(): void {
     this.heroSelector = Selector.heroSelector(
-      Game.game.party.members.filter((h: Hero) => h.itemCount() > 0)
+      Game.game.party.members.filter((h: Hero) => h.basket.hasItems)
     );
   }
 
@@ -47,7 +47,7 @@ export default class MedicineManEvent extends EventView {
   }
 
   checkTrade(): void {
-    if (this.hero.itemCount() > 0) {
+    if (this.hero.basket.hasItems) {
       this.finish();
     } else {
       this.invalidTrade();
@@ -62,9 +62,8 @@ export default class MedicineManEvent extends EventView {
   }
 
   finish(): void {
-    const index: number = Random.max(this.hero.itemCount());
-    const replaced: Item = this.hero.getItem(index);
-    this.hero.unequip(replaced);
+    const replaced: Item = this.hero.basket.random();
+    this.hero.basket.unequip(replaced);
     Stats.changeUnitStat(this.hero, Stats.STRENGTH, 1);
     Stats.changeUnitStat(this.hero, Stats.WISDOM, 1);
     Stats.changeUnitStat(this.hero, Stats.DEXTERITY, 1);

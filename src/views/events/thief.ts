@@ -37,7 +37,7 @@ export default class ThiefEvent extends EventView {
 
   checkForItems(): void {
     const unflattened: Stolen[][] = Game.game.party.members.map((x: Hero) =>
-      x.getItems().map((y: Item) => [ x, y ])
+      x.basket.toList().map((y: Item) => [ x, y ])
     );
     const items: Stolen[] = unflattened.reduce((acc: Stolen[], x: Stolen[]) => acc.concat(x), []);
     if (!items.length) {
@@ -51,7 +51,7 @@ export default class ThiefEvent extends EventView {
     const steal: number = Random.max(items.length - 1) + 1;
     for (let a = 0; a < steal; a++) {
       const item: Stolen = Random.element(items);
-      item[0].unequip(item[1]);
+      item[0].basket.unequip(item[1]);
       this.stolen.push(item);
     }
     this.setDetails(
@@ -77,7 +77,7 @@ export default class ThiefEvent extends EventView {
         [
           new Action('continue', () => {
             for (const item of this.stolen) {
-              item[0].equip(item[1]);
+              item[0].basket.equip(item[1]);
             }
             Game.game.progress();
           })

@@ -31,7 +31,7 @@ export default class TradeEvent extends EventView {
 
   init(): void {
     this.heroSelector = Selector.heroSelector(
-      Game.game.party.members.filter((h: Hero) => h.itemCount() > 0)
+      Game.game.party.members.filter((h: Hero) => h.basket.hasItems)
     );
   }
 
@@ -66,7 +66,7 @@ export default class TradeEvent extends EventView {
   }
 
   checkTrade(): void {
-    if (this.hero.itemCount() > 0) {
+    if (this.hero.basket.hasItems) {
       this.finish();
     } else {
       this.invalidTrade();
@@ -81,9 +81,8 @@ export default class TradeEvent extends EventView {
   }
 
   finish(): void {
-    const index: number = Random.max(this.hero.itemCount());
-    const replaced: Item = this.hero.getItem(index);
-    this.hero.replaceItem(index, this.item);
+    const replaced: Item = this.hero.basket.random();
+    this.hero.basket.replace(replaced, this.item);
     this.setDetails(
       this.hero.sprite,
       `${this.hero.name} traded ${replaced.name} for ${this.item.name}`,

@@ -23,7 +23,7 @@ export default class DreamEvent extends EventView {
     // Set up future event
     const future: EventView = new EventView({ label: 'dreamfuture' });
     future.init = function (): void {
-      if (hero.canEquipItems()) {
+      if (hero.basket.hasSpace) {
         future.setDetails(
           hero.sprite,
           `${hero.name} receives a powerful item they had recently dreamt of`,
@@ -31,7 +31,7 @@ export default class DreamEvent extends EventView {
             new Action('view item', () =>
               future.setDetails(item.sprite, item.descriptionText(), [
                 new Action('continue', () => {
-                  hero.equip(item);
+                  hero.basket.equip(item);
                   Game.game.progress();
                 })
               ])

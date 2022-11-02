@@ -63,7 +63,7 @@ export default class GiftEvent extends EventView {
 
   finish(): void {
     const gift: Item = this.itemSelector.item();
-    this.hero.equip(gift);
+    this.hero.basket.equip(gift);
     this.setDetails(
       this.spirit,
       `${this.hero.name} received the spirit's gift of ${gift.name}. the spirit conceals itself once more.`,

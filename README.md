@@ -90,7 +90,7 @@ We have a number of `npm` commands:
 - [ ] Finally draw all final character sprites
 - [ ] Update any ugly UI throughout the game
 - [ ] Rebase project on top of the Wildflower codebase
-- [ ] Clean up all code
+- [ ] Clean up all code (revamp model hierarchy, dynamic stat accessors, history type)
 - [ ] Update beta with feedback
 
 #### Marketing/launch

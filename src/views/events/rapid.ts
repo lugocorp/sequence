@@ -46,7 +46,6 @@ export default class RapidEvent extends EventView {
         } else {
           that.consequence();
         }
-        hero.activate(Trigger.RIVER, null);
       })
     ]);
   }

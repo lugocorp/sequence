@@ -44,12 +44,12 @@ export default class Selector<T> {
         select(hero);
       }
       view.removeAction('items');
-      if (Game.game.party.contains(hero) && hero.itemCount() > 0) {
+      if (Game.game.party.contains(hero) && hero.basket.hasItems) {
         view.actions.push(
           new Action('items', () => {
             const oldActions = view.actions;
             const oldSelector = view.selector;
-            view.setSelector(Selector.itemSelector(hero.getItems()), [
+            view.setSelector(Selector.itemSelector(hero.basket.toList()), [
               new Action('back', () => view.setSelector(oldSelector, oldActions))
             ]);
           })
