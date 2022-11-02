@@ -4,7 +4,7 @@ import Action from '../../ui/action';
 import { EventView } from '../event';
 import Stats from '../../enums/stats';
 import Sprites from '../../enums/sprites';
-import { Trigger } from '../../enums/types';
+import { Trigger } from '../../enums/triggers';
 import Rarity from '../../enums/rarity';
 import Hero from '../../entities/hero';
 import Item from '../../entities/item';

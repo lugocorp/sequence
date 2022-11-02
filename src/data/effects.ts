@@ -1,9 +1,10 @@
 import Hero from '../entities/hero';
 import Random from '../logic/random';
 import { ItemData } from '../serial/types';
-import { Rarity, Trigger, Effect } from '../enums/types';
+import { Trigger, Effect } from '../enums/triggers';
 import { Weather } from '../enums/world';
 import Sprites from '../enums/sprites';
+import Rarity from '../enums/rarity';
 import Stats from '../enums/stats';
 import Game from '../game';
 

@@ -9,7 +9,7 @@ import Challenger from '../entities/challenger';
 import Hero from '../entities/hero';
 import Item from '../entities/item';
 import Sprites from '../enums/sprites';
-import { Rarity } from '../enums/types';
+import Rarity from '../enums/rarity';
 import * as types from './types';
 import challengers from '../data/challenger';
 import effects from '../data/effects';

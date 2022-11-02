@@ -1,4 +1,4 @@
-import { Trigger, Effect } from '../enums/types';
+import { Trigger, Effect } from '../enums/triggers';
 import Sprites from '../enums/sprites';
 import Rarity from '../enums/rarity';
 
