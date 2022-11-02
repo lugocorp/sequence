@@ -2,10 +2,10 @@ import { Weather } from '../../enums/world';
 import Sprites from '../../enums/sprites';
 import Random from '../../logic/random';
 import Action from '../../ui/action';
-import { Event } from '../event';
+import { EventView } from '../event';
 import Game from '../../game';
 
-export default class WeatherEvent extends Event {
+export default class WeatherEvent extends EventView {
   static label = 'weather';
 
   constructor() {

@@ -1,10 +1,10 @@
 import { Time } from '../../enums/world';
 import Sprites from '../../enums/sprites';
 import Action from '../../ui/action';
-import { Event } from '../event';
+import { EventView } from '../event';
 import Game from '../../game';
 
-export default class CaveEvent extends Event {
+export default class CaveEvent extends EventView {
   static label = 'cave';
   private time: Time;
 

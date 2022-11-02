@@ -2,10 +2,10 @@ import Sprites from '../../enums/sprites';
 import Stats from '../../enums/stats';
 import Random from '../../logic/random';
 import Action from '../../ui/action';
-import { Event } from '../event';
+import { EventView } from '../event';
 import Game from '../../game';
 
-export default class ProjectEvent extends Event {
+export default class ProjectEvent extends EventView {
   static label = 'project';
 
   constructor() {
@@ -39,7 +39,7 @@ export default class ProjectEvent extends Event {
     }
 
     // Set up future event
-    const future: Event = new Event({ label: 'projectthankyou' });
+    const future: EventView = new EventView({ label: 'projectthankyou' });
     future.setDetails(
       Sprites.PROJECT,
       `your party sees a group approaching. they are a community you helped recently, and they have come to show their gratitude.`,

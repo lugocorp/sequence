@@ -2,10 +2,10 @@ import ScoreView from '../../views/scoreboard';
 import Sprites from '../../enums/sprites';
 import GameAudio from '../../media/audio';
 import Action from '../../ui/action';
-import { Event } from '../event';
+import { EventView } from '../event';
 import Game from '../../game';
 
-export default class DeathEvent extends Event {
+export default class DeathEvent extends EventView {
   static label = 'death';
 
   constructor() {

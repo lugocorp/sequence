@@ -3,10 +3,10 @@ import Stats from '../../enums/stats';
 import Random from '../../logic/random';
 import Hero from '../../entities/hero';
 import Action from '../../ui/action';
-import { Event } from '../event';
+import { EventView } from '../event';
 import Game from '../../game';
 
-export default class SkinwalkerEvent extends Event {
+export default class SkinwalkerEvent extends EventView {
   static label = 'skinwalker';
 
   constructor() {

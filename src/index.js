@@ -24,4 +24,4 @@ document.addEventListener(
   },
   false
 );
-document.dispatchEvent(new Event('deviceready'));
+document.dispatchEvent(new EventView('deviceready'));

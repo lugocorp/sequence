@@ -2,10 +2,10 @@ import Sprites from '../../enums/sprites';
 import Hero from '../../entities/hero';
 import Selector from '../../ui/selector';
 import Action from '../../ui/action';
-import { Event } from '../event';
+import { EventView } from '../event';
 import Game from '../../game';
 
-export default class DeerEvent extends Event {
+export default class DeerEvent extends EventView {
   static label = 'deer';
   private heroSelector: Selector<Hero>;
   private initiated = false;

@@ -1,13 +1,13 @@
 import Hero from '../../entities/hero';
 import Selector from '../../ui/selector';
 import Action from '../../ui/action';
-import { Event } from '../event';
+import { EventView } from '../event';
 import Game from '../../game';
 
 /*
  * In this event you choose a new party member.
  */
-export default class RecruitEvent extends Event {
+export default class RecruitEvent extends EventView {
   static label = 'recruit';
   private recruitSelector: Selector<Hero>;
   private memberSelector: Selector<Hero>;

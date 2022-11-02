@@ -3,10 +3,10 @@ import Stats from '../../enums/stats';
 import Hero from '../../entities/hero';
 import Selector from '../../ui/selector';
 import Action from '../../ui/action';
-import { Event } from '../event';
+import { EventView } from '../event';
 import Game from '../../game';
 
-export default class ThreeSistersEvent extends Event {
+export default class ThreeSistersEvent extends EventView {
   static label = 'sisters';
   private heroSelector: Selector<Hero>;
 

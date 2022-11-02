@@ -1,10 +1,10 @@
 import Hero from '../../entities/hero';
 import Item from '../../entities/item';
 import Action from '../../ui/action';
-import { Event } from '../event';
+import { EventView } from '../event';
 import Game from '../../game';
 
-export default class DreamEvent extends Event {
+export default class DreamEvent extends EventView {
   static label = 'dream';
 
   constructor() {
@@ -21,7 +21,7 @@ export default class DreamEvent extends Event {
     );
 
     // Set up future event
-    const future: Event = new Event({ label: 'dreamfuture' });
+    const future: EventView = new EventView({ label: 'dreamfuture' });
     future.init = function (): void {
       if (hero.canEquipItems()) {
         future.setDetails(

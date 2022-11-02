@@ -4,11 +4,11 @@ import Random from '../../logic/random';
 import Item from '../../entities/item';
 import Hero from '../../entities/hero';
 import Action from '../../ui/action';
-import { Event } from '../event';
+import { EventView } from '../event';
 import Game from '../../game';
 type Stolen = [Hero, Item];
 
-export default class ThiefEvent extends Event {
+export default class ThiefEvent extends EventView {
   static label = 'thief';
   private stolen: Stolen[] = [];
   private readonly animal = Random.element([

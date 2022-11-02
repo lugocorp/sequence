@@ -1,11 +1,11 @@
 import Action from '../../ui/action';
-import { Event } from '../event';
+import { EventView } from '../event';
 import Stats from '../../enums/stats';
 import Sprites from '../../enums/sprites';
 import Random from '../../logic/random';
 import Game from '../../game';
 
-export default class PlantEvent extends Event {
+export default class PlantEvent extends EventView {
   static label = 'plant';
 
   constructor() {
@@ -93,7 +93,7 @@ export default class PlantEvent extends Event {
   }
 
   poison(): void {
-    const view: Event = new Event({ label: 'plantpoison' });
+    const view: EventView = new EventView({ label: 'plantpoison' });
     view.init = (): void =>
       view.setDetails(
         Game.game.party.members[0].sprite,
@@ -112,7 +112,7 @@ export default class PlantEvent extends Event {
   }
 
   empower(): void {
-    const view: Event = new Event({ label: 'plantempower' });
+    const view: EventView = new EventView({ label: 'plantempower' });
     view.init = (): void =>
       view.setDetails(
         Game.game.party.members[0].sprite,

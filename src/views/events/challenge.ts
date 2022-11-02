@@ -6,10 +6,10 @@ import Stats from '../../enums/stats';
 import Random from '../../logic/random';
 import Selector from '../../ui/selector';
 import Action from '../../ui/action';
-import { Event } from '../event';
+import { EventView } from '../event';
 import Game from '../../game';
 
-export default class ChallengeEvent extends Event {
+export default class ChallengeEvent extends EventView {
   static label = 'challenge';
   private heroSelector: Selector<Hero>;
   private challenger: Challenger;

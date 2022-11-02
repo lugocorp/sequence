@@ -3,7 +3,7 @@
  * Its job is to generate and serve events for as long as
  * the player survives.
  */
-import { Event, EventClass } from '../views/event';
+import { EventView, EventClass } from '../views/event';
 import SkinwalkerEvent from '../views/events/skinwalker';
 import ThreeSistersEvent from '../views/events/sisters';
 import MedicineManEvent from '../views/events/medicine';
@@ -34,9 +34,9 @@ import Random from './random';
 import Game from '../game';
 
 export default class EventChain {
-  private previouslyPlanned: Event;
+  private previouslyPlanned: EventView;
   futures: FutureEvent[] = [];
-  events: Event[] = [ new BeginEvent() ];
+  events: EventView[] = [ new BeginEvent() ];
 
   /*
    * This function returns the roll table for the next event
@@ -95,7 +95,7 @@ export default class EventChain {
   /*
    * This function returns the current event in the sequence.
    */
-  latest(): Event {
+  latest(): EventView {
     for (const hero of Game.game.party.members) {
       if (hero.isFatigued()) {
         return new FatigueEvent(hero);
@@ -120,7 +120,7 @@ export default class EventChain {
     let a = 0;
     let future = false;
     while (a < this.futures.length) {
-      const v: Event = this.futures[a].tick();
+      const v: EventView = this.futures[a].tick();
       if (v) {
         if (this.futures[a].valid()) {
           this.events.push(v);
@@ -136,7 +136,7 @@ export default class EventChain {
     }
 
     // Roll for the next event
-    const event: Event = new (Random.weighted(
+    const event: EventView = new (Random.weighted(
       this.getEventRollTable()
         .map((x: any[]): [number, any] => x as [number, any])
         .filter(

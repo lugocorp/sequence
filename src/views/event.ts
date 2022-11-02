@@ -7,7 +7,7 @@ export interface EventClass {
 /**
  * This class wraps game event logic such as event type labelling and comparison
  */
-export class Event extends View {
+export class EventView extends View {
   private _label: string;
 
   constructor(_class: EventClass) {
@@ -21,7 +21,7 @@ export class Event extends View {
   }
 
   // Returns true if the given event is of the same type as this one
-  isSameEvent(event: Event): boolean {
+  isSameEvent(event: EventView): boolean {
     return this.label === event.label;
   }
 

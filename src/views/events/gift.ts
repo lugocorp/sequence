@@ -4,13 +4,13 @@ import Hero from '../../entities/hero';
 import Random from '../../logic/random';
 import Selector from '../../ui/selector';
 import Action from '../../ui/action';
-import { Event } from '../event';
+import { EventView } from '../event';
 import Game from '../../game';
 
 /*
  * In this event you choose 1 of 3 items to bestow upon a pre-selected party member.
  */
-export default class GiftEvent extends Event {
+export default class GiftEvent extends EventView {
   static label = 'gift';
   private itemSelector: Selector<Item>;
   private spirit: Sprites;

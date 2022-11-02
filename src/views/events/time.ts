@@ -1,10 +1,10 @@
 import { Time, DAY_NIGHT_CYCLE } from '../../enums/world';
 import Sprites from '../../enums/sprites';
 import Action from '../../ui/action';
-import { Event } from '../event';
+import { EventView } from '../event';
 import Game from '../../game';
 
-export default class TimeEvent extends Event {
+export default class TimeEvent extends EventView {
   static label = 'time';
   private time: Time;
 

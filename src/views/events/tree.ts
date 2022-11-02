@@ -4,10 +4,10 @@ import Random from '../../logic/random';
 import Hero from '../../entities/hero';
 import Selector from '../../ui/selector';
 import Action from '../../ui/action';
-import { Event } from '../event';
+import { EventView } from '../event';
 import Game from '../../game';
 
-export default class TreeEvent extends Event {
+export default class TreeEvent extends EventView {
   static label = 'tree';
   private heroSelector: Selector<Hero>;
 

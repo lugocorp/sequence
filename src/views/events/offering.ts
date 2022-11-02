@@ -3,13 +3,13 @@ import Item from '../../entities/item';
 import Hero from '../../entities/hero';
 import Selector from '../../ui/selector';
 import Action from '../../ui/action';
-import { Event } from '../event';
+import { EventView } from '../event';
 import Game from '../../game';
 
 /*
  * In this event you choose a party member to receive some pre-selected item.
  */
-export default class OfferingEvent extends Event {
+export default class OfferingEvent extends EventView {
   static label = 'offering';
   private heroSelector: Selector<Hero>;
   private spirit: Sprites;

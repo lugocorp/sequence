@@ -9,7 +9,7 @@ import EventChain from './logic/chain';
 import Party from './entities/party';
 import TimeEvent from './views/events/time';
 import StartView from './views/start';
-import { Event } from './views/event';
+import { EventView } from './views/event';
 import View from './ui/view';
 
 export default class Game {
@@ -88,7 +88,7 @@ export default class Game {
   }
 
   // Queues a FutureEvent
-  static futureEvent(view: Event, turns: number, valid?: () => boolean): void {
+  static futureEvent(view: EventView, turns: number, valid?: () => boolean): void {
     Game.game.chain.futures.push(new FutureEvent(view, turns, valid));
   }
 

@@ -2,9 +2,9 @@ import Sprites from '../../enums/sprites';
 import Selector from '../../ui/selector';
 import Action from '../../ui/action';
 import Game from '../../game';
-import { Event } from '../event';
+import { EventView } from '../event';
 
-export default class BeginEvent extends Event {
+export default class BeginEvent extends EventView {
   static label = 'begin';
 
   constructor() {

@@ -2,13 +2,13 @@ import Sprites from '../../enums/sprites';
 import Random from '../../logic/random';
 import Selector from '../../ui/selector';
 import Action from '../../ui/action';
-import { Event } from '../event';
+import { EventView } from '../event';
 import Hero from '../../entities/hero';
 import Item from '../../entities/item';
 import Stats from '../../enums/stats';
 import Game from '../../game';
 
-export default class MedicineManEvent extends Event {
+export default class MedicineManEvent extends EventView {
   static label = 'medicine';
   private heroSelector: Selector<Hero>;
   private readonly sprite = Random.element([

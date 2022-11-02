@@ -2,13 +2,13 @@ import Sprites from '../../enums/sprites';
 import Stats from '../../enums/stats';
 import Random from '../../logic/random';
 import Action from '../../ui/action';
-import { Event } from '../event';
+import { EventView } from '../event';
 import Game from '../../game';
 
 /*
  * In this event your party is filtered by a certain stat limit.
  */
-export default class ObstacleEvent extends Event {
+export default class ObstacleEvent extends EventView {
   static label = 'obstacle';
   private original: number;
   private cutoff: number;
