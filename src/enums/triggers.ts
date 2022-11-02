@@ -1,3 +1,5 @@
+import Hero from '../entities/hero';
+import Rarity from './rarity';
 
 export enum TriggerType {
   GET_STATS = "when you calculate a hero's stats",
@@ -27,18 +29,24 @@ export type Trigger =
     }
   | {
       type: TriggerType.GET_FATIGUE;
+      fatigue: boolean;
     }
   | {
       type: TriggerType.GET_OBSTACLE;
+      pass: boolean;
     }
   | {
       type: TriggerType.GET_CHAIN;
+      easierCaves: boolean;
+      morePlants: boolean;
     }
   | {
       type: TriggerType.GET_RARITY;
+      floor: Rarity;
     }
   | {
       type: TriggerType.AFTER_SELECTED;
+      hero: Hero;
     }
   | {
       type: TriggerType.AFTER_LUCK;
@@ -48,9 +56,11 @@ export type Trigger =
     }
   | {
       type: TriggerType.AFTER_LEAVE;
+      hero: Hero;
     }
   | {
       type: TriggerType.AFTER_FATIGUE;
+      hero: Hero;
     };
 
 // Item effect type

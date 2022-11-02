@@ -1,4 +1,4 @@
-import { green, yellow, orange, red } from '../enums/colors';
+import { Trigger, TriggerType } from '../enums/triggers';
 import Sprites from '../enums/sprites';
 import Stats from '../enums/stats';
 import Random from '../logic/random';
@@ -12,9 +12,8 @@ export default class Hero extends Unit {
   private originalWisdom: number;
   private originalDexterity: number;
   private items: Item[];
-  private luck: number;
+  private _luck: number;
   private people: string;
-  private riverSafety: number;
   private _basket: Basket;
   description: string;
 
@@ -30,15 +29,14 @@ export default class Hero extends Unit {
     description: string
   ) {
     super(sprite, name, strength, wisdom, dexterity);
-    this.description = description;
-    this.people = people;
-    this.items = [];
-    this.luck = luck;
     this.originalStrength = strength;
     this.originalWisdom = wisdom;
     this.originalDexterity = dexterity;
-    this.riverSafety = 0;
     this._basket = new Basket(itemSlots);
+    this.description = description;
+    this.people = people;
+    this._luck = luck;
+    this.items = [];
   }
 
   // Returns accessor to this hero's held items
@@ -58,9 +56,22 @@ export default class Hero extends Unit {
 
   // Reduces this Hero's stats
   fatigue(): void {
-    Stats.changeUnitStat(this, Stats.STRENGTH, -1);
-    Stats.changeUnitStat(this, Stats.WISDOM, -1);
-    Stats.changeUnitStat(this, Stats.DEXTERITY, -1);
+    const data: Trigger = {
+      type: TriggerType.GET_FATIGUE,
+      fatigue: true
+    };
+    this.basket.activate(data);
+    if (data.fatigue) {
+      Stats.changeUnitStat(this, Stats.STRENGTH, -1);
+      Stats.changeUnitStat(this, Stats.WISDOM, -1);
+      Stats.changeUnitStat(this, Stats.DEXTERITY, -1);
+      for (const hero of Game.game.party.members) {
+        hero.basket.activate({
+          type: TriggerType.AFTER_FATIGUE,
+          hero: this
+        });
+      }
+    }
   }
 
   // Restores a given stat to its original value
@@ -76,15 +87,7 @@ export default class Hero extends Unit {
 
   // Changes the hero's luck by a given amount
   boostLuck(boost: number): void {
-    this.luck = Math.max(Math.min(this.luck + boost, 100), 0);
-  }
-
-  tickRiverSafety(positive = true): void {
-    this.riverSafety += positive ? 1 : -1;
-  }
-
-  getRiverSafety(): number {
-    return this.riverSafety;
+    this._luck = Math.max(Math.min(this._luck + boost, 100), 0);
   }
 
   // Returns the text used in this hero's description
@@ -100,37 +103,22 @@ export default class Hero extends Unit {
     );
   }
 
-  // Colors a player's success rate for some challenge
-  private coloredRate(rate: number): string {
-    if (rate >= 90) {
-      return green(`${rate}%`);
-    }
-    if (rate >= 60) {
-      return yellow(`${rate}%`);
-    }
-    if (rate >= 30) {
-      return orange(`${rate}%`);
-    }
-    return red(`${rate}%`);
-  }
-
-  // Returns the colored success rate of surviving a rapid
-  riverSuccess(): string {
-    return this.coloredRate(this.riverSafety ? 100 : this.luck);
-  }
-
-  // Returns the colored success rate of winning a challenge
-  challengeSuccess(playerStatsHigher: boolean): string {
-    return this.coloredRate(playerStatsHigher ? 100 : this.luck);
-  }
-
-  // Returns the colored success rate of successfully hunting a deer
-  deerSuccess(): string {
-    return this.coloredRate(this.luck);
+  // Calculates the hero's prospective luck at any given time
+  get luck(): number {
+    const data: Trigger = {
+      type: TriggerType.GET_LUCK,
+      luck: this._luck
+    };
+    this.basket.activate(data);
+    return data.luck;
   }
 
   // Returns true if the hero passes a luck check
   lucky(): boolean {
-    return Random.passes(this.luck / 100);
+    const success = Random.passes(this.luck / 100);
+    this.basket.activate({
+      type: TriggerType.AFTER_LUCK
+    });
+    return success;
   }
 }

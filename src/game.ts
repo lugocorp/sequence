@@ -1,4 +1,5 @@
 import { DAY_NIGHT_CYCLE, World, Weather, Time } from './enums/world';
+import { TriggerType } from './enums/triggers';
 import GraphicsRenderer from './media/renderer';
 import GraphicsLoader from './media/loader';
 import GameAudio from './media/audio';
@@ -100,6 +101,11 @@ export default class Game {
       await wait();
     }
     this.invalidate();
+    for (const hero of this.party.members) {
+      hero.basket.activate({
+        type: TriggerType.AFTER_EVENT
+      });
+    }
     if (this.party.length() && this.chain.events.length === 1) {
       this.chain.plan();
     }

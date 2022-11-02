@@ -1,3 +1,4 @@
+import { green, yellow, orange, red } from '../enums/colors';
 import View from '../ui/view';
 
 export interface EventClass {
@@ -28,5 +29,19 @@ export class EventView extends View {
   // Returns true if this event is of the given event type
   isTypeEvent(_class: EventClass): boolean {
     return this.label === _class.label;
+  }
+
+  // Colors a success rate based on its numerical range
+  coloredRate(rate: number): string {
+    if (rate >= 90) {
+      return green(`${rate}%`);
+    }
+    if (rate >= 60) {
+      return yellow(`${rate}%`);
+    }
+    if (rate >= 30) {
+      return orange(`${rate}%`);
+    }
+    return red(`${rate}%`);
   }
 }

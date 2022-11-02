@@ -1,5 +1,6 @@
-import Challenger from '../../entities/challenger';
 import Hero from '../../entities/hero';
+import Challenger from '../../entities/challenger';
+import { TriggerType } from '../../enums/triggers';
 import { orange } from '../../enums/colors';
 import Stats from '../../enums/stats';
 import Random from '../../logic/random';
@@ -44,7 +45,9 @@ export default class ChallengeEvent extends EventView {
       Game.game.party.members,
       undefined,
       (hero: Hero) =>
-        `${hero.challengeSuccess(this.playerStatsHigher(hero, this.challenger))} chance to win`
+        `${this.coloredRate(
+          this.playerStatsHigher(hero, this.challenger) ? 100 : hero.luck
+        )} chance to win`
     );
   }
 
@@ -74,6 +77,12 @@ export default class ChallengeEvent extends EventView {
   finish(): void {
     const that = this;
     const hero: Hero = this.heroSelector.item();
+    for (const hero1 of Game.game.party.members) {
+      hero1.basket.activate({
+        type: TriggerType.AFTER_SELECTED,
+        hero: hero
+      });
+    }
     const result: boolean = this.playerOvercomesChallenge(hero, this.challenger);
     if (result) {
       Game.game.history.challengesWon++;

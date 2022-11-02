@@ -28,7 +28,7 @@ export default class RapidEvent extends EventView {
     this.heroSelector = Selector.heroSelector(
       Game.game.party.members,
       undefined,
-      (hero: Hero) => `${hero.riverSuccess()} chance to not get swept away.`
+      (hero: Hero) => `${this.coloredRate(hero.luck)} chance to not get swept away.`
     );
   }
 
@@ -40,7 +40,7 @@ export default class RapidEvent extends EventView {
     Stats.changeUnitStat(hero, Stats.DEXTERITY, 1);
     this.setDetails(hero.sprite, `${hero.name} became stronger, wiser, and faster by the river!`, [
       new Action('continue', () => {
-        if (hero.getRiverSafety() > 0 || hero.lucky()) {
+        if (hero.lucky()) {
           Game.game.progress();
         } else {
           that.consequence();

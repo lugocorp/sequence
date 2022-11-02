@@ -3,13 +3,15 @@
  * provides the Factory class with all the data it needs to instantiate game
  * entities. Use this to get indexed abilities or random game objects.
  */
+import { Trigger, TriggerType } from '../enums/triggers';
+import Sprites from '../enums/sprites';
+import Rarity from '../enums/rarity';
 import Random from '../logic/random';
 import Factory from './factory';
 import Challenger from '../entities/challenger';
 import Hero from '../entities/hero';
 import Item from '../entities/item';
-import Sprites from '../enums/sprites';
-import Rarity from '../enums/rarity';
+import Game from '../game';
 import * as types from './types';
 import challengers from '../data/challenger';
 import effects from '../data/effects';
@@ -83,15 +85,24 @@ export default class DataManager {
    * returned by this function is determined by its rarity.
    */
   getRandomItem(): Item {
+    const data: Trigger = {
+      type: TriggerType.GET_RARITY,
+      floor: Rarity.COMMON
+    };
+    for (const hero of Game.game.party.members) {
+      hero.basket.activate(data);
+    }
+
     const rarity = Random.weighted(
-      [
-        [ 2, Rarity.MYTHIC ],
-        [ 7, Rarity.LEGENDARY ],
-        [ 17, Rarity.RARE ],
-        [ 27, Rarity.UNCOMMON ],
-        [ 47, Rarity.COMMON ]
-      ],
-      100
+      (
+        [
+          [ 2, Rarity.MYTHIC ], // 2
+          [ 7, Rarity.LEGENDARY ], // 9
+          [ 17, Rarity.RARE ], // 26
+          [ 27, Rarity.UNCOMMON ], // 53
+          [ 47, Rarity.COMMON ] // 100
+        ] as [number, number][]
+      ).filter((x: number[]) => x[1] >= data.floor)
     );
     const item: Item = Random.element(this.itemsByRarityIndex.get(rarity));
     return this.factory.createItem(item, effects[item.name]);

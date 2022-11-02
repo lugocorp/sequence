@@ -3,6 +3,8 @@
  * Its job is to generate and serve events for as long as
  * the player survives.
  */
+import { Time } from '../enums/world';
+import { Trigger, TriggerType } from '../enums/triggers';
 import { EventView, EventClass } from '../views/event';
 import SkinwalkerEvent from '../views/events/skinwalker';
 import ThreeSistersEvent from '../views/events/sisters';
@@ -28,7 +30,6 @@ import GiftEvent from '../views/events/gift';
 import TrapEvent from '../views/events/trap';
 import DeerEvent from '../views/events/deer';
 import CaveEvent from '../views/events/cave';
-import { Time } from '../enums/world';
 import FutureEvent from './future';
 import Random from './random';
 import Game from '../game';
@@ -42,6 +43,15 @@ export default class EventChain {
    * This function returns the roll table for the next event
    */
   private getEventRollTable(): [number, any][] {
+    const data: Trigger = {
+      type: TriggerType.GET_CHAIN,
+      easierCaves: false,
+      morePlants: false
+    };
+    for (const hero of Game.game.party.members) {
+      hero.basket.activate(data);
+    }
+
     let table: [number, EventClass][] = [
       [ 35, ChallengeEvent ], // 35
       [ 8, WeatherEvent ], // 43
@@ -63,17 +73,31 @@ export default class EventChain {
       [ 1, ThiefEvent ], // 99
       [ 1, CaveEvent ] // 100
     ];
+    if (data.morePlants) {
+      table.push([ 8, PlantEvent ]);
+    }
     if (Game.game.world.cave) {
-      table = [
-        [ 30, ChallengeEvent ], // 30
-        [ 20, OfferingEvent ], // 50
-        [ 20, GiftEvent ], // 70
-        [ 10, TricksterEvent ], // 80
-        [ 5, AnimalEvent ], // 85
-        [ 5, ThiefEvent ], // 90
-        [ 5, WeatherEvent ], // 95
-        [ 5, SkinwalkerEvent ] // 100
-      ];
+      table = data.easierCaves
+        ? [
+            [ 25, ChallengeEvent ], // 25
+            [ 25, OfferingEvent ], // 50
+            [ 25, GiftEvent ], // 75
+            [ 8, TricksterEvent ], // 83
+            [ 6, AnimalEvent ], // 89
+            [ 4, ThiefEvent ], // 93
+            [ 5, WeatherEvent ], // 98
+            [ 2, SkinwalkerEvent ] // 100
+          ]
+        : [
+            [ 30, ChallengeEvent ], // 30
+            [ 20, OfferingEvent ], // 50
+            [ 20, GiftEvent ], // 70
+            [ 10, TricksterEvent ], // 80
+            [ 5, AnimalEvent ], // 85
+            [ 5, ThiefEvent ], // 90
+            [ 5, WeatherEvent ], // 95
+            [ 5, SkinwalkerEvent ] // 100
+          ];
     }
     if (Game.game.world.time === Time.NIGHT) {
       if (!Game.game.world.cave) {

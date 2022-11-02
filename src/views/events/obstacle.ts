@@ -1,5 +1,7 @@
+import { Trigger, TriggerType } from '../../enums/triggers';
 import Sprites from '../../enums/sprites';
 import Stats from '../../enums/stats';
+import Hero from '../../entities/hero';
 import Random from '../../logic/random';
 import Action from '../../ui/action';
 import { EventView } from '../event';
@@ -40,8 +42,26 @@ export default class ObstacleEvent extends EventView {
     return this.cutoff <= 2;
   }
 
+  // True if the given hero should pass the obstacle
+  private passes(hero: Hero): boolean {
+    return this.higher
+      ? Stats.getUnitStat(hero, this.stat) >= this.cutoff
+      : Stats.getUnitStat(hero, this.stat) <= this.cutoff;
+  }
+
   finish(): void {
-    Game.game.party.filter(this.stat, this.cutoff, this.higher);
+    const removals: Hero[] = [];
+    for (const hero of Game.game.party.members) {
+      const data: Trigger = {
+        type: TriggerType.GET_OBSTACLE,
+        pass: this.passes(hero)
+      };
+      hero.basket.activate(data);
+      if (!data.pass) {
+        removals.push(hero);
+      }
+    }
+    Game.game.party.filter((hero: Hero) => removals.indexOf(hero) < 0);
     const size: number = Game.game.party.length();
     this.setDetails(
       this.obstacle.sprite,
