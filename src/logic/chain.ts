@@ -3,6 +3,7 @@
  * Its job is to generate and serve events for as long as
  * the player survives.
  */
+import { Event, EventClass } from '../views/event';
 import SkinwalkerEvent from '../views/events/skinwalker';
 import ThreeSistersEvent from '../views/events/sisters';
 import MedicineManEvent from '../views/events/medicine';
@@ -27,16 +28,15 @@ import GiftEvent from '../views/events/gift';
 import TrapEvent from '../views/events/trap';
 import DeerEvent from '../views/events/deer';
 import CaveEvent from '../views/events/cave';
-import FutureEvent from './future';
 import { Time } from '../enums/world';
+import FutureEvent from './future';
 import Random from './random';
-import View from '../ui/view';
 import Game from '../game';
 
 export default class EventChain {
-  private previouslyPlanned: View;
+  private previouslyPlanned: Event;
   futures: FutureEvent[] = [];
-  events: View[] = [ new BeginEvent() ];
+  events: Event[] = [ new BeginEvent() ];
 
   /*
    * This function returns the roll table for the next event
@@ -95,7 +95,7 @@ export default class EventChain {
   /*
    * This function returns the current event in the sequence.
    */
-  latest(): View {
+  latest(): Event {
     for (const hero of Game.game.party.members) {
       if (hero.isFatigued()) {
         return new FatigueEvent(hero);
@@ -120,7 +120,7 @@ export default class EventChain {
     let a = 0;
     let future = false;
     while (a < this.futures.length) {
-      const v: View = this.futures[a].tick();
+      const v: Event = this.futures[a].tick();
       if (v) {
         if (this.futures[a].valid()) {
           this.events.push(v);
@@ -136,12 +136,12 @@ export default class EventChain {
     }
 
     // Roll for the next event
-    const event: View = new (Random.weighted(
+    const event: Event = new (Random.weighted(
       this.getEventRollTable()
         .map((x: any[]): [number, any] => x as [number, any])
         .filter(
           (x: [number, any]) =>
-            x[1] === ChallengeEvent || x[1] !== this.previouslyPlanned?.constructor
+            x[1].label === ChallengeEvent.label || x[1] !== this.previouslyPlanned?.label
         )
     ))();
     this.previouslyPlanned = event;

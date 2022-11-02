@@ -1,10 +1,16 @@
 import Hero from '../../entities/hero';
 import Item from '../../entities/item';
 import Action from '../../ui/action';
-import View from '../../ui/view';
+import { Event } from '../event';
 import Game from '../../game';
 
-export default class DreamEvent extends View {
+export default class DreamEvent extends Event {
+  static label = 'dream';
+
+  constructor() {
+    super(DreamEvent);
+  }
+
   init(): void {
     const hero: Hero = Game.game.party.randomHero();
     const item: Item = Game.game.data.getRandomItem();
@@ -15,7 +21,7 @@ export default class DreamEvent extends View {
     );
 
     // Set up future event
-    const future: View = new View();
+    const future: Event = new Event({ label: 'dreamfuture' });
     future.init = function (): void {
       if (hero.canEquipItems()) {
         future.setDetails(

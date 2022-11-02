@@ -4,20 +4,21 @@ import Hero from '../../entities/hero';
 import Random from '../../logic/random';
 import Selector from '../../ui/selector';
 import Action from '../../ui/action';
-import View from '../../ui/view';
+import { Event } from '../event';
 import Game from '../../game';
 
 /*
  * In this event you choose 1 of 3 items to bestow upon a pre-selected party member.
  */
-export default class GiftEvent extends View {
+export default class GiftEvent extends Event {
+  static label = 'gift';
   private itemSelector: Selector<Item>;
   private spirit: Sprites;
   private options: Item[];
   private hero: Hero;
 
   constructor() {
-    super();
+    super(GiftEvent);
     this.options = [
       Game.game.data.getRandomItem(),
       Game.game.data.getRandomItem(),

@@ -1,14 +1,15 @@
 import { Time } from '../../enums/world';
 import Sprites from '../../enums/sprites';
 import Action from '../../ui/action';
-import View from '../../ui/view';
+import { Event } from '../event';
 import Game from '../../game';
 
-export default class CaveEvent extends View {
+export default class CaveEvent extends Event {
+  static label = 'cave';
   private time: Time;
 
   constructor() {
-    super();
+    super(CaveEvent);
     const cave = !Game.game.world.cave;
     this.setDetails(
       cave ? Sprites.CAVE : Game.game.world.time === Time.DAY ? Sprites.DAY : Sprites.NIGHT,

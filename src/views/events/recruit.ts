@@ -1,19 +1,20 @@
 import Hero from '../../entities/hero';
 import Selector from '../../ui/selector';
 import Action from '../../ui/action';
-import View from '../../ui/view';
+import { Event } from '../event';
 import Game from '../../game';
 
 /*
  * In this event you choose a new party member.
  */
-export default class RecruitEvent extends View {
+export default class RecruitEvent extends Event {
+  static label = 'recruit';
   private recruitSelector: Selector<Hero>;
   private memberSelector: Selector<Hero>;
   private recruits: Hero[];
 
   constructor() {
-    super();
+    super(RecruitEvent);
     const that = this;
     this.recruits = [
       Game.game.data.getRandomHero(),

@@ -2,15 +2,16 @@ import Sprites from '../../enums/sprites';
 import Hero from '../../entities/hero';
 import Selector from '../../ui/selector';
 import Action from '../../ui/action';
-import View from '../../ui/view';
+import { Event } from '../event';
 import Game from '../../game';
 
-export default class DeerEvent extends View {
+export default class DeerEvent extends Event {
+  static label = 'deer';
   private heroSelector: Selector<Hero>;
   private initiated = false;
 
   constructor() {
-    super();
+    super(DeerEvent);
     this.setDetails(Sprites.DEER, 'your party hears a rustling in the bushes. a deer jumps out!', [
       new Action('continue', () => this.playerChoice())
     ]);

@@ -1,7 +1,7 @@
 import Random from '../../logic/random';
 import Selector from '../../ui/selector';
 import Action from '../../ui/action';
-import View from '../../ui/view';
+import { Event } from '../event';
 import Stats from '../../enums/stats';
 import Sprites from '../../enums/sprites';
 import { Trigger } from '../../enums/types';
@@ -10,11 +10,12 @@ import Hero from '../../entities/hero';
 import Item from '../../entities/item';
 import Game from '../../game';
 
-export default class AnimalEvent extends View {
+export default class AnimalEvent extends Event {
+  static label = 'animal';
   private heroSelector: Selector<Hero>;
 
   constructor() {
-    super();
+    super(AnimalEvent);
     const that = this;
     const baby = Random.element([
       {
@@ -54,7 +55,7 @@ export default class AnimalEvent extends View {
                   }
                 );
                 hero.equip(item);
-                const view: View = new View();
+                const view: Event = new Event({ label: 'animalreturn' });
                 view.setDetails(
                   baby.sprite,
                   `${hero.name} returns the baby ${baby.name} to its family. they receive a blessing of empowerment.`,

@@ -4,14 +4,15 @@ import Stats from '../../enums/stats';
 import Selector from '../../ui/selector';
 import Hero from '../../entities/hero';
 import Action from '../../ui/action';
-import View from '../../ui/view';
+import { Event } from '../event';
 import Game from '../../game';
 
-export default class RapidEvent extends View {
+export default class RapidEvent extends Event {
+  static label = 'rapid';
   private heroSelector: Selector<Hero>;
 
   constructor() {
-    super();
+    super(RapidEvent);
     const that = this;
     this.setDetails(
       Sprites.RAPID,
@@ -53,7 +54,7 @@ export default class RapidEvent extends View {
   consequence(): void {
     const hero: Hero = this.heroSelector.item();
     Game.game.party.remove(hero);
-    const retrieve: View = new View();
+    const retrieve: Event = new Event({ label: 'riverretrieve' });
     retrieve.setDetails(
       hero.sprite,
       `your party reunites with ${hero.name} after they were swept away by a river`,

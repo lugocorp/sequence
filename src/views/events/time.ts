@@ -1,11 +1,16 @@
 import { Time, DAY_NIGHT_CYCLE } from '../../enums/world';
 import Sprites from '../../enums/sprites';
 import Action from '../../ui/action';
-import View from '../../ui/view';
+import { Event } from '../event';
 import Game from '../../game';
 
-export default class TimeEvent extends View {
+export default class TimeEvent extends Event {
+  static label = 'time';
   private time: Time;
+
+  constructor() {
+    super(TimeEvent);
+  }
 
   init(): void {
     const isDay = (time: Time): boolean => time === Time.DAY;

@@ -3,10 +3,16 @@ import Stats from '../../enums/stats';
 import Random from '../../logic/random';
 import Hero from '../../entities/hero';
 import Action from '../../ui/action';
-import View from '../../ui/view';
+import { Event } from '../event';
 import Game from '../../game';
 
-export default class SkinwalkerEvent extends View {
+export default class SkinwalkerEvent extends Event {
+  static label = 'skinwalker';
+
+  constructor() {
+    super(SkinwalkerEvent);
+  }
+
   init(): void {
     this.setDetails(Sprites.SKINWALKER, 'something stares from the darkness.', [
       new Action('continue', () => Game.game.progress())

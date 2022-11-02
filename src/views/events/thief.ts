@@ -4,11 +4,12 @@ import Random from '../../logic/random';
 import Item from '../../entities/item';
 import Hero from '../../entities/hero';
 import Action from '../../ui/action';
-import View from '../../ui/view';
+import { Event } from '../event';
 import Game from '../../game';
 type Stolen = [Hero, Item];
 
-export default class ThiefEvent extends View {
+export default class ThiefEvent extends Event {
+  static label = 'thief';
   private stolen: Stolen[] = [];
   private readonly animal = Random.element([
     {
@@ -22,7 +23,7 @@ export default class ThiefEvent extends View {
   ]);
 
   constructor() {
-    super();
+    super(ThiefEvent);
     this.setDetails(
       this.animal.sprite,
       `your party comes across a trickster! a ${this.animal.name} has come to steal precious items.`,

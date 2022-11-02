@@ -3,19 +3,20 @@ import Item from '../../entities/item';
 import Hero from '../../entities/hero';
 import Selector from '../../ui/selector';
 import Action from '../../ui/action';
-import View from '../../ui/view';
+import { Event } from '../event';
 import Game from '../../game';
 
 /*
  * In this event you choose a party member to receive some pre-selected item.
  */
-export default class OfferingEvent extends View {
+export default class OfferingEvent extends Event {
+  static label = 'offering';
   private heroSelector: Selector<Hero>;
   private spirit: Sprites;
   private gift: Item;
 
   constructor() {
-    super();
+    super(OfferingEvent);
     const that = this;
     this.gift = Game.game.data.getRandomItem();
     this.spirit = Game.game.data.getRandomSpirit();

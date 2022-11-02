@@ -1,12 +1,14 @@
 import Sprites from '../../enums/sprites';
 import Selector from '../../ui/selector';
 import Action from '../../ui/action';
-import View from '../../ui/view';
 import Game from '../../game';
+import { Event } from '../event';
 
-export default class BeginEvent extends View {
+export default class BeginEvent extends Event {
+  static label = 'begin';
+
   constructor() {
-    super();
+    super(BeginEvent);
   }
 
   init(): void {

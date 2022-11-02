@@ -6,16 +6,17 @@ import Stats from '../../enums/stats';
 import Random from '../../logic/random';
 import Selector from '../../ui/selector';
 import Action from '../../ui/action';
-import View from '../../ui/view';
+import { Event } from '../event';
 import Game from '../../game';
 
-export default class ChallengeEvent extends View {
+export default class ChallengeEvent extends Event {
+  static label = 'challenge';
   private heroSelector: Selector<Hero>;
   private challenger: Challenger;
   private expectation: number[];
 
   constructor() {
-    super();
+    super(ChallengeEvent);
     const that = this;
     this.challenger = Game.game.data.getRandomChallenger();
     this.expectation = [ Random.max(Stats.N) ];

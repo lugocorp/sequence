@@ -4,14 +4,15 @@ import Hero from '../../entities/hero';
 import Random from '../../logic/random';
 import Selector from '../../ui/selector';
 import Action from '../../ui/action';
-import View from '../../ui/view';
+import { Event } from '../event';
 import Game from '../../game';
 
-export default class TricksterEvent extends View {
+export default class TricksterEvent extends Event {
+  static label = 'trickster';
   private heroSelector: Selector<Hero>;
 
   constructor() {
-    super();
+    super(TricksterEvent);
     const animal = Random.element([
       {
         sprite: Sprites.COYOTL,

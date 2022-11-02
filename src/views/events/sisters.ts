@@ -3,14 +3,15 @@ import Stats from '../../enums/stats';
 import Hero from '../../entities/hero';
 import Selector from '../../ui/selector';
 import Action from '../../ui/action';
-import View from '../../ui/view';
+import { Event } from '../event';
 import Game from '../../game';
 
-export default class ThreeSistersEvent extends View {
+export default class ThreeSistersEvent extends Event {
+  static label = 'sisters';
   private heroSelector: Selector<Hero>;
 
   constructor() {
-    super();
+    super(ThreeSistersEvent);
     const that = this;
     this.setDetails(
       Sprites.THREE_SISTERS,

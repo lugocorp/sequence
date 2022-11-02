@@ -2,17 +2,18 @@ import Sprites from '../../enums/sprites';
 import Random from '../../logic/random';
 import Selector from '../../ui/selector';
 import Action from '../../ui/action';
-import View from '../../ui/view';
+import { Event } from '../event';
 import Hero from '../../entities/hero';
 import Item from '../../entities/item';
 import Game from '../../game';
 
-export default class TradeEvent extends View {
+export default class TradeEvent extends Event {
+  static label = 'trade';
   private heroSelector: Selector<Hero>;
   private itemSelector: Selector<Item>;
 
   constructor() {
-    super();
+    super(TradeEvent);
     const that = this;
     this.itemSelector = Selector.itemSelector([
       Game.game.data.getRandomItem(),

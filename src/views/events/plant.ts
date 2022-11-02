@@ -1,13 +1,15 @@
 import Action from '../../ui/action';
-import View from '../../ui/view';
+import { Event } from '../event';
 import Stats from '../../enums/stats';
 import Sprites from '../../enums/sprites';
 import Random from '../../logic/random';
 import Game from '../../game';
 
-export default class PlantEvent extends View {
+export default class PlantEvent extends Event {
+  static label = 'plant';
+
   constructor() {
-    super();
+    super(PlantEvent);
     const SAFE = 0;
     const SEMISAFE = 1;
     const TOXIC = 2;
@@ -91,7 +93,7 @@ export default class PlantEvent extends View {
   }
 
   poison(): void {
-    const view: View = new View();
+    const view: Event = new Event({ label: 'plantpoison' });
     view.init = (): void =>
       view.setDetails(
         Game.game.party.members[0].sprite,
@@ -110,7 +112,7 @@ export default class PlantEvent extends View {
   }
 
   empower(): void {
-    const view: View = new View();
+    const view: Event = new Event({ label: 'plantempower' });
     view.init = (): void =>
       view.setDetails(
         Game.game.party.members[0].sprite,

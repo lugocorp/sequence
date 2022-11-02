@@ -2,20 +2,21 @@ import Sprites from '../../enums/sprites';
 import Stats from '../../enums/stats';
 import Random from '../../logic/random';
 import Action from '../../ui/action';
-import View from '../../ui/view';
+import { Event } from '../event';
 import Game from '../../game';
 
 /*
  * In this event your party is filtered by a certain stat limit.
  */
-export default class ObstacleEvent extends View {
+export default class ObstacleEvent extends Event {
+  static label = 'obstacle';
   private original: number;
   private cutoff: number;
   private stat: number;
   private obstacle: { sprite: Sprites; name: string };
 
   constructor() {
-    super();
+    super(ObstacleEvent);
     this.obstacle = Random.element([
       { sprite: Sprites.OBSTACLE, name: 'swamp' },
       { sprite: Sprites.OBSTACLE, name: 'cliff' },

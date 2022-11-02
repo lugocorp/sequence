@@ -2,12 +2,14 @@ import Sprites from '../../enums/sprites';
 import Stats from '../../enums/stats';
 import Random from '../../logic/random';
 import Action from '../../ui/action';
-import View from '../../ui/view';
+import { Event } from '../event';
 import Game from '../../game';
 
-export default class ProjectEvent extends View {
+export default class ProjectEvent extends Event {
+  static label = 'project';
+
   constructor() {
-    super();
+    super(ProjectEvent);
     const that = this;
     const project: string = Random.element([ 'build a bridge', 'cook a feast', 'maintain a garden' ]);
     this.setDetails(
@@ -37,7 +39,7 @@ export default class ProjectEvent extends View {
     }
 
     // Set up future event
-    const future: View = new View();
+    const future: Event = new Event({ label: 'projectthankyou' });
     future.setDetails(
       Sprites.PROJECT,
       `your party sees a group approaching. they are a community you helped recently, and they have come to show their gratitude.`,

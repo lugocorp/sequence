@@ -1,17 +1,10 @@
-import View from '../ui/view';
+import { Event } from '../views/event';
 
 export default class FutureEvent {
-  valid: () => boolean;
-  private turns: number;
-  private view: View;
 
-  constructor(view: View, turns: number, valid?: () => boolean) {
-    this.valid = valid || (() => true);
-    this.turns = turns;
-    this.view = view;
-  }
+  constructor(private event: Event, private turns: number, public valid: () => boolean = () => true) {}
 
-  tick(): View {
-    return --this.turns <= 0 ? this.view : undefined;
+  tick(): Event {
+    return --this.turns <= 0 ? this.event : undefined;
   }
 }

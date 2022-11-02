@@ -2,10 +2,16 @@ import { Weather } from '../../enums/world';
 import Sprites from '../../enums/sprites';
 import Random from '../../logic/random';
 import Action from '../../ui/action';
-import View from '../../ui/view';
+import { Event } from '../event';
 import Game from '../../game';
 
-export default class WeatherEvent extends View {
+export default class WeatherEvent extends Event {
+  static label = 'weather';
+
+  constructor() {
+    super(WeatherEvent);
+  }
+
   init(): void {
     let desc: string;
     let sprite: Sprites;
