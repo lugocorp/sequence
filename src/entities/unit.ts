@@ -5,9 +5,9 @@ import Sprites from '../enums/sprites';
  * get their logic and interface from.
  */
 export default abstract class Unit {
-  protected strength: number;
-  protected wisdom: number;
-  protected dexterity: number;
+  private strength: number;
+  private wisdom: number;
+  private dexterity: number;
   sprite: Sprites;
   name: string;
 

@@ -1,4 +1,6 @@
+import { Trigger, TriggerType } from './triggers';
 import Random from '../logic/random';
+import Basket from '../entities/basket';
 import Unit from '../entities/unit';
 import Hero from '../entities/hero';
 
@@ -21,7 +23,19 @@ export default class Stats {
 
   // Returns a unit's value for the given stat
   static getUnitStat(unit: Unit, stat: number): number {
-    return unit[[ 'strength', 'wisdom', 'dexterity' ][stat]];
+    const key: string = [ 'strength', 'wisdom', 'dexterity' ][stat];
+    if (unit['basket']) {
+      const basket = unit['basket'] as Basket;
+      const data: Trigger = {
+        type: TriggerType.GET_STATS,
+        strength: unit['strength'],
+        wisdom: unit['wisdom'],
+        dexterity: unit['dexterity']
+      };
+      basket.activate(data);
+      return Math.max(0, data[key]);
+    }
+    return unit[key];
   }
 
   // Sets a unit's value for the given stat

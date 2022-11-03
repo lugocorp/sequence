@@ -51,7 +51,10 @@ export default class Hero extends Unit {
 
   // Returns true if this Hero no longer has stats due to fatigue
   isFatigued(): boolean {
-    return this.strength <= 0 && this.wisdom <= 0 && this.dexterity <= 0;
+    const str: number = Stats.getUnitStat(this, Stats.STRENGTH);
+    const wis: number = Stats.getUnitStat(this, Stats.WISDOM);
+    const dex: number = Stats.getUnitStat(this, Stats.DEXTERITY);
+    return str <= 0 && wis <= 0 && dex <= 0;
   }
 
   // Reduces this Hero's stats
@@ -93,9 +96,12 @@ export default class Hero extends Unit {
   // Returns the text used in this hero's description
   descriptionText(): string {
     const stat = (n: number): string => (n > 9 ? `${n}\t` : `\t${n}\t`);
+    const str: number = Stats.getUnitStat(this, Stats.STRENGTH);
+    const wis: number = Stats.getUnitStat(this, Stats.WISDOM);
+    const dex: number = Stats.getUnitStat(this, Stats.DEXTERITY);
     return (
       `${this.name}\n` +
-      `${stat(this.strength)}str\t\t${stat(this.wisdom)}wis\t\t${stat(this.dexterity)}dex\n` +
+      `${stat(str)}str\t\t${stat(wis)}wis\t\t${stat(dex)}dex\n` +
       `\thas ${this.basket.itemCount} item${this.basket.itemCount === 1 ? '' : 's'} (max ${
         this.basket.total
       })\n\n` +

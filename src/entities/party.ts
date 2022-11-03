@@ -87,7 +87,7 @@ export default class Party {
 
   // Filters the party by a stat expectation
   filter(passes: (hero: Hero) => boolean): void {
-    const remove: Hero[] = this.members.filter(passes);
+    const remove: Hero[] = this.members.filter((hero: Hero) => !passes(hero));
     for (const hero of remove) {
       this.remove(hero);
     }

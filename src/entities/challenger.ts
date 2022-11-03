@@ -1,4 +1,5 @@
 import Sprites from '../enums/sprites';
+import Stats from '../enums/stats';
 import Unit from './unit';
 
 export default class Challenger extends Unit {
@@ -8,9 +9,9 @@ export default class Challenger extends Unit {
 
   descriptionText(): string {
     const stat = (n: number): string => (n > 9 ? `\t${n}\t` : `\t${n}\t\t`);
-    return (
-      `${this.name}\n` +
-      `str:${stat(this.strength)}wis:${stat(this.wisdom)}dex:${stat(this.dexterity)}`
-    );
+    const str: number = Stats.getUnitStat(this, Stats.STRENGTH);
+    const wis: number = Stats.getUnitStat(this, Stats.WISDOM);
+    const dex: number = Stats.getUnitStat(this, Stats.DEXTERITY);
+    return `${this.name}\nstr:${stat(str)}wis:${stat(wis)}dex:${stat(dex)}`;
   }
 }
