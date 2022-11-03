@@ -50,16 +50,17 @@ export type Trigger =
     }
   | {
       type: TriggerType.AFTER_LUCK;
+      hero: Hero;
     }
   | {
       type: TriggerType.AFTER_EVENT;
     }
   | {
       type: TriggerType.AFTER_LEAVE;
-      hero: Hero;
     }
   | {
       type: TriggerType.AFTER_FATIGUE;
+      fatigue: boolean;
       hero: Hero;
     };
 

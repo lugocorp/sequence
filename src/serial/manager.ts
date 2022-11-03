@@ -107,4 +107,12 @@ export default class DataManager {
     const item: Item = Random.element(this.itemsByRarityIndex.get(rarity));
     return this.factory.createItem(item, effects[item.name]);
   }
+
+  /**
+   * Returns an item given by its name
+   */
+  getNamedItem(name: string): Item {
+    const item = items.filter((x: Item) => x.name === name)[0];
+    return this.factory.createItem(item, effects[item.name]);
+  }
 }

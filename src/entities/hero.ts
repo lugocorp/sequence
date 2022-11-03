@@ -32,7 +32,7 @@ export default class Hero extends Unit {
     this.originalStrength = strength;
     this.originalWisdom = wisdom;
     this.originalDexterity = dexterity;
-    this._basket = new Basket(itemSlots);
+    this._basket = new Basket(this, itemSlots);
     this.description = description;
     this.people = people;
     this._luck = luck;
@@ -68,12 +68,13 @@ export default class Hero extends Unit {
       Stats.changeUnitStat(this, Stats.STRENGTH, -1);
       Stats.changeUnitStat(this, Stats.WISDOM, -1);
       Stats.changeUnitStat(this, Stats.DEXTERITY, -1);
-      for (const hero of Game.game.party.members) {
-        hero.basket.activate({
-          type: TriggerType.AFTER_FATIGUE,
-          hero: this
-        });
-      }
+    }
+    for (const hero of Game.game.party.members) {
+      hero.basket.activate({
+        type: TriggerType.AFTER_FATIGUE,
+        fatigue: data.fatigue,
+        hero: this
+      });
     }
   }
 
@@ -90,7 +91,7 @@ export default class Hero extends Unit {
 
   // Changes the hero's luck by a given amount
   boostLuck(boost: number): void {
-    this._luck = Math.max(Math.min(this._luck + boost, 100), 0);
+    this._luck += boost;
   }
 
   // Returns the text used in this hero's description
@@ -116,14 +117,15 @@ export default class Hero extends Unit {
       luck: this._luck
     };
     this.basket.activate(data);
-    return data.luck;
+    return Math.max(Math.min(data.luck, 100), 0);
   }
 
   // Returns true if the hero passes a luck check
   lucky(): boolean {
     const success = Random.passes(this.luck / 100);
     this.basket.activate({
-      type: TriggerType.AFTER_LUCK
+      type: TriggerType.AFTER_LUCK,
+      hero: this
     });
     return success;
   }

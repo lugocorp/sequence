@@ -1,11 +1,14 @@
 import { Trigger, Effect } from '../enums/triggers';
 import Sprites from '../enums/sprites';
 import Rarity from '../enums/rarity';
+import Hero from './hero';
 
 export default class Item {
+  values: Record<string, any> = {};
   description: string;
   sprite: Sprites;
   rarity: number;
+  bearer: Hero;
   name: string;
 
   constructor(

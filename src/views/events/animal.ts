@@ -1,13 +1,13 @@
+import { Trigger, TriggerType } from '../../enums/triggers';
+import Stats from '../../enums/stats';
+import Sprites from '../../enums/sprites';
+import Rarity from '../../enums/rarity';
 import Random from '../../logic/random';
+import Hero from '../../entities/hero';
+import Item from '../../entities/item';
 import Selector from '../../ui/selector';
 import Action from '../../ui/action';
 import { EventView } from '../event';
-import Stats from '../../enums/stats';
-import Sprites from '../../enums/sprites';
-import { Trigger } from '../../enums/triggers';
-import Rarity from '../../enums/rarity';
-import Hero from '../../entities/hero';
-import Item from '../../entities/item';
 import Game from '../../game';
 
 export default class AnimalEvent extends EventView {
@@ -45,8 +45,10 @@ export default class AnimalEvent extends EventView {
                   baby.sprite,
                   Rarity.RARE,
                   `+25% luck\na baby ${baby.name} looking for its family`,
-                  (trigger: Trigger) => {
-                    // TODO: Implement +25% luck effect here
+                  function (data: Trigger) {
+                    if (data.type === TriggerType.GET_LUCK) {
+                      data.luck += 5;
+                    }
                   }
                 );
                 hero.basket.equip(item);

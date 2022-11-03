@@ -82,6 +82,11 @@ export default class Game {
     return this.view;
   }
 
+  // Returns the current view if it's an event
+  get event(): EventView {
+    return this.view['label'] ? (this.view as EventView) : null;
+  }
+
   // Sets the current view of the game
   static setView(view: View): void {
     Game.game.view = view;

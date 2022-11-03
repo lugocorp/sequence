@@ -2,6 +2,7 @@ import { Trigger } from '../enums/triggers';
 import Random from '../logic/random';
 import Game from '../game';
 import Item from './item';
+import Hero from './hero';
 
 /**
  * This class handles item storage logic for the Hero class.
@@ -9,7 +10,7 @@ import Item from './item';
 export default class Basket {
   private items: Item[] = [];
 
-  constructor(public readonly total: number) {}
+  constructor(private readonly bearer: Hero, public readonly total: number) {}
 
   // Returns a shallow copy of the items list
   toList(): Item[] {
@@ -32,6 +33,7 @@ export default class Basket {
       throw new Error(`Item equip overflow`);
     }
     Game.game.history.itemsCollected++;
+    item.bearer = this.bearer;
     this.items.push(item);
   }
 

@@ -88,9 +88,9 @@ export default class ChallengeEvent extends EventView {
       Game.game.history.challengesWon++;
       hero.fatigue();
     } else {
-      Stats.setUnitStat(hero, Stats.STRENGTH, 0);
-      Stats.setUnitStat(hero, Stats.WISDOM, 0);
-      Stats.setUnitStat(hero, Stats.DEXTERITY, 0);
+      Stats.setUnitStat(hero, Stats.STRENGTH, -1000);
+      Stats.setUnitStat(hero, Stats.WISDOM, -1000);
+      Stats.setUnitStat(hero, Stats.DEXTERITY, -1000);
     }
     this.setDetails(
       hero.sprite,
