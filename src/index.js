@@ -21,6 +21,10 @@ document.addEventListener(
     canvas.addEventListener('mouseup', () => {
       Game.game.click(downCoordX, downCoordY, false);
     });
+    window.addEventListener('resize', () => {
+        Game.game.renderer.setCanvasSize();
+        Game.game.invalidate();
+    });
   },
   false
 );

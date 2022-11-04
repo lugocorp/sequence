@@ -23,6 +23,7 @@ export default class GraphicsRenderer {
     this.ctx = canvas.getContext('2d');
     this.canvas = canvas;
     this.assets = assets;
+    this.scale = 1;
     this.dark = 0;
   }
 
@@ -35,6 +36,7 @@ export default class GraphicsRenderer {
   setCanvasSize(): void {
     const screenWidth = window.innerWidth;
     const screenHeight = window.innerHeight;
+    this.ctx.scale(1 / this.scale, 1 / this.scale);
     this.scale = screenHeight / HEIGHT;
     if (WIDTH * this.scale > screenWidth) {
       this.scale = screenWidth / WIDTH;

@@ -25,15 +25,16 @@ export default class Stats {
   static getUnitStat(unit: Unit, stat: number): number {
     const key: string = [ 'strength', 'wisdom', 'dexterity' ][stat];
     if (unit['basket']) {
-      const basket = unit['basket'] as Basket;
+      const basket: Basket = unit['basket'] as Basket;
       const data: Trigger = {
         type: TriggerType.GET_STATS,
-        strength: unit['strength'],
-        wisdom: unit['wisdom'],
-        dexterity: unit['dexterity']
+        strength: 0,
+        wisdom: 0,
+        dexterity: 0
       };
       basket.activate(data);
-      return Math.max(0, data[key]);
+      unit[key] = Math.max(unit[key], Math.min(-data[key], 0));
+      return Math.max(0, data[key] + unit[key]);
     }
     return unit[key];
   }

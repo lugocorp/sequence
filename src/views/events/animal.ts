@@ -47,7 +47,7 @@ export default class AnimalEvent extends EventView {
                   `+25% luck\na baby ${baby.name} looking for its family`,
                   function (data: Trigger) {
                     if (data.type === TriggerType.GET_LUCK) {
-                      data.luck += 5;
+                      data.luck += 25;
                     }
                   }
                 );
