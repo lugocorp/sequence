@@ -11,7 +11,7 @@ const data: HeroData[] = [
     dexterity: 0,
     itemSlots: 2,
     luck: 10,
-    description: 'some description here'
+    description: 'a poetry enthusiast who likes swords.'
   },
   {
     sprite: Sprites.FROST_WOMAN,
@@ -22,7 +22,7 @@ const data: HeroData[] = [
     dexterity: 0,
     itemSlots: 2,
     luck: 10,
-    description: 'some description here'
+    description: 'travels the frozen places of turtle island.'
   },
   {
     sprite: Sprites.RUNNER,
@@ -33,7 +33,7 @@ const data: HeroData[] = [
     dexterity: 6,
     itemSlots: 2,
     luck: 10,
-    description: 'some description here'
+    description: 'runs between villages with important information.'
   },
   {
     sprite: Sprites.HERO_4,
@@ -55,7 +55,7 @@ const data: HeroData[] = [
     dexterity: 1,
     itemSlots: 2,
     luck: 10,
-    description: 'some description here'
+    description: 'a highly skilled and decorated warrior.'
   },
   {
     sprite: Sprites.CHILLY_ELDER,
@@ -66,7 +66,7 @@ const data: HeroData[] = [
     dexterity: 0,
     itemSlots: 2,
     luck: 10,
-    description: 'some description here'
+    description: 'he\'s discovered a way to stay warm at all times.'
   },
   {
     sprite: Sprites.SERPENT_PRIESTESS,
@@ -77,7 +77,7 @@ const data: HeroData[] = [
     dexterity: 1,
     itemSlots: 2,
     luck: 10,
-    description: 'some description here'
+    description: 'a literal snake whisperer.'
   },
   {
     sprite: Sprites.HERO_8,
@@ -110,7 +110,7 @@ const data: HeroData[] = [
     dexterity: 1,
     itemSlots: 3,
     luck: 10,
-    description: 'some description here'
+    description: 'a strong woman who loves corn.'
   },
   {
     sprite: Sprites.SQUASH_LADY,
@@ -121,7 +121,7 @@ const data: HeroData[] = [
     dexterity: 1,
     itemSlots: 3,
     luck: 10,
-    description: 'some description here'
+    description: 'has spent her entire life curating wisdom.'
   },
   {
     sprite: Sprites.BEAN_GIRL,
@@ -132,7 +132,7 @@ const data: HeroData[] = [
     dexterity: 4,
     itemSlots: 3,
     luck: 10,
-    description: 'some description here'
+    description: 'the youngest and most active of her sisters.'
   },
   {
     sprite: Sprites.MINDIMOOYENH,
@@ -143,7 +143,7 @@ const data: HeroData[] = [
     dexterity: 0,
     itemSlots: 3,
     luck: 10,
-    description: 'some description here'
+    description: 'holds her village together.'
   },
   {
     sprite: Sprites.BRAWLER,
@@ -154,7 +154,7 @@ const data: HeroData[] = [
     dexterity: 2,
     itemSlots: 3,
     luck: 10,
-    description: 'some description here'
+    description: 'skilled fighter who never holds grudges.'
   },
   {
     sprite: Sprites.POTTER,
@@ -165,7 +165,7 @@ const data: HeroData[] = [
     dexterity: 0,
     itemSlots: 3,
     luck: 10,
-    description: 'some description here'
+    description: 'skilled crafter known across nations.'
   },
   {
     sprite: Sprites.HERO_16,
@@ -308,7 +308,7 @@ const data: HeroData[] = [
     dexterity: 2,
     itemSlots: 4,
     luck: 20,
-    description: 'some description here'
+    description: 'makes her own jewelry from turquoise.'
   }
 ];
 
