@@ -1,5 +1,6 @@
 import { DAY_NIGHT_CYCLE, World, Weather, Time } from './enums/world';
 import { TriggerType } from './enums/triggers';
+import Sprites from './enums/sprites';
 import GraphicsRenderer from './media/renderer';
 import GraphicsLoader from './media/loader';
 import GameAudio from './media/audio';
@@ -96,6 +97,25 @@ export default class Game {
   // Queues a FutureEvent
   static futureEvent(view: EventView, turns: number, valid?: () => boolean): void {
     Game.game.chain.futures.push(new FutureEvent(view, turns, valid));
+  }
+
+  getBackground(): Sprites {
+    if (this.world.cave) {
+      return Sprites.CAVE;
+    }
+    if (this.world.time === Time.NIGHT) {
+      return Sprites.NIGHT;
+    }
+    switch (this.world.weather) {
+      case Weather.RAIN:
+        return Sprites.RAIN;
+      case Weather.WIND:
+        return Sprites.WIND;
+      case Weather.SNOW:
+        return Sprites.SNOW;
+      default:
+        return Sprites.SUN;
+    }
   }
 
   // Progresses to the next event in the game

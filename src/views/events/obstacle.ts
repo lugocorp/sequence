@@ -20,9 +20,9 @@ export default class ObstacleEvent extends EventView {
   constructor() {
     super(ObstacleEvent);
     this.obstacle = Random.element([
-      { sprite: Sprites.OBSTACLE, name: 'swamp' },
-      { sprite: Sprites.OBSTACLE, name: 'cliff' },
-      { sprite: Sprites.OBSTACLE, name: 'mountain' }
+      { sprite: Sprites.SWAMP, name: 'swamp' },
+      { sprite: Sprites.CLIFF, name: 'cliff' },
+      { sprite: Sprites.MOUNTAIN, name: 'mountain' }
     ]);
     this.original = Game.game.party.length();
     this.stat = Stats.getRandomStat();

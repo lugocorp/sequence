@@ -51,6 +51,7 @@ export default class ThiefEvent extends EventView {
     const steal: number = Random.max(items.length - 1) + 1;
     for (let a = 0; a < steal; a++) {
       const item: Stolen = Random.element(items);
+      items.splice(items.indexOf(item), 1);
       item[0].basket.unequip(item[1]);
       this.stolen.push(item);
     }

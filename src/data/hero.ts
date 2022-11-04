@@ -14,7 +14,7 @@ const data: HeroData[] = [
     description: 'some description here'
   },
   {
-    sprite: Sprites.BIRD_CATCHER,
+    sprite: Sprites.FROST_WOMAN,
     name: 'frost woman',
     people: 'inuit',
     strength: 0,
@@ -36,7 +36,7 @@ const data: HeroData[] = [
     description: 'some description here'
   },
   {
-    sprite: Sprites.BIRD_CATCHER,
+    sprite: Sprites.HERO_4,
     name: '',
     people: '',
     strength: 5,
@@ -47,7 +47,7 @@ const data: HeroData[] = [
     description: 'some description here'
   },
   {
-    sprite: Sprites.BIRD_CATCHER,
+    sprite: Sprites.EAGLE_KNIGHT,
     name: 'eagle knight',
     people: 'mexica',
     strength: 5,
@@ -69,7 +69,7 @@ const data: HeroData[] = [
     description: 'some description here'
   },
   {
-    sprite: Sprites.BIRD_CATCHER,
+    sprite: Sprites.SERPENT_PRIESTESS,
     name: 'serpent priestess',
     people: 'mayan',
     strength: 0,
@@ -80,7 +80,7 @@ const data: HeroData[] = [
     description: 'some description here'
   },
   {
-    sprite: Sprites.BIRD_CATCHER,
+    sprite: Sprites.HERO_8,
     name: '',
     people: '',
     strength: 1,
@@ -91,7 +91,7 @@ const data: HeroData[] = [
     description: 'some description here'
   },
   {
-    sprite: Sprites.BIRD_CATCHER,
+    sprite: Sprites.HERO_9,
     name: '',
     people: '',
     strength: 0,
@@ -135,7 +135,7 @@ const data: HeroData[] = [
     description: 'some description here'
   },
   {
-    sprite: Sprites.BIRD_CATCHER,
+    sprite: Sprites.MINDIMOOYENH,
     name: 'mindimooyenh',
     people: 'ojibwe',
     strength: 4,
@@ -168,7 +168,7 @@ const data: HeroData[] = [
     description: 'some description here'
   },
   {
-    sprite: Sprites.BIRD_CATCHER,
+    sprite: Sprites.HERO_16,
     name: '',
     people: '',
     strength: 0,
@@ -190,7 +190,7 @@ const data: HeroData[] = [
     description: 'uses gourds to hunt birds for his yukayeke.'
   },
   {
-    sprite: Sprites.BIRD_CATCHER,
+    sprite: Sprites.HERO_18,
     name: '',
     people: '',
     strength: 0,
@@ -201,7 +201,7 @@ const data: HeroData[] = [
     description: 'some description here'
   },
   {
-    sprite: Sprites.BIRD_CATCHER,
+    sprite: Sprites.HERO_19,
     name: '',
     people: '',
     strength: 3,
@@ -212,7 +212,7 @@ const data: HeroData[] = [
     description: 'some description here'
   },
   {
-    sprite: Sprites.BIRD_CATCHER,
+    sprite: Sprites.HERO_20,
     name: '',
     people: '',
     strength: 0,
@@ -223,7 +223,7 @@ const data: HeroData[] = [
     description: 'some description here'
   },
   {
-    sprite: Sprites.BIRD_CATCHER,
+    sprite: Sprites.HERO_21,
     name: '',
     people: '',
     strength: 3,
@@ -234,7 +234,7 @@ const data: HeroData[] = [
     description: 'some description here'
   },
   {
-    sprite: Sprites.BIRD_CATCHER,
+    sprite: Sprites.HERO_22,
     name: '',
     people: '',
     strength: 3,
@@ -245,7 +245,7 @@ const data: HeroData[] = [
     description: 'some description here'
   },
   {
-    sprite: Sprites.BIRD_CATCHER,
+    sprite: Sprites.HERO_23,
     name: '',
     people: '',
     strength: 3,
@@ -256,7 +256,7 @@ const data: HeroData[] = [
     description: 'some description here'
   },
   {
-    sprite: Sprites.BIRD_CATCHER,
+    sprite: Sprites.HERO_24,
     name: '',
     people: '',
     strength: 2,
@@ -267,7 +267,7 @@ const data: HeroData[] = [
     description: 'some description here'
   },
   {
-    sprite: Sprites.BIRD_CATCHER,
+    sprite: Sprites.HERO_25,
     name: '',
     people: '',
     strength: 1,
@@ -278,7 +278,7 @@ const data: HeroData[] = [
     description: 'some description here'
   },
   {
-    sprite: Sprites.BIRD_CATCHER,
+    sprite: Sprites.HERO_26,
     name: '',
     people: '',
     strength: 2,
@@ -289,7 +289,7 @@ const data: HeroData[] = [
     description: 'some description here'
   },
   {
-    sprite: Sprites.BIRD_CATCHER,
+    sprite: Sprites.HERO_27,
     name: '',
     people: '',
     strength: 1,

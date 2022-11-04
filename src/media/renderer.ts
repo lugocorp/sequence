@@ -45,16 +45,6 @@ export default class GraphicsRenderer {
     this.ctx.scale(this.scale, this.scale);
   }
 
-  getBackground(sprite: number): number {
-    switch ((sprite & 0xff0000) >> 16) {
-      case 0x03:
-        return Sprites.SPIRIT_REALM;
-      case 0x04:
-        return Sprites.PRAIRIE;
-    }
-    return Sprites.NONE;
-  }
-
   /*
    * This method draws a single frame of the app.
    */
@@ -65,7 +55,7 @@ export default class GraphicsRenderer {
       return;
     }
     if (view.image) {
-      const background: number = this.getBackground(view.image);
+      const background: number = Game.game.getBackground();
       if (background !== Sprites.NONE) {
         this.drawSprite(background, 12, 3);
       }

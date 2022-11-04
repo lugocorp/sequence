@@ -50,9 +50,6 @@ export default class Stats {
 
   // Changes a unit's stat by a given value
   static changeUnitStat(unit: Unit, stat: number, boost: number): void {
-    unit[Stats.getStatName(stat)] = Math.max(
-      0,
-      unit[[ 'strength', 'wisdom', 'dexterity' ][stat]] + boost
-    );
+    unit[Stats.getStatName(stat)] = unit[[ 'strength', 'wisdom', 'dexterity' ][stat]] + boost;
   }
 }

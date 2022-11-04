@@ -29,7 +29,9 @@ export default class DataManager {
       this.itemsByRarityIndex.set(rarity, []);
     }
     for (const item of items) {
-      this.itemsByRarityIndex.get(item.rarity).push(item);
+      if (effects[item.name]) {
+        this.itemsByRarityIndex.get(item.rarity).push(item);
+      }
     }
     this.heroes = heroes.filter((h: types.HeroData): boolean => h.name.length > 0);
 

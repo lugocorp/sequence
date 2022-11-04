@@ -80,8 +80,9 @@ We have a number of `npm` commands:
 - [x] Implement high score screen (store past runs, create a points system, etc)
 - [x] Change existing events and implement new ones
 - [x] Add new character/challenger data, rework the auditor
-- [ ] Implement all item effects
-- [ ] Package with new placeholder graphics, launch a browser-based open beta
+- [x] Implement most item effects
+- [x] Package with new placeholder graphics, launch a browser-based open beta
+- [ ] Finish item logic
 - [ ] Add background sprites (designed with composition in mind)
 - [ ] Add all graphics for the events
 - [ ] Draw item sprites

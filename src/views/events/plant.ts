@@ -21,12 +21,12 @@ export default class PlantEvent extends EventView {
       },
       {
         name: 'bear corn',
-        sprite: Sprites.CHAYOTE,
+        sprite: Sprites.BEAR_CORN,
         type: SAFE
       },
       {
         name: 'purple passionflower',
-        sprite: Sprites.CHAYOTE,
+        sprite: Sprites.PASSIONFLOWER,
         type: SAFE
       },
       {
@@ -36,27 +36,27 @@ export default class PlantEvent extends EventView {
       },
       {
         name: 'yaupon holly',
-        sprite: Sprites.ELDERBERRY,
+        sprite: Sprites.YAUPON_HOLLY,
         type: SEMISAFE
       },
       {
         name: 'pokeweed',
-        sprite: Sprites.ELDERBERRY,
+        sprite: Sprites.POKEWEED,
         type: SEMISAFE
       },
       {
         name: 'foxglove',
-        sprite: Sprites.POKEWEED,
+        sprite: Sprites.FOXGLOVE,
         type: TOXIC
       },
       {
         name: 'castor bean',
-        sprite: Sprites.POKEWEED,
+        sprite: Sprites.CASTOR_BEAN,
         type: TOXIC
       },
       {
         name: 'swamp sumac',
-        sprite: Sprites.POKEWEED,
+        sprite: Sprites.SWAMP_SUMAC,
         type: TOXIC
       }
     ]);

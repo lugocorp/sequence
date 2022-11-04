@@ -22,7 +22,7 @@ export default class ScoreView extends View {
     history.save();
     const total: number = history.calculateScore();
     this.setDetails(
-      Sprites.CREDITS,
+      Sprites.SCORE,
       `${this.place < 0 ? 'not a high score' : 'high score!'}\n` +
         `${history.peopleHelped} people helped x100\n` +
         `${history.itemsCollected} items held x25\n` +
@@ -50,7 +50,7 @@ export default class ScoreView extends View {
     const scores = `${Game.game.history.runs
       .map((x: [string, number], i: number) => this.format(x, i))
       .join('\n')}`;
-    this.setDetails(Sprites.CREDITS, scores, [
+    this.setDetails(Sprites.SCORE, scores, [
       new Action('continue', () => Game.setView(new StartView()))
     ]);
   }

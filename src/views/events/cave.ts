@@ -12,7 +12,11 @@ export default class CaveEvent extends EventView {
     super(CaveEvent);
     const cave = !Game.game.world.cave;
     this.setDetails(
-      cave ? Sprites.CAVE : Game.game.world.time === Time.DAY ? Sprites.DAY : Sprites.NIGHT,
+      cave
+        ? Sprites.CAVE
+        : Game.game.world.time === Time.DAY
+        ? Game.game.getBackground()
+        : Sprites.NIGHT,
       cave
         ? 'your party comes across a cave. will they venture inside?'
         : 'your party comes to a mouth of the cave. finally they are free.',

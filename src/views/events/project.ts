@@ -11,14 +11,27 @@ export default class ProjectEvent extends EventView {
   constructor() {
     super(ProjectEvent);
     const that = this;
-    const project: string = Random.element([ 'build a bridge', 'cook a feast', 'maintain a garden' ]);
+    const project: { sprite: Sprites; name: string } = Random.element([
+      {
+        name: 'build a bridge',
+        sprite: Sprites.BRIDGE
+      },
+      {
+        name: 'cook a feast',
+        sprite: Sprites.FEAST
+      },
+      {
+        name: 'maintain a garden',
+        sprite: Sprites.GARDEN
+      }
+    ]);
     this.setDetails(
-      Sprites.PROJECT,
-      `your party has the chance to ${project} for a local community, but it will wear everyone out. will they do it?`,
+      project.sprite,
+      `your party has the chance to ${project.name} for a local community, but it will wear everyone out. will they do it?`,
       [
         new Action('yes', () => that.yes(project)),
         new Action('no', () =>
-          that.setDetails(Sprites.PROJECT, `your party does not ${project}`, [
+          that.setDetails(project.sprite, `your party does not ${project.name}`, [
             new Action('continue', () => Game.game.progress())
           ])
         )
@@ -26,10 +39,10 @@ export default class ProjectEvent extends EventView {
     );
   }
 
-  yes(project: string): void {
+  yes(project: { name: string; sprite: Sprites }): void {
     this.setDetails(
-      Sprites.PROJECT,
-      `your party stays a while to ${project}. it is tiring but eventually the work is done and the community is thankful.`,
+      project.sprite,
+      `your party stays a while to ${project.name}. it is tiring but eventually the work is done and the community is thankful.`,
       [ new Action('continue', () => Game.game.progress()) ]
     );
 
@@ -41,12 +54,12 @@ export default class ProjectEvent extends EventView {
     // Set up future event
     const future: EventView = new EventView({ label: 'projectthankyou' });
     future.setDetails(
-      Sprites.PROJECT,
+      project.sprite,
       `your party sees a group approaching. they are a community you helped recently, and they have come to show their gratitude.`,
       [
         new Action('continue', () =>
           future.setDetails(
-            Sprites.PROJECT,
+            project.sprite,
             'your party is empowered and made luckier by the thankful community members',
             [
               new Action('continue', () => {

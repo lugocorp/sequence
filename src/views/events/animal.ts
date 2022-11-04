@@ -23,12 +23,12 @@ export default class AnimalEvent extends EventView {
         sprite: Sprites.CARDINAL
       },
       {
-        name: 'raccoon',
-        sprite: Sprites.RACCOON
+        name: 'peccary',
+        sprite: Sprites.PECCARY
       },
       {
         name: 'tadpole',
-        sprite: Sprites.COYOTL
+        sprite: Sprites.TADPOLE
       }
     ]);
     this.setDetails(
