@@ -51,6 +51,11 @@ export default class Basket {
     return this.items.indexOf(item) > -1;
   }
 
+  // Returns true if this basket has an item with the given name
+  has(item: string): boolean {
+    return this.items.map((x: Item) => x.name).indexOf(item) > -1;
+  }
+
   // Returns a random item from this basket
   random(): Item {
     return Random.element(this.items);

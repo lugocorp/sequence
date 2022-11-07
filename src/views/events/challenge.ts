@@ -19,7 +19,7 @@ export default class ChallengeEvent extends EventView {
     super(ChallengeEvent);
     const that = this;
     this.challenger = Game.game.data.getRandomChallenger();
-    this.expectation = [ Random.max(Stats.N) ];
+    this.expectation = [ Stats.getRandomStat() ];
     if (Random.passes(0.5)) {
       this.expectation.push(
         ((Random.passes(0.5) ? 1 : -1) + this.expectation[0] + Stats.N) % Stats.N
@@ -80,6 +80,7 @@ export default class ChallengeEvent extends EventView {
     for (const hero1 of Game.game.party.members) {
       hero1.basket.activate({
         type: TriggerType.AFTER_SELECTED,
+        tested: this.expectation,
         hero: hero
       });
     }

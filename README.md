@@ -82,7 +82,7 @@ We have a number of `npm` commands:
 - [x] Add new character/challenger data, rework the auditor
 - [x] Implement most item effects
 - [x] Package with new placeholder graphics, launch a browser-based open beta
-- [ ] Finish item logic
+- [x] Finish item logic
 - [ ] Add background sprites (designed with composition in mind)
 - [ ] Add all graphics for the events
 - [ ] Draw item sprites

@@ -3,6 +3,7 @@ import Rarity from './rarity';
 
 export enum TriggerType {
   GET_STATS = "when you calculate a hero's stats",
+  GET_STATS_TWO = "part 2 of hero stat calculation",
   GET_LUCK = "when you calculate a hero's luck",
   GET_FATIGUE = "when you calculate a hero's fatigue",
   GET_OBSTACLE = 'when you calculate obstacle survival',
@@ -24,12 +25,19 @@ export type Trigger =
       dexterity: number;
     }
   | {
+      type: TriggerType.GET_STATS_TWO;
+      strength: number;
+      wisdom: number;
+      dexterity: number;
+    }
+  | {
       type: TriggerType.GET_LUCK;
       luck: number;
     }
   | {
       type: TriggerType.GET_FATIGUE;
       fatigue: boolean;
+      hero: Hero;
     }
   | {
       type: TriggerType.GET_OBSTACLE;
@@ -46,6 +54,7 @@ export type Trigger =
     }
   | {
       type: TriggerType.AFTER_SELECTED;
+      tested: number[];
       hero: Hero;
     }
   | {
@@ -57,6 +66,7 @@ export type Trigger =
     }
   | {
       type: TriggerType.AFTER_LEAVE;
+      hero: Hero;
     }
   | {
       type: TriggerType.AFTER_FATIGUE;

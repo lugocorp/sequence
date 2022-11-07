@@ -1,3 +1,5 @@
+import Hero from '../entities/hero';
+import Challenger from '../entities/challenger';
 import DeerEvent from '../views/events/deer';
 import RapidEvent from '../views/events/rapid';
 import ObstacleEvent from '../views/events/obstacle';
@@ -7,7 +9,6 @@ import { Weather, Time } from '../enums/world';
 import Rarity from '../enums/rarity';
 import Stats from '../enums/stats';
 import Random from '../logic/random';
-import Hero from '../entities/hero';
 import Game from '../game';
 const data: Record<string, Effect> = {};
 
@@ -45,10 +46,10 @@ data['pigeon feather'] = function (data: Trigger) {
 };
 
 data['ground cherry'] = function (data: Trigger) {
-  if (data.type === TriggerType.GET_FATIGUE) {
+  if (data.type === TriggerType.GET_FATIGUE && data.hero === this.bearer) {
     data.fatigue = false;
   }
-  if (data.type === TriggerType.AFTER_FATIGUE) {
+  if (data.type === TriggerType.AFTER_FATIGUE && data.hero === this.bearer) {
     if (data.hero.basket.contains(this)) {
       data.hero.basket.unequip(this);
     }
@@ -62,7 +63,7 @@ data['acorn'] = function (data: Trigger) {
     }
     data[Stats.getStatName(this.values.stat)]++;
   }
-  if (data.type === TriggerType.AFTER_FATIGUE && Game.game.event.isTypeEvent(ChallengeEvent)) {
+  if (data.type === TriggerType.AFTER_FATIGUE && data.hero === this.bearer && Game.game.event.isTypeEvent(ChallengeEvent)) {
     if (data.hero.basket.contains(this)) {
       data.hero.basket.unequip(this);
     }
@@ -92,7 +93,7 @@ data['wool blanket'] = function (data: Trigger) {
 };
 
 data['cranberry'] = function (data: Trigger) {
-  if (data.type === TriggerType.GET_FATIGUE) {
+  if (data.type === TriggerType.GET_FATIGUE && data.hero === this.bearer) {
     if (this.values.ticks === 0) {
       data.fatigue = false;
     }
@@ -189,7 +190,7 @@ data['cardinal feather'] = function (data: Trigger) {
 };
 
 data['medicine bag'] = function (data: Trigger) {
-  if (data.type === TriggerType.AFTER_LEAVE) {
+  if (data.type === TriggerType.AFTER_LEAVE && data.hero === this.bearer) {
     for (const hero of Game.game.party.members) {
       hero.boostLuck(5);
     }
@@ -268,10 +269,17 @@ data['crowberry'] = function (data: Trigger) {
   }
 };
 
-data['dream catcher'] = undefined;
+data['dream catcher'] = function (data: Trigger) {
+  if (data.type === TriggerType.GET_FATIGUE && data.hero !== this.bearer) {
+    if (data.fatigue && !data.hero.basket.has('dream catcher')) {
+      data.fatigue = false;
+      this.bearer.fatigue();
+    }
+  }
+};
 
 data['serpentine armbands'] = function (data: Trigger) {
-  if (data.type === TriggerType.AFTER_LEAVE) {
+  if (data.type === TriggerType.AFTER_LEAVE && data.hero === this.bearer) {
     for (const hero of Game.game.party.members) {
       Stats.changeUnitStat(hero, Stats.STRENGTH, 1);
     }
@@ -279,7 +287,7 @@ data['serpentine armbands'] = function (data: Trigger) {
 };
 
 data['turkey headdress'] = function (data: Trigger) {
-  if (data.type === TriggerType.AFTER_LEAVE) {
+  if (data.type === TriggerType.AFTER_LEAVE && data.hero === this.bearer) {
     for (const hero of Game.game.party.members) {
       Stats.changeUnitStat(hero, Stats.WISDOM, 1);
     }
@@ -287,7 +295,7 @@ data['turkey headdress'] = function (data: Trigger) {
 };
 
 data['deerskin boots'] = function (data: Trigger) {
-  if (data.type === TriggerType.AFTER_LEAVE) {
+  if (data.type === TriggerType.AFTER_LEAVE && data.hero === this.bearer) {
     for (const hero of Game.game.party.members) {
       Stats.changeUnitStat(hero, Stats.DEXTERITY, 1);
     }
@@ -432,11 +440,59 @@ data['rattle gourd'] = function (data: Trigger) {
   }
 };
 
-data['lynx cape'] = undefined;
+data['lynx cape'] = function (data: Trigger) {
+  if (Game.game.event.isTypeEvent(ChallengeEvent)) {
+    if (data.type === TriggerType.AFTER_SELECTED && data.hero === this.bearer) {
+      this.values.stat = Stats.getUnitStat(data.hero, Stats.STRENGTH);
+      this.values.hero = data.hero;
+      if (this.values.stat === 0) {
+        this.values.stat = undefined;
+      }
+    }
+    if (data.type === TriggerType.AFTER_EVENT && this.values.stat !== undefined) {
+      this.values.stat = undefined;
+      while (Stats.getUnitStat(this.values.hero, Stats.STRENGTH) === 0) {
+        Stats.changeUnitStat(this.values.hero, Stats.STRENGTH, 1);
+      }
+    }
+  }
+};
 
-data['racoon cape'] = undefined;
+data['racoon cape'] = function (data: Trigger) {
+  if (Game.game.event.isTypeEvent(ChallengeEvent)) {
+    if (data.type === TriggerType.AFTER_SELECTED && data.hero === this.bearer) {
+      this.values.stat = Stats.getUnitStat(data.hero, Stats.WISDOM);
+      this.values.hero = data.hero;
+      if (this.values.stat === 0) {
+        this.values.stat = undefined;
+      }
+    }
+    if (data.type === TriggerType.AFTER_EVENT && this.values.stat !== undefined) {
+      this.values.stat = undefined;
+      while (Stats.getUnitStat(this.values.hero, Stats.WISDOM) === 0) {
+        Stats.changeUnitStat(this.values.hero, Stats.WISDOM, 1);
+      }
+    }
+  }
+};
 
-data['deerskin cape'] = undefined;
+data['deerskin cape'] = function (data: Trigger) {
+  if (Game.game.event.isTypeEvent(ChallengeEvent)) {
+    if (data.type === TriggerType.AFTER_SELECTED && data.hero === this.bearer) {
+      this.values.stat = Stats.getUnitStat(data.hero, Stats.DEXTERITY);
+      this.values.hero = data.hero;
+      if (this.values.stat === 0) {
+        this.values.stat = undefined;
+      }
+    }
+    if (data.type === TriggerType.AFTER_EVENT && this.values.stat !== undefined) {
+      this.values.stat = undefined;
+      while (Stats.getUnitStat(this.values.hero, Stats.DEXTERITY) === 0) {
+        Stats.changeUnitStat(this.values.hero, Stats.DEXTERITY, 1);
+      }
+    }
+  }
+};
 
 data['bow and arrow'] = function (data: Trigger) {
   if (Game.game.event.isTypeEvent(DeerEvent)) {
@@ -455,13 +511,36 @@ data['jungle manual'] = function (data: Trigger) {
   }
 };
 
-data['flowering sash'] = undefined;
+data['flowering sash'] = function (data: Trigger) {
+  if (data.type === TriggerType.AFTER_LEAVE && data.hero !== this.bearer) {
+    const stat: number = Stats.getRandomStat();
+    Stats.changeUnitStat(this.bearer, stat, 1);
+  }
+};
 
-data['bison totem'] = undefined;
+data['bison totem'] = function (data: Trigger) {
+  if (data.type === TriggerType.GET_STATS_TWO) {
+    data.strength += data.wisdom + data.dexterity;
+    data.wisdom = 0;
+    data.dexterity = 0;
+  }
+};
 
-data['eagle totem'] = undefined;
+data['eagle totem'] = function (data: Trigger) {
+  if (data.type === TriggerType.GET_STATS_TWO) {
+    data.wisdom += data.strength + data.dexterity;
+    data.strength = 0;
+    data.dexterity = 0;
+  }
+};
 
-data['turtle totem'] = undefined;
+data['turtle totem'] = function (data: Trigger) {
+  if (data.type === TriggerType.GET_STATS_TWO) {
+    data.dexterity += data.strength + data.wisdom;
+    data.strength = 0;
+    data.wisdom = 0;
+  }
+};
 
 data['corn and bean soup'] = function (data: Trigger) {
   if (data.type === TriggerType.GET_STATS) {
@@ -483,17 +562,74 @@ data['eagle feather'] = function (data: Trigger) {
   }
 };
 
-data['condor feather'] = undefined;
+data['condor feather'] = function (data: Trigger) {
+  if (data.type === TriggerType.AFTER_SELECTED && data.hero === this.bearer && data.tested.indexOf(Stats.STRENGTH) > -1) {
+    this.values.primed = true;
+  }
+  if (data.type === TriggerType.GET_LUCK && this.values.primed) {
+    data.luck += 100;
+  }
+  if (data.type === TriggerType.AFTER_EVENT) {
+    this.values.primed = false;
+  }
+};
 
-data['quetzal feather'] = undefined;
+data['quetzal feather'] = function (data: Trigger) {
+  if (data.type === TriggerType.AFTER_SELECTED && data.hero === this.bearer && data.tested.indexOf(Stats.WISDOM) > -1) {
+    this.values.primed = true;
+  }
+  if (data.type === TriggerType.GET_LUCK && this.values.primed) {
+    data.luck += 100;
+  }
+  if (data.type === TriggerType.AFTER_EVENT) {
+    this.values.primed = false;
+  }
+};
 
-data['hummingbird feather'] = undefined;
+data['hummingbird feather'] = function (data: Trigger) {
+  if (data.type === TriggerType.AFTER_SELECTED && data.hero === this.bearer && data.tested.indexOf(Stats.DEXTERITY) > -1) {
+    this.values.primed = true;
+  }
+  if (data.type === TriggerType.GET_LUCK && this.values.primed) {
+    data.luck += 100;
+  }
+  if (data.type === TriggerType.AFTER_EVENT) {
+    this.values.primed = false;
+  }
+};
 
-data["condor's cleaver"] = undefined;
+data["condor's cleaver"] = function (data: Trigger) {
+  if (data.type === TriggerType.AFTER_SELECTED) {
+    Stats.changeUnitStat(data.hero, Stats.STRENGTH, 1);
+    this.values.hero = data.hero;
+  }
+  if (data.type === TriggerType.AFTER_EVENT && this.values.hero) {
+    Stats.changeUnitStat(this.values.hero, Stats.STRENGTH, -1);
+    this.values.hero = undefined;
+  }
+};
 
-data["quetzal's quiver"] = undefined;
+data["quetzal's quiver"] = function (data: Trigger) {
+  if (data.type === TriggerType.AFTER_SELECTED) {
+    Stats.changeUnitStat(data.hero, Stats.WISDOM, 1);
+    this.values.hero = data.hero;
+  }
+  if (data.type === TriggerType.AFTER_EVENT && this.values.hero) {
+    Stats.changeUnitStat(this.values.hero, Stats.WISDOM, -1);
+    this.values.hero = undefined;
+  }
+};
 
-data["eagle's aegis"] = undefined;
+data["eagle's aegis"] = function (data: Trigger) {
+  if (data.type === TriggerType.AFTER_SELECTED) {
+    Stats.changeUnitStat(data.hero, Stats.DEXTERITY, 1);
+    this.values.hero = data.hero;
+  }
+  if (data.type === TriggerType.AFTER_EVENT && this.values.hero) {
+    Stats.changeUnitStat(this.values.hero, Stats.DEXTERITY, -1);
+    this.values.hero = undefined;
+  }
+};
 
 data['golden mirror'] = function (data: Trigger) {
   if (data.type === TriggerType.GET_CHAIN) {
@@ -501,7 +637,17 @@ data['golden mirror'] = function (data: Trigger) {
   }
 };
 
-data['pine needle tea'] = undefined;
+data['pine needle tea'] = function (data: Trigger) {
+  if (data.type === TriggerType.AFTER_SELECTED && data.hero === this.bearer) {
+    this.values.primed = true;
+  }
+  if (data.type === TriggerType.GET_FATIGUE && this.values.primed) {
+    data.fatigue = data.fatigue && Random.passes(0.5);
+  }
+  if (data.type === TriggerType.AFTER_EVENT) {
+    this.values.primed = false;
+  }
+};
 
 data['jade collar'] = function (data: Trigger) {
   if (data.type === TriggerType.GET_RARITY) {
@@ -509,14 +655,44 @@ data['jade collar'] = function (data: Trigger) {
   }
 };
 
-data['turquoise mask'] = undefined;
+data['turquoise mask'] = function (data: Trigger) {
+  if (data.type === TriggerType.AFTER_SELECTED && data.hero === this.bearer && data.tested.indexOf(Stats.STRENGTH) > -1) {
+    this.values.primed = true;
+  }
+  if (data.type === TriggerType.GET_FATIGUE && this.values.primed) {
+    data.fatigue = false;
+  }
+  if (data.type === TriggerType.AFTER_EVENT) {
+    this.values.primed = false;
+  }
+};
 
-data['jade mask'] = undefined;
+data['jade mask'] = function (data: Trigger) {
+  if (data.type === TriggerType.AFTER_SELECTED && data.hero === this.bearer && data.tested.indexOf(Stats.WISDOM) > -1) {
+    this.values.primed = true;
+  }
+  if (data.type === TriggerType.GET_FATIGUE && this.values.primed) {
+    data.fatigue = false;
+  }
+  if (data.type === TriggerType.AFTER_EVENT) {
+    this.values.primed = false;
+  }
+};
 
-data['gold mask'] = undefined;
+data['gold mask'] = function (data: Trigger) {
+  if (data.type === TriggerType.AFTER_SELECTED && data.hero === this.bearer && data.tested.indexOf(Stats.DEXTERITY) > -1) {
+    this.values.primed = true;
+  }
+  if (data.type === TriggerType.GET_FATIGUE && this.values.primed) {
+    data.fatigue = false;
+  }
+  if (data.type === TriggerType.AFTER_EVENT) {
+    this.values.primed = false;
+  }
+};
 
 data['pemmican'] = function (data: Trigger) {
-  if (data.type === TriggerType.GET_FATIGUE) {
+  if (data.type === TriggerType.GET_FATIGUE && data.hero === this.bearer) {
     const str = Stats.getUnitStat(this.bearer, Stats.STRENGTH);
     const wis = Stats.getUnitStat(this.bearer, Stats.WISDOM);
     const dex = Stats.getUnitStat(this.bearer, Stats.DEXTERITY);
@@ -534,8 +710,27 @@ data['turquoise ring'] = function (data: Trigger) {
   }
 };
 
-data['medicine wheel'] = undefined;
+data['medicine wheel'] = function (data: Trigger) {
+  if (data.type === TriggerType.AFTER_FATIGUE && data.hero !== this.bearer && Game.game.event.isTypeEvent(ChallengeEvent)) {
+    this.bearer.empower();
+  }
+};
 
-data['spirit rattle'] = undefined;
+data['spirit rattle'] = function (data: Trigger) {
+  if (data.type === TriggerType.AFTER_LEAVE && data.hero === this.bearer) {
+    const spirit: Challenger = Game.game.data.getRandomChallenger();
+    Game.game.party.add(new Hero(
+      spirit.sprite,
+      spirit.name,
+      'spirit',
+      Stats.getUnitStat(spirit, Stats.STRENGTH),
+      Stats.getUnitStat(spirit, Stats.WISDOM),
+      Stats.getUnitStat(spirit, Stats.DEXTERITY),
+      0,
+      20,
+      'a spirit summoned by a sacred rattle'
+    ));
+  }
+};
 
 export default data;

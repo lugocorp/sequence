@@ -61,9 +61,15 @@ export default class Hero extends Unit {
   fatigue(): void {
     const data: Trigger = {
       type: TriggerType.GET_FATIGUE,
-      fatigue: true
+      fatigue: true,
+      hero: this
     };
     this.basket.activate(data);
+    for (const hero of Game.game.party.members) {
+      if (hero !== this) {
+        hero.basket.activate(data);
+      }
+    }
     if (data.fatigue) {
       Stats.changeUnitStat(this, Stats.STRENGTH, -1);
       Stats.changeUnitStat(this, Stats.WISDOM, -1);

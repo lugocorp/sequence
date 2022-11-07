@@ -42,11 +42,6 @@ export default class DataManager {
         throw new Error(`Item ${key} does not exist.`);
       }
     }
-    for (const item of itemNames) {
-      if (!effects[item]) {
-        console.warn(`Unimplemented item '${item}'`);
-      }
-    }
   }
 
   /*

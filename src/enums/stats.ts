@@ -33,8 +33,15 @@ export default class Stats {
         dexterity: 0
       };
       basket.activate(data);
-      unit[key] = Math.max(unit[key], Math.min(-data[key], 0));
-      return Math.max(0, data[key] + unit[key]);
+      const data1: Trigger = {
+        type: TriggerType.GET_STATS_TWO,
+        strength: data.strength,
+        wisdom: data.wisdom,
+        dexterity: data.dexterity
+      };
+      basket.activate(data1);
+      unit[key] = Math.max(unit[key], Math.min(-data1[key], 0));
+      return Math.max(0, data1[key] + unit[key]);
     }
     return unit[key];
   }
