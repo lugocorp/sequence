@@ -64,7 +64,7 @@ export default class PlantEvent extends EventView {
     const result = (aftermath: () => void, ate = true): void =>
       that.setDetails(
         plant.sprite,
-        `your party ${ate ? 'eats' : 'avoids'} the plant known as ${plant.name}`,
+        `your party ${ate ? 'eats' : 'avoids'} the plant known as ${plant.name}.`,
         [ new Action('continue', () => aftermath()) ]
       );
     this.setDetails(

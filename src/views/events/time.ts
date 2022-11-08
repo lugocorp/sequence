@@ -23,8 +23,8 @@ export default class TimeEvent extends EventView {
     this.setDetails(
       isDay(time) ? Game.game.getBackground() : Sprites.NIGHT,
       isDay(time)
-        ? `the sun rises over the horizon${cave} as night retreats to the west`
-        : `the sun comes to rest behind the hills${cave} as the moon rises into the night sky`,
+        ? `the sun rises over the horizon${cave} as night retreats to the west.`
+        : `the sun comes to rest behind the hills${cave} as the moon rises into the night sky.`,
       [
         new Action('continue', () => {
           Game.futureEvent(new TimeEvent(), DAY_NIGHT_CYCLE);

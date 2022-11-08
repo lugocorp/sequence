@@ -53,7 +53,7 @@ export default class OfferingEvent extends EventView {
         new Action('view gift', () => that.viewGift())
       ]);
     } else {
-      this.setDetails(this.heroSelector.item().sprite, `no one in your party can pickup items`, [
+      this.setDetails(this.heroSelector.item().sprite, `no one in your party can pickup items.`, [
         new Action('continue', () => Game.game.progress())
       ]);
     }

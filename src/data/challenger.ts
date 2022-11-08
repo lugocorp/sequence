@@ -157,8 +157,8 @@ const data: ChallengerData[] = [
     dexterity: 1
   },
   {
-    sprite: Sprites.MOLE,
-    name: 'mole',
+    sprite: Sprites.TIMBERDOODLE,
+    name: 'timberdoodle',
     strength: 3,
     wisdom: 1,
     dexterity: 2

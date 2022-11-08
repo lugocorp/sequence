@@ -81,10 +81,10 @@ export default class DataManager {
    * Returns a random item available in the game. An item's probability to be
    * returned by this function is determined by its rarity.
    */
-  getRandomItem(): Item {
+  getRandomItem(floor = Rarity.COMMON): Item {
     const data: Trigger = {
       type: TriggerType.GET_RARITY,
-      floor: Rarity.COMMON
+      floor
     };
     for (const hero of Game.game.party.members) {
       hero.basket.activate(data);

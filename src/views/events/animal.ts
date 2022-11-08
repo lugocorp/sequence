@@ -44,7 +44,7 @@ export default class AnimalEvent extends EventView {
                   baby.name,
                   baby.sprite,
                   Rarity.RARE,
-                  `+25% luck\na baby ${baby.name} looking for its family`,
+                  `+25% luck. a baby ${baby.name} looking for its family.`,
                   function (data: Trigger) {
                     if (data.type === TriggerType.GET_LUCK) {
                       data.luck += 25;
@@ -68,7 +68,7 @@ export default class AnimalEvent extends EventView {
                   ]
                 );
                 Game.futureEvent(view, 8, () => hero.isInParty() && hero.basket.contains(item));
-                that.setDetails(baby.sprite, `${hero.name} picks up the baby ${baby.name}`, [
+                that.setDetails(baby.sprite, `${hero.name} picks up the baby ${baby.name}.`, [
                   new Action('continue', () => Game.game.progress())
                 ]);
               })

@@ -31,7 +31,7 @@ export default class ProjectEvent extends EventView {
       [
         new Action('yes', () => that.yes(project)),
         new Action('no', () =>
-          that.setDetails(project.sprite, `your party does not ${project.name}`, [
+          that.setDetails(project.sprite, `your party does not ${project.name}.`, [
             new Action('continue', () => Game.game.progress())
           ])
         )
@@ -60,7 +60,7 @@ export default class ProjectEvent extends EventView {
         new Action('continue', () =>
           future.setDetails(
             project.sprite,
-            'your party is empowered and made luckier by the thankful community members',
+            'your party is empowered and made luckier by the thankful community members.',
             [
               new Action('continue', () => {
                 for (const hero of Game.game.party.members) {

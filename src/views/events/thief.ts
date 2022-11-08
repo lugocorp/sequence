@@ -102,7 +102,7 @@ export default class ThiefEvent extends EventView {
   getsAway(): void {
     this.setDetails(
       this.animal.sprite,
-      `the ${this.animal.name} got away with ${this.stolen.length} of your party's items`,
+      `the ${this.animal.name} got away with ${this.stolen.length} of your party's items.`,
       [ new Action('continue', () => Game.game.progress()) ]
     );
   }

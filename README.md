@@ -83,13 +83,12 @@ We have a number of `npm` commands:
 - [x] Implement most item effects
 - [x] Package with new placeholder graphics, launch a browser-based open beta
 - [x] Finish item logic
-- [ ] Add background sprites (designed with composition in mind)
-- [ ] Add all graphics for the events
+- [ ] Add new background + event sprites
 - [ ] Draw item sprites
-- [ ] Finally draw all final character sprites
-- [ ] Update any ugly UI throughout the game
+- [ ] Finally draw playable character and challenger sprites
 - [ ] Rebase project on top of the Wildflower codebase
 - [ ] Clean up all code (revamp model hierarchy, dynamic stat accessors, history type)
+- [ ] Design/draw the other half of playable characters
 - [ ] Update beta with feedback
 
 #### Marketing/launch

@@ -25,7 +25,7 @@ export default class DeerEvent extends EventView {
     this.heroSelector = Selector.heroSelector(
       Game.game.party.members,
       undefined,
-      (hero) => `${this.coloredRate(hero.luck)} chance of success`
+      (hero) => `${this.coloredRate(hero.luck)} chance of success.`
     );
   }
 

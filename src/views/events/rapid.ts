@@ -28,7 +28,7 @@ export default class RapidEvent extends EventView {
     this.heroSelector = Selector.heroSelector(
       Game.game.party.members,
       undefined,
-      (hero: Hero) => `${this.coloredRate(hero.luck)} chance to not get swept away.`
+      (hero: Hero) => `${this.coloredRate(hero.luck)} chance to be safe.`
     );
   }
 
@@ -55,7 +55,7 @@ export default class RapidEvent extends EventView {
     const retrieve: EventView = new EventView({ label: 'riverretrieve' });
     retrieve.setDetails(
       hero.sprite,
-      `your party reunites with ${hero.name} after they were swept away by a river`,
+      `your party reunites with ${hero.name} after they were swept away by a river.`,
       [
         new Action('continue', () => {
           Game.game.party.add(hero);

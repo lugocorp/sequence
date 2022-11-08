@@ -551,7 +551,7 @@ data['corn and bean soup'] = function (data: Trigger) {
 };
 
 data['obsidian collar'] = function (data: Trigger) {
-  if (data.type === TriggerType.GET_RARITY) {
+  if (data.type === TriggerType.GET_RARITY && data.floor < Rarity.UNCOMMON) {
     data.floor = Rarity.UNCOMMON;
   }
 };
@@ -650,7 +650,7 @@ data['pine needle tea'] = function (data: Trigger) {
 };
 
 data['jade collar'] = function (data: Trigger) {
-  if (data.type === TriggerType.GET_RARITY) {
+  if (data.type === TriggerType.GET_RARITY && data.floor < Rarity.RARE) {
     data.floor = Rarity.RARE;
   }
 };

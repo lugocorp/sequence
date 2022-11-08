@@ -50,7 +50,7 @@ export default class TradeEvent extends EventView {
         new Action('make trade', () => that.checkTrade())
       ]);
     } else {
-      this.setDetails(Sprites.TRADE, `no one in your party has items to trade`, [
+      this.setDetails(Sprites.TRADE, `no one in your party has items to trade.`, [
         new Action('continue', () => Game.game.progress())
       ]);
     }
@@ -74,7 +74,7 @@ export default class TradeEvent extends EventView {
 
   invalidTrade(): void {
     const that = this;
-    this.setDetails(this.hero.sprite, `${this.hero.name} has no items to trade`, [
+    this.setDetails(this.hero.sprite, `${this.hero.name} has no items to trade.`, [
       new Action('continue', () => that.viewParty())
     ]);
   }
@@ -84,7 +84,7 @@ export default class TradeEvent extends EventView {
     this.hero.basket.replace(replaced, this.item);
     this.setDetails(
       this.hero.sprite,
-      `${this.hero.name} traded ${replaced.name} for ${this.item.name}`,
+      `${this.hero.name} traded ${replaced.name} for ${this.item.name}.`,
       [ new Action('continue', () => Game.game.progress()) ]
     );
   }

@@ -1,3 +1,4 @@
+import Rarity from '../../enums/rarity';
 import Hero from '../../entities/hero';
 import Item from '../../entities/item';
 import Action from '../../ui/action';
@@ -13,7 +14,7 @@ export default class DreamEvent extends EventView {
 
   init(): void {
     const hero: Hero = Game.game.party.randomHero();
-    const item: Item = Game.game.data.getRandomItem();
+    const item: Item = Game.game.data.getRandomItem(Rarity.RARE);
     this.setDetails(
       hero.sprite,
       `${hero.name} has a dream about a powerful item. could it be prophetic?`,
@@ -26,7 +27,7 @@ export default class DreamEvent extends EventView {
       if (hero.basket.hasSpace) {
         future.setDetails(
           hero.sprite,
-          `${hero.name} receives a powerful item they had recently dreamt of`,
+          `${hero.name} receives a powerful item they had recently dreamt of.`,
           [
             new Action('view item', () =>
               future.setDetails(item.sprite, item.descriptionText(), [
