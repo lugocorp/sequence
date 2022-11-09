@@ -83,7 +83,7 @@ We have a number of `npm` commands:
 - [x] Implement most item effects
 - [x] Package with new placeholder graphics, launch a browser-based open beta
 - [x] Finish item logic
-- [ ] Add new background + event sprites
+- [x] Add new background + event sprites
 - [ ] Draw item sprites
 - [ ] Finally draw playable character and challenger sprites
 - [ ] Rebase project on top of the Wildflower codebase
