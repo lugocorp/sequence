@@ -55,23 +55,23 @@ export default class EventChain {
     let table: [number, EventClass][] = [
       [ 35, ChallengeEvent ], // 35
       [ 8, WeatherEvent ], // 43
-      [ 6, OfferingEvent ], // 49
-      [ 6, GiftEvent ], // 55
-      [ 5, ObstacleEvent ], // 60
-      [ 5, RecruitEvent ], // 65
-      [ 5, TrapEvent ], // 70
-      [ 4, PlantEvent ], // 74
-      [ 4, ProjectEvent ], // 78
-      [ 4, RapidEvent ], // 82
-      [ 3, AnimalEvent ], // 85
-      [ 3, TradeEvent ], // 88
-      [ 3, MedicineManEvent ], // 91
-      [ 3, TreeEvent ], // 94
-      [ 2, DeerEvent ], // 96
-      [ 1, TricksterEvent ], // 97
-      [ 1, ThreeSistersEvent ], // 98
-      [ 1, ThiefEvent ], // 99
-      [ 1, CaveEvent ] // 100
+      [ 6, TrapEvent ], // 49
+      [ 5, ObstacleEvent ], // 54
+      [ 5, OfferingEvent ], // 59
+      [ 5, GiftEvent ], // 64
+      [ 4, PlantEvent ], // 68
+      [ 4, ProjectEvent ], // 72
+      [ 4, RapidEvent ], // 76
+      [ 3, AnimalEvent ], // 79
+      [ 3, TradeEvent ], // 82
+      [ 3, MedicineManEvent ], // 85
+      [ 3, TreeEvent ], // 88
+      [ 3, RecruitEvent ], // 91
+      [ 2, DeerEvent ], // 93
+      [ 2, TricksterEvent ], // 95
+      [ 2, CaveEvent ], // 97
+      [ 2, ThiefEvent ], // 99
+      [ 1, ThreeSistersEvent ] // 100
     ];
     if (data.morePlants) {
       table.push([ 8, PlantEvent ]);
@@ -101,7 +101,7 @@ export default class EventChain {
     }
     if (Game.game.world.time === Time.NIGHT) {
       if (!Game.game.world.cave) {
-        table.push([ 2, SkinwalkerEvent ]);
+        table.push([ 3, SkinwalkerEvent ]);
       }
       table.push([ 5, DreamEvent ]);
     }

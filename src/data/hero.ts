@@ -10,7 +10,6 @@ const data: HeroData[] = [
     wisdom: 0,
     dexterity: 0,
     itemSlots: 2,
-    luck: 10,
     description: 'a poetry enthusiast who likes swords.'
   },
   {
@@ -21,7 +20,6 @@ const data: HeroData[] = [
     wisdom: 6,
     dexterity: 0,
     itemSlots: 2,
-    luck: 10,
     description: 'travels the frozen places of turtle island.'
   },
   {
@@ -32,7 +30,6 @@ const data: HeroData[] = [
     wisdom: 0,
     dexterity: 6,
     itemSlots: 2,
-    luck: 10,
     description: 'runs between villages with important information.'
   },
   {
@@ -43,7 +40,6 @@ const data: HeroData[] = [
     wisdom: 1,
     dexterity: 0,
     itemSlots: 2,
-    luck: 10,
     description: 'some description here'
   },
   {
@@ -54,7 +50,6 @@ const data: HeroData[] = [
     wisdom: 0,
     dexterity: 1,
     itemSlots: 2,
-    luck: 10,
     description: 'a highly skilled and decorated warrior.'
   },
   {
@@ -65,7 +60,6 @@ const data: HeroData[] = [
     wisdom: 5,
     dexterity: 0,
     itemSlots: 2,
-    luck: 10,
     description: 'he\'s discovered a way to stay warm at all times.'
   },
   {
@@ -76,7 +70,6 @@ const data: HeroData[] = [
     wisdom: 5,
     dexterity: 1,
     itemSlots: 2,
-    luck: 10,
     description: 'a literal snake whisperer.'
   },
   {
@@ -87,7 +80,6 @@ const data: HeroData[] = [
     wisdom: 0,
     dexterity: 5,
     itemSlots: 2,
-    luck: 10,
     description: 'some description here'
   },
   {
@@ -98,7 +90,6 @@ const data: HeroData[] = [
     wisdom: 1,
     dexterity: 5,
     itemSlots: 2,
-    luck: 10,
     description: 'some description here'
   },
   {
@@ -109,7 +100,6 @@ const data: HeroData[] = [
     wisdom: 1,
     dexterity: 1,
     itemSlots: 3,
-    luck: 10,
     description: 'a strong woman who loves corn.'
   },
   {
@@ -120,7 +110,6 @@ const data: HeroData[] = [
     wisdom: 4,
     dexterity: 1,
     itemSlots: 3,
-    luck: 10,
     description: 'has spent her entire life curating wisdom.'
   },
   {
@@ -131,7 +120,6 @@ const data: HeroData[] = [
     wisdom: 1,
     dexterity: 4,
     itemSlots: 3,
-    luck: 10,
     description: 'the youngest and most active of her sisters.'
   },
   {
@@ -142,7 +130,6 @@ const data: HeroData[] = [
     wisdom: 2,
     dexterity: 0,
     itemSlots: 3,
-    luck: 10,
     description: 'holds her village together.'
   },
   {
@@ -153,7 +140,6 @@ const data: HeroData[] = [
     wisdom: 0,
     dexterity: 2,
     itemSlots: 3,
-    luck: 10,
     description: 'skilled fighter who never holds grudges.'
   },
   {
@@ -164,7 +150,6 @@ const data: HeroData[] = [
     wisdom: 4,
     dexterity: 0,
     itemSlots: 3,
-    luck: 10,
     description: 'skilled crafter known across nations.'
   },
   {
@@ -175,7 +160,6 @@ const data: HeroData[] = [
     wisdom: 4,
     dexterity: 2,
     itemSlots: 3,
-    luck: 10,
     description: 'some description here'
   },
   {
@@ -186,7 +170,6 @@ const data: HeroData[] = [
     wisdom: 0,
     dexterity: 4,
     itemSlots: 3,
-    luck: 10,
     description: 'uses gourds to hunt birds for his yukayeke.'
   },
   {
@@ -197,7 +180,6 @@ const data: HeroData[] = [
     wisdom: 2,
     dexterity: 4,
     itemSlots: 3,
-    luck: 10,
     description: 'some description here'
   },
   {
@@ -208,7 +190,6 @@ const data: HeroData[] = [
     wisdom: 3,
     dexterity: 0,
     itemSlots: 4,
-    luck: 15,
     description: 'some description here'
   },
   {
@@ -219,7 +200,6 @@ const data: HeroData[] = [
     wisdom: 3,
     dexterity: 3,
     itemSlots: 4,
-    luck: 15,
     description: 'some description here'
   },
   {
@@ -230,7 +210,6 @@ const data: HeroData[] = [
     wisdom: 0,
     dexterity: 3,
     itemSlots: 4,
-    luck: 15,
     description: 'some description here'
   },
   {
@@ -241,7 +220,6 @@ const data: HeroData[] = [
     wisdom: 2,
     dexterity: 1,
     itemSlots: 4,
-    luck: 15,
     description: 'some description here'
   },
   {
@@ -252,7 +230,6 @@ const data: HeroData[] = [
     wisdom: 1,
     dexterity: 2,
     itemSlots: 4,
-    luck: 15,
     description: 'some description here'
   },
   {
@@ -263,7 +240,6 @@ const data: HeroData[] = [
     wisdom: 3,
     dexterity: 1,
     itemSlots: 4,
-    luck: 15,
     description: 'some description here'
   },
   {
@@ -274,7 +250,6 @@ const data: HeroData[] = [
     wisdom: 3,
     dexterity: 2,
     itemSlots: 4,
-    luck: 15,
     description: 'some description here'
   },
   {
@@ -285,7 +260,6 @@ const data: HeroData[] = [
     wisdom: 1,
     dexterity: 3,
     itemSlots: 4,
-    luck: 15,
     description: 'some description here'
   },
   {
@@ -296,7 +270,6 @@ const data: HeroData[] = [
     wisdom: 2,
     dexterity: 3,
     itemSlots: 4,
-    luck: 15,
     description: 'some description here'
   },
   {
@@ -307,7 +280,6 @@ const data: HeroData[] = [
     wisdom: 2,
     dexterity: 2,
     itemSlots: 4,
-    luck: 20,
     description: 'makes her own jewelry from turquoise.'
   }
 ];

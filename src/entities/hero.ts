@@ -25,7 +25,6 @@ export default class Hero extends Unit {
     wisdom: number,
     dexterity: number,
     itemSlots: number,
-    luck: number,
     description: string
   ) {
     super(sprite, name, strength, wisdom, dexterity);
@@ -35,7 +34,7 @@ export default class Hero extends Unit {
     this._basket = new Basket(this, itemSlots);
     this.description = description;
     this.people = people;
-    this._luck = luck;
+    this._luck = 5;
     this.items = [];
   }
 
@@ -82,6 +81,25 @@ export default class Hero extends Unit {
         hero: this
       });
     }
+  }
+
+  // Fully fatigues the hero
+  fullyFatigue(): void {
+    Stats.setUnitStat(this, Stats.STRENGTH, -1000);
+    Stats.setUnitStat(this, Stats.WISDOM, -1000);
+    Stats.setUnitStat(this, Stats.DEXTERITY, -1000);
+  }
+
+  // Boosts each stat on this hero
+  empower(): void {
+    Stats.changeUnitStat(this, Stats.STRENGTH, 1);
+    Stats.changeUnitStat(this, Stats.WISDOM, 1);
+    Stats.changeUnitStat(this, Stats.DEXTERITY, 1);
+  }
+
+  // Boosts a random stat on this hero
+  empowerRandom(): void {
+    Stats.changeUnitStat(this, Stats.getRandomStat(), 1);
   }
 
   // Restores a given stat to its original value

@@ -57,7 +57,7 @@ export default class GraphicsRenderer {
       return;
     }
     if (view.image) {
-      const background: number = Game.game.getBackground();
+      const background: number = Game.game.getBackground(true);
       if (background !== Sprites.NONE) {
         this.drawSprite(background, 12, 3);
       }

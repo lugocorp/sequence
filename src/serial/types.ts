@@ -9,7 +9,6 @@ export interface HeroData {
   wisdom: number;
   dexterity: number;
   itemSlots: number;
-  luck: number;
   description: string;
 }
 

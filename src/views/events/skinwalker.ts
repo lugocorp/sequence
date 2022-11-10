@@ -18,13 +18,11 @@ export default class SkinwalkerEvent extends EventView {
       new Action('continue', () => Game.game.progress())
     ]);
     const heroes: Hero[] = [ ...Game.game.party.members ];
-    const removed: number = Random.max(heroes.length);
+    const removed: number = Random.max(heroes.length - 1) + 1;
     for (let a = 0; a < removed; a++) {
       const hero: Hero = Random.element(heroes);
       heroes.splice(heroes.indexOf(hero), 1);
-      Stats.setUnitStat(hero, Stats.STRENGTH, 0);
-      Stats.setUnitStat(hero, Stats.WISDOM, 0);
-      Stats.setUnitStat(hero, Stats.DEXTERITY, 0);
+      hero.fullyFatigue();
     }
   }
 }

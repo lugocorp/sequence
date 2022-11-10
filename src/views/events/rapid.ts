@@ -28,7 +28,7 @@ export default class RapidEvent extends EventView {
     this.heroSelector = Selector.heroSelector(
       Game.game.party.members,
       undefined,
-      (hero: Hero) => `${this.coloredRate(hero.luck)} chance to be safe.`
+      (hero: Hero) => `${this.coloredRate(hero.luck)} chance of success.`
     );
   }
 

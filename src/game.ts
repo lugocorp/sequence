@@ -99,9 +99,9 @@ export default class Game {
     Game.game.chain.futures.push(new FutureEvent(view, turns, valid));
   }
 
-  getBackground(): Sprites {
-    if (this.world.cave) {
-      return Sprites.CAVE;
+  getBackground(includeCave = false): Sprites {
+    if (includeCave && this.world.cave) {
+      return Sprites.CAVE_INSIDE;
     }
     if (this.world.time === Time.NIGHT) {
       return Sprites.NIGHT;

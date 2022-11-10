@@ -58,9 +58,7 @@ export default class AnimalEvent extends EventView {
                   `${hero.name} returns the baby ${baby.name} to its family. they receive a blessing of empowerment.`,
                   [
                     new Action('continue', () => {
-                      Stats.changeUnitStat(hero, Stats.STRENGTH, 1);
-                      Stats.changeUnitStat(hero, Stats.WISDOM, 1);
-                      Stats.changeUnitStat(hero, Stats.DEXTERITY, 1);
+                      hero.empowerRandom();
                       Game.game.history.peopleHelped++;
                       hero.basket.unequip(item);
                       Game.game.progress();

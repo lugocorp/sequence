@@ -64,9 +64,7 @@ export default class MedicineManEvent extends EventView {
   finish(): void {
     const replaced: Item = this.hero.basket.random();
     this.hero.basket.unequip(replaced);
-    Stats.changeUnitStat(this.hero, Stats.STRENGTH, 1);
-    Stats.changeUnitStat(this.hero, Stats.WISDOM, 1);
-    Stats.changeUnitStat(this.hero, Stats.DEXTERITY, 1);
+    this.hero.empowerRandom();
     this.setDetails(
       this.hero.sprite,
       `${this.hero.name} gave ${replaced.name} to the medicine man and was empowered.`,

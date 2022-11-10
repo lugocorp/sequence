@@ -64,10 +64,8 @@ export default class ProjectEvent extends EventView {
             [
               new Action('continue', () => {
                 for (const hero of Game.game.party.members) {
-                  hero.boostLuck(10);
-                  Stats.changeUnitStat(hero, Stats.STRENGTH, 1);
-                  Stats.changeUnitStat(hero, Stats.WISDOM, 1);
-                  Stats.changeUnitStat(hero, Stats.DEXTERITY, 1);
+                  hero.boostLuck(5);
+                  hero.empowerRandom();
                 }
                 Game.game.progress();
               })

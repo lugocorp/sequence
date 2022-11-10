@@ -727,7 +727,6 @@ data['spirit rattle'] = function (data: Trigger) {
       Stats.getUnitStat(spirit, Stats.WISDOM),
       Stats.getUnitStat(spirit, Stats.DEXTERITY),
       0,
-      20,
       'a spirit summoned by a sacred rattle'
     ));
   }

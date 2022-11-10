@@ -120,9 +120,7 @@ export default class PlantEvent extends EventView {
         [
           new Action('continue', () => {
             for (const hero of Game.game.party.members) {
-              Stats.changeUnitStat(hero, Stats.STRENGTH, 1);
-              Stats.changeUnitStat(hero, Stats.WISDOM, 1);
-              Stats.changeUnitStat(hero, Stats.DEXTERITY, 1);
+              hero.empowerRandom();
             }
             Game.game.progress();
           })

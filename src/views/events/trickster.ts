@@ -52,7 +52,7 @@ export default class TricksterEvent extends EventView {
                   new Action('continue', () => Game.game.progress())
                 ]);
               } else {
-                hero.boostLuck(15);
+                hero.boostLuck(5);
                 this.setDetails(animal.sprite, `${hero.name} was blessed by the ${animal.name}!`, [
                   new Action('continue', () => Game.game.progress())
                 ]);

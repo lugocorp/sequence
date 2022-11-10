@@ -85,6 +85,7 @@ enum Sprites {
   TRAP = 0x010403,
   TRADE = 0x010004,
   RAPID = 0x010104,
+  CAVE_INSIDE = 0x010204,
 
   // Spritesheet #2 (NPCs)
   ELDERBERRY = 0x020000,

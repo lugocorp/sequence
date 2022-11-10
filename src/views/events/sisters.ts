@@ -24,7 +24,7 @@ export default class ThreeSistersEvent extends EventView {
               that.setDetails(hero.sprite, `${hero.name} was empowered by the three plants.`, [
                 new Action('continue', () => Game.game.progress())
               ]);
-              hero.boostLuck(10);
+              hero.boostLuck(5);
               Stats.changeUnitStat(hero, Stats.STRENGTH, 1);
               Stats.changeUnitStat(hero, Stats.WISDOM, 1);
               Stats.changeUnitStat(hero, Stats.DEXTERITY, 1);

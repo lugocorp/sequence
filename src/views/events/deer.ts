@@ -51,7 +51,7 @@ export default class DeerEvent extends EventView {
         hero.fatigue();
         if (hero.lucky()) {
           for (const hero of Game.game.party.members) {
-            hero.boostLuck(20);
+            hero.boostLuck(5);
           }
           this.setDetails(
             hero.sprite,

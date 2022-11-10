@@ -47,7 +47,7 @@ export default class ChallengeEvent extends EventView {
       (hero: Hero) =>
         `${this.coloredRate(
           this.playerStatsHigher(hero, this.challenger) ? 100 : hero.luck
-        )} chance to win`
+        )} chance of success.`
     );
   }
 
@@ -89,9 +89,7 @@ export default class ChallengeEvent extends EventView {
       Game.game.history.challengesWon++;
       hero.fatigue();
     } else {
-      Stats.setUnitStat(hero, Stats.STRENGTH, -1000);
-      Stats.setUnitStat(hero, Stats.WISDOM, -1000);
-      Stats.setUnitStat(hero, Stats.DEXTERITY, -1000);
+      hero.fullyFatigue();
     }
     this.setDetails(
       hero.sprite,
