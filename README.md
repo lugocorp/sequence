@@ -84,7 +84,7 @@ We have a number of `npm` commands:
 - [x] Package with new placeholder graphics, launch a browser-based open beta
 - [x] Finish item logic
 - [x] Add new background + event sprites
-- [ ] Draw item sprites
+- [xñ] Draw item sprites
 - [ ] Finally draw playable character and challenger sprites
 - [ ] Rebase project on top of the Wildflower codebase
 - [ ] Clean up all code (revamp model hierarchy, dynamic stat accessors, history type)
