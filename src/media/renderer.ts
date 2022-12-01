@@ -198,11 +198,11 @@ export default class GraphicsRenderer {
     }
     if (highlight) {
       const bounds: [number, number] = this.getTextBounds(msg);
-      this.ctx.fillStyle = '#dcd36a';
+      this.ctx.fillStyle = '#00bf2a';
       this.ctx.globalCompositeOperation = 'source-atop';
       this.ctx.fillRect(x, y, bounds[0], bounds[1]);
       this.ctx.globalCompositeOperation = 'source-over';
-      this.ctx.fillStyle = 'black';
+      this.ctx.fillStyle = '#000000';
     }
   }
 }

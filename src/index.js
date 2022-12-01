@@ -11,14 +11,16 @@ document.addEventListener(
     let downCoordX = 0;
     let downCoordY = 0;
     const canvas = document.getElementById('canvas');
-    canvas.addEventListener('mousedown', (e) => {
+    const clickDown = (e) => {
       const scale = Game.game.renderer.scale;
       const rect = canvas.getBoundingClientRect();
       downCoordX = (e.clientX - rect.left) / scale;
       downCoordY = (e.clientY - rect.top) / scale;
       Game.game.click(downCoordX, downCoordY, true);
-    });
-    canvas.addEventListener('mouseup', () => {
+    };
+    window.addEventListener('mousedown', clickDown);
+    window.addEventListener('mousemove', clickDown);
+    window.addEventListener('mouseup', () => {
       Game.game.click(downCoordX, downCoordY, false);
     });
     window.addEventListener('resize', () => {

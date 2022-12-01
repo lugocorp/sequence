@@ -147,7 +147,7 @@ export default class Game {
   click(x: number, y: number, down: boolean): void {
     if (this.view) {
       this.currentClick = { x, y, down };
-      if (this.view.hasActions()) {
+      if (!down && this.view.hasActions()) {
         for (let a = 0; a < this.view.actions.length; a++) {
           const action = this.view.actions[a];
           const actionCoords: [number, number] = this.view.getActionCoords(a);
@@ -162,7 +162,7 @@ export default class Game {
           }
         }
       }
-      if (this.view.hasOptions()) {
+      if (!down && this.view.hasOptions()) {
         if (this.view.selector.index > 0 && this.bounded(0, 0, 12, 100)) {
           this.audio.play(GameAudio.ARROW);
           this.view.selector.index--;
@@ -187,8 +187,8 @@ export default class Game {
       this.currentClick.down === down &&
       this.currentClick.x >= x &&
       this.currentClick.y >= y &&
-      this.currentClick.x <= x + w &&
-      this.currentClick.y <= y + h
+      this.currentClick.x < x + w &&
+      this.currentClick.y < y + h
     );
   }
 
