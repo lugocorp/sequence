@@ -1,10 +1,12 @@
+import Injector from './injector';
 import Game from './game';
-Game.game = new Game();
 
 // For game start
 document.addEventListener(
   'deviceready',
   async () => {
+    const injector = new Injector();
+    Game.game = await injector.get('game');
     await Game.game.start();
 
     // For click handling
