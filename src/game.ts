@@ -129,11 +129,6 @@ export default class Game {
       await wait();
     }
     this.invalidate();
-    for (const hero of this.party.members) {
-      hero.basket.activate({
-        type: TriggerType.AFTER_EVENT
-      });
-    }
     if (this.party.length() && this.chain.events.length === 1) {
       this.chain.plan();
     }

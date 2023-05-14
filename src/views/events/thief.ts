@@ -78,7 +78,7 @@ export default class ThiefEvent extends EventView {
         [
           new Action('continue', () => {
             for (const item of this.stolen) {
-              item[0].basket.equip(this.game.history, item[1]);
+              item[0].basket.equip(item[1]);
             }
             this.game.progress();
           })

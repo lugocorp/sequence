@@ -82,7 +82,7 @@ export default class TradeEvent extends EventView {
 
   finish(): void {
     const replaced: Item = this.hero.basket.random();
-    this.hero.basket.replace(this.game.history, replaced, this.item);
+    this.hero.basket.replace(replaced, this.item);
     this.setDetails(
       this.hero.sprite,
       `${this.hero.name} traded ${replaced.name} for ${this.item.name}.`,

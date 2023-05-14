@@ -67,7 +67,7 @@ export default class DataManager {
    * to be returned by this function.
    */
   getRandomHero(): Hero {
-    return this.factory.createHero(this, Random.element(this.heroes));
+    return this.factory.createHero(this.game, this, Random.element(this.heroes));
   }
 
   /*
@@ -75,6 +75,7 @@ export default class DataManager {
    */
   getNamedHero(name: string): Hero {
     return this.factory.createHero(
+      this.game, 
       this,
       this.heroes.filter((x: types.HeroData) => x.name === name)[0]
     );
@@ -85,14 +86,6 @@ export default class DataManager {
    * returned by this function is determined by its rarity.
    */
   getRandomItem(floor = Rarity.COMMON): Item {
-    const data: Trigger = {
-      type: TriggerType.GET_RARITY,
-      floor
-    };
-    for (const hero of this.game.party.members) {
-      hero.basket.activate(data);
-    }
-
     const rarity = Random.weighted(
       (
         [
@@ -102,7 +95,7 @@ export default class DataManager {
           [ 27, Rarity.UNCOMMON ], // 53
           [ 47, Rarity.COMMON ] // 100
         ] as [number, number][]
-      ).filter((x: number[]) => x[1] >= data.floor)
+      ).filter((x: number[]) => x[1] >= floor)
     );
     const item: Item = Random.element(this.itemsByRarityIndex.get(rarity));
     return this.factory.createItem(item, effects[item.name]);

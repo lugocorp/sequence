@@ -76,14 +76,6 @@ export default class Party {
       throw new Error(`${hero.name} is not in your party and therefore cannot be removed`);
     }
     this.members.splice(index, 1);
-    const data: Trigger = {
-      type: TriggerType.AFTER_LEAVE,
-      hero
-    };
-    hero.basket.activate(data);
-    for (const hero of this.members) {
-      hero.basket.activate(data);
-    }
   }
 
   // Returns a random hero in the party

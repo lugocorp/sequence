@@ -52,12 +52,7 @@ export default class ObstacleEvent extends EventView {
   finish(): void {
     const removals: Hero[] = [];
     for (const hero of this.game.party.members) {
-      const data: Trigger = {
-        type: TriggerType.GET_OBSTACLE,
-        pass: this.passes(hero)
-      };
-      hero.basket.activate(data);
-      if (!data.pass) {
+      if (!this.passes(hero)) {
         removals.push(hero);
       }
     }

@@ -32,7 +32,7 @@ export default class DreamEvent extends EventView {
             new Action('view item', () =>
               future.setDetails(item.sprite, item.descriptionText(), [
                 new Action('continue', () => {
-                  hero.basket.equip(this.game.history, item);
+                  hero.basket.equip(item);
                   this.game.progress();
                 })
               ])

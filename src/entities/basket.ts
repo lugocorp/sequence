@@ -11,7 +11,7 @@ import Hero from './hero';
 export default class Basket {
   private items: Item[] = [];
 
-  constructor(private readonly bearer: Hero, public readonly total: number) {}
+  constructor(private readonly game: Game, private readonly bearer: Hero, public readonly total: number) {}
 
   // Returns a shallow copy of the items list
   toList(): Item[] {
@@ -29,11 +29,11 @@ export default class Basket {
   }
 
   // Equips an item
-  equip(history: History, item: Item): void {
+  equip(item: Item): void {
     if (!this.hasSpace) {
       throw new Error(`Item equip overflow`);
     }
-    history.itemsCollected++;
+    this.game.history.itemsCollected++;
     item.bearer = this.bearer;
     this.items.push(item);
   }
@@ -63,9 +63,9 @@ export default class Basket {
   }
 
   // Replaces item1 with item2
-  replace(history: History, item1: Item, item2: Item): void {
+  replace(item1: Item, item2: Item): void {
     this.unequip(item1);
-    this.equip(history, item2);
+    this.equip(item2);
   }
 
   // Returns the number of held items
@@ -76,7 +76,7 @@ export default class Basket {
   // Triggers item effects
   activate(trigger: Trigger): void {
     for (const item of this.toList()) {
-      item.activate(trigger);
+      item.activate(this.game, trigger);
     }
   }
 }

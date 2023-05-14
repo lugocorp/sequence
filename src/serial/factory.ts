@@ -7,12 +7,14 @@ import { Effect } from '../enums/triggers';
 import Challenger from '../entities/challenger';
 import Hero from '../entities/hero';
 import Item from '../entities/item';
+import Game from '../game';
 import * as types from './types';
 
 export default class Factory {
   // Instantiates a new Hero object based on some game data
-  createHero(manager: DataManager, data: types.HeroData): Hero {
+  createHero(game: Game, manager: DataManager, data: types.HeroData): Hero {
     return new Hero(
+      game,
       data.sprite,
       data.name,
       data.people,

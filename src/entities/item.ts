@@ -1,6 +1,7 @@
 import { Trigger, Effect } from '../enums/triggers';
 import Sprites from '../enums/sprites';
 import Rarity from '../enums/rarity';
+import Game from '../game';
 import Hero from './hero';
 
 export default class Item {
@@ -24,8 +25,8 @@ export default class Item {
     this.name = name;
   }
 
-  activate(trigger: Trigger): void {
-    this.effect?.call(this, trigger);
+  activate(game: Game, trigger: Trigger): void {
+    this.effect?.call(this, game, trigger);
   }
 
   descriptionText(): string {

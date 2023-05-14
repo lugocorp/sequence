@@ -51,7 +51,7 @@ export default class AnimalEvent extends EventView {
                     }
                   }
                 );
-                hero.basket.equip(this.game.history, item);
+                hero.basket.equip(item);
                 const view: EventView = new EventView(this.game, { label: 'animalreturn' });
                 view.setDetails(
                   baby.sprite,

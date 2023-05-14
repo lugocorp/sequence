@@ -77,13 +77,6 @@ export default class ChallengeEvent extends EventView {
   finish(): void {
     const that = this;
     const hero: Hero = this.heroSelector.item();
-    for (const hero1 of this.game.party.members) {
-      hero1.basket.activate({
-        type: TriggerType.AFTER_SELECTED,
-        tested: this.expectation,
-        hero: hero
-      });
-    }
     const result: boolean = this.playerOvercomesChallenge(hero, this.challenger);
     if (result) {
       this.game.history.challengesWon++;

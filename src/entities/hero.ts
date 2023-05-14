@@ -19,6 +19,7 @@ export default class Hero extends Unit {
   description: string;
 
   constructor(
+    game: Game,
     sprite: Sprites,
     name: string,
     people: string,
@@ -32,7 +33,7 @@ export default class Hero extends Unit {
     this.originalStrength = strength;
     this.originalWisdom = wisdom;
     this.originalDexterity = dexterity;
-    this._basket = new Basket(this, itemSlots);
+    this._basket = new Basket(game, this, itemSlots);
     this.description = description;
     this.people = people;
     this._luck = 5;
@@ -59,29 +60,9 @@ export default class Hero extends Unit {
 
   // Reduces this Hero's stats
   fatigue(party: Party): void {
-    const data: Trigger = {
-      type: TriggerType.GET_FATIGUE,
-      fatigue: true,
-      hero: this
-    };
-    this.basket.activate(data);
-    for (const hero of party.members) {
-      if (hero !== this) {
-        hero.basket.activate(data);
-      }
-    }
-    if (data.fatigue) {
       Stats.changeUnitStat(this, Stats.STRENGTH, -1);
       Stats.changeUnitStat(this, Stats.WISDOM, -1);
       Stats.changeUnitStat(this, Stats.DEXTERITY, -1);
-    }
-    for (const hero of party.members) {
-      hero.basket.activate({
-        type: TriggerType.AFTER_FATIGUE,
-        fatigue: data.fatigue,
-        hero: this
-      });
-    }
   }
 
   // Fully fatigues the hero
@@ -147,11 +128,6 @@ export default class Hero extends Unit {
 
   // Returns true if the hero passes a luck check
   lucky(): boolean {
-    const success = Random.passes(this.luck / 100);
-    this.basket.activate({
-      type: TriggerType.AFTER_LUCK,
-      hero: this
-    });
-    return success;
+    return Random.passes(this.luck / 100);
   }
 }

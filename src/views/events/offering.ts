@@ -61,7 +61,7 @@ export default class OfferingEvent extends EventView {
 
   finish(): void {
     const hero: Hero = this.heroSelector.item();
-    hero.basket.equip(this.game.history, this.gift);
+    hero.basket.equip(this.gift);
     this.setDetails(
       this.spirit,
       `${hero.name} was given ${this.gift.name}. the spirit conceals itself once more.`,

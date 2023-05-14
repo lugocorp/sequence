@@ -50,15 +50,6 @@ export default class EventChain {
    * This function returns the roll table for the next event
    */
   private getEventRollTable(): [number, any][] {
-    const data: Trigger = {
-      type: TriggerType.GET_CHAIN,
-      easierCaves: false,
-      morePlants: false
-    };
-    for (const hero of this.game.party.members) {
-      hero.basket.activate(data);
-    }
-
     let table: [number, EventClass][] = [
       [ 35, ChallengeEvent ], // 35
       [ 8, WeatherEvent ], // 43
@@ -80,22 +71,8 @@ export default class EventChain {
       [ 2, ThiefEvent ], // 99
       [ 1, ThreeSistersEvent ] // 100
     ];
-    if (data.morePlants) {
-      table.push([ 8, PlantEvent ]);
-    }
     if (this.game.world.cave) {
-      table = data.easierCaves
-        ? [
-            [ 25, ChallengeEvent ], // 25
-            [ 25, OfferingEvent ], // 50
-            [ 25, GiftEvent ], // 75
-            [ 8, TricksterEvent ], // 83
-            [ 6, AnimalEvent ], // 89
-            [ 4, ThiefEvent ], // 93
-            [ 5, WeatherEvent ], // 98
-            [ 2, SkinwalkerEvent ] // 100
-          ]
-        : [
+      table = [
             [ 30, ChallengeEvent ], // 30
             [ 20, OfferingEvent ], // 50
             [ 20, GiftEvent ], // 70
