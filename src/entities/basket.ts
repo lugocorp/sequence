@@ -1,5 +1,4 @@
 import { Trigger } from '../enums/triggers';
-import History from '../media/history';
 import Random from '../logic/random';
 import Game from '../game';
 import Item from './item';
@@ -11,7 +10,11 @@ import Hero from './hero';
 export default class Basket {
   private items: Item[] = [];
 
-  constructor(private readonly game: Game, private readonly bearer: Hero, public readonly total: number) {}
+  constructor(
+    private readonly game: Game,
+    private readonly bearer: Hero,
+    public readonly total: number
+  ) {}
 
   // Returns a shallow copy of the items list
   toList(): Item[] {

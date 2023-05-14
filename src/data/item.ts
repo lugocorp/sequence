@@ -128,7 +128,7 @@ const data: ItemData[] = [
     sprite: Sprites.TURQUOISE_RING,
     rarity: Rarity.MYTHIC,
     description: '+3 strength, +3 wisdom, +3 dexterity.'
-  },
+  }
 ];
 
 export default data;

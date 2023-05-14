@@ -1,5 +1,4 @@
 import { Trigger, TriggerType } from '../../enums/triggers';
-import Stats from '../../enums/stats';
 import Sprites from '../../enums/sprites';
 import Rarity from '../../enums/rarity';
 import Random from '../../logic/random';
@@ -65,7 +64,11 @@ export default class AnimalEvent extends EventView {
                     })
                   ]
                 );
-                this.game.futureEvent(view, 8, () => hero.isInParty(this.game.party) && hero.basket.contains(item));
+                this.game.futureEvent(
+                  view,
+                  8,
+                  () => hero.isInParty(this.game.party) && hero.basket.contains(item)
+                );
                 that.setDetails(baby.sprite, `${hero.name} picks up the baby ${baby.name}.`, [
                   new Action('continue', () => this.game.progress())
                 ]);

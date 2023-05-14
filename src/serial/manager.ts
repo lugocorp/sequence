@@ -3,7 +3,6 @@
  * provides the Factory class with all the data it needs to instantiate game
  * entities. Use this to get indexed abilities or random game objects.
  */
-import { Trigger, TriggerType } from '../enums/triggers';
 import Sprites from '../enums/sprites';
 import Rarity from '../enums/rarity';
 import Random from '../logic/random';
@@ -11,7 +10,6 @@ import Factory from './factory';
 import Challenger from '../entities/challenger';
 import Hero from '../entities/hero';
 import Item from '../entities/item';
-import Party from '../entities/party';
 import Game from '../game';
 import * as types from './types';
 import challengers from '../data/challenger';
@@ -75,7 +73,7 @@ export default class DataManager {
    */
   getNamedHero(name: string): Hero {
     return this.factory.createHero(
-      this.game, 
+      this.game,
       this,
       this.heroes.filter((x: types.HeroData) => x.name === name)[0]
     );

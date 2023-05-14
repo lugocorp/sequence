@@ -4,7 +4,6 @@
  * the player survives.
  */
 import { Time } from '../enums/world';
-import { Trigger, TriggerType } from '../enums/triggers';
 import { EventView } from '../views/event';
 import SkinwalkerEvent from '../views/events/skinwalker';
 import ThreeSistersEvent from '../views/events/sisters';
@@ -30,7 +29,6 @@ import GiftEvent from '../views/events/gift';
 import TrapEvent from '../views/events/trap';
 import DeerEvent from '../views/events/deer';
 import CaveEvent from '../views/events/cave';
-import Party from '../entities/party';
 import FutureEvent from './future';
 import Random from './random';
 import Game from '../game';
@@ -75,15 +73,15 @@ export default class EventChain {
     ];
     if (this.game.world.cave) {
       table = [
-            [ 30, (game: Game) => new ChallengeEvent(game) ], // 30
-            [ 20, (game: Game) => new OfferingEvent(game) ], // 50
-            [ 20, (game: Game) => new GiftEvent(game) ], // 70
-            [ 10, (game: Game) => new TricksterEvent(game) ], // 80
-            [ 5, (game: Game) => new AnimalEvent(game) ], // 85
-            [ 5, (game: Game) => new ThiefEvent(game) ], // 90
-            [ 5, (game: Game) => new WeatherEvent(game) ], // 95
-            [ 5, (game: Game) => new SkinwalkerEvent(game) ] // 100
-          ];
+        [ 30, (game: Game) => new ChallengeEvent(game) ], // 30
+        [ 20, (game: Game) => new OfferingEvent(game) ], // 50
+        [ 20, (game: Game) => new GiftEvent(game) ], // 70
+        [ 10, (game: Game) => new TricksterEvent(game) ], // 80
+        [ 5, (game: Game) => new AnimalEvent(game) ], // 85
+        [ 5, (game: Game) => new ThiefEvent(game) ], // 90
+        [ 5, (game: Game) => new WeatherEvent(game) ], // 95
+        [ 5, (game: Game) => new SkinwalkerEvent(game) ] // 100
+      ];
     }
     if (this.game.world.time === Time.NIGHT) {
       if (!this.game.world.cave) {
@@ -146,12 +144,12 @@ export default class EventChain {
     }
 
     // Roll for the next event
-    const event: EventGenerator = (Random.weighted(
+    const event: EventGenerator = Random.weighted(
       this.getEventRollTable().filter(
         (x: [number, EventGenerator]) =>
           x[1].toString().includes('ChallengeEvent') || x[1].toString() !== this.previouslyPlanned
       )
-    ));
+    );
     this.previouslyPlanned = event.toString();
     this.events.push(event(this.game));
   }

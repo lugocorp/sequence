@@ -1,5 +1,3 @@
-import Hero from '../entities/hero';
-import Rarity from './rarity';
 import Game from '../game';
 
 export enum TriggerType {

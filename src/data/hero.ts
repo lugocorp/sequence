@@ -60,7 +60,7 @@ const data: HeroData[] = [
     wisdom: 5,
     dexterity: 0,
     itemSlots: 2,
-    description: 'he\'s discovered a way to stay warm at all times.'
+    description: "he's discovered a way to stay warm at all times."
   },
   {
     sprite: Sprites.SERPENT_PRIESTESS,

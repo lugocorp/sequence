@@ -1,5 +1,4 @@
 import { DAY_NIGHT_CYCLE, World, Weather, Time } from './enums/world';
-import { TriggerType } from './enums/triggers';
 import Sprites from './enums/sprites';
 import GraphicsRenderer from './media/renderer';
 import GraphicsLoader from './media/loader';

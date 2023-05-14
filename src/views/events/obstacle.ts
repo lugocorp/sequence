@@ -1,4 +1,3 @@
-import { Trigger, TriggerType } from '../../enums/triggers';
 import Sprites from '../../enums/sprites';
 import Stats from '../../enums/stats';
 import Hero from '../../entities/hero';

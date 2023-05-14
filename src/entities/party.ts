@@ -1,6 +1,3 @@
-import { Trigger, TriggerType } from '../enums/triggers';
-import DataManager from '../serial/manager';
-import History from '../media/history';
 import Random from '../logic/random';
 import Game from '../game';
 import Hero from './hero';

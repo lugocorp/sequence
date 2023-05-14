@@ -1,5 +1,4 @@
 import Sprites from '../../enums/sprites';
-import Stats from '../../enums/stats';
 import Random from '../../logic/random';
 import Hero from '../../entities/hero';
 import Action from '../../ui/action';

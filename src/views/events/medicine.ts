@@ -5,7 +5,6 @@ import Action from '../../ui/action';
 import { EventView } from '../event';
 import Hero from '../../entities/hero';
 import Item from '../../entities/item';
-import Stats from '../../enums/stats';
 import Game from '../../game';
 
 export default class MedicineManEvent extends EventView {

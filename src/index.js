@@ -24,8 +24,8 @@ document.addEventListener(
       game.click(downCoordX, downCoordY, false);
     });
     window.addEventListener('resize', () => {
-        game.renderer.setCanvasSize();
-        game.invalidate();
+      game.renderer.setCanvasSize();
+      game.invalidate();
     });
   },
   false

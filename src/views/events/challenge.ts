@@ -1,6 +1,5 @@
 import Hero from '../../entities/hero';
 import Challenger from '../../entities/challenger';
-import { TriggerType } from '../../enums/triggers';
 import { orange } from '../../enums/colors';
 import Stats from '../../enums/stats';
 import Random from '../../logic/random';
