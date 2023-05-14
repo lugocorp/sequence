@@ -15,7 +15,7 @@ export default class StartView extends View {
       [
         new Action('instructions', () => game.setView(new InstructionsView(game))),
         new Action('credits', () => game.setView(new CreditsView(game))),
-        new Action('new game', () => game.setView(game.chain.latest(game))),
+        new Action('new game', () => game.setView(game.chain.latest())),
         new Action('score', () => game.setView(new ScoreView(game)))
       ]
     );

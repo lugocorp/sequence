@@ -2,17 +2,14 @@ import { Trigger, TriggerType } from '../enums/triggers';
 import DataManager from '../serial/manager';
 import History from '../media/history';
 import Random from '../logic/random';
-
+import Game from '../game';
 import Hero from './hero';
 
 export default class Party {
   static MAX = 4;
   members: Hero[] = [];
 
-  constructor(
-    private data: DataManager,
-    private history: History,
-  ) {}
+  constructor(private game: Game) {}
 
   // Removes all heroes from your party
   clear(): void {
@@ -47,10 +44,10 @@ export default class Party {
   // Fully populates the party with an optional guaranteed character
   populate(guaranteed?: string): void {
     if (guaranteed) {
-      this.add(this.data.getNamedHero(guaranteed));
+      this.add(this.game.data.getNamedHero(guaranteed));
     }
     while (this.length() < Party.MAX) {
-      this.add(this.data.getRandomHero());
+      this.add(this.game.data.getRandomHero());
     }
   }
 
@@ -64,7 +61,7 @@ export default class Party {
     if (this.members.length > Party.MAX) {
       throw new Error(`Cannot have more than ${Party.MAX} members in your party`);
     }
-    this.history.partyMembers++;
+    this.game.history.partyMembers++;
     this.members.push(hero);
   }
 

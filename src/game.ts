@@ -16,24 +16,32 @@ import View from './ui/view';
 
 export default class Game {
   private view: View;
+  private renderer: GraphicsRenderer;
+  private assets: GraphicsLoader;
+  chain: EventChain;
+  data: DataManager;
+  history: History;
+  audio: GameAudio;
+  party: Party;
   currentClick: { x: number; y: number; down: boolean };
   score: number;
   world: World;
 
-  constructor(
-    private renderer: GraphicsRenderer,
-    private assets: GraphicsLoader,
-    public chain: EventChain,
-    public data: DataManager,
-    public history: History,
-    public audio: GameAudio,
-    public party: Party
-  ) {
+  constructor() {
     this.currentClick = { x: 0, y: 0, down: false };
   }
 
   // Initializes the game object so the player can start interacting with it
   async start(): Promise<void> {
+    this.renderer = new GraphicsRenderer(this);
+    this.assets = new GraphicsLoader();
+    this.chain = new EventChain(this);
+    this.data = new DataManager(this);
+    this.history = new History();
+    this.audio = new GameAudio();
+    this.party = new Party(this);
+
+    // Set up canvas
     const canvas: HTMLCanvasElement = document.getElementById('canvas') as HTMLCanvasElement;
     this.renderer.setup(canvas, this.assets);
     this.renderer.setCanvasSize();
@@ -47,7 +55,7 @@ export default class Game {
     this.data.index();
     await new Promise((resolve) => setTimeout(resolve, 1000));
     this.audio.play(GameAudio.STARTUP);
-    this.chain.setup(this);
+    this.chain.setup();
 
     // Loading has completed
     this.setView(new StartView(this));
@@ -57,7 +65,7 @@ export default class Game {
   // Sets initial game state
   setInitialState(): void {
     this.history.clear();
-    this.chain.clear(this);
+    this.chain.clear();
     this.party.clear();
     this.world = {
       weather: Weather.SUN,
@@ -127,10 +135,10 @@ export default class Game {
       });
     }
     if (this.party.length() && this.chain.events.length === 1) {
-      this.chain.plan(this);
+      this.chain.plan();
     }
     this.chain.events.splice(0, 1);
-    this.setView(this.chain.latest(this));
+    this.setView(this.chain.latest());
     for (this.renderer.dark = 100; this.renderer.dark > 0; this.renderer.dark -= 20) {
       this.invalidate();
       await wait();

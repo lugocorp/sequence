@@ -40,24 +40,22 @@ export default class EventChain {
   futures: FutureEvent[] = [];
   events: EventView[];
 
-  constructor(
-    private party: Party
-  ) {}
+  constructor(private game: Game) {}
 
-  setup(game: Game) {
-    this.events = [ new BeginEvent(game) ];
+  setup() {
+    this.events = [ new BeginEvent(this.game) ];
   }
 
   /*
    * This function returns the roll table for the next event
    */
-  private getEventRollTable(game: Game): [number, any][] {
+  private getEventRollTable(): [number, any][] {
     const data: Trigger = {
       type: TriggerType.GET_CHAIN,
       easierCaves: false,
       morePlants: false
     };
-    for (const hero of this.party.members) {
+    for (const hero of this.game.party.members) {
       hero.basket.activate(data);
     }
 
@@ -85,7 +83,7 @@ export default class EventChain {
     if (data.morePlants) {
       table.push([ 8, PlantEvent ]);
     }
-    if (game.world.cave) {
+    if (this.game.world.cave) {
       table = data.easierCaves
         ? [
             [ 25, ChallengeEvent ], // 25
@@ -108,8 +106,8 @@ export default class EventChain {
             [ 5, SkinwalkerEvent ] // 100
           ];
     }
-    if (game.world.time === Time.NIGHT) {
-      if (!game.world.cave) {
+    if (this.game.world.time === Time.NIGHT) {
+      if (!this.game.world.cave) {
         table.push([ 3, SkinwalkerEvent ]);
       }
       table.push([ 5, DreamEvent ]);
@@ -120,25 +118,25 @@ export default class EventChain {
   /*
    * This function clears the chain's internal state
    */
-  clear(game: Game): void {
+  clear(): void {
     this.futures = [];
-    this.events = [ new BeginEvent(game) ];
+    this.events = [ new BeginEvent(this.game) ];
   }
 
   /*
    * This function returns the current event in the sequence.
    */
-  latest(game: Game): EventView {
-    for (const hero of this.party.members) {
+  latest(): EventView {
+    for (const hero of this.game.party.members) {
       if (hero.isFatigued()) {
-        return new FatigueEvent(game, hero);
+        return new FatigueEvent(this.game, hero);
       }
     }
-    if (!this.party.length()) {
-      return new DeathEvent(game);
+    if (!this.game.party.length()) {
+      return new DeathEvent(this.game);
     }
     if (!this.events.length) {
-      this.plan(game);
+      this.plan();
     }
     return this.events[0];
   }
@@ -148,7 +146,7 @@ export default class EventChain {
    * It's the core algorithm that runs the game, and it basically
    * determines difficulty.
    */
-  plan(game: Game): void {
+  plan(): void {
     // Tick future events and push if they're ready
     let a = 0;
     let future = false;
@@ -170,7 +168,7 @@ export default class EventChain {
 
     // Roll for the next event
     const event: EventView = new (Random.weighted(
-      this.getEventRollTable(game).filter(
+      this.getEventRollTable().filter(
         (x: [number, EventClass]) =>
           x[1].label === ChallengeEvent.label || x[1].label !== this.previouslyPlanned?.label
       )
