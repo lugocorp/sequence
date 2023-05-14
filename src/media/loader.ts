@@ -3,9 +3,9 @@
  * It loads assets by a 3-byte hexadecimal, where the first byte refers to
  * a spritesheet ID, and the second and third bytes are coordinates.
  */
-import { WGLYPH, HGLYPH } from '../enums/values';
-import Sprites from '../enums/sprites';
+import { WGLYPH, HGLYPH } from '../types';
 import DrawCoords from './draw-coords';
+import Sprites from './sprites';
 
 export default class GraphicsLoader {
   loadAsset: HTMLImageElement;

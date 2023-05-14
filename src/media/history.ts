@@ -1,4 +1,4 @@
-import { HTEXT } from '../enums/values';
+import { HTEXT } from '../types';
 
 export default class HistoryManager {
   private entry: any;

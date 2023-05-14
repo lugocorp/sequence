@@ -1,5 +1,5 @@
 import ChallengeEvent from './challenge';
-import Sprites from '../../enums/sprites';
+import Sprites from '../../media/sprites';
 import Random from '../../logic/random';
 import Item from '../../entities/item';
 import Hero from '../../entities/hero';

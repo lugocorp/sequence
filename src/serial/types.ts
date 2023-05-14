@@ -1,4 +1,4 @@
-import Sprites from '../enums/sprites';
+import Sprites from '../media/sprites';
 
 // Defines game data for a Hero
 export interface HeroData {

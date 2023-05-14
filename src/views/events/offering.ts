@@ -1,4 +1,4 @@
-import Sprites from '../../enums/sprites';
+import Sprites from '../../media/sprites';
 import Item from '../../entities/item';
 import Hero from '../../entities/hero';
 import Selector from '../../ui/selector';

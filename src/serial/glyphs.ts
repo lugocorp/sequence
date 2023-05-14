@@ -1,4 +1,4 @@
-import Sprites from '../enums/sprites';
+import Sprites from '../media/sprites';
 
 export default class Glyphs {
   /*

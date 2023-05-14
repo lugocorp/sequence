@@ -3,7 +3,7 @@
  * Its job is to generate and serve events for as long as
  * the player survives.
  */
-import { Time } from '../enums/world';
+import { Time } from '../types';
 import { EventView } from '../views/event';
 import SkinwalkerEvent from '../views/events/skinwalker';
 import ThreeSistersEvent from '../views/events/sisters';

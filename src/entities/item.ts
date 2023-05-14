@@ -1,5 +1,5 @@
-import { Trigger, Effect } from '../enums/triggers';
-import Sprites from '../enums/sprites';
+import { Trigger, Effect } from '../types';
+import Sprites from '../media/sprites';
 import Rarity from '../enums/rarity';
 import Game from '../game';
 import Hero from './hero';

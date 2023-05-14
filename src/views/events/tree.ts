@@ -1,4 +1,4 @@
-import Sprites from '../../enums/sprites';
+import Sprites from '../../media/sprites';
 import Stats from '../../enums/stats';
 import Random from '../../logic/random';
 import Hero from '../../entities/hero';

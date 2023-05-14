@@ -1,5 +1,5 @@
-import { DAY_NIGHT_CYCLE, World, Weather, Time } from './enums/world';
-import Sprites from './enums/sprites';
+import { DAY_NIGHT_CYCLE, World, Weather, Time } from './types';
+import Sprites from './media/sprites';
 import GraphicsRenderer from './media/renderer';
 import GraphicsLoader from './media/loader';
 import GameAudio from './media/audio';

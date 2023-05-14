@@ -1,6 +1,6 @@
-import Sprites from '../enums/sprites';
-import { WTEXT } from '../enums/values';
-import { green } from '../enums/colors';
+import Sprites from '../media/sprites';
+import { WTEXT } from '../types';
+import { green } from '../media/colors';
 import HistoryManager from '../media/history';
 import Action from '../ui/action';
 import View from '../ui/view';

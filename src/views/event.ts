@@ -1,4 +1,4 @@
-import { green, yellow, orange, red } from '../enums/colors';
+import { green, yellow, orange, red } from '../media/colors';
 import View from '../ui/view';
 import Game from '../game';
 

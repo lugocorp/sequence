@@ -1,4 +1,4 @@
-import Sprites from '../enums/sprites';
+import Sprites from '../media/sprites';
 import InstructionsView from './instructions';
 import CreditsView from './credits';
 import ScoreView from './scoreboard';

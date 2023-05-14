@@ -1,5 +1,5 @@
-import { Weather } from '../../enums/world';
-import Sprites from '../../enums/sprites';
+import { Weather } from '../../types';
+import Sprites from '../../media/sprites';
 import Random from '../../logic/random';
 import Action from '../../ui/action';
 import { EventView } from '../event';

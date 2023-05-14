@@ -1,6 +1,6 @@
 import Action from '../../ui/action';
 import { EventView } from '../event';
-import Sprites from '../../enums/sprites';
+import Sprites from '../../media/sprites';
 import Random from '../../logic/random';
 import Game from '../../game';
 

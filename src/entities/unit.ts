@@ -1,4 +1,4 @@
-import Sprites from '../enums/sprites';
+import Sprites from '../media/sprites';
 
 /**
  * This is the base class that both Hero and Enemy

@@ -1,4 +1,4 @@
-import { Trigger, TriggerType } from './triggers';
+import { Trigger, TriggerType } from '../types';
 import Random from '../logic/random';
 import Basket from '../entities/basket';
 import Unit from '../entities/unit';

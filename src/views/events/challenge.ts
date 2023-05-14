@@ -1,6 +1,6 @@
 import Hero from '../../entities/hero';
 import Challenger from '../../entities/challenger';
-import { orange } from '../../enums/colors';
+import { orange } from '../../media/colors';
 import Stats from '../../enums/stats';
 import Random from '../../logic/random';
 import Selector from '../../ui/selector';

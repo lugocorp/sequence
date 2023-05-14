@@ -3,7 +3,7 @@
  * Use this whenever you need to instantiate a game object.
  */
 import DataManager from './manager';
-import { Effect } from '../enums/triggers';
+import { Effect } from '../types';
 import Challenger from '../entities/challenger';
 import Hero from '../entities/hero';
 import Item from '../entities/item';

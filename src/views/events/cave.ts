@@ -1,5 +1,5 @@
-import { Time } from '../../enums/world';
-import Sprites from '../../enums/sprites';
+import { Time } from '../../types';
+import Sprites from '../../media/sprites';
 import Action from '../../ui/action';
 import { EventView } from '../event';
 import Game from '../../game';
