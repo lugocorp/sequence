@@ -3,7 +3,7 @@ import Sprites from './enums/sprites';
 import GraphicsRenderer from './media/renderer';
 import GraphicsLoader from './media/loader';
 import GameAudio from './media/audio';
-import History from './media/history';
+import HistoryManager from './media/history';
 import DataManager from './serial/manager';
 import EventChain from './logic/chain';
 import Party from './entities/party';
@@ -18,7 +18,7 @@ export default class Game {
   private assets: GraphicsLoader;
   chain: EventChain;
   data: DataManager;
-  history: History;
+  history: HistoryManager;
   audio: GameAudio;
   party: Party;
   currentClick: { x: number; y: number; down: boolean };
@@ -35,7 +35,7 @@ export default class Game {
     this.assets = new GraphicsLoader();
     this.chain = new EventChain(this);
     this.data = new DataManager(this);
-    this.history = new History();
+    this.history = new HistoryManager();
     this.audio = new GameAudio();
     this.party = new Party(this);
 

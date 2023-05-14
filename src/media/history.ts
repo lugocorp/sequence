@@ -1,6 +1,6 @@
 import { HTEXT } from '../enums/values';
 
-export default class History {
+export default class HistoryManager {
   private entry: any;
   runs: [string, number][];
   peopleHelped: number;

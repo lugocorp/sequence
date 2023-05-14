@@ -1,7 +1,7 @@
 import Sprites from '../enums/sprites';
 import { WTEXT } from '../enums/values';
 import { green } from '../enums/colors';
-import History from '../media/history';
+import HistoryManager from '../media/history';
 import Action from '../ui/action';
 import View from '../ui/view';
 import StartView from './start';
@@ -18,7 +18,7 @@ export default class ScoreView extends View {
       return;
     }
     const that = this;
-    const history: History = this.game.history;
+    const history: HistoryManager = this.game.history;
     history.save();
     const total: number = history.calculateScore();
     this.setDetails(
