@@ -1,5 +1,5 @@
 import Sprites from '../../media/sprites';
-import Stats from '../../enums/stats';
+import EnumsHelper from '../../logic/enums';
 import Hero from '../../entities/hero';
 import Random from '../../logic/random';
 import Action from '../../ui/action';
@@ -23,14 +23,14 @@ export default class ObstacleEvent extends EventView {
       { sprite: Sprites.MOUNTAIN, name: 'mountain' }
     ]);
     this.original = this.game.party.length();
-    this.stat = Stats.getRandomStat();
+    this.stat = EnumsHelper.getRandomStat();
     this.cutoff = Random.max(4) + 1;
     const that = this;
     this.setDetails(
       this.obstacle.sprite,
       `your party comes across a ${this.obstacle.name}. only travelers with ${
         this.cutoff
-      } ${Stats.getStatName(this.stat)} or ${this.higher ? 'higher' : 'lower'} may pass.`,
+      } ${EnumsHelper.getStatName(this.stat)} or ${this.higher ? 'higher' : 'lower'} may pass.`,
       [ new Action('continue', () => that.finish()) ]
     );
   }
@@ -43,8 +43,8 @@ export default class ObstacleEvent extends EventView {
   // True if the given hero should pass the obstacle
   private passes(hero: Hero): boolean {
     return this.higher
-      ? Stats.getUnitStat(hero, this.stat) >= this.cutoff
-      : Stats.getUnitStat(hero, this.stat) <= this.cutoff;
+      ? EnumsHelper.getUnitStat(hero, this.stat) >= this.cutoff
+      : EnumsHelper.getUnitStat(hero, this.stat) <= this.cutoff;
   }
 
   finish(): void {

@@ -12,6 +12,12 @@ export const HGLYPH = 8;
 export const WTEXT = 120 / WGLYPH; // 24
 export const HTEXT = 96 / HGLYPH; // 12
 
+export enum Stats {
+  STRENGTH = 0,
+  WISDOM = 1,
+  DEXTERITY = 2
+}
+
 export enum Rarity {
   COMMON = 0,
   UNCOMMON = 1,

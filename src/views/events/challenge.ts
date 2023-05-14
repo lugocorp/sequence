@@ -1,7 +1,8 @@
+import { Stats } from '../../types';
 import Hero from '../../entities/hero';
 import Sprites from '../../media/sprites';
 import { orange } from '../../media/colors';
-import Stats from '../../enums/stats';
+import EnumsHelper from '../../logic/enums';
 import Random from '../../logic/random';
 import Selector from '../../ui/selector';
 import Action from '../../ui/action';
@@ -31,11 +32,10 @@ export default class ChallengeEvent extends EventView {
       wisdom: 2,
       dexterity: 0
     };
-    this.expectation = [ Stats.getRandomStat() ];
+    this.expectation = [ EnumsHelper.getRandomStat() ];
     if (Random.passes(0.5)) {
-      this.expectation.push(
-        ((Random.passes(0.5) ? 1 : -1) + this.expectation[0] + Stats.N) % Stats.N
-      );
+      const n = Stats.DEXTERITY + 1;
+      this.expectation.push(((Random.passes(0.5) ? 1 : -1) + this.expectation[0] + n) % n);
     }
     this.setDetails(
       this.challenger.sprite,
@@ -64,8 +64,10 @@ export default class ChallengeEvent extends EventView {
 
   getTestText(): string {
     return (
-      `a test of ${orange(Stats.getStatName(this.expectation[0]))}` +
-      (this.expectation.length > 1 ? ` and ${orange(Stats.getStatName(this.expectation[1]))}` : '')
+      `a test of ${orange(EnumsHelper.getStatName(this.expectation[0]))}` +
+      (this.expectation.length > 1
+        ? ` and ${orange(EnumsHelper.getStatName(this.expectation[1]))}`
+        : '')
     );
   }
 
@@ -119,14 +121,18 @@ export default class ChallengeEvent extends EventView {
   }
 
   private getChallengerStat(index: number): number {
-    return this.challenger[Stats.getStatName(this.expectation[index])];
+    return {
+      [Stats.STRENGTH]: this.challenger.strength,
+      [Stats.WISDOM]: this.challenger.wisdom,
+      [Stats.DEXTERITY]: this.challenger.dexterity
+    }[this.expectation[index]];
   }
 
   private playerStatsHigher(hero: Hero): boolean {
-    let sum1: number = Stats.getUnitStat(hero, this.expectation[0]);
+    let sum1: number = EnumsHelper.getUnitStat(hero, this.expectation[0]);
     let sum2: number = this.getChallengerStat(0);
     if (this.expectation.length > 1) {
-      sum1 += Stats.getUnitStat(hero, this.expectation[1]);
+      sum1 += EnumsHelper.getUnitStat(hero, this.expectation[1]);
       sum2 += this.getChallengerStat(1);
     }
     return sum1 >= sum2;

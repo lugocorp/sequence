@@ -1,5 +1,5 @@
+import { Stats } from '../../types';
 import Sprites from '../../media/sprites';
-import Stats from '../../enums/stats';
 import Random from '../../logic/random';
 import Hero from '../../entities/hero';
 import Selector from '../../ui/selector';

@@ -1,6 +1,6 @@
-import { Trigger, TriggerType } from '../types';
+import { Stats, Trigger, TriggerType } from '../types';
 import Sprites from '../media/sprites';
-import Stats from '../enums/stats';
+import EnumsHelper from '../logic/enums';
 import Random from '../logic/random';
 import Basket from './basket';
 import Party from './party';
@@ -60,36 +60,36 @@ export default class Hero {
 
   // Returns true if this Hero no longer has stats due to fatigue
   isFatigued(): boolean {
-    const str: number = Stats.getUnitStat(this, Stats.STRENGTH);
-    const wis: number = Stats.getUnitStat(this, Stats.WISDOM);
-    const dex: number = Stats.getUnitStat(this, Stats.DEXTERITY);
+    const str: number = EnumsHelper.getUnitStat(this, Stats.STRENGTH);
+    const wis: number = EnumsHelper.getUnitStat(this, Stats.WISDOM);
+    const dex: number = EnumsHelper.getUnitStat(this, Stats.DEXTERITY);
     return str <= 0 && wis <= 0 && dex <= 0;
   }
 
   // Reduces this Hero's stats
   fatigue(): void {
-    Stats.changeUnitStat(this, Stats.STRENGTH, -1);
-    Stats.changeUnitStat(this, Stats.WISDOM, -1);
-    Stats.changeUnitStat(this, Stats.DEXTERITY, -1);
+    EnumsHelper.changeUnitStat(this, Stats.STRENGTH, -1);
+    EnumsHelper.changeUnitStat(this, Stats.WISDOM, -1);
+    EnumsHelper.changeUnitStat(this, Stats.DEXTERITY, -1);
   }
 
   // Fully fatigues the hero
   fullyFatigue(): void {
-    Stats.setUnitStat(this, Stats.STRENGTH, -1000);
-    Stats.setUnitStat(this, Stats.WISDOM, -1000);
-    Stats.setUnitStat(this, Stats.DEXTERITY, -1000);
+    EnumsHelper.setUnitStat(this, Stats.STRENGTH, -1000);
+    EnumsHelper.setUnitStat(this, Stats.WISDOM, -1000);
+    EnumsHelper.setUnitStat(this, Stats.DEXTERITY, -1000);
   }
 
   // Boosts each stat on this hero
   empower(): void {
-    Stats.changeUnitStat(this, Stats.STRENGTH, 1);
-    Stats.changeUnitStat(this, Stats.WISDOM, 1);
-    Stats.changeUnitStat(this, Stats.DEXTERITY, 1);
+    EnumsHelper.changeUnitStat(this, Stats.STRENGTH, 1);
+    EnumsHelper.changeUnitStat(this, Stats.WISDOM, 1);
+    EnumsHelper.changeUnitStat(this, Stats.DEXTERITY, 1);
   }
 
   // Boosts a random stat on this hero
   empowerRandom(): void {
-    Stats.changeUnitStat(this, Stats.getRandomStat(), 1);
+    EnumsHelper.changeUnitStat(this, EnumsHelper.getRandomStat(), 1);
   }
 
   // Restores a given stat to its original value
@@ -100,7 +100,7 @@ export default class Hero {
         : stat === Stats.WISDOM
         ? this.originalWisdom
         : this.originalDexterity;
-    Stats.setUnitStat(this, stat, original);
+    EnumsHelper.setUnitStat(this, stat, original);
   }
 
   // Changes the hero's luck by a given amount
@@ -111,9 +111,9 @@ export default class Hero {
   // Returns the text used in this hero's description
   descriptionText(): string {
     const stat = (n: number): string => (n > 9 ? `${n}\t` : `\t${n}\t`);
-    const str: number = Stats.getUnitStat(this, Stats.STRENGTH);
-    const wis: number = Stats.getUnitStat(this, Stats.WISDOM);
-    const dex: number = Stats.getUnitStat(this, Stats.DEXTERITY);
+    const str: number = EnumsHelper.getUnitStat(this, Stats.STRENGTH);
+    const wis: number = EnumsHelper.getUnitStat(this, Stats.WISDOM);
+    const dex: number = EnumsHelper.getUnitStat(this, Stats.DEXTERITY);
     return (
       `${this.name}\n` +
       `${stat(str)}str\t\t${stat(wis)}wis\t\t${stat(dex)}dex\n` +

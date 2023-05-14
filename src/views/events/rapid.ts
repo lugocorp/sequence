@@ -1,5 +1,6 @@
+import { Stats } from '../../types';
 import Sprites from '../../media/sprites';
-import Stats from '../../enums/stats';
+import EnumsHelper from '../../logic/enums';
 import Selector from '../../ui/selector';
 import Hero from '../../entities/hero';
 import Action from '../../ui/action';
@@ -35,9 +36,9 @@ export default class RapidEvent extends EventView {
   river(): void {
     const that = this;
     const hero: Hero = this.heroSelector.item();
-    Stats.changeUnitStat(hero, Stats.STRENGTH, 1);
-    Stats.changeUnitStat(hero, Stats.WISDOM, 1);
-    Stats.changeUnitStat(hero, Stats.DEXTERITY, 1);
+    EnumsHelper.changeUnitStat(hero, Stats.STRENGTH, 1);
+    EnumsHelper.changeUnitStat(hero, Stats.WISDOM, 1);
+    EnumsHelper.changeUnitStat(hero, Stats.DEXTERITY, 1);
     this.setDetails(hero.sprite, `${hero.name} became stronger, wiser, and faster by the river!`, [
       new Action('continue', () => {
         if (hero.lucky()) {

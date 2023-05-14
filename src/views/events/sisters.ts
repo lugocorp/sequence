@@ -1,5 +1,6 @@
+import { Stats } from '../../types';
 import Sprites from '../../media/sprites';
-import Stats from '../../enums/stats';
+import EnumsHelper from '../../logic/enums';
 import Hero from '../../entities/hero';
 import Selector from '../../ui/selector';
 import Action from '../../ui/action';
@@ -24,9 +25,9 @@ export default class ThreeSistersEvent extends EventView {
                 new Action('continue', () => this.game.progress())
               ]);
               hero.boostLuck(5);
-              Stats.changeUnitStat(hero, Stats.STRENGTH, 1);
-              Stats.changeUnitStat(hero, Stats.WISDOM, 1);
-              Stats.changeUnitStat(hero, Stats.DEXTERITY, 1);
+              EnumsHelper.changeUnitStat(hero, Stats.STRENGTH, 1);
+              EnumsHelper.changeUnitStat(hero, Stats.WISDOM, 1);
+              EnumsHelper.changeUnitStat(hero, Stats.DEXTERITY, 1);
             })
           ])
         )

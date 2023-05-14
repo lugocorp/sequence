@@ -1,5 +1,6 @@
+import { Stats } from '../../types';
 import Sprites from '../../media/sprites';
-import Stats from '../../enums/stats';
+import EnumsHelper from '../../logic/enums';
 import Hero from '../../entities/hero';
 import Random from '../../logic/random';
 import Selector from '../../ui/selector';
@@ -37,9 +38,9 @@ export default class TricksterEvent extends EventView {
                   new Action('continue', () => this.game.progress())
                 ]);
               } else if (effect === 1) {
-                Stats.changeUnitStat(hero, Stats.STRENGTH, 1);
-                Stats.changeUnitStat(hero, Stats.WISDOM, 1);
-                Stats.changeUnitStat(hero, Stats.DEXTERITY, 1);
+                EnumsHelper.changeUnitStat(hero, Stats.STRENGTH, 1);
+                EnumsHelper.changeUnitStat(hero, Stats.WISDOM, 1);
+                EnumsHelper.changeUnitStat(hero, Stats.DEXTERITY, 1);
                 this.setDetails(
                   animal.sprite,
                   `${hero.name} was empowered by the ${animal.name}!`,
