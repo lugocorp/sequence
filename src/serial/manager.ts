@@ -4,12 +4,13 @@
  * entities. Use this to get indexed abilities or random game objects.
  */
 import Sprites from '../media/sprites';
-import Rarity from '../enums/rarity';
+import EnumsHelper from '../logic/enums';
 import Random from '../logic/random';
 import Factory from './factory';
 import Challenger from '../entities/challenger';
 import Hero from '../entities/hero';
 import Item from '../entities/item';
+import { Rarity } from '../types';
 import Game from '../game';
 import * as types from './types';
 import challengers from '../data/challenger';
@@ -26,7 +27,7 @@ export default class DataManager {
 
   // Sets up indices in this object for easy access of game data by reference
   index(): void {
-    for (const rarity of Rarity.values()) {
+    for (const rarity of EnumsHelper.rarities()) {
       this.itemsByRarityIndex.set(rarity, []);
     }
     for (const item of items) {

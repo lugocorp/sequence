@@ -1,14 +1,5 @@
-import Hero from '../entities/hero';
-import Challenger from '../entities/challenger';
-import DeerEvent from '../views/events/deer';
-import RapidEvent from '../views/events/rapid';
-import ObstacleEvent from '../views/events/obstacle';
-import ChallengeEvent from '../views/events/challenge';
 import { Trigger, TriggerType, Effect } from '../types';
 import { Weather, Time } from '../types';
-import Rarity from '../enums/rarity';
-import Stats from '../enums/stats';
-import Random from '../logic/random';
 import Game from '../game';
 const data: Record<string, Effect> = {};
 

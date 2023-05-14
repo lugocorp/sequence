@@ -12,6 +12,14 @@ export const HGLYPH = 8;
 export const WTEXT = 120 / WGLYPH; // 24
 export const HTEXT = 96 / HGLYPH; // 12
 
+export enum Rarity {
+  COMMON = 0,
+  UNCOMMON = 1,
+  RARE = 2,
+  LEGENDARY = 3,
+  MYTHIC = 4
+}
+
 export enum TriggerType {
   GET_STATS = "when you calculate a hero's stats",
   GET_LUCK = "when you calculate a hero's luck"

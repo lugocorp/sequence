@@ -1,6 +1,6 @@
 import { ItemData } from '../serial/types';
 import Sprites from '../media/sprites';
-import Rarity from '../enums/rarity';
+import { Rarity } from '../types';
 
 const data: ItemData[] = [
   {

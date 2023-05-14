@@ -1,4 +1,4 @@
-import Rarity from '../../enums/rarity';
+import { Rarity } from '../../types';
 import Hero from '../../entities/hero';
 import Item from '../../entities/item';
 import Action from '../../ui/action';

@@ -1,6 +1,5 @@
-import { Trigger, TriggerType } from '../../types';
+import { Rarity, Trigger, TriggerType } from '../../types';
 import Sprites from '../../media/sprites';
-import Rarity from '../../enums/rarity';
 import Random from '../../logic/random';
 import Hero from '../../entities/hero';
 import Item from '../../entities/item';

@@ -1,6 +1,6 @@
 import { Trigger, Effect } from '../types';
+import EnumsHelper from '../logic/enums';
 import Sprites from '../media/sprites';
-import Rarity from '../enums/rarity';
 import Game from '../game';
 import Hero from './hero';
 
@@ -30,6 +30,6 @@ export default class Item {
   }
 
   descriptionText(): string {
-    return `${this.name}\n${Rarity.display(this.rarity)}\n${this.description}`;
+    return `${this.name}\n${EnumsHelper.displayRarity(this.rarity)}\n${this.description}`;
   }
 }
