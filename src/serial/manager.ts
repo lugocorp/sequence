@@ -11,7 +11,7 @@ import Factory from './factory';
 import Challenger from '../entities/challenger';
 import Hero from '../entities/hero';
 import Item from '../entities/item';
-import Game from '../game';
+import Party from '../entities/party';
 import * as types from './types';
 import challengers from '../data/challenger';
 import effects from '../data/effects';
@@ -22,6 +22,8 @@ export default class DataManager {
   itemsByRarityIndex: Map<number, types.ItemData[]> = new Map();
   factory: Factory = new Factory();
   heroes: types.HeroData[];
+
+  constructor(private party: Party) {}
 
   // Sets up indices in this object for easy access of game data by reference
   index(): void {
@@ -86,7 +88,7 @@ export default class DataManager {
       type: TriggerType.GET_RARITY,
       floor
     };
-    for (const hero of Game.game.party.members) {
+    for (const hero of this.party.members) {
       hero.basket.activate(data);
     }
 

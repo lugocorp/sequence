@@ -15,33 +15,27 @@ import { EventView } from './views/event';
 import View from './ui/view';
 
 export default class Game {
-  static game: Game;
   private view: View;
   currentClick: { x: number; y: number; down: boolean };
-  renderer: GraphicsRenderer;
-  assets: GraphicsLoader;
-  chain: EventChain;
-  data: DataManager;
-  history: History;
-  audio: GameAudio;
   score: number;
   world: World;
-  party: Party;
 
-  constructor() {
+  constructor(
+    private renderer: GraphicsRenderer,
+    private assets: GraphicsLoader,
+    private chain: EventChain,
+    private data: DataManager,
+    private history: History,
+    private audio: GameAudio,
+    private party: Party
+  ) {
     this.currentClick = { x: 0, y: 0, down: false };
-    this.assets = new GraphicsLoader();
-    this.chain = new EventChain();
-    this.data = new DataManager();
-    this.history = new History();
-    this.audio = new GameAudio();
-    this.party = new Party();
   }
 
   // Initializes the game object so the player can start interacting with it
   async start(): Promise<void> {
     const canvas: HTMLCanvasElement = document.getElementById('canvas') as HTMLCanvasElement;
-    this.renderer = new GraphicsRenderer(canvas, this.assets);
+    this.renderer.setup(canvas, this.assets);
     this.renderer.setCanvasSize();
 
     // Load and setup game assets (with a loading screen)
@@ -70,7 +64,7 @@ export default class Game {
       cave: false
     };
     this.party.populate('bird catcher');
-    Game.futureEvent(new TimeEvent(), DAY_NIGHT_CYCLE);
+    this.futureEvent(new TimeEvent(), DAY_NIGHT_CYCLE);
   }
 
   // Tells the game to render a new frame
@@ -89,14 +83,14 @@ export default class Game {
   }
 
   // Sets the current view of the game
-  static setView(view: View): void {
-    Game.game.view = view;
+  setView(view: View): void {
+    this.view = view;
     view.init();
   }
 
   // Queues a FutureEvent
-  static futureEvent(view: EventView, turns: number, valid?: () => boolean): void {
-    Game.game.chain.futures.push(new FutureEvent(view, turns, valid));
+  futureEvent(view: EventView, turns: number, valid?: () => boolean): void {
+    this.chain.futures.push(new FutureEvent(view, turns, valid));
   }
 
   getBackground(includeCave = false): Sprites {

@@ -2,7 +2,13 @@
 export default class Injector {
   private objects: Record<string, any> = {};
   private classes: Record<string, any> = {
-
+    renderer: 'media/renderer',
+    assets: 'media/loader',
+    chain: 'logic/chain',
+    data: 'serial/manager',
+    history: 'media/history',
+    audio: 'media/audio',
+    party: 'entities/party'
   };
 
   /**

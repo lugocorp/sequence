@@ -19,7 +19,9 @@ export default class GraphicsRenderer {
   scale: number;
   dark: number;
 
-  constructor(canvas: HTMLCanvasElement, assets: GraphicsLoader) {
+  constructor(private game: Game) {}
+
+  setup(canvas: HTMLCanvasElement, assets: GraphicsLoader) {
     this.ctx = canvas.getContext('2d');
     this.canvas = canvas;
     this.assets = assets;
@@ -57,7 +59,7 @@ export default class GraphicsRenderer {
       return;
     }
     if (view.image) {
-      const background: number = Game.game.getBackground(true);
+      const background: number = this.game.getBackground(true);
       if (background !== Sprites.NONE) {
         this.drawSprite(background, 12, 3);
       }
@@ -161,7 +163,7 @@ export default class GraphicsRenderer {
     const coords = this.toDisplayCoords(tx, ty);
     const x = coords[0];
     const y = coords[1];
-    const highlight = clickable && Game.game.within(msg, x, y, true);
+    const highlight = clickable && this.game.within(msg, x, y, true);
     let dx = 0;
     let dy = 0;
     for (let a = 0; a < msg.length; a++) {

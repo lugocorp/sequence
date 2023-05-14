@@ -30,6 +30,7 @@ import GiftEvent from '../views/events/gift';
 import TrapEvent from '../views/events/trap';
 import DeerEvent from '../views/events/deer';
 import CaveEvent from '../views/events/cave';
+import Party from '../entities/party';
 import FutureEvent from './future';
 import Random from './random';
 import Game from '../game';
@@ -38,6 +39,11 @@ export default class EventChain {
   private previouslyPlanned: EventView;
   futures: FutureEvent[] = [];
   events: EventView[] = [ new BeginEvent() ];
+
+  constructor(
+    private game: Game,
+    private party: Party
+  ) {}
 
   /*
    * This function returns the roll table for the next event
@@ -48,7 +54,7 @@ export default class EventChain {
       easierCaves: false,
       morePlants: false
     };
-    for (const hero of Game.game.party.members) {
+    for (const hero of this.party.members) {
       hero.basket.activate(data);
     }
 
@@ -76,7 +82,7 @@ export default class EventChain {
     if (data.morePlants) {
       table.push([ 8, PlantEvent ]);
     }
-    if (Game.game.world.cave) {
+    if (this.game.world.cave) {
       table = data.easierCaves
         ? [
             [ 25, ChallengeEvent ], // 25
@@ -99,8 +105,8 @@ export default class EventChain {
             [ 5, SkinwalkerEvent ] // 100
           ];
     }
-    if (Game.game.world.time === Time.NIGHT) {
-      if (!Game.game.world.cave) {
+    if (this.game.world.time === Time.NIGHT) {
+      if (!this.game.world.cave) {
         table.push([ 3, SkinwalkerEvent ]);
       }
       table.push([ 5, DreamEvent ]);
@@ -120,12 +126,12 @@ export default class EventChain {
    * This function returns the current event in the sequence.
    */
   latest(): EventView {
-    for (const hero of Game.game.party.members) {
+    for (const hero of this.party.members) {
       if (hero.isFatigued()) {
         return new FatigueEvent(hero);
       }
     }
-    if (!Game.game.party.length()) {
+    if (!this.party.length()) {
       return new DeathEvent();
     }
     if (!this.events.length) {
