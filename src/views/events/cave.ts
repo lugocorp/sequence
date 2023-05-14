@@ -20,7 +20,7 @@ export default class CaveEvent extends EventView {
         ? [
             new Action('yes', () => {
               this.game.world.cave = true;
-              this.game.futureEvent(new CaveEvent(this.game), 8);
+              this.game.chain.futureEvent(new CaveEvent(this.game), 8);
               this.game.progress();
             }),
             new Action('no', () => this.game.progress())

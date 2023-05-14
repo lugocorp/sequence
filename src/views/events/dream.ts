@@ -53,6 +53,6 @@ export default class DreamEvent extends EventView {
         );
       }
     };
-    this.game.futureEvent(future, 10, () => this.game.party.members.indexOf(hero) > -1);
+    this.game.chain.futureEvent(future, 10, () => this.game.party.members.indexOf(hero) > -1);
   }
 }

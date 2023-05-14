@@ -28,7 +28,7 @@ export default class TimeEvent extends EventView {
         : `the sun comes to rest behind the hills${cave} as the moon rises into the night sky.`,
       [
         new Action('continue', () => {
-          that.game.futureEvent(new TimeEvent(that.game), DAY_NIGHT_CYCLE);
+          that.game.chain.futureEvent(new TimeEvent(that.game), DAY_NIGHT_CYCLE);
           that.game.progress();
         })
       ]

@@ -29,7 +29,6 @@ import GiftEvent from '../views/events/gift';
 import TrapEvent from '../views/events/trap';
 import DeerEvent from '../views/events/deer';
 import CaveEvent from '../views/events/cave';
-import FutureEvent from './future';
 import Random from './random';
 import Game from '../game';
 
@@ -44,6 +43,11 @@ export default class EventChain {
 
   setup() {
     this.events = [ new BeginEvent(this.game) ];
+  }
+
+  // Queues a FutureEvent
+  futureEvent(view: EventView, turns: number, valid?: () => boolean): void {
+    this.futures.push(new FutureEvent(view, turns, valid));
   }
 
   /*
@@ -152,5 +156,18 @@ export default class EventChain {
     );
     this.previouslyPlanned = event.toString();
     this.events.push(event(this.game));
+  }
+}
+
+// An event to show in the future
+class FutureEvent {
+  constructor(
+    private event: EventView,
+    private turns: number,
+    public valid: () => boolean = () => true
+  ) {}
+
+  tick(): EventView {
+    return --this.turns <= 0 ? this.event : undefined;
   }
 }

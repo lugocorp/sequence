@@ -5,7 +5,6 @@ import GraphicsLoader from './media/loader';
 import GameAudio from './media/audio';
 import History from './media/history';
 import DataManager from './serial/manager';
-import FutureEvent from './logic/future';
 import EventChain from './logic/chain';
 import Party from './entities/party';
 import TimeEvent from './views/events/time';
@@ -72,7 +71,7 @@ export default class Game {
       cave: false
     };
     this.party.populate('bird catcher');
-    this.futureEvent(new TimeEvent(this), DAY_NIGHT_CYCLE);
+    this.chain.futureEvent(new TimeEvent(this), DAY_NIGHT_CYCLE);
   }
 
   // Tells the game to render a new frame
@@ -94,11 +93,6 @@ export default class Game {
   setView(view: View): void {
     this.view = view;
     view.init();
-  }
-
-  // Queues a FutureEvent
-  futureEvent(view: EventView, turns: number, valid?: () => boolean): void {
-    this.chain.futures.push(new FutureEvent(view, turns, valid));
   }
 
   getBackground(includeCave = false): Sprites {

@@ -73,6 +73,6 @@ export default class ProjectEvent extends EventView {
         )
       ]
     );
-    this.game.futureEvent(future, 8);
+    this.game.chain.futureEvent(future, 8);
   }
 }

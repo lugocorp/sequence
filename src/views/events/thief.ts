@@ -91,8 +91,8 @@ export default class ThiefEvent extends EventView {
         oldInit.call(challenge);
         this.catchUp();
       };
-      this.game.futureEvent(challenge, 1);
-      this.game.futureEvent(this, 2);
+      this.game.chain.futureEvent(challenge, 1);
+      this.game.chain.futureEvent(this, 2);
       this.setDetails(this.animal.sprite, `your party did not catch the ${this.animal.name}.`, [
         new Action('continue', () => this.game.progress())
       ]);

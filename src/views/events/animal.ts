@@ -64,7 +64,7 @@ export default class AnimalEvent extends EventView {
                     })
                   ]
                 );
-                this.game.futureEvent(
+                this.game.chain.futureEvent(
                   view,
                   8,
                   () => hero.isInParty(this.game.party) && hero.basket.contains(item)

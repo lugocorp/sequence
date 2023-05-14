@@ -60,7 +60,7 @@ export default class DeerEvent extends EventView {
             [ new Action('continue', () => this.game.progress()) ]
           );
         } else {
-          this.game.futureEvent(this, 3);
+          this.game.chain.futureEvent(this, 3);
           this.setDetails(
             hero.sprite,
             `${hero.name} exhausted themself and did not catch the deer, and it escaped into the thicket. your party gives chase.`,

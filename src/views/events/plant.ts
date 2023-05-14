@@ -106,7 +106,7 @@ export default class PlantEvent extends EventView {
           })
         ]
       );
-    this.game.futureEvent(view, 3);
+    this.game.chain.futureEvent(view, 3);
     this.game.progress();
   }
 
@@ -125,7 +125,7 @@ export default class PlantEvent extends EventView {
           })
         ]
       );
-    this.game.futureEvent(view, 3);
+    this.game.chain.futureEvent(view, 3);
     this.game.progress();
   }
 }

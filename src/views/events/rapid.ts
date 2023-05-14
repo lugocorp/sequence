@@ -64,7 +64,7 @@ export default class RapidEvent extends EventView {
         })
       ]
     );
-    this.game.futureEvent(retrieve, 5, () => !this.game.party.isFull());
+    this.game.chain.futureEvent(retrieve, 5, () => !this.game.party.isFull());
     this.setDetails(
       Sprites.RAPID,
       `${hero.name} was swept away by the river! you can meet them downstream if your party isn't full.`,
