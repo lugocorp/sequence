@@ -3,7 +3,7 @@
  * Use it whenever you have to interact with the game canvas.
  */
 import { WIDTH, HEIGHT, WGLYPH, HGLYPH, WTEXT } from '../types';
-import Glyphs from '../serial/glyphs';
+import Glyphs from './glyphs';
 import DrawCoords from './draw-coords';
 import GraphicsLoader from './loader';
 import { colors } from './colors';

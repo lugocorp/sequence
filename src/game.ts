@@ -4,7 +4,7 @@ import GraphicsRenderer from './media/renderer';
 import GraphicsLoader from './media/loader';
 import GameAudio from './media/audio';
 import HistoryManager from './media/history';
-import DataManager from './serial/manager';
+import DataManager from './logic/data';
 import EventChain from './logic/chain';
 import Party from './entities/party';
 import TimeEvent from './views/events/time';
@@ -50,7 +50,6 @@ export default class Game {
     await this.history.initialize();
     await this.assets.loadAssets();
     await this.audio.loadAudio();
-    this.data.index();
     await new Promise((resolve) => setTimeout(resolve, 1000));
     this.audio.play(GameAudio.STARTUP);
     this.chain.setup();

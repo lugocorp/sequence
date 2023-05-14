@@ -11,8 +11,6 @@ export default class Hero {
   private strength: number;
   private wisdom: number;
   private dexterity: number;
-  sprite: Sprites;
-  name: string;
   private originalStrength: number;
   private originalWisdom: number;
   private originalDexterity: number;
@@ -21,6 +19,8 @@ export default class Hero {
   private people: string;
   private _basket: Basket;
   description: string;
+  sprite: Sprites;
+  name: string;
 
   constructor(
     game: Game,
