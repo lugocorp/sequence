@@ -1,5 +1,5 @@
 import { Trigger } from '../enums/triggers';
-impor tHistory from '../media/history';
+import History from '../media/history';
 import Random from '../logic/random';
 import Game from '../game';
 import Item from './item';
@@ -63,9 +63,9 @@ export default class Basket {
   }
 
   // Replaces item1 with item2
-  replace(item1: Item, item2: Item): void {
+  replace(history: History, item1: Item, item2: Item): void {
     this.unequip(item1);
-    this.equip(item2);
+    this.equip(history, item2);
   }
 
   // Returns the number of held items

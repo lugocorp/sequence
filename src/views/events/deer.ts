@@ -10,60 +10,60 @@ export default class DeerEvent extends EventView {
   private heroSelector: Selector<Hero>;
   private initiated = false;
 
-  constructor() {
+  constructor(game: Game) {
     super(DeerEvent);
     this.setDetails(Sprites.DEER, 'your party hears a rustling in the bushes. a deer jumps out!', [
-      new Action('continue', () => this.playerChoice())
+      new Action('continue', () => this.playerChoice(game))
     ]);
   }
 
-  init(): void {
+  init(game: Game): void {
     if (this.initiated) {
-      this.playerChoice();
+      this.playerChoice(game);
     }
     this.initiated = true;
     this.heroSelector = Selector.heroSelector(
-      Game.game.party.members,
+      game.party,
       undefined,
       (hero) => `${this.coloredRate(hero.luck)} chance of success.`
     );
   }
 
-  playerChoice(): void {
+  playerChoice(game: Game): void {
     this.setDetails(
       Sprites.DEER,
       'your party comes close to the deer. will a party member try to catch it?',
       [
-        new Action('yes', () => this.hunt()),
+        new Action('yes', () => this.hunt(game)),
         new Action('no', () =>
           this.setDetails(Sprites.DEER, 'your party turns away and leaves the deer alone.', [
-            new Action('continue', () => Game.game.progress())
+            new Action('continue', () => game.progress())
           ])
         )
       ]
     );
   }
 
-  hunt(): void {
+  hunt(game: Game): void {
     this.setSelector(this.heroSelector, [
       new Action('hunt deer', () => {
         const hero: Hero = this.heroSelector.item();
-        hero.fatigue();
+        hero.fatigue(game.party);
         if (hero.lucky()) {
-          for (const hero of Game.game.party.members) {
+          for (const hero of game.party.members) {
             hero.boostLuck(5);
           }
           this.setDetails(
             hero.sprite,
             `${hero.name} successfully hunted the deer! they are tired but left a small offering for the beast's spirit. your party was blessed for their efforts.`,
-            [ new Action('continue', () => Game.game.progress()) ]
+            [ new Action('continue', () => game.progress()) ]
           );
         } else {
-          Game.futureEvent(this, 3);
+          game.futureEvent(this, 3);
           this.setDetails(
             hero.sprite,
             `${hero.name} exhausted themself and did not catch the deer, and it escaped into the thicket. your party gives chase.`,
-            [ new Action('continue', () => Game.game.progress()) ]
+            [ new Action('continue', () => game.progress()) ]
           );
         }
       })

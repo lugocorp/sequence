@@ -1,7 +1,7 @@
 import { Trigger, TriggerType } from '../enums/triggers';
+import DataManager from '../serial/manager';
+import History from '../media/history';
 import Random from '../logic/random';
-import History from './media/history';
-import DataManager from './serial/manager';
 
 import Hero from './hero';
 

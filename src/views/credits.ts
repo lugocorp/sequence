@@ -6,7 +6,7 @@ import StartView from './start';
 import Game from '../game';
 
 export default class CreditsView extends View {
-  constructor() {
+  constructor(game: Game) {
     super();
     const that = this;
     this.setSelector(
@@ -21,7 +21,7 @@ export default class CreditsView extends View {
           that.setText(e);
         }
       ),
-      [ new Action('back', () => Game.setView(new StartView())) ]
+      [ new Action('back', () => game.setView(new StartView(game))) ]
     );
   }
 }

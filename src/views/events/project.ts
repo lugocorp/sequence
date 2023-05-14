@@ -8,7 +8,7 @@ import Game from '../../game';
 export default class ProjectEvent extends EventView {
   static label = 'project';
 
-  constructor() {
+  constructor(game: Game) {
     super(ProjectEvent);
     const that = this;
     const project: { sprite: Sprites; name: string } = Random.element([
@@ -29,26 +29,26 @@ export default class ProjectEvent extends EventView {
       project.sprite,
       `your party has the chance to ${project.name} for a local community, but it will wear everyone out. will they do it?`,
       [
-        new Action('yes', () => that.yes(project)),
+        new Action('yes', () => that.yes(game, project)),
         new Action('no', () =>
           that.setDetails(project.sprite, `your party does not ${project.name}.`, [
-            new Action('continue', () => Game.game.progress())
+            new Action('continue', () => game.progress())
           ])
         )
       ]
     );
   }
 
-  yes(project: { name: string; sprite: Sprites }): void {
+  yes(game: Game, project: { name: string; sprite: Sprites }): void {
     this.setDetails(
       project.sprite,
       `your party stays a while to ${project.name}. it is tiring but eventually the work is done and the community is thankful.`,
-      [ new Action('continue', () => Game.game.progress()) ]
+      [ new Action('continue', () => game.progress()) ]
     );
 
-    Game.game.history.peopleHelped++;
-    for (const hero of Game.game.party.members) {
-      hero.fatigue();
+    game.history.peopleHelped++;
+    for (const hero of game.party.members) {
+      hero.fatigue(game.party);
     }
 
     // Set up future event
@@ -63,17 +63,17 @@ export default class ProjectEvent extends EventView {
             'your party is empowered and made luckier by the thankful community members.',
             [
               new Action('continue', () => {
-                for (const hero of Game.game.party.members) {
+                for (const hero of game.party.members) {
                   hero.boostLuck(5);
                   hero.empowerRandom();
                 }
-                Game.game.progress();
+                game.progress();
               })
             ]
           )
         )
       ]
     );
-    Game.futureEvent(future, 8);
+    game.futureEvent(future, 8);
   }
 }

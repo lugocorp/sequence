@@ -23,11 +23,11 @@ export default class Game {
   constructor(
     private renderer: GraphicsRenderer,
     private assets: GraphicsLoader,
-    private chain: EventChain,
-    private data: DataManager,
-    private history: History,
-    private audio: GameAudio,
-    private party: Party
+    public chain: EventChain,
+    public data: DataManager,
+    public history: History,
+    public audio: GameAudio,
+    public party: Party
   ) {
     this.currentClick = { x: 0, y: 0, down: false };
   }
@@ -49,7 +49,7 @@ export default class Game {
     this.audio.play(GameAudio.STARTUP);
 
     // Loading has completed
-    this.setView(new StartView());
+    this.setView(new StartView(this));
     this.invalidate();
   }
 
@@ -85,7 +85,7 @@ export default class Game {
   // Sets the current view of the game
   setView(view: View): void {
     this.view = view;
-    view.init();
+    view.init(this);
   }
 
   // Queues a FutureEvent
@@ -129,7 +129,7 @@ export default class Game {
       this.chain.plan();
     }
     this.chain.events.splice(0, 1);
-    this.setView(this.chain.latest());
+    this.setView(this.chain.latest(this));
     for (this.renderer.dark = 100; this.renderer.dark > 0; this.renderer.dark -= 20) {
       this.invalidate();
       await wait();
@@ -160,7 +160,7 @@ export default class Game {
         if (this.view.selector.index > 0 && this.bounded(0, 0, 12, 100)) {
           this.audio.play(GameAudio.ARROW);
           this.view.selector.index--;
-          this.view.selector.invalidate();
+          this.view.selector.invalidate(this);
         }
         if (
           this.view.selector.index < this.view.selector.size() - 1 &&
@@ -168,7 +168,7 @@ export default class Game {
         ) {
           this.audio.play(GameAudio.ARROW);
           this.view.selector.index++;
-          this.view.selector.invalidate();
+          this.view.selector.invalidate(this);
         }
       }
       this.invalidate();

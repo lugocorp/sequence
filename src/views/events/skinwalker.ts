@@ -13,11 +13,11 @@ export default class SkinwalkerEvent extends EventView {
     super(SkinwalkerEvent);
   }
 
-  init(): void {
+  init(game: Game): void {
     this.setDetails(Sprites.SKINWALKER, 'something stares from the darkness.', [
-      new Action('continue', () => Game.game.progress())
+      new Action('continue', () => game.progress())
     ]);
-    const heroes: Hero[] = [ ...Game.game.party.members ];
+    const heroes: Hero[] = [ ...game.party.members ];
     const removed: number = Random.max(heroes.length - 1) + 1;
     for (let a = 0; a < removed; a++) {
       const hero: Hero = Random.element(heroes);

@@ -1,3 +1,4 @@
+import Party from '../entities/party';
 import Item from '../entities/item';
 import Hero from '../entities/hero';
 import Action from './action';

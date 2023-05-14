@@ -11,26 +11,27 @@ export default class TradeEvent extends EventView {
   private heroSelector: Selector<Hero>;
   private itemSelector: Selector<Item>;
 
-  constructor() {
+  constructor(game: Game) {
     super(TradeEvent);
     const that = this;
     this.itemSelector = Selector.itemSelector([
-      Game.game.data.getRandomItem(),
-      Game.game.data.getRandomItem(),
-      Game.game.data.getRandomItem(),
-      Game.game.data.getRandomItem(),
-      Game.game.data.getRandomItem()
+      game.data.getRandomItem(),
+      game.data.getRandomItem(),
+      game.data.getRandomItem(),
+      game.data.getRandomItem(),
+      game.data.getRandomItem()
     ]);
     this.setDetails(
       Sprites.TRADE,
       'your party comes across a trading post. choose a party member and they will trade a random item for a new one.',
-      [ new Action('continue', () => that.viewParty()) ]
+      [ new Action('continue', () => that.viewParty(game)) ]
     );
   }
 
-  init(): void {
+  init(game: Game): void {
     this.heroSelector = Selector.heroSelector(
-      Game.game.party.members.filter((h: Hero) => h.basket.hasItems)
+      game.party,
+      game.party.members.filter((h: Hero) => h.basket.hasItems)
     );
   }
 
@@ -42,50 +43,50 @@ export default class TradeEvent extends EventView {
     return this.itemSelector.item();
   }
 
-  viewParty(): void {
+  viewParty(game: Game): void {
     const that = this;
-    if (Game.game.party.hasItems()) {
+    if (game.party.hasItems()) {
       this.setSelector(this.heroSelector, [
-        new Action('view goods', () => that.trade()),
-        new Action('make trade', () => that.checkTrade())
+        new Action('view goods', () => that.trade(game)),
+        new Action('make trade', () => that.checkTrade(game))
       ]);
     } else {
       this.setDetails(Sprites.TRADE, `no one in your party has items to trade.`, [
-        new Action('continue', () => Game.game.progress())
+        new Action('continue', () => game.progress())
       ]);
     }
   }
 
-  trade(): void {
+  trade(game: Game): void {
     const that = this;
     this.setSelector(this.itemSelector, [
-      new Action('view party', () => that.viewParty()),
-      new Action('make trade', () => that.checkTrade())
+      new Action('view party', () => that.viewParty(game)),
+      new Action('make trade', () => that.checkTrade(game))
     ]);
   }
 
-  checkTrade(): void {
+  checkTrade(game: Game): void {
     if (this.hero.basket.hasItems) {
-      this.finish();
+      this.finish(game);
     } else {
-      this.invalidTrade();
+      this.invalidTrade(game);
     }
   }
 
-  invalidTrade(): void {
+  invalidTrade(game: Game): void {
     const that = this;
     this.setDetails(this.hero.sprite, `${this.hero.name} has no items to trade.`, [
-      new Action('continue', () => that.viewParty())
+      new Action('continue', () => that.viewParty(game))
     ]);
   }
 
-  finish(): void {
+  finish(game: Game): void {
     const replaced: Item = this.hero.basket.random();
-    this.hero.basket.replace(replaced, this.item);
+    this.hero.basket.replace(game.history, replaced, this.item);
     this.setDetails(
       this.hero.sprite,
       `${this.hero.name} traded ${replaced.name} for ${this.item.name}.`,
-      [ new Action('continue', () => Game.game.progress()) ]
+      [ new Action('continue', () => game.progress()) ]
     );
   }
 }

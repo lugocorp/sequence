@@ -7,21 +7,21 @@ import Action from '../ui/action';
 import Game from '../game';
 
 export default class StartView extends View {
-  constructor() {
+  constructor(game: Game) {
     super();
     this.setDetails(
       Sprites.WELCOME,
       "welcome to the game!\nthis is a beta release, please report any bugs you encounter.",
       [
-        new Action('instructions', () => Game.setView(new InstructionsView())),
-        new Action('credits', () => Game.setView(new CreditsView())),
-        new Action('new game', () => Game.setView(Game.game.chain.latest())),
-        new Action('score', () => Game.setView(new ScoreView()))
+        new Action('instructions', () => game.setView(new InstructionsView(game))),
+        new Action('credits', () => game.setView(new CreditsView(game))),
+        new Action('new game', () => game.setView(game.chain.latest(game))),
+        new Action('score', () => game.setView(new ScoreView()))
       ]
     );
   }
 
-  init(): void {
-    Game.game.setInitialState();
+  init(game: Game): void {
+    game.setInitialState();
   }
 }

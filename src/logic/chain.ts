@@ -125,10 +125,10 @@ export default class EventChain {
   /*
    * This function returns the current event in the sequence.
    */
-  latest(): EventView {
+  latest(game: Game): EventView {
     for (const hero of this.party.members) {
       if (hero.isFatigued()) {
-        return new FatigueEvent(hero);
+        return new FatigueEvent(game, hero);
       }
     }
     if (!this.party.length()) {

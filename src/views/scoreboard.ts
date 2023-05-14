@@ -12,13 +12,13 @@ export default class ScoreView extends View {
     super();
   }
 
-  init(): void {
+  init(game: Game): void {
     if (this.place === undefined) {
-      this.viewScoreboard();
+      this.viewScoreboard(game);
       return;
     }
     const that = this;
-    const history: History = Game.game.history;
+    const history: History = game.history;
     history.save();
     const total: number = history.calculateScore();
     this.setDetails(
@@ -30,7 +30,7 @@ export default class ScoreView extends View {
         `${history.challengesWon} challenges won x100\n` +
         `${history.partyMembers} party members x50\n` +
         `total: ${total}`,
-      [ new Action('continue', () => that.viewScoreboard()) ]
+      [ new Action('continue', () => that.viewScoreboard(game)) ]
     );
   }
 
@@ -46,12 +46,12 @@ export default class ScoreView extends View {
     return `${entry[0]}${dots}${entry[1]}`;
   }
 
-  private viewScoreboard(): void {
-    const scores = `${Game.game.history.runs
+  private viewScoreboard(game: Game): void {
+    const scores = `${game.history.runs
       .map((x: [string, number], i: number) => this.format(x, i))
       .join('\n')}`;
     this.setDetails(Sprites.SCORE, scores, [
-      new Action('continue', () => Game.setView(new StartView()))
+      new Action('continue', () => game.setView(new StartView(game)))
     ]);
   }
 }

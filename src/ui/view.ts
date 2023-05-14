@@ -2,15 +2,21 @@ import { WTEXT, HTEXT } from '../enums/values';
 import Sprites from '../enums/sprites';
 import Selector from './selector';
 import Action from './action';
+import Game from '../game';
 
 export default class View {
+  private game: Game;
   private text: string;
   selector: Selector<any>;
   actions: Action[];
   image: number;
 
+  constructor() {
+    // TODO add game here
+  }
+
   // Performs some task when this view is first transitioned to
-  init(): void {
+  init(game: Game): void {
     // Do nothing by default
   }
 
@@ -46,7 +52,7 @@ export default class View {
   setSelector(selector: Selector<any>, actions: Action[]): void {
     this.setDetails(Sprites.NONE, '', actions);
     this.selector = selector;
-    this.selector.invalidate();
+    this.selector.invalidate(this.game);
   }
 
   // Returns true if this view has options

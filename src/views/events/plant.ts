@@ -8,7 +8,7 @@ import Game from '../../game';
 export default class PlantEvent extends EventView {
   static label = 'plant';
 
-  constructor() {
+  constructor(game: Game) {
     super(PlantEvent);
     const SAFE = 0;
     const SEMISAFE = 1;
@@ -73,60 +73,60 @@ export default class PlantEvent extends EventView {
       [
         new Action('eat it raw', () => {
           if (plant.type === SAFE) {
-            result(that.empower);
+            result(() => that.empower(game));
           } else {
-            result(that.poison);
+            result(() => that.poison(game));
           }
         }),
         new Action('eat it boiled', () => {
           if (plant.type === SEMISAFE) {
-            result(that.empower);
+            result(() => that.empower(game));
           } else if (plant.type === TOXIC) {
-            result(that.poison);
+            result(() => that.poison(game));
           } else {
-            result(() => Game.game.progress());
+            result(() => game.progress());
           }
         }),
-        new Action('avoid it', () => result(() => Game.game.progress(), false))
+        new Action('avoid it', () => result(() => game.progress(), false))
       ]
     );
   }
 
-  poison(): void {
+  poison(game: Game): void {
     const view: EventView = new EventView({ label: 'plantpoison' });
     view.init = (): void =>
       view.setDetails(
-        Game.game.party.members[0].sprite,
+        game.party.members[0].sprite,
         `your party suddenly feels fatigued. perhaps it was something they ate...`,
         [
           new Action('continue', () => {
-            for (const hero of Game.game.party.members) {
-              hero.fatigue();
+            for (const hero of game.party.members) {
+              hero.fatigue(game.party);
             }
-            Game.game.progress();
+            game.progress();
           })
         ]
       );
-    Game.futureEvent(view, 3);
-    Game.game.progress();
+    game.futureEvent(view, 3);
+    game.progress();
   }
 
-  empower(): void {
+  empower(game: Game): void {
     const view: EventView = new EventView({ label: 'plantempower' });
     view.init = (): void =>
       view.setDetails(
-        Game.game.party.members[0].sprite,
+        game.party.members[0].sprite,
         `your party suddenly feels stronger, smarter and faster. perhaps it was something they ate!`,
         [
           new Action('continue', () => {
-            for (const hero of Game.game.party.members) {
+            for (const hero of game.party.members) {
               hero.empowerRandom();
             }
-            Game.game.progress();
+            game.progress();
           })
         ]
       );
-    Game.futureEvent(view, 3);
-    Game.game.progress();
+    game.futureEvent(view, 3);
+    game.progress();
   }
 }

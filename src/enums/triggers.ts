@@ -1,5 +1,6 @@
 import Hero from '../entities/hero';
 import Rarity from './rarity';
+import Game from '../game';
 
 export enum TriggerType {
   GET_STATS = "when you calculate a hero's stats",
@@ -75,4 +76,4 @@ export type Trigger =
     };
 
 // Item effect type
-export type Effect = (trigger: Trigger) => void;
+export type Effect = (game: Game, trigger: Trigger) => void;

@@ -12,13 +12,13 @@ export default class DreamEvent extends EventView {
     super(DreamEvent);
   }
 
-  init(): void {
-    const hero: Hero = Game.game.party.randomHero();
-    const item: Item = Game.game.data.getRandomItem(Rarity.RARE);
+  init(game: Game): void {
+    const hero: Hero = game.party.randomHero();
+    const item: Item = game.data.getRandomItem(Rarity.RARE);
     this.setDetails(
       hero.sprite,
       `${hero.name} has a dream about a powerful item. could it be prophetic?`,
-      [ new Action('continue', () => Game.game.progress()) ]
+      [ new Action('continue', () => game.progress()) ]
     );
 
     // Set up future event
@@ -32,8 +32,8 @@ export default class DreamEvent extends EventView {
             new Action('view item', () =>
               future.setDetails(item.sprite, item.descriptionText(), [
                 new Action('continue', () => {
-                  hero.basket.equip(item);
-                  Game.game.progress();
+                  hero.basket.equip(game.history, item);
+                  game.progress();
                 })
               ])
             )
@@ -46,13 +46,13 @@ export default class DreamEvent extends EventView {
           [
             new Action('view item', () =>
               future.setDetails(item.sprite, item.descriptionText(), [
-                new Action('continue', () => Game.game.progress())
+                new Action('continue', () => game.progress())
               ])
             )
           ]
         );
       }
     };
-    Game.futureEvent(future, 10, () => Game.game.party.members.indexOf(hero) > -1);
+    game.futureEvent(future, 10, () => game.party.members.indexOf(hero) > -1);
   }
 }

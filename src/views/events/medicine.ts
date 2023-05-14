@@ -16,18 +16,19 @@ export default class MedicineManEvent extends EventView {
     Sprites.MEDICINE_MAN_GUARANI
   ]);
 
-  constructor() {
+  constructor(game: Game) {
     super(MedicineManEvent);
     this.setDetails(
       this.sprite,
       'your party comes across a medicine man. he will empower one of your party members in exchange for a random item from them.',
-      [ new Action('continue', () => this.viewParty()) ]
+      [ new Action('continue', () => this.viewParty(game)) ]
     );
   }
 
-  init(): void {
+  init(game: Game): void {
     this.heroSelector = Selector.heroSelector(
-      Game.game.party.members.filter((h: Hero) => h.basket.hasItems)
+      game.party,
+      game.party.members.filter((h: Hero) => h.basket.hasItems)
     );
   }
 
@@ -35,40 +36,40 @@ export default class MedicineManEvent extends EventView {
     return this.heroSelector.item();
   }
 
-  viewParty(): void {
+  viewParty(game: Game): void {
     const that = this;
-    if (Game.game.party.hasItems()) {
-      this.setSelector(this.heroSelector, [ new Action('make trade', () => that.checkTrade()) ]);
+    if (game.party.hasItems()) {
+      this.setSelector(this.heroSelector, [ new Action('make trade', () => that.checkTrade(game)) ]);
     } else {
       this.setDetails(this.sprite, `no one in your party has an item to give.`, [
-        new Action('continue', () => Game.game.progress())
+        new Action('continue', () => game.progress())
       ]);
     }
   }
 
-  checkTrade(): void {
+  checkTrade(game: Game): void {
     if (this.hero.basket.hasItems) {
-      this.finish();
+      this.finish(game);
     } else {
-      this.invalidTrade();
+      this.invalidTrade(game);
     }
   }
 
-  invalidTrade(): void {
+  invalidTrade(game: Game): void {
     const that = this;
     this.setDetails(this.hero.sprite, `${this.hero.name} has no items to give.`, [
-      new Action('continue', () => that.viewParty())
+      new Action('continue', () => that.viewParty(game))
     ]);
   }
 
-  finish(): void {
+  finish(game: Game): void {
     const replaced: Item = this.hero.basket.random();
     this.hero.basket.unequip(replaced);
     this.hero.empowerRandom();
     this.setDetails(
       this.hero.sprite,
       `${this.hero.name} gave ${replaced.name} to the medicine man and was empowered.`,
-      [ new Action('continue', () => Game.game.progress()) ]
+      [ new Action('continue', () => game.progress()) ]
     );
   }
 }

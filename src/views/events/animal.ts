@@ -14,7 +14,7 @@ export default class AnimalEvent extends EventView {
   static label = 'animal';
   private heroSelector: Selector<Hero>;
 
-  constructor() {
+  constructor(game: Game) {
     super(AnimalEvent);
     const that = this;
     const baby = Random.element([
@@ -36,7 +36,7 @@ export default class AnimalEvent extends EventView {
       `your party finds a lonely baby ${baby.name}. someone may carry it until its family comes around.`,
       [
         new Action('continue', () => {
-          if (Game.game.party.canPickupItems()) {
+          if (game.party.canPickupItems()) {
             that.setSelector(that.heroSelector, [
               new Action('choose', () => {
                 const hero: Hero = that.heroSelector.item();
@@ -45,13 +45,13 @@ export default class AnimalEvent extends EventView {
                   baby.sprite,
                   Rarity.RARE,
                   `+25% luck. a baby ${baby.name} looking for its family.`,
-                  function (data: Trigger) {
+                  function (game: Game, data: Trigger) {
                     if (data.type === TriggerType.GET_LUCK) {
                       data.luck += 25;
                     }
                   }
                 );
-                hero.basket.equip(item);
+                hero.basket.equip(game.history, item);
                 const view: EventView = new EventView({ label: 'animalreturn' });
                 view.setDetails(
                   baby.sprite,
@@ -59,15 +59,15 @@ export default class AnimalEvent extends EventView {
                   [
                     new Action('continue', () => {
                       hero.empowerRandom();
-                      Game.game.history.peopleHelped++;
+                      game.history.peopleHelped++;
                       hero.basket.unequip(item);
-                      Game.game.progress();
+                      game.progress();
                     })
                   ]
                 );
-                Game.futureEvent(view, 8, () => hero.isInParty() && hero.basket.contains(item));
+                game.futureEvent(view, 8, () => hero.isInParty(game.party) && hero.basket.contains(item));
                 that.setDetails(baby.sprite, `${hero.name} picks up the baby ${baby.name}.`, [
-                  new Action('continue', () => Game.game.progress())
+                  new Action('continue', () => game.progress())
                 ]);
               })
             ]);
@@ -75,7 +75,7 @@ export default class AnimalEvent extends EventView {
             that.setDetails(
               baby.sprite,
               `your party's inventory is completely full. your party leaves the small animal.`,
-              [ new Action('continue', () => Game.game.progress()) ]
+              [ new Action('continue', () => game.progress()) ]
             );
           }
         })
@@ -83,7 +83,7 @@ export default class AnimalEvent extends EventView {
     );
   }
 
-  init(): void {
-    this.heroSelector = Selector.heroSelector(Game.game.party.emptyItemSlots());
+  init(game: Game): void {
+    this.heroSelector = Selector.heroSelector(game.party, game.party.emptyItemSlots());
   }
 }

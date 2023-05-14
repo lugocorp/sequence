@@ -22,12 +22,12 @@ export default class ThiefEvent extends EventView {
     }
   ]);
 
-  constructor() {
+  constructor(game: Game) {
     super(ThiefEvent);
     this.setDetails(
       this.animal.sprite,
       `your party comes across a trickster! a ${this.animal.name} has come to steal precious items.`,
-      [ new Action('continue', () => this.checkForItems()) ]
+      [ new Action('continue', () => this.checkForItems(game)) ]
     );
   }
 
@@ -35,8 +35,8 @@ export default class ThiefEvent extends EventView {
     return this.stolen.length === 1 ? 'item' : 'items';
   }
 
-  checkForItems(): void {
-    const unflattened: Stolen[][] = Game.game.party.members.map((x: Hero) =>
+  checkForItems(game: Game): void {
+    const unflattened: Stolen[][] = game.party.members.map((x: Hero) =>
       x.basket.toList().map((y: Item) => [ x, y ])
     );
     const items: Stolen[] = unflattened.reduce((acc: Stolen[], x: Stolen[]) => acc.concat(x), []);
@@ -44,7 +44,7 @@ export default class ThiefEvent extends EventView {
       this.setDetails(
         this.animal.sprite,
         `your party has no items for the ${this.animal.name} to steal. the trickster scurries away in frustration.`,
-        [ new Action('continue', () => Game.game.progress()) ]
+        [ new Action('continue', () => game.progress()) ]
       );
       return;
     }
@@ -58,19 +58,19 @@ export default class ThiefEvent extends EventView {
     this.setDetails(
       this.animal.sprite,
       `the ${this.animal.name} has stolen ${this.stolen.length} ${this.items}. will you chase it down?`,
-      [ new Action('yes', () => this.chase()), new Action('no', () => this.getsAway()) ]
+      [ new Action('yes', () => this.chase(game)), new Action('no', () => this.getsAway(game)) ]
     );
   }
 
-  catchUp(): void {
+  catchUp(game: Game): void {
     this.setDetails(
       this.animal.sprite,
       `your party has caught up with the ${this.animal.name}. will you continue to chase it down?`,
-      [ new Action('yes', () => this.chase()), new Action('no', () => this.getsAway()) ]
+      [ new Action('yes', () => this.chase(game)), new Action('no', () => this.getsAway(game)) ]
     );
   }
 
-  chase(): void {
+  chase(game: Game): void {
     if (Random.passes(0.25)) {
       this.setDetails(
         this.animal.sprite,
@@ -78,32 +78,32 @@ export default class ThiefEvent extends EventView {
         [
           new Action('continue', () => {
             for (const item of this.stolen) {
-              item[0].basket.equip(item[1]);
+              item[0].basket.equip(game.history, item[1]);
             }
-            Game.game.progress();
+            game.progress();
           })
         ]
       );
     } else {
-      const challenge: ChallengeEvent = new ChallengeEvent();
+      const challenge: ChallengeEvent = new ChallengeEvent(game);
       const oldInit = challenge.init;
       challenge.init = () => {
         oldInit.call(challenge);
-        this.catchUp();
+        this.catchUp(game);
       };
-      Game.futureEvent(challenge, 1);
-      Game.futureEvent(this, 2);
+      game.futureEvent(challenge, 1);
+      game.futureEvent(this, 2);
       this.setDetails(this.animal.sprite, `your party did not catch the ${this.animal.name}.`, [
-        new Action('continue', () => Game.game.progress())
+        new Action('continue', () => game.progress())
       ]);
     }
   }
 
-  getsAway(): void {
+  getsAway(game: Game): void {
     this.setDetails(
       this.animal.sprite,
       `the ${this.animal.name} got away with ${this.stolen.length} of your party's items.`,
-      [ new Action('continue', () => Game.game.progress()) ]
+      [ new Action('continue', () => game.progress()) ]
     );
   }
 }

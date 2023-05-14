@@ -11,7 +11,7 @@ export default class TricksterEvent extends EventView {
   static label = 'trickster';
   private heroSelector: Selector<Hero>;
 
-  constructor() {
+  constructor(game: Game) {
     super(TricksterEvent);
     const animal = Random.element([
       {
@@ -33,9 +33,9 @@ export default class TricksterEvent extends EventView {
               const hero: Hero = this.heroSelector.item();
               const effect: number = Random.max(4);
               if (effect === 0) {
-                hero.fatigue();
+                hero.fatigue(game.party);
                 this.setDetails(animal.sprite, `${hero.name} was fatigued by the ${animal.name}.`, [
-                  new Action('continue', () => Game.game.progress())
+                  new Action('continue', () => game.progress())
                 ]);
               } else if (effect === 1) {
                 Stats.changeUnitStat(hero, Stats.STRENGTH, 1);
@@ -44,17 +44,17 @@ export default class TricksterEvent extends EventView {
                 this.setDetails(
                   animal.sprite,
                   `${hero.name} was empowered by the ${animal.name}!`,
-                  [ new Action('continue', () => Game.game.progress()) ]
+                  [ new Action('continue', () => game.progress()) ]
                 );
               } else if (effect === 2) {
                 hero.boostLuck(-15);
                 this.setDetails(animal.sprite, `${hero.name} was cursed by the ${animal.name}.`, [
-                  new Action('continue', () => Game.game.progress())
+                  new Action('continue', () => game.progress())
                 ]);
               } else {
                 hero.boostLuck(5);
                 this.setDetails(animal.sprite, `${hero.name} was blessed by the ${animal.name}!`, [
-                  new Action('continue', () => Game.game.progress())
+                  new Action('continue', () => game.progress())
                 ]);
               }
             })
@@ -64,7 +64,7 @@ export default class TricksterEvent extends EventView {
     );
   }
 
-  init(): void {
-    this.heroSelector = Selector.heroSelector(Game.game.party.members);
+  init(game: Game): void {
+    this.heroSelector = Selector.heroSelector(game.party, game.party.members);
   }
 }
