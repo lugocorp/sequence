@@ -1,7 +1,6 @@
 import { DAY_NIGHT_CYCLE, World, Weather, Time } from './types';
 import Sprites from './media/sprites';
 import GraphicsRenderer from './media/renderer';
-import GraphicsLoader from './media/loader';
 import GameAudio from './media/audio';
 import HistoryManager from './media/history';
 import DataManager from './logic/data';
@@ -14,43 +13,35 @@ import View from './ui/view';
 
 export default class Game {
   private view: View;
-  private renderer: GraphicsRenderer;
-  private assets: GraphicsLoader;
   chain: EventChain;
   data: DataManager;
   history: HistoryManager;
-  audio: GameAudio;
   party: Party;
   currentClick: { x: number; y: number; down: boolean };
   score: number;
   world: World;
 
-  constructor() {
+  constructor(private renderer: GraphicsRenderer, public audio: GameAudio) {
     this.currentClick = { x: 0, y: 0, down: false };
+    this.audio = audio;
   }
 
   // Initializes the game object so the player can start interacting with it
   async start(): Promise<void> {
-    this.renderer = new GraphicsRenderer(this);
-    this.assets = new GraphicsLoader();
     this.chain = new EventChain(this);
     this.data = new DataManager(this);
     this.history = new HistoryManager();
-    this.audio = new GameAudio();
     this.party = new Party(this);
 
-    // Set up canvas
-    const canvas: HTMLCanvasElement = document.getElementById('canvas') as HTMLCanvasElement;
-    this.renderer.setup(canvas, this.assets);
-    this.renderer.setCanvasSize();
-
-    // Load and setup game assets (with a loading screen)
-    await this.assets.loadInitialAsset();
+    // Set up canvas then load game assets (with a loading screen)
+    this.renderer.setup();
+    this.renderer.setSize();
+    await this.renderer.loadInitialAsset();
     this.invalidate();
     await this.history.initialize();
-    await this.assets.loadAssets();
+    await this.renderer.loadAssets();
     await this.audio.loadAudio();
-    await new Promise((resolve) => setTimeout(resolve, 1000));
+    await new Promise((resolve) => setTimeout(resolve, 500));
     this.audio.play(GameAudio.STARTUP);
     this.chain.setup();
 
@@ -75,7 +66,7 @@ export default class Game {
 
   // Tells the game to render a new frame
   invalidate(): void {
-    this.renderer.frame(this.view);
+    this.renderer.frame(this, this.view);
   }
 
   // Protected access to the current View

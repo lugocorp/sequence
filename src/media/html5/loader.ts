@@ -3,14 +3,21 @@
  * It loads assets by a 3-byte hexadecimal, where the first byte refers to
  * a spritesheet ID, and the second and third bytes are coordinates.
  */
-import { WGLYPH, HGLYPH } from '../types';
-import DrawCoords from './draw-coords';
-import Sprites from './sprites';
+import { WGLYPH, HGLYPH } from '../../types';
+import GraphicsRenderer from '../renderer';
+import Sprites from '../sprites';
 
-export default class GraphicsLoader {
-  loadAsset: HTMLImageElement;
-  sheets: HTMLImageElement[];
-  static NUM_SHEETS = 5;
+export interface DrawCoords {
+  src: HTMLImageElement;
+  left: number;
+  top: number;
+  width: number;
+  height: number;
+}
+
+export class HTML5GraphicsLoader {
+  private loadAsset: HTMLImageElement;
+  private sheets: HTMLImageElement[];
 
   /*
    * This method returns the dimensions of each sprite in a spritesheet
@@ -39,7 +46,7 @@ export default class GraphicsLoader {
    */
   async loadAssets(): Promise<void> {
     this.sheets = [];
-    for (let index = 0; index < GraphicsLoader.NUM_SHEETS; index++) {
+    for (let index = 0; index < GraphicsRenderer.NUM_SHEETS; index++) {
       this.sheets.push(new Image());
       await new Promise((resolve) => {
         this.sheets[index].src = `./assets/sheet${index}.png`;
@@ -76,7 +83,7 @@ export default class GraphicsLoader {
     const x = (id - (index << 16)) >> 8;
     const y = id - (index << 16) - (x << 8);
     const dimensions: { w: number; h: number } = this.getDimensions(index);
-    if (index >= GraphicsLoader.NUM_SHEETS) {
+    if (index >= GraphicsRenderer.NUM_SHEETS) {
       throw new Error(`Spritesheet #${index} not registered`);
     }
     return {
