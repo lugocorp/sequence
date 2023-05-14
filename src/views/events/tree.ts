@@ -12,7 +12,7 @@ export default class TreeEvent extends EventView {
   private heroSelector: Selector<Hero>;
 
   constructor(game: Game) {
-    super(TreeEvent);
+    super(game, TreeEvent);
     const tree = Random.element([
       {
         sprite: Sprites.CHESTNUT,
@@ -39,7 +39,7 @@ export default class TreeEvent extends EventView {
               that.setDetails(
                 hero.sprite,
                 `${hero.name} sat beneath the ${tree.name} tree and became refreshed.`,
-                [ new Action('continue', () => game.progress()) ]
+                [ new Action('continue', () => this.game.progress()) ]
               );
               hero.refresh(Stats.STRENGTH);
               hero.refresh(Stats.WISDOM);
@@ -51,7 +51,7 @@ export default class TreeEvent extends EventView {
     );
   }
 
-  init(game: Game): void {
-    this.heroSelector = Selector.heroSelector(game.party, game.party.members);
+  init(): void {
+    this.heroSelector = Selector.heroSelector(this.game.party, this.game.party.members);
   }
 }

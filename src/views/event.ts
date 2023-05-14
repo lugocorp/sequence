@@ -1,5 +1,6 @@
 import { green, yellow, orange, red } from '../enums/colors';
 import View from '../ui/view';
+import Game from '../game';
 
 export interface EventClass {
   label: string;
@@ -11,8 +12,8 @@ export interface EventClass {
 export class EventView extends View {
   private _label: string;
 
-  constructor(_class: EventClass) {
-    super();
+  constructor(game: Game, _class: EventClass) {
+    super(game);
     this._label = _class.label;
   }
 

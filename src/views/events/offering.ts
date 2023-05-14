@@ -16,56 +16,56 @@ export default class OfferingEvent extends EventView {
   private gift: Item;
 
   constructor(game: Game) {
-    super(OfferingEvent);
+    super(game, OfferingEvent);
     const that = this;
-    this.gift = game.data.getRandomItem();
-    this.spirit = game.data.getRandomSpirit();
+    this.gift = this.game.data.getRandomItem();
+    this.spirit = this.game.data.getRandomSpirit();
     this.setDetails(
       this.spirit,
       `a spirit offers a gift of ${this.gift.name} to your party. only one member may accept it.`,
-      [ new Action('continue', () => that.viewGift(game)) ]
+      [ new Action('continue', () => that.viewGift()) ]
     );
   }
 
-  init(game: Game): void {
-    this.heroSelector = Selector.heroSelector(game.party, game.party.emptyItemSlots());
+  init(): void {
+    this.heroSelector = Selector.heroSelector(this.game.party, this.game.party.emptyItemSlots());
     if (!this.heroSelector.size()) {
       this.setDetails(
         this.spirit,
         `a spirit offers a gift of ${this.gift.name} to your party, but everyone's inventory is full.`,
-        [ new Action('continue', () => game.progress()) ]
+        [ new Action('continue', () => this.game.progress()) ]
       );
     }
   }
 
-  viewGift(game: Game): void {
+  viewGift(): void {
     const that = this;
     this.setDetails(this.gift.sprite, this.gift.descriptionText(), [
-      new Action('view party', () => that.viewParty(game))
+      new Action('view party', () => that.viewParty())
     ]);
   }
 
-  viewParty(game: Game): void {
+  viewParty(): void {
     const that = this;
-    if (game.party.canPickupItems()) {
+    if (this.game.party.canPickupItems()) {
       this.setSelector(this.heroSelector, [
-        new Action('choose', () => that.finish(game)),
-        new Action('view gift', () => that.viewGift(game))
+        new Action('choose', () => that.finish()),
+        new Action('view gift', () => that.viewGift())
       ]);
     } else {
       this.setDetails(this.heroSelector.item().sprite, `no one in your party can pickup items.`, [
-        new Action('continue', () => game.progress())
+        new Action('continue', () => this.game.progress())
       ]);
     }
   }
 
-  finish(game: Game): void {
+  finish(): void {
     const hero: Hero = this.heroSelector.item();
-    hero.basket.equip(game.history, this.gift);
+    hero.basket.equip(this.game.history, this.gift);
     this.setDetails(
       this.spirit,
       `${hero.name} was given ${this.gift.name}. the spirit conceals itself once more.`,
-      [ new Action('continue', () => game.progress()) ]
+      [ new Action('continue', () => this.game.progress()) ]
     );
   }
 }

@@ -8,15 +8,15 @@ import Game from '../../game';
 export default class DeathEvent extends EventView {
   static label = 'death';
 
-  constructor() {
-    super(DeathEvent);
+  constructor(game: Game) {
+    super(game, DeathEvent);
   }
 
-  init(game: Game): void {
-    game.audio.play(GameAudio.FAIL);
-    const place: number = game.history.log();
+  init(): void {
+    this.game.audio.play(GameAudio.FAIL);
+    const place: number = this.game.history.log();
     this.setDetails(Sprites.DEATH, 'your party is empty.', [
-      new Action('continue', () => game.setView(new ScoreView(place)))
+      new Action('continue', () => this.game.setView(new ScoreView(this.game, place)))
     ]);
   }
 }

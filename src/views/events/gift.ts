@@ -18,56 +18,56 @@ export default class GiftEvent extends EventView {
   private hero: Hero;
 
   constructor(game: Game) {
-    super(GiftEvent);
+    super(game, GiftEvent);
     this.options = [
-      game.data.getRandomItem(),
-      game.data.getRandomItem(),
-      game.data.getRandomItem()
+      this.game.data.getRandomItem(),
+      this.game.data.getRandomItem(),
+      this.game.data.getRandomItem()
     ];
     this.itemSelector = Selector.itemSelector(this.options);
-    this.spirit = game.data.getRandomSpirit();
+    this.spirit = this.game.data.getRandomSpirit();
   }
 
-  init(game: Game): void {
+  init(): void {
     const that = this;
-    if (game.party.canPickupItems()) {
-      this.hero = Random.element(game.party.emptyItemSlots());
+    if (this.game.party.canPickupItems()) {
+      this.hero = Random.element(this.game.party.emptyItemSlots());
       this.setDetails(
         this.spirit,
         `a spirit reveals itself to ${this.hero.name}. it comes bearing a gift of your choosing.`,
-        [ new Action('continue', () => that.chooseGift(game)) ]
+        [ new Action('continue', () => that.chooseGift()) ]
       );
     } else {
       this.setDetails(
         this.spirit,
         `a spirit reveals itself to your party. it comes bearing a gift, but everyone's inventory is full.`,
-        [ new Action('continue', () => game.progress()) ]
+        [ new Action('continue', () => this.game.progress()) ]
       );
     }
   }
 
-  chooseGift(game: Game): void {
+  chooseGift(): void {
     const that = this;
     this.setSelector(this.itemSelector, [
-      new Action('choose', () => that.finish(game)),
-      new Action('view member', () => that.viewHero(game))
+      new Action('choose', () => that.finish()),
+      new Action('view member', () => that.viewHero())
     ]);
   }
 
-  viewHero(game: Game): void {
+  viewHero(): void {
     const that = this;
     this.setDetails(this.hero.sprite, this.hero.descriptionText(), [
-      new Action('view gifts', () => that.chooseGift(game))
+      new Action('view gifts', () => that.chooseGift())
     ]);
   }
 
-  finish(game: Game): void {
+  finish(): void {
     const gift: Item = this.itemSelector.item();
-    this.hero.basket.equip(game.history, gift);
+    this.hero.basket.equip(this.game.history, gift);
     this.setDetails(
       this.spirit,
       `${this.hero.name} received the spirit's gift of ${gift.name}. the spirit conceals itself once more.`,
-      [ new Action('continue', () => game.progress()) ]
+      [ new Action('continue', () => this.game.progress()) ]
     );
   }
 }

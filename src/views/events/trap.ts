@@ -13,31 +13,31 @@ export default class TrapEvent extends EventView {
   private heroSelector: Selector<Hero>;
 
   constructor(game: Game) {
-    super(TrapEvent);
+    super(game, TrapEvent);
     const that = this;
     this.setDetails(Sprites.TRAP, 'your party comes across a very inviting village.', [
       new Action('continue', () =>
         that.setDetails(Sprites.TRAP, 'choose one of your party members to stay here.', [
-          new Action('continue', () => that.heroViewer(game))
+          new Action('continue', () => that.heroViewer())
         ])
       )
     ]);
   }
 
-  init(game: Game): void {
-    this.heroSelector = Selector.heroSelector(game.party, game.party.members);
+  init(): void {
+    this.heroSelector = Selector.heroSelector(this.game.party, this.game.party.members);
   }
 
-  heroViewer(game: Game): void {
+  heroViewer(): void {
     const that = this;
-    this.setSelector(this.heroSelector, [ new Action('choose', () => that.finished(game)) ]);
+    this.setSelector(this.heroSelector, [ new Action('choose', () => that.finished()) ]);
   }
 
-  finished(game: Game): void {
+  finished(): void {
     const hero: Hero = this.heroSelector.item();
-    game.party.remove(hero);
+    this.game.party.remove(hero);
     this.setDetails(hero.sprite, `${hero.name} was let go from your party.`, [
-      new Action('continue', () => game.progress())
+      new Action('continue', () => this.game.progress())
     ]);
   }
 }

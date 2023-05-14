@@ -5,18 +5,15 @@ import Action from './action';
 import Game from '../game';
 
 export default class View {
-  private game: Game;
   private text: string;
   selector: Selector<any>;
   actions: Action[];
   image: number;
 
-  constructor() {
-    // TODO add game here
-  }
+  constructor(protected game: Game) {}
 
   // Performs some task when this view is first transitioned to
-  init(game: Game): void {
+  init(): void {
     // Do nothing by default
   }
 

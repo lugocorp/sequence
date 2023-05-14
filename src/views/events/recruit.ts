@@ -14,14 +14,14 @@ export default class RecruitEvent extends EventView {
   private recruits: Hero[];
 
   constructor(game: Game) {
-    super(RecruitEvent);
+    super(game, RecruitEvent);
     const that = this;
     this.recruits = [
-      game.data.getRandomHero(),
-      game.data.getRandomHero(),
-      game.data.getRandomHero()
+      this.game.data.getRandomHero(),
+      this.game.data.getRandomHero(),
+      this.game.data.getRandomHero()
     ];
-    this.recruitSelector = Selector.heroSelector(game.party, this.recruits);
+    this.recruitSelector = Selector.heroSelector(this.game.party, this.recruits);
     this.setDetails(
       this.recruits[0].sprite,
       'your party comes across another group of travelers.',
@@ -30,59 +30,59 @@ export default class RecruitEvent extends EventView {
           that.setDetails(
             this.recruits[0].sprite,
             'you can choose one traveler to recruit into your party.',
-            [ new Action('continue', () => that.viewRecruits(game)) ]
+            [ new Action('continue', () => that.viewRecruits()) ]
           )
         )
       ]
     );
   }
 
-  init(game: Game): void {
-    this.memberSelector = Selector.heroSelector(game.party, game.party.members);
+  init(): void {
+    this.memberSelector = Selector.heroSelector(this.game.party, this.game.party.members);
   }
 
-  viewRecruits(game: Game): void {
+  viewRecruits(): void {
     const that = this;
     this.setSelector(this.recruitSelector, [
       new Action('choose', () => {
-        if (game.party.isFull()) {
-          that.pleaseRemove(game);
+        if (this.game.party.isFull()) {
+          that.pleaseRemove();
         } else {
-          that.finished(game);
+          that.finished();
         }
       }),
-      new Action('view party', () => that.viewParty(game))
+      new Action('view party', () => that.viewParty())
     ]);
   }
 
-  viewParty(game: Game): void {
+  viewParty(): void {
     const that = this;
-    this.setSelector(this.memberSelector, [ new Action('back', () => that.viewRecruits(game)) ]);
+    this.setSelector(this.memberSelector, [ new Action('back', () => that.viewRecruits()) ]);
   }
 
-  pleaseRemove(game: Game): void {
+  pleaseRemove(): void {
     const that = this;
     this.setDetails(
       this.recruitSelector.item().sprite,
       'your party is full. please remove an existing member.',
-      [ new Action('continue', () => that.removeMember(game)) ]
+      [ new Action('continue', () => that.removeMember()) ]
     );
   }
 
-  removeMember(game: Game): void {
+  removeMember(): void {
     const that = this;
-    this.setSelector(this.memberSelector, [ new Action('choose', () => that.finished(game)) ]);
+    this.setSelector(this.memberSelector, [ new Action('choose', () => that.finished()) ]);
   }
 
-  finished(game: Game): void {
+  finished(): void {
     const recruit: Hero = this.recruitSelector.item();
     let text = `welcome ${recruit.name} to your party!`;
-    if (game.party.isFull()) {
+    if (this.game.party.isFull()) {
       const member: Hero = this.memberSelector.item();
       text += ` ${member.name} left your party.`;
-      game.party.remove(member);
+      this.game.party.remove(member);
     }
-    game.party.add(recruit);
-    this.setDetails(recruit.sprite, text, [ new Action('continue', () => game.progress()) ]);
+    this.game.party.add(recruit);
+    this.setDetails(recruit.sprite, text, [ new Action('continue', () => this.game.progress()) ]);
   }
 }

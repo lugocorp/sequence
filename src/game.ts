@@ -47,6 +47,7 @@ export default class Game {
     this.data.index();
     await new Promise((resolve) => setTimeout(resolve, 1000));
     this.audio.play(GameAudio.STARTUP);
+    this.chain.setup(this);
 
     // Loading has completed
     this.setView(new StartView(this));
@@ -56,7 +57,7 @@ export default class Game {
   // Sets initial game state
   setInitialState(): void {
     this.history.clear();
-    this.chain.clear();
+    this.chain.clear(this);
     this.party.clear();
     this.world = {
       weather: Weather.SUN,
@@ -64,7 +65,7 @@ export default class Game {
       cave: false
     };
     this.party.populate('bird catcher');
-    this.futureEvent(new TimeEvent(), DAY_NIGHT_CYCLE);
+    this.futureEvent(new TimeEvent(this), DAY_NIGHT_CYCLE);
   }
 
   // Tells the game to render a new frame
@@ -85,7 +86,7 @@ export default class Game {
   // Sets the current view of the game
   setView(view: View): void {
     this.view = view;
-    view.init(this);
+    view.init();
   }
 
   // Queues a FutureEvent
@@ -126,7 +127,7 @@ export default class Game {
       });
     }
     if (this.party.length() && this.chain.events.length === 1) {
-      this.chain.plan();
+      this.chain.plan(this);
     }
     this.chain.events.splice(0, 1);
     this.setView(this.chain.latest(this));

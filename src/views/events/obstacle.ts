@@ -18,13 +18,13 @@ export default class ObstacleEvent extends EventView {
   private obstacle: { sprite: Sprites; name: string };
 
   constructor(game: Game) {
-    super(ObstacleEvent);
+    super(game, ObstacleEvent);
     this.obstacle = Random.element([
       { sprite: Sprites.SWAMP, name: 'swamp' },
       { sprite: Sprites.CLIFF, name: 'cliff' },
       { sprite: Sprites.MOUNTAIN, name: 'mountain' }
     ]);
-    this.original = game.party.length();
+    this.original = this.game.party.length();
     this.stat = Stats.getRandomStat();
     this.cutoff = Random.max(4) + 1;
     const that = this;
@@ -33,7 +33,7 @@ export default class ObstacleEvent extends EventView {
       `your party comes across a ${this.obstacle.name}. only travelers with ${
         this.cutoff
       } ${Stats.getStatName(this.stat)} or ${this.higher ? 'higher' : 'lower'} may pass.`,
-      [ new Action('continue', () => that.finish(game)) ]
+      [ new Action('continue', () => that.finish()) ]
     );
   }
 
@@ -49,9 +49,9 @@ export default class ObstacleEvent extends EventView {
       : Stats.getUnitStat(hero, this.stat) <= this.cutoff;
   }
 
-  finish(game: Game): void {
+  finish(): void {
     const removals: Hero[] = [];
-    for (const hero of game.party.members) {
+    for (const hero of this.game.party.members) {
       const data: Trigger = {
         type: TriggerType.GET_OBSTACLE,
         pass: this.passes(hero)
@@ -61,8 +61,8 @@ export default class ObstacleEvent extends EventView {
         removals.push(hero);
       }
     }
-    game.party.filter((hero: Hero) => removals.indexOf(hero) < 0);
-    const size: number = game.party.length();
+    this.game.party.filter((hero: Hero) => removals.indexOf(hero) < 0);
+    const size: number = this.game.party.length();
     this.setDetails(
       this.obstacle.sprite,
       size
@@ -72,7 +72,7 @@ export default class ObstacleEvent extends EventView {
               this.obstacle.name
             }.`
         : `no one in your party could pass the ${this.obstacle.name}.`,
-      [ new Action('continue', () => game.progress()) ]
+      [ new Action('continue', () => this.game.progress()) ]
     );
   }
 }

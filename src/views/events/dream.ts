@@ -8,21 +8,21 @@ import Game from '../../game';
 export default class DreamEvent extends EventView {
   static label = 'dream';
 
-  constructor() {
-    super(DreamEvent);
+  constructor(game: Game) {
+    super(game, DreamEvent);
   }
 
-  init(game: Game): void {
-    const hero: Hero = game.party.randomHero();
-    const item: Item = game.data.getRandomItem(Rarity.RARE);
+  init(): void {
+    const hero: Hero = this.game.party.randomHero();
+    const item: Item = this.game.data.getRandomItem(Rarity.RARE);
     this.setDetails(
       hero.sprite,
       `${hero.name} has a dream about a powerful item. could it be prophetic?`,
-      [ new Action('continue', () => game.progress()) ]
+      [ new Action('continue', () => this.game.progress()) ]
     );
 
     // Set up future event
-    const future: EventView = new EventView({ label: 'dreamfuture' });
+    const future: EventView = new EventView(this.game, { label: 'dreamfuture' });
     future.init = function (): void {
       if (hero.basket.hasSpace) {
         future.setDetails(
@@ -32,8 +32,8 @@ export default class DreamEvent extends EventView {
             new Action('view item', () =>
               future.setDetails(item.sprite, item.descriptionText(), [
                 new Action('continue', () => {
-                  hero.basket.equip(game.history, item);
-                  game.progress();
+                  hero.basket.equip(this.game.history, item);
+                  this.game.progress();
                 })
               ])
             )
@@ -46,13 +46,13 @@ export default class DreamEvent extends EventView {
           [
             new Action('view item', () =>
               future.setDetails(item.sprite, item.descriptionText(), [
-                new Action('continue', () => game.progress())
+                new Action('continue', () => this.game.progress())
               ])
             )
           ]
         );
       }
     };
-    game.futureEvent(future, 10, () => game.party.members.indexOf(hero) > -1);
+    this.game.futureEvent(future, 10, () => this.game.party.members.indexOf(hero) > -1);
   }
 }

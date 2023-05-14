@@ -16,9 +16,9 @@ export default class ChallengeEvent extends EventView {
   private expectation: number[];
 
   constructor(game: Game) {
-    super(ChallengeEvent);
+    super(game, ChallengeEvent);
     const that = this;
-    this.challenger = game.data.getRandomChallenger();
+    this.challenger = this.game.data.getRandomChallenger();
     this.expectation = [ Stats.getRandomStat() ];
     if (Random.passes(0.5)) {
       this.expectation.push(
@@ -33,16 +33,16 @@ export default class ChallengeEvent extends EventView {
           that.setDetails(
             that.challenger.sprite,
             `your party member will win if they meet the contested stats or have enough luck. they will tire afterwards, but less so if they win.`,
-            [ new Action('continue', () => that.viewChallenger(game)) ]
+            [ new Action('continue', () => that.viewChallenger()) ]
           )
         )
       ]
     );
   }
 
-  init(game: Game): void {
+  init(): void {
     this.heroSelector = Selector.heroSelector(
-      game.party,
+      this.game.party,
       undefined,
       (hero: Hero) =>
         `${this.coloredRate(
@@ -58,26 +58,26 @@ export default class ChallengeEvent extends EventView {
     );
   }
 
-  viewChallenger(game: Game): void {
+  viewChallenger(): void {
     const that = this;
     const text = `${this.challenger.descriptionText()}\nchallenges you to ${this.getTestText()}.`;
     this.setDetails(this.challenger.sprite, text, [
-      new Action('view party', () => that.viewParty(game))
+      new Action('view party', () => that.viewParty())
     ]);
   }
 
-  viewParty(game): void {
+  viewParty(): void {
     const that = this;
     this.setSelector(this.heroSelector, [
-      new Action('choose', () => that.finish(game)),
-      new Action('view spirit', () => that.viewChallenger(game))
+      new Action('choose', () => that.finish()),
+      new Action('view spirit', () => that.viewChallenger())
     ]);
   }
 
-  finish(game: Game): void {
+  finish(): void {
     const that = this;
     const hero: Hero = this.heroSelector.item();
-    for (const hero1 of game.party.members) {
+    for (const hero1 of this.game.party.members) {
       hero1.basket.activate({
         type: TriggerType.AFTER_SELECTED,
         tested: this.expectation,
@@ -86,8 +86,8 @@ export default class ChallengeEvent extends EventView {
     }
     const result: boolean = this.playerOvercomesChallenge(hero, this.challenger);
     if (result) {
-      game.history.challengesWon++;
-      hero.fatigue(game.party);
+      this.game.history.challengesWon++;
+      hero.fatigue(this.game.party);
     } else {
       hero.fullyFatigue();
     }
@@ -103,7 +103,7 @@ export default class ChallengeEvent extends EventView {
             result
               ? `${hero.name} is tired but triumphant. they received -1 to all their stats.`
               : `${hero.name} lost all their stats during the challenge.`,
-            [ new Action('continue', () => game.progress()) ]
+            [ new Action('continue', () => this.game.progress()) ]
           )
         )
       ]

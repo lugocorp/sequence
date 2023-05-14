@@ -7,18 +7,18 @@ import { EventView } from '../event';
 export default class BeginEvent extends EventView {
   static label = 'begin';
 
-  constructor() {
-    super(BeginEvent);
+  constructor(game: Game) {
+    super(game, BeginEvent);
   }
 
-  init(game: Game): void {
+  init(): void {
     this.setDetails(
       Sprites.BEGIN,
       'your party sets off on a new adventure. press continue below and then use the arrows that appear above to view your party members.',
       [
         new Action('view party', () =>
-          this.setSelector(Selector.heroSelector(game.party, game.party.members), [
-            new Action('continue', () => game.progress())
+          this.setSelector(Selector.heroSelector(this.game.party, this.game.party.members), [
+            new Action('continue', () => this.game.progress())
           ])
         )
       ]

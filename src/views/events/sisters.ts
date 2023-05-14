@@ -11,7 +11,7 @@ export default class ThreeSistersEvent extends EventView {
   private heroSelector: Selector<Hero>;
 
   constructor(game: Game) {
-    super(ThreeSistersEvent);
+    super(game, ThreeSistersEvent);
     const that = this;
     this.setDetails(
       Sprites.THREE_SISTERS,
@@ -22,7 +22,7 @@ export default class ThreeSistersEvent extends EventView {
             new Action('select', () => {
               const hero: Hero = that.heroSelector.item();
               that.setDetails(hero.sprite, `${hero.name} was empowered by the three plants.`, [
-                new Action('continue', () => game.progress())
+                new Action('continue', () => this.game.progress())
               ]);
               hero.boostLuck(5);
               Stats.changeUnitStat(hero, Stats.STRENGTH, 1);
@@ -35,7 +35,7 @@ export default class ThreeSistersEvent extends EventView {
     );
   }
 
-  init(game: Game): void {
-    this.heroSelector = Selector.heroSelector(game.party, game.party.members);
+  init(): void {
+    this.heroSelector = Selector.heroSelector(this.game.party, this.game.party.members);
   }
 }

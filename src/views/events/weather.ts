@@ -8,14 +8,14 @@ import Game from '../../game';
 export default class WeatherEvent extends EventView {
   static label = 'weather';
 
-  constructor() {
-    super(WeatherEvent);
+  constructor(game: Game) {
+    super(game, WeatherEvent);
   }
 
-  init(game: Game): void {
+  init(): void {
     let desc: string;
     let sprite: Sprites;
-    const cave = game.world.cave;
+    const cave = this.game.world.cave;
     const weather = Random.enum(Weather);
     switch (weather) {
       case Weather.SUN:
@@ -45,8 +45,8 @@ export default class WeatherEvent extends EventView {
     }
     this.setDetails(sprite, desc, [
       new Action('continue', () => {
-        game.world.weather = weather;
-        game.progress();
+        this.game.world.weather = weather;
+        this.game.progress();
       })
     ]);
   }

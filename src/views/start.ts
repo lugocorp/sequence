@@ -8,7 +8,7 @@ import Game from '../game';
 
 export default class StartView extends View {
   constructor(game: Game) {
-    super();
+    super(game);
     this.setDetails(
       Sprites.WELCOME,
       "welcome to the game!\nthis is a beta release, please report any bugs you encounter.",
@@ -16,12 +16,12 @@ export default class StartView extends View {
         new Action('instructions', () => game.setView(new InstructionsView(game))),
         new Action('credits', () => game.setView(new CreditsView(game))),
         new Action('new game', () => game.setView(game.chain.latest(game))),
-        new Action('score', () => game.setView(new ScoreView()))
+        new Action('score', () => game.setView(new ScoreView(game)))
       ]
     );
   }
 
-  init(game: Game): void {
-    game.setInitialState();
+  init(): void {
+    this.game.setInitialState();
   }
 }

@@ -7,14 +7,14 @@ export default class FatigueEvent extends EventView {
   static label = 'fatigue';
 
   constructor(game: Game, hero: Hero) {
-    super(FatigueEvent);
+    super(game, FatigueEvent);
     this.setDetails(
       hero.sprite,
       `${hero.name} is too fatigued to move on, and has left your party.`,
       [
         new Action('continue', () => {
-          game.party.remove(hero);
-          game.progress();
+          this.game.party.remove(hero);
+          this.game.progress();
         })
       ]
     );

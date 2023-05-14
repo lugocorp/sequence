@@ -9,15 +9,15 @@ import Game from '../../game';
 export default class SkinwalkerEvent extends EventView {
   static label = 'skinwalker';
 
-  constructor() {
-    super(SkinwalkerEvent);
+  constructor(game: Game) {
+    super(game, SkinwalkerEvent);
   }
 
-  init(game: Game): void {
+  init(): void {
     this.setDetails(Sprites.SKINWALKER, 'something stares from the darkness.', [
-      new Action('continue', () => game.progress())
+      new Action('continue', () => this.game.progress())
     ]);
-    const heroes: Hero[] = [ ...game.party.members ];
+    const heroes: Hero[] = [ ...this.game.party.members ];
     const removed: number = Random.max(heroes.length - 1) + 1;
     for (let a = 0; a < removed; a++) {
       const hero: Hero = Random.element(heroes);

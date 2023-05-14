@@ -9,8 +9,8 @@ export default class CaveEvent extends EventView {
   private time: Time;
 
   constructor(game: Game) {
-    super(CaveEvent);
-    const cave = !game.world.cave;
+    super(game, CaveEvent);
+    const cave = !this.game.world.cave;
     this.setDetails(
       Sprites.CAVE,
       cave
@@ -19,16 +19,16 @@ export default class CaveEvent extends EventView {
       cave
         ? [
             new Action('yes', () => {
-              game.world.cave = true;
-              game.futureEvent(new CaveEvent(game), 8);
-              game.progress();
+              this.game.world.cave = true;
+              this.game.futureEvent(new CaveEvent(this.game), 8);
+              this.game.progress();
             }),
-            new Action('no', () => game.progress())
+            new Action('no', () => this.game.progress())
           ]
         : [
             new Action('continue', () => {
-              game.world.cave = false;
-              game.progress();
+              this.game.world.cave = false;
+              this.game.progress();
             })
           ]
     );

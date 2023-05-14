@@ -7,7 +7,7 @@ import Game from '../game';
 
 export default class CreditsView extends View {
   constructor(game: Game) {
-    super();
+    super(game);
     const that = this;
     this.setSelector(
       new Selector<string>(

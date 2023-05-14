@@ -38,17 +38,20 @@ import Game from '../game';
 export default class EventChain {
   private previouslyPlanned: EventView;
   futures: FutureEvent[] = [];
-  events: EventView[] = [ new BeginEvent() ];
+  events: EventView[];
 
   constructor(
-    private game: Game,
     private party: Party
   ) {}
+
+  setup(game: Game) {
+    this.events = [ new BeginEvent(game) ];
+  }
 
   /*
    * This function returns the roll table for the next event
    */
-  private getEventRollTable(): [number, any][] {
+  private getEventRollTable(game: Game): [number, any][] {
     const data: Trigger = {
       type: TriggerType.GET_CHAIN,
       easierCaves: false,
@@ -82,7 +85,7 @@ export default class EventChain {
     if (data.morePlants) {
       table.push([ 8, PlantEvent ]);
     }
-    if (this.game.world.cave) {
+    if (game.world.cave) {
       table = data.easierCaves
         ? [
             [ 25, ChallengeEvent ], // 25
@@ -105,8 +108,8 @@ export default class EventChain {
             [ 5, SkinwalkerEvent ] // 100
           ];
     }
-    if (this.game.world.time === Time.NIGHT) {
-      if (!this.game.world.cave) {
+    if (game.world.time === Time.NIGHT) {
+      if (!game.world.cave) {
         table.push([ 3, SkinwalkerEvent ]);
       }
       table.push([ 5, DreamEvent ]);
@@ -117,9 +120,9 @@ export default class EventChain {
   /*
    * This function clears the chain's internal state
    */
-  clear(): void {
+  clear(game: Game): void {
     this.futures = [];
-    this.events = [ new BeginEvent() ];
+    this.events = [ new BeginEvent(game) ];
   }
 
   /*
@@ -132,10 +135,10 @@ export default class EventChain {
       }
     }
     if (!this.party.length()) {
-      return new DeathEvent();
+      return new DeathEvent(game);
     }
     if (!this.events.length) {
-      this.plan();
+      this.plan(game);
     }
     return this.events[0];
   }
@@ -145,7 +148,7 @@ export default class EventChain {
    * It's the core algorithm that runs the game, and it basically
    * determines difficulty.
    */
-  plan(): void {
+  plan(game: Game): void {
     // Tick future events and push if they're ready
     let a = 0;
     let future = false;
@@ -167,7 +170,7 @@ export default class EventChain {
 
     // Roll for the next event
     const event: EventView = new (Random.weighted(
-      this.getEventRollTable().filter(
+      this.getEventRollTable(game).filter(
         (x: [number, EventClass]) =>
           x[1].label === ChallengeEvent.label || x[1].label !== this.previouslyPlanned?.label
       )

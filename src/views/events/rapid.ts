@@ -11,28 +11,28 @@ export default class RapidEvent extends EventView {
   private heroSelector: Selector<Hero>;
 
   constructor(game: Game) {
-    super(RapidEvent);
+    super(game, RapidEvent);
     const that = this;
     this.setDetails(
       Sprites.RAPID,
       'your party approaches a dangerous, fast moving river. a party member will go down to become stronger, wiser and faster. they may get swept down the river.',
       [
         new Action('continue', () =>
-          that.setSelector(that.heroSelector, [ new Action('choose', () => that.river(game)) ])
+          that.setSelector(that.heroSelector, [ new Action('choose', () => that.river()) ])
         )
       ]
     );
   }
 
-  init(game: Game): void {
+  init(): void {
     this.heroSelector = Selector.heroSelector(
-      game.party,
+      this.game.party,
       undefined,
       (hero: Hero) => `${this.coloredRate(hero.luck)} chance of success.`
     );
   }
 
-  river(game: Game): void {
+  river(): void {
     const that = this;
     const hero: Hero = this.heroSelector.item();
     Stats.changeUnitStat(hero, Stats.STRENGTH, 1);
@@ -41,33 +41,33 @@ export default class RapidEvent extends EventView {
     this.setDetails(hero.sprite, `${hero.name} became stronger, wiser, and faster by the river!`, [
       new Action('continue', () => {
         if (hero.lucky()) {
-          game.progress();
+          this.game.progress();
         } else {
-          that.consequence(game);
+          that.consequence();
         }
       })
     ]);
   }
 
-  consequence(game: Game): void {
+  consequence(): void {
     const hero: Hero = this.heroSelector.item();
-    game.party.remove(hero);
-    const retrieve: EventView = new EventView({ label: 'riverretrieve' });
+    this.game.party.remove(hero);
+    const retrieve: EventView = new EventView(this.game, { label: 'riverretrieve' });
     retrieve.setDetails(
       hero.sprite,
       `your party reunites with ${hero.name} after they were swept away by a river.`,
       [
         new Action('continue', () => {
-          game.party.add(hero);
-          game.progress();
+          this.game.party.add(hero);
+          this.game.progress();
         })
       ]
     );
-    game.futureEvent(retrieve, 5, () => !game.party.isFull());
+    this.game.futureEvent(retrieve, 5, () => !this.game.party.isFull());
     this.setDetails(
       Sprites.RAPID,
       `${hero.name} was swept away by the river! you can meet them downstream if your party isn't full.`,
-      [ new Action('continue', () => game.progress()) ]
+      [ new Action('continue', () => this.game.progress()) ]
     );
   }
 }
