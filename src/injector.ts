@@ -9,16 +9,16 @@ export default class Injector {
    * Grab a dependency and initialize one if needed
    */
   async get(key: string, stack?: string[]): Promise<any> {
-    if (this.objects[key] === undefined) {
+    if (!this.objects[key]) {
       if (stack?.includes(key)) {
         throw new Error(`Circular dependency [ ${stack.join(', ')}, ${key} ]`);
       }
-      const obj = Object.create(null);
       const that = this;
+      const obj = Object.create(null);
       const builder = (await import(`./${that.classes[key] || key}.ts`)).default;
       const deps = this.getDependencies(builder);
-      builder.call(obj, deps.map((d) => that.get(d, [...(stack || []), key])));
       Object.assign(obj, builder.prototype);
+      builder.call(obj, deps.map((d) => that.get(d, [...(stack || []), key])));
       this.objects[key] = obj;
     }
     return this.objects[key];
