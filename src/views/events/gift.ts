@@ -11,7 +11,6 @@ import Game from '../../game';
  * In this event you choose 1 of 3 items to bestow upon a pre-selected party member.
  */
 export default class GiftEvent extends EventView {
-  static label = 'gift';
   private itemSelector: Selector<Item>;
   private spirit: Sprites;
   private options: Item[];

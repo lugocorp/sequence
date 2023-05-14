@@ -9,7 +9,6 @@ import Game from '../../game';
  * In this event you choose a party member to leave behind.
  */
 export default class TrapEvent extends EventView {
-  static label = 'trap';
   private heroSelector: Selector<Hero>;
 
   constructor(game: Game) {

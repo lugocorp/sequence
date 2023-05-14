@@ -7,7 +7,6 @@ import Item from '../../entities/item';
 import Game from '../../game';
 
 export default class TradeEvent extends EventView {
-  static label = 'trade';
   private heroSelector: Selector<Hero>;
   private itemSelector: Selector<Item>;
 

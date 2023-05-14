@@ -6,8 +6,6 @@ import { EventView } from '../event';
 import Game from '../../game';
 
 export default class DeathEvent extends EventView {
-  static label = 'death';
-
   constructor(game: Game) {
     super(game);
   }

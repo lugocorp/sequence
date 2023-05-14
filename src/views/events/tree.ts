@@ -8,7 +8,6 @@ import { EventView } from '../event';
 import Game from '../../game';
 
 export default class TreeEvent extends EventView {
-  static label = 'tree';
   private heroSelector: Selector<Hero>;
 
   constructor(game: Game) {

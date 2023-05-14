@@ -5,8 +5,6 @@ import { EventView } from '../event';
 import Game from '../../game';
 
 export default class ProjectEvent extends EventView {
-  static label = 'project';
-
   constructor(game: Game) {
     super(game);
     const that = this;
@@ -47,7 +45,7 @@ export default class ProjectEvent extends EventView {
 
     this.game.history.peopleHelped++;
     for (const hero of this.game.party.members) {
-      hero.fatigue(this.game.party);
+      hero.fatigue();
     }
 
     // Set up future event

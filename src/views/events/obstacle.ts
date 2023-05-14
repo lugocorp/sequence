@@ -10,7 +10,6 @@ import Game from '../../game';
  * In this event your party is filtered by a certain stat limit.
  */
 export default class ObstacleEvent extends EventView {
-  static label = 'obstacle';
   private original: number;
   private cutoff: number;
   private stat: number;

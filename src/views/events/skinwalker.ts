@@ -6,8 +6,6 @@ import { EventView } from '../event';
 import Game from '../../game';
 
 export default class SkinwalkerEvent extends EventView {
-  static label = 'skinwalker';
-
   constructor(game: Game) {
     super(game);
   }

@@ -8,7 +8,6 @@ import Game from '../../game';
  * In this event you choose a new party member.
  */
 export default class RecruitEvent extends EventView {
-  static label = 'recruit';
   private recruitSelector: Selector<Hero>;
   private memberSelector: Selector<Hero>;
   private recruits: Hero[];

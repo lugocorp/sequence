@@ -5,8 +5,6 @@ import Random from '../../logic/random';
 import Game from '../../game';
 
 export default class PlantEvent extends EventView {
-  static label = 'plant';
-
   constructor(game: Game) {
     super(game);
     const SAFE = 0;
@@ -100,7 +98,7 @@ export default class PlantEvent extends EventView {
         [
           new Action('continue', () => {
             for (const hero of this.game.party.members) {
-              hero.fatigue(this.game.party);
+              hero.fatigue();
             }
             this.game.progress();
           })

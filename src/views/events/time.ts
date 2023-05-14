@@ -5,7 +5,6 @@ import { EventView } from '../event';
 import Game from '../../game';
 
 export default class TimeEvent extends EventView {
-  static label = 'time';
   private time: Time;
 
   constructor(game: Game) {

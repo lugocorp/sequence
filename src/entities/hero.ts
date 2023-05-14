@@ -59,7 +59,7 @@ export default class Hero extends Unit {
   }
 
   // Reduces this Hero's stats
-  fatigue(party: Party): void {
+  fatigue(): void {
     Stats.changeUnitStat(this, Stats.STRENGTH, -1);
     Stats.changeUnitStat(this, Stats.WISDOM, -1);
     Stats.changeUnitStat(this, Stats.DEXTERITY, -1);

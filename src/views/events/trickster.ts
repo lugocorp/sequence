@@ -8,7 +8,6 @@ import { EventView } from '../event';
 import Game from '../../game';
 
 export default class TricksterEvent extends EventView {
-  static label = 'trickster';
   private heroSelector: Selector<Hero>;
 
   constructor(game: Game) {
@@ -33,7 +32,7 @@ export default class TricksterEvent extends EventView {
               const hero: Hero = this.heroSelector.item();
               const effect: number = Random.max(4);
               if (effect === 0) {
-                hero.fatigue(this.game.party);
+                hero.fatigue();
                 this.setDetails(animal.sprite, `${hero.name} was fatigued by the ${animal.name}.`, [
                   new Action('continue', () => this.game.progress())
                 ]);

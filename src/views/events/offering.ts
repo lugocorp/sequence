@@ -10,7 +10,6 @@ import Game from '../../game';
  * In this event you choose a party member to receive some pre-selected item.
  */
 export default class OfferingEvent extends EventView {
-  static label = 'offering';
   private heroSelector: Selector<Hero>;
   private spirit: Sprites;
   private gift: Item;

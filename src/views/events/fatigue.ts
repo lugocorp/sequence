@@ -4,8 +4,6 @@ import { EventView } from '../event';
 import Game from '../../game';
 
 export default class FatigueEvent extends EventView {
-  static label = 'fatigue';
-
   constructor(game: Game, hero: Hero) {
     super(game);
     this.setDetails(

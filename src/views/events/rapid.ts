@@ -7,7 +7,6 @@ import { EventView } from '../event';
 import Game from '../../game';
 
 export default class RapidEvent extends EventView {
-  static label = 'rapid';
   private heroSelector: Selector<Hero>;
 
   constructor(game: Game) {

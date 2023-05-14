@@ -9,7 +9,6 @@ import { EventView } from '../event';
 import Game from '../../game';
 
 export default class ChallengeEvent extends EventView {
-  static label = 'challenge';
   private heroSelector: Selector<Hero>;
   private challenger: Challenger;
   private expectation: number[];
@@ -80,7 +79,7 @@ export default class ChallengeEvent extends EventView {
     const result: boolean = this.playerOvercomesChallenge(hero, this.challenger);
     if (result) {
       this.game.history.challengesWon++;
-      hero.fatigue(this.game.party);
+      hero.fatigue();
     } else {
       hero.fullyFatigue();
     }

@@ -8,7 +8,6 @@ import Item from '../../entities/item';
 import Game from '../../game';
 
 export default class MedicineManEvent extends EventView {
-  static label = 'medicine';
   private heroSelector: Selector<Hero>;
   private readonly sprite = Random.element([
     Sprites.MEDICINE_MAN_MUSKOGEE,

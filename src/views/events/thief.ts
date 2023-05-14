@@ -9,7 +9,6 @@ import Game from '../../game';
 type Stolen = [Hero, Item];
 
 export default class ThiefEvent extends EventView {
-  static label = 'thief';
   private stolen: Stolen[] = [];
   private readonly animal = Random.element([
     {

@@ -6,7 +6,6 @@ import { EventView } from '../event';
 import Game from '../../game';
 
 export default class DeerEvent extends EventView {
-  static label = 'deer';
   private heroSelector: Selector<Hero>;
   private initiated = false;
 
@@ -49,7 +48,7 @@ export default class DeerEvent extends EventView {
     this.setSelector(this.heroSelector, [
       new Action('hunt deer', () => {
         const hero: Hero = this.heroSelector.item();
-        hero.fatigue(this.game.party);
+        hero.fatigue();
         if (hero.lucky()) {
           for (const hero of this.game.party.members) {
             hero.boostLuck(5);
