@@ -1,7 +1,6 @@
 import { Trigger, TriggerType } from '../types';
 import Random from '../logic/random';
 import Basket from '../entities/basket';
-import Unit from '../entities/unit';
 import Hero from '../entities/hero';
 
 // Handles logic for unit stats in the game
@@ -22,7 +21,7 @@ export default class Stats {
   }
 
   // Returns a unit's value for the given stat
-  static getUnitStat(unit: Unit, stat: number): number {
+  static getUnitStat(unit: Hero, stat: number): number {
     const key: string = [ 'strength', 'wisdom', 'dexterity' ][stat];
     if (unit['basket']) {
       const basket: Basket = unit['basket'] as Basket;
@@ -40,7 +39,7 @@ export default class Stats {
   }
 
   // Sets a unit's value for the given stat
-  static setUnitStat(unit: Unit, stat: number, value: number): void {
+  static setUnitStat(unit: Hero, stat: number, value: number): void {
     unit[Stats.getStatName(stat)] = value;
   }
 
@@ -50,7 +49,7 @@ export default class Stats {
   }
 
   // Changes a unit's stat by a given value
-  static changeUnitStat(unit: Unit, stat: number, boost: number): void {
+  static changeUnitStat(unit: Hero, stat: number, boost: number): void {
     unit[Stats.getStatName(stat)] = unit[[ 'strength', 'wisdom', 'dexterity' ][stat]] + boost;
   }
 }

@@ -7,13 +7,11 @@ import Sprites from '../media/sprites';
 import EnumsHelper from '../logic/enums';
 import Random from '../logic/random';
 import Factory from './factory';
-import Challenger from '../entities/challenger';
 import Hero from '../entities/hero';
 import Item from '../entities/item';
 import { Rarity } from '../types';
 import Game from '../game';
 import * as types from './types';
-import challengers from '../data/challenger';
 import effects from '../data/effects';
 import heroes from '../data/hero';
 import items from '../data/item';
@@ -50,15 +48,7 @@ export default class DataManager {
    * Returns a random challenger sprite to represent a spirit.
    */
   getRandomSpirit(): Sprites {
-    return this.getRandomChallenger().sprite;
-  }
-
-  /*
-   * Returns a random challenger available in the game. Every challenger has
-   * equal chance to be returned by this function.
-   */
-  getRandomChallenger(): Challenger {
-    return this.factory.createChallenger(this, Random.element(challengers));
+    return Sprites.BEAR;
   }
 
   /*

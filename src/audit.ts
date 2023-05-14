@@ -1,8 +1,6 @@
 import Glyphs from './serial/glyphs';
-import challengers from './data/challenger';
 import heroes from './data/hero';
 import items from './data/item';
-const MAX_CHALLENGER_NAME_LENGTH = 20;
 const MAX_HERO_NAME_LENGTH = 20;
 const MAX_ITEM_NAME_LENGTH = 20;
 let errors = 0;
@@ -30,32 +28,6 @@ for (const item of items) {
   }
   if (!Glyphs.isValid(item.description)) {
     error('Invalid description', 'item', item.name);
-  }
-}
-
-// Check enemies
-for (const challenger of challengers) {
-  if (challenger.name != challenger.name.toLowerCase()) {
-    error('Uppercase letters detected', 'challenger', challenger.name);
-  }
-  if (challenger.name.length > MAX_CHALLENGER_NAME_LENGTH) {
-    error(
-      'Invalid name length',
-      'challenger',
-      challenger.name,
-      `Maximum name length is ${MAX_CHALLENGER_NAME_LENGTH}.`
-    );
-  }
-  if (challenger.strength + challenger.wisdom + challenger.dexterity !== 6) {
-    error(
-      'Invalid stat spread detected',
-      'challenger',
-      challenger.name,
-      'Stats should add up to 6'
-    );
-  }
-  if (!Glyphs.isValid(challenger.name)) {
-    error('Invalid name', 'challenger', challenger.name);
   }
 }
 

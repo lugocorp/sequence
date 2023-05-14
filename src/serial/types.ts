@@ -12,15 +12,6 @@ export interface HeroData {
   description: string;
 }
 
-// Defines game data for an Challenger
-export interface ChallengerData {
-  sprite: Sprites;
-  name: string;
-  strength: number;
-  wisdom: number;
-  dexterity: number;
-}
-
 // Defines game data for an Item
 export interface ItemData {
   sprite: Sprites;

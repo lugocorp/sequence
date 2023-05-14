@@ -5,10 +5,14 @@ import Random from '../logic/random';
 import Basket from './basket';
 import Party from './party';
 import Item from './item';
-import Unit from './unit';
 import Game from '../game';
 
-export default class Hero extends Unit {
+export default class Hero {
+  private strength: number;
+  private wisdom: number;
+  private dexterity: number;
+  sprite: Sprites;
+  name: string;
   private originalStrength: number;
   private originalWisdom: number;
   private originalDexterity: number;
@@ -29,7 +33,11 @@ export default class Hero extends Unit {
     itemSlots: number,
     description: string
   ) {
-    super(sprite, name, strength, wisdom, dexterity);
+    this.sprite = sprite;
+    this.strength = strength;
+    this.wisdom = wisdom;
+    this.dexterity = dexterity;
+    this.name = name;
     this.originalStrength = strength;
     this.originalWisdom = wisdom;
     this.originalDexterity = dexterity;

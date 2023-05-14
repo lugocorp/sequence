@@ -1,5 +1,5 @@
 import Hero from '../../entities/hero';
-import Challenger from '../../entities/challenger';
+import Sprites from '../../media/sprites';
 import { orange } from '../../media/colors';
 import Stats from '../../enums/stats';
 import Random from '../../logic/random';
@@ -7,6 +7,14 @@ import Selector from '../../ui/selector';
 import Action from '../../ui/action';
 import { EventView } from '../event';
 import Game from '../../game';
+
+type Challenger = {
+  name: string;
+  sprite: Sprites;
+  strength: number;
+  wisdom: number;
+  dexterity: number;
+};
 
 export default class ChallengeEvent extends EventView {
   private heroSelector: Selector<Hero>;
@@ -16,7 +24,13 @@ export default class ChallengeEvent extends EventView {
   constructor(game: Game) {
     super(game);
     const that = this;
-    this.challenger = this.game.data.getRandomChallenger();
+    this.challenger = {
+      name: 'Bear',
+      sprite: Sprites.BEAR,
+      strength: 4,
+      wisdom: 2,
+      dexterity: 0
+    };
     this.expectation = [ Stats.getRandomStat() ];
     if (Random.passes(0.5)) {
       this.expectation.push(
@@ -44,9 +58,7 @@ export default class ChallengeEvent extends EventView {
       this.game.party.members,
       undefined,
       (hero: Hero) =>
-        `${this.coloredRate(
-          this.playerStatsHigher(hero, this.challenger) ? 100 : hero.luck
-        )} chance of success.`
+        `${this.coloredRate(this.playerStatsHigher(hero) ? 100 : hero.luck)} chance of success.`
     );
   }
 
@@ -59,7 +71,11 @@ export default class ChallengeEvent extends EventView {
 
   viewChallenger(): void {
     const that = this;
-    const text = `${this.challenger.descriptionText()}\nchallenges you to ${this.getTestText()}.`;
+    const stat = (n: number): string => (n > 9 ? `\t${n}\t` : `\t${n}\t\t`);
+    const desc = `${this.challenger.name}\nstr:${stat(this.challenger.strength)}wis:${stat(
+      this.challenger.wisdom
+    )}dex:${stat(this.challenger.dexterity)}`;
+    const text = `${desc}\nchallenges you to ${this.getTestText()}.`;
     this.setDetails(this.challenger.sprite, text, [
       new Action('view party', () => that.viewParty())
     ]);
@@ -76,7 +92,7 @@ export default class ChallengeEvent extends EventView {
   finish(): void {
     const that = this;
     const hero: Hero = this.heroSelector.item();
-    const result: boolean = this.playerOvercomesChallenge(hero, this.challenger);
+    const result: boolean = this.playerOvercomesChallenge(hero);
     if (result) {
       this.game.history.challengesWon++;
       hero.fatigue();
@@ -102,17 +118,21 @@ export default class ChallengeEvent extends EventView {
     );
   }
 
-  private playerStatsHigher(hero: Hero, challenger: Challenger): boolean {
+  private getChallengerStat(index: number): number {
+    return this.challenger[Stats.getStatName(this.expectation[index])];
+  }
+
+  private playerStatsHigher(hero: Hero): boolean {
     let sum1: number = Stats.getUnitStat(hero, this.expectation[0]);
-    let sum2: number = Stats.getUnitStat(challenger, this.expectation[0]);
+    let sum2: number = this.getChallengerStat(0);
     if (this.expectation.length > 1) {
       sum1 += Stats.getUnitStat(hero, this.expectation[1]);
-      sum2 += Stats.getUnitStat(challenger, this.expectation[1]);
+      sum2 += this.getChallengerStat(1);
     }
     return sum1 >= sum2;
   }
 
-  playerOvercomesChallenge(hero: Hero, challenger: Challenger): boolean {
-    return this.playerStatsHigher(hero, challenger) || hero.lucky();
+  playerOvercomesChallenge(hero: Hero): boolean {
+    return this.playerStatsHigher(hero) || hero.lucky();
   }
 }
