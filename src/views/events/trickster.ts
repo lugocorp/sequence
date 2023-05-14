@@ -12,7 +12,7 @@ export default class TricksterEvent extends EventView {
   private heroSelector: Selector<Hero>;
 
   constructor(game: Game) {
-    super(game, TricksterEvent);
+    super(game);
     const animal = Random.element([
       {
         sprite: Sprites.COYOTL,

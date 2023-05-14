@@ -18,7 +18,7 @@ export default class GiftEvent extends EventView {
   private hero: Hero;
 
   constructor(game: Game) {
-    super(game, GiftEvent);
+    super(game);
     this.options = [
       this.game.data.getRandomItem(),
       this.game.data.getRandomItem(),

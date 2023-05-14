@@ -9,7 +9,7 @@ export default class WeatherEvent extends EventView {
   static label = 'weather';
 
   constructor(game: Game) {
-    super(game, WeatherEvent);
+    super(game);
   }
 
   init(): void {

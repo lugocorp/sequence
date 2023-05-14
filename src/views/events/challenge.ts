@@ -16,7 +16,7 @@ export default class ChallengeEvent extends EventView {
   private expectation: number[];
 
   constructor(game: Game) {
-    super(game, ChallengeEvent);
+    super(game);
     const that = this;
     this.challenger = this.game.data.getRandomChallenger();
     this.expectation = [ Stats.getRandomStat() ];

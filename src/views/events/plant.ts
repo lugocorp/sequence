@@ -9,7 +9,7 @@ export default class PlantEvent extends EventView {
   static label = 'plant';
 
   constructor(game: Game) {
-    super(game, PlantEvent);
+    super(game);
     const SAFE = 0;
     const SEMISAFE = 1;
     const TOXIC = 2;
@@ -93,7 +93,7 @@ export default class PlantEvent extends EventView {
   }
 
   poison(): void {
-    const view: EventView = new EventView(this.game, { label: 'plantpoison' });
+    const view: EventView = new EventView(this.game);
     view.init = (): void =>
       view.setDetails(
         this.game.party.members[0].sprite,
@@ -112,7 +112,7 @@ export default class PlantEvent extends EventView {
   }
 
   empower(): void {
-    const view: EventView = new EventView(this.game, { label: 'plantempower' });
+    const view: EventView = new EventView(this.game);
     view.init = (): void =>
       view.setDetails(
         this.game.party.members[0].sprite,

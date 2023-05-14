@@ -9,7 +9,7 @@ export default class DeathEvent extends EventView {
   static label = 'death';
 
   constructor(game: Game) {
-    super(game, DeathEvent);
+    super(game);
   }
 
   init(): void {

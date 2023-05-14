@@ -10,7 +10,7 @@ export default class SkinwalkerEvent extends EventView {
   static label = 'skinwalker';
 
   constructor(game: Game) {
-    super(game, SkinwalkerEvent);
+    super(game);
   }
 
   init(): void {

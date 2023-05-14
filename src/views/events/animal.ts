@@ -15,7 +15,7 @@ export default class AnimalEvent extends EventView {
   private heroSelector: Selector<Hero>;
 
   constructor(game: Game) {
-    super(game, AnimalEvent);
+    super(game);
     const that = this;
     const baby = Random.element([
       {
@@ -52,7 +52,7 @@ export default class AnimalEvent extends EventView {
                   }
                 );
                 hero.basket.equip(item);
-                const view: EventView = new EventView(this.game, { label: 'animalreturn' });
+                const view: EventView = new EventView(this.game);
                 view.setDetails(
                   baby.sprite,
                   `${hero.name} returns the baby ${baby.name} to its family. they receive a blessing of empowerment.`,

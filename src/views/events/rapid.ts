@@ -11,7 +11,7 @@ export default class RapidEvent extends EventView {
   private heroSelector: Selector<Hero>;
 
   constructor(game: Game) {
-    super(game, RapidEvent);
+    super(game);
     const that = this;
     this.setDetails(
       Sprites.RAPID,
@@ -52,7 +52,7 @@ export default class RapidEvent extends EventView {
   consequence(): void {
     const hero: Hero = this.heroSelector.item();
     this.game.party.remove(hero);
-    const retrieve: EventView = new EventView(this.game, { label: 'riverretrieve' });
+    const retrieve: EventView = new EventView(this.game);
     retrieve.setDetails(
       hero.sprite,
       `your party reunites with ${hero.name} after they were swept away by a river.`,

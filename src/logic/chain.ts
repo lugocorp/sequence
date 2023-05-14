@@ -5,7 +5,7 @@
  */
 import { Time } from '../enums/world';
 import { Trigger, TriggerType } from '../enums/triggers';
-import { EventView, EventClass } from '../views/event';
+import { EventView } from '../views/event';
 import SkinwalkerEvent from '../views/events/skinwalker';
 import ThreeSistersEvent from '../views/events/sisters';
 import MedicineManEvent from '../views/events/medicine';
@@ -35,12 +35,14 @@ import FutureEvent from './future';
 import Random from './random';
 import Game from '../game';
 
+type EventGenerator = (game: Game) => EventView;
+
 export default class EventChain {
-  private previouslyPlanned: EventView;
+  private previouslyPlanned: string;
   futures: FutureEvent[] = [];
   events: EventView[];
 
-  constructor(private game: Game) {}
+  constructor(private readonly game: Game) {}
 
   setup() {
     this.events = [ new BeginEvent(this.game) ];
@@ -49,45 +51,45 @@ export default class EventChain {
   /*
    * This function returns the roll table for the next event
    */
-  private getEventRollTable(): [number, any][] {
-    let table: [number, EventClass][] = [
-      [ 35, ChallengeEvent ], // 35
-      [ 8, WeatherEvent ], // 43
-      [ 6, TrapEvent ], // 49
-      [ 5, ObstacleEvent ], // 54
-      [ 5, OfferingEvent ], // 59
-      [ 5, GiftEvent ], // 64
-      [ 4, PlantEvent ], // 68
-      [ 4, ProjectEvent ], // 72
-      [ 4, RapidEvent ], // 76
-      [ 3, AnimalEvent ], // 79
-      [ 3, TradeEvent ], // 82
-      [ 3, MedicineManEvent ], // 85
-      [ 3, TreeEvent ], // 88
-      [ 3, RecruitEvent ], // 91
-      [ 2, DeerEvent ], // 93
-      [ 2, TricksterEvent ], // 95
-      [ 2, CaveEvent ], // 97
-      [ 2, ThiefEvent ], // 99
-      [ 1, ThreeSistersEvent ] // 100
+  private getEventRollTable(): [number, EventGenerator][] {
+    let table: [number, EventGenerator][] = [
+      [ 35, (game: Game) => new ChallengeEvent(game) ], // 35
+      [ 8, (game: Game) => new WeatherEvent(game) ], // 43
+      [ 6, (game: Game) => new TrapEvent(game) ], // 49
+      [ 5, (game: Game) => new ObstacleEvent(game) ], // 54
+      [ 5, (game: Game) => new OfferingEvent(game) ], // 59
+      [ 5, (game: Game) => new GiftEvent(game) ], // 64
+      [ 4, (game: Game) => new PlantEvent(game) ], // 68
+      [ 4, (game: Game) => new ProjectEvent(game) ], // 72
+      [ 4, (game: Game) => new RapidEvent(game) ], // 76
+      [ 3, (game: Game) => new AnimalEvent(game) ], // 79
+      [ 3, (game: Game) => new TradeEvent(game) ], // 82
+      [ 3, (game: Game) => new MedicineManEvent(game) ], // 85
+      [ 3, (game: Game) => new TreeEvent(game) ], // 88
+      [ 3, (game: Game) => new RecruitEvent(game) ], // 91
+      [ 2, (game: Game) => new DeerEvent(game) ], // 93
+      [ 2, (game: Game) => new TricksterEvent(game) ], // 95
+      [ 2, (game: Game) => new CaveEvent(game) ], // 97
+      [ 2, (game: Game) => new ThiefEvent(game) ], // 99
+      [ 1, (game: Game) => new ThreeSistersEvent(game) ] // 100
     ];
     if (this.game.world.cave) {
       table = [
-            [ 30, ChallengeEvent ], // 30
-            [ 20, OfferingEvent ], // 50
-            [ 20, GiftEvent ], // 70
-            [ 10, TricksterEvent ], // 80
-            [ 5, AnimalEvent ], // 85
-            [ 5, ThiefEvent ], // 90
-            [ 5, WeatherEvent ], // 95
-            [ 5, SkinwalkerEvent ] // 100
+            [ 30, (game: Game) => new ChallengeEvent(game) ], // 30
+            [ 20, (game: Game) => new OfferingEvent(game) ], // 50
+            [ 20, (game: Game) => new GiftEvent(game) ], // 70
+            [ 10, (game: Game) => new TricksterEvent(game) ], // 80
+            [ 5, (game: Game) => new AnimalEvent(game) ], // 85
+            [ 5, (game: Game) => new ThiefEvent(game) ], // 90
+            [ 5, (game: Game) => new WeatherEvent(game) ], // 95
+            [ 5, (game: Game) => new SkinwalkerEvent(game) ] // 100
           ];
     }
     if (this.game.world.time === Time.NIGHT) {
       if (!this.game.world.cave) {
-        table.push([ 3, SkinwalkerEvent ]);
+        table.push([ 3, (game: Game) => new SkinwalkerEvent(game) ]);
       }
-      table.push([ 5, DreamEvent ]);
+      table.push([ 5, (game: Game) => new DreamEvent(game) ]);
     }
     return table;
   }
@@ -144,13 +146,13 @@ export default class EventChain {
     }
 
     // Roll for the next event
-    const event: EventView = new (Random.weighted(
+    const event: EventGenerator = (Random.weighted(
       this.getEventRollTable().filter(
-        (x: [number, EventClass]) =>
-          x[1].label === ChallengeEvent.label || x[1].label !== this.previouslyPlanned?.label
+        (x: [number, EventGenerator]) =>
+          x[1].toString().includes('ChallengeEvent') || x[1].toString() !== this.previouslyPlanned
       )
-    ))();
-    this.previouslyPlanned = event;
-    this.events.push(event);
+    ));
+    this.previouslyPlanned = event.toString();
+    this.events.push(event(this.game));
   }
 }

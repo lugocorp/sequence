@@ -16,7 +16,7 @@ export default class OfferingEvent extends EventView {
   private gift: Item;
 
   constructor(game: Game) {
-    super(game, OfferingEvent);
+    super(game);
     const that = this;
     this.gift = this.game.data.getRandomItem();
     this.spirit = this.game.data.getRandomSpirit();

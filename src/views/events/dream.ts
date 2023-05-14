@@ -9,7 +9,7 @@ export default class DreamEvent extends EventView {
   static label = 'dream';
 
   constructor(game: Game) {
-    super(game, DreamEvent);
+    super(game);
   }
 
   init(): void {
@@ -22,7 +22,7 @@ export default class DreamEvent extends EventView {
     );
 
     // Set up future event
-    const future: EventView = new EventView(this.game, { label: 'dreamfuture' });
+    const future: EventView = new EventView(this.game);
     future.init = function (): void {
       if (hero.basket.hasSpace) {
         future.setDetails(

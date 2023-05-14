@@ -23,7 +23,7 @@ export default class ThiefEvent extends EventView {
   ]);
 
   constructor(game: Game) {
-    super(game, ThiefEvent);
+    super(game);
     this.setDetails(
       this.animal.sprite,
       `your party comes across a trickster! a ${this.animal.name} has come to steal precious items.`,

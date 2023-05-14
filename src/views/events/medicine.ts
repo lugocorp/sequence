@@ -17,7 +17,7 @@ export default class MedicineManEvent extends EventView {
   ]);
 
   constructor(game: Game) {
-    super(game, MedicineManEvent);
+    super(game);
     this.setDetails(
       this.sprite,
       'your party comes across a medicine man. he will empower one of your party members in exchange for a random item from them.',

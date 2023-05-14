@@ -18,7 +18,7 @@ export default class ObstacleEvent extends EventView {
   private obstacle: { sprite: Sprites; name: string };
 
   constructor(game: Game) {
-    super(game, ObstacleEvent);
+    super(game);
     this.obstacle = Random.element([
       { sprite: Sprites.SWAMP, name: 'swamp' },
       { sprite: Sprites.CLIFF, name: 'cliff' },

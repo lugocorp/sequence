@@ -12,7 +12,7 @@ export default class TradeEvent extends EventView {
   private itemSelector: Selector<Item>;
 
   constructor(game: Game) {
-    super(game, TradeEvent);
+    super(game);
     const that = this;
     this.itemSelector = Selector.itemSelector([
       this.game.data.getRandomItem(),

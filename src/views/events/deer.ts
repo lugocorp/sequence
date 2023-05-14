@@ -11,7 +11,7 @@ export default class DeerEvent extends EventView {
   private initiated = false;
 
   constructor(game: Game) {
-    super(game, DeerEvent);
+    super(game);
     this.setDetails(Sprites.DEER, 'your party hears a rustling in the bushes. a deer jumps out!', [
       new Action('continue', () => this.playerChoice())
     ]);

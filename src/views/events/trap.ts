@@ -13,7 +13,7 @@ export default class TrapEvent extends EventView {
   private heroSelector: Selector<Hero>;
 
   constructor(game: Game) {
-    super(game, TrapEvent);
+    super(game);
     const that = this;
     this.setDetails(Sprites.TRAP, 'your party comes across a very inviting village.', [
       new Action('continue', () =>

@@ -12,7 +12,7 @@ export default class TreeEvent extends EventView {
   private heroSelector: Selector<Hero>;
 
   constructor(game: Game) {
-    super(game, TreeEvent);
+    super(game);
     const tree = Random.element([
       {
         sprite: Sprites.CHESTNUT,

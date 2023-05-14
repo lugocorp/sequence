@@ -9,7 +9,7 @@ export default class CaveEvent extends EventView {
   private time: Time;
 
   constructor(game: Game) {
-    super(game, CaveEvent);
+    super(game);
     const cave = !this.game.world.cave;
     this.setDetails(
       Sprites.CAVE,

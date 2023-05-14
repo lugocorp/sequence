@@ -14,7 +14,7 @@ export default class RecruitEvent extends EventView {
   private recruits: Hero[];
 
   constructor(game: Game) {
-    super(game, RecruitEvent);
+    super(game);
     const that = this;
     this.recruits = [
       this.game.data.getRandomHero(),

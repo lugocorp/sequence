@@ -8,7 +8,7 @@ export default class BeginEvent extends EventView {
   static label = 'begin';
 
   constructor(game: Game) {
-    super(game, BeginEvent);
+    super(game);
   }
 
   init(): void {

@@ -9,7 +9,7 @@ export default class ProjectEvent extends EventView {
   static label = 'project';
 
   constructor(game: Game) {
-    super(game, ProjectEvent);
+    super(game);
     const that = this;
     const project: { sprite: Sprites; name: string } = Random.element([
       {
@@ -52,7 +52,7 @@ export default class ProjectEvent extends EventView {
     }
 
     // Set up future event
-    const future: EventView = new EventView(this.game, { label: 'projectthankyou' });
+    const future: EventView = new EventView(this.game);
     future.setDetails(
       project.sprite,
       `your party sees a group approaching. they are a community you helped recently, and they have come to show their gratitude.`,

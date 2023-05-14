@@ -11,7 +11,7 @@ export default class ThreeSistersEvent extends EventView {
   private heroSelector: Selector<Hero>;
 
   constructor(game: Game) {
-    super(game, ThreeSistersEvent);
+    super(game);
     const that = this;
     this.setDetails(
       Sprites.THREE_SISTERS,

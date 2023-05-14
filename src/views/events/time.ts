@@ -9,7 +9,7 @@ export default class TimeEvent extends EventView {
   private time: Time;
 
   constructor(game: Game) {
-    super(game, TimeEvent);
+    super(game);
   }
 
   init(): void {
