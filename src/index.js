@@ -14,7 +14,7 @@ document.addEventListener(
     let downCoordY = 0;
     const canvas = document.getElementById('canvas');
     const clickDown = (e) => {
-      const scale = game.renderer.scale;
+      const scale = game.graphics.scale;
       const rect = canvas.getBoundingClientRect();
       downCoordX = (e.clientX - rect.left) / scale;
       downCoordY = (e.clientY - rect.top) / scale;
@@ -26,7 +26,7 @@ document.addEventListener(
       game.click(downCoordX, downCoordY, false);
     });
     window.addEventListener('resize', () => {
-      game.renderer.setCanvasSize();
+      game.graphics.setSize();
       game.invalidate();
     });
   },
