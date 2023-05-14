@@ -1,4 +1,5 @@
 import { Trigger } from '../enums/triggers';
+impor tHistory from '../media/history';
 import Random from '../logic/random';
 import Game from '../game';
 import Item from './item';
@@ -28,11 +29,11 @@ export default class Basket {
   }
 
   // Equips an item
-  equip(item: Item): void {
+  equip(history: History, item: Item): void {
     if (!this.hasSpace) {
       throw new Error(`Item equip overflow`);
     }
-    Game.game.history.itemsCollected++;
+    history.itemsCollected++;
     item.bearer = this.bearer;
     this.items.push(item);
   }

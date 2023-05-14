@@ -49,7 +49,7 @@ export default class Game {
     this.audio.play(GameAudio.STARTUP);
 
     // Loading has completed
-    Game.setView(new StartView());
+    this.setView(new StartView());
     this.invalidate();
   }
 
@@ -129,7 +129,7 @@ export default class Game {
       this.chain.plan();
     }
     this.chain.events.splice(0, 1);
-    Game.setView(this.chain.latest());
+    this.setView(this.chain.latest());
     for (this.renderer.dark = 100; this.renderer.dark > 0; this.renderer.dark -= 20) {
       this.invalidate();
       await wait();

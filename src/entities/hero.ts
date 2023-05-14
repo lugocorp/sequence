@@ -3,6 +3,7 @@ import Sprites from '../enums/sprites';
 import Stats from '../enums/stats';
 import Random from '../logic/random';
 import Basket from './basket';
+import Party from './party';
 import Item from './item';
 import Unit from './unit';
 import Game from '../game';
@@ -44,8 +45,8 @@ export default class Hero extends Unit {
   }
 
   // Returns true if this Hero is in the player's Party
-  isInParty(): boolean {
-    return Game.game.party.members.indexOf(this) > -1;
+  isInParty(party: Party): boolean {
+    return party.members.indexOf(this) > -1;
   }
 
   // Returns true if this Hero no longer has stats due to fatigue
@@ -57,14 +58,14 @@ export default class Hero extends Unit {
   }
 
   // Reduces this Hero's stats
-  fatigue(): void {
+  fatigue(party: Party): void {
     const data: Trigger = {
       type: TriggerType.GET_FATIGUE,
       fatigue: true,
       hero: this
     };
     this.basket.activate(data);
-    for (const hero of Game.game.party.members) {
+    for (const hero of party.members) {
       if (hero !== this) {
         hero.basket.activate(data);
       }
@@ -74,7 +75,7 @@ export default class Hero extends Unit {
       Stats.changeUnitStat(this, Stats.WISDOM, -1);
       Stats.changeUnitStat(this, Stats.DEXTERITY, -1);
     }
-    for (const hero of Game.game.party.members) {
+    for (const hero of party.members) {
       hero.basket.activate({
         type: TriggerType.AFTER_FATIGUE,
         fatigue: data.fatigue,

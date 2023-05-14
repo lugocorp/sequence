@@ -12,108 +12,108 @@ import Random from '../logic/random';
 import Game from '../game';
 const data: Record<string, Effect> = {};
 
-data['corn'] = function (data: Trigger) {
+data['corn'] = function (game: Game, data: Trigger) {
   if (data.type === TriggerType.GET_STATS) {
     data.strength++;
   }
 };
 
-data['squash'] = function (data: Trigger) {
+data['squash'] = function (game: Game, data: Trigger) {
   if (data.type === TriggerType.GET_STATS) {
     data.wisdom++;
   }
 };
 
-data['beans'] = function (data: Trigger) {
+data['beans'] = function (game: Game, data: Trigger) {
   if (data.type === TriggerType.GET_STATS) {
     data.dexterity++;
   }
 };
 
-data['turquoise bead'] = function (data: Trigger) {
+data['turquoise bead'] = function (game: Game, data: Trigger) {
   if (data.type === TriggerType.GET_LUCK) {
     data.luck += 5;
   }
 };
 
-data['copper axe'] = function (data: Trigger) {
+data['copper axe'] = function (game: Game, data: Trigger) {
   if (data.type === TriggerType.GET_STATS) {
     data.strength += 2;
     data.wisdom--;
   }
 };
 
-data['quipu'] = function (data: Trigger) {
+data['quipu'] = function (game: Game, data: Trigger) {
   if (data.type === TriggerType.GET_STATS) {
     data.wisdom += 2;
     data.dexterity--;
   }
 };
 
-data['moccasins'] = function (data: Trigger) {
+data['moccasins'] = function (game: Game, data: Trigger) {
   if (data.type === TriggerType.GET_STATS) {
     data.dexterity += 2;
     data.strength--;
   }
 };
 
-data['fry bread'] = function (data: Trigger) {
-  if (data.type === TriggerType.GET_STATS && Game.game.party.length() <= 3) {
+data['fry bread'] = function (game: Game, data: Trigger) {
+  if (data.type === TriggerType.GET_STATS && game.party.length() <= 3) {
     data.strength += 2;
     data.wisdom += 2;
     data.dexterity += 2;
   }
 };
 
-data['sack of gold'] = function (data: Trigger) {
-  if (data.type === TriggerType.GET_STATS && Game.game.world.time === Time.DAY) {
+data['sack of gold'] = function (game: Game, data: Trigger) {
+  if (data.type === TriggerType.GET_STATS && game.world.time === Time.DAY) {
     data.strength++;
     data.wisdom++;
     data.dexterity++;
   }
 };
 
-data['sack of silver'] = function (data: Trigger) {
-  if (data.type === TriggerType.GET_STATS && Game.game.world.time === Time.NIGHT) {
+data['sack of silver'] = function (game: Game, data: Trigger) {
+  if (data.type === TriggerType.GET_STATS && game.world.time === Time.NIGHT) {
     data.strength++;
     data.wisdom++;
     data.dexterity++;
   }
 };
 
-data['paw paw'] = function (data: Trigger) {
-  if (data.type === TriggerType.GET_STATS && Game.game.world.weather === Weather.RAIN) {
+data['paw paw'] = function (game: Game, data: Trigger) {
+  if (data.type === TriggerType.GET_STATS && game.world.weather === Weather.RAIN) {
     data.strength++;
     data.wisdom++;
     data.dexterity++;
   }
 };
 
-data['cassava'] = function (data: Trigger) {
-  if (data.type === TriggerType.GET_STATS && Game.game.world.weather === Weather.WIND) {
+data['cassava'] = function (game: Game, data: Trigger) {
+  if (data.type === TriggerType.GET_STATS && game.world.weather === Weather.WIND) {
     data.strength++;
     data.wisdom++;
     data.dexterity++;
   }
 };
 
-data['sunflower'] = function (data: Trigger) {
-  if (data.type === TriggerType.GET_STATS && Game.game.world.weather === Weather.SUN) {
+data['sunflower'] = function (game: Game, data: Trigger) {
+  if (data.type === TriggerType.GET_STATS && game.world.weather === Weather.SUN) {
     data.strength++;
     data.wisdom++;
     data.dexterity++;
   }
 };
 
-data['crowberry'] = function (data: Trigger) {
-  if (data.type === TriggerType.GET_STATS && Game.game.world.weather === Weather.SNOW) {
+data['crowberry'] = function (game: Game, data: Trigger) {
+  if (data.type === TriggerType.GET_STATS && game.world.weather === Weather.SNOW) {
     data.strength++;
     data.wisdom++;
     data.dexterity++;
   }
 };
 
-data['succotash'] = function (data: Trigger) {
+data['succotash'] = function (game: Game, data: Trigger) {
   if (data.type === TriggerType.GET_STATS) {
     data.strength++;
     data.wisdom++;
@@ -121,7 +121,7 @@ data['succotash'] = function (data: Trigger) {
   }
 };
 
-data['macuahuitl'] = function (data: Trigger) {
+data['macuahuitl'] = function (game: Game, data: Trigger) {
   if (data.type === TriggerType.GET_STATS) {
     data.strength += 2;
   }
@@ -130,7 +130,7 @@ data['macuahuitl'] = function (data: Trigger) {
   }
 };
 
-data['amoxtli'] = function (data: Trigger) {
+data['amoxtli'] = function (game: Game, data: Trigger) {
   if (data.type === TriggerType.GET_STATS) {
     data.wisdom += 2;
   }
@@ -139,7 +139,7 @@ data['amoxtli'] = function (data: Trigger) {
   }
 };
 
-data['huarache'] = function (data: Trigger) {
+data['huarache'] = function (game: Game, data: Trigger) {
   if (data.type === TriggerType.GET_STATS) {
     data.dexterity += 2;
   }
@@ -148,7 +148,7 @@ data['huarache'] = function (data: Trigger) {
   }
 };
 
-data['corn and bean soup'] = function (data: Trigger) {
+data['corn and bean soup'] = function (game: Game, data: Trigger) {
   if (data.type === TriggerType.GET_STATS) {
     data.strength += 2;
     data.wisdom += 2;
@@ -156,13 +156,13 @@ data['corn and bean soup'] = function (data: Trigger) {
   }
 };
 
-data['eagle feather'] = function (data: Trigger) {
+data['eagle feather'] = function (game: Game, data: Trigger) {
   if (data.type === TriggerType.GET_LUCK) {
     data.luck += 100;
   }
 };
 
-data['turquoise ring'] = function (data: Trigger) {
+data['turquoise ring'] = function (game: Game, data: Trigger) {
   if (data.type === TriggerType.GET_STATS) {
     data.strength += 3;
     data.wisdom += 3;

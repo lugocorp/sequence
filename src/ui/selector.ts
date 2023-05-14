@@ -15,8 +15,8 @@ export default class Selector<T> {
     this.index = 0;
   }
 
-  invalidate(): void {
-    this.select(Game.game.getView(), this.item());
+  invalidate(game: Game): void {
+    this.select(game.getView(), this.item());
   }
 
   item(): T {
@@ -29,6 +29,7 @@ export default class Selector<T> {
 
   // A built-in Hero viewing selector
   static heroSelector(
+    party: Party,
     data: Hero[],
     select?: (hero: Hero) => void,
     extra?: (hero: Hero) => string
@@ -44,7 +45,7 @@ export default class Selector<T> {
         select(hero);
       }
       view.removeAction('items');
-      if (Game.game.party.contains(hero) && hero.basket.hasItems) {
+      if (party.contains(hero) && hero.basket.hasItems) {
         view.actions.push(
           new Action('items', () => {
             const oldActions = view.actions;
