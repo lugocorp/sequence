@@ -5,14 +5,14 @@
 import { WIDTH, HEIGHT, WGLYPH, HGLYPH, WTEXT } from '../../types';
 import { HTML5GraphicsLoader, DrawCoords } from './loader';
 import Glyphs from '../glyphs';
-import GraphicsRenderer from '../renderer';
+import Graphics from '../graphics';
 import { colors } from '../colors';
 import Sprites from '../sprites';
 import Action from '../../ui/action';
 import View from '../../ui/view';
 import Game from '../../game';
 
-export default class HTML5GraphicsRenderer extends GraphicsRenderer {
+export default class HTML5Graphics extends Graphics {
   private assets: HTML5GraphicsLoader = new HTML5GraphicsLoader();
   private ctx: CanvasRenderingContext2D;
   private canvas: HTMLCanvasElement;

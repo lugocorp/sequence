@@ -1,15 +1,12 @@
 import Game from './game';
-import HTML5GraphicsRenderer from './media/html5/renderer';
+import HTML5Graphics from './media/html5/graphics';
 import HTML5GameAudio from './media/html5/audio';
 
 // For game start
 document.addEventListener(
   'deviceready',
   async () => {
-    const game = new Game(
-      new HTML5GraphicsRenderer(),
-      new HTML5GameAudio()
-    );
+    const game = new Game(new HTML5Graphics(), new HTML5GameAudio());
     await game.start();
 
     // For click handling

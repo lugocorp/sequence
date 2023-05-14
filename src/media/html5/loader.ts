@@ -4,7 +4,7 @@
  * a spritesheet ID, and the second and third bytes are coordinates.
  */
 import { WGLYPH, HGLYPH } from '../../types';
-import GraphicsRenderer from '../renderer';
+import Graphics from '../graphics';
 import Sprites from '../sprites';
 
 export interface DrawCoords {
@@ -46,7 +46,7 @@ export class HTML5GraphicsLoader {
    */
   async loadAssets(): Promise<void> {
     this.sheets = [];
-    for (let index = 0; index < GraphicsRenderer.NUM_SHEETS; index++) {
+    for (let index = 0; index < Graphics.NUM_SHEETS; index++) {
       this.sheets.push(new Image());
       await new Promise((resolve) => {
         this.sheets[index].src = `./assets/sheet${index}.png`;
@@ -83,7 +83,7 @@ export class HTML5GraphicsLoader {
     const x = (id - (index << 16)) >> 8;
     const y = id - (index << 16) - (x << 8);
     const dimensions: { w: number; h: number } = this.getDimensions(index);
-    if (index >= GraphicsRenderer.NUM_SHEETS) {
+    if (index >= Graphics.NUM_SHEETS) {
       throw new Error(`Spritesheet #${index} not registered`);
     }
     return {

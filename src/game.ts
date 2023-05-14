@@ -1,6 +1,6 @@
 import { DAY_NIGHT_CYCLE, World, Weather, Time } from './types';
 import Sprites from './media/sprites';
-import GraphicsRenderer from './media/renderer';
+import Graphics from './media/graphics';
 import GameAudio from './media/audio';
 import HistoryManager from './media/history';
 import DataManager from './logic/data';
@@ -21,7 +21,7 @@ export default class Game {
   score: number;
   world: World;
 
-  constructor(private renderer: GraphicsRenderer, public audio: GameAudio) {
+  constructor(private graphics: Graphics, public audio: GameAudio) {
     this.currentClick = { x: 0, y: 0, down: false };
     this.audio = audio;
   }
@@ -34,12 +34,12 @@ export default class Game {
     this.party = new Party(this);
 
     // Set up canvas then load game assets (with a loading screen)
-    this.renderer.setup();
-    this.renderer.setSize();
-    await this.renderer.loadInitialAsset();
+    this.graphics.setup();
+    this.graphics.setSize();
+    await this.graphics.loadInitialAsset();
     this.invalidate();
     await this.history.initialize();
-    await this.renderer.loadAssets();
+    await this.graphics.loadAssets();
     await this.audio.loadAudio();
     await new Promise((resolve) => setTimeout(resolve, 500));
     this.audio.play(GameAudio.STARTUP);
@@ -66,7 +66,7 @@ export default class Game {
 
   // Tells the game to render a new frame
   invalidate(): void {
-    this.renderer.frame(this, this.view);
+    this.graphics.frame(this, this.view);
   }
 
   // Protected access to the current View
@@ -107,7 +107,7 @@ export default class Game {
   // Progresses to the next event in the game
   async progress(): Promise<void> {
     const wait = () => new Promise((resolve) => setTimeout(resolve, 10));
-    for (this.renderer.dark = 0; this.renderer.dark < 100; this.renderer.dark += 20) {
+    for (this.graphics.dark = 0; this.graphics.dark < 100; this.graphics.dark += 20) {
       this.invalidate();
       await wait();
     }
@@ -117,7 +117,7 @@ export default class Game {
     }
     this.chain.events.splice(0, 1);
     this.setView(this.chain.latest());
-    for (this.renderer.dark = 100; this.renderer.dark > 0; this.renderer.dark -= 20) {
+    for (this.graphics.dark = 100; this.graphics.dark > 0; this.graphics.dark -= 20) {
       this.invalidate();
       await wait();
     }
@@ -132,7 +132,7 @@ export default class Game {
         for (let a = 0; a < this.view.actions.length; a++) {
           const action = this.view.actions[a];
           const actionCoords: [number, number] = this.view.getActionCoords(a);
-          const coords: [number, number] = this.renderer.toDisplayCoords(
+          const coords: [number, number] = this.graphics.toDisplayCoords(
             actionCoords[0],
             actionCoords[1]
           );
@@ -175,7 +175,7 @@ export default class Game {
 
   // Returns true if the current click happened inside this text
   within(msg: string, x: number, y: number, down = false): boolean {
-    const bounds = this.renderer.getTextBounds(msg);
+    const bounds = this.graphics.getTextBounds(msg);
     return this.bounded(x, y, bounds[0], bounds[1], down);
   }
 }

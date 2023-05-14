@@ -1,4 +1,3 @@
-
 export default abstract class GameAudio {
   static STARTUP = 0;
   static OPTION = 1;
@@ -8,4 +7,4 @@ export default abstract class GameAudio {
 
   abstract loadAudio(): Promise<void>;
   abstract play(index: number): void;
-};
+}

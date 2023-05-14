@@ -1,8 +1,8 @@
-import { WIDTH, HEIGHT, WGLYPH, HGLYPH, WTEXT } from '../types';
+import { WGLYPH, HGLYPH } from '../types';
 import View from '../ui/view';
 import Game from '../game';
 
-export default abstract class GraphicsRenderer {
+export default abstract class Graphics {
   static NUM_SHEETS = 5;
   scale: number;
   dark: number;
