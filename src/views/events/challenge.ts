@@ -43,6 +43,7 @@ export default class ChallengeEvent extends EventView {
   init(): void {
     this.heroSelector = Selector.heroSelector(
       this.game.party,
+      this.game.party.members,
       undefined,
       (hero: Hero) =>
         `${this.coloredRate(
