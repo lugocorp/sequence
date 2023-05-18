@@ -1,4 +1,4 @@
-import { Stats, Trigger, TriggerType } from '../types';
+import { Stats, Trigger, TriggerType, Effect, Skills } from '../types';
 import Sprites from '../media/sprites';
 import EnumsHelper from '../logic/enums';
 import Random from '../logic/random';
@@ -16,34 +16,28 @@ export default class Hero {
   private originalDexterity: number;
   private items: Item[];
   private _luck: number;
-  private people: string;
   private _basket: Basket;
-  description: string;
-  sprite: Sprites;
-  name: string;
 
   constructor(
-    game: Game,
-    sprite: Sprites,
-    name: string,
-    people: string,
+    private game: Game,
+    public sprite: Sprites,
+    public name: string,
+    private people: string,
     strength: number,
     wisdom: number,
     dexterity: number,
     itemSlots: number,
-    description: string
+    public description: string,
+    public skills: Skills = [ undefined, undefined ],
+    private effect?: Effect
   ) {
-    this.sprite = sprite;
     this.strength = strength;
     this.wisdom = wisdom;
     this.dexterity = dexterity;
-    this.name = name;
     this.originalStrength = strength;
     this.originalWisdom = wisdom;
     this.originalDexterity = dexterity;
     this._basket = new Basket(game, this, itemSlots);
-    this.description = description;
-    this.people = people;
     this._luck = 5;
     this.items = [];
   }
@@ -130,12 +124,22 @@ export default class Hero {
       type: TriggerType.GET_LUCK,
       luck: this._luck
     };
-    this.basket.activate(data);
+    this.activate(data);
     return Math.max(Math.min(data.luck, 100), 0);
   }
 
   // Returns true if the hero passes a luck check
   lucky(): boolean {
     return Random.passes(this.luck / 100);
+  }
+
+  // Triggers item and hero effects
+  activate(trigger: Trigger): void {
+    for (const item of this.basket.toList()) {
+      item.activate(this.game, trigger);
+    }
+    if (this.effect) {
+      this.effect(this.game, trigger);
+    }
   }
 }

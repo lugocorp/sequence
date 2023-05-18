@@ -1,4 +1,3 @@
-import { Trigger } from '../types';
 import Random from '../logic/random';
 import Game from '../game';
 import Item from './item';
@@ -74,12 +73,5 @@ export default class Basket {
   // Returns the number of held items
   get itemCount(): number {
     return this.items.length;
-  }
-
-  // Triggers item effects
-  activate(trigger: Trigger): void {
-    for (const item of this.toList()) {
-      item.activate(this.game, trigger);
-    }
   }
 }

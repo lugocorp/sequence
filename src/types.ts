@@ -31,6 +31,15 @@ export enum TriggerType {
   GET_LUCK = "when you calculate a hero's luck"
 }
 
+// Skill tuple type
+export enum Skill {
+  PROWESS = 'prowess',
+  ENDURANCE = 'endurance',
+  STEALTH = 'stealth',
+  DIPLOMACY = 'diplomacy'
+}
+export type Skills = [Skill, Skill] | [Skill, undefined] | [undefined, undefined];
+
 // Triggers are used to activate effects at certain times during gameplay
 export type Trigger =
   | {
