@@ -43,7 +43,7 @@ export default class AnimalEvent extends EventView {
                   Rarity.RARE,
                   `+25% luck. a baby ${baby.name} looking for its family.`,
                   function (game: Game, data: Trigger) {
-                    if (data.type === TriggerType.GET_LUCK) {
+                    if (data.type === TriggerType.GET_STATS) {
                       data.luck += 25;
                     }
                   }

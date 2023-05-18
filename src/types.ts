@@ -12,6 +12,14 @@ export const HGLYPH = 8;
 export const WTEXT = 120 / WGLYPH; // 24
 export const HTEXT = 96 / HGLYPH; // 12
 
+export type StatBlock = {
+  str: number;
+  wis: number;
+  dex: number;
+  luck: number;
+  energy: number;
+};
+
 export enum Stats {
   STRENGTH = 0,
   WISDOM = 1,
@@ -27,8 +35,7 @@ export enum Rarity {
 }
 
 export enum TriggerType {
-  GET_STATS = "when you calculate a hero's stats",
-  GET_LUCK = "when you calculate a hero's luck"
+  GET_STATS = "when you calculate a hero's stats"
 }
 
 // Skill tuple type
@@ -44,14 +51,7 @@ export type Skills = [Skill, Skill] | [Skill, undefined] | [undefined, undefined
 export type Trigger =
   | {
       type: TriggerType.GET_STATS;
-      strength: number;
-      wisdom: number;
-      dexterity: number;
-    }
-  | {
-      type: TriggerType.GET_LUCK;
-      luck: number;
-    };
+    } & StatBlock;
 
 // Item effect type
 export type Effect = (game: Game, trigger: Trigger) => void;

@@ -58,7 +58,9 @@ export default class ChallengeEvent extends EventView {
       this.game.party.members,
       undefined,
       (hero: Hero) =>
-        `${this.coloredRate(this.playerStatsHigher(hero) ? 100 : hero.luck)} chance of success.`
+        `${this.coloredRate(
+          this.playerStatsHigher(hero) ? 100 : hero.stats.luck
+        )} chance of success.`
     );
   }
 
@@ -129,10 +131,10 @@ export default class ChallengeEvent extends EventView {
   }
 
   private playerStatsHigher(hero: Hero): boolean {
-    let sum1: number = EnumsHelper.getUnitStat(hero, this.expectation[0]);
+    let sum1: number = hero.getStat(this.expectation[0]);
     let sum2: number = this.getChallengerStat(0);
     if (this.expectation.length > 1) {
-      sum1 += EnumsHelper.getUnitStat(hero, this.expectation[1]);
+      sum1 += hero.getStat(this.expectation[1]);
       sum2 += this.getChallengerStat(1);
     }
     return sum1 >= sum2;

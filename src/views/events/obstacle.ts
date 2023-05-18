@@ -43,8 +43,8 @@ export default class ObstacleEvent extends EventView {
   // True if the given hero should pass the obstacle
   private passes(hero: Hero): boolean {
     return this.higher
-      ? EnumsHelper.getUnitStat(hero, this.stat) >= this.cutoff
-      : EnumsHelper.getUnitStat(hero, this.stat) <= this.cutoff;
+      ? hero.getStat(this.stat) >= this.cutoff
+      : hero.getStat(this.stat) <= this.cutoff;
   }
 
   finish(): void {

@@ -25,7 +25,7 @@ export default class DeerEvent extends EventView {
       this.game.party,
       this.game.party.members,
       undefined,
-      (hero) => `${this.coloredRate(hero.luck)} chance of success.`
+      (hero) => `${this.coloredRate(hero.stats.luck)} chance of success.`
     );
   }
 
@@ -51,7 +51,7 @@ export default class DeerEvent extends EventView {
         hero.fatigue();
         if (hero.lucky()) {
           for (const hero of this.game.party.members) {
-            hero.boostLuck(5);
+            hero.luck += 5;
           }
           this.setDetails(
             hero.sprite,

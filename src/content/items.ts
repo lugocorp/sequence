@@ -12,7 +12,7 @@ export const items: ItemGenerator[] = [
       data: Trigger
     ) {
       if (data.type === TriggerType.GET_STATS) {
-        data.strength++;
+        data.str++;
       }
     }),
   () =>
@@ -21,7 +21,7 @@ export const items: ItemGenerator[] = [
       data: Trigger
     ) {
       if (data.type === TriggerType.GET_STATS) {
-        data.wisdom++;
+        data.wis++;
       }
     }),
   () =>
@@ -30,7 +30,7 @@ export const items: ItemGenerator[] = [
       data: Trigger
     ) {
       if (data.type === TriggerType.GET_STATS) {
-        data.dexterity++;
+        data.dex++;
       }
     }),
   () =>
@@ -38,7 +38,7 @@ export const items: ItemGenerator[] = [
       game: Game,
       data: Trigger
     ) {
-      if (data.type === TriggerType.GET_LUCK) {
+      if (data.type === TriggerType.GET_STATS) {
         data.luck += 5;
       }
     }),
@@ -50,8 +50,8 @@ export const items: ItemGenerator[] = [
       '+2 strength, -1 wisdom.',
       function (game: Game, data: Trigger) {
         if (data.type === TriggerType.GET_STATS) {
-          data.strength += 2;
-          data.wisdom--;
+          data.str += 2;
+          data.wis--;
         }
       }
     ),
@@ -61,8 +61,8 @@ export const items: ItemGenerator[] = [
       data: Trigger
     ) {
       if (data.type === TriggerType.GET_STATS) {
-        data.wisdom += 2;
-        data.dexterity--;
+        data.wis += 2;
+        data.dex--;
       }
     }),
   () =>
@@ -73,8 +73,8 @@ export const items: ItemGenerator[] = [
       '+2 dexterity, -1 strength.',
       function (game: Game, data: Trigger) {
         if (data.type === TriggerType.GET_STATS) {
-          data.dexterity += 2;
-          data.strength--;
+          data.dex += 2;
+          data.str--;
         }
       }
     ),
@@ -86,9 +86,9 @@ export const items: ItemGenerator[] = [
       '+2 to all stats if you have 3 or fewer party members.',
       function (game: Game, data: Trigger) {
         if (data.type === TriggerType.GET_STATS && game.party.length() <= 3) {
-          data.strength += 2;
-          data.wisdom += 2;
-          data.dexterity += 2;
+          data.str += 2;
+          data.wis += 2;
+          data.dex += 2;
         }
       }
     ),
@@ -100,9 +100,9 @@ export const items: ItemGenerator[] = [
       '+1 to all stats during the day.',
       function (game: Game, data: Trigger) {
         if (data.type === TriggerType.GET_STATS && game.world.time === Time.DAY) {
-          data.strength++;
-          data.wisdom++;
-          data.dexterity++;
+          data.str++;
+          data.wis++;
+          data.dex++;
         }
       }
     ),
@@ -114,9 +114,9 @@ export const items: ItemGenerator[] = [
       '+1 to all stats at night.',
       function (game: Game, data: Trigger) {
         if (data.type === TriggerType.GET_STATS && game.world.time === Time.NIGHT) {
-          data.strength++;
-          data.wisdom++;
-          data.dexterity++;
+          data.str++;
+          data.wis++;
+          data.dex++;
         }
       }
     ),
@@ -128,9 +128,9 @@ export const items: ItemGenerator[] = [
       '+1 to all stats in rainy weather.',
       function (game: Game, data: Trigger) {
         if (data.type === TriggerType.GET_STATS && game.world.weather === Weather.RAIN) {
-          data.strength++;
-          data.wisdom++;
-          data.dexterity++;
+          data.str++;
+          data.wis++;
+          data.dex++;
         }
       }
     ),
@@ -142,9 +142,9 @@ export const items: ItemGenerator[] = [
       '+1 to all stats in windy weather.',
       function (game: Game, data: Trigger) {
         if (data.type === TriggerType.GET_STATS && game.world.weather === Weather.WIND) {
-          data.strength++;
-          data.wisdom++;
-          data.dexterity++;
+          data.str++;
+          data.wis++;
+          data.dex++;
         }
       }
     ),
@@ -156,9 +156,9 @@ export const items: ItemGenerator[] = [
       '+1 to all stats in sunny weather.',
       function (game: Game, data: Trigger) {
         if (data.type === TriggerType.GET_STATS && game.world.weather === Weather.SUN) {
-          data.strength++;
-          data.wisdom++;
-          data.dexterity++;
+          data.str++;
+          data.wis++;
+          data.dex++;
         }
       }
     ),
@@ -170,9 +170,9 @@ export const items: ItemGenerator[] = [
       '+1 to all stats in snowy weather.',
       function (game: Game, data: Trigger) {
         if (data.type === TriggerType.GET_STATS && game.world.weather === Weather.SNOW) {
-          data.strength++;
-          data.wisdom++;
-          data.dexterity++;
+          data.str++;
+          data.wis++;
+          data.dex++;
         }
       }
     ),
@@ -184,9 +184,9 @@ export const items: ItemGenerator[] = [
       '+1 strength, +1 wisdom, +1 dexterity.',
       function (game: Game, data: Trigger) {
         if (data.type === TriggerType.GET_STATS) {
-          data.strength++;
-          data.wisdom++;
-          data.dexterity++;
+          data.str++;
+          data.wis++;
+          data.dex++;
         }
       }
     ),
@@ -196,9 +196,9 @@ export const items: ItemGenerator[] = [
       data: Trigger
     ) {
       if (data.type === TriggerType.GET_STATS) {
-        data.strength += 2;
+        data.str += 2;
       }
-      if (data.type === TriggerType.GET_LUCK) {
+      if (data.type === TriggerType.GET_STATS) {
         data.luck -= 5;
       }
     }),
@@ -208,9 +208,9 @@ export const items: ItemGenerator[] = [
       data: Trigger
     ) {
       if (data.type === TriggerType.GET_STATS) {
-        data.wisdom += 2;
+        data.wis += 2;
       }
-      if (data.type === TriggerType.GET_LUCK) {
+      if (data.type === TriggerType.GET_STATS) {
         data.luck -= 5;
       }
     }),
@@ -220,9 +220,9 @@ export const items: ItemGenerator[] = [
       data: Trigger
     ) {
       if (data.type === TriggerType.GET_STATS) {
-        data.dexterity += 2;
+        data.dex += 2;
       }
-      if (data.type === TriggerType.GET_LUCK) {
+      if (data.type === TriggerType.GET_STATS) {
         data.luck -= 5;
       }
     }),
@@ -234,9 +234,9 @@ export const items: ItemGenerator[] = [
       '+2 strength, +2 wisdom, +2 dexterity.',
       function (game: Game, data: Trigger) {
         if (data.type === TriggerType.GET_STATS) {
-          data.strength += 2;
-          data.wisdom += 2;
-          data.dexterity += 2;
+          data.str += 2;
+          data.wis += 2;
+          data.dex += 2;
         }
       }
     ),
@@ -245,7 +245,7 @@ export const items: ItemGenerator[] = [
       game: Game,
       data: Trigger
     ) {
-      if (data.type === TriggerType.GET_LUCK) {
+      if (data.type === TriggerType.GET_STATS) {
         data.luck += 100;
       }
     }),
@@ -257,9 +257,9 @@ export const items: ItemGenerator[] = [
       '+3 strength, +3 wisdom, +3 dexterity.',
       function (game: Game, data: Trigger) {
         if (data.type === TriggerType.GET_STATS) {
-          data.strength += 3;
-          data.wisdom += 3;
-          data.dexterity += 3;
+          data.str += 3;
+          data.wis += 3;
+          data.dex += 3;
         }
       }
     )

@@ -14,6 +14,7 @@ export const heroes: HeroGenerator[] = [
       6,
       0,
       0,
+      3,
       2,
       'a poetry enthusiast who likes swords.'
     ),
@@ -26,6 +27,7 @@ export const heroes: HeroGenerator[] = [
       0,
       6,
       0,
+      3,
       2,
       'travels the frozen places of turtle island.'
     ),
@@ -38,6 +40,7 @@ export const heroes: HeroGenerator[] = [
       0,
       0,
       6,
+      3,
       2,
       'runs between villages with important information.'
     ),
@@ -50,6 +53,7 @@ export const heroes: HeroGenerator[] = [
       5,
       0,
       1,
+      3,
       2,
       'a highly skilled and decorated warrior.'
     ),
@@ -62,6 +66,7 @@ export const heroes: HeroGenerator[] = [
       1,
       5,
       0,
+      3,
       2,
       "he's discovered a way to stay warm at all times."
     ),
@@ -74,6 +79,7 @@ export const heroes: HeroGenerator[] = [
       0,
       5,
       1,
+      3,
       2,
       'a literal snake whisperer.'
     ),
@@ -87,6 +93,7 @@ export const heroes: HeroGenerator[] = [
       1,
       1,
       3,
+      3,
       'a strong woman who loves corn.'
     ),
   (game: Game) =>
@@ -98,6 +105,7 @@ export const heroes: HeroGenerator[] = [
       1,
       4,
       1,
+      3,
       3,
       'has spent her entire life curating wisdom.'
     ),
@@ -111,6 +119,7 @@ export const heroes: HeroGenerator[] = [
       1,
       4,
       3,
+      3,
       'the youngest and most active of her sisters.'
     ),
   (game: Game) =>
@@ -122,6 +131,7 @@ export const heroes: HeroGenerator[] = [
       4,
       2,
       0,
+      3,
       3,
       'holds her village together.'
     ),
@@ -135,6 +145,7 @@ export const heroes: HeroGenerator[] = [
       0,
       2,
       3,
+      3,
       'skilled fighter who never holds grudges.'
     ),
   (game: Game) =>
@@ -146,6 +157,7 @@ export const heroes: HeroGenerator[] = [
       2,
       4,
       0,
+      3,
       3,
       'skilled crafter known across nations.'
     ),
@@ -159,6 +171,7 @@ export const heroes: HeroGenerator[] = [
       0,
       4,
       3,
+      3,
       'uses gourds to hunt birds for his yukayeke.'
     ),
   (game: Game) =>
@@ -170,6 +183,7 @@ export const heroes: HeroGenerator[] = [
       2,
       2,
       2,
+      3,
       4,
       'makes her own jewelry from turquoise.'
     )
