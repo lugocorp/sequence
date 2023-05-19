@@ -1,7 +1,6 @@
-import { Trigger, Effect } from '../types';
+import { Effect } from '../types';
 import EnumsHelper from '../logic/enums';
 import Sprites from '../media/sprites';
-import Game from '../game';
 import Hero from './hero';
 
 export default class Item {

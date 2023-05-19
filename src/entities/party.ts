@@ -1,4 +1,3 @@
-import Random from '../logic/random';
 import Game from '../game';
 import Hero from './hero';
 

@@ -6,13 +6,13 @@ import Game from '../game';
 
 export class TestAudio extends GameAudio {
   async loadAudio(): Promise<void> {}
-  play(index: number): void {}
+  play(_index: number): void {}
 }
 
 export class TestGraphics extends Graphics {
   setup(): void {}
   setSize(): void {}
-  frame(game: Game, view: View): void {}
+  frame(_game: Game, _view: View): void {}
   async loadInitialAsset(): Promise<void> {}
   async loadAssets(): Promise<void> {}
 }

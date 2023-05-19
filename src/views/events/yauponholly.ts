@@ -1,6 +1,5 @@
 import { Stats } from '../../types';
 import Sprites from '../../media/sprites';
-import Random from '../../logic/random';
 import Hero from '../../entities/hero';
 import Selector from '../../ui/selector';
 import Action from '../../ui/action';
