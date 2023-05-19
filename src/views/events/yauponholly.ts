@@ -7,29 +7,15 @@ import Action from '../../ui/action';
 import { EventView } from '../event';
 import Game from '../../game';
 
-export default class TreeEvent extends EventView {
+export default class YauponHollyEvent extends EventView {
   private heroSelector: Selector<Hero>;
 
   constructor(game: Game) {
     super(game);
-    const tree = Random.element([
-      {
-        sprite: Sprites.CHESTNUT,
-        name: 'chestnut'
-      },
-      {
-        sprite: Sprites.CATALPA,
-        name: 'catalpa'
-      },
-      {
-        sprite: Sprites.REDBUD,
-        name: 'redbud'
-      }
-    ]);
     const that = this;
     this.setDetails(
-      tree.sprite,
-      `your party comes across an elder ${tree.name} tree. a party member may sit beneath it refresh their original abilities.`,
+      Sprites.CHESTNUT,
+      `your party comes across a yaupon holly. choose someone to brew a drink from it and revert their original stats.`,
       [
         new Action('continue', () =>
           that.setSelector(that.heroSelector, [
@@ -37,12 +23,12 @@ export default class TreeEvent extends EventView {
               const hero: Hero = that.heroSelector.item();
               that.setDetails(
                 hero.sprite,
-                `${hero.name} sat beneath the ${tree.name} tree and became refreshed.`,
+                `${hero.name} brewed a drink from the yaupon holly. they regain their original strength, wisdom and dexterity.`,
                 [ new Action('continue', () => this.game.progress()) ]
               );
-              hero.refresh(Stats.STRENGTH);
-              hero.refresh(Stats.WISDOM);
-              hero.refresh(Stats.DEXTERITY);
+              hero.boosts.str = 0;
+              hero.boosts.wis = 0;
+              hero.boosts.dex = 0;
             })
           ])
         )

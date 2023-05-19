@@ -9,16 +9,12 @@ import Game from '../../game';
 
 export default class MedicineManEvent extends EventView {
   private heroSelector: Selector<Hero>;
-  private readonly sprite = Random.element([
-    Sprites.MEDICINE_MAN_MUSKOGEE,
-    Sprites.MEDICINE_MAN_GUARANI
-  ]);
 
   constructor(game: Game) {
     super(game);
     this.setDetails(
-      this.sprite,
-      'your party comes across a medicine man. he will empower one of your party members in exchange for a random item from them.',
+      Sprites.MEDICINE_MAN_GUARANI,
+      'your party comes across a medicine man. he will bless one of your party members in exchange for a gift.',
       [ new Action('continue', () => this.viewParty()) ]
     );
   }
@@ -37,36 +33,24 @@ export default class MedicineManEvent extends EventView {
   viewParty(): void {
     const that = this;
     if (this.game.party.hasItems()) {
-      this.setSelector(this.heroSelector, [ new Action('make trade', () => that.checkTrade()) ]);
+      this.setSelector(this.heroSelector, [ new Action('make trade', () => that.makeTrade()) ]);
     } else {
-      this.setDetails(this.sprite, `no one in your party has an item to give.`, [
+      this.setDetails(Sprites.MEDICINE_MAN_GUARANI, `no one in your party has anything to give.`, [
         new Action('continue', () => this.game.progress())
       ]);
     }
   }
 
-  checkTrade(): void {
-    if (this.hero.basket.hasItems) {
-      this.finish();
-    } else {
-      this.invalidTrade();
+  makeTrade(): void {
+    for (const item of this.hero.basket.toList()) {
+      this.hero.basket.unequip(item);
     }
-  }
-
-  invalidTrade(): void {
-    const that = this;
-    this.setDetails(this.hero.sprite, `${this.hero.name} has no items to give.`, [
-      new Action('continue', () => that.viewParty())
-    ]);
-  }
-
-  finish(): void {
-    const replaced: Item = this.hero.basket.random();
-    this.hero.basket.unequip(replaced);
-    this.hero.empowerRandom();
+    this.hero.str++;
+    this.hero.wis++;
+    this.hero.dex++;
     this.setDetails(
       this.hero.sprite,
-      `${this.hero.name} gave ${replaced.name} to the medicine man and was empowered.`,
+      `${this.hero.name} gifted all their items to the medicine man. they were blessed with strength, wisdom and dexterity.`,
       [ new Action('continue', () => this.game.progress()) ]
     );
   }

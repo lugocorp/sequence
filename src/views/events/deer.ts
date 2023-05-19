@@ -25,7 +25,7 @@ export default class DeerEvent extends EventView {
       this.game.party,
       this.game.party.members,
       undefined,
-      (hero) => `${this.coloredRate(hero.stats.luck)} chance of success.`
+      (hero) => `${this.coloredRate(hero.stats.luck)} chance to catch it`
     );
   }
 
@@ -48,21 +48,21 @@ export default class DeerEvent extends EventView {
     this.setSelector(this.heroSelector, [
       new Action('hunt deer', () => {
         const hero: Hero = this.heroSelector.item();
-        hero.fatigue();
+        hero.energy--;
         if (hero.lucky()) {
           for (const hero of this.game.party.members) {
-            hero.luck += 5;
+            hero.luck += 20;
           }
           this.setDetails(
             hero.sprite,
-            `${hero.name} successfully hunted the deer! they are tired but left a small offering for the beast's spirit. your party was blessed for their efforts.`,
+            `${hero.name} successfully hunted the deer! they are tired but still left a small offering for the beast's spirit. your party was blessed for their efforts.`,
             [ new Action('continue', () => this.game.progress()) ]
           );
         } else {
           this.game.chain.futureEvent(this, 3);
           this.setDetails(
             hero.sprite,
-            `${hero.name} exhausted themself and did not catch the deer, and it escaped into the thicket. your party gives chase.`,
+            `${hero.name} exhausted themself but did not catch the deer. it escapes into the thicket and your party gives chase.`,
             [ new Action('continue', () => this.game.progress()) ]
           );
         }

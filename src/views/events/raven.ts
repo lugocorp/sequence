@@ -6,50 +6,45 @@ import Action from '../../ui/action';
 import { EventView } from '../event';
 import Game from '../../game';
 
-export default class TricksterEvent extends EventView {
+export default class RavenEvent extends EventView {
   private heroSelector: Selector<Hero>;
 
   constructor(game: Game) {
     super(game);
-    const animal = Random.element([
-      {
-        sprite: Sprites.COYOTL,
-        name: 'coyotl'
-      },
-      {
-        sprite: Sprites.RAVEN,
-        name: 'raven'
-      }
-    ]);
     this.setDetails(
-      animal.sprite,
-      `your party comes across a tricky ${animal.name}! which party member will go up and talk to it?`,
+      Sprites.RAVEN,
+      `your party comes across a mischievous raven. which party member will go up and talk to it?`,
       [
         new Action('continue', () =>
           this.setSelector(this.heroSelector, [
             new Action('select', () => {
               const hero: Hero = this.heroSelector.item();
+              const initial = `${hero.name} approaches the raven.`;
               const effect: number = Random.max(4);
               if (effect === 0) {
-                hero.fatigue();
-                this.setDetails(animal.sprite, `${hero.name} was fatigued by the ${animal.name}.`, [
+                hero.str--;
+                hero.wis--;
+                hero.dex--;
+                this.setDetails(Sprites.RAVEN, `${initial} it laughs and places a curse upon them.`, [
                   new Action('continue', () => this.game.progress())
                 ]);
               } else if (effect === 1) {
-                hero.empower();
+                hero.str++;
+                hero.wis++;
+                hero.dex++;
                 this.setDetails(
-                  animal.sprite,
-                  `${hero.name} was empowered by the ${animal.name}!`,
+                  Sprites.RAVEN,
+                  `${initial} it places a blessing upon them!`,
                   [ new Action('continue', () => this.game.progress()) ]
                 );
               } else if (effect === 2) {
-                hero.luck -= 15;
-                this.setDetails(animal.sprite, `${hero.name} was cursed by the ${animal.name}.`, [
+                hero.luck -= 10;
+                this.setDetails(Sprites.RAVEN, `${initial} it laughs and places a curse upon them.`, [
                   new Action('continue', () => this.game.progress())
                 ]);
               } else {
-                hero.luck += 5;
-                this.setDetails(animal.sprite, `${hero.name} was blessed by the ${animal.name}!`, [
+                hero.luck += 10;
+                this.setDetails(Sprites.RAVEN, `${initial} it places a blessing upon them!`, [
                   new Action('continue', () => this.game.progress())
                 ]);
               }

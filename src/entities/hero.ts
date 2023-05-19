@@ -8,7 +8,7 @@ import Game from '../game';
 
 export default class Hero {
   private originals: StatBlock;
-  private boosts: StatBlock;
+  boosts: StatBlock;
   basket: Basket;
 
   constructor(

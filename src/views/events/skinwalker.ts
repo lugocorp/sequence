@@ -19,7 +19,7 @@ export default class SkinwalkerEvent extends EventView {
     for (let a = 0; a < removed; a++) {
       const hero: Hero = Random.element(heroes);
       heroes.splice(heroes.indexOf(hero), 1);
-      hero.fullyFatigue();
+      hero.energy = -100;
     }
   }
 }

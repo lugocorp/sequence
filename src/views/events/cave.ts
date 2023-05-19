@@ -14,7 +14,7 @@ export default class CaveEvent extends EventView {
       Sprites.CAVE,
       cave
         ? 'your party comes across a cave. will they venture inside?'
-        : 'your party comes to a mouth of the cave. finally they are free.',
+        : 'your party comes to an exit of the cave. finally they are free!',
       cave
         ? [
             new Action('yes', () => {

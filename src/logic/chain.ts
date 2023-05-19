@@ -6,12 +6,12 @@
 import { Time } from '../types';
 import { EventView } from '../views/event';
 import PlantingSeasonEvent from '../views/events/plantingseason';
+import ThreeSistersEvent from '../views/events/threesisters';
 import TradingPostEvent from '../views/events/tradingpost';
 import BabyPeccaryEvent from '../views/events/babypeccary';
+import MedicineManEvent from '../views/events/medicineman';
+import YauponHollyEvent from '../views/events/yauponholly';
 import SkinwalkerEvent from '../views/events/skinwalker';
-import ThreeSistersEvent from '../views/events/sisters';
-import MedicineManEvent from '../views/events/medicine';
-import TricksterEvent from '../views/events/trickster';
 import ChallengeEvent from '../views/events/challenge';
 import OfferingEvent from '../views/events/offering';
 import ProphecyEvent from '../views/events/prophecy';
@@ -21,11 +21,11 @@ import FatigueEvent from '../views/events/fatigue';
 import ForageEvent from '../views/events/forage';
 import CliffsEvent from '../views/events/cliffs';
 import CoyotlEvent from '../views/events/coyotl';
-import ThiefEvent from '../views/events/thief';
+import RabbitEvent from '../views/events/rabbit';
+import RavenEvent from '../views/events/raven';
 import DeathEvent from '../views/events/death';
 import BeginEvent from '../views/events/begin';
 import RiverEvent from '../views/events/river';
-import TreeEvent from '../views/events/tree';
 import GiftEvent from '../views/events/gift';
 import DeerEvent from '../views/events/deer';
 import CaveEvent from '../views/events/cave';
@@ -67,13 +67,13 @@ export default class EventChain {
       [ 3, (game: Game) => new BabyPeccaryEvent(game) ], // 77
       [ 3, (game: Game) => new TradingPostEvent(game) ], // 80
       [ 3, (game: Game) => new MedicineManEvent(game) ], // 83
-      [ 3, (game: Game) => new TreeEvent(game) ], // 86
+      [ 3, (game: Game) => new YauponHollyEvent(game) ], // 86
       [ 3, (game: Game) => new CaravanEvent(game) ], // 89
       [ 2, (game: Game) => new ProphecyEvent(game) ], // 91
       [ 2, (game: Game) => new DeerEvent(game) ], // 93
-      [ 2, (game: Game) => new TricksterEvent(game) ], // 95
+      [ 2, (game: Game) => new RavenEvent(game) ], // 95
       [ 2, (game: Game) => new CaveEvent(game) ], // 97
-      [ 2, (game: Game) => new ThiefEvent(game) ], // 99
+      [ 2, (game: Game) => new RabbitEvent(game) ], // 99
       [ 1, (game: Game) => new ThreeSistersEvent(game) ] // 100
     ];
     if (this.game.world.cave) {
@@ -82,9 +82,9 @@ export default class EventChain {
         [ 15, (game: Game) => new OfferingEvent(game) ], // 45
         [ 15, (game: Game) => new GiftEvent(game) ], // 60
         [ 10, (game: Game) => new ProphecyEvent(game) ], // 70
-        [ 10, (game: Game) => new TricksterEvent(game) ], // 80
+        [ 10, (game: Game) => new RavenEvent(game) ], // 80
         [ 5, (game: Game) => new BabyPeccaryEvent(game) ], // 85
-        [ 5, (game: Game) => new ThiefEvent(game) ], // 90
+        [ 5, (game: Game) => new RabbitEvent(game) ], // 90
         [ 5, (game: Game) => new WeatherEvent(game) ], // 95
         [ 5, (game: Game) => new SkinwalkerEvent(game) ] // 100
       ];

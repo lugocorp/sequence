@@ -8,24 +8,14 @@ import { EventView } from '../event';
 import Game from '../../game';
 type Stolen = [Hero, Item];
 
-export default class ThiefEvent extends EventView {
+export default class RabbitEvent extends EventView {
   private stolen: Stolen[] = [];
-  private readonly animal = Random.element([
-    {
-      name: 'rabbit',
-      sprite: Sprites.RABBIT
-    },
-    {
-      name: 'otter',
-      sprite: Sprites.OTTER
-    }
-  ]);
 
   constructor(game: Game) {
     super(game);
     this.setDetails(
-      this.animal.sprite,
-      `your party comes across a trickster! a ${this.animal.name} has come to steal precious items.`,
+      Sprites.RABBIT,
+      `your party comes across a tricky little rabbit.`,
       [ new Action('continue', () => this.checkForItems()) ]
     );
   }
@@ -41,8 +31,8 @@ export default class ThiefEvent extends EventView {
     const items: Stolen[] = unflattened.reduce((acc: Stolen[], x: Stolen[]) => acc.concat(x), []);
     if (!items.length) {
       this.setDetails(
-        this.animal.sprite,
-        `your party has no items for the ${this.animal.name} to steal. the trickster scurries away in frustration.`,
+        Sprites.RABBIT,
+        `your party has nothing for the trickster to steal. it scurries away in frustration.`,
         [ new Action('continue', () => this.game.progress()) ]
       );
       return;
@@ -55,16 +45,16 @@ export default class ThiefEvent extends EventView {
       this.stolen.push(item);
     }
     this.setDetails(
-      this.animal.sprite,
-      `the ${this.animal.name} has stolen ${this.stolen.length} ${this.items}. will you chase it down?`,
+      Sprites.RABBIT,
+      `the rabbit stole ${this.stolen.length} items from your party! will you chase it down?`,
       [ new Action('yes', () => this.chase()), new Action('no', () => this.getsAway()) ]
     );
   }
 
   catchUp(): void {
     this.setDetails(
-      this.animal.sprite,
-      `your party has caught up with the ${this.animal.name}. will you continue to chase it down?`,
+      Sprites.RABBIT,
+      `your party has caught up with the thieving rabbit. will you continue to chase it down?`,
       [ new Action('yes', () => this.chase()), new Action('no', () => this.getsAway()) ]
     );
   }
@@ -72,8 +62,8 @@ export default class ThiefEvent extends EventView {
   chase(): void {
     if (Random.passes(0.25)) {
       this.setDetails(
-        this.animal.sprite,
-        `your party caught the ${this.animal.name}! it gave all your items back and giggled as it scurried away.`,
+        Sprites.RABBIT,
+        `your party caught the thief! it gives all your items back and giggles as it scurries away.`,
         [
           new Action('continue', () => {
             for (const item of this.stolen) {
@@ -92,7 +82,7 @@ export default class ThiefEvent extends EventView {
       };
       this.game.chain.futureEvent(challenge, 1);
       this.game.chain.futureEvent(this, 2);
-      this.setDetails(this.animal.sprite, `your party did not catch the ${this.animal.name}.`, [
+      this.setDetails(Sprites.RABBIT, `your party did not catch the rabbit.`, [
         new Action('continue', () => this.game.progress())
       ]);
     }
@@ -100,8 +90,8 @@ export default class ThiefEvent extends EventView {
 
   getsAway(): void {
     this.setDetails(
-      this.animal.sprite,
-      `the ${this.animal.name} got away with ${this.stolen.length} of your party's items.`,
+      Sprites.RABBIT,
+      `the rabbit got away with ${this.stolen.length} of your party's items.`,
       [ new Action('continue', () => this.game.progress()) ]
     );
   }
