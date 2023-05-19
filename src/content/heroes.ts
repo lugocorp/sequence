@@ -47,7 +47,7 @@ export const heroes: HeroGenerator[] = [
       6,
       2,
       1,
-      '',
+      'no effect',
       [ undefined, undefined ],
       undefined
     ),
@@ -62,7 +62,7 @@ export const heroes: HeroGenerator[] = [
       0,
       4,
       2,
-      '',
+      'no effect',
       [ Skill.DIPLOMACY, undefined ],
       undefined
     ),
@@ -77,7 +77,7 @@ export const heroes: HeroGenerator[] = [
       3,
       4,
       2,
-      '',
+      'no effect',
       [ Skill.PROWESS, undefined ],
       undefined
     ),
@@ -92,7 +92,7 @@ export const heroes: HeroGenerator[] = [
       3,
       4,
       2,
-      '',
+      'no effect',
       [ Skill.STEALTH, undefined ],
       undefined
     ),
@@ -122,7 +122,7 @@ export const heroes: HeroGenerator[] = [
       2,
       4,
       2,
-      '',
+      'no effect',
       [ Skill.PROWESS, Skill.STEALTH ],
       undefined
     ),
@@ -182,7 +182,7 @@ export const heroes: HeroGenerator[] = [
       0,
       2,
       2,
-      '',
+      'no effect',
       [ Skill.PROWESS, Skill.STEALTH ],
       undefined
     ),
@@ -197,7 +197,7 @@ export const heroes: HeroGenerator[] = [
       0,
       2,
       2,
-      '',
+      'no effect',
       [ Skill.DIPLOMACY, Skill.STEALTH ],
       undefined
     ),
@@ -212,7 +212,7 @@ export const heroes: HeroGenerator[] = [
       3,
       2,
       2,
-      '',
+      'no effect',
       [ Skill.ENDURANCE, Skill.STEALTH ],
       undefined
     ),
@@ -227,7 +227,7 @@ export const heroes: HeroGenerator[] = [
       0,
       3,
       1,
-      '',
+      'no effect',
       [ Skill.PROWESS, undefined ],
       undefined
     ),
@@ -242,7 +242,7 @@ export const heroes: HeroGenerator[] = [
       0,
       3,
       1,
-      '',
+      'no effect',
       [ Skill.ENDURANCE, undefined ],
       undefined
     ),
@@ -257,7 +257,7 @@ export const heroes: HeroGenerator[] = [
       6,
       3,
       1,
-      '',
+      'no effect',
       [ Skill.ENDURANCE, undefined ],
       undefined
     ),

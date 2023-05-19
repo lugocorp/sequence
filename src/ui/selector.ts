@@ -28,12 +28,17 @@ export default class Selector<T> {
     return this.data.length;
   }
 
+  static viewHeroLuck(hero: Hero): string {
+    const n = hero.stats.luck;
+    return n > 99 ? `${n}%\tluck` : n > 9 ? `\t${n}%\tluck` : `\t\t${n}%\tluck`;
+  }
+
   // A built-in Hero viewing selector
   static heroSelector(
     party: Party,
     data: Hero[],
     select?: (hero: Hero) => void,
-    extra?: (hero: Hero) => string
+    extra = Selector.viewHeroLuck
   ): Selector<Hero> {
     return new Selector<Hero>(data, (view: View, hero: Hero): void => {
       view.image = hero.sprite;

@@ -179,12 +179,24 @@ export default class Hero {
   // Returns the text used in this hero's description
   descriptionText(): string {
     const stat = (n: number): string => (n > 9 ? `${n}\t` : `\t${n}\t`);
+    let skills = 'no skills';
+    if (this.skills[0]) {
+      skills = this.skills[0];
+      if (this.skills[1]) {
+        for (let a = 0; a < 24 - this.skills[0].length - this.skills[1].length; a++) {
+          skills += '\t';
+        }
+        skills += this.skills[1];
+      }
+    }
     return (
       `${this.name}\n` +
-      `${stat(this.stats.str)}str\t\t${stat(this.stats.wis)}wis\t\t${stat(this.stats.dex)}dex\n` +
-      `\thas ${this.basket.itemCount} item${this.basket.itemCount === 1 ? '' : 's'} (max ${
-        this.basket.total
-      })\n\n` +
+      `${this.basket.itemCount}/${this.basket.total}\titems\t\t\t\t\t\t` +
+      `${stat(this.stats.energy)}energy\n` +
+      `${stat(this.stats.str)}str\t\t` +
+      `${stat(this.stats.wis)}wis\t\t` +
+      `${stat(this.stats.dex)}dex\n` +
+      `${skills}\n` +
       `${this.description}`
     );
   }
