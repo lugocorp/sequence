@@ -22,8 +22,8 @@ export default class Hero {
     energy: number,
     itemSlots: number,
     public description: string,
-    public skills: Skills = [ undefined, undefined ],
-    private effect?: Effect
+    public skills: Skills,
+    private effect: Effect
   ) {
     this.basket = new Basket(game, this, itemSlots);
     this.originals = {
