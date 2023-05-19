@@ -8,17 +8,15 @@ import Game from '../../game';
 /*
  * In this event you choose a party member to leave behind.
  */
-export default class TrapEvent extends EventView {
+export default class CoyotlEvent extends EventView {
   private heroSelector: Selector<Hero>;
 
   constructor(game: Game) {
     super(game);
     const that = this;
-    this.setDetails(Sprites.TRAP, 'your party comes across a very inviting village.', [
+    this.setDetails(Sprites.TRAP, 'a tricky coyotl chases off one of your party members.', [
       new Action('continue', () =>
-        that.setDetails(Sprites.TRAP, 'choose one of your party members to stay here.', [
-          new Action('continue', () => that.heroViewer())
-        ])
+        that.setSelector(that.heroSelector, [ new Action('choose', () => that.finished()) ])
       )
     ]);
   }
@@ -27,15 +25,10 @@ export default class TrapEvent extends EventView {
     this.heroSelector = Selector.heroSelector(this.game.party, this.game.party.members);
   }
 
-  heroViewer(): void {
-    const that = this;
-    this.setSelector(this.heroSelector, [ new Action('choose', () => that.finished()) ]);
-  }
-
   finished(): void {
     const hero: Hero = this.heroSelector.item();
     this.game.party.remove(hero);
-    this.setDetails(hero.sprite, `${hero.name} was let go from your party.`, [
+    this.setDetails(hero.sprite, `${hero.name} was chased away by the coyotl.`, [
       new Action('continue', () => this.game.progress())
     ]);
   }

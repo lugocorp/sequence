@@ -5,7 +5,7 @@ import Action from '../../ui/action';
 import { EventView } from '../event';
 import Game from '../../game';
 
-export default class DreamEvent extends EventView {
+export default class ProphecyEvent extends EventView {
   constructor(game: Game) {
     super(game);
   }
@@ -15,7 +15,7 @@ export default class DreamEvent extends EventView {
     const item: Item = this.game.data.getRandomItem(Rarity.RARE);
     this.setDetails(
       hero.sprite,
-      `${hero.name} has a dream about a powerful item. could it be prophetic?`,
+      `${hero.name} has a vision about a powerful artifact. could it be prophetic?`,
       [ new Action('continue', () => this.game.progress()) ]
     );
 
@@ -25,7 +25,7 @@ export default class DreamEvent extends EventView {
       if (hero.basket.hasSpace) {
         future.setDetails(
           hero.sprite,
-          `${hero.name} receives a powerful item they had recently dreamt of.`,
+          `${hero.name} receives a powerful item they had recently seen in a vision.`,
           [
             new Action('view item', () =>
               future.setDetails(item.sprite, item.descriptionText(), [
@@ -40,7 +40,7 @@ export default class DreamEvent extends EventView {
       } else {
         future.setDetails(
           hero.sprite,
-          `${hero.name} comes upon a powerful item they had recently dreamt of, but their inventory is full.`,
+          `${hero.name} comes upon a powerful artifact they had recently seen in a vision, but their inventory is full. they leave the item alone.`,
           [
             new Action('view item', () =>
               future.setDetails(item.sprite, item.descriptionText(), [

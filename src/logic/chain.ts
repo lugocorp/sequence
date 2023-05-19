@@ -5,28 +5,28 @@
  */
 import { Time } from '../types';
 import { EventView } from '../views/event';
+import PlantingSeasonEvent from '../views/events/plantingseason';
+import TradingPostEvent from '../views/events/tradingpost';
+import BabyPeccaryEvent from '../views/events/babypeccary';
 import SkinwalkerEvent from '../views/events/skinwalker';
 import ThreeSistersEvent from '../views/events/sisters';
 import MedicineManEvent from '../views/events/medicine';
 import TricksterEvent from '../views/events/trickster';
 import ChallengeEvent from '../views/events/challenge';
 import OfferingEvent from '../views/events/offering';
-import ObstacleEvent from '../views/events/obstacle';
-import RecruitEvent from '../views/events/recruit';
+import ProphecyEvent from '../views/events/prophecy';
+import CaravanEvent from '../views/events/caravan';
 import WeatherEvent from '../views/events/weather';
-import ProjectEvent from '../views/events/project';
 import FatigueEvent from '../views/events/fatigue';
-import AnimalEvent from '../views/events/animal';
+import ForageEvent from '../views/events/forage';
+import CliffsEvent from '../views/events/cliffs';
+import CoyotlEvent from '../views/events/coyotl';
 import ThiefEvent from '../views/events/thief';
 import DeathEvent from '../views/events/death';
 import BeginEvent from '../views/events/begin';
-import DreamEvent from '../views/events/dream';
-import TradeEvent from '../views/events/trade';
-import RapidEvent from '../views/events/rapid';
-import PlantEvent from '../views/events/plant';
+import RiverEvent from '../views/events/river';
 import TreeEvent from '../views/events/tree';
 import GiftEvent from '../views/events/gift';
-import TrapEvent from '../views/events/trap';
 import DeerEvent from '../views/events/deer';
 import CaveEvent from '../views/events/cave';
 import Random from './random';
@@ -57,18 +57,19 @@ export default class EventChain {
     let table: [number, EventGenerator][] = [
       [ 35, (game: Game) => new ChallengeEvent(game) ], // 35
       [ 8, (game: Game) => new WeatherEvent(game) ], // 43
-      [ 6, (game: Game) => new TrapEvent(game) ], // 49
-      [ 5, (game: Game) => new ObstacleEvent(game) ], // 54
-      [ 5, (game: Game) => new OfferingEvent(game) ], // 59
-      [ 5, (game: Game) => new GiftEvent(game) ], // 64
-      [ 4, (game: Game) => new PlantEvent(game) ], // 68
-      [ 4, (game: Game) => new ProjectEvent(game) ], // 72
-      [ 4, (game: Game) => new RapidEvent(game) ], // 76
-      [ 3, (game: Game) => new AnimalEvent(game) ], // 79
-      [ 3, (game: Game) => new TradeEvent(game) ], // 82
-      [ 3, (game: Game) => new MedicineManEvent(game) ], // 85
-      [ 3, (game: Game) => new TreeEvent(game) ], // 88
-      [ 3, (game: Game) => new RecruitEvent(game) ], // 91
+      [ 4, (game: Game) => new CoyotlEvent(game) ], // 47
+      [ 5, (game: Game) => new CliffsEvent(game) ], // 52
+      [ 5, (game: Game) => new OfferingEvent(game) ], // 57
+      [ 5, (game: Game) => new GiftEvent(game) ], // 62
+      [ 4, (game: Game) => new ForageEvent(game) ], // 66
+      [ 4, (game: Game) => new PlantingSeasonEvent(game) ], // 70
+      [ 4, (game: Game) => new RiverEvent(game) ], // 74
+      [ 3, (game: Game) => new BabyPeccaryEvent(game) ], // 77
+      [ 3, (game: Game) => new TradingPostEvent(game) ], // 80
+      [ 3, (game: Game) => new MedicineManEvent(game) ], // 83
+      [ 3, (game: Game) => new TreeEvent(game) ], // 86
+      [ 3, (game: Game) => new CaravanEvent(game) ], // 89
+      [ 2, (game: Game) => new ProphecyEvent(game) ], // 91
       [ 2, (game: Game) => new DeerEvent(game) ], // 93
       [ 2, (game: Game) => new TricksterEvent(game) ], // 95
       [ 2, (game: Game) => new CaveEvent(game) ], // 97
@@ -78,20 +79,18 @@ export default class EventChain {
     if (this.game.world.cave) {
       table = [
         [ 30, (game: Game) => new ChallengeEvent(game) ], // 30
-        [ 20, (game: Game) => new OfferingEvent(game) ], // 50
-        [ 20, (game: Game) => new GiftEvent(game) ], // 70
+        [ 15, (game: Game) => new OfferingEvent(game) ], // 45
+        [ 15, (game: Game) => new GiftEvent(game) ], // 60
+        [ 10, (game: Game) => new ProphecyEvent(game) ], // 70
         [ 10, (game: Game) => new TricksterEvent(game) ], // 80
-        [ 5, (game: Game) => new AnimalEvent(game) ], // 85
+        [ 5, (game: Game) => new BabyPeccaryEvent(game) ], // 85
         [ 5, (game: Game) => new ThiefEvent(game) ], // 90
         [ 5, (game: Game) => new WeatherEvent(game) ], // 95
         [ 5, (game: Game) => new SkinwalkerEvent(game) ] // 100
       ];
     }
-    if (this.game.world.time === Time.NIGHT) {
-      if (!this.game.world.cave) {
-        table.push([ 3, (game: Game) => new SkinwalkerEvent(game) ]);
-      }
-      table.push([ 5, (game: Game) => new DreamEvent(game) ]);
+    if (this.game.world.time === Time.NIGHT && !this.game.world.cave) {
+      table.push([ 3, (game: Game) => new SkinwalkerEvent(game) ]);
     }
     return table;
   }
@@ -109,7 +108,7 @@ export default class EventChain {
    */
   latest(): EventView {
     for (const hero of this.game.party.members) {
-      if (hero.isFatigued()) {
+      if (hero.stats.energy === 0) {
         return new FatigueEvent(this.game, hero);
       }
     }

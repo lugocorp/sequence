@@ -21,7 +21,7 @@ export default class OfferingEvent extends EventView {
     this.spirit = this.game.data.getRandomSpirit();
     this.setDetails(
       this.spirit,
-      `a spirit offers a gift of ${this.gift.name} to your party. only one member may accept it.`,
+      `a generous spirit offers a gift of ${this.gift.name} to your party. choose someone to accept it.`,
       [ new Action('continue', () => that.viewGift()) ]
     );
   }
@@ -31,7 +31,7 @@ export default class OfferingEvent extends EventView {
     if (!this.heroSelector.size()) {
       this.setDetails(
         this.spirit,
-        `a spirit offers a gift of ${this.gift.name} to your party, but everyone's inventory is full.`,
+        `a generous spirit offers a gift of ${this.gift.name} to your party, but no one has space for more items. the spirit conceals itself once more.`,
         [ new Action('continue', () => this.game.progress()) ]
       );
     }
@@ -52,9 +52,11 @@ export default class OfferingEvent extends EventView {
         new Action('view gift', () => that.viewGift())
       ]);
     } else {
-      this.setDetails(this.heroSelector.item().sprite, `no one in your party can pickup items.`, [
-        new Action('continue', () => this.game.progress())
-      ]);
+      this.setDetails(
+        this.heroSelector.item().sprite,
+        `no one in your party has space for new items.`,
+        [ new Action('continue', () => this.game.progress()) ]
+      );
     }
   }
 

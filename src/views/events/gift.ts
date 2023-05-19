@@ -33,13 +33,13 @@ export default class GiftEvent extends EventView {
       this.hero = Random.element(this.game.party.emptyItemSlots());
       this.setDetails(
         this.spirit,
-        `a spirit reveals itself to ${this.hero.name}. it comes bearing a gift of your choosing.`,
+        `a generous spirit reveals itself to ${this.hero.name}. it comes bearing a gift of your choosing.`,
         [ new Action('continue', () => that.chooseGift()) ]
       );
     } else {
       this.setDetails(
         this.spirit,
-        `a spirit reveals itself to your party. it comes bearing a gift, but everyone's inventory is full.`,
+        `a generous spirit reveals itself to your party. it comes bearing a gift, but no one can hold any more belongings. the spirit conceals itself once more.`,
         [ new Action('continue', () => this.game.progress()) ]
       );
     }
@@ -55,7 +55,7 @@ export default class GiftEvent extends EventView {
 
   viewHero(): void {
     const that = this;
-    this.setDetails(this.hero.sprite, this.hero.descriptionText(), [
+    this.setSelector(Selector.heroSelector(this.game.party, [ this.hero ]), [
       new Action('view gifts', () => that.chooseGift())
     ]);
   }

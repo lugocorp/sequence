@@ -1,6 +1,5 @@
 import { Rarity, Trigger, TriggerType } from '../../types';
 import Sprites from '../../media/sprites';
-import Random from '../../logic/random';
 import Hero from '../../entities/hero';
 import Item from '../../entities/item';
 import Selector from '../../ui/selector';
@@ -8,29 +7,15 @@ import Action from '../../ui/action';
 import { EventView } from '../event';
 import Game from '../../game';
 
-export default class AnimalEvent extends EventView {
+export default class BabyPeccaryEvent extends EventView {
   private heroSelector: Selector<Hero>;
 
   constructor(game: Game) {
     super(game);
     const that = this;
-    const baby = Random.element([
-      {
-        name: 'cardinal',
-        sprite: Sprites.CARDINAL
-      },
-      {
-        name: 'peccary',
-        sprite: Sprites.PECCARY
-      },
-      {
-        name: 'tadpole',
-        sprite: Sprites.TADPOLE
-      }
-    ]);
     this.setDetails(
-      baby.sprite,
-      `your party finds a lonely baby ${baby.name}. someone may carry it until its family comes around.`,
+      Sprites.PECCARY,
+      `your party finds a lonely baby peccary. choose someone to carry it until the party finds its family.`,
       [
         new Action('continue', () => {
           if (this.game.party.canPickupItems()) {
@@ -38,10 +23,10 @@ export default class AnimalEvent extends EventView {
               new Action('choose', () => {
                 const hero: Hero = that.heroSelector.item();
                 const item: Item = new Item(
-                  baby.name,
-                  baby.sprite,
+                  'baby peccary',
+                  Sprites.PECCARY,
                   Rarity.RARE,
-                  `+25% luck. a baby ${baby.name} looking for its family.`,
+                  `+25% luck\na baby peccary looking for its family.`,
                   function (game: Game, data: Trigger) {
                     if (data.type === TriggerType.GET_STATS) {
                       data.luck += 25;
@@ -51,11 +36,13 @@ export default class AnimalEvent extends EventView {
                 hero.basket.equip(item);
                 const view: EventView = new EventView(this.game);
                 view.setDetails(
-                  baby.sprite,
-                  `${hero.name} returns the baby ${baby.name} to its family. they receive a blessing of empowerment.`,
+                  Sprites.PECCARY,
+                  `${hero.name} returns the baby peccary to its family and receives a blessing in return. they are now stronger, wiser and faster.`,
                   [
                     new Action('continue', () => {
-                      hero.empowerRandom();
+                      hero.str++;
+                      hero.wis++;
+                      hero.dex++;
                       this.game.history.peopleHelped++;
                       hero.basket.unequip(item);
                       this.game.progress();
@@ -67,14 +54,14 @@ export default class AnimalEvent extends EventView {
                   8,
                   () => hero.isInParty(this.game.party) && hero.basket.contains(item)
                 );
-                that.setDetails(baby.sprite, `${hero.name} picks up the baby ${baby.name}.`, [
+                that.setDetails(Sprites.PECCARY, `${hero.name} picks up the baby peccary.`, [
                   new Action('continue', () => this.game.progress())
                 ]);
               })
             ]);
           } else {
             that.setDetails(
-              baby.sprite,
+              Sprites.PECCARY,
               `your party's inventory is completely full. your party leaves the small animal.`,
               [ new Action('continue', () => this.game.progress()) ]
             );

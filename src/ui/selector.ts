@@ -42,11 +42,9 @@ export default class Selector<T> {
   ): Selector<Hero> {
     return new Selector<Hero>(data, (view: View, hero: Hero): void => {
       view.image = hero.sprite;
-      let description = `${data.indexOf(hero) + 1}/${data.length} ${hero.descriptionText()}`;
-      if (extra) {
-        description += `\n${extra(hero)}`;
-      }
-      view.setText(description);
+      view.setText(
+        `${data.indexOf(hero) + 1}/${data.length} ${hero.descriptionText()}\n${extra(hero)}`
+      );
       if (select) {
         select(hero);
       }

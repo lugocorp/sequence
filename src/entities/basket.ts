@@ -1,4 +1,3 @@
-import Random from '../logic/random';
 import Game from '../game';
 import Item from './item';
 import Hero from './hero';
@@ -57,17 +56,6 @@ export default class Basket {
   // Returns true if this basket has an item with the given name
   has(item: string): boolean {
     return this.items.map((x: Item) => x.name).indexOf(item) > -1;
-  }
-
-  // Returns a random item from this basket
-  random(): Item {
-    return Random.element(this.items);
-  }
-
-  // Replaces item1 with item2
-  replace(item1: Item, item2: Item): void {
-    this.unequip(item1);
-    this.equip(item2);
   }
 
   // Returns the number of held items

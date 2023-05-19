@@ -56,11 +56,11 @@ export default class Hero {
     };
     this.activate(data);
     return {
-      str: Math.max(0, data.str),
-      wis: Math.max(0, data.wis),
-      dex: Math.max(0, data.dex),
+      str: Math.min(10, Math.max(0, data.str)),
+      wis: Math.min(10, Math.max(0, data.wis)),
+      dex: Math.min(10, Math.max(0, data.dex)),
       luck: Math.min(100, Math.max(0, data.luck)),
-      energy: Math.min(5, Math.max(0, data.energy))
+      energy: Math.min(10, Math.max(0, data.energy))
     };
   }
 
@@ -120,32 +120,6 @@ export default class Hero {
     return party.members.indexOf(this) > -1;
   }
 
-  // Returns true if this Hero no longer has stats due to fatigue
-  isFatigued(): boolean {
-    return this.stats.str <= 0 && this.stats.wis <= 0 && this.stats.dex <= 0;
-  }
-
-  // Reduces this Hero's stats
-  fatigue(): void {
-    this.str--;
-    this.wis--;
-    this.dex--;
-  }
-
-  // Fully fatigues the hero
-  fullyFatigue(): void {
-    this.str = -1000;
-    this.wis = -1000;
-    this.dex = -1000;
-  }
-
-  // Boosts each stat on this hero
-  empower(): void {
-    this.str++;
-    this.wis++;
-    this.dex++;
-  }
-
   // Boosts a random stat on this hero
   empowerRandom(): void {
     switch (EnumsHelper.getRandomStat()) {
@@ -193,11 +167,10 @@ export default class Hero {
       `${this.name}\n` +
       `${this.basket.itemCount}/${this.basket.total}\titems\t\t\t\t\t\t` +
       `${stat(this.stats.energy)}energy\n` +
-      `${stat(this.stats.str)}str\t\t` +
-      `${stat(this.stats.wis)}wis\t\t` +
+      `${stat(this.stats.str)}str\t\t\t` +
+      `${stat(this.stats.wis)}wis\t\t\t` +
       `${stat(this.stats.dex)}dex\n` +
-      `${skills}\n` +
-      `${this.description}`
+      `${skills}\n${this.description}`
     );
   }
 

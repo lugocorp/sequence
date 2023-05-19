@@ -5,7 +5,7 @@ import Action from '../../ui/action';
 import { EventView } from '../event';
 import Game from '../../game';
 
-export default class RapidEvent extends EventView {
+export default class RiverEvent extends EventView {
   private heroSelector: Selector<Hero>;
 
   constructor(game: Game) {
@@ -13,7 +13,7 @@ export default class RapidEvent extends EventView {
     const that = this;
     this.setDetails(
       Sprites.RAPID,
-      'your party approaches a dangerous, fast moving river. a party member will go down to become stronger, wiser and faster. they may get swept down the river.',
+      'your party approaches a dangerous, fast moving river. choose a party member to get closer for a blessing, but they may get swept down the river.',
       [
         new Action('continue', () =>
           that.setSelector(that.heroSelector, [ new Action('choose', () => that.river()) ])
@@ -27,14 +27,22 @@ export default class RapidEvent extends EventView {
       this.game.party,
       this.game.party.members,
       undefined,
-      (hero: Hero) => `${this.coloredRate(hero.stats.luck)} chance of success.`
+      (hero: Hero) => {
+        const luck = hero.stats.luck;
+        return `${this.coloredRate(luck).replace(
+          luck.toString(),
+          (100 - luck).toString()
+        )} chance to fall in`;
+      }
     );
   }
 
   river(): void {
     const that = this;
     const hero: Hero = this.heroSelector.item();
-    hero.empower();
+    hero.str++;
+    hero.wis++;
+    hero.dex++;
     this.setDetails(hero.sprite, `${hero.name} became stronger, wiser, and faster by the river!`, [
       new Action('continue', () => {
         if (hero.lucky()) {
@@ -63,7 +71,7 @@ export default class RapidEvent extends EventView {
     this.game.chain.futureEvent(retrieve, 5, () => !this.game.party.isFull());
     this.setDetails(
       Sprites.RAPID,
-      `${hero.name} was swept away by the river! you can meet them downstream if your party isn't full.`,
+      `${hero.name} was swept away by the river! you may meet them downstream if your party can use more members.`,
       [ new Action('continue', () => this.game.progress()) ]
     );
   }

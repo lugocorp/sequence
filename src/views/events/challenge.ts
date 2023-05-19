@@ -20,7 +20,7 @@ type Challenger = {
 export default class ChallengeEvent extends EventView {
   private heroSelector: Selector<Hero>;
   private challenger: Challenger;
-  private expectation: number[];
+  private expectation: Stats;
 
   constructor(game: Game) {
     super(game);
@@ -28,27 +28,15 @@ export default class ChallengeEvent extends EventView {
     this.challenger = {
       name: 'bear',
       sprite: Sprites.BEAR,
-      strength: 4,
-      wisdom: 2,
-      dexterity: 0
+      strength: Random.max(7),
+      wisdom: Random.max(7),
+      dexterity: Random.max(7)
     };
-    this.expectation = [ EnumsHelper.getRandomStat() ];
-    if (Random.passes(0.5)) {
-      const n = Stats.DEXTERITY + 1;
-      this.expectation.push(((Random.passes(0.5) ? 1 : -1) + this.expectation[0] + n) % n);
-    }
+    this.expectation = EnumsHelper.getRandomStat();
     this.setDetails(
       this.challenger.sprite,
-      `your party comes across a spirit who offers a challenge. you may choose one party member to participate.`,
-      [
-        new Action('continue', () =>
-          that.setDetails(
-            that.challenger.sprite,
-            `your party member will win if they meet the contested stats or have enough luck. they will tire afterwards, but less so if they win.`,
-            [ new Action('continue', () => that.viewChallenger()) ]
-          )
-        )
-      ]
+      `a powerful spirit offers your party a challenge. choose someone to participate.`,
+      [ new Action('continue', () => that.viewChallenger()) ]
     );
   }
 
@@ -60,16 +48,7 @@ export default class ChallengeEvent extends EventView {
       (hero: Hero) =>
         `${this.coloredRate(
           this.playerStatsHigher(hero) ? 100 : hero.stats.luck
-        )} chance of success.`
-    );
-  }
-
-  getTestText(): string {
-    return (
-      `a test of ${orange(EnumsHelper.getStatName(this.expectation[0]))}` +
-      (this.expectation.length > 1
-        ? ` and ${orange(EnumsHelper.getStatName(this.expectation[1]))}`
-        : '')
+        )} chance of success`
     );
   }
 
@@ -79,7 +58,9 @@ export default class ChallengeEvent extends EventView {
     const desc = `${this.challenger.name}\nstr:${stat(this.challenger.strength)}wis:${stat(
       this.challenger.wisdom
     )}dex:${stat(this.challenger.dexterity)}`;
-    const text = `${desc}\nchallenges you to ${this.getTestText()}.`;
+    const text = `${desc}\nchallenges you to a test of ${orange(
+      EnumsHelper.getStatName(this.expectation)
+    )}.`;
     this.setDetails(this.challenger.sprite, text, [
       new Action('view party', () => that.viewParty())
     ]);
@@ -99,9 +80,9 @@ export default class ChallengeEvent extends EventView {
     const result: boolean = this.playerOvercomesChallenge(hero);
     if (result) {
       this.game.history.challengesWon++;
-      hero.fatigue();
+      hero.energy--;
     } else {
-      hero.fullyFatigue();
+      hero.energy = -100;
     }
     this.setDetails(
       hero.sprite,
@@ -113,8 +94,8 @@ export default class ChallengeEvent extends EventView {
           that.setDetails(
             hero.sprite,
             result
-              ? `${hero.name} is tired but triumphant. they received -1 to all their stats.`
-              : `${hero.name} lost all their stats during the challenge.`,
+              ? `${hero.name} is triumphant but tired. they have lost some of their energy.`
+              : `${hero.name} used up all their energy in the challenge.`,
             [ new Action('continue', () => this.game.progress()) ]
           )
         )
@@ -122,21 +103,13 @@ export default class ChallengeEvent extends EventView {
     );
   }
 
-  private getChallengerStat(index: number): number {
-    return {
+  private playerStatsHigher(hero: Hero): boolean {
+    const sum1: number = hero.getStat(this.expectation);
+    const sum2: number = {
       [Stats.STRENGTH]: this.challenger.strength,
       [Stats.WISDOM]: this.challenger.wisdom,
       [Stats.DEXTERITY]: this.challenger.dexterity
-    }[this.expectation[index]];
-  }
-
-  private playerStatsHigher(hero: Hero): boolean {
-    let sum1: number = hero.getStat(this.expectation[0]);
-    let sum2: number = this.getChallengerStat(0);
-    if (this.expectation.length > 1) {
-      sum1 += hero.getStat(this.expectation[1]);
-      sum2 += this.getChallengerStat(1);
-    }
+    }[this.expectation];
     return sum1 >= sum2;
   }
 

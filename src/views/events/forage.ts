@@ -4,7 +4,7 @@ import Sprites from '../../media/sprites';
 import Random from '../../logic/random';
 import Game from '../../game';
 
-export default class PlantEvent extends EventView {
+export default class ForageEvent extends EventView {
   constructor(game: Game) {
     super(game);
     const SAFE = 0;
@@ -12,29 +12,9 @@ export default class PlantEvent extends EventView {
     const TOXIC = 2;
     const plant = Random.element([
       {
-        name: 'chayote',
-        sprite: Sprites.CHAYOTE,
-        type: SAFE
-      },
-      {
-        name: 'bear corn',
-        sprite: Sprites.BEAR_CORN,
-        type: SAFE
-      },
-      {
         name: 'purple passionflower',
         sprite: Sprites.PASSIONFLOWER,
         type: SAFE
-      },
-      {
-        name: 'elderberry',
-        sprite: Sprites.ELDERBERRY,
-        type: SEMISAFE
-      },
-      {
-        name: 'yaupon holly',
-        sprite: Sprites.YAUPON_HOLLY,
-        type: SEMISAFE
       },
       {
         name: 'pokeweed',
@@ -42,49 +22,37 @@ export default class PlantEvent extends EventView {
         type: SEMISAFE
       },
       {
-        name: 'foxglove',
-        sprite: Sprites.FOXGLOVE,
-        type: TOXIC
-      },
-      {
         name: 'castor bean',
         sprite: Sprites.CASTOR_BEAN,
-        type: TOXIC
-      },
-      {
-        name: 'swamp sumac',
-        sprite: Sprites.SWAMP_SUMAC,
         type: TOXIC
       }
     ]);
     const that = this;
-    const result = (aftermath: () => void, ate = true): void =>
-      that.setDetails(
-        plant.sprite,
-        `your party ${ate ? 'eats' : 'avoids'} the plant known as ${plant.name}.`,
-        [ new Action('continue', () => aftermath()) ]
-      );
+    const result = (action: string, aftermath: () => void): void =>
+      that.setDetails(plant.sprite, `your party ${action} the plant known as ${plant.name}.`, [
+        new Action('continue', () => aftermath())
+      ]);
     this.setDetails(
       plant.sprite,
       `your party is hungry and they come across a plant known as ${plant.name}. what do they do?`,
       [
         new Action('eat it raw', () => {
           if (plant.type === SAFE) {
-            result(() => that.empower());
+            result('eats', () => that.empower());
           } else {
-            result(() => that.poison());
+            result('eats', () => that.poison());
           }
         }),
-        new Action('eat it boiled', () => {
+        new Action('boil it', () => {
           if (plant.type === SEMISAFE) {
-            result(() => that.empower());
+            result('boils and eats', () => that.empower());
           } else if (plant.type === TOXIC) {
-            result(() => that.poison());
+            result('boils and eats', () => that.poison());
           } else {
-            result(() => this.game.progress());
+            result('boils and eats', () => this.game.progress());
           }
         }),
-        new Action('avoid it', () => result(() => this.game.progress(), false))
+        new Action('avoid it', () => result('avoids', () => this.game.progress()))
       ]
     );
   }
@@ -94,11 +62,13 @@ export default class PlantEvent extends EventView {
     view.init = (): void =>
       view.setDetails(
         this.game.party.members[0].sprite,
-        `your party suddenly feels fatigued. perhaps it was something they ate...`,
+        `your party suddenly feels weaker and slower. perhaps it was something they ate...`,
         [
           new Action('continue', () => {
             for (const hero of this.game.party.members) {
-              hero.fatigue();
+              hero.str--;
+              hero.wis--;
+              hero.dex--;
             }
             this.game.progress();
           })
@@ -117,7 +87,9 @@ export default class PlantEvent extends EventView {
         [
           new Action('continue', () => {
             for (const hero of this.game.party.members) {
-              hero.empowerRandom();
+              hero.str++;
+              hero.wis++;
+              hero.dex++;
             }
             this.game.progress();
           })

@@ -7,7 +7,7 @@ import Game from '../../game';
 /*
  * In this event you choose a new party member.
  */
-export default class RecruitEvent extends EventView {
+export default class CaravanEvent extends EventView {
   private recruitSelector: Selector<Hero>;
   private memberSelector: Selector<Hero>;
   private recruits: Hero[];
@@ -21,19 +21,15 @@ export default class RecruitEvent extends EventView {
       this.game.data.getRandomHero()
     ];
     this.recruitSelector = Selector.heroSelector(this.game.party, this.recruits);
-    this.setDetails(
-      this.recruits[0].sprite,
-      'your party comes across another group of travelers.',
-      [
-        new Action('continue', () =>
-          that.setDetails(
-            this.recruits[0].sprite,
-            'you can choose one traveler to recruit into your party.',
-            [ new Action('continue', () => that.viewRecruits()) ]
-          )
+    this.setDetails(this.recruits[0].sprite, 'your party comes across a small caravan.', [
+      new Action('continue', () =>
+        that.setDetails(
+          this.recruits[0].sprite,
+          'one of the travelers would like to join your party.',
+          [ new Action('continue', () => that.viewRecruits()) ]
         )
-      ]
-    );
+      )
+    ]);
   }
 
   init(): void {
@@ -63,7 +59,7 @@ export default class RecruitEvent extends EventView {
     const that = this;
     this.setDetails(
       this.recruitSelector.item().sprite,
-      'your party is full. please remove an existing member.',
+      'one of your party members would like to join the caravan.',
       [ new Action('continue', () => that.removeMember()) ]
     );
   }
@@ -75,10 +71,10 @@ export default class RecruitEvent extends EventView {
 
   finished(): void {
     const recruit: Hero = this.recruitSelector.item();
-    let text = `welcome ${recruit.name} to your party!`;
+    let text = `${recruit.name} left the caravan for your party!`;
     if (this.game.party.isFull()) {
       const member: Hero = this.memberSelector.item();
-      text += ` ${member.name} left your party.`;
+      text += ` ${member.name} left your party for the caravan.`;
       this.game.party.remove(member);
     }
     this.game.party.add(recruit);
