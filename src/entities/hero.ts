@@ -8,7 +8,7 @@ import Game from '../game';
 
 export default class Hero {
   private originals: StatBlock;
-  boosts: StatBlock;
+  private boosts: StatBlock;
   basket: Basket;
 
   constructor(
@@ -182,7 +182,7 @@ export default class Hero {
   // Triggers item and hero effects
   activate(trigger: Trigger): void {
     for (const item of this.basket.toList()) {
-      item.activate(this.game, trigger);
+      item.effect?.call(item, this.game, trigger);
     }
     if (this.effect) {
       this.effect(this.game, trigger);

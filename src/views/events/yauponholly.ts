@@ -26,9 +26,9 @@ export default class YauponHollyEvent extends EventView {
                 `${hero.name} brewed a drink from the yaupon holly. they regain their original strength, wisdom and dexterity.`,
                 [ new Action('continue', () => this.game.progress()) ]
               );
-              hero.boosts.str = 0;
-              hero.boosts.wis = 0;
-              hero.boosts.dex = 0;
+              hero.refresh(Stats.STRENGTH);
+              hero.refresh(Stats.WISDOM);
+              hero.refresh(Stats.DEXTERITY);
             })
           ])
         )

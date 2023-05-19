@@ -15,13 +15,12 @@ export default class Game {
   private view: View;
   chain: EventChain;
   data: DataManager;
-  history: HistoryManager;
   party: Party;
   currentClick: { x: number; y: number; down: boolean };
   score: number;
   world: World;
 
-  constructor(private graphics: Graphics, public audio: GameAudio) {
+  constructor(private graphics: Graphics, public audio: GameAudio, public history: HistoryManager) {
     this.currentClick = { x: 0, y: 0, down: false };
     this.audio = audio;
   }
@@ -30,7 +29,6 @@ export default class Game {
   async start(): Promise<void> {
     this.chain = new EventChain(this);
     this.data = new DataManager(this);
-    this.history = new HistoryManager();
     this.party = new Party(this);
 
     // Set up canvas then load game assets (with a loading screen)
@@ -112,7 +110,7 @@ export default class Game {
       await wait();
     }
     this.invalidate();
-    if (this.party.length() && this.chain.events.length === 1) {
+    if (this.party.size && this.chain.events.length === 1) {
       this.chain.plan();
     }
     this.chain.events.splice(0, 1);

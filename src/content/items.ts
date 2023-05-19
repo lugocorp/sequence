@@ -85,7 +85,7 @@ export const items: ItemGenerator[] = [
       Rarity.UNCOMMON,
       '+2 to all stats if you have 3 or fewer party members.',
       function (game: Game, data: Trigger) {
-        if (data.type === TriggerType.GET_STATS && game.party.length() <= 3) {
+        if (data.type === TriggerType.GET_STATS && game.party.size <= 3) {
           data.str += 2;
           data.wis += 2;
           data.dex += 2;

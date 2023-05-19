@@ -112,7 +112,7 @@ export default class EventChain {
         return new FatigueEvent(this.game, hero);
       }
     }
-    if (!this.game.party.length()) {
+    if (!this.game.party.size) {
       return new DeathEvent(this.game);
     }
     if (!this.events.length) {

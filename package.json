@@ -8,7 +8,8 @@
     "format": "prettier -w src && eslint --fix src",
     "start": "webpack serve --port 2017",
     "audit": "tsc -t es5 --outDir out src/audit.ts && node out/audit.js",
-    "android": "cordova run android"
+    "android": "cordova run android",
+    "test": "mocha --loader=ts-node/esm --extension=ts src/tests/*.spec.ts"
   },
   "keywords": [
     "ecosystem:cordova"
@@ -40,5 +41,12 @@
     "plugins": {
       "cordova-plugin-file": {}
     }
+  },
+  "dependencies": {
+    "@types/chai": "^4.3.5",
+    "@types/mocha": "^10.0.1",
+    "chai": "^4.3.7",
+    "mocha": "^10.2.0",
+    "ts-node": "^10.9.1"
   }
 }

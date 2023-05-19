@@ -11,3 +11,4 @@ We have a number of `npm` commands:
 - `format` makes the code pretty and lints everything
 - `audit` checks the game data for any illegal values
 - `android` compiles and deploys the game to an android device
+- `test` run unit tests

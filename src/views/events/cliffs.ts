@@ -16,7 +16,7 @@ export default class CliffsEvent extends EventView {
 
   constructor(game: Game) {
     super(game);
-    this.original = this.game.party.length();
+    this.original = this.game.party.size;
     this.stat = EnumsHelper.getRandomStat();
     this.cutoff = Random.max(4) + 1;
     const that = this;
@@ -49,7 +49,7 @@ export default class CliffsEvent extends EventView {
       }
     }
     this.game.party.filter((hero: Hero) => removals.indexOf(hero) < 0);
-    const size: number = this.game.party.length();
+    const size: number = this.game.party.size;
     this.setDetails(
       Sprites.CLIFF,
       size

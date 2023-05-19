@@ -1,7 +1,6 @@
 import { HTEXT } from '../types';
 
-export default class HistoryManager {
-  private entry: any;
+export default abstract class HistoryManager {
   runs: [string, number][];
   peopleHelped: number;
   itemsCollected: number;
@@ -9,31 +8,9 @@ export default class HistoryManager {
   challengesWon: number;
   partyMembers: number;
 
-  /**
-   * Sets up initial state
-   */
-  async initialize(): Promise<void> {
-    const that = this;
-    this.clear();
-    await new Promise<void>((resolve) => {
-      try {
-        window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function (fs) {
-          fs.root.getFile(
-            'abyayala.json',
-            { create: true, exclusive: false },
-            function (fileEntry) {
-              that.entry = fileEntry;
-              resolve();
-            }
-          );
-        });
-      } catch (e) {
-        console.error(e, e.stack);
-        resolve();
-      }
-    });
-    await this.load();
-  }
+  abstract initialize(): Promise<void>;
+  abstract save(): Promise<void>;
+  protected abstract load(): Promise<void>;
 
   /**
    * Resets state for a new game
@@ -79,46 +56,5 @@ export default class HistoryManager {
       this.runs.pop();
     }
     return index < MAX ? index : -1;
-  }
-
-  /**
-   * Writes save data to storage
-   */
-  async save(): Promise<void> {
-    const that = this;
-    if (!this.entry) {
-      return;
-    }
-    return new Promise((resolve) => {
-      that.entry.createWriter(function (writer) {
-        writer.onwriteend = resolve;
-        writer.write(JSON.stringify(that.runs));
-      });
-    });
-  }
-
-  /**
-   * Reads save data from storage
-   */
-  private async load(): Promise<void> {
-    const that = this;
-    this.runs = [];
-    if (!this.entry) {
-      return;
-    }
-    return new Promise((resolve) => {
-      that.entry.file(function (file) {
-        const reader = new FileReader();
-        reader.onloadend = function () {
-          try {
-            that.runs = JSON.parse(reader.result.toString());
-          } catch (e) {
-            console.error(e, e.stack);
-          }
-          resolve();
-        };
-        reader.readAsText(file);
-      });
-    });
   }
 }

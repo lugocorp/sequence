@@ -25,23 +25,25 @@ export default class RavenEvent extends EventView {
                 hero.str--;
                 hero.wis--;
                 hero.dex--;
-                this.setDetails(Sprites.RAVEN, `${initial} it laughs and places a curse upon them.`, [
-                  new Action('continue', () => this.game.progress())
-                ]);
+                this.setDetails(
+                  Sprites.RAVEN,
+                  `${initial} it laughs and places a curse upon them.`,
+                  [ new Action('continue', () => this.game.progress()) ]
+                );
               } else if (effect === 1) {
                 hero.str++;
                 hero.wis++;
                 hero.dex++;
-                this.setDetails(
-                  Sprites.RAVEN,
-                  `${initial} it places a blessing upon them!`,
-                  [ new Action('continue', () => this.game.progress()) ]
-                );
-              } else if (effect === 2) {
-                hero.luck -= 10;
-                this.setDetails(Sprites.RAVEN, `${initial} it laughs and places a curse upon them.`, [
+                this.setDetails(Sprites.RAVEN, `${initial} it places a blessing upon them!`, [
                   new Action('continue', () => this.game.progress())
                 ]);
+              } else if (effect === 2) {
+                hero.luck -= 10;
+                this.setDetails(
+                  Sprites.RAVEN,
+                  `${initial} it laughs and places a curse upon them.`,
+                  [ new Action('continue', () => this.game.progress()) ]
+                );
               } else {
                 hero.luck += 10;
                 this.setDetails(Sprites.RAVEN, `${initial} it places a blessing upon them!`, [

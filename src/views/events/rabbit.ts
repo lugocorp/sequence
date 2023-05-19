@@ -13,11 +13,9 @@ export default class RabbitEvent extends EventView {
 
   constructor(game: Game) {
     super(game);
-    this.setDetails(
-      Sprites.RABBIT,
-      `your party comes across a tricky little rabbit.`,
-      [ new Action('continue', () => this.checkForItems()) ]
-    );
+    this.setDetails(Sprites.RABBIT, `your party comes across a tricky little rabbit.`, [
+      new Action('continue', () => this.checkForItems())
+    ]);
   }
 
   private get items(): string {

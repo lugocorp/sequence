@@ -19,9 +19,11 @@ export default class ThreeSistersEvent extends EventView {
           that.setSelector(that.heroSelector, [
             new Action('select', () => {
               const hero: Hero = that.heroSelector.item();
-              that.setDetails(hero.sprite, `${hero.name} ate the plants and got stronger, smarter and faster.`, [
-                new Action('continue', () => this.game.progress())
-              ]);
+              that.setDetails(
+                hero.sprite,
+                `${hero.name} ate the plants and got stronger, smarter and faster.`,
+                [ new Action('continue', () => this.game.progress()) ]
+              );
               hero.luck += 5;
               hero.str++;
               hero.wis++;

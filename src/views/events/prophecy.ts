@@ -1,4 +1,5 @@
 import { Rarity } from '../../types';
+import Random from '../../logic/random';
 import Hero from '../../entities/hero';
 import Item from '../../entities/item';
 import Action from '../../ui/action';
@@ -11,7 +12,7 @@ export default class ProphecyEvent extends EventView {
   }
 
   init(): void {
-    const hero: Hero = this.game.party.randomHero();
+    const hero: Hero = Random.element(this.game.party.members);
     const item: Item = this.game.data.getRandomItem(Rarity.RARE);
     this.setDetails(
       hero.sprite,

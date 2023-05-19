@@ -14,13 +14,13 @@ export default class Party {
   }
 
   // Returns the number of heroes in your party
-  length(): number {
+  get size(): number {
     return this.members.length;
   }
 
   // Returns true if the party is full
   isFull(): boolean {
-    return this.length() === Party.MAX;
+    return this.size === Party.MAX;
   }
 
   // Returns true if the given Hero is part of this party
@@ -43,7 +43,7 @@ export default class Party {
     if (guaranteed) {
       this.add(this.game.data.getNamedHero(guaranteed));
     }
-    while (this.length() < Party.MAX) {
+    while (this.size < Party.MAX) {
       this.add(this.game.data.getRandomHero());
     }
   }
@@ -55,7 +55,7 @@ export default class Party {
 
   // Adds a hero to your party
   add(hero: Hero): void {
-    if (this.members.length > Party.MAX) {
+    if (this.members.length >= Party.MAX) {
       throw new Error(`Cannot have more than ${Party.MAX} members in your party`);
     }
     this.game.history.partyMembers++;
@@ -73,11 +73,6 @@ export default class Party {
       throw new Error(`${hero.name} is not in your party and therefore cannot be removed`);
     }
     this.members.splice(index, 1);
-  }
-
-  // Returns a random hero in the party
-  randomHero(): Hero {
-    return Random.element(this.members);
   }
 
   // Filters the party by a stat expectation
