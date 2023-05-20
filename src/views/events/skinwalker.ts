@@ -2,7 +2,7 @@ import Sprites from '../../media/sprites';
 import Random from '../../logic/random';
 import Hero from '../../entities/hero';
 import Action from '../../ui/action';
-import { EventView } from '../event';
+import EventView from '../event';
 import Game from '../../game';
 
 export default class SkinwalkerEvent extends EventView {

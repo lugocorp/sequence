@@ -5,7 +5,7 @@ import Game from '../game';
 /**
  * This class wraps game event logic such as event type labelling and comparison
  */
-export class EventView extends View {
+export default class EventView extends View {
   constructor(game: Game) {
     super(game);
   }

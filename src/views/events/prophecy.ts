@@ -3,7 +3,7 @@ import Random from '../../logic/random';
 import Hero from '../../entities/hero';
 import Item from '../../entities/item';
 import Action from '../../ui/action';
-import { EventView } from '../event';
+import EventView from '../event';
 import Game from '../../game';
 
 export default class ProphecyEvent extends EventView {

@@ -2,7 +2,7 @@ import Sprites from '../../media/sprites';
 import Selector from '../../ui/selector';
 import Action from '../../ui/action';
 import Game from '../../game';
-import { EventView } from '../event';
+import EventView from '../event';
 
 export default class BeginEvent extends EventView {
   constructor(game: Game) {

@@ -1,6 +1,6 @@
 import Sprites from '../../media/sprites';
 import Action from '../../ui/action';
-import { EventView } from '../event';
+import EventView from '../event';
 import Game from '../../game';
 
 export default class PlantingSeasonEvent extends EventView {

@@ -4,7 +4,7 @@ import Random from '../../logic/random';
 import Item from '../../entities/item';
 import Hero from '../../entities/hero';
 import Action from '../../ui/action';
-import { EventView } from '../event';
+import EventView from '../event';
 import Game from '../../game';
 type Stolen = [Hero, Item];
 

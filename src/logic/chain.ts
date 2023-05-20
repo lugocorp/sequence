@@ -4,7 +4,7 @@
  * the player survives.
  */
 import { Time } from '../types';
-import { EventView } from '../views/event';
+import EventView from '../views/event';
 import PlantingSeasonEvent from '../views/events/plantingseason';
 import ThreeSistersEvent from '../views/events/threesisters';
 import TradingPostEvent from '../views/events/tradingpost';

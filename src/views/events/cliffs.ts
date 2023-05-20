@@ -3,7 +3,7 @@ import EnumsHelper from '../../logic/enums';
 import Hero from '../../entities/hero';
 import Random from '../../logic/random';
 import Action from '../../ui/action';
-import { EventView } from '../event';
+import EventView from '../event';
 import Game from '../../game';
 
 /*

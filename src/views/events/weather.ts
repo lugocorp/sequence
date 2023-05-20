@@ -2,7 +2,7 @@ import { Weather } from '../../types';
 import Sprites from '../../media/sprites';
 import Random from '../../logic/random';
 import Action from '../../ui/action';
-import { EventView } from '../event';
+import EventView from '../event';
 import Game from '../../game';
 
 export default class WeatherEvent extends EventView {
