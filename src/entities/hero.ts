@@ -46,7 +46,7 @@ export default class Hero {
    * Grabs the hero's stat block after effects are calculated
    */
   get stats(): StatBlock {
-    const data = {
+    const data: Trigger = {
       type: TriggerType.GET_STATS,
       str: this.str,
       wis: this.wis,
@@ -64,12 +64,34 @@ export default class Hero {
     };
   }
 
+  private get losable(): StatBlock<boolean> {
+    const data: Trigger = {
+      type: TriggerType.LOSS_CHECK,
+      str: true,
+      wis: true,
+      dex: true,
+      luck: true,
+      energy: true
+    };
+    this.activate(data);
+    return {
+      str: data.str,
+      wis: data.wis,
+      dex: data.dex,
+      luck: data.luck,
+      energy: data.energy
+    };
+  }
+
   get str(): number {
     return this.originals.str + this.boosts.str;
   }
 
   set str(value: number) {
-    this.boosts.str = value - this.originals.str;
+    const updated = value - this.originals.str;
+    if (updated > this.boosts.str || this.losable.str) {
+      this.boosts.str = updated;
+    }
   }
 
   get wis(): number {
@@ -77,7 +99,10 @@ export default class Hero {
   }
 
   set wis(value: number) {
-    this.boosts.wis = value - this.originals.wis;
+    const updated = value - this.originals.wis;
+    if (updated > this.boosts.wis || this.losable.wis) {
+      this.boosts.wis = updated;
+    }
   }
 
   get dex(): number {
@@ -85,7 +110,10 @@ export default class Hero {
   }
 
   set dex(value: number) {
-    this.boosts.dex = value - this.originals.dex;
+    const updated = value - this.originals.dex;
+    if (updated > this.boosts.dex || this.losable.dex) {
+      this.boosts.dex = updated;
+    }
   }
 
   get luck(): number {
@@ -93,7 +121,10 @@ export default class Hero {
   }
 
   set luck(value: number) {
-    this.boosts.luck = value - this.originals.luck;
+    const updated = value - this.originals.luck;
+    if (updated > this.boosts.luck || this.losable.luck) {
+      this.boosts.luck = updated;
+    }
   }
 
   get energy(): number {
@@ -101,7 +132,10 @@ export default class Hero {
   }
 
   set energy(value: number) {
-    this.boosts.energy = value - this.originals.energy;
+    const updated = value - this.originals.energy;
+    if (updated > this.boosts.energy || this.losable.energy) {
+      this.boosts.energy = updated;
+    }
   }
 
   getStat(stat: Stats): number {
@@ -182,7 +216,9 @@ export default class Hero {
   // Triggers item and hero effects
   activate(trigger: Trigger): void {
     for (const item of this.basket.toList()) {
-      item.effect?.call(item, this.game, trigger);
+      if (item.effect) {
+        item.effect(this.game, trigger);
+      }
     }
     if (this.effect) {
       this.effect(this.game, trigger);
