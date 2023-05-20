@@ -1,3 +1,4 @@
+import { TriggerType } from '../types';
 import Game from '../game';
 import Hero from './hero';
 
@@ -70,6 +71,12 @@ export default class Party {
     const index: number = this.members.indexOf(hero);
     if (index < 0) {
       throw new Error(`${hero.name} is not in your party and therefore cannot be removed`);
+    }
+    for (const hero of this.members) {
+      hero.activate({
+        type: TriggerType.LEAVE_PARTY,
+        hero
+      });
     }
     this.members.splice(index, 1);
   }

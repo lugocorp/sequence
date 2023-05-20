@@ -92,7 +92,7 @@ export const items: ItemGenerator[] = [
     ),
   () =>
     new Item(
-      'beaded moccasin',
+      'beaded moccasins',
       Sprites.TURQUOISE_BEAD,
       Rarity.UNCOMMON,
       '+2 dexterity\n-1 strength',
@@ -150,7 +150,7 @@ export const items: ItemGenerator[] = [
     ),
   () =>
     new Item(
-      'cursed sandal',
+      'cursed sandals',
       Sprites.TURQUOISE_BEAD,
       Rarity.UNCOMMON,
       '-1 dexterity',
