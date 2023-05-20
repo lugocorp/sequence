@@ -55,7 +55,7 @@ describe('Item effects', function () {
   });
 
   function testItem(name: string, extra: string, suite: (item: Item) => void): void {
-    it(`${name}'s effect${extra ? `: ${extra}` : ''}`, () => suite(game.data.getNamedItem(name)));
+    it(`${name}${extra ? ` (${extra})` : ''}`, () => suite(game.data.getNamedItem(name)));
   }
 
   function statBlockEffect(item: Item, partialStats: Partial<StatBlock> = {}) {
