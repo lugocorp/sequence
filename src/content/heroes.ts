@@ -207,7 +207,7 @@ export const heroes: HeroGenerator[] = [
         data.str += boosts;
         data.wis += boosts;
         data.dex += boosts;
-        data.energy += boosts * 10;
+        data.luck += boosts * 10;
       }
     };
     return hero;
