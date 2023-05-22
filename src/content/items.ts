@@ -295,7 +295,7 @@ export const items: ItemGenerator[] = [
       undefined
     );
     item.effect = (game: Game, data: Trigger) => {
-      if (data.type === TriggerType.LEAVE_PARTY && data.hero === item.bearer) {
+      if (data.type === TriggerType.LEAVE_PARTY) {
         const view: EventView = new EventView(game);
         view.setDetails(
           Sprites.TURQUOISE_BEAD,

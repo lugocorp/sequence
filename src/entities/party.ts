@@ -60,6 +60,7 @@ export default class Party {
     }
     this.game.history.partyMembers++;
     this.members.push(hero);
+    hero.activate({ type: TriggerType.JOIN_PARTY });
   }
 
   emptyItemSlots(): Hero[] {
@@ -72,12 +73,7 @@ export default class Party {
     if (index < 0) {
       throw new Error(`${hero.name} is not in your party and therefore cannot be removed`);
     }
-    for (const hero of this.members) {
-      hero.activate({
-        type: TriggerType.LEAVE_PARTY,
-        hero
-      });
-    }
+    hero.activate({ type: TriggerType.LEAVE_PARTY });
     this.members.splice(index, 1);
   }
 

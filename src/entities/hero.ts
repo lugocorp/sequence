@@ -21,9 +21,9 @@ export default class Hero {
     dex: number,
     energy: number,
     itemSlots: number,
-    public description: string,
-    public skills: Skills,
-    private effect: Effect
+    public skills: Skills = [ undefined, undefined ],
+    public description: string = 'no effect',
+    public effect: Effect = undefined
   ) {
     this.basket = new Basket(game, this, itemSlots);
     this.originals = {
@@ -133,8 +133,11 @@ export default class Hero {
 
   set energy(value: number) {
     const updated = value - this.originals.energy;
-    if (updated > this.boosts.energy || this.losable.energy) {
+    if (updated >= this.boosts.energy) {
       this.boosts.energy = updated;
+    } else if (this.losable.energy) {
+      this.boosts.energy = updated;
+      this.activate({ type: TriggerType.LOSE_ENERGY });
     }
   }
 

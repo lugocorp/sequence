@@ -36,20 +36,7 @@ describe('Item effects', function () {
   beforeEach(function () {
     game.setInitialState();
     game.data['heroesByName']['test hero'] = () =>
-      new Hero(
-        game,
-        Sprites.NONE,
-        'test hero',
-        '',
-        3,
-        3,
-        3,
-        3,
-        6,
-        '',
-        [ undefined, undefined ],
-        undefined
-      );
+      new Hero(game, Sprites.NONE, 'test hero', '', 3, 3, 3, 3, 6);
     hero = game.data.getNamedHero('test hero');
     hero.luck = 35;
   });

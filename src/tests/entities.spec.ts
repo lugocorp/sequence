@@ -15,20 +15,7 @@ describe('Basket tests', function () {
   let basket: Basket;
 
   beforeEach(function () {
-    const hero = new Hero(
-      game,
-      Sprites.NONE,
-      '',
-      '',
-      0,
-      0,
-      0,
-      0,
-      2,
-      '',
-      [ undefined, undefined ],
-      undefined
-    );
+    const hero = new Hero(game, Sprites.NONE, '', '', 0, 0, 0, 0, 2);
     basket = hero.basket;
   });
 
@@ -60,20 +47,7 @@ describe('Basket tests', function () {
 describe('Party tests', function () {
   const party = game.party;
   const hero = (name: string, items = 2) =>
-    new Hero(
-      game,
-      Sprites.NONE,
-      name,
-      '',
-      0,
-      0,
-      0,
-      0,
-      items,
-      '',
-      [ undefined, undefined ],
-      undefined
-    );
+    new Hero(game, Sprites.NONE, name, '', 0, 0, 0, 0, items);
 
   beforeEach(function () {
     party.clear();
@@ -137,20 +111,7 @@ describe('Hero tests', function () {
   let hero: Hero;
 
   beforeEach(function () {
-    hero = new Hero(
-      game,
-      Sprites.NONE,
-      'someone',
-      '',
-      3,
-      3,
-      3,
-      0,
-      0,
-      '',
-      [ undefined, undefined ],
-      undefined
-    );
+    hero = new Hero(game, Sprites.NONE, 'someone', '', 3, 3, 3, 0, 0);
   });
 
   it('empowerRandom()', function () {

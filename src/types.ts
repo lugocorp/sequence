@@ -1,4 +1,3 @@
-import Hero from './entities/hero';
 import Game from './game';
 
 // The display size of the entire game view
@@ -50,7 +49,9 @@ export enum Rarity {
 export enum TriggerType {
   GET_STATS = "when you calculate a hero's stats",
   LOSS_CHECK = 'determines if the hero can lose a particular stat',
-  LEAVE_PARTY = 'when a party member leaves'
+  LEAVE_PARTY = 'when a party member leaves',
+  LOSE_ENERGY = 'when a party member loses energy',
+  JOIN_PARTY = 'when a party member joins'
 }
 
 export type Trigger =
@@ -62,7 +63,12 @@ export type Trigger =
     } & StatBlock<boolean>)
   | {
       type: TriggerType.LEAVE_PARTY;
-      hero: Hero;
+    }
+  | {
+      type: TriggerType.LOSE_ENERGY;
+    }
+  | {
+      type: TriggerType.JOIN_PARTY;
     };
 
 // Item effect type
