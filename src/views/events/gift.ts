@@ -12,7 +12,6 @@ import Game from '../../game';
  */
 export default class GiftEvent extends EventView {
   private itemSelector: Selector<Item>;
-  private spirit: Sprites;
   private options: Item[];
   private hero: Hero;
 
@@ -24,7 +23,6 @@ export default class GiftEvent extends EventView {
       this.game.data.getRandomItem()
     ];
     this.itemSelector = Selector.itemSelector(this.options);
-    this.spirit = this.game.data.getRandomSpirit();
   }
 
   init(): void {
@@ -32,13 +30,13 @@ export default class GiftEvent extends EventView {
     if (this.game.party.canPickupItems()) {
       this.hero = Random.element(this.game.party.emptyItemSlots());
       this.setDetails(
-        this.spirit,
+        Sprites.GIFT,
         `a generous spirit reveals itself to ${this.hero.name}. it comes bearing a gift of your choosing.`,
         [ new Action('continue', () => that.chooseGift()) ]
       );
     } else {
       this.setDetails(
-        this.spirit,
+        Sprites.GIFT,
         `a generous spirit reveals itself to your party. it comes bearing a gift, but no one can hold any more belongings. the spirit conceals itself once more.`,
         [ new Action('continue', () => this.game.progress()) ]
       );
@@ -64,7 +62,7 @@ export default class GiftEvent extends EventView {
     const gift: Item = this.itemSelector.item();
     this.hero.basket.equip(gift);
     this.setDetails(
-      this.spirit,
+      Sprites.GIFT,
       `${this.hero.name} received the spirit's gift of ${gift.name}. the spirit conceals itself once more.`,
       [ new Action('continue', () => this.game.progress()) ]
     );

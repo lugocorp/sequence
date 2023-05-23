@@ -13,7 +13,7 @@ export default class TradingPostEvent extends EventView {
     super(game);
     const that = this;
     this.setDetails(
-      Sprites.TRADE,
+      Sprites.TRADING_POST,
       'your party comes across a trading post. choose a party member and they will trade all their items for new ones.',
       [ new Action('continue', () => that.viewParty()) ]
     );
@@ -35,7 +35,7 @@ export default class TradingPostEvent extends EventView {
     if (this.game.party.hasItems()) {
       this.setSelector(this.heroSelector, [ new Action('trade', () => that.trade()) ]);
     } else {
-      this.setDetails(Sprites.TRADE, `nobody has any items to trade.`, [
+      this.setDetails(Sprites.TRADING_POST, `nobody has any items to trade.`, [
         new Action('continue', () => this.game.progress())
       ]);
     }

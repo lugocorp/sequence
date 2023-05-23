@@ -14,7 +14,7 @@ export default class CoyotlEvent extends EventView {
   constructor(game: Game) {
     super(game);
     const that = this;
-    this.setDetails(Sprites.TRAP, 'a tricky coyotl chases off one of your party members.', [
+    this.setDetails(Sprites.COYOTL, 'a tricky coyotl chases off one of your party members.', [
       new Action('continue', () =>
         that.setSelector(that.heroSelector, [ new Action('choose', () => that.finished()) ])
       )

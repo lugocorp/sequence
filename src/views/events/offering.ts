@@ -11,16 +11,14 @@ import Game from '../../game';
  */
 export default class OfferingEvent extends EventView {
   private heroSelector: Selector<Hero>;
-  private spirit: Sprites;
   private gift: Item;
 
   constructor(game: Game) {
     super(game);
     const that = this;
     this.gift = this.game.data.getRandomItem();
-    this.spirit = this.game.data.getRandomSpirit();
     this.setDetails(
-      this.spirit,
+      Sprites.OFFERING,
       `a generous spirit offers a gift of ${this.gift.name} to your party. choose someone to accept it.`,
       [ new Action('continue', () => that.viewGift()) ]
     );
@@ -30,7 +28,7 @@ export default class OfferingEvent extends EventView {
     this.heroSelector = Selector.heroSelector(this.game.party, this.game.party.emptyItemSlots());
     if (!this.heroSelector.size()) {
       this.setDetails(
-        this.spirit,
+        Sprites.OFFERING,
         `a generous spirit offers a gift of ${this.gift.name} to your party, but no one has space for more items. the spirit conceals itself once more.`,
         [ new Action('continue', () => this.game.progress()) ]
       );
@@ -64,7 +62,7 @@ export default class OfferingEvent extends EventView {
     const hero: Hero = this.heroSelector.item();
     hero.basket.equip(this.gift);
     this.setDetails(
-      this.spirit,
+      Sprites.OFFERING,
       `${hero.name} was given ${this.gift.name}. the spirit conceals itself once more.`,
       [ new Action('continue', () => this.game.progress()) ]
     );

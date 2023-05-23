@@ -5,7 +5,6 @@
  */
 import { HeroGenerator, heroes } from '../content/heroes';
 import { ItemGenerator, items } from '../content/items';
-import Sprites from '../media/sprites';
 import Hero from '../entities/hero';
 import Item from '../entities/item';
 import Random from './random';
@@ -29,13 +28,6 @@ export default class DataManager {
       }
       this.itemsByRarity[item.rarity].push(itemFunc);
     }
-  }
-
-  /*
-   * Returns a random challenger sprite to represent a spirit.
-   */
-  getRandomSpirit(): Sprites {
-    return Sprites.BEAR;
   }
 
   /*

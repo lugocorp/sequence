@@ -83,10 +83,7 @@ export default class Game {
     view.init();
   }
 
-  getBackground(includeCave = false): Sprites {
-    if (includeCave && this.world.cave) {
-      return Sprites.CAVE_INSIDE;
-    }
+  getBackground(): Sprites {
     if (this.world.time === Time.NIGHT) {
       return Sprites.NIGHT;
     }

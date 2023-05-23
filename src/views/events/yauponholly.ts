@@ -13,7 +13,7 @@ export default class YauponHollyEvent extends EventView {
     super(game);
     const that = this;
     this.setDetails(
-      Sprites.CHESTNUT,
+      Sprites.YAUPON_HOLLY,
       `your party comes across a yaupon holly. choose someone to brew a drink from it and revert their original stats.`,
       [
         new Action('continue', () =>

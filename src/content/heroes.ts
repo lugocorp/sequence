@@ -53,7 +53,7 @@ export const heroes: HeroGenerator[] = [
       undefined
     ]),
   (game: Game) =>
-    new Hero(game, Sprites.HERO_4, 'guecha', 'muisca', 3, 0, 3, 4, 2, [ Skill.PROWESS, undefined ]),
+    new Hero(game, Sprites.GUECHA, 'guecha', 'muisca', 3, 0, 3, 4, 2, [ Skill.PROWESS, undefined ]),
   (game: Game) =>
     new Hero(game, Sprites.BIRD_CATCHER, 'bird catcher', 'taíno', 0, 3, 3, 4, 2, [
       Skill.STEALTH,
@@ -81,14 +81,14 @@ export const heroes: HeroGenerator[] = [
     return hero;
   },
   (game: Game) =>
-    new Hero(game, Sprites.HERO_4, 'highlander', 'guachichil', 2, 2, 2, 4, 2, [
+    new Hero(game, Sprites.HIGHLANDER, 'highlander', 'guachichil', 2, 2, 2, 4, 2, [
       Skill.PROWESS,
       Skill.STEALTH
     ]),
   (game: Game) =>
     new Hero(
       game,
-      Sprites.HERO_4,
+      Sprites.GUARDIAN,
       'guardian',
       'wampanoag',
       3,
@@ -137,7 +137,7 @@ export const heroes: HeroGenerator[] = [
   (game: Game) =>
     new Hero(
       game,
-      Sprites.HERO_4,
+      Sprites.MEDICINE_WOMAN,
       'medicine woman',
       'mapuche',
       0,
@@ -154,17 +154,17 @@ export const heroes: HeroGenerator[] = [
       }
     ),
   (game: Game) =>
-    new Hero(game, Sprites.HERO_4, 'kamayuq', 'quechua', 3, 0, 0, 2, 2, [
+    new Hero(game, Sprites.KAMAYUQ, 'kamayuq', 'quechua', 3, 0, 0, 2, 2, [
       Skill.PROWESS,
       Skill.STEALTH
     ]),
   (game: Game) =>
-    new Hero(game, Sprites.HERO_4, 'gourd elder', 'aymara', 0, 3, 0, 2, 2, [
+    new Hero(game, Sprites.GOURD_ELDER, 'gourd elder', 'aymara', 0, 3, 0, 2, 2, [
       Skill.DIPLOMACY,
       Skill.STEALTH
     ]),
   (game: Game) =>
-    new Hero(game, Sprites.HERO_4, 'hoop dancer', 'cree', 0, 0, 3, 2, 2, [
+    new Hero(game, Sprites.HOOP_DANCER, 'hoop dancer', 'cree', 0, 0, 3, 2, 2, [
       Skill.ENDURANCE,
       Skill.STEALTH
     ]),
@@ -174,7 +174,7 @@ export const heroes: HeroGenerator[] = [
       undefined
     ]),
   (game: Game) =>
-    new Hero(game, Sprites.FROST_WOMAN, 'tracker', 'inuit', 0, 6, 0, 3, 1, [
+    new Hero(game, Sprites.TRACKER, 'tracker', 'inuit', 0, 6, 0, 3, 1, [
       Skill.ENDURANCE,
       undefined
     ]),
@@ -187,7 +187,7 @@ export const heroes: HeroGenerator[] = [
   (game: Game) => {
     const hero = new Hero(
       game,
-      Sprites.HERO_4,
+      Sprites.WANDERER,
       'wanderer',
       'omaha',
       3,
@@ -215,7 +215,7 @@ export const heroes: HeroGenerator[] = [
   (game: Game) =>
     new Hero(
       game,
-      Sprites.SERPENT_PRIESTESS,
+      Sprites.MOON_PRIESTESS,
       'moon priestess',
       'itza',
       0,
@@ -236,7 +236,7 @@ export const heroes: HeroGenerator[] = [
   (game: Game) => {
     const hero = new Hero(
       game,
-      Sprites.HERO_4,
+      Sprites.FISHERMAN,
       'fisherman',
       'lummi',
       0,

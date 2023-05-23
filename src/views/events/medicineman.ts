@@ -11,7 +11,7 @@ export default class MedicineManEvent extends EventView {
   constructor(game: Game) {
     super(game);
     this.setDetails(
-      Sprites.MEDICINE_MAN_GUARANI,
+      Sprites.MEDICINE_MAN,
       'your party comes across a medicine man. he will bless one of your party members in exchange for a gift.',
       [ new Action('continue', () => this.viewParty()) ]
     );
@@ -33,7 +33,7 @@ export default class MedicineManEvent extends EventView {
     if (this.game.party.hasItems()) {
       this.setSelector(this.heroSelector, [ new Action('make trade', () => that.makeTrade()) ]);
     } else {
-      this.setDetails(Sprites.MEDICINE_MAN_GUARANI, `no one in your party has anything to give.`, [
+      this.setDetails(Sprites.MEDICINE_MAN, `no one in your party has anything to give.`, [
         new Action('continue', () => this.game.progress())
       ]);
     }

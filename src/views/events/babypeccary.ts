@@ -14,7 +14,7 @@ export default class BabyPeccaryEvent extends EventView {
     super(game);
     const that = this;
     this.setDetails(
-      Sprites.PECCARY,
+      Sprites.BABY_PECCARY,
       `your party finds a lonely baby peccary. choose someone to carry it until the party finds its family.`,
       [
         new Action('continue', () => {
@@ -24,7 +24,7 @@ export default class BabyPeccaryEvent extends EventView {
                 const hero: Hero = that.heroSelector.item();
                 const item: Item = new Item(
                   'baby peccary',
-                  Sprites.PECCARY,
+                  Sprites.BABY_PECCARY,
                   Rarity.RARE,
                   `+25% luck\na baby peccary looking for its family.`,
                   function (game: Game, data: Trigger) {
@@ -36,7 +36,7 @@ export default class BabyPeccaryEvent extends EventView {
                 hero.basket.equip(item);
                 const view: EventView = new EventView(this.game);
                 view.setDetails(
-                  Sprites.PECCARY,
+                  Sprites.BABY_PECCARY,
                   `${hero.name} returns the baby peccary to its family and receives a blessing in return. they are now stronger, wiser and faster.`,
                   [
                     new Action('continue', () => {
@@ -54,14 +54,14 @@ export default class BabyPeccaryEvent extends EventView {
                   8,
                   () => hero.isInParty(this.game.party) && hero.basket.contains(item)
                 );
-                that.setDetails(Sprites.PECCARY, `${hero.name} picks up the baby peccary.`, [
+                that.setDetails(Sprites.BABY_PECCARY, `${hero.name} picks up the baby peccary.`, [
                   new Action('continue', () => this.game.progress())
                 ]);
               })
             ]);
           } else {
             that.setDetails(
-              Sprites.PECCARY,
+              Sprites.BABY_PECCARY,
               `your party's inventory is completely full. your party leaves the small animal.`,
               [ new Action('continue', () => this.game.progress()) ]
             );
