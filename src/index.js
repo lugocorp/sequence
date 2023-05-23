@@ -21,11 +21,15 @@ document.addEventListener(
       downCoordY = (e.clientY - rect.top) / scale;
       game.click(downCoordX, downCoordY, true);
     };
-    window.addEventListener('mousedown', clickDown);
-    window.addEventListener('mousemove', clickDown);
-    window.addEventListener('mouseup', () => {
-      game.click(downCoordX, downCoordY, false);
-    });
+    if (window.cordova === undefined) {
+      window.addEventListener('mousedown', (e) => clickDown(e));
+      window.addEventListener('mousemove', (e) => clickDown(e));
+      window.addEventListener('mouseup', () => game.click(downCoordX, downCoordY, false));
+    } else {
+      window.addEventListener('touchstart', (e) => clickDown(e.touches[0]));
+      window.addEventListener('touchmove', (e) => clickDown(e.touches[0]));
+      window.addEventListener('touchend', () => game.click(downCoordX, downCoordY, false));
+    }
     window.addEventListener('resize', () => {
       game.graphics.setSize();
       game.invalidate();

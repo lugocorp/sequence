@@ -66,7 +66,7 @@ export default class HTML5Graphics extends Graphics {
       return;
     }
     if (view.image) {
-      const background: number = game.getBackground(true);
+      const background: number = game.getBackground();
       if (background !== Sprites.NONE) {
         this.drawSprite(background, 12, 3);
       }

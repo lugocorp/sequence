@@ -3,7 +3,7 @@ import View from '../ui/view';
 import Game from '../game';
 
 export default abstract class Graphics {
-  static NUM_SHEETS = 5;
+  static NUM_SHEETS = 4;
   scale: number;
   dark: number;
 
