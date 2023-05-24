@@ -7,17 +7,20 @@ import { Time } from '../types';
 import EventView from '../views/event';
 import PlantingSeasonEvent from '../views/events/plantingseason';
 import ThreeSistersEvent from '../views/events/threesisters';
+import HungryBadgerEvent from '../views/events/hungrybadger';
 import TradingPostEvent from '../views/events/tradingpost';
 import BabyPeccaryEvent from '../views/events/babypeccary';
 import MedicineManEvent from '../views/events/medicineman';
 import YauponHollyEvent from '../views/events/yauponholly';
 import SkinwalkerEvent from '../views/events/skinwalker';
 import ChallengeEvent from '../views/events/challenge';
+import OldBridgeEvent from '../views/events/oldbridge';
 import OfferingEvent from '../views/events/offering';
 import ProphecyEvent from '../views/events/prophecy';
 import CaravanEvent from '../views/events/caravan';
 import WeatherEvent from '../views/events/weather';
 import FatigueEvent from '../views/events/fatigue';
+import VillageEvent from '../views/events/village';
 import ForageEvent from '../views/events/forage';
 import CliffsEvent from '../views/events/cliffs';
 import CoyotlEvent from '../views/events/coyotl';
@@ -29,6 +32,8 @@ import RiverEvent from '../views/events/river';
 import GiftEvent from '../views/events/gift';
 import DeerEvent from '../views/events/deer';
 import CaveEvent from '../views/events/cave';
+import SeedEvent from '../views/events/seed';
+import EggEvent from '../views/events/egg';
 import Random from './random';
 import Game from '../game';
 
@@ -57,36 +62,43 @@ export default class EventChain {
     let table: [number, EventGenerator][] = [
       [ 35, (game: Game) => new ChallengeEvent(game) ], // 35
       [ 8, (game: Game) => new WeatherEvent(game) ], // 43
-      [ 4, (game: Game) => new CoyotlEvent(game) ], // 47
-      [ 5, (game: Game) => new CliffsEvent(game) ], // 52
-      [ 5, (game: Game) => new OfferingEvent(game) ], // 57
-      [ 5, (game: Game) => new GiftEvent(game) ], // 62
-      [ 4, (game: Game) => new ForageEvent(game) ], // 66
-      [ 4, (game: Game) => new PlantingSeasonEvent(game) ], // 70
-      [ 4, (game: Game) => new RiverEvent(game) ], // 74
-      [ 3, (game: Game) => new BabyPeccaryEvent(game) ], // 77
-      [ 3, (game: Game) => new TradingPostEvent(game) ], // 80
-      [ 3, (game: Game) => new MedicineManEvent(game) ], // 83
-      [ 3, (game: Game) => new YauponHollyEvent(game) ], // 86
-      [ 3, (game: Game) => new CaravanEvent(game) ], // 89
-      [ 2, (game: Game) => new ProphecyEvent(game) ], // 91
-      [ 2, (game: Game) => new DeerEvent(game) ], // 93
-      [ 2, (game: Game) => new RavenEvent(game) ], // 95
-      [ 2, (game: Game) => new CaveEvent(game) ], // 97
-      [ 2, (game: Game) => new RabbitEvent(game) ], // 99
-      [ 1, (game: Game) => new ThreeSistersEvent(game) ] // 100
+      [ 4, (game: Game) => new OfferingEvent(game) ], // 47
+      [ 4, (game: Game) => new GiftEvent(game) ], // 51
+      [ 4, (game: Game) => new CoyotlEvent(game) ], // 55
+      [ 4, (game: Game) => new CliffsEvent(game) ], // 59
+      [ 4, (game: Game) => new ForageEvent(game) ], // 63
+      [ 3, (game: Game) => new RiverEvent(game) ], // 66
+      [ 3, (game: Game) => new PlantingSeasonEvent(game) ], // 69
+      [ 3, (game: Game) => new BabyPeccaryEvent(game) ], // 72
+      [ 3, (game: Game) => new TradingPostEvent(game) ], // 75
+      [ 3, (game: Game) => new CaravanEvent(game) ], // 78
+      [ 3, (game: Game) => new HungryBadgerEvent(game) ], // 81
+      [ 3, (game: Game) => new EggEvent(game) ], // 84
+      [ 2, (game: Game) => new MedicineManEvent(game) ], // 86
+      [ 2, (game: Game) => new YauponHollyEvent(game) ], // 88
+      [ 2, (game: Game) => new RavenEvent(game) ], // 90
+      [ 2, (game: Game) => new RabbitEvent(game) ], // 92
+      [ 2, (game: Game) => new SeedEvent(game) ], // 94
+      [ 1, (game: Game) => new ProphecyEvent(game) ], // 95
+      [ 1, (game: Game) => new DeerEvent(game) ], // 96
+      [ 1, (game: Game) => new CaveEvent(game) ], // 97
+      [ 1, (game: Game) => new ThreeSistersEvent(game) ], // 98
+      [ 1, (game: Game) => new OldBridgeEvent(game) ], // 99
+      [ 1, (game: Game) => new VillageEvent(game) ] // 100
     ];
     if (this.game.world.cave) {
       table = [
         [ 30, (game: Game) => new ChallengeEvent(game) ], // 30
         [ 15, (game: Game) => new OfferingEvent(game) ], // 45
-        [ 15, (game: Game) => new GiftEvent(game) ], // 60
-        [ 10, (game: Game) => new ProphecyEvent(game) ], // 70
-        [ 10, (game: Game) => new RavenEvent(game) ], // 80
-        [ 5, (game: Game) => new BabyPeccaryEvent(game) ], // 85
-        [ 5, (game: Game) => new RabbitEvent(game) ], // 90
-        [ 5, (game: Game) => new WeatherEvent(game) ], // 95
-        [ 5, (game: Game) => new SkinwalkerEvent(game) ] // 100
+        [ 10, (game: Game) => new GiftEvent(game) ], // 55
+        [ 10, (game: Game) => new RavenEvent(game) ], // 65
+        [ 5, (game: Game) => new ProphecyEvent(game) ], // 70
+        [ 5, (game: Game) => new BabyPeccaryEvent(game) ], // 75
+        [ 5, (game: Game) => new RabbitEvent(game) ], // 80
+        [ 5, (game: Game) => new WeatherEvent(game) ], // 85
+        [ 5, (game: Game) => new SkinwalkerEvent(game) ], // 90
+        [ 5, (game: Game) => new EggEvent(game) ], // 95
+        [ 5, (game: Game) => new HungryBadgerEvent(game) ] // 100
       ];
     }
     if (this.game.world.time === Time.NIGHT && !this.game.world.cave) {

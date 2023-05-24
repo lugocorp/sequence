@@ -187,6 +187,11 @@ export default class Hero {
     }
   }
 
+  // Restores energy to its original value
+  refreshEnergy(): void {
+    this.energy = this.originals.energy;
+  }
+
   // Returns the text used in this hero's description
   descriptionText(): string {
     const stat = (n: number): string => (n > 9 ? `${n}\t` : `\t${n}\t`);

@@ -11,14 +11,15 @@ export default class EventView extends View {
   }
 
   // Colors a success rate based on its numerical range
-  coloredRate(rate: number): string {
-    if (rate >= 90) {
+  coloredRate(rate: number, reversed = false): string {
+    const colorRate = reversed ? 100 - rate : rate;
+    if (colorRate >= 90) {
       return green(`${rate}%`);
     }
-    if (rate >= 60) {
+    if (colorRate >= 60) {
       return yellow(`${rate}%`);
     }
-    if (rate >= 30) {
+    if (colorRate >= 30) {
       return orange(`${rate}%`);
     }
     return red(`${rate}%`);

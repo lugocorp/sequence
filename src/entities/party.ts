@@ -1,4 +1,5 @@
 import { TriggerType } from '../types';
+import Random from '../logic/random';
 import Game from '../game';
 import Hero from './hero';
 
@@ -83,5 +84,10 @@ export default class Party {
     for (const hero of remove) {
       this.remove(hero);
     }
+  }
+
+  // Returns a random party member
+  randomMember(): Hero {
+    return Random.element(this.members);
   }
 }

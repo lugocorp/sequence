@@ -27,7 +27,7 @@ export default class RiverEvent extends EventView {
       this.game.party,
       this.game.party.members,
       undefined,
-      (hero: Hero) => `${this.coloredRate(100 - hero.stats.luck)} chance to fall in`
+      (hero: Hero) => `${this.coloredRate(100 - hero.stats.luck, true)} chance to fall in`
     );
   }
 
