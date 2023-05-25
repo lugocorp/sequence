@@ -3,7 +3,7 @@
  * provides the Factory class with all the data it needs to instantiate game
  * entities. Use this to get indexed abilities or random game objects.
  */
-import { HeroGenerator, heroes } from '../content/heroes';
+import { HeroGenerator, heroes, turtle } from '../content/heroes';
 import { ItemGenerator, items } from '../content/items';
 import Hero from '../entities/hero';
 import Item from '../entities/item';
@@ -42,6 +42,9 @@ export default class DataManager {
    * Returns the hero with the given name.
    */
   getNamedHero(name: string): Hero {
+    if (name === 'turtle') {
+      return turtle(this.game);
+    }
     return this.heroesByName[name](this.game);
   }
 

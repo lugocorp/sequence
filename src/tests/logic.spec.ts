@@ -37,3 +37,13 @@ describe('Chain tests', function () {
     expect(chain.latest()).to.equal(future);
   });
 });
+
+describe('Data tests', function () {
+  const data = game.data;
+
+  it('Make sure we can grab a turtle hero', function () {
+    const turtle = data.getNamedHero('turtle');
+    expect(turtle).to.exist;
+    expect(turtle.name).to.equal('turtle');
+  });
+});

@@ -18,12 +18,15 @@ import ChallengeEvent from '../views/events/challenge';
 import OldBridgeEvent from '../views/events/oldbridge';
 import OfferingEvent from '../views/events/offering';
 import ProphecyEvent from '../views/events/prophecy';
+import SiblingsEvent from '../views/events/siblings';
+import MerchantEvent from '../views/events/merchant';
 import CaravanEvent from '../views/events/caravan';
 import WeatherEvent from '../views/events/weather';
 import FatigueEvent from '../views/events/fatigue';
 import VillageEvent from '../views/events/village';
 import SunriseEvent from '../views/events/sunrise';
 import RequestEvent from '../views/events/request';
+import IllnessEvent from '../views/events/illness';
 import ForageEvent from '../views/events/forage';
 import CliffsEvent from '../views/events/cliffs';
 import CoyotlEvent from '../views/events/coyotl';
@@ -34,6 +37,8 @@ import RavenEvent from '../views/events/raven';
 import DeathEvent from '../views/events/death';
 import BeginEvent from '../views/events/begin';
 import RiverEvent from '../views/events/river';
+import DreamEvent from '../views/events/dream';
+import StormEvent from '../views/events/storm';
 import GiftEvent from '../views/events/gift';
 import DeerEvent from '../views/events/deer';
 import CaveEvent from '../views/events/cave';
@@ -69,32 +74,37 @@ export default class EventChain {
       [ 10, (game: Game) => new RequestEvent(game) ], // 35
       [ 8, (game: Game) => new WeatherEvent(game) ], // 43
       [ 4, (game: Game) => new OfferingEvent(game) ], // 47
-      [ 4, (game: Game) => new GiftEvent(game) ], // 51
-      [ 4, (game: Game) => new CoyotlEvent(game) ], // 55
-      [ 4, (game: Game) => new CliffsEvent(game) ], // 59
-      [ 4, (game: Game) => new ForageEvent(game) ], // 63
-      [ 3, (game: Game) => new PlantingSeasonEvent(game) ], // 66
-      [ 3, (game: Game) => new TradingPostEvent(game) ], // 69
-      [ 3, (game: Game) => new HungryBadgerEvent(game) ], // 72
-      [ 3, (game: Game) => new EggEvent(game) ], // 75
-      [ 2, (game: Game) => new RiverEvent(game) ], // 77
-      [ 2, (game: Game) => new CaravanEvent(game) ], // 79
-      [ 2, (game: Game) => new MedicineManEvent(game) ], // 81
-      [ 2, (game: Game) => new YauponHollyEvent(game) ], // 83
-      [ 2, (game: Game) => new RavenEvent(game) ], // 85
-      [ 2, (game: Game) => new RabbitEvent(game) ], // 87
-      [ 2, (game: Game) => new SeedEvent(game) ], // 89
-      [ 1, (game: Game) => new BabyPeccaryEvent(game) ], // 90
-      [ 1, (game: Game) => new CactusEvent(game) ], // 91
-      [ 1, (game: Game) => new MentorEvent(game) ], // 92
-      [ 1, (game: Game) => new SunriseEvent(game) ], // 93
-      [ 1, (game: Game) => new SuspiciousItemEvent(game) ], // 94
-      [ 1, (game: Game) => new ProphecyEvent(game) ], // 95
-      [ 1, (game: Game) => new DeerEvent(game) ], // 96
-      [ 1, (game: Game) => new CaveEvent(game) ], // 97
-      [ 1, (game: Game) => new ThreeSistersEvent(game) ], // 98
-      [ 1, (game: Game) => new OldBridgeEvent(game) ], // 99
-      [ 1, (game: Game) => new VillageEvent(game) ] // 100
+      [ 4, (game: Game) => new CoyotlEvent(game) ], // 51
+      [ 3, (game: Game) => new ForageEvent(game) ], // 54
+      [ 3, (game: Game) => new GiftEvent(game) ], // 57
+      [ 3, (game: Game) => new EggEvent(game) ], // 60
+      [ 2, (game: Game) => new PlantingSeasonEvent(game) ], // 62
+      [ 2, (game: Game) => new HungryBadgerEvent(game) ], // 64
+      [ 2, (game: Game) => new CliffsEvent(game) ], // 66
+      [ 2, (game: Game) => new TradingPostEvent(game) ], // 68
+      [ 2, (game: Game) => new RiverEvent(game) ], // 70
+      [ 2, (game: Game) => new CaravanEvent(game) ], // 72
+      [ 2, (game: Game) => new MedicineManEvent(game) ], // 74
+      [ 2, (game: Game) => new YauponHollyEvent(game) ], // 76
+      [ 2, (game: Game) => new RavenEvent(game) ], // 78
+      [ 2, (game: Game) => new RabbitEvent(game) ], // 80
+      [ 2, (game: Game) => new SeedEvent(game) ], // 82
+      [ 2, (game: Game) => new IllnessEvent(game) ], // 84
+      [ 2, (game: Game) => new StormEvent(game) ], // 86
+      [ 1, (game: Game) => new BabyPeccaryEvent(game) ], // 87
+      [ 1, (game: Game) => new CactusEvent(game) ], // 88
+      [ 1, (game: Game) => new MentorEvent(game) ], // 89
+      [ 1, (game: Game) => new SunriseEvent(game) ], // 90
+      [ 1, (game: Game) => new SuspiciousItemEvent(game) ], // 91
+      [ 1, (game: Game) => new ProphecyEvent(game) ], // 92
+      [ 1, (game: Game) => new DeerEvent(game) ], // 93
+      [ 1, (game: Game) => new CaveEvent(game) ], // 94
+      [ 1, (game: Game) => new ThreeSistersEvent(game) ], // 95
+      [ 1, (game: Game) => new OldBridgeEvent(game) ], // 96
+      [ 1, (game: Game) => new VillageEvent(game) ], // 97
+      [ 1, (game: Game) => new MerchantEvent(game) ], // 98
+      [ 1, (game: Game) => new DreamEvent(game) ], // 99
+      [ 1, (game: Game) => new SiblingsEvent(game) ] // 100
     ];
     if (this.game.world.cave) {
       table = [
@@ -106,11 +116,13 @@ export default class EventChain {
         [ 5, (game: Game) => new MentorEvent(game) ], // 65
         [ 5, (game: Game) => new ProphecyEvent(game) ], // 70
         [ 5, (game: Game) => new BabyPeccaryEvent(game) ], // 75
-        [ 5, (game: Game) => new RabbitEvent(game) ], // 80
-        [ 5, (game: Game) => new WeatherEvent(game) ], // 85
-        [ 5, (game: Game) => new SkinwalkerEvent(game) ], // 90
-        [ 5, (game: Game) => new EggEvent(game) ], // 95
-        [ 5, (game: Game) => new HungryBadgerEvent(game) ] // 100
+        [ 5, (game: Game) => new SkinwalkerEvent(game) ], // 80
+        [ 4, (game: Game) => new RabbitEvent(game) ], // 84
+        [ 4, (game: Game) => new WeatherEvent(game) ], // 88
+        [ 4, (game: Game) => new EggEvent(game) ], // 92
+        [ 4, (game: Game) => new HungryBadgerEvent(game) ], // 96
+        [ 2, (game: Game) => new DreamEvent(game) ], // 98
+        [ 2, (game: Game) => new IllnessEvent(game) ] // 100
       ];
     }
     if (this.game.world.time === Time.NIGHT && !this.game.world.cave) {

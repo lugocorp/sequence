@@ -1,4 +1,5 @@
 import { Rarity, Trigger, TriggerType } from '../../types';
+import { turtle } from '../../content/heroes';
 import Sprites from '../../media/sprites';
 import Hero from '../../entities/hero';
 import Item from '../../entities/item';
@@ -79,19 +80,7 @@ export default class EggEvent extends EventView {
         [ new Action('continue', () => this.game.progress()) ]
       );
     } else {
-      this.game.party.add(
-        new Hero(
-          this.game,
-          Sprites.EGG, // TODO update sprite to turtle
-          'turtle',
-          'turtle',
-          1,
-          1,
-          1,
-          2,
-          0
-        )
-      );
+      this.game.party.add(turtle(this.game));
       this.setDetails(
         Sprites.EGG, // TODO update sprite to turtle
         'the egg hatches into a turtle! the turtle joins your party.',
