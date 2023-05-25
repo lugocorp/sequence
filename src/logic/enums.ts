@@ -1,4 +1,4 @@
-import { Stats, Rarity } from '../types';
+import { Stats, Rarity, Skill, Skills } from '../types';
 import Random from '../logic/random';
 
 export default class EnumsHelper {
@@ -18,5 +18,13 @@ export default class EnumsHelper {
   // Returns the stat's display name
   static getStatName(stat: Stats): string {
     return [ 'strength', 'wisdom', 'dexterity' ][stat];
+  }
+
+  static skills(): Skill[] {
+    return [ Skill.PROWESS, Skill.ENDURANCE, Skill.STEALTH, Skill.DIPLOMACY ];
+  }
+
+  static hasSkill(skills: Skills, skill: Skill): boolean {
+    return skills[0] === skill || skills[1] === skill;
   }
 }

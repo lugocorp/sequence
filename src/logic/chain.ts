@@ -6,6 +6,7 @@
 import { Time } from '../types';
 import EventView from '../views/event';
 import PlantingSeasonEvent from '../views/events/plantingseason';
+import SuspiciousItemEvent from '../views/events/suspiciousitem';
 import ThreeSistersEvent from '../views/events/threesisters';
 import HungryBadgerEvent from '../views/events/hungrybadger';
 import TradingPostEvent from '../views/events/tradingpost';
@@ -21,10 +22,14 @@ import CaravanEvent from '../views/events/caravan';
 import WeatherEvent from '../views/events/weather';
 import FatigueEvent from '../views/events/fatigue';
 import VillageEvent from '../views/events/village';
+import SunriseEvent from '../views/events/sunrise';
+import RequestEvent from '../views/events/request';
 import ForageEvent from '../views/events/forage';
 import CliffsEvent from '../views/events/cliffs';
 import CoyotlEvent from '../views/events/coyotl';
 import RabbitEvent from '../views/events/rabbit';
+import CactusEvent from '../views/events/cactus';
+import MentorEvent from '../views/events/mentor';
 import RavenEvent from '../views/events/raven';
 import DeathEvent from '../views/events/death';
 import BeginEvent from '../views/events/begin';
@@ -60,25 +65,30 @@ export default class EventChain {
    */
   private getEventRollTable(): [number, EventGenerator][] {
     let table: [number, EventGenerator][] = [
-      [ 35, (game: Game) => new ChallengeEvent(game) ], // 35
+      [ 25, (game: Game) => new ChallengeEvent(game) ], // 25
+      [ 10, (game: Game) => new RequestEvent(game) ], // 35
       [ 8, (game: Game) => new WeatherEvent(game) ], // 43
       [ 4, (game: Game) => new OfferingEvent(game) ], // 47
       [ 4, (game: Game) => new GiftEvent(game) ], // 51
       [ 4, (game: Game) => new CoyotlEvent(game) ], // 55
       [ 4, (game: Game) => new CliffsEvent(game) ], // 59
       [ 4, (game: Game) => new ForageEvent(game) ], // 63
-      [ 3, (game: Game) => new RiverEvent(game) ], // 66
-      [ 3, (game: Game) => new PlantingSeasonEvent(game) ], // 69
-      [ 3, (game: Game) => new BabyPeccaryEvent(game) ], // 72
-      [ 3, (game: Game) => new TradingPostEvent(game) ], // 75
-      [ 3, (game: Game) => new CaravanEvent(game) ], // 78
-      [ 3, (game: Game) => new HungryBadgerEvent(game) ], // 81
-      [ 3, (game: Game) => new EggEvent(game) ], // 84
-      [ 2, (game: Game) => new MedicineManEvent(game) ], // 86
-      [ 2, (game: Game) => new YauponHollyEvent(game) ], // 88
-      [ 2, (game: Game) => new RavenEvent(game) ], // 90
-      [ 2, (game: Game) => new RabbitEvent(game) ], // 92
-      [ 2, (game: Game) => new SeedEvent(game) ], // 94
+      [ 3, (game: Game) => new PlantingSeasonEvent(game) ], // 66
+      [ 3, (game: Game) => new TradingPostEvent(game) ], // 69
+      [ 3, (game: Game) => new HungryBadgerEvent(game) ], // 72
+      [ 3, (game: Game) => new EggEvent(game) ], // 75
+      [ 2, (game: Game) => new RiverEvent(game) ], // 77
+      [ 2, (game: Game) => new CaravanEvent(game) ], // 79
+      [ 2, (game: Game) => new MedicineManEvent(game) ], // 81
+      [ 2, (game: Game) => new YauponHollyEvent(game) ], // 83
+      [ 2, (game: Game) => new RavenEvent(game) ], // 85
+      [ 2, (game: Game) => new RabbitEvent(game) ], // 87
+      [ 2, (game: Game) => new SeedEvent(game) ], // 89
+      [ 1, (game: Game) => new BabyPeccaryEvent(game) ], // 90
+      [ 1, (game: Game) => new CactusEvent(game) ], // 91
+      [ 1, (game: Game) => new MentorEvent(game) ], // 92
+      [ 1, (game: Game) => new SunriseEvent(game) ], // 93
+      [ 1, (game: Game) => new SuspiciousItemEvent(game) ], // 94
       [ 1, (game: Game) => new ProphecyEvent(game) ], // 95
       [ 1, (game: Game) => new DeerEvent(game) ], // 96
       [ 1, (game: Game) => new CaveEvent(game) ], // 97
@@ -88,10 +98,12 @@ export default class EventChain {
     ];
     if (this.game.world.cave) {
       table = [
-        [ 30, (game: Game) => new ChallengeEvent(game) ], // 30
-        [ 15, (game: Game) => new OfferingEvent(game) ], // 45
-        [ 10, (game: Game) => new GiftEvent(game) ], // 55
-        [ 10, (game: Game) => new RavenEvent(game) ], // 65
+        [ 20, (game: Game) => new ChallengeEvent(game) ], // 20
+        [ 10, (game: Game) => new RequestEvent(game) ], // 30
+        [ 10, (game: Game) => new OfferingEvent(game) ], // 40
+        [ 10, (game: Game) => new GiftEvent(game) ], // 50
+        [ 10, (game: Game) => new RavenEvent(game) ], // 60
+        [ 5, (game: Game) => new MentorEvent(game) ], // 65
         [ 5, (game: Game) => new ProphecyEvent(game) ], // 70
         [ 5, (game: Game) => new BabyPeccaryEvent(game) ], // 75
         [ 5, (game: Game) => new RabbitEvent(game) ], // 80
@@ -162,7 +174,9 @@ export default class EventChain {
     const event: EventGenerator = Random.weighted(
       this.getEventRollTable().filter(
         (x: [number, EventGenerator]) =>
-          x[1].toString().includes('ChallengeEvent') || x[1].toString() !== this.previouslyPlanned
+          x[1].toString().includes('ChallengeEvent') ||
+          x[1].toString().includes('RequestEvent') ||
+          x[1].toString() !== this.previouslyPlanned
       )
     );
     this.previouslyPlanned = event.toString();
