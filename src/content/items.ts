@@ -33,7 +33,7 @@ export const items: ItemGenerator[] = [
   () =>
     new Item(
       'gold bead',
-      Sprites.TURQUOISE_BEAD,
+      Sprites.GOLD_BEAD,
       Rarity.COMMON,
       '+1 energy during the day',
       (game: Game, data: Trigger) =>
@@ -42,7 +42,7 @@ export const items: ItemGenerator[] = [
   () =>
     new Item(
       'silver bead',
-      Sprites.TURQUOISE_BEAD,
+      Sprites.SILVER_BEAD,
       Rarity.COMMON,
       '+1 energy at night',
       (game: Game, data: Trigger) =>
@@ -51,7 +51,7 @@ export const items: ItemGenerator[] = [
   () =>
     new Item(
       'bad medicine',
-      Sprites.TURQUOISE_BEAD,
+      Sprites.BAD_MEDICINE,
       Rarity.COMMON,
       '-5% luck',
       (game: Game, data: Trigger) => stats(data, 0, 0, 0, -5, 0)
@@ -61,7 +61,7 @@ export const items: ItemGenerator[] = [
   () =>
     new Item(
       'gold ring',
-      Sprites.TURQUOISE_BEAD,
+      Sprites.GOLD_RING,
       Rarity.UNCOMMON,
       '+2 strength\n-1 wisdom',
       (game: Game, data: Trigger) => stats(data, 2, -1, 0, 0, 0)
@@ -69,7 +69,7 @@ export const items: ItemGenerator[] = [
   () =>
     new Item(
       'corn soup',
-      Sprites.TURQUOISE_BEAD,
+      Sprites.CORN_SOUP,
       Rarity.UNCOMMON,
       '+2 strength\n-1 dexterity',
       (game: Game, data: Trigger) => stats(data, 2, 0, -1, 0, 0)
@@ -77,7 +77,7 @@ export const items: ItemGenerator[] = [
   () =>
     new Item(
       'jade amulet',
-      Sprites.TURQUOISE_BEAD,
+      Sprites.JADE_AMULET,
       Rarity.UNCOMMON,
       '+2 wisdom\n-1 strength',
       (game: Game, data: Trigger) => stats(data, -1, 2, 0, 0, 0)
@@ -85,7 +85,7 @@ export const items: ItemGenerator[] = [
   () =>
     new Item(
       'squash soup',
-      Sprites.TURQUOISE_BEAD,
+      Sprites.SQUASH_SOUP,
       Rarity.UNCOMMON,
       '+2 wisdom\n-1 dexterity',
       (game: Game, data: Trigger) => stats(data, 0, 2, -1, 0, 0)
@@ -93,7 +93,7 @@ export const items: ItemGenerator[] = [
   () =>
     new Item(
       'beaded moccasins',
-      Sprites.TURQUOISE_BEAD,
+      Sprites.BEADED_MOCCASINS,
       Rarity.UNCOMMON,
       '+2 dexterity\n-1 strength',
       (game: Game, data: Trigger) => stats(data, -1, 0, 2, 0, 0)
@@ -101,7 +101,7 @@ export const items: ItemGenerator[] = [
   () =>
     new Item(
       'bean soup',
-      Sprites.TURQUOISE_BEAD,
+      Sprites.BEAN_SOUP,
       Rarity.UNCOMMON,
       '+2 dexterity\n-1 wisdom',
       (game: Game, data: Trigger) => stats(data, 0, -1, 2, 0, 0)
@@ -109,7 +109,7 @@ export const items: ItemGenerator[] = [
   () =>
     new Item(
       'gourd bottle',
-      Sprites.TURQUOISE_BEAD,
+      Sprites.GOURD_BOTTLE,
       Rarity.UNCOMMON,
       '+1 energy',
       (game: Game, data: Trigger) => stats(data, 0, 0, 0, 0, 1)
@@ -117,7 +117,7 @@ export const items: ItemGenerator[] = [
   () =>
     new Item(
       'gold bracelet',
-      Sprites.TURQUOISE_BEAD,
+      Sprites.GOLD_BRACELET,
       Rarity.UNCOMMON,
       '+25% luck during the day',
       (game: Game, data: Trigger) =>
@@ -126,7 +126,7 @@ export const items: ItemGenerator[] = [
   () =>
     new Item(
       'silver bracelet',
-      Sprites.TURQUOISE_BEAD,
+      Sprites.SILVER_BRACELET,
       Rarity.UNCOMMON,
       '+25% luck at night',
       (game: Game, data: Trigger) =>
@@ -135,7 +135,7 @@ export const items: ItemGenerator[] = [
   () =>
     new Item(
       'cursed ring',
-      Sprites.TURQUOISE_BEAD,
+      Sprites.CURSED_RING,
       Rarity.UNCOMMON,
       '-1 strength',
       (game: Game, data: Trigger) => stats(data, -1, 0, 0, 0, 0)
@@ -143,7 +143,7 @@ export const items: ItemGenerator[] = [
   () =>
     new Item(
       'cursed amulet',
-      Sprites.TURQUOISE_BEAD,
+      Sprites.CURSED_AMULET,
       Rarity.UNCOMMON,
       '-1 wisdom',
       (game: Game, data: Trigger) => stats(data, 0, -1, 0, 0, 0)
@@ -151,7 +151,7 @@ export const items: ItemGenerator[] = [
   () =>
     new Item(
       'cursed sandals',
-      Sprites.TURQUOISE_BEAD,
+      Sprites.CURSED_SANDALS,
       Rarity.UNCOMMON,
       '-1 dexterity',
       (game: Game, data: Trigger) => stats(data, 0, 0, -1, 0, 0)
@@ -161,23 +161,19 @@ export const items: ItemGenerator[] = [
   () =>
     new Item(
       'macuahuitl',
-      Sprites.TURQUOISE_BEAD,
+      Sprites.MACUAHUITL,
       Rarity.RARE,
       '+2 strength',
       (game: Game, data: Trigger) => stats(data, 2, 0, 0, 0, 0)
     ),
   () =>
-    new Item(
-      'quipu',
-      Sprites.TURQUOISE_BEAD,
-      Rarity.RARE,
-      '+2 wisdom',
-      (game: Game, data: Trigger) => stats(data, 0, 2, 0, 0, 0)
+    new Item('quipu', Sprites.QUIPU, Rarity.RARE, '+2 wisdom', (game: Game, data: Trigger) =>
+      stats(data, 0, 2, 0, 0, 0)
     ),
   () =>
     new Item(
       'mogollon',
-      Sprites.TURQUOISE_BEAD,
+      Sprites.MOGOLLON,
       Rarity.RARE,
       '+2 dexterity',
       (game: Game, data: Trigger) => stats(data, 0, 0, 2, 0, 0)
@@ -185,23 +181,19 @@ export const items: ItemGenerator[] = [
   () =>
     new Item(
       'medicine bag',
-      Sprites.TURQUOISE_BEAD,
+      Sprites.MEDICINE_BAG,
       Rarity.RARE,
       '+25% luck',
       (game: Game, data: Trigger) => stats(data, 0, 0, 0, 25, 0)
     ),
   () =>
-    new Item(
-      'pemmican',
-      Sprites.TURQUOISE_BEAD,
-      Rarity.RARE,
-      '+2 energy',
-      (game: Game, data: Trigger) => stats(data, 0, 0, 0, 0, 2)
+    new Item('pemmican', Sprites.PEMMICAN, Rarity.RARE, '+2 energy', (game: Game, data: Trigger) =>
+      stats(data, 0, 0, 0, 0, 2)
     ),
   () =>
     new Item(
       'sunflower',
-      Sprites.TURQUOISE_BEAD,
+      Sprites.SUNFLOWER,
       Rarity.RARE,
       '+1 str, wis and dex in sunny weather',
       (game: Game, data: Trigger) =>
@@ -210,7 +202,7 @@ export const items: ItemGenerator[] = [
   () =>
     new Item(
       'paw paw',
-      Sprites.TURQUOISE_BEAD,
+      Sprites.PAW_PAW,
       Rarity.RARE,
       '+1 str, wis and dex in rainy weather',
       (game: Game, data: Trigger) =>
@@ -219,7 +211,7 @@ export const items: ItemGenerator[] = [
   () =>
     new Item(
       'pitaya',
-      Sprites.TURQUOISE_BEAD,
+      Sprites.PITAYA,
       Rarity.RARE,
       '+1 str, wis and dex in windy weather',
       (game: Game, data: Trigger) =>
@@ -228,7 +220,7 @@ export const items: ItemGenerator[] = [
   () =>
     new Item(
       'crowberries',
-      Sprites.TURQUOISE_BEAD,
+      Sprites.CROWBERRIES,
       Rarity.RARE,
       '+1 str, wis and dex in snowy weather',
       (game: Game, data: Trigger) =>
@@ -237,7 +229,7 @@ export const items: ItemGenerator[] = [
   () =>
     new Item(
       'passionflower tea',
-      Sprites.TURQUOISE_BEAD,
+      Sprites.PASSIONFLOWER_TEA,
       Rarity.RARE,
       '-1 energy',
       (game: Game, data: Trigger) => stats(data, 0, 0, 0, 0, -1)
@@ -247,31 +239,31 @@ export const items: ItemGenerator[] = [
   () =>
     new Item(
       'condor feather',
-      Sprites.TURQUOISE_BEAD,
+      Sprites.CONDOR_FEATHER,
       Rarity.LEGENDARY,
-      'cannot lose any strength (except from items)',
+      'cannot lose any base strength',
       (game: Game, data: Trigger) => canLoseStats(data, false, true, true, true)
     ),
   () =>
     new Item(
       'owl feather',
-      Sprites.TURQUOISE_BEAD,
+      Sprites.OWL_FEATHER,
       Rarity.LEGENDARY,
-      'cannot lose any wisdom (except from items)',
+      'cannot lose any base wisdom',
       (game: Game, data: Trigger) => canLoseStats(data, true, false, true, true)
     ),
   () =>
     new Item(
       'falcon feather',
-      Sprites.TURQUOISE_BEAD,
+      Sprites.FALCON_FEATHER,
       Rarity.LEGENDARY,
-      'cannot lose any dexterity (except from items)',
+      'cannot lose any base dexterity',
       (game: Game, data: Trigger) => canLoseStats(data, true, true, false, true)
     ),
   () =>
     new Item(
       'succotash',
-      Sprites.TURQUOISE_BEAD,
+      Sprites.SUCCOTASH,
       Rarity.LEGENDARY,
       '+1 strength\n+1 wisdom\n+1 dexterity',
       (game: Game, data: Trigger) => stats(data, 1, 1, 1, 0, 0)
@@ -279,7 +271,7 @@ export const items: ItemGenerator[] = [
   () =>
     new Item(
       'eagle feather',
-      Sprites.TURQUOISE_BEAD,
+      Sprites.EAGLE_FEATHER,
       Rarity.LEGENDARY,
       '+100% luck',
       (game: Game, data: Trigger) => stats(data, 0, 0, 0, 100, 0)
@@ -289,7 +281,7 @@ export const items: ItemGenerator[] = [
   () => {
     const item = new Item(
       'golden mirror',
-      Sprites.TURQUOISE_BEAD,
+      Sprites.GOLDEN_MIRROR,
       Rarity.MYTHIC,
       'eventually summons a reflection of the bearer if they leave the party',
       undefined
@@ -298,7 +290,7 @@ export const items: ItemGenerator[] = [
       if (data.type === TriggerType.LEAVE_PARTY) {
         const view: EventView = new EventView(game);
         view.setDetails(
-          Sprites.TURQUOISE_BEAD,
+          Sprites.GOLDEN_MIRROR,
           `${item.bearer.name} is summoned to your party by the magic of a golden mirror.`,
           [
             new Action('continue', () => {
@@ -315,7 +307,7 @@ export const items: ItemGenerator[] = [
   () => {
     const item = new Item(
       'deer totem',
-      Sprites.TURQUOISE_BEAD,
+      Sprites.DEER_TOTEM,
       Rarity.MYTHIC,
       "doubles the bearer's base energy",
       undefined
@@ -327,7 +319,7 @@ export const items: ItemGenerator[] = [
   () => {
     const item = new Item(
       'buffalo totem',
-      Sprites.TURQUOISE_BEAD,
+      Sprites.BUFFALO_TOTEM,
       Rarity.MYTHIC,
       "doubles the bearer's base strength",
       undefined
@@ -339,7 +331,7 @@ export const items: ItemGenerator[] = [
   () => {
     const item = new Item(
       'turtle totem',
-      Sprites.TURQUOISE_BEAD,
+      Sprites.TURTLE_TOTEM,
       Rarity.MYTHIC,
       "doubles the bearer's base wisdom",
       undefined
@@ -351,7 +343,7 @@ export const items: ItemGenerator[] = [
   () => {
     const item = new Item(
       'coyotl totem',
-      Sprites.TURQUOISE_BEAD,
+      Sprites.COYOTL_TOTEM,
       Rarity.MYTHIC,
       "doubles the bearer's base dexterity",
       undefined
@@ -363,7 +355,7 @@ export const items: ItemGenerator[] = [
   () =>
     new Item(
       'turquoise ring',
-      Sprites.TURQUOISE_BEAD,
+      Sprites.TURQUOISE_RING,
       Rarity.MYTHIC,
       '+1 strength\n+1 wisdom\n+1 dexterity\n+100% luck\n+3 energy',
       (game: Game, data: Trigger) => stats(data, 1, 1, 1, 100, 3)

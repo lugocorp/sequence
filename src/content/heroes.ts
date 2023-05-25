@@ -146,7 +146,7 @@ export const heroes: HeroGenerator[] = [
       2,
       2,
       [ Skill.ENDURANCE, Skill.DIPLOMACY ],
-      'cannot lose any luck',
+      'cannot lose any base luck',
       (game: Game, data: Trigger) => {
         if (data.type === TriggerType.LOSS_CHECK) {
           data.luck = false;
