@@ -12,7 +12,7 @@ export default class CreditsView extends View {
     this.setSelector(
       new Selector<string>(
         [
-          '-development-\n\nalex lugo\ntaíno/chichimeca',
+          '-development-\n\nalex lugo\ntaíno/guachichil',
           '-consultants-\n\nkoro valdivia\ntawantinsuyu\n\nnati/palta\nquechua\nshe/they',
           'c. travioli\ncheyenne river lakota\n\nlydia prince\ndakelh/nehiyaw\nshe/her'
         ],

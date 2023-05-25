@@ -53,11 +53,6 @@ export default class Basket {
     return this.items.indexOf(item) > -1;
   }
 
-  // Returns true if this basket has an item with the given name
-  has(item: string): boolean {
-    return this.items.map((x: Item) => x.name).indexOf(item) > -1;
-  }
-
   // Returns the number of held items
   get itemCount(): number {
     return this.items.length;

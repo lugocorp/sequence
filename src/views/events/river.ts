@@ -62,7 +62,7 @@ export default class RiverEvent extends EventView {
         })
       ]
     );
-    this.game.chain.futureEvent(retrieve, 5, () => !this.game.party.isFull());
+    this.game.chain.futureEvent(retrieve, 5, () => !this.game.party.isFull);
     this.setDetails(
       Sprites.RIVER,
       `${hero.name} was swept away by the river! you may meet them downstream if your party can use more members.`,

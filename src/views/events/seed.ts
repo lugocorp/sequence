@@ -19,7 +19,7 @@ export default class SeedEvent extends EventView {
       `your party finds a mysterious seed in the grass. choose someone to pick it up.`,
       [
         new Action('continue', () => {
-          if (this.game.party.canPickupItems()) {
+          if (this.game.party.canPickupItems) {
             that.setSelector(that.heroSelector, [
               new Action('choose', () => {
                 const hero: Hero = that.heroSelector.item();

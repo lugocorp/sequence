@@ -44,7 +44,7 @@ export default class OfferingEvent extends EventView {
 
   viewParty(): void {
     const that = this;
-    if (this.game.party.canPickupItems()) {
+    if (this.game.party.canPickupItems) {
       this.setSelector(this.heroSelector, [
         new Action('choose', () => that.finish()),
         new Action('view gift', () => that.viewGift())

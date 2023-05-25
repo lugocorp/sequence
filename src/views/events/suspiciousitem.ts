@@ -32,7 +32,7 @@ export default class SuspiciousItemEvent extends EventView {
   }
 
   private viewParty(): void {
-    if (this.game.party.canPickupItems()) {
+    if (this.game.party.canPickupItems) {
       this.setSelector(this.heroSelector, [
         new Action('select', () => {
           this.game.chain.futureEvent(

@@ -30,7 +30,7 @@ export default class MedicineManEvent extends EventView {
 
   viewParty(): void {
     const that = this;
-    if (this.game.party.hasItems()) {
+    if (this.game.party.hasItems) {
       this.setSelector(this.heroSelector, [ new Action('make trade', () => that.makeTrade()) ]);
     } else {
       this.setDetails(Sprites.MEDICINE_MAN, `no one in your party has anything to give.`, [

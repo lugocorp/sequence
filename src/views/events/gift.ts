@@ -27,7 +27,7 @@ export default class GiftEvent extends EventView {
 
   init(): void {
     const that = this;
-    if (this.game.party.canPickupItems()) {
+    if (this.game.party.canPickupItems) {
       this.hero = Random.element(this.game.party.emptyItemSlots());
       this.setDetails(
         Sprites.GIFT,

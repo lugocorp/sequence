@@ -35,11 +35,9 @@ describe('Basket tests', function () {
   it('Correctly identify items it has or does not have', function () {
     const item = new Item('something', Sprites.NONE, Rarity.COMMON, '', undefined);
     expect(basket.hasItems).to.be.false;
-    expect(basket.has('something')).to.be.false;
     expect(basket.contains(item)).to.be.false;
     basket.equip(item);
     expect(basket.hasItems).to.be.true;
-    expect(basket.has('something')).to.be.true;
     expect(basket.contains(item)).to.be.true;
   });
 });
@@ -76,30 +74,30 @@ describe('Party tests', function () {
   it('Check if the party can pick up items', function () {
     const member = hero('someone');
     expect(party.emptyItemSlots()).to.deep.equal([]);
-    expect(party.canPickupItems()).to.be.false;
-    expect(party.hasItems()).to.be.false;
+    expect(party.canPickupItems).to.be.false;
+    expect(party.hasItems).to.be.false;
     party.add(member);
     expect(party.emptyItemSlots().map((x) => x.name)).to.deep.equal([ 'someone' ]);
-    expect(party.canPickupItems()).to.be.true;
-    expect(party.hasItems()).to.be.false;
+    expect(party.canPickupItems).to.be.true;
+    expect(party.hasItems).to.be.false;
     member.basket.equip(new Item('something', Sprites.NONE, Rarity.COMMON, '', undefined));
     expect(party.emptyItemSlots().map((x) => x.name)).to.deep.equal([ 'someone' ]);
-    expect(party.canPickupItems()).to.be.true;
-    expect(party.hasItems()).to.be.true;
+    expect(party.canPickupItems).to.be.true;
+    expect(party.hasItems).to.be.true;
     member.basket.equip(new Item('something else', Sprites.NONE, Rarity.COMMON, '', undefined));
     expect(party.emptyItemSlots()).to.deep.equal([]);
-    expect(party.canPickupItems()).to.be.false;
-    expect(party.hasItems()).to.be.true;
+    expect(party.canPickupItems).to.be.false;
+    expect(party.hasItems).to.be.true;
     party.remove(party.get(0));
     expect(party.emptyItemSlots()).to.deep.equal([]);
-    expect(party.canPickupItems()).to.be.false;
-    expect(party.hasItems()).to.be.false;
+    expect(party.canPickupItems).to.be.false;
+    expect(party.hasItems).to.be.false;
   });
 
   it('Enforce max party size', function () {
-    expect(party.isFull()).to.be.false;
+    expect(party.isFull).to.be.false;
     party.populate();
-    expect(party.isFull()).to.be.true;
+    expect(party.isFull).to.be.true;
     expect(party.size).to.equal(Party.MAX);
     expect(() => party.add(hero('someone'))).to.throw(
       `Cannot have more than ${Party.MAX} members in your party`

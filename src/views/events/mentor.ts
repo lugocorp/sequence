@@ -28,7 +28,7 @@ export default class MentorEvent extends EventView {
   }
 
   viewParty(): void {
-    if (this.game.party.canLearnSkills()) {
+    if (this.game.party.canLearnSkills) {
       this.setSelector(this.heroSelector, [ new Action('choose', () => this.finish()) ]);
     } else {
       this.setDetails(

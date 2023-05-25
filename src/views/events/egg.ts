@@ -18,7 +18,7 @@ export default class EggEvent extends EventView {
       `your party finds an egg laying on the ground. choose someone to pick it up.`,
       [
         new Action('continue', () => {
-          if (this.game.party.canPickupItems()) {
+          if (this.game.party.canPickupItems) {
             that.setSelector(that.heroSelector, [
               new Action('choose', () => {
                 const hero: Hero = that.heroSelector.item();
@@ -72,7 +72,7 @@ export default class EggEvent extends EventView {
   }
 
   hatches(): void {
-    if (this.game.party.isFull()) {
+    if (this.game.party.isFull) {
       this.setDetails(
         Sprites.EGG, // TODO update sprite to turtle
         'the egg hatches into a turtle!',

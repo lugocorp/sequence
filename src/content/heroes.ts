@@ -129,7 +129,7 @@ export const heroes: HeroGenerator[] = [
             game.progress();
           })
         ]);
-        game.chain.futureEvent(view, 3, () => game.party.contains(hero));
+        game.chain.futureEvent(view, 6, () => game.party.contains(hero));
       }
     };
     return hero;
@@ -264,5 +264,5 @@ function summon(game: Game, hero: Hero): void {
       game.progress();
     })
   ]);
-  game.chain.futureEvent(view, 4, () => !game.party.isFull());
+  game.chain.futureEvent(view, 4, () => !game.party.isFull && !game.party.contains(hero));
 }

@@ -18,7 +18,7 @@ export default class BabyPeccaryEvent extends EventView {
       `your party finds a lonely baby peccary. choose someone to carry it until the party finds its family.`,
       [
         new Action('continue', () => {
-          if (this.game.party.canPickupItems()) {
+          if (this.game.party.canPickupItems) {
             that.setSelector(that.heroSelector, [
               new Action('choose', () => {
                 const hero: Hero = that.heroSelector.item();

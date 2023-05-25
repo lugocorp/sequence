@@ -110,6 +110,12 @@ describe('Hero effects', function () {
     game.chain.events.splice(0, 1);
     game.chain.latest();
     game.chain.events.splice(0, 1);
+    game.chain.latest();
+    game.chain.events.splice(0, 1);
+    game.chain.latest();
+    game.chain.events.splice(0, 1);
+    game.chain.latest();
+    game.chain.events.splice(0, 1);
     expect(game.chain.latest().getText().replace(/\n/g, ' ')).to.equal(
       'eagle knight healed from low energy. '
     );

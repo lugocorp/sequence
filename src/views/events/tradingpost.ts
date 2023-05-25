@@ -32,7 +32,7 @@ export default class TradingPostEvent extends EventView {
 
   viewParty(): void {
     const that = this;
-    if (this.game.party.hasItems()) {
+    if (this.game.party.hasItems) {
       this.setSelector(this.heroSelector, [ new Action('trade', () => that.trade()) ]);
     } else {
       this.setDetails(Sprites.TRADING_POST, `nobody has any items to trade.`, [

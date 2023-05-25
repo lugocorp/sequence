@@ -20,7 +20,7 @@ export default class Party {
   }
 
   // Returns true if the party is full
-  isFull(): boolean {
+  get isFull(): boolean {
     return this.size === Party.MAX;
   }
 
@@ -30,17 +30,17 @@ export default class Party {
   }
 
   // Returns true if anyone in your party has at least 1 empty item slot
-  canPickupItems(): boolean {
+  get canPickupItems(): boolean {
     return this.emptyItemSlots().length > 0;
   }
 
   // Returns true if anyone in your party has at least 1 item
-  hasItems(): boolean {
+  get hasItems(): boolean {
     return this.members.reduce((acc: number, x: Hero) => acc + x.basket.itemCount, 0) > 0;
   }
 
   // Returns true if anyone in your party has at least 1 empty skill slot
-  canLearnSkills(): boolean {
+  get canLearnSkills(): boolean {
     return this.emptySkillSlots().length > 0;
   }
 

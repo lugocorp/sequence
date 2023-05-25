@@ -7,7 +7,6 @@
     "compile": "webpack",
     "format": "prettier -w src && eslint --fix src",
     "start": "webpack serve --port 2017",
-    "audit": "tsc -t es5 --outDir out src/audit.ts && node out/audit.js",
     "android": "cordova run android",
     "test": "mocha --loader=ts-node/esm --extension=ts src/tests/*.spec.ts"
   },

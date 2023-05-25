@@ -40,7 +40,7 @@ export default class CaravanEvent extends EventView {
     const that = this;
     this.setSelector(this.recruitSelector, [
       new Action('choose', () => {
-        if (this.game.party.isFull()) {
+        if (this.game.party.isFull) {
           that.pleaseRemove();
         } else {
           that.finished();
@@ -72,7 +72,7 @@ export default class CaravanEvent extends EventView {
   finished(): void {
     const recruit: Hero = this.recruitSelector.item();
     let text = `${recruit.name} left the caravan for your party!`;
-    if (this.game.party.isFull()) {
+    if (this.game.party.isFull) {
       const member: Hero = this.memberSelector.item();
       text += ` ${member.name} left your party for the caravan.`;
       this.game.party.remove(member);

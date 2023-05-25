@@ -30,7 +30,7 @@ export default class SunriseEvent extends EventView {
 
   viewParty(): void {
     const that = this;
-    if (this.game.party.hasItems()) {
+    if (this.game.party.hasItems) {
       this.setSelector(this.heroSelector, [ new Action('offer items', () => that.offer()) ]);
     } else {
       this.setDetails(Sprites.SUNRISE, `no one in your party has anything to offer.`, [

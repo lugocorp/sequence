@@ -307,7 +307,7 @@ export const items: ItemGenerator[] = [
             })
           ]
         );
-        game.chain.futureEvent(view, 3, () => !game.party.isFull());
+        game.chain.futureEvent(view, 3, () => !game.party.isFull);
       }
     };
     return item;
