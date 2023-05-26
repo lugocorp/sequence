@@ -17,7 +17,7 @@ export default class VillageEvent extends EventView {
   }
 
   heal(): void {
-    const leave = Math.min(this.game.party.size);
+    const leave = Math.min(this.game.party.size / 2);
     for (const hero of this.game.party.members) {
       hero.refreshEnergy();
     }
