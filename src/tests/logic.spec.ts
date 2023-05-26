@@ -46,4 +46,12 @@ describe('Data tests', function () {
     expect(turtle).to.exist;
     expect(turtle.name).to.equal('turtle');
   });
+
+  [ 'magic seed', 'round egg', 'baby peccary' ].forEach((name: string) =>
+    it(`Proper override for ${name}`, function () {
+      const item = data.getNamedItem(name);
+      expect(item).to.exist;
+      expect(item.name).to.equal('turquoise bead');
+    })
+  );
 });

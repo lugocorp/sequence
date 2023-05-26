@@ -270,7 +270,7 @@ export const heroes: HeroGenerator[] = [
   }
 ];
 
-function summon(game: Game, hero: Hero): void {
+export function summon(game: Game, hero: Hero): void {
   const view: EventView = new EventView(game);
   view.setDetails(hero.sprite, `${hero.name} joins your party.`, [
     new Action('continue', () => {

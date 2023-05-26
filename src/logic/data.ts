@@ -71,6 +71,9 @@ export default class DataManager {
    * Returns an item given by its name
    */
   getNamedItem(name: string): Item {
+    if ([ 'magic seed', 'round egg', 'baby peccary' ].includes(name)) {
+      name = 'turquoise bead';
+    }
     return this.itemsByName[name]();
   }
 }

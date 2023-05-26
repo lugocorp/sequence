@@ -8,9 +8,6 @@ import Action from '../../ui/action';
 import EventView from '../event';
 import Game from '../../game';
 
-/*
- * In this event you choose a party member to receive some pre-selected item.
- */
 export default class MentorEvent extends EventView {
   private heroSelector: Selector<Hero>;
 

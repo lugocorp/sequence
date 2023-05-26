@@ -13,14 +13,13 @@ export default class OfferingEvent extends EventView {
   private heroSelector: Selector<Hero>;
   private gift: Item;
 
-  constructor(game: Game) {
+  constructor(game: Game, gift?: Item) {
     super(game);
-    const that = this;
-    this.gift = this.game.data.getRandomItem();
+    this.gift = gift || this.game.data.getRandomItem();
     this.setDetails(
       Sprites.OFFERING,
       `a generous spirit offers a gift of ${this.gift.name} to your party. choose someone to accept it.`,
-      [ new Action('continue', () => that.viewGift()) ]
+      [ new Action('continue', () => this.viewGift()) ]
     );
   }
 
