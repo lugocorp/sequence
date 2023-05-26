@@ -7,7 +7,7 @@ import Action from '../../ui/action';
 import EventView from '../event';
 import Game from '../../game';
 
-/*
+/**
  * In this event you choose 1 of 3 items to bestow upon a pre-selected party member.
  */
 export default class GiftEvent extends EventView {
@@ -30,13 +30,13 @@ export default class GiftEvent extends EventView {
     if (this.game.party.canPickupItems) {
       this.hero = Random.element(this.game.party.emptyItemSlots());
       this.setDetails(
-        Sprites.GIFT,
+        Sprites.RACCOON,
         `a generous spirit reveals itself to ${this.hero.name}. it comes bearing a gift of your choosing.`,
         [ new Action('continue', () => that.chooseGift()) ]
       );
     } else {
       this.setDetails(
-        Sprites.GIFT,
+        Sprites.RACCOON,
         `a generous spirit reveals itself to your party. it comes bearing a gift, but no one can hold any more belongings. the spirit conceals itself once more.`,
         [ new Action('continue', () => this.game.progress()) ]
       );
@@ -62,7 +62,7 @@ export default class GiftEvent extends EventView {
     const gift: Item = this.itemSelector.item();
     this.hero.basket.equip(gift);
     this.setDetails(
-      Sprites.GIFT,
+      Sprites.RACCOON,
       `${this.hero.name} received the spirit's gift of ${gift.name}. the spirit conceals itself once more.`,
       [ new Action('continue', () => this.game.progress()) ]
     );

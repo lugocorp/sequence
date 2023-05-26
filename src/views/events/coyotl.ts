@@ -5,7 +5,7 @@ import Action from '../../ui/action';
 import EventView from '../event';
 import Game from '../../game';
 
-/*
+/**
  * In this event you choose a party member to leave behind.
  */
 export default class CoyotlEvent extends EventView {

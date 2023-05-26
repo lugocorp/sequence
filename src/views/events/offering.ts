@@ -6,7 +6,7 @@ import Action from '../../ui/action';
 import EventView from '../event';
 import Game from '../../game';
 
-/*
+/**
  * In this event you choose a party member to receive some pre-selected item.
  */
 export default class OfferingEvent extends EventView {
@@ -17,7 +17,7 @@ export default class OfferingEvent extends EventView {
     super(game);
     this.gift = gift || this.game.data.getRandomItem();
     this.setDetails(
-      Sprites.OFFERING,
+      Sprites.BUTTERFLY,
       `a generous spirit offers a gift of ${this.gift.name} to your party. choose someone to accept it.`,
       [ new Action('continue', () => this.viewGift()) ]
     );
@@ -27,7 +27,7 @@ export default class OfferingEvent extends EventView {
     this.heroSelector = Selector.heroSelector(this.game.party, this.game.party.emptyItemSlots());
     if (!this.heroSelector.size()) {
       this.setDetails(
-        Sprites.OFFERING,
+        Sprites.BUTTERFLY,
         `a generous spirit offers a gift of ${this.gift.name} to your party, but no one has space for more items. the spirit conceals itself once more.`,
         [ new Action('continue', () => this.game.progress()) ]
       );
@@ -61,7 +61,7 @@ export default class OfferingEvent extends EventView {
     const hero: Hero = this.heroSelector.item();
     hero.basket.equip(this.gift);
     this.setDetails(
-      Sprites.OFFERING,
+      Sprites.BUTTERFLY,
       `${hero.name} was given ${this.gift.name}. the spirit conceals itself once more.`,
       [ new Action('continue', () => this.game.progress()) ]
     );

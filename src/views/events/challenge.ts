@@ -26,8 +26,7 @@ export default class ChallengeEvent extends EventView {
     super(game);
     const that = this;
     this.challenger = {
-      name: 'bear',
-      sprite: Sprites.CHALLENGE,
+      ...this.game.data.getRandomSpirit(),
       strength: Random.max(7),
       wisdom: Random.max(7),
       dexterity: Random.max(7)

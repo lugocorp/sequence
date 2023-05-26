@@ -57,13 +57,13 @@ export default class SuspiciousItemEvent extends EventView {
   private getFutureEvent(): EventView {
     const view: EventView = new EventView(this.game);
     view.setDetails(
-      Sprites.SUSPICIOUS_ITEM,
+      Sprites.PUMA,
       `a spirit comes to ${this.hero.name} and asks to have their ${this.item.name} back.`,
       [
         new Action('return it', () => {
           this.hero.basket.unequip(this.item);
           this.setDetails(
-            Sprites.SUSPICIOUS_ITEM,
+            Sprites.PUMA,
             `${this.hero.name} returns the ${this.item.name} to the spirit.`,
             [ new Action('continue', () => this.game.progress()) ]
           );
@@ -74,11 +74,9 @@ export default class SuspiciousItemEvent extends EventView {
           this.hero.dex--;
           this.hero.luck -= 10;
           this.hero.energy--;
-          this.setDetails(
-            Sprites.SUSPICIOUS_ITEM,
-            `the spirit places a curse upon ${this.hero.name}.`,
-            [ new Action('continue', () => this.game.progress()) ]
-          );
+          this.setDetails(Sprites.PUMA, `the spirit places a curse upon ${this.hero.name}.`, [
+            new Action('continue', () => this.game.progress())
+          ]);
         })
       ]
     );

@@ -74,15 +74,13 @@ export default class EggEvent extends EventView {
 
   hatches(): void {
     if (this.game.party.isFull) {
-      this.setDetails(
-        Sprites.EGG, // TODO update sprite to turtle
-        'the egg hatches into a turtle!',
-        [ new Action('continue', () => this.game.progress()) ]
-      );
+      this.setDetails(Sprites.TURTLE, 'the egg hatches into a turtle!', [
+        new Action('continue', () => this.game.progress())
+      ]);
     } else {
       this.game.party.add(turtle(this.game));
       this.setDetails(
-        Sprites.EGG, // TODO update sprite to turtle
+        Sprites.TURTLE,
         'the egg hatches into a turtle! the turtle joins your party.',
         [ new Action('continue', () => this.game.progress()) ]
       );

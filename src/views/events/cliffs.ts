@@ -6,7 +6,7 @@ import Action from '../../ui/action';
 import EventView from '../event';
 import Game from '../../game';
 
-/*
+/**
  * In this event your party is filtered by a certain stat limit.
  */
 export default class CliffsEvent extends EventView {

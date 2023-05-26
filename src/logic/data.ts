@@ -5,6 +5,7 @@
  */
 import { HeroGenerator, heroes, turtle } from '../content/heroes';
 import { ItemGenerator, items } from '../content/items';
+import Sprites from '../media/sprites';
 import Hero from '../entities/hero';
 import Item from '../entities/item';
 import Random from './random';
@@ -75,5 +76,25 @@ export default class DataManager {
       name = 'turquoise bead';
     }
     return this.itemsByName[name]();
+  }
+
+  /**
+   * Returns a random named spirit
+   */
+  getRandomSpirit(): { name: string; sprite: Sprites } {
+    return Random.element([
+      {
+        name: 'bear',
+        sprite: Sprites.BEAR
+      },
+      {
+        name: 'axolotl',
+        sprite: Sprites.AXOLOTL
+      },
+      {
+        name: 'owl',
+        sprite: Sprites.OWL
+      }
+    ]);
   }
 }

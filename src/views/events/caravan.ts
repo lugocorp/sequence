@@ -4,7 +4,7 @@ import Action from '../../ui/action';
 import EventView from '../event';
 import Game from '../../game';
 
-/*
+/**
  * In this event you choose a new party member.
  */
 export default class CaravanEvent extends EventView {

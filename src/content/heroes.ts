@@ -8,17 +8,7 @@ import Game from '../game';
 export type HeroGenerator = (game: Game) => Hero;
 
 export function turtle(game: Game): Hero {
-  return new Hero(
-    game,
-    Sprites.EGG, // TODO update sprite to turtle
-    'turtle',
-    'turtle',
-    1,
-    1,
-    1,
-    2,
-    0
-  );
+  return new Hero(game, Sprites.TURTLE, 'turtle', 'turtle', 1, 1, 1, 2, 0);
 }
 
 export const heroes: HeroGenerator[] = [

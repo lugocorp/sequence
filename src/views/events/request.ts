@@ -8,7 +8,7 @@ import Action from '../../ui/action';
 import EventView from '../event';
 import Game from '../../game';
 
-type Challenger = {
+type Request = {
   name: string;
   sprite: Sprites;
   skill: Skill;
@@ -16,19 +16,18 @@ type Challenger = {
 
 export default class RequestEvent extends EventView {
   private heroSelector: Selector<Hero>;
-  private challenger: Challenger;
+  private challenger: Request;
 
   constructor(game: Game) {
     super(game);
     this.challenger = {
-      name: 'bear',
-      sprite: Sprites.CHALLENGE,
+      ...this.game.data.getRandomSpirit(),
       skill: Random.element(EnumsHelper.skills())
     };
     this.setDetails(
       this.challenger.sprite,
       `an ethereal spirit makes a request of your party. choose someone to help.`,
-      [ new Action('continue', () => this.viewChallenger()) ]
+      [ new Action('continue', () => this.viewRequest()) ]
     );
   }
 
@@ -44,7 +43,7 @@ export default class RequestEvent extends EventView {
     );
   }
 
-  private viewChallenger(): void {
+  private viewRequest(): void {
     const text = `${this.challenger.name}\nrequests help from someone with ${this.challenger.skill}.`;
     this.setDetails(this.challenger.sprite, text, [
       new Action('view party', () => this.viewParty())
@@ -54,7 +53,7 @@ export default class RequestEvent extends EventView {
   private viewParty(): void {
     this.setSelector(this.heroSelector, [
       new Action('choose', () => this.finish()),
-      new Action('view spirit', () => this.viewChallenger())
+      new Action('view spirit', () => this.viewRequest())
     ]);
   }
 
