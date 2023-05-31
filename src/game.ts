@@ -83,22 +83,6 @@ export default class Game {
     view.init();
   }
 
-  getBackground(): Sprites {
-    if (this.world.time === Time.NIGHT) {
-      return Sprites.NIGHT;
-    }
-    switch (this.world.weather) {
-      case Weather.RAIN:
-        return Sprites.RAIN;
-      case Weather.WIND:
-        return Sprites.WIND;
-      case Weather.SNOW:
-        return Sprites.SNOW;
-      default:
-        return Sprites.SUN;
-    }
-  }
-
   // Progresses to the next event in the game
   async progress(): Promise<void> {
     const wait = () => new Promise((resolve) => setTimeout(resolve, 10));

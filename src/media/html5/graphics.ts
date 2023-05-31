@@ -66,10 +66,6 @@ export default class HTML5Graphics extends Graphics {
       return;
     }
     if (view.image) {
-      const background: number = game.getBackground();
-      if (background !== Sprites.NONE) {
-        this.drawSprite(background, 12, 3);
-      }
       const c: DrawCoords = this.assets.getSprite(view.image);
       this.drawSprite(view.image, (100 - c.width) / 2 + 12, (100 - c.height) / 2 + 3);
     }

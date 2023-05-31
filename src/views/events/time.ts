@@ -21,7 +21,7 @@ export default class TimeEvent extends EventView {
     this.game.world.time = time;
     const cave = this.game.world.cave ? ' in the world outside the cave' : '';
     this.setDetails(
-      isDay(time) ? this.game.getBackground() : Sprites.NIGHT,
+      isDay(time) ? Sprites.SUN : Sprites.NIGHT,
       isDay(time)
         ? `the sun rises over the horizon${cave} as night retreats to the west.`
         : `the sun comes to rest behind the hills${cave} as the moon rises into the night sky.`,
