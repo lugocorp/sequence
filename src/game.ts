@@ -1,5 +1,4 @@
 import { DAY_NIGHT_CYCLE, World, Weather, Time } from './types';
-import Sprites from './media/sprites';
 import Graphics from './media/graphics';
 import GameAudio from './media/audio';
 import HistoryManager from './media/history';

@@ -2,7 +2,7 @@
  * This class handles working with the HTML5 canvas to render game elements.
  * Use it whenever you have to interact with the game canvas.
  */
-import { WIDTH, HEIGHT, WGLYPH, HGLYPH, WTEXT } from '../../types';
+import { WIDTH, HEIGHT, WGLYPH, HGLYPH, WTEXT, PADDING } from '../../types';
 import { HTML5GraphicsLoader, DrawCoords } from './loader';
 import Glyphs from '../glyphs';
 import Graphics from '../graphics';
@@ -89,26 +89,14 @@ export default class HTML5Graphics extends Graphics {
     }
     if (view.hasActions()) {
       const actionCoords: [number, number] = view.getActionCoords(0);
-      const top = this.toDisplayCoords(0, actionCoords[1])[1] - HGLYPH;
+      const top = this.toDisplayCoords(0, actionCoords[1])[1];
       for (let a = 0; a < WTEXT; a++) {
-        let sprite1 = Sprites.LINE_HORT;
-        let sprite2 = Sprites.LINE_HORT;
-        if (a === 0) {
-          sprite1 = Sprites.BOT_LEFT;
-          sprite2 = Sprites.TOP_LEFT;
-        } else if (a === 23) {
-          sprite1 = Sprites.BOT_RIGHT;
-          sprite2 = Sprites.TOP_RIGHT;
-        }
-        this.drawSprite(sprite1, a * WGLYPH + 2, 190);
-        this.drawSprite(sprite2, a * WGLYPH + 2, top);
+        this.drawSprite(Sprites.LINE_HORT, a * WGLYPH + PADDING, top);
       }
       for (let a = 0; a < view.actions.length; a++) {
         const action: Action = view.actions[a];
         const coords: [number, number] = view.getActionCoords(a);
         this.drawText(game, action.label, coords[0], coords[1], true);
-        this.drawSprite(Sprites.LINE_VERT, 2, coords[1] * HGLYPH + 102);
-        this.drawSprite(Sprites.LINE_VERT, 23 * WGLYPH + 2, coords[1] * HGLYPH + 102);
       }
     }
     if (this.dark) {
@@ -178,7 +166,7 @@ export default class HTML5Graphics extends Graphics {
             this.ctx.globalCompositeOperation = 'source-atop';
             this.ctx.fillRect(x + dx * WGLYPH, y + dy * HGLYPH, WGLYPH, HGLYPH);
             this.ctx.globalCompositeOperation = 'source-over';
-            this.ctx.fillStyle = 'black';
+            this.ctx.fillStyle = '#10121c';
           }
         }
         dx++;
@@ -186,9 +174,9 @@ export default class HTML5Graphics extends Graphics {
     }
     if (highlight) {
       const bounds: [number, number] = this.getTextBounds(msg);
-      this.ctx.fillStyle = '#00bf2a';
+      this.ctx.fillStyle = '#8c78a5';
       this.ctx.globalCompositeOperation = 'source-atop';
-      this.ctx.fillRect(x, y, bounds[0], bounds[1]);
+      this.ctx.fillRect(x, y + 1, bounds[0], bounds[1] - 1);
       this.ctx.globalCompositeOperation = 'source-over';
       this.ctx.fillStyle = '#000000';
     }

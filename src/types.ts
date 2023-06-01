@@ -3,6 +3,7 @@ import Game from './game';
 // The display size of the entire game view
 export const WIDTH = 124;
 export const HEIGHT = 200;
+export const PADDING = 2;
 
 // The display size of a single glyph
 export const WGLYPH = 5;

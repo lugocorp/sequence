@@ -53,17 +53,17 @@
      id="layer1">
     <path
        id="path833"
-       style="fill:#f6fe1e;fill-opacity:1;stroke-width:1.09643;stroke-linecap:round"
+       style="fill:#e8d282;fill-opacity:1;stroke-width:1.09643;stroke-linecap:round"
        transform="matrix(0.83044427,-0.55710171,0.55642602,0.83089716,0,0)"
        d="M 51.0597,137.493 A 25.073484,46.742237 0 0 1 25.986216,184.23523 25.073484,46.742237 0 0 1 0.91273117,137.493 25.073484,46.742237 0 0 1 25.986216,90.750759 25.073484,46.742237 0 0 1 51.0597,137.493 Z" />
     <path
        id="path835"
-       style="fill:#1fe001;fill-opacity:1;stroke-width:1;stroke-linecap:round"
+       style="fill:#5ab552;fill-opacity:1;stroke-width:1;stroke-linecap:round"
        transform="rotate(-84.429295)"
        d="m -105.96182,111.91103 a 13.522063,31.171377 0 0 1 -13.52207,31.17138 13.522063,31.171377 0 0 1 -13.52206,-31.17138 13.522063,31.171377 0 0 1 13.52206,-31.171374 13.522063,31.171377 0 0 1 13.52207,31.171374 z" />
     <path
        id="path835-3"
-       style="fill:#1fe001;fill-opacity:1;stroke-width:1;stroke-linecap:round"
+       style="fill:#5ab552;fill-opacity:1;stroke-width:1;stroke-linecap:round"
        transform="rotate(4.8474704)"
        d="M 147.81993,97.263947 A 13.522063,31.171377 0 0 1 134.29787,128.43532 13.522063,31.171377 0 0 1 120.7758,97.263947 13.522063,31.171377 0 0 1 134.29787,66.092569 13.522063,31.171377 0 0 1 147.81993,97.263947 Z" />
   </g>

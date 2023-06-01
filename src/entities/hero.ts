@@ -207,6 +207,7 @@ export default class Hero {
     }
     return (
       `${this.name}\n` +
+      `${this.people}\n` +
       `${this.basket.itemCount}/${this.basket.total}\titems\t\t\t\t\t\t` +
       `${stat(this.stats.energy)}energy\n` +
       `${stat(this.stats.str)}str\t\t\t` +
