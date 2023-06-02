@@ -57,7 +57,7 @@ export default class Game {
       time: Time.DAY,
       cave: false
     };
-    this.party.populate('bird catcher', 'moon priestess');
+    this.party.populate('sword holder', 'moon priestess', 'eagle knight', 'runner');
     this.chain.futureEvent(new TimeEvent(this), DAY_NIGHT_CYCLE);
   }
 

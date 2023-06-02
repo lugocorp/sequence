@@ -16,7 +16,7 @@ export default class BeginEvent extends EventView {
       [
         new Action('view party', () =>
           this.setSelector(Selector.heroSelector(this.game.party, this.game.party.members), [
-            new Action('continue', () => this.game.progress())
+            new Action('start adventure', () => this.game.progress())
           ])
         )
       ]
