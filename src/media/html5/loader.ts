@@ -24,8 +24,10 @@ export class HTML5GraphicsLoader {
    * identified by the sheet parameter.
    */
   getDimensions(sheet: number): { w: number; h: number } {
-    const sizes = [ { w: WGLYPH, h: HGLYPH }, undefined, undefined, { w: 50, h: 50 } ];
-    return (sheet < sizes.length ? sizes[sheet] : undefined) || { w: 100, h: 100 };
+    if (sheet === 0) {
+      return { w: WGLYPH, h: HGLYPH };
+    }
+    return { w: 100, h: 100 };
   }
 
   /*
