@@ -6,8 +6,7 @@ export default class HTML5GameAudio extends GameAudio {
     'startup.wav',
     'option.wav',
     'arrow.wav',
-    'gameover.wav',
-    'mixkit-game-level-music-689.wav'
+    'gameover.wav'
   ];
 
   // Loads all audio assets specified in this file
