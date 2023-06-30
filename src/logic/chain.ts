@@ -18,6 +18,7 @@ import SkinwalkerEvent from '../views/events/skinwalker';
 import ChallengeEvent from '../views/events/challenge';
 import OldBridgeEvent from '../views/events/oldbridge';
 import WaterfallEvent from '../views/events/waterfall';
+import SnakeBiteEvent from '../views/events/snakebite';
 import OfferingEvent from '../views/events/offering';
 import ProphecyEvent from '../views/events/prophecy';
 import SiblingsEvent from '../views/events/siblings';
@@ -28,7 +29,6 @@ import FatigueEvent from '../views/events/fatigue';
 import VillageEvent from '../views/events/village';
 import SunriseEvent from '../views/events/sunrise';
 import RequestEvent from '../views/events/request';
-import IllnessEvent from '../views/events/illness';
 import PrairieEvent from '../views/events/prairie';
 import ForageEvent from '../views/events/forage';
 import CliffsEvent from '../views/events/cliffs';
@@ -93,7 +93,7 @@ export default class EventChain {
       [ 2, (game: Game) => new RavenEvent(game) ], // 73
       [ 2, (game: Game) => new RabbitEvent(game) ], // 75
       [ 2, (game: Game) => new SeedEvent(game) ], // 77
-      [ 2, (game: Game) => new IllnessEvent(game) ], // 79
+      [ 2, (game: Game) => new SnakeBiteEvent(game) ], // 79
       [ 2, (game: Game) => new StormEvent(game) ], // 81
       [ 2, (game: Game) => new PrairieEvent(game) ], // 83
       [ 1, (game: Game) => new BabyPeccaryEvent(game) ], // 84
@@ -130,7 +130,7 @@ export default class EventChain {
         [ 4, (game: Game) => new EggEvent(game) ], // 92
         [ 4, (game: Game) => new HungryBadgerEvent(game) ], // 96
         [ 2, (game: Game) => new DreamEvent(game) ], // 98
-        [ 2, (game: Game) => new IllnessEvent(game) ] // 100
+        [ 2, (game: Game) => new SnakeBiteEvent(game) ] // 100
       ];
     }
     if (this.game.world.time === Time.NIGHT && !this.game.world.cave) {

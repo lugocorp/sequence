@@ -5,20 +5,20 @@ import Action from '../../ui/action';
 import EventView from '../event';
 import Game from '../../game';
 
-export default class IllnessEvent extends EventView {
+export default class SnakeBiteEvent extends EventView {
   private heroSelector: Selector<Hero>;
 
   constructor(game: Game) {
     super(game);
     this.setDetails(
-      Sprites.ILLNESS,
-      `one of your party members isn't feeling well. choose someone to get sick.`,
+      Sprites.SNAKE_BITE,
+      `your party comes across a snake. choose someone to get bit.`,
       [
         new Action('continue', () =>
           this.setSelector(this.heroSelector, [
             new Action('select', () => {
               const hero: Hero = this.heroSelector.item();
-              this.setDetails(hero.sprite, `${hero.name} fell ill and lost their base stats.`, [
+              this.setDetails(hero.sprite, `${hero.name} got bit and lost their base stats.`, [
                 new Action('continue', () => this.game.progress())
               ]);
               hero.str = 0;
