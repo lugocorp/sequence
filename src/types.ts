@@ -30,10 +30,10 @@ export enum Stats {
 
 // Skill tuple type
 export enum Skill {
-  PROWESS = 'prowess',
-  ENDURANCE = 'endurance',
-  STEALTH = 'stealth',
-  DIPLOMACY = 'diplomacy'
+  PROWESS = 'P', // Prowess
+  ENDURANCE = 'E', // Endurance
+  STEALTH = 'S', // Stealth
+  DIPLOMACY = 'D' // Diplomacy
 }
 export type Skills = [Skill, Skill] | [Skill, undefined] | [undefined, undefined];
 

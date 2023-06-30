@@ -1,4 +1,4 @@
-import { Stats, Trigger, TriggerType, Effect, Skills, StatBlock } from '../types';
+import { WTEXT, Stats, Trigger, TriggerType, Effect, Skills, StatBlock } from '../types';
 import Sprites from '../media/sprites';
 import EnumsHelper from '../logic/enums';
 import Random from '../logic/random';
@@ -56,9 +56,9 @@ export default class Hero {
     };
     this.activate(data);
     return {
-      str: Math.min(10, Math.max(0, data.str)),
-      wis: Math.min(10, Math.max(0, data.wis)),
-      dex: Math.min(10, Math.max(0, data.dex)),
+      str: Math.min(9, Math.max(0, data.str)),
+      wis: Math.min(9, Math.max(0, data.wis)),
+      dex: Math.min(9, Math.max(0, data.dex)),
       luck: Math.min(100, Math.max(0, data.luck)),
       energy: Math.min(10, Math.max(0, data.energy))
     };
@@ -195,24 +195,25 @@ export default class Hero {
   // Returns the text used in this hero's description
   descriptionText(): string {
     const stat = (n: number): string => (n > 9 ? `${n}\t` : `\t${n}\t`);
-    let skills = 'no skills';
+    let skills = 'skills: none';
     if (this.skills[0]) {
-      skills = this.skills[0];
+      skills = `skills:\t${this.skills[0]}`;
       if (this.skills[1]) {
-        for (let a = 0; a < 24 - this.skills[0].length - this.skills[1].length; a++) {
-          skills += '\t';
-        }
-        skills += this.skills[1];
+        skills += `\t${this.skills[1]}`;
       }
+    }
+    let energy = '';
+    for (let a = 0; a < WTEXT - 10; a++) {
+      energy = (a < this.stats.energy ? 'H' : '\t') + energy;
     }
     return (
       `${this.name}\n` +
       `${this.people}\n` +
-      `${this.basket.itemCount}/${this.basket.total}\titems\t\t\t\t\t\t` +
-      `${stat(this.stats.energy)}energy\n` +
-      `${stat(this.stats.str)}str\t\t\t` +
-      `${stat(this.stats.wis)}wis\t\t\t` +
-      `${stat(this.stats.dex)}dex\n` +
+      `${this.basket.itemCount}/${this.basket.total}\titems\t` +
+      `${energy}\nstats:\t` +
+      `${this.stats.str}\tstr/` +
+      `${this.stats.wis}\twis/` +
+      `${this.stats.dex}\tdex\n` +
       `${skills}\n${this.description}`
     );
   }

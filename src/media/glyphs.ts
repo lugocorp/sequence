@@ -61,6 +61,16 @@ export default class Glyphs {
         return Sprites.PAREN_OPEN;
       case ')':
         return Sprites.PAREN_CLOSE;
+      case 'P':
+        return Sprites.PROWESS;
+      case 'E':
+        return Sprites.ENDURANCE;
+      case 'S':
+        return Sprites.STEALTH;
+      case 'D':
+        return Sprites.DIPLOMACY;
+      case 'H':
+        return Sprites.HEART;
     }
     throw new Error(`No font glyph for character '${char}'`);
   }

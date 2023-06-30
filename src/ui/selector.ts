@@ -29,8 +29,7 @@ export default class Selector<T> {
   }
 
   static viewHeroLuck(hero: Hero): string {
-    const n = hero.stats.luck;
-    return n > 99 ? `${n}%\tluck` : n > 9 ? `\t${n}%\tluck` : `\t\t${n}%\tluck`;
+    return `${hero.stats.luck}%\tluck`;
   }
 
   // A built-in Hero viewing selector
