@@ -22,7 +22,7 @@ export default class Hero {
     energy: number,
     itemSlots: number,
     public skills: Skills = [ undefined, undefined ],
-    public description: string = 'no effect',
+    public description: string = 'none',
     public effect: Effect = undefined
   ) {
     this.basket = new Basket(game, this, itemSlots);
@@ -214,7 +214,7 @@ export default class Hero {
       `${this.stats.str}\tstr/` +
       `${this.stats.wis}\twis/` +
       `${this.stats.dex}\tdex\n` +
-      `${skills}\n${this.description}`
+      `${skills}\neffect:${this.description}`
     );
   }
 
