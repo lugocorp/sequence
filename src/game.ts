@@ -57,7 +57,7 @@ export default class Game {
       time: Time.DAY,
       cave: false
     };
-    this.party.populate('hoop dancer', 'guardian', 'gourd elder', 'medicine woman');
+    this.party.populate('highlander', 'guardian', 'hoop dancer', 'gourd elder');
     this.chain.futureEvent(new TimeEvent(this), DAY_NIGHT_CYCLE);
   }
 
