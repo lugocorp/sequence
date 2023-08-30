@@ -11,7 +11,7 @@ export default class StartView extends View {
     super(game);
     this.setDetails(
       Sprites.WELCOME,
-      'welcome to the game!\nthis is a beta release, please report any bugs you encounter.',
+      'welcome to the game!',
       [
         new Action('instructions', () => game.setView(new InstructionsView(game))),
         new Action('credits', () => game.setView(new CreditsView(game))),
