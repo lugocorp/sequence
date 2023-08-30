@@ -9,11 +9,11 @@ valid_colors = []
 
 # Blue light filter algorithm
 def blue_filter(r, g, b):
-    return r, g, b, 255
+    return r, g, int(b * 0.75), 255
 
 # Check the Krita .kpl file
-with ZipFile("./www/assets/lospec500.kpl") as zf:
-    with io.TextIOWrapper(zf.open("colorset.xml"), encoding = "utf-8") as f:
+with ZipFile('./www/assets/lospec500.kpl', 'r') as zf:
+    with io.TextIOWrapper(zf.open('colorset.xml', 'r'), encoding = 'utf-8') as f:
         tree = minidom.parseString(f.read())
         for entry in tree.documentElement.childNodes:
             for rgb in entry.childNodes if type(entry) == minidom.Element else []:
@@ -24,9 +24,13 @@ with ZipFile("./www/assets/lospec500.kpl") as zf:
                 b = int(float(rgb.getAttribute('b')) * 255)
                 valid_colors.append((r, g, b))
                 r1, g1, b1, _ = blue_filter(r, g, b)
-                rgb.setAttribute('r', r1 / 255)
-                rgb.setAttribute('g', g1 / 255)
-                rgb.setAttribute('b', b1 / 255)
+                rgb.setAttribute('r', str(r1 / 255))
+                rgb.setAttribute('g', str(g1 / 255))
+                rgb.setAttribute('b', str(b1 / 255))
+
+# Write the updated palette file to memory
+with ZipFile('./www/assets/lospec500.kpl', 'w') as zf:
+    with io.TextIOWrapper(zf.open('colorset.xml', 'w'), encoding = 'utf-8') as f:
         f.write(tree.toprettyxml())
 
 # Print valid colors
@@ -37,6 +41,7 @@ for color in valid_colors:
 
 # Run this for each requested file
 for filepath in glob('./www/assets/*.png'):
+    print(filepath)
 
     # Open the requested image
     img = Image.open(filepath)
@@ -51,7 +56,7 @@ for filepath in glob('./www/assets/*.png'):
                 data[x, y] = r, g, b, 0
                 continue
             if (r, g, b) not in valid_colors:
-                raise Exception(f'Invalid color ({r}, {g}, {b}) in {filepath} at ({x}, {y})')
+                raise Exception(f'Invalid color ({r}, {g}, {b}) at ({x}, {y})')
             data[x, y] = blue_filter(r, g, b)
 
     # Write back to file
