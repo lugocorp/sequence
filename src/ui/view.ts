@@ -84,11 +84,6 @@ export default class View {
     return [ x, y + HTEXT - coords[1] - 2 ];
   }
 
-  // Sets a single action for this View
-  setAction(label: string, effect: () => void): void {
-    this.actions = [ new Action(label, effect) ];
-  }
-
   // Returns this view's text content
   getText(): string {
     return this.text;
@@ -96,7 +91,7 @@ export default class View {
 
   // Calculates string length without color annotations
   visibleLength(word: string): number {
-    return word.replace(/#./g, '').length;
+    return word.replace(/#[0-9]/g, '').length;
   }
 
   // Formats text wrap according to the screen constraints

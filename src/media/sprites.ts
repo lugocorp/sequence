@@ -61,6 +61,7 @@ enum Sprites {
   ACCENT_E = 0x000e02,
   PAREN_OPEN = 0x000f02,
   PAREN_CLOSE = 0x001002,
+  CLEAR = 0x001102,
 
   // Spritesheet #1 (backgrounds) (10 x 5)
   WELCOME = 0x010000,

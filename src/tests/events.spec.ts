@@ -21,6 +21,6 @@ describe('Number of lines tests', function () {
     game.setView(event);
     event.setSelector(event['heroSelector'], [ new Action('choose', () => null) ]);
     const lines = (event.getText().match(/\n/g) || []).length;
-    expect(lines + 1).to.be.lte(LIMIT); // +1 for the 'choose' option
+    expect(lines + 2).to.be.lte(LIMIT); // +2 for the 'choose' option
   });
 });
