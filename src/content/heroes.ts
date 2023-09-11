@@ -2,7 +2,7 @@ import { Skill, TriggerType, Trigger, Time } from '../types';
 import EventView from '../views/event';
 import Sprites from '../media/sprites';
 import Hero from '../entities/hero';
-import View from '../ui/view';
+import View from '../views/view';
 import Game from '../game';
 
 export type HeroGenerator = (game: Game) => Hero;

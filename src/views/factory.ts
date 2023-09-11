@@ -2,7 +2,7 @@ import { WTEXT } from '../types';
 import { green } from '../media/colors';
 import HistoryManager from '../media/history';
 import Sprites from '../media/sprites';
-import View from '../ui/view';
+import View from './view';
 import Game from '../game';
 
 export default class ViewFactory {

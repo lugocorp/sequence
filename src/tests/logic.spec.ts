@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 import { TestAudio, TestGraphics, TestHistory } from './media';
 import EventView from '../views/event';
-import View from '../ui/view';
+import View from '../views/view';
 import Game from '../game';
 
 const game = new Game(new TestGraphics(), new TestAudio(), new TestHistory());

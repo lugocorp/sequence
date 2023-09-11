@@ -1,6 +1,7 @@
 import { DAY_NIGHT_CYCLE, World, Weather, Time, Actions, WTEXT, HTEXT } from './types';
-import ViewManager from './ui/manager';
-import View from './ui/view';
+import ViewFactory from './views/factory';
+import ViewManager from './views/manager';
+import View from './views/view';
 import Graphics from './media/graphics';
 import GameAudio from './media/audio';
 import HistoryManager from './media/history';
@@ -8,7 +9,6 @@ import DataManager from './logic/data';
 import EventChain from './logic/chain';
 import Party from './entities/party';
 import TimeEvent from './views/events/time';
-import ViewFactory from './views/factory';
 
 export default class Game {
   private factory: ViewFactory;

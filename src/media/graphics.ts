@@ -1,5 +1,4 @@
 import { WGLYPH, HGLYPH } from '../types';
-import View from '../ui/view';
 import Game from '../game';
 
 export default abstract class Graphics {

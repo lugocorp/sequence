@@ -8,7 +8,7 @@ import Glyphs from '../glyphs';
 import Graphics from '../graphics';
 import { colors } from '../colors';
 import Sprites from '../sprites';
-import View from '../../ui/view';
+import View from '../../views/view';
 import Game from '../../game';
 
 export default class HTML5Graphics extends Graphics {

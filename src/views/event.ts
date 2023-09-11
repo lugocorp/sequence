@@ -1,5 +1,5 @@
 import { green, yellow, orange, red } from '../media/colors';
-import View from '../ui/view';
+import View from './view';
 import Game from '../game';
 
 /**

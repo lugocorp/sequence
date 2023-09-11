@@ -1,4 +1,4 @@
-import EventView from '../views/event';
+import EventView from './event';
 import View from './view';
 
 export default class ViewManager {
