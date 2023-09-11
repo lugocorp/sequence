@@ -9,7 +9,7 @@ export default abstract class Graphics {
 
   abstract setup(): void;
   abstract setSize(): void;
-  abstract frame(game: Game, view: View): void;
+  abstract frame(game: Game): void;
   abstract loadInitialAsset(): Promise<void>;
   abstract loadAssets(): Promise<void>;
 

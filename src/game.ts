@@ -1,4 +1,6 @@
 import { DAY_NIGHT_CYCLE, World, Weather, Time } from './types';
+import ViewManager from './ui/manager';
+import View from './ui/view';
 import Graphics from './media/graphics';
 import GameAudio from './media/audio';
 import HistoryManager from './media/history';
@@ -7,11 +9,9 @@ import EventChain from './logic/chain';
 import Party from './entities/party';
 import TimeEvent from './views/events/time';
 import StartView from './views/start';
-import EventView from './views/event';
-import View from './ui/view';
 
 export default class Game {
-  private view: View;
+  views: ViewManager = new ViewManager();
   chain: EventChain;
   data: DataManager;
   party: Party;
@@ -34,7 +34,7 @@ export default class Game {
     this.graphics.setup();
     this.graphics.setSize();
     await this.graphics.loadInitialAsset();
-    this.invalidate();
+    this.graphics.frame(this);
     await this.history.initialize();
     await this.graphics.loadAssets();
     await this.audio.loadAudio();
@@ -43,8 +43,8 @@ export default class Game {
     this.chain.setup();
 
     // Loading has completed
-    this.setView(new StartView(this));
-    this.invalidate();
+    this.views.setView(new StartView(this));
+    this.graphics.frame(this);
   }
 
   // Sets initial game state
@@ -61,83 +61,52 @@ export default class Game {
     this.chain.futureEvent(new TimeEvent(this), DAY_NIGHT_CYCLE);
   }
 
-  // Tells the game to render a new frame
-  invalidate(): void {
-    this.graphics.frame(this, this.view);
-  }
-
-  // Protected access to the current View
-  getView(): View {
-    return this.view;
-  }
-
-  // Returns the current view if it's an event
-  get event(): EventView {
-    return this.view['label'] ? (this.view as EventView) : null;
-  }
-
-  // Sets the current view of the game
-  setView(view: View): void {
-    this.view = view;
-    view.init();
-  }
-
   // Progresses to the next event in the game
   async progress(): Promise<void> {
     const wait = () => new Promise((resolve) => setTimeout(resolve, 10));
     for (this.graphics.dark = 0; this.graphics.dark < 100; this.graphics.dark += 20) {
-      this.invalidate();
+      this.graphics.frame(this);
       await wait();
     }
-    this.invalidate();
+    this.graphics.frame(this);
     if (this.party.size && this.chain.events.length === 1) {
       this.chain.plan();
     }
     this.chain.events.splice(0, 1);
-    this.setView(this.chain.latest());
+    this.views.setView(this.chain.latest());
     for (this.graphics.dark = 100; this.graphics.dark > 0; this.graphics.dark -= 20) {
-      this.invalidate();
+      this.graphics.frame(this);
       await wait();
     }
-    this.invalidate();
+    this.graphics.frame(this);
   }
 
   // Alerts the current view of a click event
   click(x: number, y: number, down: boolean): void {
-    if (this.view) {
-      this.currentClick = { x, y, down };
-      if (!down && this.view.hasActions()) {
-        for (let a = 0; a < this.view.actions.length; a++) {
-          const action = this.view.actions[a];
-          const actionCoords: [number, number] = this.view.getActionCoords(a);
-          const coords: [number, number] = this.graphics.toDisplayCoords(
-            actionCoords[0],
-            actionCoords[1]
-          );
-          if (this.within(action.label, coords[0], coords[1])) {
-            this.audio.play(GameAudio.OPTION);
-            action.effect();
-            break;
-          }
-        }
-      }
-      if (!down && this.view.hasOptions()) {
-        if (this.view.selector.index > 0 && this.bounded(0, 0, 12, 100)) {
-          this.audio.play(GameAudio.ARROW);
-          this.view.selector.index--;
-          this.view.selector.invalidate(this);
-        }
-        if (
-          this.view.selector.index < this.view.selector.size() - 1 &&
-          this.bounded(112, 0, 12, 100)
-        ) {
-          this.audio.play(GameAudio.ARROW);
-          this.view.selector.index++;
-          this.view.selector.invalidate(this);
-        }
-      }
-      this.invalidate();
+    const view: View = this.views.getView();
+    if (!view) {
+      return;
     }
+    this.currentClick = { x, y, down };
+    if (!down) {
+      for (const [label, effect] of Object.entries(view.actions)) {
+        const actionCoords: [number, number] = view.getActionCoords(a);
+        const coords: [number, number] = this.graphics.toDisplayCoords(
+          actionCoords[0],
+          actionCoords[1]
+        );
+        if (this.within(label, coords[0], coords[1])) {
+          this.audio.play(GameAudio.OPTION);
+          effect();
+          break;
+        }
+      }
+
+      if (this.views.hasOptions() && ((this.bounded(0, 0, 12, 100) && this.views.changeOption(-1)) || (this.bounded(112, 0, 12, 100) && this.views.changeOption(1)))) {
+        this.audio.play(GameAudio.ARROW);
+      }
+    }
+    this.graphics.frame(this);
   }
 
   // Returns true if the current click happened inside the given rectangle

@@ -9,7 +9,7 @@ import Graphics from '../graphics';
 import { colors } from '../colors';
 import Sprites from '../sprites';
 import Action from '../../ui/action';
-import View from '../../ui/view';
+import { View } from '../../ui/view';
 import Game from '../../game';
 
 export default class HTML5Graphics extends Graphics {
@@ -59,7 +59,8 @@ export default class HTML5Graphics extends Graphics {
   /*
    * This method draws a single frame of the app.
    */
-  frame(game: Game, view: View): void {
+  frame(game: Game): void {
+    const view: View = game.views.getView();
     this.ctx.clearRect(0, 0, WIDTH, HEIGHT);
     if (!view) {
       this.drawSprite(Sprites.LOADING, 25, 96);
