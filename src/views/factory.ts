@@ -1,3 +1,5 @@
+import { WTEXT } from '../types';
+import { green } from '../media/colors';
 import HistoryManager from '../media/history';
 import Sprites from '../media/sprites';
 import View from '../ui/view';
@@ -68,7 +70,7 @@ export default class ViewFactory {
       const scoreboard: View = {
         image: Sprites.SCORE,
         text: `${this.game.history.runs
-          .map((x: [string, number], i: number) => this.format(x, i))
+          .map((x: [string, number], i: number) => this.format(x, i, place))
           .join('\n')}`,
         actions: {
           'main menu': () => this.startView()
@@ -95,5 +97,17 @@ export default class ViewFactory {
       } else {
         this.game.views.setViews([scoreboard]);
       }
+    }
+
+    private format(entry: [string, number], index: number, place?: number): string {
+      let dots = '';
+      const space = WTEXT - entry[0].length - `${entry[1]}`.length;
+      for (let a = 0; a < space; a++) {
+        dots += '.';
+      }
+      if (index === place) {
+        return green(`${entry[0]}${dots}${entry[1]}`);
+      }
+      return `${entry[0]}${dots}${entry[1]}`;
     }
 }

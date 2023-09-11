@@ -24,17 +24,19 @@ export default class ViewManager {
     }
 
     getView(): View {
-        if (!this.actionsOpen) {
-            const that = this;
-            return {
-                ...this.views[this.selectedViewIndex],
-                actions: {
-                    options: () => {
-                        that.actionsOpen = true;
-                    }
-                }
-            };
+        const current: View = this.views[this.selectedViewIndex];
+        if (this.actionsOpen || Object.keys(current.actions).length === 1) {
+            return current;
         }
-        return this.views[this.selectedViewIndex];
+
+        const that = this;
+        return {
+            ...current,
+            actions: {
+                options: () => {
+                    that.actionsOpen = true;
+                }
+            }
+        };
     }
 }

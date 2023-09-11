@@ -8,9 +8,10 @@ import DataManager from './logic/data';
 import EventChain from './logic/chain';
 import Party from './entities/party';
 import TimeEvent from './views/events/time';
-import StartView from './views/start';
+import ViewFactory from './views/factory';
 
 export default class Game {
+  private factory: ViewFactory;
   views: ViewManager = new ViewManager();
   chain: EventChain;
   data: DataManager;
@@ -26,6 +27,7 @@ export default class Game {
 
   // Initializes the game object so the player can start interacting with it
   async start(): Promise<void> {
+    this.factory = new ViewFactory(this);
     this.chain = new EventChain(this);
     this.data = new DataManager(this);
     this.party = new Party(this);
@@ -43,7 +45,7 @@ export default class Game {
     this.chain.setup();
 
     // Loading has completed
-    this.views.setView(new StartView(this));
+    this.factory.startView();
     this.graphics.frame(this);
   }
 
