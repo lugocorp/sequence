@@ -8,8 +8,7 @@ import Glyphs from '../glyphs';
 import Graphics from '../graphics';
 import { colors } from '../colors';
 import Sprites from '../sprites';
-import Action from '../../ui/action';
-import { View } from '../../ui/view';
+import View from '../../ui/view';
 import Game from '../../game';
 
 export default class HTML5Graphics extends Graphics {
@@ -76,28 +75,27 @@ export default class HTML5Graphics extends Graphics {
     this.ctx.rect(11, 2, 1, 102);
     this.ctx.rect(112, 2, 1, 102);
     this.ctx.fill();
-    const text = view.getText();
-    if (text) {
-      this.drawText(game, text, 0, 0);
+    if (view.text) {
+      this.drawText(game, view.text, 0, 0);
     }
-    if (view.hasOptions()) {
-      if (view.selector.index > 0) {
+    if (game.views.hasOptions()) {
+      if (game.views.drawArrowLeft()) {
         this.drawSprite(Sprites.ARROW_LEFT, 3, 46);
       }
-      if (view.selector.index < view.selector.size() - 1) {
+      if (game.views.drawArrowRight()) {
         this.drawSprite(Sprites.ARROW_RIGHT, 116, 46);
       }
     }
-    if (view.hasActions()) {
-      const actionCoords: [number, number] = view.getActionCoords(0);
+    if (Object.keys(view.actions).length > 0) {
+      const actionCoords: [number, number] = game.getActionCoords(view.actions, 0);
       const top = this.toDisplayCoords(0, actionCoords[1])[1];
       for (let a = 0; a < WTEXT; a++) {
         this.drawSprite(Sprites.LINE_HORT, a * WGLYPH + PADDING, top);
       }
-      for (let a = 0; a < view.actions.length; a++) {
-        const action: Action = view.actions[a];
-        const coords: [number, number] = view.getActionCoords(a);
-        this.drawText(game, action.label, coords[0], coords[1], true);
+      const labels = Object.keys(view.actions);
+      for (let a = 0; a < labels.length; a++) {
+        const coords: [number, number] = game.getActionCoords(view.actions, a);
+        this.drawText(game, labels[a], coords[0], coords[1], true);
       }
     }
     if (this.dark) {

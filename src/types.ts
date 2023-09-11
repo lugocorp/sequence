@@ -13,6 +13,9 @@ export const HGLYPH = 8;
 export const WTEXT = 120 / WGLYPH; // 24
 export const HTEXT = 96 / HGLYPH; // 12
 
+// UI action set type
+export type Actions = { [label: string]: () => void };
+
 // Stat model
 export type StatBlock<T = number> = {
   str: T;

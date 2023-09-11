@@ -1,6 +1,7 @@
 import { expect } from 'chai';
 import { TestAudio, TestGraphics, TestHistory } from './media';
 import EventView from '../views/event';
+import View from '../ui/view';
 import Game from '../game';
 
 const game = new Game(new TestGraphics(), new TestAudio(), new TestHistory());
@@ -27,7 +28,12 @@ describe('Chain tests', function () {
   });
 
   it('Future event fires at correct time', function () {
-    const future = new EventView(game);
+    const EmptyEventView = class extends EventView {
+      getViews(): View[] {
+        return [];
+      }
+    }
+    const future = new EmptyEventView(game);
     chain.futureEvent(future, 3);
     chain.events.splice(0, 1);
     expect(chain.latest()).to.not.equal(future);

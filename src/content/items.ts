@@ -1,9 +1,9 @@
 import { Trigger, TriggerType, Rarity, Weather, Time } from '../types';
 import EventView from '../views/event';
 import Sprites from '../media/sprites';
-import Action from '../ui/action';
 import Item from '../entities/item';
 import Hero from '../entities/hero';
+import View from '../ui/view';
 import Game from '../game';
 
 export type ItemGenerator = () => Item;
@@ -288,18 +288,21 @@ export const items: ItemGenerator[] = [
     );
     item.effect = (game: Game, data: Trigger) => {
       if (data.type === TriggerType.LEAVE_PARTY) {
-        const view: EventView = new EventView(game);
-        view.setDetails(
-          Sprites.GOLDEN_MIRROR,
-          `${item.bearer.name} is summoned to your party by the magic of a golden mirror.`,
-          [
-            new Action('continue', () => {
-              game.party.add(game.data.getNamedHero(item.bearer.name));
-              game.progress();
-            })
-          ]
-        );
-        game.chain.futureEvent(view, 3, () => !game.party.isFull);
+        const GoldenMirrorEvent = class extends EventView {
+          getViews(): View[] {
+            return [{
+              image: Sprites.GOLDEN_MIRROR,
+              text: `${item.bearer.name} is summoned to your party by the magic of a golden mirror.`,
+              actions: {
+                'continue': () => {
+                  game.party.add(game.data.getNamedHero(item.bearer.name));
+                  game.progress();
+                }
+              }
+            }];
+          }
+        };
+        game.chain.futureEvent(new GoldenMirrorEvent(game), 3, () => !game.party.isFull);
       }
     };
     return item;

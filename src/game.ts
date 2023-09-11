@@ -1,4 +1,4 @@
-import { DAY_NIGHT_CYCLE, World, Weather, Time } from './types';
+import { DAY_NIGHT_CYCLE, World, Weather, Time, Actions, WTEXT, HTEXT } from './types';
 import ViewManager from './ui/manager';
 import View from './ui/view';
 import Graphics from './media/graphics';
@@ -75,13 +75,36 @@ export default class Game {
       this.chain.plan();
     }
     this.chain.events.splice(0, 1);
-    this.views.setView(this.chain.latest());
+    this.views.setEvent(this.chain.latest());
     for (this.graphics.dark = 100; this.graphics.dark > 0; this.graphics.dark -= 20) {
       this.graphics.frame(this);
       await wait();
     }
     this.graphics.frame(this);
   }
+
+  // Returns the text coordinates of the indexed action
+  getActionCoords(actions: Actions, index: number): [number, number] {
+      let x = 0;
+      let y = 0;
+      const coords: [number, number] = [ x, y ];
+      const keys = Object.keys(actions);
+      for (let a = 1; a < keys.length; a++) {
+        const current: string = keys[a];
+        const previous: string = keys[a - 1];
+        if (coords[0] === 0 && current.length + previous.length + 2 <= WTEXT - 1) {
+          coords[0] = WTEXT - current.length;
+        } else {
+          coords[0] = 0;
+          coords[1]++;
+        }
+        if (a === index) {
+          x = coords[0];
+          y = coords[1];
+        }
+      }
+      return [ x, y + HTEXT - coords[1] - 2 ];
+    }
 
   // Alerts the current view of a click event
   click(x: number, y: number, down: boolean): void {
@@ -91,8 +114,9 @@ export default class Game {
     }
     this.currentClick = { x, y, down };
     if (!down) {
+      let a = 0;
       for (const [label, effect] of Object.entries(view.actions)) {
-        const actionCoords: [number, number] = view.getActionCoords(a);
+        const actionCoords: [number, number] = this.getActionCoords(view.actions, a++);
         const coords: [number, number] = this.graphics.toDisplayCoords(
           actionCoords[0],
           actionCoords[1]

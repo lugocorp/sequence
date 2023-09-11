@@ -1,6 +1,7 @@
+import { Actions } from '../types';
 
 type View = {
-    actions: { [label: string]: () => void };
+    actions: Actions;
     image: number;
     text: string;
 };

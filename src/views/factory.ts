@@ -18,7 +18,7 @@ export default class ViewFactory {
                 'credits': () => this.creditsView(),
                 'new game': () => {
                     this.game.setInitialState();
-                    this.setView(this.game.chain.latest());
+                    this.game.views.setEvent(this.game.chain.latest());
                 },
                 'score': () => this.scoreView(),
             }

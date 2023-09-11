@@ -1,7 +1,6 @@
 import HistoryManager from '../media/history';
 import GameAudio from '../media/audio';
 import Graphics from '../media/graphics';
-import View from '../ui/view';
 import Game from '../game';
 
 export class TestAudio extends GameAudio {
@@ -12,7 +11,7 @@ export class TestAudio extends GameAudio {
 export class TestGraphics extends Graphics {
   setup(): void {}
   setSize(): void {}
-  frame(_game: Game, _view: View): void {}
+  frame(_game: Game): void {}
   async loadInitialAsset(): Promise<void> {}
   async loadAssets(): Promise<void> {}
 }

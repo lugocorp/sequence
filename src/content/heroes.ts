@@ -2,7 +2,7 @@ import { Skill, TriggerType, Trigger, Time } from '../types';
 import EventView from '../views/event';
 import Sprites from '../media/sprites';
 import Hero from '../entities/hero';
-import Action from '../ui/action';
+import View from '../ui/view';
 import Game from '../game';
 
 export type HeroGenerator = (game: Game) => Hero;
@@ -124,16 +124,23 @@ export const heroes: HeroGenerator[] = [
       [ Skill.PROWESS, Skill.ENDURANCE ],
       'will eventually heal from 1 base energy'
     );
+    const EagleKnightHealEvent = class extends EventView {
+      getViews(): View[] {
+        return [{
+          image: hero.sprite,
+          text: `${hero.name} healed from low energy.`,
+          actions: {
+            'continue': () => {
+              hero.energy++;
+              game.progress();
+            }
+          }
+        }];
+      }
+    };
     hero.effect = (game: Game, data: Trigger) => {
       if (data.type === TriggerType.LOSE_ENERGY && hero.stats.energy === 1) {
-        const view = new EventView(game);
-        view.setDetails(hero.sprite, `${hero.name} healed from low energy.`, [
-          new Action('continue', () => {
-            hero.energy++;
-            game.progress();
-          })
-        ]);
-        game.chain.futureEvent(view, 6, () => game.party.contains(hero));
+        game.chain.futureEvent(new EagleKnightHealEvent(game), 6, () => game.party.contains(hero));
       }
     };
     return hero;
@@ -261,12 +268,19 @@ export const heroes: HeroGenerator[] = [
 ];
 
 export function summon(game: Game, hero: Hero): void {
-  const view: EventView = new EventView(game);
-  view.setDetails(hero.sprite, `${hero.name} joins your party.`, [
-    new Action('continue', () => {
-      game.party.add(hero);
-      game.progress();
-    })
-  ]);
-  game.chain.futureEvent(view, 4, () => !game.party.isFull && !game.party.contains(hero));
+  const SummonEvent = class extends EventView {
+    getViews(): View[] {
+      return [{
+        image: hero.sprite,
+        text: `${hero.name} joins your party.`,
+        actions: {
+          'continue': () => {
+            game.party.add(hero);
+            game.progress();
+          }
+        }
+      }];
+    }
+  };
+  game.chain.futureEvent(new SummonEvent(game), 4, () => !game.party.isFull && !game.party.contains(hero));
 }

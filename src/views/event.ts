@@ -5,10 +5,10 @@ import Game from '../game';
 /**
  * This class wraps game event logic such as event type labelling and comparison
  */
-export default class EventView extends View {
-  constructor(game: Game) {
-    super(game);
-  }
+export default abstract class EventView {
+  constructor(protected game: Game) {}
+
+  abstract getViews(): View[];
 
   // Colors a success rate based on its numerical range
   coloredRate(rate: number, reversed = false): string {
