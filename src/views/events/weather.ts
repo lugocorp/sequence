@@ -1,16 +1,11 @@
 import { Weather } from '../../types';
 import Sprites from '../../media/sprites';
 import Random from '../../logic/random';
-import Action from '../../ui/action';
 import EventView from '../event';
-import Game from '../../game';
+import View from '../view';
 
 export default class WeatherEvent extends EventView {
-  constructor(game: Game) {
-    super(game);
-  }
-
-  init(): void {
+  getViews(): View[] {
     let desc: string;
     let sprite: Sprites;
     const cave = this.game.world.cave;
@@ -41,11 +36,15 @@ export default class WeatherEvent extends EventView {
         sprite = Sprites.SNOW;
         break;
     }
-    this.setDetails(sprite, desc, [
-      new Action('continue', () => {
-        this.game.world.weather = weather;
-        this.game.progress();
-      })
-    ]);
+    return [{
+      image: sprite,
+      text: desc,
+      actions: {
+        'continue': () => {
+          this.game.world.weather = weather;
+          this.game.progress();
+        }
+      }
+    }];
   }
 }
