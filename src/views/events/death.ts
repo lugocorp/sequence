@@ -1,7 +1,6 @@
 import ScoreView from '../../views/scoreboard';
 import Sprites from '../../media/sprites';
 import GameAudio from '../../media/audio';
-import Action from '../../ui/action';
 import EventView from '../event';
 import Game from '../../game';
 

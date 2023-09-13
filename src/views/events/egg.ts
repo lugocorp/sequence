@@ -3,8 +3,7 @@ import { turtle } from '../../content/heroes';
 import Sprites from '../../media/sprites';
 import Hero from '../../entities/hero';
 import Item from '../../entities/item';
-import Selector from '../../ui/selector';
-import Action from '../../ui/action';
+import Selectors from '../selectors';
 import EventView from '../event';
 import Game from '../../game';
 

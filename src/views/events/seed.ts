@@ -3,26 +3,21 @@ import { Rarity, Trigger, TriggerType } from '../../types';
 import Sprites from '../../media/sprites';
 import Hero from '../../entities/hero';
 import Item from '../../entities/item';
-import Selector from '../../ui/selector';
-import Action from '../../ui/action';
+import Selectors from '../selectors';
 import EventView from '../event';
 import Game from '../../game';
+import View from '../view';
 
 export default class SeedEvent extends EventView {
-  private heroSelector: Selector<Hero>;
-
-  constructor(game: Game) {
-    super(game);
-    const that = this;
-    this.setDetails(
-      Sprites.SEED,
-      `your party finds a mysterious seed in the grass. choose someone to pick it up.`,
-      [
-        new Action('continue', () => {
+  getViews(): View[] {
+    return [{
+      image: Sprites.SEED,
+      text: `your party finds a mysterious seed in the grass. choose someone to pick it up.`,
+      actions: {
+        'continue': () => {
           if (this.game.party.canPickupItems) {
-            that.setSelector(that.heroSelector, [
-              new Action('choose', () => {
-                const hero: Hero = that.heroSelector.item();
+            this.game.views.setViews(Selectors.heroes(this.game.party.emptyItemSlots(), (hero: Hero) => ({
+              'choose': () => {
                 const item: Item = new Item(
                   'magic seed',
                   Sprites.SEED,
@@ -35,41 +30,51 @@ export default class SeedEvent extends EventView {
                   }
                 );
                 hero.basket.equip(item);
-                const view: EventView = new EventView(this.game);
-                view.setDetails(
-                  Sprites.SEED,
-                  `${hero.name} takes the seed from their bag and plants it. it sprouts into a large plant.`,
-                  [
-                    new Action('continue', () => {
-                      this.game.chain.futureEvent(new ForageEvent(this.game), 1);
-                      hero.basket.unequip(item);
-                      this.game.progress();
-                    })
-                  ]
-                );
                 this.game.chain.futureEvent(
-                  view,
+                  new PickupSeedEvent(this.game, hero, item),
                   6,
                   () => hero.isInParty(this.game.party) && hero.basket.contains(item)
                 );
-                that.setDetails(Sprites.SEED, `${hero.name} picks up the mysterious seed.`, [
-                  new Action('continue', () => this.game.progress())
-                ]);
-              })
-            ]);
+                this.game.views.setViews([{
+                  image: Sprites.SEED,
+                  text: `${hero.name} picks up the mysterious seed.`,
+                  actions: {
+                    'continue': () => this.game.progress()
+                  }
+                }]);
+              }
+            })));
           } else {
-            that.setDetails(
-              Sprites.SEED,
-              `your party's inventory is completely full. your party leaves the mysterious seed.`,
-              [ new Action('continue', () => this.game.progress()) ]
-            );
+            this.game.views.setViews([{
+              image: Sprites.SEED,
+              text: `your party's inventory is completely full. your party leaves the mysterious seed.`,
+              actions: {
+                'continue': () => this.game.progress()
+              }
+            }]);
           }
-        })
-      ]
-    );
+        }
+      }
+    }];
+  }
+}
+
+class PickupSeedEvent extends EventView {
+  constructor(game: Game, private hero: Hero, private item: Item) {
+    super(game);
   }
 
-  init(): void {
-    this.heroSelector = Selector.heroSelector(this.game.party, this.game.party.emptyItemSlots());
+  getViews(): View[] {
+    return [{
+      image: Sprites.SEED,
+      text: `${this.hero.name} takes the seed from their bag and plants it. it sprouts into a large plant.`,
+      actions: {
+        'continue': () => {
+          this.game.chain.futureEvent(new ForageEvent(this.game), 1);
+          this.hero.basket.unequip(this.item);
+          this.game.progress();
+        }
+      }
+    }];
   }
 }

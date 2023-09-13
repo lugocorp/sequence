@@ -1,5 +1,4 @@
 import Hero from '../../entities/hero';
-import Action from '../../ui/action';
 import EventView from '../event';
 import Game from '../../game';
 

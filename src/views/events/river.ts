@@ -1,7 +1,6 @@
 import Sprites from '../../media/sprites';
-import Selector from '../../ui/selector';
+import Selectors from '../selectors';
 import Hero from '../../entities/hero';
-import Action from '../../ui/action';
 import EventView from '../event';
 import Game from '../../game';
 

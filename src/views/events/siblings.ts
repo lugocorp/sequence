@@ -1,22 +1,21 @@
 import Random from '../../logic/random';
-import Action from '../../ui/action';
 import EventView from '../event';
-import Game from '../../game';
+import View from '../view';
 
 export default class IllnessEvent extends EventView {
-  constructor(game: Game) {
-    super(game);
-  }
-
-  init(): void {
+  getViews(): View[] {
     const hero = Random.element(this.game.party.members);
-    this.setDetails(hero.sprite, `a group of ${hero.name}'s siblings joins your party.`, [
-      new Action('continue', () => {
-        while (!this.game.party.isFull) {
-          this.game.party.add(this.game.data.getNamedHero(hero.name));
+    return [{
+      image: hero.sprite,
+      text: `a group of ${hero.name}'s siblings joins your party.`,
+      actions: {
+        'continue': () => {
+          while (!this.game.party.isFull) {
+            this.game.party.add(this.game.data.getNamedHero(hero.name));
+          }
+          this.game.progress();
         }
-        this.game.progress();
-      })
-    ]);
+      }
+    }];
   }
 }

@@ -2,7 +2,6 @@ import { Skill } from '../../types';
 import EnumsHelper from '../../logic/enums';
 import Random from '../../logic/random';
 import Hero from '../../entities/hero';
-import Action from '../../ui/action';
 import EventView from '../event';
 import Game from '../../game';
 
