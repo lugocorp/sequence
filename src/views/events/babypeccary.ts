@@ -12,14 +12,14 @@ export default class BabyPeccaryEvent extends EventView {
   constructor(game: Game) {
     super(game);
     const that = this;
-    this.setDetails(
+    this.game.views.setViews([{(
       Sprites.BABY_PECCARY,
       `your party finds a lonely baby peccary. choose someone to carry it until the party finds its family.`,
       [
-        new Action('continue', () => {
+        'continue': () => {
           if (this.game.party.canPickupItems) {
             that.setSelector(that.heroSelector, [
-              new Action('choose', () => {
+              'choose': () => {
                 const hero: Hero = that.heroSelector.item();
                 const item: Item = new Item(
                   'baby peccary',
@@ -38,7 +38,7 @@ export default class BabyPeccaryEvent extends EventView {
                   Sprites.BABY_PECCARY,
                   `${hero.name} returns the baby peccary to its family and receives a blessing in return. they are now stronger, wiser and faster.`,
                   [
-                    new Action('continue', () => {
+                    'continue': () => {
                       hero.str++;
                       hero.wis++;
                       hero.dex++;
@@ -54,7 +54,7 @@ export default class BabyPeccaryEvent extends EventView {
                   () => hero.isInParty(this.game.party) && hero.basket.contains(item)
                 );
                 that.setDetails(Sprites.BABY_PECCARY, `${hero.name} picks up the baby peccary.`, [
-                  new Action('continue', () => this.game.progress())
+                  'continue': () => this.game.progress())
                 ]);
               })
             ]);
@@ -62,7 +62,7 @@ export default class BabyPeccaryEvent extends EventView {
             that.setDetails(
               Sprites.BABY_PECCARY,
               `your party's inventory is completely full. your party leaves the small animal.`,
-              [ new Action('continue', () => this.game.progress()) ]
+              [ 'continue': () => this.game.progress()) ]
             );
           }
         })

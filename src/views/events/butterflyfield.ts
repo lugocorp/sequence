@@ -11,12 +11,12 @@ export default class ButterflyFieldEvent extends EventView {
 
   constructor(game: Game) {
     super(game);
-    this.setDetails(
+    this.game.views.setViews([{(
       Sprites.BUTTERFLY_FIELD,
       'your party comes across a butterfly field. choose someone to receive a blessing. you may get copies of their belongings in the future.',
       [
-        new Action('continue', () =>
-          this.setSelector(this.heroSelector, [ new Action('choose', () => this.finished()) ])
+        'continue': () =>
+          this.setSelector(this.heroSelector, [ 'choose': () => this.finished()) ])
         )
       ]
     );
@@ -34,8 +34,8 @@ export default class ButterflyFieldEvent extends EventView {
         Random.max(10) + 3
       );
     }
-    this.setDetails(hero.sprite, `${hero.name} received a blessing from the butterflies.`, [
-      new Action('continue', () => this.game.progress())
+    this.game.views.setViews([{(hero.sprite, `${hero.name} received a blessing from the butterflies.`, [
+      'continue': () => this.game.progress())
     ]);
   }
 }

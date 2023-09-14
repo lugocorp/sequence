@@ -31,10 +31,10 @@ export default class ChallengeEvent extends EventView {
       dexterity: Random.max(7)
     };
     this.expectation = EnumsHelper.getRandomStat();
-    this.setDetails(
+    this.game.views.setViews([{(
       this.challenger.sprite,
       `a powerful spirit offers your party a challenge. choose someone to participate.`,
-      [ new Action('continue', () => that.viewChallenger()) ]
+      [ 'continue': () => that.viewChallenger()) ]
     );
   }
 
@@ -59,16 +59,16 @@ export default class ChallengeEvent extends EventView {
     const text = `${desc}\nchallenges you to a test of ${orange(
       EnumsHelper.getStatName(this.expectation)
     )}.`;
-    this.setDetails(this.challenger.sprite, text, [
-      new Action('view party', () => that.viewParty())
+    this.game.views.setViews([{(this.challenger.sprite, text, [
+      'view party': () => that.viewParty())
     ]);
   }
 
   viewParty(): void {
     const that = this;
     this.setSelector(this.heroSelector, [
-      new Action('choose', () => that.finish()),
-      new Action('view spirit', () => that.viewChallenger())
+      'choose': () => that.finish()),
+      'view spirit': () => that.viewChallenger())
     ]);
   }
 
@@ -82,19 +82,19 @@ export default class ChallengeEvent extends EventView {
     } else {
       hero.energy = -100;
     }
-    this.setDetails(
+    this.game.views.setViews([{(
       hero.sprite,
       result
         ? `${hero.name} overcame the spirit's challenge!`
         : `${hero.name} did not succeed in the spirit's challenge.`,
       [
-        new Action('continue', () =>
+        'continue': () =>
           that.setDetails(
             hero.sprite,
             result
               ? `${hero.name} is triumphant but tired. they have lost some of their energy.`
               : `${hero.name} used up all their energy in the challenge.`,
-            [ new Action('continue', () => this.game.progress()) ]
+            [ 'continue': () => this.game.progress()) ]
           )
         )
       ]

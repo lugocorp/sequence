@@ -19,12 +19,12 @@ export default class CliffsEvent extends EventView {
     this.stat = EnumsHelper.getRandomStat();
     this.cutoff = Random.max(4) + 1;
     const that = this;
-    this.setDetails(
+    this.game.views.setViews([{(
       Sprites.CLIFF,
       `your party comes across some cliffs. only travelers with ${
         this.cutoff
       } ${EnumsHelper.getStatName(this.stat)} or ${this.higher ? 'higher' : 'lower'} may pass.`,
-      [ new Action('continue', () => that.finish()) ]
+      [ 'continue': () => that.finish()) ]
     );
   }
 
@@ -49,14 +49,14 @@ export default class CliffsEvent extends EventView {
     }
     this.game.party.filter((hero: Hero) => removals.indexOf(hero) < 0);
     const size: number = this.game.party.size;
-    this.setDetails(
+    this.game.views.setViews([{(
       Sprites.CLIFF,
       size
         ? size === this.original
           ? `all party members passed the cliffs!`
           : `only ${size} party member${size > 1 ? 's' : ''} made it past the cliffs.`
         : `no one in your party could pass the cliffs.`,
-      [ new Action('continue', () => this.game.progress()) ]
+      [ 'continue': () => this.game.progress()) ]
     );
   }
 }

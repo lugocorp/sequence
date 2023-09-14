@@ -1,13 +1,9 @@
 import Sprites from '../../media/sprites';
 import EventView from '../event';
-import Game from '../../game';
+import View from '../view';
 
 export default class HungryBadger extends EventView {
-  constructor(game: Game) {
-    super(game);
-  }
-
-  init(): void {
+  getViews(): View[] {
     let relevantItems = false;
     for (const hero of this.game.party.members) {
       for (const item of hero.basket.toList()) {
@@ -28,6 +24,6 @@ export default class HungryBadger extends EventView {
       }
     }
 
-    this.setDetails(Sprites.BADGER, msg, [ new Action('continue', () => this.game.progress()) ]);
+    return [{image: Sprites.BADGER, text: msg, actions: { 'continue': () => this.game.progress() }}];
   }
 }

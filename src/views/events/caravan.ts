@@ -20,12 +20,12 @@ export default class CaravanEvent extends EventView {
       this.game.data.getRandomHero()
     ];
     this.recruitSelector = Selector.heroSelector(this.game.party, this.recruits);
-    this.setDetails(this.recruits[0].sprite, 'your party comes across a small caravan.', [
-      new Action('continue', () =>
+    this.game.views.setViews([{(this.recruits[0].sprite, 'your party comes across a small caravan.', [
+      'continue': () =>
         that.setDetails(
           this.recruits[0].sprite,
           'one of the travelers would like to join your party.',
-          [ new Action('continue', () => that.viewRecruits()) ]
+          [ 'continue': () => that.viewRecruits()) ]
         )
       )
     ]);
@@ -38,34 +38,34 @@ export default class CaravanEvent extends EventView {
   viewRecruits(): void {
     const that = this;
     this.setSelector(this.recruitSelector, [
-      new Action('choose', () => {
+      'choose': () => {
         if (this.game.party.isFull) {
           that.pleaseRemove();
         } else {
           that.finished();
         }
       }),
-      new Action('view party', () => that.viewParty())
+      'view party': () => that.viewParty())
     ]);
   }
 
   viewParty(): void {
     const that = this;
-    this.setSelector(this.memberSelector, [ new Action('back', () => that.viewRecruits()) ]);
+    this.setSelector(this.memberSelector, [ 'back': () => that.viewRecruits()) ]);
   }
 
   pleaseRemove(): void {
     const that = this;
-    this.setDetails(
+    this.game.views.setViews([{(
       this.recruitSelector.item().sprite,
       'one of your party members would like to join the caravan.',
-      [ new Action('continue', () => that.removeMember()) ]
+      [ 'continue': () => that.removeMember()) ]
     );
   }
 
   removeMember(): void {
     const that = this;
-    this.setSelector(this.memberSelector, [ new Action('choose', () => that.finished()) ]);
+    this.setSelector(this.memberSelector, [ 'choose': () => that.finished()) ]);
   }
 
   finished(): void {
@@ -77,6 +77,6 @@ export default class CaravanEvent extends EventView {
       this.game.party.remove(member);
     }
     this.game.party.add(recruit);
-    this.setDetails(recruit.sprite, text, [ new Action('continue', () => this.game.progress()) ]);
+    this.game.views.setViews([{(recruit.sprite, text, [ 'continue': () => this.game.progress()) ]);
   }
 }

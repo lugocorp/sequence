@@ -13,9 +13,9 @@ export default class CoyotlEvent extends EventView {
   constructor(game: Game) {
     super(game);
     const that = this;
-    this.setDetails(Sprites.COYOTL, 'a tricky coyotl chases off one of your party members.', [
-      new Action('continue', () =>
-        that.setSelector(that.heroSelector, [ new Action('choose', () => that.finished()) ])
+    this.game.views.setViews([{(Sprites.COYOTL, 'a tricky coyotl chases off one of your party members.', [
+      'continue': () =>
+        that.setSelector(that.heroSelector, [ 'choose': () => that.finished()) ])
       )
     ]);
   }
@@ -27,8 +27,8 @@ export default class CoyotlEvent extends EventView {
   finished(): void {
     const hero: Hero = this.heroSelector.item();
     this.game.party.remove(hero);
-    this.setDetails(hero.sprite, `${hero.name} was chased away by the coyotl.`, [
-      new Action('continue', () => this.game.progress())
+    this.game.views.setViews([{(hero.sprite, `${hero.name} was chased away by the coyotl.`, [
+      'continue': () => this.game.progress())
     ]);
   }
 }

@@ -4,17 +4,20 @@ import Random from '../../logic/random';
 import Item from '../../entities/item';
 import Hero from '../../entities/hero';
 import EventView from '../event';
-import Game from '../../game';
+import View from '../view';
 type Stolen = [Hero, Item];
 
 export default class RabbitEvent extends EventView {
   private stolen: Stolen[] = [];
 
-  constructor(game: Game) {
-    super(game);
-    this.setDetails(Sprites.RABBIT, `your party comes across a tricky little rabbit.`, [
-      new Action('continue', () => this.checkForItems())
-    ]);
+  getViews(): View[] {
+    return [{
+      image: Sprites.RABBIT,
+      text: `your party comes across a tricky little rabbit.`,
+      actions: {
+        'continue': () => this.checkForItems()
+      }
+    }];
   }
 
   private get items(): string {
@@ -27,11 +30,11 @@ export default class RabbitEvent extends EventView {
     );
     const items: Stolen[] = unflattened.reduce((acc: Stolen[], x: Stolen[]) => acc.concat(x), []);
     if (!items.length) {
-      this.setDetails(
-        Sprites.RABBIT,
-        `your party has nothing for the trickster to steal. it scurries away in frustration.`,
-        [ new Action('continue', () => this.game.progress()) ]
-      );
+      this.game.views.setViews([{
+        image: Sprites.RABBIT,
+        text: `your party has nothing for the trickster to steal. it scurries away in frustration.`,
+        actions: { 'continue': () => this.game.progress() }
+      }]);
       return;
     }
     const steal: number = Random.max(items.length - 1) + 1;
@@ -41,35 +44,35 @@ export default class RabbitEvent extends EventView {
       item[0].basket.unequip(item[1]);
       this.stolen.push(item);
     }
-    this.setDetails(
-      Sprites.RABBIT,
-      `the rabbit stole ${this.stolen.length} items from your party! will you chase it down?`,
-      [ new Action('yes', () => this.chase()), new Action('no', () => this.getsAway()) ]
-    );
+    this.game.views.setViews([{
+      image: Sprites.RABBIT,
+      text: `the rabbit stole ${this.stolen.length} items from your party! will you chase it down?`,
+      actions: { 'yes': () => this.chase(), 'no': () => this.getsAway() }
+    }]);
   }
 
   catchUp(): void {
-    this.setDetails(
-      Sprites.RABBIT,
-      `your party has caught up with the thieving rabbit. will you continue to chase it down?`,
-      [ new Action('yes', () => this.chase()), new Action('no', () => this.getsAway()) ]
-    );
+    this.game.views.setViews([{
+      image: Sprites.RABBIT,
+      text: `your party has caught up with the thieving rabbit. will you continue to chase it down?`,
+      actions: { 'yes': () => this.chase(), 'no': () => this.getsAway() }
+    }]);
   }
 
   chase(): void {
     if (Random.passes(0.25)) {
-      this.setDetails(
-        Sprites.RABBIT,
-        `your party caught the thief! it gives all your items back and giggles as it scurries away.`,
-        [
-          new Action('continue', () => {
+      this.game.views.setViews([{
+        image: Sprites.RABBIT,
+        text: `your party caught the thief! it gives all your items back and giggles as it scurries away.`,
+        actions: {
+          'continue': () => {
             for (const item of this.stolen) {
               item[0].basket.equip(item[1]);
             }
             this.game.progress();
-          })
-        ]
-      );
+          }
+        }
+      }]);
     } else {
       const challenge: ChallengeEvent = new ChallengeEvent(this.game);
       const oldInit = challenge.init;
@@ -79,17 +82,17 @@ export default class RabbitEvent extends EventView {
       };
       this.game.chain.futureEvent(challenge, 1);
       this.game.chain.futureEvent(this, 2);
-      this.setDetails(Sprites.RABBIT, `your party did not catch the rabbit.`, [
-        new Action('continue', () => this.game.progress())
-      ]);
+      this.game.views.setViews([{ image: Sprites.RABBIT, text: `your party did not catch the rabbit.`, actions: {
+        'continue': () => this.game.progress()
+      }}]);
     }
   }
 
   getsAway(): void {
-    this.setDetails(
-      Sprites.RABBIT,
-      `the rabbit got away with ${this.stolen.length} of your party's items.`,
-      [ new Action('continue', () => this.game.progress()) ]
-    );
+    this.game.views.setViews([{
+      image: Sprites.RABBIT,
+      text: `the rabbit got away with ${this.stolen.length} of your party's items.`,
+      actions: { 'continue': () => this.game.progress() }
+    }]);
   }
 }

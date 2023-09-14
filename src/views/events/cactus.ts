@@ -10,18 +10,18 @@ export default class CactusEvent extends EventView {
   constructor(game: Game) {
     super(game);
     const that = this;
-    this.setDetails(
+    this.game.views.setViews([{(
       Sprites.CACTUS,
       `your party comes across a cactus. choose someone to eat its fruit and regain their original energy.`,
       [
-        new Action('continue', () =>
+        'continue': () =>
           that.setSelector(that.heroSelector, [
-            new Action('select', () => {
+            'select': () => {
               const hero: Hero = that.heroSelector.item();
               that.setDetails(
                 hero.sprite,
                 `${hero.name} ate the cactus fruit and regained their original energy.`,
-                [ new Action('continue', () => this.game.progress()) ]
+                [ 'continue': () => this.game.progress()) ]
               );
               hero.refreshEnergy();
             })

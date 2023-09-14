@@ -12,8 +12,8 @@ export default class DeathEvent extends EventView {
   init(): void {
     this.game.audio.play(GameAudio.FAIL);
     const place: number = this.game.history.log();
-    this.setDetails(Sprites.DEATH, 'your party is empty.', [
-      new Action('continue', () => this.game.setView(new ScoreView(this.game, place)))
+    this.game.views.setViews([{(Sprites.DEATH, 'your party is empty.', [
+      'continue': () => this.game.setView(new ScoreView(this.game, place)))
     ]);
   }
 }

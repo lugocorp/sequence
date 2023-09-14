@@ -3,25 +3,21 @@ import EnumsHelper from '../../logic/enums';
 import Random from '../../logic/random';
 import Hero from '../../entities/hero';
 import EventView from '../event';
-import Game from '../../game';
+import View from '../view';
 
 export default class DreamEvent extends EventView {
-  constructor(game: Game) {
-    super(game);
-  }
-
-  init(): void {
+  getViews(): View[] {
     const hero: Hero = Random.element(this.game.party.members);
-    this.setDetails(
-      hero.sprite,
-      `${hero.name} has a strange introspective dream. what is more important to them?`,
-      [
-        new Action('skills', () => {
-          this.setDetails(
-            hero.sprite,
-            `${hero.name} gains some skills in exchange for their base stats.`,
-            [ new Action('continue', () => this.game.progress()) ]
-          );
+    return [{
+      image: hero.sprite,
+      text: `${hero.name} has a strange introspective dream. what is more important to them?`,
+      actions: {
+        'skills': () => {
+          this.game.views.setViews([{
+            image: hero.sprite,
+            text: `${hero.name} gains some skills in exchange for their base stats.`,
+            actions: { 'continue': () => this.game.progress() }
+          }]);
           if (hero.skills[0] === undefined) {
             hero.skills[0] = Random.element(EnumsHelper.skills());
           }
@@ -33,19 +29,19 @@ export default class DreamEvent extends EventView {
           hero.str--;
           hero.wis--;
           hero.dex--;
-        }),
-        new Action('stats', () => {
-          this.setDetails(
-            hero.sprite,
-            `${hero.name} gains base stats in exchange for their skills.`,
-            [ new Action('continue', () => this.game.progress()) ]
-          );
+        },
+        'stats': () => {
+          this.game.views.setViews([{
+            image: hero.sprite,
+            text: `${hero.name} gains base stats in exchange for their skills.`,
+            actions: { 'continue': () => this.game.progress() }
+          }]);
           hero.skills = [ undefined, undefined ];
           hero.str++;
           hero.wis++;
           hero.dex++;
-        })
-      ]
-    );
+        }
+      }
+    }];
   }
 }

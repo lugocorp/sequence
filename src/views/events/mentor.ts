@@ -5,38 +5,32 @@ import Sprites from '../../media/sprites';
 import Hero from '../../entities/hero';
 import Selectors from '../selectors';
 import EventView from '../event';
-import Game from '../../game';
+import View from '../view';
 
 export default class MentorEvent extends EventView {
-  private heroSelector: Selector<Hero>;
-
-  constructor(game: Game) {
-    super(game);
-    this.setDetails(
-      Sprites.MENTOR,
-      `a mentor offers to teach some skill to your party. choose someone to learn it.`,
-      [ new Action('continue', () => this.viewParty()) ]
-    );
-  }
-
-  init(): void {
-    this.heroSelector = Selector.heroSelector(this.game.party, this.game.party.emptySkillSlots());
+  getViews(): View[] {
+    return [{
+      image: Sprites.MENTOR,
+      text: `a mentor offers to teach some skill to your party. choose someone to learn it.`,
+      actions: { 'continue': () => this.viewParty() }
+    }];
   }
 
   viewParty(): void {
     if (this.game.party.canLearnSkills) {
-      this.setSelector(this.heroSelector, [ new Action('choose', () => this.finish()) ]);
+      this.game.views.setViews(Selectors.heroes(this.game.party.emptySkillSlots(), (hero: Hero) => ({
+        'choose': () => this.finish(hero)
+      })));
     } else {
-      this.setDetails(
-        Sprites.MENTOR,
-        `no one in your party can learn new skills. the mentor goes their own way.`,
-        [ new Action('continue', () => this.game.progress()) ]
-      );
+      this.game.views.setViews([{
+        image: Sprites.MENTOR,
+        text: `no one in your party can learn new skills. the mentor goes their own way.`,
+        actions: { 'continue': () => this.game.progress() }
+      }]);
     }
   }
 
-  finish(): void {
-    const hero: Hero = this.heroSelector.item();
+  finish(hero: Hero): void {
     const skill: Skill = Random.element(
       EnumsHelper.skills().filter((x: Skill) => !EnumsHelper.hasSkill(hero.skills, x))
     );
@@ -45,8 +39,8 @@ export default class MentorEvent extends EventView {
     } else {
       hero.skills[1] = skill;
     }
-    this.setDetails(Sprites.MENTOR, `${hero.name} learned ${skill} from the mentor.`, [
-      new Action('continue', () => this.game.progress())
-    ]);
+    this.game.views.setViews([{image: Sprites.MENTOR, text: `${hero.name} learned ${skill} from the mentor.`, actions: {
+      'continue': () => this.game.progress()
+    }}]);
   }
 }

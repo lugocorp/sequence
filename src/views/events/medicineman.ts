@@ -2,53 +2,41 @@ import Sprites from '../../media/sprites';
 import Selectors from '../selectors';
 import EventView from '../event';
 import Hero from '../../entities/hero';
-import Game from '../../game';
+import View from '../view';
 
 export default class MedicineManEvent extends EventView {
-  private heroSelector: Selector<Hero>;
 
-  constructor(game: Game) {
-    super(game);
-    this.setDetails(
-      Sprites.MEDICINE_MAN,
-      'your party comes across a medicine man. he will bless one of your party members in exchange for a gift.',
-      [ new Action('continue', () => this.viewParty()) ]
-    );
-  }
-
-  init(): void {
-    this.heroSelector = Selector.heroSelector(
-      this.game.party,
-      this.game.party.members.filter((h: Hero) => h.basket.hasItems)
-    );
-  }
-
-  get hero(): Hero {
-    return this.heroSelector.item();
+  getViews(): View[] {
+    return [{
+      image: Sprites.MEDICINE_MAN,
+      text: 'your party comes across a medicine man. he will bless one of your party members in exchange for a gift.',
+      actions: { 'continue': () => this.viewParty() }
+    }];
   }
 
   viewParty(): void {
-    const that = this;
     if (this.game.party.hasItems) {
-      this.setSelector(this.heroSelector, [ new Action('make trade', () => that.makeTrade()) ]);
+      this.game.views.setViews(Selectors.heroes(this.game.party.members.filter((h: Hero) => h.basket.hasItems), (hero: Hero) => ({
+        'make trade': () => this.makeTrade(hero)
+      })));
     } else {
-      this.setDetails(Sprites.MEDICINE_MAN, `no one in your party has anything to give.`, [
-        new Action('continue', () => this.game.progress())
-      ]);
+      this.game.views.setViews([{image: Sprites.MEDICINE_MAN, text: `no one in your party has anything to give.`, actions: {
+        'continue': () => this.game.progress()
+      }}]);
     }
   }
 
-  makeTrade(): void {
-    for (const item of this.hero.basket.toList()) {
-      this.hero.basket.unequip(item);
+  makeTrade(hero: Hero): void {
+    for (const item of hero.basket.toList()) {
+      hero.basket.unequip(item);
     }
-    this.hero.str++;
-    this.hero.wis++;
-    this.hero.dex++;
-    this.setDetails(
-      this.hero.sprite,
-      `${this.hero.name} gifted all their items to the medicine man. they were blessed with strength, wisdom and dexterity.`,
-      [ new Action('continue', () => this.game.progress()) ]
-    );
+    hero.str++;
+    hero.wis++;
+    hero.dex++;
+    this.game.views.setViews([{
+      image: hero.sprite,
+      text: `${hero.name} gifted all their items to the medicine man. they were blessed with strength, wisdom and dexterity.`,
+      actions: { 'continue': () => this.game.progress() }
+    }]);
   }
 }

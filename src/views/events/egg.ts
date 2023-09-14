@@ -6,22 +6,19 @@ import Item from '../../entities/item';
 import Selectors from '../selectors';
 import EventView from '../event';
 import Game from '../../game';
+import View from '../view';
 
 export default class EggEvent extends EventView {
-  private heroSelector: Selector<Hero>;
-
-  constructor(game: Game) {
-    super(game);
+  getViews(): View[] {
     const that = this;
-    this.setDetails(
-      Sprites.EGG,
-      `your party finds an egg laying on the ground. choose someone to pick it up.`,
-      [
-        new Action('continue', () => {
+    return [{
+      image: Sprites.EGG,
+      text: `your party finds an egg laying on the ground. choose someone to pick it up.`,
+      actions: {
+        'continue': () => {
           if (this.game.party.canPickupItems) {
-            that.setSelector(that.heroSelector, [
-              new Action('choose', () => {
-                const hero: Hero = that.heroSelector.item();
+            that.game.views.setViews(Selectors.heroes(this.game.party.emptyItemSlots(), (hero: Hero) => ({
+              'choose': () => {
                 const item: Item = new Item(
                   'round egg',
                   Sprites.EGG,
@@ -34,55 +31,55 @@ export default class EggEvent extends EventView {
                   }
                 );
                 hero.basket.equip(item);
-                const view: EventView = new EventView(this.game);
-                view.setDetails(
-                  Sprites.EGG,
-                  `${hero.name} feels a slight stir as the egg in their bag hatches into a turtle!`,
-                  [
-                    new Action('continue', () => {
-                      hero.basket.unequip(item);
-                      this.hatches.call(view);
-                    })
-                  ]
-                );
                 this.game.chain.futureEvent(
-                  view,
+                  new HatchEvent(this.game, hero, item),
                   6,
                   () => hero.isInParty(this.game.party) && hero.basket.contains(item)
                 );
-                that.setDetails(Sprites.EGG, `${hero.name} picks up the egg.`, [
-                  new Action('continue', () => this.game.progress())
-                ]);
-              })
-            ]);
+                that.game.views.setViews([{image: Sprites.EGG, text: `${hero.name} picks up the egg.`, actions: {
+                  'continue': () => this.game.progress()
+                }}]);
+              }
+            })));
           } else {
-            that.setDetails(
-              Sprites.EGG,
-              `your party's inventory is completely full. your party leaves the egg behind.`,
-              [ new Action('continue', () => this.game.progress()) ]
-            );
+            this.game.views.setViews([{
+              image: Sprites.EGG,
+              text: `your party's inventory is completely full. your party leaves the egg behind.`,
+              actions: { 'continue': () => this.game.progress() }
+            }]);
           }
-        })
-      ]
-    );
+        }
+      }
+    }];
+  }
+}
+
+class HatchEvent extends EventView {
+  constructor(game: Game, private hero: Hero, private item: Item) {
+    super(game);
   }
 
-  init(): void {
-    this.heroSelector = Selector.heroSelector(this.game.party, this.game.party.emptyItemSlots());
-  }
-
-  hatches(): void {
-    if (this.game.party.isFull) {
-      this.setDetails(Sprites.TURTLE, 'the egg hatches into a turtle!', [
-        new Action('continue', () => this.game.progress())
-      ]);
-    } else {
-      this.game.party.add(turtle(this.game));
-      this.setDetails(
-        Sprites.TURTLE,
-        'the egg hatches into a turtle! the turtle joins your party.',
-        [ new Action('continue', () => this.game.progress()) ]
-      );
-    }
+  getViews(): View[] {
+    return [{
+      image: Sprites.EGG,
+      text: `${this.hero.name} feels a slight stir as the egg in their bag hatches into a turtle!`,
+      actions: {
+        'continue': () => {
+          this.hero.basket.unequip(this.item);
+          if (this.game.party.isFull) {
+            this.game.views.setViews([{image: Sprites.TURTLE, text: 'the egg hatches into a turtle!', actions: {
+              'continue': () => this.game.progress()
+            }}]);
+          } else {
+            this.game.party.add(turtle(this.game));
+            this.game.views.setViews([{
+              image: Sprites.TURTLE,
+              text: 'the egg hatches into a turtle! the turtle joins your party.',
+              actions: { 'continue': () => this.game.progress() }
+            }]);
+          }
+        }
+      }
+    }];
   }
 }

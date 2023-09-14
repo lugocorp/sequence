@@ -2,41 +2,30 @@ import Sprites from '../../media/sprites';
 import Selectors from '../selectors';
 import EventView from '../event';
 import Hero from '../../entities/hero';
-import Game from '../../game';
+import View from '../view';
 
 export default class MerchantEvent extends EventView {
-  private heroSelector: Selector<Hero>;
 
-  constructor(game: Game) {
-    super(game);
-    this.setDetails(
-      Sprites.MERCHANT,
-      'your party comes across a merchant. a party member will get new items to fill their inventory.',
-      [
-        new Action('continue', () =>
-          this.setSelector(this.heroSelector, [ new Action('get items', () => this.trade()) ])
-        )
-      ]
-    );
+  getViews(): View[] {
+    return [{
+      image: Sprites.MERCHANT,
+      text: 'your party comes across a merchant. a party member will get new items to fill their inventory.',
+      actions: {
+        'continue': () =>
+          this.game.views.setViews(Selectors.heroes(this.game.party.members, (hero: Hero) => ({'get items': () => this.trade(hero)})))
+      }
+    }];
   }
 
-  init(): void {
-    this.heroSelector = Selector.heroSelector(this.game.party, this.game.party.members);
-  }
-
-  private get hero(): Hero {
-    return this.heroSelector.item();
-  }
-
-  private trade(): void {
-    const n = this.hero.basket.total - this.hero.basket.itemCount;
+  private trade(hero: Hero): void {
+    const n = hero.basket.total - hero.basket.itemCount;
     for (let a = 0; a < n; a++) {
-      this.hero.basket.equip(this.game.data.getRandomItem());
+      hero.basket.equip(this.game.data.getRandomItem());
     }
-    this.setDetails(
-      this.hero.sprite,
-      `${this.hero.name} got ${n} new item${n === 1 ? '' : 's'} from the merchant.`,
-      [ new Action('continue', () => this.game.progress()) ]
-    );
+    this.game.views.setViews([{
+      image: hero.sprite,
+      text: `${hero.name} got ${n} new item${n === 1 ? '' : 's'} from the merchant.`,
+      actions: { 'continue': () => this.game.progress() }
+    }]);
   }
 }
