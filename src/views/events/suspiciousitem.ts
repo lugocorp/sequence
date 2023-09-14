@@ -18,6 +18,7 @@ export default class SuspiciousItemEvent extends EventView {
                         this.game.views.setViews(
                             this.game.party.canPickupItems
                                 ? Selectors.heroes(
+                                      this.game,
                                       this.game.party.members.filter(
                                           (h: Hero) => h.basket.hasSpace
                                       ),

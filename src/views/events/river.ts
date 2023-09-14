@@ -15,6 +15,7 @@ export default class RiverEvent extends EventView {
                     continue: () =>
                         this.game.views.setViews(
                             Selectors.heroes(
+                                this.game,
                                 this.game.party.members,
                                 (hero: Hero) => ({
                                     choose: () => this.river(hero)

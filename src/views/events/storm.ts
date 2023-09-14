@@ -16,7 +16,7 @@ export default class StormEvent extends EventView {
                 actions: {
                     continue: () =>
                         this.game.views.setViews(
-                            Selectors.heroes(this.game.party.members, (hero: Hero) => ({
+                            Selectors.heroes(this.game, this.game.party.members, (hero: Hero) => ({
                                 select: () => {
                                     if (hero.skills[0] !== undefined) {
                                         hero.skills[0] = Random.element(EnumsHelper.skills());

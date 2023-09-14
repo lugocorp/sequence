@@ -13,7 +13,7 @@ export default class BeginEvent extends EventView {
                 actions: {
                     'view party': () =>
                         this.game.views.setViews(
-                            Selectors.heroes(this.game.party.members, (_: Hero) => ({
+                            Selectors.heroes(this.game, this.game.party.members, (_: Hero) => ({
                                 'start adventure': () => this.game.progress()
                             }))
                         )

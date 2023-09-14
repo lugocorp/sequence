@@ -19,6 +19,7 @@ export default class BabyPeccaryEvent extends EventView {
                         if (this.game.party.canPickupItems) {
                             that.game.views.setViews(
                                 Selectors.heroes(
+                                    this.game,
                                     this.game.party.emptyItemSlots(),
                                     (hero: Hero) => ({
                                         choose: () => {

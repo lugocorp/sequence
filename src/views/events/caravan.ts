@@ -41,7 +41,7 @@ export default class CaravanEvent extends EventView {
     viewRecruits(): void {
         const that = this;
         this.game.views.setViews(
-            Selectors.heroes(this.recruits, (hero: Hero) => ({
+            Selectors.heroes(this.game, this.recruits, (hero: Hero) => ({
                 choose: () => {
                     if (this.game.party.isFull) {
                         that.pleaseRemove(hero);
@@ -57,7 +57,7 @@ export default class CaravanEvent extends EventView {
     viewParty(): void {
         const that = this;
         this.game.views.setViews(
-            Selectors.heroes(this.game.party.members, (_: Hero) => ({
+            Selectors.heroes(this.game, this.game.party.members, (_: Hero) => ({
                 back: () => that.viewRecruits()
             }))
         );
@@ -77,7 +77,7 @@ export default class CaravanEvent extends EventView {
     removeMember(recruit: Hero): void {
         const that = this;
         this.game.views.setViews(
-            Selectors.heroes(this.game.party.members, (hero: Hero) => ({
+            Selectors.heroes(this.game, this.game.party.members, (hero: Hero) => ({
                 choose: () => that.finished(recruit, hero)
             }))
         );

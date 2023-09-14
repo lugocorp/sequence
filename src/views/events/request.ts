@@ -26,6 +26,7 @@ export default class RequestEvent extends EventView {
                 'view party': () =>
                     this.game.views.setViews(
                         Selectors.heroes(
+                            this.game,
                             this.game.party.members,
                             (hero: Hero) => ({
                                 choose: () => {

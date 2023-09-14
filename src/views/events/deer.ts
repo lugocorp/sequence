@@ -47,7 +47,7 @@ export default class DeerEvent extends EventView {
 
     hunt(): void {
         this.game.views.setViews(
-            Selectors.heroes(this.game.party.members, (hero: Hero) => ({
+            Selectors.heroes(this.game, this.game.party.members, (hero: Hero) => ({
                 'hunt deer': () => {
                     hero.energy--;
                     if (hero.lucky()) {

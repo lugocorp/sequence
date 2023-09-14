@@ -15,6 +15,7 @@ export default class SunriseEvent extends EventView {
                         this.game.views.setViews(
                             this.game.party.hasItems
                                 ? Selectors.heroes(
+                                      this.game,
                                       this.game.party.members.filter(
                                           (h: Hero) => h.basket.hasItems
                                       ),

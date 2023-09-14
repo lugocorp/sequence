@@ -13,7 +13,7 @@ export default class OldBridgeEvent extends EventView {
                 actions: {
                     'choose someone': () =>
                         this.game.views.setViews(
-                            Selectors.heroes(this.game.party.members, (hero: Hero) => ({
+                            Selectors.heroes(this.game, this.game.party.members, (hero: Hero) => ({
                                 'cross the bridge': () => {
                                     this.game.party.clear();
                                     this.game.party.add(hero);

@@ -13,7 +13,7 @@ export default class SnakeBiteEvent extends EventView {
                 actions: {
                     continue: () =>
                         this.game.views.setViews(
-                            Selectors.heroes(this.game.party.members, (hero: Hero) => ({
+                            Selectors.heroes(this.game, this.game.party.members, (hero: Hero) => ({
                                 select: () => {
                                     hero.str = 0;
                                     hero.wis = 0;

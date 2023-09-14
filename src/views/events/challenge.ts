@@ -62,6 +62,7 @@ export default class ChallengeEvent extends EventView {
         const that = this;
         this.game.views.setViews(
             Selectors.heroes(
+                this.game,
                 this.game.party.members,
                 (hero: Hero) => ({
                     choose: () => that.finish(hero),

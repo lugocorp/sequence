@@ -19,6 +19,7 @@ export default class MedicineManEvent extends EventView {
         if (this.game.party.hasItems) {
             this.game.views.setViews(
                 Selectors.heroes(
+                    this.game,
                     this.game.party.members.filter((h: Hero) => h.basket.hasItems),
                     (hero: Hero) => ({
                         'make trade': () => this.makeTrade(hero)

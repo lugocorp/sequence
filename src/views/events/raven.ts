@@ -14,7 +14,7 @@ export default class RavenEvent extends EventView {
                 actions: {
                     continue: () =>
                         this.game.views.setViews(
-                            Selectors.heroes(this.game.party.members, (hero: Hero) => ({
+                            Selectors.heroes(this.game, this.game.party.members, (hero: Hero) => ({
                                 select: () => {
                                     const initial = `${hero.name} approaches the raven.`;
                                     const effect: number = Random.max(4);

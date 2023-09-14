@@ -14,7 +14,7 @@ export default class YauponHollyEvent extends EventView {
                 actions: {
                     continue: () =>
                         this.game.views.setViews(
-                            Selectors.heroes(this.game.party.members, (hero: Hero) => ({
+                            Selectors.heroes(this.game, this.game.party.members, (hero: Hero) => ({
                                 select: () => {
                                     hero.refresh(Stats.STRENGTH);
                                     hero.refresh(Stats.WISDOM);
