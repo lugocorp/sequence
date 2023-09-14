@@ -4,38 +4,31 @@ import Sprites from '../../media/sprites';
 import Hero from '../../entities/hero';
 import Selectors from '../selectors';
 import EventView from '../event';
-import Game from '../../game';
+import View from '../view';
 
 export default class ButterflyFieldEvent extends EventView {
-  private heroSelector: Selector<Hero>;
-
-  constructor(game: Game) {
-    super(game);
-    this.game.views.setViews([{(
-      Sprites.BUTTERFLY_FIELD,
-      'your party comes across a butterfly field. choose someone to receive a blessing. you may get copies of their belongings in the future.',
-      [
+  getViews(): View[] {
+    return [{
+      image: Sprites.BUTTERFLY_FIELD,
+      text: 'your party comes across a butterfly field. choose someone to receive a blessing. you may get copies of their belongings in the future.',
+      actions: {
         'continue': () =>
-          this.setSelector(this.heroSelector, [ 'choose': () => this.finished()) ])
-        )
-      ]
-    );
+          this.game.views.setViews(Selectors.heroes(this.game.party.members, (hero: Hero) => ({
+            'choose': () => this.finished(hero)
+          })))
+      }
+    }];
   }
 
-  init(): void {
-    this.heroSelector = Selector.heroSelector(this.game.party, this.game.party.members);
-  }
-
-  private finished(): void {
-    const hero: Hero = this.heroSelector.item();
+  private finished(hero: Hero): void {
     for (const item of hero.basket.toList()) {
       this.game.chain.futureEvent(
         new OfferingEvent(this.game, this.game.data.getNamedItem(item.name)),
         Random.max(10) + 3
       );
     }
-    this.game.views.setViews([{(hero.sprite, `${hero.name} received a blessing from the butterflies.`, [
-      'continue': () => this.game.progress())
-    ]);
+    this.game.views.setViews([{image: hero.sprite, text: `${hero.name} received a blessing from the butterflies.`, actions: {
+      'continue': () => this.game.progress()
+    }}]);
   }
 }

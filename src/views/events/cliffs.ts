@@ -3,7 +3,7 @@ import EnumsHelper from '../../logic/enums';
 import Hero from '../../entities/hero';
 import Random from '../../logic/random';
 import EventView from '../event';
-import Game from '../../game';
+import View from '../view';
 
 /**
  * In this event your party is filtered by a certain stat limit.
@@ -13,19 +13,18 @@ export default class CliffsEvent extends EventView {
   private cutoff: number;
   private stat: number;
 
-  constructor(game: Game) {
-    super(game);
+  getViews(): View[] {
     this.original = this.game.party.size;
     this.stat = EnumsHelper.getRandomStat();
     this.cutoff = Random.max(4) + 1;
     const that = this;
-    this.game.views.setViews([{(
-      Sprites.CLIFF,
-      `your party comes across some cliffs. only travelers with ${
+    return [{
+      image: Sprites.CLIFF,
+      text: `your party comes across some cliffs. only travelers with ${
         this.cutoff
       } ${EnumsHelper.getStatName(this.stat)} or ${this.higher ? 'higher' : 'lower'} may pass.`,
-      [ 'continue': () => that.finish()) ]
-    );
+      actions: { 'continue': () => that.finish() }
+    }];
   }
 
   // True if this event only allows members above a certain threshold
@@ -49,14 +48,14 @@ export default class CliffsEvent extends EventView {
     }
     this.game.party.filter((hero: Hero) => removals.indexOf(hero) < 0);
     const size: number = this.game.party.size;
-    this.game.views.setViews([{(
-      Sprites.CLIFF,
-      size
+    this.game.views.setViews([{
+      image: Sprites.CLIFF,
+      text: size
         ? size === this.original
           ? `all party members passed the cliffs!`
           : `only ${size} party member${size > 1 ? 's' : ''} made it past the cliffs.`
         : `no one in your party could pass the cliffs.`,
-      [ 'continue': () => this.game.progress()) ]
-    );
+      actions: { 'continue': () => this.game.progress() }
+    }]);
   }
 }

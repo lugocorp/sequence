@@ -1,82 +1,78 @@
 import Hero from '../../entities/hero';
 import Selectors from '../selectors';
 import EventView from '../event';
-import Game from '../../game';
+import View from '../view';
 
 /**
  * In this event you choose a new party member.
  */
 export default class CaravanEvent extends EventView {
-  private recruitSelector: Selector<Hero>;
-  private memberSelector: Selector<Hero>;
+  // private recruitSelector: Selector<Hero>;
+  // private memberSelector: Selector<Hero>;
   private recruits: Hero[];
 
-  constructor(game: Game) {
-    super(game);
+  getViews(): View[] {
     const that = this;
     this.recruits = [
       this.game.data.getRandomHero(),
       this.game.data.getRandomHero(),
       this.game.data.getRandomHero()
     ];
-    this.recruitSelector = Selector.heroSelector(this.game.party, this.recruits);
-    this.game.views.setViews([{(this.recruits[0].sprite, 'your party comes across a small caravan.', [
+    return [{image: this.recruits[0].sprite, text: 'your party comes across a small caravan.', actions: {
       'continue': () =>
-        that.setDetails(
-          this.recruits[0].sprite,
-          'one of the travelers would like to join your party.',
-          [ 'continue': () => that.viewRecruits()) ]
-        )
-      )
-    ]);
-  }
-
-  init(): void {
-    this.memberSelector = Selector.heroSelector(this.game.party, this.game.party.members);
+        that.game.views.setViews([{
+          image: this.recruits[0].sprite,
+          text: 'one of the travelers would like to join your party.',
+          actions: { 'continue': () => that.viewRecruits() }
+        }])
+      }
+    }];
   }
 
   viewRecruits(): void {
     const that = this;
-    this.setSelector(this.recruitSelector, [
+    this.game.views.setViews(Selectors.heroes(this.recruits, (hero: Hero) => ({
       'choose': () => {
         if (this.game.party.isFull) {
-          that.pleaseRemove();
+          that.pleaseRemove(hero);
         } else {
-          that.finished();
+          that.finished(hero);
         }
-      }),
-      'view party': () => that.viewParty())
-    ]);
+      },
+      'view party': () => that.viewParty()
+    })));
   }
 
   viewParty(): void {
     const that = this;
-    this.setSelector(this.memberSelector, [ 'back': () => that.viewRecruits()) ]);
+    this.game.views.setViews(Selectors.heroes(this.game.party.members, (hero: Hero) => ({
+      'back': () => that.viewRecruits()
+    })));
   }
 
-  pleaseRemove(): void {
+  pleaseRemove(recruit: Hero): void {
     const that = this;
-    this.game.views.setViews([{(
-      this.recruitSelector.item().sprite,
-      'one of your party members would like to join the caravan.',
-      [ 'continue': () => that.removeMember()) ]
-    );
+    this.game.views.setViews([{
+      image: recruit.sprite,
+      text: 'one of your party members would like to join the caravan.',
+      actions: { 'continue': () => that.removeMember(recruit) }
+    }]);
   }
 
-  removeMember(): void {
+  removeMember(recruit: Hero): void {
     const that = this;
-    this.setSelector(this.memberSelector, [ 'choose': () => that.finished()) ]);
+    this.game.views.setViews(Selectors.heroes(this.game.party.members, (hero: Hero) => ({
+      'choose': () => that.finished(recruit, hero)
+    })));
   }
 
-  finished(): void {
-    const recruit: Hero = this.recruitSelector.item();
+  finished(recruit: Hero, member?: Hero): void {
     let text = `${recruit.name} left the caravan for your party!`;
     if (this.game.party.isFull) {
-      const member: Hero = this.memberSelector.item();
       text += ` ${member.name} left your party for the caravan.`;
       this.game.party.remove(member);
     }
     this.game.party.add(recruit);
-    this.game.views.setViews([{(recruit.sprite, text, [ 'continue': () => this.game.progress()) ]);
+    this.game.views.setViews([{image: recruit.sprite, text, actions: { 'continue': () => this.game.progress() }}]);
   }
 }

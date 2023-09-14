@@ -1,19 +1,15 @@
-import ScoreView from '../../views/scoreboard';
+import ViewFactory from '../factory';
 import Sprites from '../../media/sprites';
 import GameAudio from '../../media/audio';
 import EventView from '../event';
-import Game from '../../game';
+import View from '../view';
 
 export default class DeathEvent extends EventView {
-  constructor(game: Game) {
-    super(game);
-  }
-
-  init(): void {
+  getViews(): View[] {
     this.game.audio.play(GameAudio.FAIL);
     const place: number = this.game.history.log();
-    this.game.views.setViews([{(Sprites.DEATH, 'your party is empty.', [
-      'continue': () => this.game.setView(new ScoreView(this.game, place)))
-    ]);
+    return [{image: Sprites.DEATH, text: 'your party is empty.', actions: {
+      'continue': () => new ViewFactory(this.game).scoreView(place)
+    }}];
   }
 }

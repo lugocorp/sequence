@@ -6,7 +6,7 @@ import EnumsHelper from '../../logic/enums';
 import Random from '../../logic/random';
 import Selectors from '../selectors';
 import EventView from '../event';
-import Game from '../../game';
+import View from '../view';
 
 type Challenger = {
   name: string;
@@ -17,12 +17,10 @@ type Challenger = {
 };
 
 export default class ChallengeEvent extends EventView {
-  private heroSelector: Selector<Hero>;
   private challenger: Challenger;
   private expectation: Stats;
 
-  constructor(game: Game) {
-    super(game);
+  getViews(): View[] {
     const that = this;
     this.challenger = {
       ...this.game.data.getRandomSpirit(),
@@ -31,23 +29,11 @@ export default class ChallengeEvent extends EventView {
       dexterity: Random.max(7)
     };
     this.expectation = EnumsHelper.getRandomStat();
-    this.game.views.setViews([{(
-      this.challenger.sprite,
-      `a powerful spirit offers your party a challenge. choose someone to participate.`,
-      [ 'continue': () => that.viewChallenger()) ]
-    );
-  }
-
-  init(): void {
-    this.heroSelector = Selector.heroSelector(
-      this.game.party,
-      this.game.party.members,
-      undefined,
-      (hero: Hero) =>
-        `${this.coloredRate(
-          this.playerStatsHigher(hero) ? 100 : hero.stats.luck
-        )} chance of success`
-    );
+    return [{
+      image: this.challenger.sprite,
+      text: `a powerful spirit offers your party a challenge. choose someone to participate.`,
+      actions: { 'continue': () => that.viewChallenger() }
+    }];
   }
 
   viewChallenger(): void {
@@ -59,22 +45,24 @@ export default class ChallengeEvent extends EventView {
     const text = `${desc}\nchallenges you to a test of ${orange(
       EnumsHelper.getStatName(this.expectation)
     )}.`;
-    this.game.views.setViews([{(this.challenger.sprite, text, [
-      'view party': () => that.viewParty())
-    ]);
+    this.game.views.setViews([{image: this.challenger.sprite, text, actions: {
+      'view party': () => that.viewParty()
+    }}]);
   }
 
   viewParty(): void {
     const that = this;
-    this.setSelector(this.heroSelector, [
-      'choose': () => that.finish()),
-      'view spirit': () => that.viewChallenger())
-    ]);
+    this.game.views.setViews(Selectors.heroes(this.game.party.members, (hero: Hero) => ({
+      'choose': () => that.finish(hero),
+      'view spirit': () => that.viewChallenger()
+    }), (hero: Hero) =>
+    `${this.coloredRate(
+      this.playerStatsHigher(hero) ? 100 : hero.stats.luck
+    )} chance of success`));
   }
 
-  finish(): void {
+  finish(hero: Hero): void {
     const that = this;
-    const hero: Hero = this.heroSelector.item();
     const result: boolean = this.playerOvercomesChallenge(hero);
     if (result) {
       this.game.history.challengesWon++;
@@ -82,23 +70,22 @@ export default class ChallengeEvent extends EventView {
     } else {
       hero.energy = -100;
     }
-    this.game.views.setViews([{(
-      hero.sprite,
-      result
+    this.game.views.setViews([{
+      image: hero.sprite,
+      text: result
         ? `${hero.name} overcame the spirit's challenge!`
         : `${hero.name} did not succeed in the spirit's challenge.`,
-      [
+      actions: {
         'continue': () =>
-          that.setDetails(
-            hero.sprite,
-            result
+          that.game.views.setViews([{
+            image: hero.sprite,
+            text: result
               ? `${hero.name} is triumphant but tired. they have lost some of their energy.`
               : `${hero.name} used up all their energy in the challenge.`,
-            [ 'continue': () => this.game.progress()) ]
-          )
-        )
-      ]
-    );
+            actions: { 'continue': () => this.game.progress() }
+          }])
+      }
+    }]);
   }
 
   private playerStatsHigher(hero: Hero): boolean {

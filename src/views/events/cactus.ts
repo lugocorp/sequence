@@ -2,36 +2,27 @@ import Sprites from '../../media/sprites';
 import Hero from '../../entities/hero';
 import Selectors from '../selectors';
 import EventView from '../event';
-import Game from '../../game';
+import View from '../view';
 
 export default class CactusEvent extends EventView {
-  private heroSelector: Selector<Hero>;
-
-  constructor(game: Game) {
-    super(game);
+  getViews(): View[] {
     const that = this;
-    this.game.views.setViews([{(
-      Sprites.CACTUS,
-      `your party comes across a cactus. choose someone to eat its fruit and regain their original energy.`,
-      [
+    return [{
+      image: Sprites.CACTUS,
+      text: `your party comes across a cactus. choose someone to eat its fruit and regain their original energy.`,
+      actions: {
         'continue': () =>
-          that.setSelector(that.heroSelector, [
+          that.game.views.setViews(Selectors.heroes(this.game.party.members, (hero: Hero) => ({
             'select': () => {
-              const hero: Hero = that.heroSelector.item();
-              that.setDetails(
-                hero.sprite,
-                `${hero.name} ate the cactus fruit and regained their original energy.`,
-                [ 'continue': () => this.game.progress()) ]
-              );
+              that.game.views.setViews([{
+                image: hero.sprite,
+                text: `${hero.name} ate the cactus fruit and regained their original energy.`,
+                actions: { 'continue': () => this.game.progress() }
+              }]);
               hero.refreshEnergy();
-            })
-          ])
-        )
-      ]
-    );
-  }
-
-  init(): void {
-    this.heroSelector = Selector.heroSelector(this.game.party, this.game.party.members);
+            }})
+          ))
+      }
+    }];
   }
 }
