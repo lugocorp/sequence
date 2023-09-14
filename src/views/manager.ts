@@ -1,3 +1,4 @@
+import { WTEXT } from '../types';
 import EventView from './event';
 import View from './view';
 
@@ -34,6 +35,9 @@ export default class ViewManager {
         this.selectedViewIndex = 0;
         this.actionsOpen = false;
         this.views = views;
+        for (const view of views) {
+            view.text = this.formatText(view.text);
+        }
     }
 
     getView(): View {
@@ -51,5 +55,31 @@ export default class ViewManager {
                 }
             }
         };
+    }
+
+    // Calculates string length without color annotations
+    visibleLength(word: string): number {
+        return word.replace(/#[0-9]/g, '').length;
+    }
+
+    // Formats text wrap according to the screen constraints
+    formatText(msg: string): string {
+        const words: string[] = msg.replace(/\n/g, '\n ').split(' ');
+        let line: string = words.shift();
+        let text = '';
+        while (line.length) {
+            while (words.length && this.visibleLength(line) + this.visibleLength(words[0]) + 1 <= WTEXT) {
+            if (line[line.length - 1] === '\n') {
+                break;
+            }
+            line = `${line} ${words.shift()}`;
+            }
+            if (line[line.length - 1] !== '\n') {
+            line += '\n';
+            }
+            text += line;
+            line = words.length ? words.shift() : '';
+        }
+        return text.replace(/\t/g, ' ');
     }
 }

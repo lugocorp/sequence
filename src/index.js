@@ -32,7 +32,7 @@ document.addEventListener(
     }
     window.addEventListener('resize', () => {
       game.graphics.setSize();
-      game.invalidate();
+      game.graphics.frame(game);
     });
   },
   false

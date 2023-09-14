@@ -2,11 +2,11 @@ import { expect } from 'chai';
 import { TestAudio, TestGraphics, TestHistory } from './media';
 import { WTEXT, Time, Weather, StatBlock } from '../types';
 import { items } from '../content/items';
-import EventView from '../views/event';
 import Sprites from '../media/sprites';
 import Party from '../entities/party';
 import Item from '../entities/item';
 import Hero from '../entities/hero';
+import View from '../views/view';
 import Game from '../game';
 
 const game = new Game(new TestGraphics(), new TestAudio(), new TestHistory());
@@ -200,11 +200,11 @@ describe('Item effects', function () {
       game.chain.events.splice(0, 1);
       game.chain.latest();
     }
-    const view: EventView = game.chain.latest();
-    expect(view.getText().replace(/\n/g, ' ')).to.equal(
-      'test hero is summoned to your party by the magic of a golden mirror. '
+    const view: View = game.chain.latest().getViews()[0];
+    expect(view.text.replace(/\n/g, ' ')).to.equal(
+      'test hero is summoned to your party by the magic of a golden mirror.'
     );
-    view.actions[0].effect();
+    view.actions['continue']();
     expect(game.party.members[Party.MAX - 1].name).to.contain('test hero');
     expect(game.party.members[Party.MAX - 1].basket.itemCount).to.equal(0);
   });

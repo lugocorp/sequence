@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 import RiverEvent from '../views/events/river';
 import { TestAudio, TestGraphics, TestHistory } from './media';
-import Action from '../ui/action';
+import View from '../views/view';
 import Game from '../game';
 
 const game = new Game(new TestGraphics(), new TestAudio(), new TestHistory());
@@ -17,10 +17,10 @@ describe('Number of lines tests', function () {
 
   it('River event', function () {
     const event = new RiverEvent(game);
-    event.init();
-    game.setView(event);
-    event.setSelector(event['heroSelector'], [ new Action('choose', () => null) ]);
-    const lines = (event.getText().match(/\n/g) || []).length;
+    const views: View[] = event.getViews();
+    game.views.setViews(views);
+    views[0].actions['continue']();
+    const lines = (game.views.getView().text.match(/\n/g) || []).length;
     expect(lines + 2).to.be.lte(LIMIT); // +2 for the 'choose' option
   });
 });

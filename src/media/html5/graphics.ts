@@ -58,17 +58,15 @@ export default class HTML5Graphics extends Graphics {
   /*
    * This method draws a single frame of the app.
    */
-  frame(game: Game): void {
-    const view: View = game.views.getView();
+  frame(game: Game, loading = false): void {
     this.ctx.clearRect(0, 0, WIDTH, HEIGHT);
-    if (!view) {
+    if (loading) {
       this.drawSprite(Sprites.LOADING, 25, 96);
       return;
     }
-    if (view.image) {
-      const c: DrawCoords = this.assets.getSprite(view.image);
-      this.drawSprite(view.image, (100 - c.width) / 2 + 12, (100 - c.height) / 2 + 3);
-    }
+    const view: View = game.views.getView();
+    const c: DrawCoords = this.assets.getSprite(view.image);
+    this.drawSprite(view.image, (100 - c.width) / 2 + 12, (100 - c.height) / 2 + 3);
     this.ctx.lineWidth = 1;
     this.ctx.rect(11, 2, 102, 1);
     this.ctx.rect(11, 103, 102, 1);

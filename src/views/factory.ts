@@ -91,7 +91,7 @@ export default class ViewFactory {
             `${history.partyMembers} party members x50\n` +
             `total: ${total}`,
             actions: {
-              'continue': () => scoreboard
+              'continue': () => this.game.views.setViews([scoreboard])
             }
         }]);
       } else {

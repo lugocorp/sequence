@@ -52,8 +52,8 @@ describe('Hero effects', function () {
     game.chain.events.splice(0, 1);
     game.chain.latest();
     game.chain.events.splice(0, 1);
-    expect(game.chain.latest().getText().replace(/\n/g, ' ')).to.equal(
-      'squash lady joins your party. '
+    expect(game.chain.latest().getViews()[0].text.replace(/\n/g, ' ')).to.equal(
+      'squash lady joins your party.'
     );
   });
 
@@ -69,8 +69,8 @@ describe('Hero effects', function () {
     game.chain.events.splice(0, 1);
     game.chain.latest();
     game.chain.events.splice(0, 1);
-    expect(game.chain.latest().getText().replace(/\n/g, ' ')).to.equal(
-      'bean girl joins your party. '
+    expect(game.chain.latest().getViews()[0].text.replace(/\n/g, ' ')).to.equal(
+      'bean girl joins your party.'
     );
   });
 
@@ -116,8 +116,8 @@ describe('Hero effects', function () {
     game.chain.events.splice(0, 1);
     game.chain.latest();
     game.chain.events.splice(0, 1);
-    expect(game.chain.latest().getText().replace(/\n/g, ' ')).to.equal(
-      'eagle knight healed from low energy. '
+    expect(game.chain.latest().getViews()[0].text.replace(/\n/g, ' ')).to.equal(
+      'eagle knight healed from low energy.'
     );
   });
 
@@ -169,8 +169,8 @@ describe('Hero effects', function () {
     game.chain.events.splice(0, 1);
     game.chain.latest();
     game.chain.events.splice(0, 1);
-    expect(game.chain.latest().getText().replace(/\n/g, ' ')).to.equal(
-      'fisherman joins your party. '
+    expect(game.chain.latest().getViews()[0].text.replace(/\n/g, ' ')).to.equal(
+      'fisherman joins your party.'
     );
   });
 });

@@ -36,7 +36,7 @@ export default class Game {
     this.graphics.setup();
     this.graphics.setSize();
     await this.graphics.loadInitialAsset();
-    this.graphics.frame(this);
+    this.graphics.frame(this, true);
     await this.history.initialize();
     await this.graphics.loadAssets();
     await this.audio.loadAudio();

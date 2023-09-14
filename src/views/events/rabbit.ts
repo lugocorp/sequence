@@ -9,8 +9,17 @@ type Stolen = [Hero, Item];
 
 export default class RabbitEvent extends EventView {
   private stolen: Stolen[] = [];
+  private catchingUp = false;
 
   getViews(): View[] {
+    if (this.catchingUp) {
+      this.catchingUp = false;
+      return [{
+        image: Sprites.RABBIT,
+        text: `your party has caught up with the thieving rabbit. will you continue to chase it down?`,
+        actions: { 'yes': () => this.chase(), 'no': () => this.getsAway() }
+      }];
+    }
     return [{
       image: Sprites.RABBIT,
       text: `your party comes across a tricky little rabbit.`,
@@ -51,14 +60,6 @@ export default class RabbitEvent extends EventView {
     }]);
   }
 
-  catchUp(): void {
-    this.game.views.setViews([{
-      image: Sprites.RABBIT,
-      text: `your party has caught up with the thieving rabbit. will you continue to chase it down?`,
-      actions: { 'yes': () => this.chase(), 'no': () => this.getsAway() }
-    }]);
-  }
-
   chase(): void {
     if (Random.passes(0.25)) {
       this.game.views.setViews([{
@@ -74,13 +75,8 @@ export default class RabbitEvent extends EventView {
         }
       }]);
     } else {
-      const challenge: ChallengeEvent = new ChallengeEvent(this.game);
-      const oldInit = challenge.init;
-      challenge.init = () => {
-        oldInit.call(challenge);
-        this.catchUp();
-      };
-      this.game.chain.futureEvent(challenge, 1);
+      this.catchingUp = true;
+      this.game.chain.futureEvent(new ChallengeEvent(this.game), 1);
       this.game.chain.futureEvent(this, 2);
       this.game.views.setViews([{ image: Sprites.RABBIT, text: `your party did not catch the rabbit.`, actions: {
         'continue': () => this.game.progress()
