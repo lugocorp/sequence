@@ -73,9 +73,6 @@ export default class HTML5Graphics extends Graphics {
         this.ctx.rect(11, 2, 1, 102);
         this.ctx.rect(112, 2, 1, 102);
         this.ctx.fill();
-        if (view.text) {
-            this.drawText(game, view.text, 0, 0);
-        }
         if (game.views.hasOptions()) {
             if (game.views.drawArrowLeft()) {
                 this.drawSprite(Sprites.ARROW_LEFT, 3, 46);
@@ -84,9 +81,9 @@ export default class HTML5Graphics extends Graphics {
                 this.drawSprite(Sprites.ARROW_RIGHT, 116, 46);
             }
         }
+        const actionCoords: [number, number] = game.getActionCoords(view.actions, 0);
         if (Object.keys(view.actions).length > 0) {
-            const actionCoords: [number, number] = game.getActionCoords(view.actions, 0);
-            const top = this.toDisplayCoords(0, actionCoords[1])[1];
+            const top: number = this.toDisplayCoords(0, actionCoords[1] - 1)[1];
             for (let a = 0; a < WTEXT; a++) {
                 this.drawSprite(Sprites.LINE_HORT, a * WGLYPH + PADDING, top);
             }
@@ -95,6 +92,13 @@ export default class HTML5Graphics extends Graphics {
                 const coords: [number, number] = game.getActionCoords(view.actions, a);
                 this.drawText(game, labels[a], coords[0], coords[1], true);
             }
+        }
+        if (view.text) {
+            const shown = view.text
+                .split('\n')
+                .splice(0, actionCoords[1] - 1)
+                .join('\n');
+            this.drawText(game, shown, 0, 0);
         }
         if (this.dark) {
             this.ctx.globalAlpha = this.dark / 100;

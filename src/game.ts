@@ -1,4 +1,4 @@
-import { DAY_NIGHT_CYCLE, World, Weather, Time, Actions, WTEXT, HTEXT } from './types';
+import { DAY_NIGHT_CYCLE, World, Weather, Time, Actions, HTEXT } from './types';
 import ViewFactory from './views/factory';
 import ViewManager from './views/manager';
 import View from './views/view';
@@ -94,20 +94,14 @@ export default class Game {
         const coords: [number, number] = [ x, y ];
         const keys = Object.keys(actions);
         for (let a = 1; a < keys.length; a++) {
-            const current: string = keys[a];
-            const previous: string = keys[a - 1];
-            if (coords[0] === 0 && current.length + previous.length + 2 <= WTEXT - 1) {
-                coords[0] = WTEXT - current.length;
-            } else {
-                coords[0] = 0;
-                coords[1]++;
-            }
+            coords[0] = 0;
+            coords[1]++;
             if (a === index) {
                 x = coords[0];
                 y = coords[1];
             }
         }
-        return [ x, y + HTEXT - coords[1] - 2 ];
+        return [ x, y * 2 + HTEXT - coords[1] * 2 - 2 ];
     }
 
     // Alerts the current view of a click event

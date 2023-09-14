@@ -42,16 +42,27 @@ export default class ViewManager {
 
     getView(): View {
         const current: View = this.views[this.selectedViewIndex];
-        if (this.actionsOpen || Object.keys(current.actions).length === 1) {
+        if (Object.keys(current.actions).length === 1) {
             return current;
         }
 
-        const that = this;
+        if (this.actionsOpen) {
+            return {
+                ...current,
+                actions: {
+                    ...current.actions,
+                    back: () => {
+                        this.actionsOpen = false;
+                    }
+                }
+            };
+        }
+
         return {
             ...current,
             actions: {
                 options: () => {
-                    that.actionsOpen = true;
+                    this.actionsOpen = true;
                 }
             }
         };

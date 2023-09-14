@@ -9,17 +9,17 @@ export default class Selectors {
         actions: (hero: Hero) => Actions,
         extra?: (hero: Hero) => string
     ): View[] {
-        return heroes.map((x: Hero) => ({
+        return heroes.map((x: Hero, i: number) => ({
             image: x.sprite,
-            text: x.descriptionText() + (extra ? '\n' + extra(x) : ''),
+            text: `${i + 1}/${heroes.length} ${x.descriptionText()}${extra ? '\n' + extra(x) : ''}`,
             actions: actions(x)
         }));
     }
 
     static items(items: Item[], actions: (item: Item) => Actions): View[] {
-        return items.map((x: Item) => ({
+        return items.map((x: Item, i: number) => ({
             image: x.sprite,
-            text: x.descriptionText(),
+            text: `${i + 1}/${items.length} ${x.descriptionText()}`,
             actions: actions(x)
         }));
     }
