@@ -4,7 +4,11 @@ import { Actions } from '../types';
 import View from './view';
 
 export default class Selectors {
-    static heroes(heroes: Hero[], actions: (hero: Hero) => Actions, extra?: (hero: Hero) => string): View[] {
+    static heroes(
+        heroes: Hero[],
+        actions: (hero: Hero) => Actions,
+        extra?: (hero: Hero) => string
+    ): View[] {
         return heroes.map((x: Hero) => ({
             image: x.sprite,
             text: x.descriptionText() + (extra ? '\n' + extra(x) : ''),

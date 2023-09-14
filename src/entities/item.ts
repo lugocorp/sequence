@@ -4,17 +4,17 @@ import Sprites from '../media/sprites';
 import Hero from './hero';
 
 export default class Item {
-  bearer: Hero;
+    bearer: Hero;
 
-  constructor(
-    public name: string,
-    public sprite: Sprites,
-    public rarity: number,
-    public description: string,
-    public effect?: Effect
-  ) {}
+    constructor(
+        public name: string,
+        public sprite: Sprites,
+        public rarity: number,
+        public description: string,
+        public effect?: Effect
+    ) {}
 
-  descriptionText(): string {
-    return `${this.name}\n${EnumsHelper.displayRarity(this.rarity)}\n${this.description}`;
-  }
+    descriptionText(): string {
+        return `${this.name}\n${EnumsHelper.displayRarity(this.rarity)}\n${this.description}`;
+    }
 }

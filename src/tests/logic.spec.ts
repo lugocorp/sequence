@@ -9,55 +9,55 @@ game.start();
 game.setInitialState();
 
 describe('Chain tests', function () {
-  const chain = game.chain;
+    const chain = game.chain;
 
-  beforeEach(function () {
-    chain.clear();
-  });
+    beforeEach(function () {
+        chain.clear();
+    });
 
-  it('Continuous event chain', function () {
-    let previous: EventView = chain.latest();
-    for (let a = 0; a < 10; a++) {
-      chain.events.splice(0, 1);
-      const current = chain.latest();
-      expect(current).to.exist;
-      expect(current).to.equal(chain.latest());
-      expect(current).to.not.equal(previous);
-      previous = current;
-    }
-  });
+    it('Continuous event chain', function () {
+        let previous: EventView = chain.latest();
+        for (let a = 0; a < 10; a++) {
+            chain.events.splice(0, 1);
+            const current = chain.latest();
+            expect(current).to.exist;
+            expect(current).to.equal(chain.latest());
+            expect(current).to.not.equal(previous);
+            previous = current;
+        }
+    });
 
-  it('Future event fires at correct time', function () {
-    const EmptyEventView = class extends EventView {
-      getViews(): View[] {
-        return [];
-      }
-    }
-    const future = new EmptyEventView(game);
-    chain.futureEvent(future, 3);
-    chain.events.splice(0, 1);
-    expect(chain.latest()).to.not.equal(future);
-    chain.events.splice(0, 1);
-    expect(chain.latest()).to.not.equal(future);
-    chain.events.splice(0, 1);
-    expect(chain.latest()).to.equal(future);
-  });
+    it('Future event fires at correct time', function () {
+        const EmptyEventView = class extends EventView {
+            getViews(): View[] {
+                return [];
+            }
+        };
+        const future = new EmptyEventView(game);
+        chain.futureEvent(future, 3);
+        chain.events.splice(0, 1);
+        expect(chain.latest()).to.not.equal(future);
+        chain.events.splice(0, 1);
+        expect(chain.latest()).to.not.equal(future);
+        chain.events.splice(0, 1);
+        expect(chain.latest()).to.equal(future);
+    });
 });
 
 describe('Data tests', function () {
-  const data = game.data;
+    const data = game.data;
 
-  it('Make sure we can grab a turtle hero', function () {
-    const turtle = data.getNamedHero('turtle');
-    expect(turtle).to.exist;
-    expect(turtle.name).to.equal('turtle');
-  });
+    it('Make sure we can grab a turtle hero', function () {
+        const turtle = data.getNamedHero('turtle');
+        expect(turtle).to.exist;
+        expect(turtle.name).to.equal('turtle');
+    });
 
-  [ 'magic seed', 'round egg', 'baby peccary' ].forEach((name: string) =>
-    it(`Proper override for ${name}`, function () {
-      const item = data.getNamedItem(name);
-      expect(item).to.exist;
-      expect(item.name).to.equal('turquoise bead');
-    })
-  );
+    [ 'magic seed', 'round egg', 'baby peccary' ].forEach((name: string) =>
+        it(`Proper override for ${name}`, function () {
+            const item = data.getNamedItem(name);
+            expect(item).to.exist;
+            expect(item.name).to.equal('turquoise bead');
+        })
+    );
 });

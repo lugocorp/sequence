@@ -68,14 +68,17 @@ export default class ViewManager {
         let line: string = words.shift();
         let text = '';
         while (line.length) {
-            while (words.length && this.visibleLength(line) + this.visibleLength(words[0]) + 1 <= WTEXT) {
-            if (line[line.length - 1] === '\n') {
-                break;
-            }
-            line = `${line} ${words.shift()}`;
+            while (
+                words.length &&
+                this.visibleLength(line) + this.visibleLength(words[0]) + 1 <= WTEXT
+            ) {
+                if (line[line.length - 1] === '\n') {
+                    break;
+                }
+                line = `${line} ${words.shift()}`;
             }
             if (line[line.length - 1] !== '\n') {
-            line += '\n';
+                line += '\n';
             }
             text += line;
             line = words.length ? words.shift() : '';

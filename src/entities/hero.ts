@@ -7,231 +7,230 @@ import Party from './party';
 import Game from '../game';
 
 export default class Hero {
-  private originals: StatBlock;
-  private boosts: StatBlock;
-  basket: Basket;
+    private originals: StatBlock;
+    private boosts: StatBlock;
+    basket: Basket;
 
-  constructor(
-    private game: Game,
-    public sprite: Sprites,
-    public name: string,
-    private people: string,
-    str: number,
-    wis: number,
-    dex: number,
-    energy: number,
-    itemSlots: number,
-    public skills: Skills = [ undefined, undefined ],
-    public description: string = 'none',
-    public effect: Effect = undefined
-  ) {
-    this.basket = new Basket(game, this, itemSlots);
-    this.originals = {
-      str,
-      wis,
-      dex,
-      luck: 5,
-      energy
-    };
-    this.boosts = {
-      str: 0,
-      wis: 0,
-      dex: 0,
-      luck: 0,
-      energy: 0
-    };
-  }
-
-  /**
-   * Grabs the hero's stat block after effects are calculated
-   */
-  get stats(): StatBlock {
-    const data: Trigger = {
-      type: TriggerType.GET_STATS,
-      str: this.str,
-      wis: this.wis,
-      dex: this.dex,
-      luck: this.luck,
-      energy: this.energy
-    };
-    this.activate(data);
-    return {
-      str: Math.min(9, Math.max(0, data.str)),
-      wis: Math.min(9, Math.max(0, data.wis)),
-      dex: Math.min(9, Math.max(0, data.dex)),
-      luck: Math.min(100, Math.max(0, data.luck)),
-      energy: Math.min(10, Math.max(0, data.energy))
-    };
-  }
-
-  private get losable(): StatBlock<boolean> {
-    const data: Trigger = {
-      type: TriggerType.LOSS_CHECK,
-      str: true,
-      wis: true,
-      dex: true,
-      luck: true,
-      energy: true
-    };
-    this.activate(data);
-    return {
-      str: data.str,
-      wis: data.wis,
-      dex: data.dex,
-      luck: data.luck,
-      energy: data.energy
-    };
-  }
-
-  get str(): number {
-    return this.originals.str + this.boosts.str;
-  }
-
-  set str(value: number) {
-    const updated = value - this.originals.str;
-    if (updated > this.boosts.str || this.losable.str) {
-      this.boosts.str = updated;
+    constructor(
+        private game: Game,
+        public sprite: Sprites,
+        public name: string,
+        private people: string,
+        str: number,
+        wis: number,
+        dex: number,
+        energy: number,
+        itemSlots: number,
+        public skills: Skills = [ undefined, undefined ],
+        public description: string = 'none',
+        public effect: Effect = undefined
+    ) {
+        this.basket = new Basket(game, this, itemSlots);
+        this.originals = {
+            str,
+            wis,
+            dex,
+            luck: 5,
+            energy
+        };
+        this.boosts = {
+            str: 0,
+            wis: 0,
+            dex: 0,
+            luck: 0,
+            energy: 0
+        };
     }
-  }
 
-  get wis(): number {
-    return this.originals.wis + this.boosts.wis;
-  }
-
-  set wis(value: number) {
-    const updated = value - this.originals.wis;
-    if (updated > this.boosts.wis || this.losable.wis) {
-      this.boosts.wis = updated;
+    /**
+     * Grabs the hero's stat block after effects are calculated
+     */
+    get stats(): StatBlock {
+        const data: Trigger = {
+            type: TriggerType.GET_STATS,
+            str: this.str,
+            wis: this.wis,
+            dex: this.dex,
+            luck: this.luck,
+            energy: this.energy
+        };
+        this.activate(data);
+        return {
+            str: Math.min(9, Math.max(0, data.str)),
+            wis: Math.min(9, Math.max(0, data.wis)),
+            dex: Math.min(9, Math.max(0, data.dex)),
+            luck: Math.min(100, Math.max(0, data.luck)),
+            energy: Math.min(10, Math.max(0, data.energy))
+        };
     }
-  }
 
-  get dex(): number {
-    return this.originals.dex + this.boosts.dex;
-  }
-
-  set dex(value: number) {
-    const updated = value - this.originals.dex;
-    if (updated > this.boosts.dex || this.losable.dex) {
-      this.boosts.dex = updated;
+    private get losable(): StatBlock<boolean> {
+        const data: Trigger = {
+            type: TriggerType.LOSS_CHECK,
+            str: true,
+            wis: true,
+            dex: true,
+            luck: true,
+            energy: true
+        };
+        this.activate(data);
+        return {
+            str: data.str,
+            wis: data.wis,
+            dex: data.dex,
+            luck: data.luck,
+            energy: data.energy
+        };
     }
-  }
 
-  get luck(): number {
-    return this.originals.luck + this.boosts.luck;
-  }
-
-  set luck(value: number) {
-    const updated = value - this.originals.luck;
-    if (updated > this.boosts.luck || this.losable.luck) {
-      this.boosts.luck = updated;
+    get str(): number {
+        return this.originals.str + this.boosts.str;
     }
-  }
 
-  get energy(): number {
-    return this.originals.energy + this.boosts.energy;
-  }
-
-  set energy(value: number) {
-    const updated = value - this.originals.energy;
-    if (updated >= this.boosts.energy) {
-      this.boosts.energy = updated;
-    } else if (this.losable.energy) {
-      this.boosts.energy = updated;
-      this.activate({ type: TriggerType.LOSE_ENERGY });
+    set str(value: number) {
+        const updated = value - this.originals.str;
+        if (updated > this.boosts.str || this.losable.str) {
+            this.boosts.str = updated;
+        }
     }
-  }
 
-  getStat(stat: Stats): number {
-    switch (stat) {
-      case Stats.STRENGTH:
-        return this.stats.str;
-      case Stats.WISDOM:
-        return this.stats.wis;
-      case Stats.DEXTERITY:
-        return this.stats.dex;
+    get wis(): number {
+        return this.originals.wis + this.boosts.wis;
     }
-  }
 
-  // Returns true if this Hero is in the player's Party
-  isInParty(party: Party): boolean {
-    return party.members.indexOf(this) > -1;
-  }
-
-  // Boosts a random stat on this hero
-  empowerRandom(): void {
-    switch (EnumsHelper.getRandomStat()) {
-      case Stats.STRENGTH:
-        this.str++;
-        break;
-      case Stats.WISDOM:
-        this.wis++;
-        break;
-      case Stats.DEXTERITY:
-        this.dex++;
-        break;
+    set wis(value: number) {
+        const updated = value - this.originals.wis;
+        if (updated > this.boosts.wis || this.losable.wis) {
+            this.boosts.wis = updated;
+        }
     }
-  }
 
-  // Restores a given stat to its original value
-  refresh(stat: Stats): void {
-    switch (stat) {
-      case Stats.STRENGTH:
-        this.str = this.originals.str;
-        break;
-      case Stats.WISDOM:
-        this.wis = this.originals.wis;
-        break;
-      case Stats.DEXTERITY:
-        this.dex = this.originals.dex;
-        break;
+    get dex(): number {
+        return this.originals.dex + this.boosts.dex;
     }
-  }
 
-  // Restores energy to its original value
-  refreshEnergy(): void {
-    this.energy = this.originals.energy;
-  }
+    set dex(value: number) {
+        const updated = value - this.originals.dex;
+        if (updated > this.boosts.dex || this.losable.dex) {
+            this.boosts.dex = updated;
+        }
+    }
 
-  // Returns the text used in this hero's description
-  descriptionText(): string {
-    const stat = (n: number): string => (n > 9 ? `${n}\t` : `\t${n}\t`);
-    let skills = 'skills: none';
-    if (this.skills[0]) {
-      skills = `skills:\t${this.skills[0]}`;
-      if (this.skills[1]) {
-        skills += `\t${this.skills[1]}`;
-      }
+    get luck(): number {
+        return this.originals.luck + this.boosts.luck;
     }
-    let energy = '';
-    for (let a = 0; a < WTEXT - 10; a++) {
-      energy = (a < this.stats.energy ? 'H' : '\t') + energy;
-    }
-    return (
-      `${this.name}\n` +
-      `${this.people}\n` +
-      `${this.basket.itemCount}/${this.basket.total}\titems\t` +
-      `${energy}\nstats:\t` +
-      `${this.stats.str}\tstr/` +
-      `${this.stats.wis}\twis/` +
-      `${this.stats.dex}\tdex\n` +
-      `${skills}\neffect:${this.description}`
-    );
-  }
 
-  // Returns true if the hero passes a luck check
-  lucky(): boolean {
-    return Random.passes(this.stats.luck / 100);
-  }
+    set luck(value: number) {
+        const updated = value - this.originals.luck;
+        if (updated > this.boosts.luck || this.losable.luck) {
+            this.boosts.luck = updated;
+        }
+    }
 
-  // Triggers item and hero effects
-  activate(trigger: Trigger): void {
-    for (const item of this.basket.toList()) {
-      if (item.effect) {
-        item.effect(this.game, trigger);
-      }
+    get energy(): number {
+        return this.originals.energy + this.boosts.energy;
     }
-    if (this.effect) {
-      this.effect(this.game, trigger);
+
+    set energy(value: number) {
+        const updated = value - this.originals.energy;
+        if (updated >= this.boosts.energy) {
+            this.boosts.energy = updated;
+        } else if (this.losable.energy) {
+            this.boosts.energy = updated;
+            this.activate({ type: TriggerType.LOSE_ENERGY });
+        }
     }
-  }
+
+    getStat(stat: Stats): number {
+        switch (stat) {
+            case Stats.STRENGTH:
+                return this.stats.str;
+            case Stats.WISDOM:
+                return this.stats.wis;
+            case Stats.DEXTERITY:
+                return this.stats.dex;
+        }
+    }
+
+    // Returns true if this Hero is in the player's Party
+    isInParty(party: Party): boolean {
+        return party.members.indexOf(this) > -1;
+    }
+
+    // Boosts a random stat on this hero
+    empowerRandom(): void {
+        switch (EnumsHelper.getRandomStat()) {
+            case Stats.STRENGTH:
+                this.str++;
+                break;
+            case Stats.WISDOM:
+                this.wis++;
+                break;
+            case Stats.DEXTERITY:
+                this.dex++;
+                break;
+        }
+    }
+
+    // Restores a given stat to its original value
+    refresh(stat: Stats): void {
+        switch (stat) {
+            case Stats.STRENGTH:
+                this.str = this.originals.str;
+                break;
+            case Stats.WISDOM:
+                this.wis = this.originals.wis;
+                break;
+            case Stats.DEXTERITY:
+                this.dex = this.originals.dex;
+                break;
+        }
+    }
+
+    // Restores energy to its original value
+    refreshEnergy(): void {
+        this.energy = this.originals.energy;
+    }
+
+    // Returns the text used in this hero's description
+    descriptionText(): string {
+        let skills = 'skills: none';
+        if (this.skills[0]) {
+            skills = `skills:\t${this.skills[0]}`;
+            if (this.skills[1]) {
+                skills += `\t${this.skills[1]}`;
+            }
+        }
+        let energy = '';
+        for (let a = 0; a < WTEXT - 10; a++) {
+            energy = (a < this.stats.energy ? 'H' : '\t') + energy;
+        }
+        return (
+            `${this.name}\n` +
+            `${this.people}\n` +
+            `${this.basket.itemCount}/${this.basket.total}\titems\t` +
+            `${energy}\nstats:\t` +
+            `${this.stats.str}\tstr/` +
+            `${this.stats.wis}\twis/` +
+            `${this.stats.dex}\tdex\n` +
+            `${skills}\neffect:${this.description}`
+        );
+    }
+
+    // Returns true if the hero passes a luck check
+    lucky(): boolean {
+        return Random.passes(this.stats.luck / 100);
+    }
+
+    // Triggers item and hero effects
+    activate(trigger: Trigger): void {
+        for (const item of this.basket.toList()) {
+            if (item.effect) {
+                item.effect(this.game, trigger);
+            }
+        }
+        if (this.effect) {
+            this.effect(this.game, trigger);
+        }
+    }
 }
