@@ -16,7 +16,7 @@ export default class WaterfallEvent extends EventView {
                     continue: () =>
                         this.game.views.setViews(
                             Selectors.heroes(this.game, this.game.party.members, (hero: Hero) => ({
-                                choose: () => {
+                                'go to waterfall': () => {
                                     const stat = EnumsHelper.getRandomStat();
                                     if (stat === Stats.STRENGTH) {
                                         hero.str += hero.wis + hero.dex;

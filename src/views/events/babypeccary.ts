@@ -9,7 +9,6 @@ import View from '../view';
 
 export default class BabyPeccaryEvent extends EventView {
     getViews(): View[] {
-        const that = this;
         return [
             {
                 image: Sprites.BABY_PECCARY,
@@ -17,7 +16,7 @@ export default class BabyPeccaryEvent extends EventView {
                 actions: {
                     continue: () => {
                         if (this.game.party.canPickupItems) {
-                            that.game.views.setViews(
+                            this.game.views.setViews(
                                 Selectors.heroes(
                                     this.game,
                                     this.game.party.emptyItemSlots(),
@@ -42,7 +41,7 @@ export default class BabyPeccaryEvent extends EventView {
                                                     hero.isInParty(this.game.party) &&
                                                     hero.basket.contains(item)
                                             );
-                                            that.game.views.setViews([
+                                            this.game.views.setViews([
                                                 {
                                                     image: Sprites.BABY_PECCARY,
                                                     text: `${hero.name} picks up the baby peccary.`,
@@ -56,7 +55,7 @@ export default class BabyPeccaryEvent extends EventView {
                                 )
                             );
                         } else {
-                            that.game.views.setViews([
+                            this.game.views.setViews([
                                 {
                                     image: Sprites.BABY_PECCARY,
                                     text: `your party's inventory is completely full. your party leaves the small animal.`,

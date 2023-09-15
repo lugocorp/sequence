@@ -17,7 +17,6 @@ export default class CliffsEvent extends EventView {
         this.original = this.game.party.size;
         this.stat = EnumsHelper.getRandomStat();
         this.cutoff = Random.max(4) + 1;
-        const that = this;
         return [
             {
                 image: Sprites.CLIFF,
@@ -26,7 +25,7 @@ export default class CliffsEvent extends EventView {
                 } ${EnumsHelper.getStatName(this.stat)} or ${
                     this.higher ? 'higher' : 'lower'
                 } may pass.`,
-                actions: { continue: () => that.finish() }
+                actions: { continue: () => this.finish() }
             }
         ];
     }

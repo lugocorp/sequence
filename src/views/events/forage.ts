@@ -25,7 +25,6 @@ export default class ForageEvent extends EventView {
                 type: TOXIC
             }
         ]);
-        const that = this;
         const result = (action: string, aftermath: () => void): void =>
             this.game.views.setViews([
                 {
@@ -43,16 +42,16 @@ export default class ForageEvent extends EventView {
                 actions: {
                     'eat it raw': () => {
                         if (plant.type === SAFE) {
-                            result('eats', () => that.empower());
+                            result('eats', () => this.empower());
                         } else {
-                            result('eats', () => that.poison());
+                            result('eats', () => this.poison());
                         }
                     },
                     'boil it': () => {
                         if (plant.type === SEMISAFE) {
-                            result('boils and eats', () => that.empower());
+                            result('boils and eats', () => this.empower());
                         } else if (plant.type === TOXIC) {
-                            result('boils and eats', () => that.poison());
+                            result('boils and eats', () => this.poison());
                         } else {
                             result('boils and eats', () => this.game.progress());
                         }

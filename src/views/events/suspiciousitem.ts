@@ -23,7 +23,7 @@ export default class SuspiciousItemEvent extends EventView {
                                           (h: Hero) => h.basket.hasSpace
                                       ),
                                       (hero: Hero) => ({
-                                          select: () => {
+                                          'pick it up': () => {
                                               this.game.chain.futureEvent(
                                                   new SpiritWantsItsStuffBackEvent(
                                                       this.game,

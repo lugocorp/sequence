@@ -21,7 +21,6 @@ export default class ChallengeEvent extends EventView {
     private expectation: Stats;
 
     getViews(): View[] {
-        const that = this;
         this.challenger = {
             ...this.game.data.getRandomSpirit(),
             strength: Random.max(7),
@@ -33,13 +32,12 @@ export default class ChallengeEvent extends EventView {
             {
                 image: this.challenger.sprite,
                 text: `a powerful spirit offers your party a challenge. choose someone to participate.`,
-                actions: { continue: () => that.viewChallenger() }
+                actions: { continue: () => this.viewChallenger() }
             }
         ];
     }
 
     viewChallenger(): void {
-        const that = this;
         const stat = (n: number): string => (n > 9 ? `\t${n}\t` : `\t${n}\t\t`);
         const desc = `${this.challenger.name}\nstr:${stat(this.challenger.strength)}wis:${stat(
             this.challenger.wisdom
@@ -52,21 +50,20 @@ export default class ChallengeEvent extends EventView {
                 image: this.challenger.sprite,
                 text,
                 actions: {
-                    'view party': () => that.viewParty()
+                    'view party': () => this.viewParty()
                 }
             }
         ]);
     }
 
     viewParty(): void {
-        const that = this;
         this.game.views.setViews(
             Selectors.heroes(
                 this.game,
                 this.game.party.members,
                 (hero: Hero) => ({
-                    choose: () => that.finish(hero),
-                    'view spirit': () => that.viewChallenger()
+                    choose: () => this.finish(hero),
+                    'view spirit': () => this.viewChallenger()
                 }),
                 (hero: Hero) =>
                     `${this.coloredRate(
@@ -77,7 +74,6 @@ export default class ChallengeEvent extends EventView {
     }
 
     finish(hero: Hero): void {
-        const that = this;
         const result: boolean = this.playerOvercomesChallenge(hero);
         if (result) {
             this.game.history.challengesWon++;
@@ -93,7 +89,7 @@ export default class ChallengeEvent extends EventView {
                     : `${hero.name} did not succeed in the spirit's challenge.`,
                 actions: {
                     continue: () =>
-                        that.game.views.setViews([
+                        this.game.views.setViews([
                             {
                                 image: hero.sprite,
                                 text: result

@@ -6,15 +6,14 @@ export default class HTML5GameAudio extends GameAudio {
 
     // Loads all audio assets specified in this file
     async loadAudio(): Promise<void> {
-        const that = this;
         this.assets = new Array(this.paths.length);
         await Promise.all(
             this.paths.map(
                 (path: string, index: number) =>
                     new Promise((resolve) => {
-                        that.assets[index] = new Audio();
-                        that.assets[index].src = `./assets/${path}`;
-                        that.assets[index].addEventListener('canplaythrough', resolve);
+                        this.assets[index] = new Audio();
+                        this.assets[index].src = `./assets/${path}`;
+                        this.assets[index].addEventListener('canplaythrough', resolve);
                     })
             )
         );

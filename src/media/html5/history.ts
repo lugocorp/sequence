@@ -33,14 +33,13 @@ export default class HTML5HistoryManager extends HistoryManager {
      * Writes save data to storage
      */
     async save(): Promise<void> {
-        const that = this;
         if (!this.entry) {
             return;
         }
         return new Promise((resolve) => {
-            that.entry.createWriter(function (writer) {
+            this.entry.createWriter(function (writer) {
                 writer.onwriteend = resolve;
-                writer.write(JSON.stringify(that.runs));
+                writer.write(JSON.stringify(this.runs));
             });
         });
     }

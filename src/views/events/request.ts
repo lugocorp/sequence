@@ -29,7 +29,7 @@ export default class RequestEvent extends EventView {
                             this.game,
                             this.game.party.members,
                             (hero: Hero) => ({
-                                choose: () => {
+                                'attempt request': () => {
                                     const result: boolean = this.playerSatisfiesRequest(
                                         hero,
                                         challenger

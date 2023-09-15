@@ -54,7 +54,7 @@ export default class OfferingEvent extends EventView {
         if (this.game.party.canPickupItems) {
             this.game.views.setViews(
                 Selectors.heroes(this.game, this.game.party.emptyItemSlots(), (hero: Hero) => ({
-                    choose: () => this.finish(hero),
+                    'accept gift': () => this.finish(hero),
                     'view gift': () => this.viewGift()
                 }))
             );

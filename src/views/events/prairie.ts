@@ -15,7 +15,7 @@ export default class PrairieEvent extends EventView {
                     continue: () =>
                         this.game.views.setViews(
                             Selectors.heroes(this.game, this.game.party.members, (hero: Hero) => ({
-                                choose: () => {
+                                'travel the prairie': () => {
                                     this.game.party.remove(hero);
                                     summon(this.game, hero);
                                     this.game.views.setViews([
