@@ -14,7 +14,7 @@ export default class ThreeSistersEvent extends EventView {
                     continue: () =>
                         this.game.views.setViews(
                             Selectors.heroes(this.game, this.game.party.members, (hero: Hero) => ({
-                                select: () => {
+                                'eat the crops': () => {
                                     hero.luck += 5;
                                     hero.str++;
                                     hero.wis++;

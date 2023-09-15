@@ -11,28 +11,25 @@ export default class Selectors {
         actions: (hero: Hero) => Actions,
         extra?: (hero: Hero) => string
     ): View[] {
-        return heroes.map((hero: Hero, i: number) => {
-            const view: View = {
-                image: hero.sprite,
-                text: `${i + 1}/${heroes.length} ${hero.descriptionText()}${
-                    extra ? '\n' + extra(hero) : ''
-                }`,
-                actions: {
-                    ...(hero.basket.hasItems
-                        ? {
-                              items: () =>
-                                  game.views.setViews(
-                                      Selectors.items(hero.basket.toList(), (_: Item) => ({
-                                          back: () => game.views.setViews([ view ])
-                                      }))
-                                  )
-                          }
-                        : {}),
-                    ...actions(hero)
-                }
-            };
-            return view;
-        });
+        return heroes.map((hero: Hero, i: number) => ({
+            image: hero.sprite,
+            text: `${i + 1}/${heroes.length} ${hero.descriptionText()}${
+                extra ? '\n' + extra(hero) : ''
+            }`,
+            actions: {
+                ...(hero.basket.hasItems
+                    ? {
+                          items: () =>
+                              game.views.pushViews(
+                                  Selectors.items(hero.basket.toList(), (_: Item) => ({
+                                      back: () => game.views.popViews()
+                                  }))
+                              )
+                      }
+                    : {}),
+                ...actions(hero)
+            }
+        }));
     }
 
     static items(items: Item[], actions: (item: Item) => Actions): View[] {

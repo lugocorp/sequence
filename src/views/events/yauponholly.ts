@@ -15,7 +15,7 @@ export default class YauponHollyEvent extends EventView {
                     continue: () =>
                         this.game.views.setViews(
                             Selectors.heroes(this.game, this.game.party.members, (hero: Hero) => ({
-                                select: () => {
+                                'drink yaupon tea': () => {
                                     hero.refresh(Stats.STRENGTH);
                                     hero.refresh(Stats.WISDOM);
                                     hero.refresh(Stats.DEXTERITY);

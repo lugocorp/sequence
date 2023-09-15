@@ -15,7 +15,7 @@ export default class CactusEvent extends EventView {
                     continue: () =>
                         that.game.views.setViews(
                             Selectors.heroes(this.game, this.game.party.members, (hero: Hero) => ({
-                                select: () => {
+                                'eat fruit': () => {
                                     that.game.views.setViews([
                                         {
                                             image: hero.sprite,

@@ -22,7 +22,7 @@ export default class SeedEvent extends EventView {
                                     this.game,
                                     this.game.party.emptyItemSlots(),
                                     (hero: Hero) => ({
-                                        choose: () => {
+                                        'carry the seed': () => {
                                             const item: Item = new Item(
                                                 'magic seed',
                                                 Sprites.SEED,

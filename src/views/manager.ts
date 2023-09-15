@@ -2,10 +2,22 @@ import { WTEXT } from '../types';
 import EventView from './event';
 import View from './view';
 
+type ViewStackEntry = {
+    selectedViewIndex: number;
+    views: View[];
+};
+
 export default class ViewManager {
-    private selectedViewIndex = 0;
     private actionsOpen = false;
-    private views: View[] = [];
+    private viewStack: ViewStackEntry[] = [];
+
+    private get views(): View[] {
+        return this.viewStack[this.viewStack.length - 1].views;
+    }
+
+    private get selectedViewIndex(): number {
+        return this.viewStack[this.viewStack.length - 1].selectedViewIndex;
+    }
 
     hasOptions(): boolean {
         return this.views.length > 1;
@@ -23,7 +35,7 @@ export default class ViewManager {
         if (this.selectedViewIndex + d >= this.views.length || this.selectedViewIndex + d < 0) {
             return false;
         }
-        this.selectedViewIndex += d;
+        this.viewStack[this.viewStack.length - 1].selectedViewIndex += d;
         return true;
     }
 
@@ -32,16 +44,27 @@ export default class ViewManager {
     }
 
     setViews(views: View[]): void {
-        this.selectedViewIndex = 0;
+        this.viewStack = [];
+        this.pushViews(views);
+    }
+
+    pushViews(views: View[]): void {
         this.actionsOpen = false;
-        this.views = views;
         for (const view of views) {
             view.text = this.formatText(view.text);
         }
+        this.viewStack.push({
+            selectedViewIndex: 0,
+            views
+        });
+    }
+
+    popViews(): void {
+        this.viewStack.slice(this.viewStack.length - 1, 1);
     }
 
     getView(): View {
-        const current: View = this.views[this.selectedViewIndex];
+        const current: View = this.views[this.views.length - 1][this.selectedViewIndex];
         if (Object.keys(current.actions).length === 1) {
             return current;
         }

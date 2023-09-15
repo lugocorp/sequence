@@ -22,7 +22,7 @@ export default class BabyPeccaryEvent extends EventView {
                                     this.game,
                                     this.game.party.emptyItemSlots(),
                                     (hero: Hero) => ({
-                                        choose: () => {
+                                        'carry the baby': () => {
                                             const item: Item = new Item(
                                                 'baby peccary',
                                                 Sprites.BABY_PECCARY,

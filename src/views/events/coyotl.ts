@@ -17,7 +17,7 @@ export default class CoyotlEvent extends EventView {
                     continue: () =>
                         this.game.views.setViews(
                             Selectors.heroes(this.game, this.game.party.members, (hero: Hero) => ({
-                                choose: () => {
+                                'run from coyotl': () => {
                                     this.game.party.remove(hero);
                                     this.game.views.setViews([
                                         {

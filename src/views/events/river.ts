@@ -18,7 +18,7 @@ export default class RiverEvent extends EventView {
                                 this.game,
                                 this.game.party.members,
                                 (hero: Hero) => ({
-                                    choose: () => this.river(hero)
+                                    'approach river': () => this.river(hero)
                                 }),
                                 (hero: Hero) =>
                                     `${this.coloredRate(

@@ -23,7 +23,7 @@ export default class EggEvent extends EventView {
                                     this.game,
                                     this.game.party.emptyItemSlots(),
                                     (hero: Hero) => ({
-                                        choose: () => {
+                                        'carry the egg': () => {
                                             const item: Item = new Item(
                                                 'round egg',
                                                 Sprites.EGG,
