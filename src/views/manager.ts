@@ -60,11 +60,11 @@ export default class ViewManager {
     }
 
     popViews(): void {
-        this.viewStack.slice(this.viewStack.length - 1, 1);
+        this.viewStack.splice(this.viewStack.length - 1, 1);
     }
 
     getView(): View {
-        const current: View = this.views[this.views.length - 1][this.selectedViewIndex];
+        const current: View = this.views[this.selectedViewIndex];
         if (Object.keys(current.actions).length === 1) {
             return current;
         }

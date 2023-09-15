@@ -62,7 +62,7 @@ export default class ChallengeEvent extends EventView {
                 this.game,
                 this.game.party.members,
                 (hero: Hero) => ({
-                    choose: () => this.finish(hero),
+                    'attempt challenge': () => this.finish(hero),
                     'view spirit': () => this.viewChallenger()
                 }),
                 (hero: Hero) =>
