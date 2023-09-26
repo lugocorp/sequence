@@ -182,12 +182,12 @@ export const heroes: HeroGenerator[] = [
             Skill.STEALTH
         ]),
     (game: Game) =>
-        new Hero(game, Sprites.HOOP_DANCER, 'hoop dancer', 'cree', 0, 0, 3, 2, 2, [
+        new Hero(game, Sprites.HOOP_DANCER, 'hoop dancer', 'nehiyaw', 0, 0, 3, 2, 2, [
             Skill.ENDURANCE,
             Skill.STEALTH
         ]),
     (game: Game) =>
-        new Hero(game, Sprites.SWORD_HOLDER, 'sword holder', 'lakota', 6, 0, 0, 3, 1, [
+        new Hero(game, Sprites.SWORD_HOLDER, 'sword holder', 'oceti sakowin', 6, 0, 0, 3, 1, [
             Skill.PROWESS,
             undefined
         ]),
