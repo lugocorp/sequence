@@ -61,7 +61,7 @@ export default class ViewFactory {
         this.game.views.setViews(
             [
                 '-development-\n\nalex lugo\ntaíno/guachichil\n\n-play testing-\n\namanda brooks',
-                'alethea phillips\nomaha',
+                'alethea phillips\nomaha\n\nmubeen khan\n\nhibba hussain',
                 '-consultants-\n\nkoro valdivia\ntawantinsuyu\n\nnati/palta\nquechua\nshe/they',
                 'c. travioli\ncheyenne river lakota\n\nlydia prince\ndakelh/nehiyaw\nshe/her'
             ].map(
