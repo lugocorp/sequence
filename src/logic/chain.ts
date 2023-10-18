@@ -140,6 +140,24 @@ export default class EventChain {
     }
 
     /*
+     * Returns a random penalty event for when you run from spirits
+     */
+    getPenaltyEvent(): EventView {
+        return Random.weighted([
+            [1, (game: Game) => new HungryBadgerEvent(game)],
+            [1, (game: Game) => new SkinwalkerEvent(game)],
+            [1, (game: Game) => new OldBridgeEvent(game)],
+            [1, (game: Game) => new SnakeBiteEvent(game)],
+            [1, (game: Game) => new CliffsEvent(game)],
+            [1, (game: Game) => new CoyotlEvent(game)],
+            [1, (game: Game) => new RabbitEvent(game)],
+            [1, (game: Game) => new RavenEvent(game)],
+            [1, (game: Game) => new RiverEvent(game)],
+            [1, (game: Game) => new StormEvent(game)],
+        ])(this.game);
+    }
+
+    /*
      * This function clears the chain's internal state
      */
     clear(): void {

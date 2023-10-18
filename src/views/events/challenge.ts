@@ -63,6 +63,7 @@ export default class ChallengeEvent extends EventView {
                 this.game.party.members,
                 (hero: Hero) => ({
                     'attempt challenge': () => this.finish(hero),
+                    'run away': () => this.run(),
                     'view spirit': () => this.viewChallenger()
                 }),
                 (hero: Hero) =>
@@ -71,6 +72,15 @@ export default class ChallengeEvent extends EventView {
                     )} chance of success`
             )
         );
+    }
+
+    run(): void {
+        this.game.chain.futureEvent(this.game.chain.getPenaltyEvent(), 1);
+        this.game.views.setViews([{
+            image: this.challenger.sprite,
+            text: `your party ran from the spirit's challenge. they may come across some other trial...`,
+            actions: { continue: () => this.game.progress() },
+        }]);
     }
 
     finish(hero: Hero): void {
