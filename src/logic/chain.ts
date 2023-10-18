@@ -48,6 +48,7 @@ import DeerEvent from '../views/events/deer';
 import CaveEvent from '../views/events/cave';
 import SeedEvent from '../views/events/seed';
 import EggEvent from '../views/events/egg';
+import OwlEvent from '../views/events/owl';
 import Random from './random';
 import Game from '../game';
 
@@ -75,44 +76,45 @@ export default class EventChain {
     private getEventRollTable(): [number, EventGenerator][] {
         let table: [number, EventGenerator][] = [
             [ 20, (game: Game) => new ChallengeEvent(game) ], // 20
-            [ 13, (game: Game) => new RequestEvent(game) ], // 33
-            [ 8, (game: Game) => new WeatherEvent(game) ], // 41
-            [ 4, (game: Game) => new OfferingEvent(game) ], // 45
-            [ 4, (game: Game) => new CoyotlEvent(game) ], // 49
-            [ 2, (game: Game) => new ForageEvent(game) ], // 51
-            [ 2, (game: Game) => new GiftEvent(game) ], // 53
-            [ 2, (game: Game) => new EggEvent(game) ], // 55
-            [ 2, (game: Game) => new PlantingSeasonEvent(game) ], // 57
-            [ 2, (game: Game) => new HungryBadgerEvent(game) ], // 59
-            [ 2, (game: Game) => new CliffsEvent(game) ], // 61
-            [ 2, (game: Game) => new TradingPostEvent(game) ], // 63
-            [ 2, (game: Game) => new RiverEvent(game) ], // 65
-            [ 2, (game: Game) => new CaravanEvent(game) ], // 67
-            [ 2, (game: Game) => new MedicineManEvent(game) ], // 69
-            [ 2, (game: Game) => new YauponHollyEvent(game) ], // 71
-            [ 2, (game: Game) => new RavenEvent(game) ], // 73
-            [ 2, (game: Game) => new RabbitEvent(game) ], // 75
-            [ 2, (game: Game) => new SeedEvent(game) ], // 77
-            [ 2, (game: Game) => new SnakeBiteEvent(game) ], // 79
-            [ 2, (game: Game) => new StormEvent(game) ], // 81
-            [ 2, (game: Game) => new PrairieEvent(game) ], // 83
-            [ 1, (game: Game) => new BabyPeccaryEvent(game) ], // 84
-            [ 1, (game: Game) => new CactusEvent(game) ], // 85
-            [ 1, (game: Game) => new MentorEvent(game) ], // 86
-            [ 1, (game: Game) => new SunriseEvent(game) ], // 87
-            [ 1, (game: Game) => new SuspiciousItemEvent(game) ], // 88
-            [ 1, (game: Game) => new ProphecyEvent(game) ], // 89
-            [ 1, (game: Game) => new DeerEvent(game) ], // 90
-            [ 1, (game: Game) => new CaveEvent(game) ], // 91
-            [ 1, (game: Game) => new ThreeSistersEvent(game) ], // 92
-            [ 1, (game: Game) => new OldBridgeEvent(game) ], // 93
-            [ 1, (game: Game) => new VillageEvent(game) ], // 94
-            [ 1, (game: Game) => new MerchantEvent(game) ], // 95
-            [ 1, (game: Game) => new DreamEvent(game) ], // 96
-            [ 1, (game: Game) => new SiblingsEvent(game) ], // 97
-            [ 1, (game: Game) => new WaterfallEvent(game) ], // 98
-            [ 1, (game: Game) => new ButterflyFieldEvent(game) ], // 99
-            [ 1, (game: Game) => new EagleEvent(game) ] // 100
+            [ 12, (game: Game) => new RequestEvent(game) ], // 32
+            [ 8, (game: Game) => new WeatherEvent(game) ], // 40
+            [ 4, (game: Game) => new OfferingEvent(game) ], // 44
+            [ 4, (game: Game) => new CoyotlEvent(game) ], // 48
+            [ 2, (game: Game) => new ForageEvent(game) ], // 50
+            [ 2, (game: Game) => new GiftEvent(game) ], // 52
+            [ 2, (game: Game) => new EggEvent(game) ], // 54
+            [ 2, (game: Game) => new PlantingSeasonEvent(game) ], // 56
+            [ 2, (game: Game) => new HungryBadgerEvent(game) ], // 58
+            [ 2, (game: Game) => new CliffsEvent(game) ], // 60
+            [ 2, (game: Game) => new TradingPostEvent(game) ], // 62
+            [ 2, (game: Game) => new RiverEvent(game) ], // 64
+            [ 2, (game: Game) => new CaravanEvent(game) ], // 66
+            [ 2, (game: Game) => new MedicineManEvent(game) ], // 68
+            [ 2, (game: Game) => new YauponHollyEvent(game) ], // 70
+            [ 2, (game: Game) => new RavenEvent(game) ], // 72
+            [ 2, (game: Game) => new RabbitEvent(game) ], // 74
+            [ 2, (game: Game) => new SeedEvent(game) ], // 76
+            [ 2, (game: Game) => new SnakeBiteEvent(game) ], // 78
+            [ 2, (game: Game) => new StormEvent(game) ], // 80
+            [ 2, (game: Game) => new PrairieEvent(game) ], // 82
+            [ 1, (game: Game) => new BabyPeccaryEvent(game) ], // 3
+            [ 1, (game: Game) => new CactusEvent(game) ], // 84
+            [ 1, (game: Game) => new MentorEvent(game) ], // 85
+            [ 1, (game: Game) => new SunriseEvent(game) ], // 86
+            [ 1, (game: Game) => new SuspiciousItemEvent(game) ], // 87
+            [ 1, (game: Game) => new ProphecyEvent(game) ], // 88
+            [ 1, (game: Game) => new DeerEvent(game) ], // 89
+            [ 1, (game: Game) => new CaveEvent(game) ], // 90
+            [ 1, (game: Game) => new ThreeSistersEvent(game) ], // 91
+            [ 1, (game: Game) => new OldBridgeEvent(game) ], // 92
+            [ 1, (game: Game) => new VillageEvent(game) ], // 93
+            [ 1, (game: Game) => new MerchantEvent(game) ], // 94
+            [ 1, (game: Game) => new DreamEvent(game) ], // 95
+            [ 1, (game: Game) => new SiblingsEvent(game) ], // 96
+            [ 1, (game: Game) => new WaterfallEvent(game) ], // 97
+            [ 1, (game: Game) => new ButterflyFieldEvent(game) ], // 98
+            [ 1, (game: Game) => new EagleEvent(game) ], // 99
+            [ 1, (game: Game) => new OwlEvent(game) ], // 100
         ];
         if (this.game.world.cave) {
             table = [
@@ -122,14 +124,15 @@ export default class EventChain {
                 [ 10, (game: Game) => new GiftEvent(game) ], // 50
                 [ 10, (game: Game) => new RavenEvent(game) ], // 60
                 [ 5, (game: Game) => new MentorEvent(game) ], // 65
-                [ 5, (game: Game) => new ProphecyEvent(game) ], // 70
-                [ 5, (game: Game) => new BabyPeccaryEvent(game) ], // 75
-                [ 5, (game: Game) => new SkinwalkerEvent(game) ], // 80
-                [ 4, (game: Game) => new RabbitEvent(game) ], // 84
-                [ 4, (game: Game) => new WeatherEvent(game) ], // 88
-                [ 4, (game: Game) => new EggEvent(game) ], // 92
-                [ 4, (game: Game) => new HungryBadgerEvent(game) ], // 96
-                [ 2, (game: Game) => new DreamEvent(game) ], // 98
+                [ 5, (game: Game) => new SkinwalkerEvent(game) ], // 70
+                [ 4, (game: Game) => new ProphecyEvent(game) ], // 74
+                [ 4, (game: Game) => new BabyPeccaryEvent(game) ], // 78
+                [ 4, (game: Game) => new RabbitEvent(game) ], // 82
+                [ 4, (game: Game) => new WeatherEvent(game) ], // 86
+                [ 4, (game: Game) => new EggEvent(game) ], // 90
+                [ 4, (game: Game) => new HungryBadgerEvent(game) ], // 94
+                [ 2, (game: Game) => new DreamEvent(game) ], // 96
+                [ 2, (game: Game) => new OwlEvent(game) ], // 98
                 [ 2, (game: Game) => new SnakeBiteEvent(game) ] // 100
             ];
         }
@@ -154,6 +157,7 @@ export default class EventChain {
             [1, (game: Game) => new RavenEvent(game)],
             [1, (game: Game) => new RiverEvent(game)],
             [1, (game: Game) => new StormEvent(game)],
+            [1, (game: Game) => new OwlEvent(game)],
         ])(this.game);
     }
 
