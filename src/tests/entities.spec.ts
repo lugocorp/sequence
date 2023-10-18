@@ -103,6 +103,14 @@ describe('Party tests', function () {
             `Cannot have more than ${Party.MAX} members in your party`
         );
     });
+
+    it('Ensure populate() does not give duplicate heroes', function () {
+        for (let a = 0; a < 100; a++) {
+            party.clear();
+            party.populate();
+            expect(new Set(party.members.map((x: Hero) => x.name)).size).to.equal(Party.MAX);
+        }
+    });
 });
 
 describe('Hero tests', function () {

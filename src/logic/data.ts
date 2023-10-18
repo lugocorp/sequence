@@ -35,8 +35,12 @@ export default class DataManager {
      * Returns a random hero available in the game. Every hero has equal chance
      * to be returned by this function.
      */
-    getRandomHero(): Hero {
-        return Random.element(heroes)(this.game);
+    getRandomHero(exceptions: string[] = []): Hero {
+        let hero: Hero = undefined;
+        while (!hero || exceptions.includes(hero.name)) {
+            hero = Random.element(heroes)(this.game);
+        }
+        return hero;
     }
 
     /*

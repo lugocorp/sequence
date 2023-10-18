@@ -47,7 +47,7 @@ export default class Party {
     // Fully populates the party with an optional guaranteed character
     populate(): void {
         while (this.size < Party.MAX) {
-            this.add(this.game.data.getRandomHero());
+            this.add(this.game.data.getRandomHero(this.members.map((x: Hero) => x.name)));
         }
     }
 
