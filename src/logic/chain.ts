@@ -114,7 +114,7 @@ export default class EventChain {
             [ 1, (game: Game) => new WaterfallEvent(game) ], // 97
             [ 1, (game: Game) => new ButterflyFieldEvent(game) ], // 98
             [ 1, (game: Game) => new EagleEvent(game) ], // 99
-            [ 1, (game: Game) => new OwlEvent(game) ], // 100
+            [ 1, (game: Game) => new OwlEvent(game) ] // 100
         ];
         if (this.game.world.cave) {
             table = [
@@ -147,17 +147,17 @@ export default class EventChain {
      */
     getPenaltyEvent(): EventView {
         return Random.weighted([
-            [1, (game: Game) => new HungryBadgerEvent(game)],
-            [1, (game: Game) => new SkinwalkerEvent(game)],
-            [1, (game: Game) => new OldBridgeEvent(game)],
-            [1, (game: Game) => new SnakeBiteEvent(game)],
-            [1, (game: Game) => new CliffsEvent(game)],
-            [1, (game: Game) => new CoyotlEvent(game)],
-            [1, (game: Game) => new RabbitEvent(game)],
-            [1, (game: Game) => new RavenEvent(game)],
-            [1, (game: Game) => new RiverEvent(game)],
-            [1, (game: Game) => new StormEvent(game)],
-            [1, (game: Game) => new OwlEvent(game)],
+            [ 1, (game: Game) => new HungryBadgerEvent(game) ],
+            [ 1, (game: Game) => new SkinwalkerEvent(game) ],
+            [ 1, (game: Game) => new OldBridgeEvent(game) ],
+            [ 1, (game: Game) => new SnakeBiteEvent(game) ],
+            [ 1, (game: Game) => new CliffsEvent(game) ],
+            [ 1, (game: Game) => new CoyotlEvent(game) ],
+            [ 1, (game: Game) => new RabbitEvent(game) ],
+            [ 1, (game: Game) => new RavenEvent(game) ],
+            [ 1, (game: Game) => new RiverEvent(game) ],
+            [ 1, (game: Game) => new StormEvent(game) ],
+            [ 1, (game: Game) => new OwlEvent(game) ]
         ])(this.game);
     }
 

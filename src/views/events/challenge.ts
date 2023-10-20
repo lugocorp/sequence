@@ -76,11 +76,13 @@ export default class ChallengeEvent extends EventView {
 
     run(): void {
         this.game.chain.futureEvent(this.game.chain.getPenaltyEvent(), 1);
-        this.game.views.setViews([{
-            image: this.challenger.sprite,
-            text: `your party ran from the spirit's challenge. they may come across some other trial...`,
-            actions: { continue: () => this.game.progress() },
-        }]);
+        this.game.views.setViews([
+            {
+                image: this.challenger.sprite,
+                text: `your party ran from the spirit's challenge. they may come across some other trial...`,
+                actions: { continue: () => this.game.progress() }
+            }
+        ]);
     }
 
     finish(hero: Hero): void {

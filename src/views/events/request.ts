@@ -64,12 +64,17 @@ export default class RequestEvent extends EventView {
                                     ]);
                                 },
                                 'run away': () => {
-                                    this.game.chain.futureEvent(this.game.chain.getPenaltyEvent(), 1);
-                                    this.game.views.setViews([{
-                                        image: challenger.sprite,
-                                        text: `your party ran from the spirit's request. they may come across some other trial...`,
-                                        actions: { continue: () => this.game.progress() },
-                                    }]);
+                                    this.game.chain.futureEvent(
+                                        this.game.chain.getPenaltyEvent(),
+                                        1
+                                    );
+                                    this.game.views.setViews([
+                                        {
+                                            image: challenger.sprite,
+                                            text: `your party ran from the spirit's request. they may come across some other trial...`,
+                                            actions: { continue: () => this.game.progress() }
+                                        }
+                                    ]);
                                 },
                                 'view spirit': () => this.game.views.setViews([ spiritView ])
                             }),
