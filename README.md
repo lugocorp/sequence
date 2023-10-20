@@ -23,3 +23,4 @@ We have a number of `npm` commands:
 - `format` makes the code pretty and lints everything
 - `android` compiles and deploys the game to an android device
 - `test` run the unit tests
+- `apk` copy the built APK file to the root directory

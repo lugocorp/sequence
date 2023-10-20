@@ -8,7 +8,8 @@
     "format": "prettier -w src && eslint --fix src",
     "start": "webpack serve --port 2017",
     "android": "cordova run android",
-    "test": "mocha --loader=ts-node/esm --extension=ts src/tests/*.spec.ts"
+    "test": "mocha --loader=ts-node/esm --extension=ts src/tests/*.spec.ts",
+    "apk": "cp platforms/android/app/build/outputs/apk/debug/app-debug.apk app.apk"
   },
   "keywords": [
     "ecosystem:cordova"
