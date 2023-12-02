@@ -7,6 +7,7 @@ export default abstract class HistoryManager {
     nightsSurvived: number;
     challengesWon: number;
     partyMembers: number;
+    day: number;
 
     abstract initialize(): Promise<void>;
     abstract save(): Promise<void>;
@@ -21,6 +22,7 @@ export default abstract class HistoryManager {
         this.nightsSurvived = 0;
         this.challengesWon = 0;
         this.partyMembers = 0;
+        this.day = 1;
     }
 
     /**

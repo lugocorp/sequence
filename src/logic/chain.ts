@@ -43,6 +43,7 @@ import RiverEvent from '../views/events/river';
 import DreamEvent from '../views/events/dream';
 import StormEvent from '../views/events/storm';
 import EagleEvent from '../views/events/eagle';
+import ScoreEvent from '../views/events/score';
 import GiftEvent from '../views/events/gift';
 import DeerEvent from '../views/events/deer';
 import CaveEvent from '../views/events/cave';
@@ -56,6 +57,7 @@ type EventGenerator = (game: Game) => EventView;
 
 export default class EventChain {
     private previouslyPlanned: string;
+    private scoreTimer: number;
     futures: FutureEvent[] = [];
     events: EventView[];
 
@@ -167,6 +169,7 @@ export default class EventChain {
     clear(): void {
         this.futures = [];
         this.events = [ new BeginEvent(this.game) ];
+        this.scoreTimer = 0;
     }
 
     /*
@@ -180,6 +183,10 @@ export default class EventChain {
         }
         if (!this.game.party.size) {
             return new DeathEvent(this.game);
+        }
+        if (this.scoreTimer++ == 5) {
+            this.scoreTimer = 0;
+            return new ScoreEvent(this.game);
         }
         if (!this.events.length) {
             this.plan();
