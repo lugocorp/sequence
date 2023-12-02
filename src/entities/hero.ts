@@ -203,7 +203,15 @@ export default class Hero {
         }
         let health = '';
         for (let a = 0; a < WTEXT - 10; a++) {
-            health = (a < this.stats.health ? 'H' : '\t') + health;
+            // TODO change the icons for missing or extra hearts
+            health =
+                (a < this.stats.health
+                    ? a >= this.originals.health
+                        ? '+'
+                        : 'H'
+                    : a < this.originals.health
+                    ? '-'
+                    : '\t') + health;
         }
         return (
             `${this.name}\n` +
