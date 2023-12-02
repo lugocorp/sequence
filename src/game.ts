@@ -12,6 +12,7 @@ import TimeEvent from './views/events/time';
 
 export default class Game {
     private factory: ViewFactory;
+    private clickDisabled: boolean;
     views: ViewManager = new ViewManager();
     chain: EventChain;
     data: DataManager;
@@ -70,6 +71,7 @@ export default class Game {
     // Progresses to the next event in the game
     async progress(): Promise<void> {
         const wait = () => new Promise((resolve) => setTimeout(resolve, 10));
+        this.clickDisabled = true;
         for (this.graphics.dark = 0; this.graphics.dark < 100; this.graphics.dark += 20) {
             this.graphics.frame(this);
             await wait();
@@ -85,6 +87,7 @@ export default class Game {
             await wait();
         }
         this.graphics.frame(this);
+        this.clickDisabled = false;
     }
 
     // Returns the text coordinates of the indexed action
@@ -106,6 +109,9 @@ export default class Game {
 
     // Alerts the current view of a click event
     click(x: number, y: number, down: boolean): void {
+        if (this.clickDisabled) {
+            return;
+        }
         const view: View = this.views.getView();
         if (!view) {
             return;
