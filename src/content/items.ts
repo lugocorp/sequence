@@ -43,7 +43,7 @@ export const items: ItemGenerator[] = [
             'gold bead',
             Sprites.GOLD_BEAD,
             Rarity.COMMON,
-            '+1 energy during the day',
+            '+1 health during the day',
             (game: Game, data: Trigger) =>
                 game.world.time === Time.DAY ? stats(data, 0, 0, 0, 0, 1) : undefined
         ),
@@ -52,7 +52,7 @@ export const items: ItemGenerator[] = [
             'silver bead',
             Sprites.SILVER_BEAD,
             Rarity.COMMON,
-            '+1 energy at night',
+            '+1 health at night',
             (game: Game, data: Trigger) =>
                 game.world.time === Time.NIGHT ? stats(data, 0, 0, 0, 0, 1) : undefined
         ),
@@ -119,7 +119,7 @@ export const items: ItemGenerator[] = [
             'gourd bottle',
             Sprites.GOURD_BOTTLE,
             Rarity.UNCOMMON,
-            '+1 energy',
+            '+1 health',
             (game: Game, data: Trigger) => stats(data, 0, 0, 0, 0, 1)
         ),
     () =>
@@ -199,7 +199,7 @@ export const items: ItemGenerator[] = [
             'pemmican',
             Sprites.PEMMICAN,
             Rarity.RARE,
-            '+2 energy',
+            '+2 health',
             (game: Game, data: Trigger) => stats(data, 0, 0, 0, 0, 2)
         ),
     () =>
@@ -243,7 +243,7 @@ export const items: ItemGenerator[] = [
             'passionflower tea',
             Sprites.PASSIONFLOWER_TEA,
             Rarity.RARE,
-            '-1 energy',
+            '-1 health',
             (game: Game, data: Trigger) => stats(data, 0, 0, 0, 0, -1)
         ),
 
@@ -326,7 +326,7 @@ export const items: ItemGenerator[] = [
             'deer totem',
             Sprites.DEER_TOTEM,
             Rarity.MYTHIC,
-            "doubles the bearer's base energy",
+            "doubles the bearer's base health",
             undefined
         );
         item.effect = (game: Game, data: Trigger) =>
@@ -374,7 +374,7 @@ export const items: ItemGenerator[] = [
             'turquoise ring',
             Sprites.TURQUOISE_RING,
             Rarity.MYTHIC,
-            '+1 strength\n+1 wisdom\n+1 dexterity\n+100% luck\n+3 energy',
+            '+1 strength\n+1 wisdom\n+1 dexterity\n+100% luck\n+3 health',
             (game: Game, data: Trigger) => stats(data, 1, 1, 1, 100, 3)
         )
 ];
@@ -385,14 +385,14 @@ function stats(
     wis: number,
     dex: number,
     luck: number,
-    energy: number
+    health: number
 ): void {
     if (data.type === TriggerType.GET_STATS) {
         data.str += str;
         data.wis += wis;
         data.dex += dex;
         data.luck += luck;
-        data.energy += energy;
+        data.health += health;
     }
 }
 
@@ -417,12 +417,12 @@ function doubleBaseStats(
     str: boolean,
     wis: boolean,
     dex: boolean,
-    energy: boolean
+    health: boolean
 ): void {
     if (data.type === TriggerType.GET_STATS) {
         data.str += str ? hero.str : 0;
         data.wis += wis ? hero.wis : 0;
         data.dex += dex ? hero.dex : 0;
-        data.energy += energy ? hero.energy : 0;
+        data.health += health ? hero.health : 0;
     }
 }

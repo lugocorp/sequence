@@ -12,7 +12,7 @@ export default class VillageEvent extends EventView {
                     'heal and lose half': () => {
                         const leave = Math.min(this.game.party.size / 2);
                         for (const hero of this.game.party.members) {
-                            hero.refreshEnergy();
+                            hero.refreshHealth();
                         }
                         for (let a = 0; a < leave; a++) {
                             this.game.party.remove(this.game.party.randomMember());

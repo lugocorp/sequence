@@ -36,9 +36,9 @@ export default class RequestEvent extends EventView {
                                     );
                                     if (result) {
                                         this.game.history.challengesWon++;
-                                        hero.energy--;
+                                        hero.health--;
                                     } else {
-                                        hero.energy = -100;
+                                        hero.health = -100;
                                     }
                                     this.game.views.setViews([
                                         {
@@ -52,8 +52,8 @@ export default class RequestEvent extends EventView {
                                                         {
                                                             image: hero.sprite,
                                                             text: result
-                                                                ? `${hero.name} is successful but tired. they have lost some of their energy.`
-                                                                : `${hero.name} used up all their energy in the request.`,
+                                                                ? `${hero.name} is successful but tired. they have lost some of their health.`
+                                                                : `${hero.name} used up all their health in the request.`,
                                                             actions: {
                                                                 continue: () => this.game.progress()
                                                             }

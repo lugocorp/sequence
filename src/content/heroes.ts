@@ -125,17 +125,17 @@ export const heroes: HeroGenerator[] = [
             2,
             2,
             [ Skill.PROWESS, Skill.ENDURANCE ],
-            'will eventually heal from 1 base energy'
+            'will eventually heal from 1 base health'
         );
         const EagleKnightHealEvent = class extends EventView {
             getViews(): View[] {
                 return [
                     {
                         image: hero.sprite,
-                        text: `${hero.name} healed from low energy.`,
+                        text: `${hero.name} healed from low health.`,
                         actions: {
                             continue: () => {
-                                hero.energy++;
+                                hero.health++;
                                 game.progress();
                             }
                         }
@@ -144,7 +144,7 @@ export const heroes: HeroGenerator[] = [
             }
         };
         hero.effect = (game: Game, data: Trigger) => {
-            if (data.type === TriggerType.LOSE_ENERGY && hero.stats.energy === 1) {
+            if (data.type === TriggerType.LOSE_HEALTH && hero.stats.health === 1) {
                 game.chain.futureEvent(new EagleKnightHealEvent(game), 6, () =>
                     game.party.contains(hero)
                 );
@@ -263,10 +263,10 @@ export const heroes: HeroGenerator[] = [
             3,
             2,
             [ undefined, undefined ],
-            'will eventually rejoin your party if he has leftover energy'
+            'will eventually rejoin your party if he has leftover health'
         );
         hero.effect = (game: Game, data: Trigger) => {
-            if (data.type === TriggerType.LEAVE_PARTY && hero.stats.energy > 0) {
+            if (data.type === TriggerType.LEAVE_PARTY && hero.stats.health > 0) {
                 summon(game, hero);
             }
         };

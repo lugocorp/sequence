@@ -19,7 +19,7 @@ export default class Hero {
         str: number,
         wis: number,
         dex: number,
-        energy: number,
+        health: number,
         itemSlots: number,
         public skills: Skills = [ undefined, undefined ],
         public description: string = 'none',
@@ -31,14 +31,14 @@ export default class Hero {
             wis,
             dex,
             luck: 5,
-            energy
+            health
         };
         this.boosts = {
             str: 0,
             wis: 0,
             dex: 0,
             luck: 0,
-            energy: 0
+            health: 0
         };
     }
 
@@ -52,7 +52,7 @@ export default class Hero {
             wis: this.wis,
             dex: this.dex,
             luck: this.luck,
-            energy: this.energy
+            health: this.health
         };
         this.activate(data);
         return {
@@ -60,7 +60,7 @@ export default class Hero {
             wis: Math.min(9, Math.max(0, data.wis)),
             dex: Math.min(9, Math.max(0, data.dex)),
             luck: Math.min(100, Math.max(0, data.luck)),
-            energy: Math.min(10, Math.max(0, data.energy))
+            health: Math.min(10, Math.max(0, data.health))
         };
     }
 
@@ -71,7 +71,7 @@ export default class Hero {
             wis: true,
             dex: true,
             luck: true,
-            energy: true
+            health: true
         };
         this.activate(data);
         return {
@@ -79,7 +79,7 @@ export default class Hero {
             wis: data.wis,
             dex: data.dex,
             luck: data.luck,
-            energy: data.energy
+            health: data.health
         };
     }
 
@@ -127,17 +127,17 @@ export default class Hero {
         }
     }
 
-    get energy(): number {
-        return this.originals.energy + this.boosts.energy;
+    get health(): number {
+        return this.originals.health + this.boosts.health;
     }
 
-    set energy(value: number) {
-        const updated = value - this.originals.energy;
-        if (updated >= this.boosts.energy) {
-            this.boosts.energy = updated;
-        } else if (this.losable.energy) {
-            this.boosts.energy = updated;
-            this.activate({ type: TriggerType.LOSE_ENERGY });
+    set health(value: number) {
+        const updated = value - this.originals.health;
+        if (updated >= this.boosts.health) {
+            this.boosts.health = updated;
+        } else if (this.losable.health) {
+            this.boosts.health = updated;
+            this.activate({ type: TriggerType.LOSE_HEALTH });
         }
     }
 
@@ -187,9 +187,9 @@ export default class Hero {
         }
     }
 
-    // Restores energy to its original value
-    refreshEnergy(): void {
-        this.energy = this.originals.energy;
+    // Restores health to its original value
+    refreshHealth(): void {
+        this.health = this.originals.health;
     }
 
     // Returns the text used in this hero's description
@@ -201,15 +201,15 @@ export default class Hero {
                 skills += `\t${this.skills[1]}`;
             }
         }
-        let energy = '';
+        let health = '';
         for (let a = 0; a < WTEXT - 10; a++) {
-            energy = (a < this.stats.energy ? 'H' : '\t') + energy;
+            health = (a < this.stats.health ? 'H' : '\t') + health;
         }
         return (
             `${this.name}\n` +
             `${this.people}\n` +
             `${this.basket.itemCount}/${this.basket.total}\titems\t` +
-            `${energy}\nstats:\t` +
+            `${health}\nstats:\t` +
             `${this.stats.str}\tstr/` +
             `${this.stats.wis}\twis/` +
             `${this.stats.dex}\tdex\n` +

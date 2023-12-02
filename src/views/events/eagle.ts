@@ -6,7 +6,7 @@ export default class EagleEvent extends EventView {
     getViews(): View[] {
         for (const hero of this.game.party.members) {
             if (hero.lucky()) {
-                hero.energy++;
+                hero.health++;
             }
         }
         return [

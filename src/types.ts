@@ -22,7 +22,7 @@ export type StatBlock<T = number> = {
     wis: T;
     dex: T;
     luck: T;
-    energy: T;
+    health: T;
 };
 
 export enum Stats {
@@ -54,7 +54,7 @@ export enum TriggerType {
     GET_STATS = "when you calculate a hero's stats",
     LOSS_CHECK = 'determines if the hero can lose a particular stat',
     LEAVE_PARTY = 'when a party member leaves',
-    LOSE_ENERGY = 'when a party member loses energy',
+    LOSE_HEALTH = 'when a party member loses health',
     JOIN_PARTY = 'when a party member joins'
 }
 
@@ -69,7 +69,7 @@ export type Trigger =
           type: TriggerType.LEAVE_PARTY;
       }
     | {
-          type: TriggerType.LOSE_ENERGY;
+          type: TriggerType.LOSE_HEALTH;
       }
     | {
           type: TriggerType.JOIN_PARTY;

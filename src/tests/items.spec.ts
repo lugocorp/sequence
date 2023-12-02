@@ -51,30 +51,30 @@ describe('Item effects', function () {
             wis: 3,
             dex: 3,
             luck: 35,
-            energy: 3,
+            health: 3,
             ...partialStats
         };
         expect(hero.str).to.equal(3);
         expect(hero.wis).to.equal(3);
         expect(hero.dex).to.equal(3);
         expect(hero.luck).to.equal(35);
-        expect(hero.energy).to.equal(3);
+        expect(hero.health).to.equal(3);
         expect(hero.stats.str).to.equal(3);
         expect(hero.stats.wis).to.equal(3);
         expect(hero.stats.dex).to.equal(3);
         expect(hero.stats.luck).to.equal(35);
-        expect(hero.stats.energy).to.equal(3);
+        expect(hero.stats.health).to.equal(3);
         hero.basket.equip(item);
         expect(hero.str).to.equal(3);
         expect(hero.wis).to.equal(3);
         expect(hero.dex).to.equal(3);
         expect(hero.luck).to.equal(35);
-        expect(hero.energy).to.equal(3);
+        expect(hero.health).to.equal(3);
         expect(hero.stats.str).to.equal(stats.str);
         expect(hero.stats.wis).to.equal(stats.wis);
         expect(hero.stats.dex).to.equal(stats.dex);
         expect(hero.stats.luck).to.equal(stats.luck);
-        expect(hero.stats.energy).to.equal(stats.energy);
+        expect(hero.stats.health).to.equal(stats.health);
     }
 
     function cannotLoseStatEffect(item: Item, partialStats: Partial<StatBlock<boolean>>) {
@@ -83,55 +83,55 @@ describe('Item effects', function () {
             wis: true,
             dex: true,
             luck: true,
-            energy: true,
+            health: true,
             ...partialStats
         };
         expect(hero.str).to.equal(3);
         expect(hero.wis).to.equal(3);
         expect(hero.dex).to.equal(3);
         expect(hero.luck).to.equal(35);
-        expect(hero.energy).to.equal(3);
+        expect(hero.health).to.equal(3);
         hero.str--;
         hero.wis--;
         hero.dex--;
         hero.luck--;
-        hero.energy--;
+        hero.health--;
         expect(hero.str).to.equal(2);
         expect(hero.wis).to.equal(2);
         expect(hero.dex).to.equal(2);
         expect(hero.luck).to.equal(34);
-        expect(hero.energy).to.equal(2);
+        expect(hero.health).to.equal(2);
         hero.str++;
         hero.wis++;
         hero.dex++;
         hero.luck++;
-        hero.energy++;
+        hero.health++;
         expect(hero.str).to.equal(3);
         expect(hero.wis).to.equal(3);
         expect(hero.dex).to.equal(3);
         expect(hero.luck).to.equal(35);
-        expect(hero.energy).to.equal(3);
+        expect(hero.health).to.equal(3);
         hero.basket.equip(item);
         hero.str--;
         hero.wis--;
         hero.dex--;
         hero.luck -= 5;
-        hero.energy--;
+        hero.health--;
         expect(hero.str).to.equal(stats.str ? 2 : 3);
         expect(hero.wis).to.equal(stats.wis ? 2 : 3);
         expect(hero.dex).to.equal(stats.dex ? 2 : 3);
         expect(hero.luck).to.equal(stats.luck ? 30 : 35);
-        expect(hero.energy).to.equal(stats.energy ? 2 : 3);
+        expect(hero.health).to.equal(stats.health ? 2 : 3);
         hero.str += stats.str ? 1 : 0;
         hero.wis += stats.wis ? 1 : 0;
         hero.dex += stats.dex ? 1 : 0;
         hero.luck += stats.luck ? 5 : 0;
-        hero.energy += stats.energy ? 1 : 0;
+        hero.health += stats.health ? 1 : 0;
         expect(hero.str).to.equal(3);
         expect(hero.wis).to.equal(3);
         expect(hero.dex).to.equal(3);
         expect(hero.luck).to.equal(35);
-        expect(hero.energy).to.equal(3);
+        expect(hero.health).to.equal(3);
         hero.basket.equip(game.data.getNamedItem('cursed ring'));
         hero.basket.equip(game.data.getNamedItem('cursed amulet'));
         hero.basket.equip(game.data.getNamedItem('cursed sandals'));
@@ -141,12 +141,12 @@ describe('Item effects', function () {
         expect(hero.wis).to.equal(3);
         expect(hero.dex).to.equal(3);
         expect(hero.luck).to.equal(35);
-        expect(hero.energy).to.equal(3);
+        expect(hero.health).to.equal(3);
         expect(hero.stats.str).to.equal(2);
         expect(hero.stats.wis).to.equal(2);
         expect(hero.stats.dex).to.equal(2);
         expect(hero.stats.luck).to.equal(30);
-        expect(hero.stats.energy).to.equal(2);
+        expect(hero.stats.health).to.equal(2);
     }
 
     testItem('corn', undefined, (item: Item) => statBlockEffect(item, { str: 4 }));
@@ -163,7 +163,7 @@ describe('Item effects', function () {
     );
 
     testItem('bean soup', undefined, (item: Item) => statBlockEffect(item, { dex: 5, wis: 2 }));
-    testItem('gourd bottle', undefined, (item: Item) => statBlockEffect(item, { energy: 4 }));
+    testItem('gourd bottle', undefined, (item: Item) => statBlockEffect(item, { health: 4 }));
     testItem('cursed ring', undefined, (item: Item) => statBlockEffect(item, { str: 2 }));
     testItem('cursed amulet', undefined, (item: Item) => statBlockEffect(item, { wis: 2 }));
     testItem('cursed sandals', undefined, (item: Item) => statBlockEffect(item, { dex: 2 }));
@@ -171,8 +171,8 @@ describe('Item effects', function () {
     testItem('quipu', undefined, (item: Item) => statBlockEffect(item, { wis: 5 }));
     testItem('mogollon', undefined, (item: Item) => statBlockEffect(item, { dex: 5 }));
     testItem('medicine bag', undefined, (item: Item) => statBlockEffect(item, { luck: 60 }));
-    testItem('pemmican', undefined, (item: Item) => statBlockEffect(item, { energy: 5 }));
-    testItem('passionflower tea', undefined, (item: Item) => statBlockEffect(item, { energy: 2 }));
+    testItem('pemmican', undefined, (item: Item) => statBlockEffect(item, { health: 5 }));
+    testItem('passionflower tea', undefined, (item: Item) => statBlockEffect(item, { health: 2 }));
     testItem('condor feather', undefined, (item: Item) =>
         cannotLoseStatEffect(item, { str: false })
     );
@@ -185,12 +185,12 @@ describe('Item effects', function () {
     );
 
     testItem('eagle feather', undefined, (item: Item) => statBlockEffect(item, { luck: 100 }));
-    testItem('deer totem', undefined, (item: Item) => statBlockEffect(item, { energy: 6 }));
+    testItem('deer totem', undefined, (item: Item) => statBlockEffect(item, { health: 6 }));
     testItem('buffalo totem', undefined, (item: Item) => statBlockEffect(item, { str: 6 }));
     testItem('turtle totem', undefined, (item: Item) => statBlockEffect(item, { wis: 6 }));
     testItem('coyotl totem', undefined, (item: Item) => statBlockEffect(item, { dex: 6 }));
     testItem('turquoise ring', undefined, (item: Item) =>
-        statBlockEffect(item, { str: 4, wis: 4, dex: 4, luck: 100, energy: 6 })
+        statBlockEffect(item, { str: 4, wis: 4, dex: 4, luck: 100, health: 6 })
     );
 
     testItem('golden mirror', undefined, (item: Item) => {
@@ -218,12 +218,12 @@ describe('Item effects', function () {
 
         testItem('gold bead', extra, (item: Item) => {
             game.world.time = time;
-            statBlockEffect(item, time === Time.DAY ? { energy: 4 } : undefined);
+            statBlockEffect(item, time === Time.DAY ? { health: 4 } : undefined);
         });
 
         testItem('silver bead', extra, (item: Item) => {
             game.world.time = time;
-            statBlockEffect(item, time === Time.NIGHT ? { energy: 4 } : undefined);
+            statBlockEffect(item, time === Time.NIGHT ? { health: 4 } : undefined);
         });
 
         testItem('gold bracelet', extra, (item: Item) => {

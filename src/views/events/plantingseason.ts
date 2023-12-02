@@ -12,13 +12,13 @@ export default class PlantingSeasonEvent extends EventView {
                     yes: () => {
                         this.game.history.peopleHelped++;
                         for (const hero of this.game.party.members) {
-                            hero.energy--;
+                            hero.health--;
                         }
                         this.game.chain.futureEvent(new GardenBonusEvent(this.game), 8);
                         this.game.views.setViews([
                             {
                                 image: Sprites.GARDEN,
-                                text: `your party stays a while and plants various crops. they have lost some of their energy in the process.`,
+                                text: `your party stays a while and plants various crops. they have lost some of their health in the process.`,
                                 actions: {
                                     continue: () => this.game.progress()
                                 }

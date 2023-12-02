@@ -79,14 +79,14 @@ describe('Hero effects', function () {
         expect(hero.stats.wis).to.equal(2);
         expect(hero.stats.dex).to.equal(2);
         expect(hero.stats.luck).to.equal(5);
-        expect(hero.stats.energy).to.equal(4);
+        expect(hero.stats.health).to.equal(4);
         for (let a = 0; a < 4; a++) {
             hero.basket.equip(game.data.getNamedItem('silver bead'));
             expect(hero.stats.str).to.equal(2);
             expect(hero.stats.wis).to.equal(2);
             expect(hero.stats.dex).to.equal(2);
             expect(hero.stats.luck).to.equal(10 + a * 5);
-            expect(hero.stats.energy).to.equal(4);
+            expect(hero.stats.health).to.equal(4);
         }
     });
 
@@ -102,8 +102,8 @@ describe('Hero effects', function () {
 
     testHero('eagle knight', undefined, (hero: Hero) => {
         const futures = game.chain.futures.length;
-        expect(hero.energy).to.equal(2);
-        hero.energy--;
+        expect(hero.health).to.equal(2);
+        hero.health--;
         expect(game.chain.futures.length).to.equal(futures + 1);
         game.chain.events.splice(0, 1);
         game.chain.latest();
@@ -117,7 +117,7 @@ describe('Hero effects', function () {
         game.chain.latest();
         game.chain.events.splice(0, 1);
         expect(game.chain.latest().getViews()[0].text.replace(/\n/g, ' ')).to.equal(
-            'eagle knight healed from low energy.'
+            'eagle knight healed from low health.'
         );
     });
 
@@ -160,7 +160,7 @@ describe('Hero effects', function () {
         game.party.add(game.data.getNamedHero('corn woman'));
         const futures = game.chain.futures.length;
         game.party.remove(hero);
-        expect(hero.stats.energy).to.equal(3);
+        expect(hero.stats.health).to.equal(3);
         expect(game.chain.futures.length).to.equal(futures + 1);
         game.chain.events.splice(0, 1);
         game.chain.latest();

@@ -91,7 +91,7 @@ class SpiritWantsItsStuffBackEvent extends EventView {
                         this.hero.wis--;
                         this.hero.dex--;
                         this.hero.luck -= 10;
-                        this.hero.energy--;
+                        this.hero.health--;
                         this.game.views.setViews([
                             {
                                 image: Sprites.PUMA,

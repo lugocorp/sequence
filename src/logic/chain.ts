@@ -174,7 +174,7 @@ export default class EventChain {
      */
     latest(): EventView {
         for (const hero of this.game.party.members) {
-            if (hero.stats.energy === 0) {
+            if (hero.stats.health === 0) {
                 return new FatigueEvent(this.game, hero);
             }
         }

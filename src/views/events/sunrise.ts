@@ -9,7 +9,7 @@ export default class SunriseEvent extends EventView {
         return [
             {
                 image: Sprites.SUNRISE,
-                text: 'a red sun rises over the horizon. someone in your party may offer all their belongings in return for an energy boost.',
+                text: 'a red sun rises over the horizon. someone in your party may offer all their belongings in return for an health boost.',
                 actions: {
                     continue: () =>
                         this.game.views.setViews(
@@ -23,7 +23,7 @@ export default class SunriseEvent extends EventView {
                                           'offer items': () => {
                                               for (const item of hero.basket.toList()) {
                                                   hero.basket.unequip(item);
-                                                  hero.energy++;
+                                                  hero.health++;
                                               }
                                               this.game.views.setViews([
                                                   {

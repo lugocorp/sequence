@@ -9,7 +9,7 @@ export default class CactusEvent extends EventView {
         return [
             {
                 image: Sprites.CACTUS,
-                text: `your party comes across a cactus. choose someone to eat its fruit and regain their original energy.`,
+                text: `your party comes across a cactus. choose someone to eat its fruit and regain their original health.`,
                 actions: {
                     continue: () =>
                         this.game.views.setViews(
@@ -18,11 +18,11 @@ export default class CactusEvent extends EventView {
                                     this.game.views.setViews([
                                         {
                                             image: hero.sprite,
-                                            text: `${hero.name} ate the cactus fruit and regained their original energy.`,
+                                            text: `${hero.name} ate the cactus fruit and regained their original health.`,
                                             actions: { continue: () => this.game.progress() }
                                         }
                                     ]);
-                                    hero.refreshEnergy();
+                                    hero.refreshHealth();
                                 }
                             }))
                         )

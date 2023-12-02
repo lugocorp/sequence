@@ -89,9 +89,9 @@ export default class ChallengeEvent extends EventView {
         const result: boolean = this.playerOvercomesChallenge(hero);
         if (result) {
             this.game.history.challengesWon++;
-            hero.energy--;
+            hero.health--;
         } else {
-            hero.energy = -100;
+            hero.health = -100;
         }
         this.game.views.setViews([
             {
@@ -105,8 +105,8 @@ export default class ChallengeEvent extends EventView {
                             {
                                 image: hero.sprite,
                                 text: result
-                                    ? `${hero.name} is triumphant but tired. they have lost some of their energy.`
-                                    : `${hero.name} used up all their energy in the challenge.`,
+                                    ? `${hero.name} is triumphant but tired. they have lost some of their health.`
+                                    : `${hero.name} used up all their health in the challenge.`,
                                 actions: { continue: () => this.game.progress() }
                             }
                         ])
