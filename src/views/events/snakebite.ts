@@ -9,12 +9,12 @@ export default class SnakeBiteEvent extends EventView {
         return [
             {
                 image: Sprites.SNAKE_BITE,
-                text: `your party comes across a snake. choose someone to get bit.`,
+                text: `your party comes across a snake. choose someone to get bit and lose their stats.`,
                 actions: {
                     continue: () =>
                         this.game.views.setViews(
                             Selectors.heroes(this.game, this.game.party.members, (hero: Hero) => ({
-                                select: () => {
+                                'lose stats': () => {
                                     hero.str = 0;
                                     hero.wis = 0;
                                     hero.dex = 0;

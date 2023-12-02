@@ -12,7 +12,7 @@ export default class CaveEvent extends EventView {
             {
                 image: Sprites.CAVE,
                 text: cave
-                    ? 'your party comes across a cave. will they venture inside?'
+                    ? `your party comes across a cave. will they venture inside? it's dangerous, but there could be great rewards inside!`
                     : 'your party comes to an exit of the cave. finally they are free!',
                 actions: cave
                     ? {

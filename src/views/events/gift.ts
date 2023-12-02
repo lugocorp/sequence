@@ -41,7 +41,7 @@ export default class GiftEvent extends EventView {
     chooseGift(): void {
         this.game.views.setViews(
             Selectors.items(this.options, (item: Item) => ({
-                choose: () => this.finish(item),
+                'choose this gift': () => this.finish(item),
                 'view member': () => this.viewHero()
             }))
         );

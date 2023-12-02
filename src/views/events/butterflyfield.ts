@@ -16,7 +16,7 @@ export default class ButterflyFieldEvent extends EventView {
                     continue: () =>
                         this.game.views.setViews(
                             Selectors.heroes(this.game, this.game.party.members, (hero: Hero) => ({
-                                choose: () => this.finished(hero)
+                                'receive blessing': () => this.finished(hero)
                             }))
                         )
                 }

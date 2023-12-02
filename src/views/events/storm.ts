@@ -12,12 +12,12 @@ export default class StormEvent extends EventView {
         return [
             {
                 image: Sprites.STORM,
-                text: `a storm blows over your party! someone will be mixed up by this ordeal.`,
+                text: `a storm blows over your party! someone will have their skills randomized by this ordeal.`,
                 actions: {
                     continue: () =>
                         this.game.views.setViews(
                             Selectors.heroes(this.game, this.game.party.members, (hero: Hero) => ({
-                                select: () => {
+                                'randomize skills': () => {
                                     if (hero.skills[0] !== undefined) {
                                         hero.skills[0] = Random.element(EnumsHelper.skills());
                                         if (hero.skills[1] !== undefined) {
