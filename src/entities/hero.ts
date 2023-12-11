@@ -207,10 +207,10 @@ export default class Hero {
             health =
                 (a < this.stats.health
                     ? a >= this.originals.health
-                        ? '+'
+                        ? 'X'
                         : 'H'
                     : a < this.originals.health
-                    ? '-'
+                    ? 'M'
                     : '\t') + health;
         }
         return (

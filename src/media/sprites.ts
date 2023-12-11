@@ -44,6 +44,8 @@ enum Sprites {
     STEALTH = 0x000c01,
     DIPLOMACY = 0x000d01,
     HEART = 0x000e01,
+    EXTRA_HEART = 0x000f01,
+    MISSING_HEART = 0x001001,
     PERIOD = 0x000002,
     COMMA = 0x000102,
     EXCLAIM = 0x000202,

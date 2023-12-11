@@ -71,6 +71,10 @@ export default class Glyphs {
                 return Sprites.DIPLOMACY;
             case 'H':
                 return Sprites.HEART;
+            case 'X':
+                return Sprites.EXTRA_HEART;
+            case 'M':
+                return Sprites.MISSING_HEART;
         }
         throw new Error(`No font glyph for character '${char}'`);
     }
