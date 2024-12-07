@@ -33,3 +33,4 @@ node_modules/
 /out
 *.kra
 /*.apk
+/*.aab

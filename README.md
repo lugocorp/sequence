@@ -25,3 +25,12 @@ We have a number of `npm` commands:
 - `android` compiles and deploys the game to an android device
 - `test` run the unit tests
 - `apk` copy the built APK file to the root directory
+
+Run the following commands to build an APK for deployment:
+
+```bash
+export JAVA_HOME="/usr/lib/jvm/<something>"
+cordova build android --release -- --packageType=bundle
+npm run aab
+jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore <my-key-store>.keystore -storepass <password> app-release.aab <keystore-alias>
+```

@@ -9,7 +9,8 @@
     "start": "webpack serve --port 2017",
     "android": "cordova run android",
     "test": "mocha --loader=ts-node/esm --extension=ts src/tests/*.spec.ts",
-    "apk": "cp platforms/android/app/build/outputs/apk/debug/app-debug.apk app.apk"
+    "apk": "cp platforms/android/app/build/outputs/apk/debug/app-debug.apk app.apk",
+    "aab": "cp platforms/android/app/build/outputs/bundle/release/app-release.aab ."
   },
   "keywords": [
     "ecosystem:cordova"
@@ -24,7 +25,7 @@
     "@typescript-eslint/eslint-plugin": "^5.9.1",
     "@typescript-eslint/parser": "^5.9.1",
     "cordova": "^12.0.0",
-    "cordova-android": "^12.0.1",
+    "cordova-android": "^13.0.0",
     "cordova-browser": "^6.0.0",
     "cordova-plugin-file": "^6.0.2",
     "eslint": "^8.6.0",
@@ -37,8 +38,8 @@
   },
   "cordova": {
     "platforms": [
-      "android",
-      "browser"
+      "browser",
+      "android"
     ],
     "plugins": {
       "cordova-plugin-file": {}
