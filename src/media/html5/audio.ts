@@ -23,6 +23,6 @@ export default class HTML5GameAudio extends GameAudio {
     play(index: number): void {
         this.assets[index].pause();
         this.assets[index].currentTime = 0;
-        this.assets[index].play();
+        this.assets[index].play().catch(console.log);
     }
 }

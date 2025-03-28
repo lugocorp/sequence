@@ -9,16 +9,17 @@ export default class HTML5HistoryManager extends HistoryManager {
     async initialize(): Promise<void> {
         const that = this;
         this.clear();
-        // TODO figure out how to expose the cordova variable here
-        /*await new Promise<void>((resolve) => {
-            window.resolveLocalFileSystemURL(cordova.file.applicationDirectory + 'abyayala.json', (file) => {
-                that.entry = file;
-                resolve();
-            }, (e) => {
-                console.error(e);
-                resolve();
+        if (window.cordova) {
+            await new Promise<void>((resolve) => {
+                window.resolveLocalFileSystemURL(cordova.file.applicationDirectory + 'abyayala.json', (file) => {
+                    that.entry = file;
+                    resolve();
+                }, (e) => {
+                    console.error(e);
+                    resolve();
+                });
             });
-        });*/
+        }
         await this.load();
     }
 
