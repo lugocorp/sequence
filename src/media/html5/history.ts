@@ -11,13 +11,17 @@ export default class HTML5HistoryManager extends HistoryManager {
         this.clear();
         if (window.cordova) {
             await new Promise<void>((resolve) => {
-                window.resolveLocalFileSystemURL(cordova.file.applicationDirectory + 'abyayala.json', (file) => {
-                    that.entry = file;
-                    resolve();
-                }, (e) => {
-                    console.error(e);
-                    resolve();
-                });
+                window.resolveLocalFileSystemURL(
+                    cordova.file.applicationDirectory + 'abyayala.json',
+                    (file) => {
+                        that.entry = file;
+                        resolve();
+                    },
+                    (e) => {
+                        console.error(e);
+                        resolve();
+                    }
+                );
             });
         }
         await this.load();
